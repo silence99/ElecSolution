@@ -1,0 +1,70 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Emergence_WPF.Comm">
+
+    <local:StringFormatConverter x:Key="StringFormatConverter"></local:StringFormatConverter>
+
+    <Style TargetType="{x:Type local:Pager}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:Pager}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid 
+                                    VerticalAlignment="Center">
+                            <Grid.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment"
+                                            Value="Center"></Setter>
+                                </Style>
+                            </Grid.Resources>
+                            <StackPanel  Orientation="Horizontal">
+                                <Button Width="40" Margin="5,0,0,0" BorderBrush="Transparent" BorderThickness="0" 
+                                    Command="{x:Static local:Pager.FirstPageCommand}" Background="#008E8E" Content="首页" Foreground="White"
+                                     />
+
+
+                                <Button Margin="5,0,0,0" BorderBrush="Transparent" BorderThickness="0" 
+                                     Background="#008E8E" Content="上一页" Foreground="White"   
+                                    Command="{x:Static local:Pager.PrePageCommand}"></Button>
+                                <Button Margin="5,0,0,0" BorderBrush="Transparent" BorderThickness="0" 
+                                    Content="下一页"  Foreground="White"   Background="#008E8E" 
+                                    Command="{x:Static local:Pager.NextPageCommand}"></Button>
+                                <Button Margin="5,0,10,0" BorderBrush="Transparent" BorderThickness="0" 
+                                    Content="尾页"  Foreground="White"   Background="#008E8E" 
+                                    Command="{x:Static local:Pager.LastPageCommand}"></Button>
+                            <TextBox Width="50"
+                                     Text="{Binding RelativeSource={RelativeSource TemplatedParent},Path=PageNum}"></TextBox>
+                                <Button Margin="5,0,0,0" BorderBrush="Transparent" BorderThickness="0"  Background="#008E8E"  Foreground="White"   
+                                    Content="跳转" 
+                                    Command="{x:Static local:Pager.GoPageCommand}"></Button>
+
+                            </StackPanel>
+                            <TextBlock HorizontalAlignment="Right">
+                            <TextBlock Text="共"></TextBlock>
+                            <TextBlock Text="{TemplateBinding TotalCount,Converter={StaticResource StringFormatConverter}}">
+                            </TextBlock>
+                            <TextBlock Text="行,"></TextBlock>
+                            <TextBlock Text="每页"></TextBlock>
+                            <TextBlock Text="{TemplateBinding PageSize,Converter={StaticResource StringFormatConverter}}">
+                            </TextBlock>
+                            <TextBlock Text="行,"></TextBlock>
+                            <TextBlock Text="第">
+                            </TextBlock>
+                            <TextBlock x:Name="PART_PageIndex"
+                                       Text="{TemplateBinding PageIndex,Converter={StaticResource StringFormatConverter}}"></TextBlock>
+                            <TextBlock Text="/"></TextBlock>
+                            <TextBlock x:Name="PART_TotalPage"
+                                       Text="{TemplateBinding TotalPage,Converter={StaticResource StringFormatConverter}}"></TextBlock>
+                            <TextBlock Text="页"></TextBlock>
+
+
+</TextBlock>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

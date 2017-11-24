@@ -1,0 +1,258 @@
+﻿<UserControl x:Class="Emergence_WPF.FullScreen1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Background="Transparent" Height="987" Width="1600"
+             d:DesignHeight="987" d:DesignWidth="1600" Loaded="UserControl_Loaded">
+
+    <UserControl.Resources>
+
+        <Style TargetType="DataGrid">
+            <!--网格线颜色-->
+            <Setter Property="CanUserResizeColumns" Value="false"/>
+            <Setter Property="Background" Value="White" />
+            <Setter Property="BorderBrush" Value="#EBEFEE" />
+            <Setter Property="HorizontalGridLinesBrush">
+                <Setter.Value>
+                    <SolidColorBrush Color="#EBEFEE"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="VerticalGridLinesBrush">
+                <Setter.Value>
+                    <SolidColorBrush Color="#EBEFEE"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--标题栏样式-->
+        <!--<Style  TargetType="DataGridColumnHeader" >
+        <Setter Property="Width" Value="50"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Background" Value="White" />
+        <Setter  Property="FontWeight"  Value="Bold"/>
+    </Style>-->
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="MinHeight" Value="40" />
+            <Setter Property="Foreground" Value="#333" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridColumnHeader">
+                        <Border x:Name="BackgroundBorder" BorderThickness="0,1,0,1"
+                             BorderBrush="#e6dbba"
+                              Width="Auto">
+                            <Grid  Background="#7DD7BB">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter  Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                <Path x:Name="SortArrow" Visibility="Collapsed" Data="M0,0 L1,0 0.5,1 z" Stretch="Fill"  Grid.Column="2" Width="8" Height="6" Fill="White" Margin="0,0,50,0"
+                            VerticalAlignment="Center" RenderTransformOrigin="1,1" />
+                                <Rectangle Width="1" Fill="#EBEFEE" HorizontalAlignment="Right" Grid.ColumnSpan="1" />
+                                <!--<TextBlock  Background="Red">
+                            <ContentPresenter></ContentPresenter></TextBlock>-->
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Height" Value="25"/>
+        </Style>
+        <!--行样式触发-->
+        <!--背景色改变必须先设置cellStyle 因为cellStyle会覆盖rowStyle样式-->
+        <Style  TargetType="DataGridRow">
+            <Setter Property="Background" Value="#F2F2F2" />
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Foreground" Value="#333" />
+            <Style.Triggers>
+                <!--隔行换色-->
+                <Trigger Property="AlternationIndex" Value="0" >
+                    <Setter Property="Background" Value="#FFFFFF" />
+                </Trigger>
+                <Trigger Property="AlternationIndex" Value="1" >
+                    <Setter Property="Background" Value="#F8F8F8" />
+                </Trigger>
+
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="LightGray"/>
+                    <!--<Setter Property="Foreground" Value="White"/>-->
+                </Trigger>
+
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Foreground" Value="#333"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--单元格样式触发-->
+        <Style TargetType="DataGridCell">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <TextBlock TextAlignment="Center" VerticalAlignment="Center"  >
+                           <ContentPresenter />
+                        </TextBlock>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <!--<Setter Property="Background" Value="White"/>
+                <Setter Property="BorderThickness" Value="0"/>-->
+                    <Setter Property="Foreground" Value="#333"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Viewbox Width="1600" Height="987" Stretch="Fill">
+        <StackPanel Width="1600" Height="987">
+            <Border CornerRadius="5" Margin="0,30,0,0" Width="1400" Height="300" BorderBrush="#179c84" BorderThickness="1.5" Background="#36393E">
+                <StackPanel>
+                <StackPanel Height="42"   VerticalAlignment="Top" Background="#179c84">
+                        <Label Foreground="White" VerticalAlignment="Center" Margin="80,1,0,0" FontSize="20">台风“纳沙”应急指挥状态</Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                        <StackPanel Margin="285,45,0,0">
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontSize="22" Foreground="White">任务状态：</Label>
+                                <Image Margin="50,0,0,0" Width="112" Height="36" Source="/Image/启动.png"></Image>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,80,0,0">
+                                <Label FontSize="22" Foreground="White">任务状态：</Label>
+                                <Image Margin="28,-10,0,0" Width="230" Height="64" Source="/Image/cc.png"></Image>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Margin="150,30,0,0">
+                            <StackPanel Orientation="Horizontal">
+                                <Label FontSize="16" Foreground="White">发生时间</Label>
+                                <TextBox Background="#181B20" Width="200"  FontSize="14" BorderThickness="0" Padding="0,6,0,0" Margin="30,1,0,0" Foreground="#cdcdcd" HorizontalAlignment="Center" TextAlignment="Center">2016年11月16日 21:10:45</TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                <Label FontSize="16" Foreground="White">任务等级</Label>
+                                <TextBox Background="#181B20" Width="200" FontSize="14" BorderThickness="0"
+                                         Padding="0,6,0,0" Margin="30,1,0,0" Foreground="Red" HorizontalAlignment="Center" TextAlignment="Center">紧急</TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                <Label FontSize="16" Foreground="White">总负责人</Label>
+                                <TextBox Background="#181B20" Width="60" FontSize="14" BorderThickness="0" Padding="8,6,0,0" Margin="30,1,0,0" Foreground="#cdcdcd" 
+                                         HorizontalAlignment="Center" TextAlignment="Left">赵孟村</TextBox>
+                                <Label FontSize="16" Foreground="White" Margin="5,0,0,0">值班员</Label>
+                                <TextBox Background="#181B20" Width="60" FontSize="14" BorderThickness="0" Padding="8,6,0,0" Margin="15,1,0,0" Foreground="#cdcdcd" 
+                                         HorizontalAlignment="Center" TextAlignment="Left">王学武</TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+                                <Label FontSize="16" Foreground="White">发生地点</Label>
+                                <TextBox Background="#181B20" Width="200" FontSize="14" BorderThickness="0" Padding="15,6,0,0" Margin="30,1,0,0" Foreground="#cdcdcd"
+                                         HorizontalAlignment="Center" TextAlignment="Left">南京市建业区奥体大街</TextBox>
+                            </StackPanel>
+
+                        </StackPanel>
+
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border CornerRadius="5" Margin="0,30,0,0" Width="1400" Height="550" BorderBrush="#179c84" BorderThickness="1.5" Background="#36393E">
+                <StackPanel>
+                    <StackPanel Height="42"   VerticalAlignment="Top" Background="#179c84">
+                        <Label Foreground="White" VerticalAlignment="Center" Margin="80,1,0,0" FontSize="20">任务进度信息</Label>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+
+
+                        <DataGrid CanUserAddRows="False"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden"  RowHeaderWidth="0" HeadersVisibility="Column" Name="DataCodeing"  HorizontalAlignment="Center" Width="1000" Margin="30" Height="240" Background="Transparent"  IsReadOnly="True" AlternationCount="2" AutoGenerateColumns="False" SelectionChanged="DataCodeing_SelectionChanged">
+                            
+                            <DataGrid.Columns >
+
+                                <DataGridTextColumn x:Name="n2" Header="队伍名称" Width="250" Binding="{Binding TaskName}"/>
+                                <DataGridTextColumn x:Name="n3" Header="任务等级" Width="250" Binding="{Binding TaskGrade}"/>
+                                <DataGridTextColumn x:Name="n4" Header="负责人" Width="250" Binding="{Binding PersonCharge}"/>
+                                <DataGridTextColumn x:Name="n5" Header="执行状态" Width="250" Binding="{Binding ExecutionStatus}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                        <StackPanel Margin="40,30,0,0" Orientation="Horizontal">
+                            <Label FontSize="18" Foreground="White">任务下达</Label>
+                            <Label FontSize="18" Foreground="White" Margin="140,0,0,0">任务接受</Label>
+                            <Label FontSize="18" Foreground="White" Margin="140,0,0,0">到达现场</Label>
+                            <Label FontSize="18" Foreground="White" Margin="140,0,0,0">任务执行</Label>
+                            <Label FontSize="18" Foreground="White" Margin="140,0,0,0">任务接单</Label>
+                        </StackPanel>
+
+                        <StackPanel Margin="50,20,0,0" Orientation="Horizontal">
+                            <Image Name="a" Height="39" Width="39" Panel.ZIndex="9999999" Source="/Image/圆点2.png"></Image>
+                            <Label Height="10" Width="190" Panel.ZIndex="0" Background="#E1E1E1" Name="a2"></Label>
+                            <Image Name="b" Height="39" Width="39" Panel.ZIndex="9999999" Source="/Image/圆点2.png"></Image>
+                            <Label Height="10" Width="180" Panel.ZIndex="0" Background="#E1E1E1"  Name="b2"></Label>
+                            <Image Name="c" Height="39" Width="39" Panel.ZIndex="9999999" Source="/Image/圆点2.png"></Image>
+                            <Label Height="10" Width="190" Panel.ZIndex="0" Background="#E1E1E1"  Name="c2"></Label>
+                            <Image Name="d" Height="39" Width="39" Panel.ZIndex="9999999" Source="/Image/圆点2.png"></Image>
+                            <Label Height="10" Width="190" Panel.ZIndex="0" Background="#E1E1E1"  Name="d2"></Label>
+                            <Image Name="f" Height="39" Width="39" Panel.ZIndex="9999999" Source="/Image/圆点2.png"></Image>
+                        </StackPanel>
+
+
+                        <StackPanel Margin="-8,10,0,0" Orientation="Horizontal">
+                            <TextBlock  Name="a1" FontSize="14" Foreground="White"  TextWrapping="Wrap">
+                             <StackPanel >
+                                 <Label HorizontalAlignment="Center" Foreground="White">
+                                     赵孟村
+                                 </Label>
+                                   <Label  Foreground="White">
+                                     2016-11-18 00:12:13
+                                 </Label>
+                             </StackPanel>
+                            </TextBlock>
+                            <TextBlock Name="b1"  FontSize="14" Foreground="White"  TextWrapping="Wrap" Margin="80,0,0,0">
+                             <StackPanel >
+                                 <Label HorizontalAlignment="Center" Foreground="White">
+                                     王学武
+                                 </Label>
+                                   <Label  Foreground="White">
+                                     2014-11-18 16:12:13
+                                 </Label>
+                             </StackPanel>
+                            </TextBlock>
+                            <TextBlock Name="c1" FontSize="14" Foreground="White"  TextWrapping="Wrap"  Margin="78,0,0,0">
+                             <StackPanel >
+                                 <Label HorizontalAlignment="Center" Foreground="White">
+                                     汪小克
+                                 </Label>
+                                   <Label  Foreground="White">
+                                     2013-05-18 15:12:13
+                                 </Label>
+                             </StackPanel>
+                            </TextBlock>
+                            <TextBlock Name="d1" FontSize="14" Foreground="White"  TextWrapping="Wrap"  Margin="85,0,0,0">
+                             <StackPanel >
+                                 <Label HorizontalAlignment="Center" Foreground="White">
+                                     汪小克
+                                 </Label>
+                                   <Label  Foreground="White">
+                                     2017-10-18 22:12:13
+                                 </Label>
+                             </StackPanel>
+                            </TextBlock>
+                            <TextBlock Name="f1"  FontSize="14" Foreground="White"  TextWrapping="Wrap"  Margin="80,0,0,0">
+                             <StackPanel >
+                                 <Label HorizontalAlignment="Center" Foreground="White">
+                                     陈德盛
+                                 </Label>
+                                   <Label  Foreground="White">
+                                     2017-08-18 00:12:13
+                                 </Label>
+                             </StackPanel>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Viewbox>
+</UserControl>

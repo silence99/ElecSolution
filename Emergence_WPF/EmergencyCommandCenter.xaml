@@ -1,0 +1,27 @@
+﻿<Window x:Class="Emergence_WPF.EmergencyCommandCenter"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Background="#181B20"
+        WindowState ="Maximized"
+        ResizeMode="CanMinimize"
+        Title="应急指挥中心" Height="1080" Width="1920" Loaded="Window_Loaded">
+    <Viewbox Stretch="Fill" Height="1050" Width="1915">
+        <Grid>
+        <DockPanel>
+            <StackPanel Height="63" DockPanel.Dock="Top" Width="1915" VerticalAlignment="Top" Background="#00655F" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Image Width="328" Height="63" Source="/Image/head背景.png" Margin="800,0,0,0" HorizontalAlignment="Center"></Image>
+                <TextBlock Foreground="White" FontSize="30" Margin="-330,0,0,0" TextAlignment="Center" Name="ccc" VerticalAlignment="Center">应急指挥中心</TextBlock>
+            </StackPanel>
+                <TextBlock Height="987" Name="main" DockPanel.Dock="Top" Width="1600" VerticalAlignment="Top" Background="Transparent"></TextBlock>
+        </DockPanel>
+            <Grid HorizontalAlignment="Left" >
+                <Image Width="84" Height="84" Source="/Image/左箭头.png" MouseLeftButtonDown="Image_MouseLeftButtonDown_1" Margin="50,0,0,0"></Image>
+            </Grid>
+            <Grid HorizontalAlignment="Right" >
+                <Image Width="84" Height="84" MouseLeftButtonDown="Image_MouseLeftButtonDown" Source="/Image/右箭头.png" Margin="0,0,50,0"></Image>
+            </Grid>
+        </Grid>
+
+
+
+    </Viewbox>
+</Window>

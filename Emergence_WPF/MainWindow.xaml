@@ -1,0 +1,33 @@
+﻿<Window x:Class="Emergence_WPF.MainWindow" 
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStartupLocation="CenterScreen" MinHeight="630" MinWidth="1000"
+        Icon="/Image/bbbb.ico"
+        Title="应急指挥中心管理平台" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
+
+    <!--<Canvas>-->
+    <DockPanel  Name="dock">
+        <DockPanel Height="80" HorizontalAlignment="Stretch" Name="head" DockPanel.Dock="Top" Background="#006F69">
+            <Image Canvas.Left="20" Margin="10,0,0,3" DockPanel.Dock="Left" Source="/Image/Icon_MainBrand.png" HorizontalAlignment="Left" ></Image>
+            <TextBlock FontSize="30" DockPanel.Dock="Left" TextAlignment="Center" Foreground="White" HorizontalAlignment="Left" Margin="10,20,0,0">应急指挥中心管理应用平台</TextBlock>
+            <StackPanel DockPanel.Dock="Right"  Orientation="Horizontal" Name="headright" HorizontalAlignment="Right">
+                <Image Margin="0,0,30,0" Width="30" Height="30" MouseLeftButtonDown="Image_MouseLeftButtonDown" Source="/Image/Icon_Home.png" HorizontalAlignment="Right" Cursor="Hand" ></Image>
+                <Image Margin="0,0,30,0" Width="30" Height="30" MouseLeftButtonDown="Image_MouseLeftButtonDown_1" Source="/Image/Icon_Lighting.png" HorizontalAlignment="Right" Cursor="Hand"></Image>
+                <Image Margin="0,0,30,0" Width="30" Height="30" Source="/Image/Icon_Message.png"  MouseLeftButtonDown="Image_MouseRightButtonDown" HorizontalAlignment="Right" Cursor="Hand"></Image>
+                <Image Margin="0,0,30,0" Width="30" Height="30" Source="/Image/Icon_Graph.png"  MouseLeftButtonDown="Image_MouseLeftButtonDown_3" HorizontalAlignment="Right" Cursor="Hand"></Image>
+                <Image Margin="0,0,30,0" Width="30" Height="30" Source="/Image/Icon_FullScreen.png" HorizontalAlignment="Right" MouseLeftButtonDown="Image_MouseLeftButtonDown_2" Cursor="Hand"></Image>
+                <TextBlock Margin="0,20,30,0" Foreground="White" FontSize="30" FontFamily="Microsoft Sans Serif">|</TextBlock>
+                <Image Margin="0,0,18,0" Width="30" Height="30" Source="/Image/Icon_User.png"  HorizontalAlignment="Right" Cursor="Hand"></Image>
+                <TextBlock Margin="0,30,30,30" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif" Name="loginname" >用户 C</TextBlock>
+                <TextBlock Margin="0,20,30,0" Foreground="White" FontSize="30" FontFamily="Microsoft Sans Serif">|</TextBlock>
+                <StackPanel Orientation="Horizontal" MouseLeftButtonDown="StackPanel_MouseLeftButtonDown">
+                    <Image Margin="0,0,40,0" Width="30" Height="30" Source="/Image/Icon_LogOut.png" HorizontalAlignment="Right" Cursor="Hand"></Image>
+                    <!--<TextBlock Foreground="White" FontSize="14" Padding="10,17,0,0">登出</TextBlock>-->
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
+        <Grid Name="maingrid" DockPanel.Dock="Top" HorizontalAlignment="Stretch" SizeChanged="maingrid_SizeChanged" VerticalAlignment="Top">
+        </Grid>
+    </DockPanel>
+    <!--</Canvas>-->
+</Window>

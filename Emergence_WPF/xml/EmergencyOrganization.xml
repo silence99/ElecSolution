@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Events Class="1401" >
+  <Event num="01">
+    <TeamName>一号联队</TeamName>
+    <Rescue>16</Rescue>
+    <IsitFree>空闲</IsitFree>
+    <DetailedAddress>武汉</DetailedAddress>
+    <DataResponsibility>人员救护</DataResponsibility>
+  </Event>
+  <Event num="02">
+    <TeamName>二号联队</TeamName>
+    <Rescue>34</Rescue>
+    <IsitFree>空闲</IsitFree>
+    <DetailedAddress>江苏</DetailedAddress>
+    <DataResponsibility>抢险</DataResponsibility>
+  </Event>
+  <Event num="03">
+    <TeamName>三号联队</TeamName>
+    <Rescue>122</Rescue>
+    <IsitFree>空闲</IsitFree>
+    <DetailedAddress>苏州</DetailedAddress>
+    <DataResponsibility>人员救护</DataResponsibility>
+  </Event>
+  <Event num="04">
+    <TeamName>十号联队</TeamName>
+    <Rescue>22</Rescue>
+    <IsitFree>调用</IsitFree>
+    <DetailedAddress>太仓</DetailedAddress>
+    <DataResponsibility>供水</DataResponsibility>
+  </Event>
+  <Event num="05">
+    <TeamName>八号联队</TeamName>
+    <Rescue>23</Rescue>
+    <IsitFree>空闲</IsitFree>
+    <DetailedAddress>供电</DetailedAddress>
+    <DataResponsibility>人员救护</DataResponsibility>
+  </Event>
+  <Event num="06">
+    <TeamName>六号联队</TeamName>
+    <Rescue>11</Rescue>
+    <IsitFree>空闲</IsitFree>
+    <DetailedAddress>长沙</DetailedAddress>
+    <DataResponsibility>人员救护</DataResponsibility>
+  </Event>
+  <Event num="07">
+    <TeamName>五号联队</TeamName>
+    <Rescue>43</Rescue>
+    <IsitFree>调用</IsitFree>
+    <DetailedAddress>上海</DetailedAddress>
+    <DataResponsibility>人员救护</DataResponsibility>
+  </Event>
+</Events>

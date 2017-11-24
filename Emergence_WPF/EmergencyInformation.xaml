@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Emergence_WPF.EmergencyInformation" Background="White"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+              xmlns:my="clr-namespace:Framework;assembly=Framework" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:local="clr-namespace:Emergence_WPF.Comm"
+             xmlns:local1="clr-namespace:Emergence_WPF"
+             mc:Ignorable="d" Width="1000" Height="550" Loaded="UserControl_Loaded" SizeChanged="UserControl_SizeChanged"
+            >
+    <UserControl.Resources>
+
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+               
+                <ResourceDictionary Source="/style/ListBoxStyle.xaml"/>
+                <ResourceDictionary Source="/style/ListViewStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+   
+        <DockPanel  Width="1000" Height="550" Name="top1" HorizontalAlignment="Left" VerticalAlignment="Top">
+
+        <StackPanel Height="550"  DockPanel.Dock="Left" Width="1000" Name="top2" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <StackPanel Background="#007B78" Height="40"  Name="top3" Width="1000" HorizontalAlignment="Left" Orientation="Horizontal">
+                    <Label Name="a1" MouseLeftButtonDown="a1_MouseLeftButtonDown" Foreground="White" Background="#008E8E" FontSize="16" Height="40" HorizontalAlignment="Left" Width="120" Padding="10" Margin="20,0,0,0">应急信息管理</Label>
+                    <Label Name="a2" MouseLeftButtonDown="a2_MouseLeftButtonDown" Foreground="White" FontSize="16" Height="40" HorizontalAlignment="Left" Width="120" Padding="10" >应急事件管理</Label>
+                    <Label Name="a3" MouseLeftButtonDown="a3_MouseLeftButtonDown" Foreground="White" FontSize="16" Height="40" HorizontalAlignment="Left" Width="120" Padding="10" >应急组织管理</Label>
+                    <Label Name="a4" MouseLeftButtonDown="a4_MouseLeftButtonDown" Foreground="White" FontSize="16" Height="40" HorizontalAlignment="Left" Width="120" Padding="10" >应急资源管理</Label>
+                </StackPanel>
+              
+                <StackPanel Background="#F5F5F5" Height="35" Width="1000" Name="top4" HorizontalAlignment="Left" Orientation="Horizontal">
+                    <Label Foreground="#337ab7" FontSize="16" Height="35" HorizontalAlignment="Left"  Padding="7" Margin="30,0,0,0">首页</Label>
+                    <Label Foreground="#777" FontSize="16" Height="35" HorizontalAlignment="Left" Width="20" Padding="7">/</Label>
+                    <Label Foreground="#337ab7" FontSize="16" Height="35" HorizontalAlignment="Left"  Padding="7" Margin="5,0,0,0">应急指挥中心</Label>
+                    <Label Foreground="#777" FontSize="16" Height="35" HorizontalAlignment="Left" Width="20" Padding="7">/</Label>
+                    <Label Foreground="#777" FontSize="16" Height="35" HorizontalAlignment="Left"  Padding="7" Name="kkk">应急信息管理</Label>
+                </StackPanel>
+                <Grid Name="main" Height="470">
+             
+                </Grid>
+            </StackPanel>
+
+
+        </DockPanel>
+  
+</UserControl>

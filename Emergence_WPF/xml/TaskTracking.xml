@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Events Class="1401" >
+  <Event num="01" Task="1">
+    <Guid>01</Guid>
+    <xiada>0</xiada>
+    <jieshou>0</jieshou>
+    <yanpan>0</yanpan>
+    <jindu>0</jindu>
+    <wancheng>0</wancheng>
+  </Event>
+</Events>

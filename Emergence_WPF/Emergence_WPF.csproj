@@ -1,0 +1,702 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8858C69E-B483-41FD-84CF-C7C0298E8452}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Emergence_WPF</RootNamespace>
+    <AssemblyName>Emergence_WPF</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <PublishUrl>发布\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Image\bbbb.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.Prism, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.Interactivity, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Prism.MefExtensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Microsoft.Practices.Prism.MefExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Comm\CommHelp.cs" />
+    <Compile Include="Comm\PageChangedEventArg.cs" />
+    <Compile Include="Comm\Pager.cs" />
+    <Compile Include="Comm\PasswordBoxHelper.cs" />
+    <Compile Include="Comm\StringFormatConverter.cs" />
+    <Compile Include="EmergencyCommandCenter.xaml.cs">
+      <DependentUpon>EmergencyCommandCenter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EmergencyResources.xaml.cs">
+      <DependentUpon>EmergencyResources.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EmergencyOrganization.xaml.cs">
+      <DependentUpon>EmergencyOrganization.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainUserControl2.xaml.cs">
+      <DependentUpon>MainUserControl2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TaskTracking.xaml.cs">
+      <DependentUpon>TaskTracking.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EventGeneration.xaml.cs">
+      <DependentUpon>EventGeneration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EventReporting.xaml.cs">
+      <DependentUpon>EventReporting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TeamStatistics.xaml.cs">
+      <DependentUpon>TeamStatistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MaterialStatistics.xaml.cs">
+      <DependentUpon>MaterialStatistics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReportCenter.xaml.cs">
+      <DependentUpon>ReportCenter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Restatement.xaml.cs">
+      <DependentUpon>Restatement.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="LiveVideo.xaml.cs">
+      <DependentUpon>LiveVideo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="GeographicInformation.xaml.cs">
+      <DependentUpon>GeographicInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FullScreen1.xaml.cs">
+      <DependentUpon>FullScreen1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationTask.xaml.cs">
+      <DependentUpon>NotificationTask.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Details.xaml.cs">
+      <DependentUpon>Details.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationNavigation.xaml.cs">
+      <DependentUpon>NotificationNavigation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationSystem.xaml.cs">
+      <DependentUpon>NotificationSystem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EmergencyEvent.xaml.cs">
+      <DependentUpon>EmergencyEvent.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="EventDetails.xaml.cs">
+      <DependentUpon>EventDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EventAdd.xaml.cs">
+      <DependentUpon>EventAdd.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Information.xaml.cs">
+      <DependentUpon>Information.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="EmergencyInformation.xaml.cs">
+      <DependentUpon>EmergencyInformation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Leadership.xaml.cs">
+      <DependentUpon>Leadership.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainUserControl.xaml.cs">
+      <DependentUpon>MainUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Event.cs" />
+    <Compile Include="Model\ListSortDirector.cs" />
+    <Compile Include="Model\ListViewBehavior.cs" />
+    <Compile Include="Model\SortInfo.cs" />
+    <Compile Include="Model\UIElementAdorner.cs" />
+    <Compile Include="UserControl1.xaml.cs">
+      <DependentUpon>UserControl1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\UserControl_MainPage.xaml.cs">
+      <DependentUpon>UserControl_MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControl\HintPasswordBox.xaml.cs">
+      <DependentUpon>HintPasswordBox.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="WebBrowserOverlay.xaml.cs">
+      <DependentUpon>WebBrowserOverlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WebBrowserOverlayWF.cs" />
+    <Compile Include="Win32.cs" />
+    <Compile Include="Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Page Include="EmergencyCommandCenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EmergencyResources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EmergencyOrganization.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainUserControl2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TaskTracking.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EventGeneration.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EventReporting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TeamStatistics.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MaterialStatistics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ReportCenter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Restatement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LiveVideo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GeographicInformation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="FullScreen1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NotificationTask.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Details.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NotificationNavigation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NotificationSystem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EmergencyEvent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EventDetails.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EventAdd.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Information.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="EmergencyInformation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Leadership.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Login.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Login.xaml.cs">
+      <DependentUpon>Login.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="style\ListBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="style\ListViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\UserControl_MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControl\HintPasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WebBrowserOverlay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Comm\zuo1.png" />
+    <Resource Include="Image\11.jpg" />
+    <Resource Include="Image\22.jpg" />
+    <Resource Include="Image\33.jpg" />
+    <Resource Include="Image\leftlogin.png" />
+    <Resource Include="Image\login.png" />
+    <Resource Include="Image\weather.png" />
+    <Resource Include="Image\weather2.png" />
+    <Resource Include="Image\zuo1.png" />
+    <Resource Include="zuo1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\1.png" />
+    <Resource Include="Image\2.png" />
+    <Resource Include="Image\3.png" />
+    <Resource Include="Image\4.png" />
+    <Resource Include="Image\5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\zuo1.png" />
+    <Content Include="bin\Debug\xml\Emergence.xml" />
+    <Content Include="DebugImage\1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\11.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\1111.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\22.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\33.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\333.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\7月30号－1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\7月30号－2.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\a.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\b.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\bbbb.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\c.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\c1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\c2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\c3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\c4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\cc.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\d.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\e.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\head背景.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\kk.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\leftlogin.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\login.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\weather.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\weather2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\xiangshang.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\xiangxia.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\zuo1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\上.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\下.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\事件生成.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\保存.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\全球显示.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\刷新.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\加.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\右.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\启动.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\左.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\播放.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\放大.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\无人机.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\时间背景.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\右箭头.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\圆点1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\圆点2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\左箭头.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\暂停.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\漫游.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\缩小.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\菜单背景.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\视频按钮.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\视频源.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\返回.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DebugImage\选中.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DLL\Framework.dll" />
+    <Content Include="DLL\Microsoft.Practices.Prism.dll" />
+    <Content Include="DLL\Microsoft.Practices.Prism.Interactivity.dll" />
+    <Content Include="DLL\Microsoft.Practices.Prism.MefExtensions.dll" />
+    <Content Include="DLL\Microsoft.Practices.ServiceLocation.dll" />
+    <Resource Include="Image\bbbb.ico" />
+    <Resource Include="Image\333.png" />
+    <Resource Include="Image\head背景.png" />
+    <Resource Include="Image\右箭头.png" />
+    <Resource Include="Image\左箭头.png" />
+    <Resource Include="Image\启动.png" />
+    <Resource Include="Image\cc.png" />
+    <Resource Include="Image\圆点1.png" />
+    <Resource Include="Image\圆点2.png" />
+    <Resource Include="Image\时间背景.png" />
+    <Resource Include="Image\全球显示.png" />
+    <Resource Include="Image\放大.png" />
+    <Resource Include="Image\漫游.png" />
+    <Resource Include="Image\缩小.png" />
+    <Resource Include="Image\kk.png" />
+    <Resource Include="Image\菜单背景.png" />
+    <Resource Include="Image\视频源.png" />
+    <Resource Include="Image\上.png" />
+    <Resource Include="Image\下.png" />
+    <Resource Include="Image\加.png" />
+    <Resource Include="Image\右.png" />
+    <Resource Include="Image\左.png" />
+    <Resource Include="Image\播放.png" />
+    <Resource Include="Image\无人机.png" />
+    <Resource Include="Image\暂停.png" />
+    <Resource Include="Image\视频按钮.png" />
+    <Resource Include="Image\选中.png" />
+    <Resource Include="Image\1111.png" />
+    <Resource Include="Image\c1.png" />
+    <Resource Include="Image\c2.png" />
+    <Resource Include="Image\c3.png" />
+    <Resource Include="Image\c4.png" />
+    <Resource Include="Image\7月30号－1.jpg" />
+    <Resource Include="Image\7月30号－2.jpg" />
+    <Resource Include="Image\事件生成.png" />
+    <Resource Include="Image\保存.png" />
+    <Resource Include="Image\刷新.png" />
+    <Resource Include="Image\返回.png" />
+    <Resource Include="Image\全屏.jpg" />
+    <Resource Include="Image\短信.jpg" />
+    <Resource Include="Image\全屏.png" />
+    <Resource Include="Image\短信.png" />
+    <Resource Include="Image\beijing.png" />
+    <Resource Include="Image\xiangshang.png" />
+    <Resource Include="Image\xiangxia.png" />
+    <Resource Include="Image\weather3.png" />
+    <Resource Include="Image\bar.png" />
+    <Resource Include="Image\pie.png" />
+    <Resource Include="Image\Icon_FullScreen.png" />
+    <Resource Include="Image\Icon_Graph.png" />
+    <Resource Include="Image\Icon_Home.png" />
+    <Resource Include="Image\Icon_LeftArrow.png" />
+    <Resource Include="Image\Icon_Lighting.png" />
+    <Resource Include="Image\Icon_LogOut.png" />
+    <Resource Include="Image\Icon_MainBrand.png" />
+    <Resource Include="Image\Icon_Message.png" />
+    <Resource Include="Image\Icon_User.png" />
+    <Resource Include="Image\EmergencyPersonSummary.png" />
+    <Resource Include="Image\MaterialsSummary.png" />
+    <Resource Include="Image\MainPage\EmergencyPersonSummary.png" />
+    <Resource Include="Image\MainPage\Weather.png" />
+    <Resource Include="Image\MainPage\MaterialsSummary.png" />
+    <Content Include="xml\TaskTracking.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="xml\EmergencyResources.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="xml\Task.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="xml\EmergencyOrganization.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="xml\Emergence.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BMap.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Image\a.png" />
+    <Resource Include="Image\b.png" />
+    <Resource Include="Image\c.png" />
+    <Resource Include="Image\d.png" />
+    <Resource Include="Image\e.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{cc84392e-728a-40c7-bf45-c6f83f615c0e}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
