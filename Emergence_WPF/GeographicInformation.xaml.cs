@@ -1,19 +1,6 @@
-﻿using Microsoft.Practices.Prism.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Xml;
 
 namespace Emergence_WPF
 {
@@ -26,7 +13,7 @@ namespace Emergence_WPF
         {
             InitializeComponent();
         }
-        public class Task : NotificationObject
+        public class Task 
         {
             public string TaskName { get; set; }
             public string TaskGrade { get; set; }

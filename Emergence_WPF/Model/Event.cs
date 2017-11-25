@@ -1,13 +1,6 @@
-﻿using Microsoft.Practices.Prism.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Emergence_WPF.Model
+﻿namespace Emergence_WPF.Model
 {
-    public class Event : NotificationObject
+    public class Event 
     {
         public string Guid { get; set; }
         public bool IsCheck
@@ -48,7 +41,7 @@ namespace Emergence_WPF.Model
        
     
     }
-    public class EmergencyOrganizationClass : NotificationObject
+    public class EmergencyOrganizationClass 
     {
 
         public bool IsCheck { get; set; }
@@ -60,7 +53,7 @@ namespace Emergence_WPF.Model
     
 
     }
-    public class ResourcesClass : NotificationObject
+    public class ResourcesClass 
     {
 
         public bool IsCheck { get; set; }
