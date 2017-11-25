@@ -90,6 +90,7 @@
     <Compile Include="MainUserControl2.xaml.cs">
       <DependentUpon>MainUserControl2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\MasterEvent.cs" />
     <Compile Include="TaskTracking.xaml.cs">
       <DependentUpon>TaskTracking.xaml</DependentUpon>
     </Compile>
@@ -173,6 +174,13 @@
     </Compile>
     <Compile Include="ViewModel\NotificationObject.cs" />
     <Compile Include="ViewModel\Video.cs" />
+    <Compile Include="ViewModel\VM_MasterEventManagement.cs" />
+    <Compile Include="Views\Event\EventMasterPage.xaml.cs">
+      <DependentUpon>EventMasterPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Event\MasterEventManagement.xaml.cs">
+      <DependentUpon>MasterEventManagement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Video.xaml.cs">
       <DependentUpon>Video.xaml</DependentUpon>
     </Compile>
@@ -288,7 +296,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -299,7 +307,7 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -324,6 +332,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControl\HintPasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Event\EventMasterPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Event\MasterEventManagement.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

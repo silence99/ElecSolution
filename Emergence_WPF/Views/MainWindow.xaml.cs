@@ -68,13 +68,15 @@ namespace Emergence_WPF
             }
             Maincontrol = null;
             Navigation = null;
-            clear(); 
+            clear();
             maingrid.Children.Clear();
-            Information = new EmergencyInformation();
-            var ff = this.ActualWidth - 1000;
-            var hh = this.ActualHeight - 630;
-            Information.bind(1000+ff,550+hh);
-            maingrid.Children.Add(Information);
+            EventMasterPage information = new EventMasterPage();
+            //Information = new EmergencyInformation();
+            //var ff = this.ActualWidth - 1000;
+            //var hh = this.ActualHeight - 630;
+            //Information.bind(1000 + ff, 550 + hh);
+            maingrid.Children.Add(information);
+
         }
 
         private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
