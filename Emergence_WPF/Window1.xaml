@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Emergence_WPF.Window1"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-           WindowStartupLocation="CenterScreen" 
+        WindowStartupLocation="CenterScreen" 
         Title="新建" Height="200" Width="500">
     <Grid>
         <StackPanel>

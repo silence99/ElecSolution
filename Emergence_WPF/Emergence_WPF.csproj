@@ -55,7 +55,6 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -171,6 +170,11 @@
     <Compile Include="UserControl\HintPasswordBox.xaml.cs">
       <DependentUpon>HintPasswordBox.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewModel\NotificationObject.cs" />
+    <Compile Include="ViewModel\Video.cs" />
+    <Compile Include="Views\Video.xaml.cs">
+      <DependentUpon>Video.xaml</DependentUpon>
     </Compile>
     <Compile Include="WebBrowserOverlay.xaml.cs">
       <DependentUpon>WebBrowserOverlay.xaml</DependentUpon>
@@ -320,6 +324,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControl\HintPasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Video.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -578,11 +586,6 @@
     <Content Include="DebugImage\选中.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="DLL\Framework.dll" />
-    <Content Include="DLL\Microsoft.Practices.Prism.dll" />
-    <Content Include="DLL\Microsoft.Practices.Prism.Interactivity.dll" />
-    <Content Include="DLL\Microsoft.Practices.Prism.MefExtensions.dll" />
-    <Content Include="DLL\Microsoft.Practices.ServiceLocation.dll" />
     <Resource Include="Image\bbbb.ico" />
     <Resource Include="Image\333.png" />
     <Resource Include="Image\head背景.png" />
@@ -668,12 +671,6 @@
     <Resource Include="Image\c.png" />
     <Resource Include="Image\d.png" />
     <Resource Include="Image\e.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Framework\Framework.csproj">
-      <Project>{cc84392e-728a-40c7-bf45-c6f83f615c0e}</Project>
-      <Name>Framework</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

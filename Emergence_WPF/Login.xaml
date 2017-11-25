@@ -2,9 +2,8 @@
          Icon="/Image/bbbb.ico"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-     ResizeMode="CanMinimize"
-        
         xmlns:control="clr-namespace:Emergence_WPF"
+        ResizeMode="CanMinimize"
         Background="White" WindowStartupLocation="CenterScreen"
     Title="应急指挥管理平台" Height="350" Width="450">
     <StackPanel Orientation="Vertical">
