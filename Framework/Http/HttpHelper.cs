@@ -642,6 +642,21 @@ namespace Framework.Http
         FilePath//表示传入的是文件
     }
 
+    public struct HeaderInfo
+    {
+        private string _name;
+        private string _value;
+
+        public string Name { get => _name; set => _name = value; }
+        public string Value { get => _value; set => _value = value; }
+
+        public HeaderInfo(string nameStr, string valueStr)
+        {
+            _name = nameStr;
+            _value = valueStr;
+        }
+    }
+
     public class HttpCommon
     {
         public static string HttpGet(string AUrl)
@@ -663,6 +678,26 @@ namespace Framework.Http
             if (hr.Html.Contains("Request Error"))
                 throw new WebException(hr.Html);
             return hr.Html;  
+        }
+
+        public static HttpResult HttpGet(string AUrl, string ACookie, List<HeaderInfo> headers)
+        {
+            HttpHelper hh = new HttpHelper();
+            HttpItem hi = new HttpItem();
+
+            hi.URL = AUrl;
+            hi.ResultType = ResultType.String;
+            hi.Method = "GET";
+            hi.Cookie = ACookie;
+            if (headers != null && headers.Count > 0)
+            {
+                foreach (var header in headers)
+                { hi.Header.Add(header.Name, header.Value); }
+            }
+            HttpResult hr = hh.GetHtml(hi);
+            if (hr.Html.Contains("Request Error"))
+                throw new WebException(hr.Html);
+            return hr;
         }
 
         public static string HttpPost(string AUrl, string AParam, string AContentType = "")
@@ -687,6 +722,32 @@ namespace Framework.Http
             if (hr.Html.Contains("Request Error"))
                 throw new WebException(hr.Html);
             return hr.Html;
+        }
+
+        public static HttpResult HttpPost(string AUrl, string AParam, string ACookie, string AContentType, List<HeaderInfo> headers)
+        {
+            HttpHelper hh = new HttpHelper();
+            HttpItem hi = new HttpItem();
+
+            hi.URL = AUrl;
+            hi.ResultType = ResultType.String;
+            hi.Method = "POST";
+            hi.Postdata = AParam;
+            //hi.PostdataByte = AParam;
+            //hi.PostDataType = PostDataType.Byte;
+            hi.Cookie = ACookie;
+            if (headers != null && headers.Count > 0)
+            {
+                foreach (var header in headers)
+                { hi.Header.Add(header.Name, header.Value); }
+            }
+            if (AContentType.Length != 0)
+                hi.ContentType = AContentType;
+
+            HttpResult hr = hh.GetHtml(hi);
+            if (hr.Html.Contains("Request Error"))
+                throw new WebException(hr.Html);
+            return hr;
         }
     }
 }

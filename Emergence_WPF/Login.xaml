@@ -13,7 +13,7 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,50,0,0">
             <Label VerticalAlignment="Center" Foreground="#31605A" FontSize="20">账号:</Label>
             <TextBox Margin="20,0,0,0" FontSize="16" Foreground="#FF776B5F" Width="250" VerticalContentAlignment="Center" BorderBrush="#C3CCCB" 
-                 Height="40" Name="txtKeyword" MaxLength="10" BorderThickness="1.5">
+                 Height="40" Name="txtUserName" MaxLength="10" BorderThickness="1.5">
                 <TextBox.Resources>
                     <VisualBrush x:Key="HelpBrush" TileMode="None" Opacity="0.3" Stretch="None" AlignmentX="Left" >
                         <VisualBrush.Visual>
@@ -38,12 +38,12 @@
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,50,0,0">
             <Label VerticalAlignment="Center" Foreground="#31605A" FontSize="20">密码:</Label>
-            <control:HintPasswordBox VerticalContentAlignment="Center"   FontSize="16" Foreground="#FF776B5F" Width="250" Margin="20,0,0,0" 
-        	Height="40" x:Name="txtKeyword_Copy" HintText="密 码" Hint="密 码">
+            <control:HintPasswordBox VerticalContentAlignment="Center" FontSize="16" Foreground="#FF776B5F" Width="250" Margin="20,0,0,0" 
+        	Height="40" x:Name="txtPassword" HintText="密 码" Hint="密 码">
 
             </control:HintPasswordBox>
         </StackPanel>
-        <Button Height="40" Width="200" Margin="0,40,0,0" Click="Button_Click" Background="#FFB200" Cursor="Hand" Content="登  录" Foreground="White">
+        <Button Height="40" Width="200" Margin="0,40,0,0" Click="LoginButton_Click" Background="#FFB200" Cursor="Hand" Content="登  录" Foreground="White">
             <Button.Style>
                 <Style  TargetType="{x:Type Button}">
                     <Setter Property="Height" Value="50"></Setter>

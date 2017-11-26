@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace Emergence_WPF.Comm
 {
@@ -65,6 +67,19 @@ namespace Emergence_WPF.Comm
             {
                 passwordBox.Password = e.NewValue == null ? string.Empty : e.NewValue.ToString();
             }
+        }
+
+        public static string GetMD5Password(string ps)
+        {
+            byte[] inputStr = Encoding.UTF8.GetBytes(ps);
+            MD5 md5 = MD5.Create();
+            byte[] result = md5.ComputeHash(inputStr);
+            StringBuilder strbul = new StringBuilder(40);
+            for (int i = 0; i < result.Length; i++)
+            {
+                strbul.Append(result[i].ToString("x2"));
+            }
+            return strbul.ToString();
         }
     }
 }
