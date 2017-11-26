@@ -1,4 +1,5 @@
-﻿using Emergence_WPF.Comm;
+﻿using Emergence.Common.ViewModel;
+using Emergence_WPF.Comm;
 using Emergence_WPF.Model;
 using System.Collections.Generic;
 using System.Windows;
@@ -13,11 +14,23 @@ namespace Emergence_WPF
     /// </summary>
     public partial class UserControl_MainPage : UserControl
     {
-
         private int _totalCount = 3;
         private int _pageIndex = 1;
         private int _totalPage = 1;
         private int _pageSize = 3;
+        private MainPageUiModel _uiModel;
+        public MainPageUiModel UiModel
+        {
+            get
+            {
+                return _uiModel;
+            }
+            set
+            {
+                _uiModel = value;
+                Videos.UiModel = UiModel.MasterEvents[0].Videos;
+            }
+        }
 
         public UserControl_MainPage()
         {
@@ -115,7 +128,7 @@ namespace Emergence_WPF
 
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            var dynamicWidth = this.ActualWidth - 694 > 0 ? this.ActualWidth-694 : 1;
+            var dynamicWidth = this.ActualWidth - 694 > 0 ? this.ActualWidth - 694 : 1;
             var dynamicHeight = this.ActualHeight - 750 > 0 ? this.ActualHeight - 750 : 1; ;
             mapPanel.Height = this.ActualHeight > 246 ? this.ActualHeight - 246 : 1;
             mapPanel.Width = dynamicWidth;
@@ -138,7 +151,7 @@ namespace Emergence_WPF
 
             //dataGridPanel.Height = 246;
             DataCodeing.Height = dataGridPanel.Height;
-            VideoScroll.Height = this.ActualHeight - 68;
+            Videos.Height = this.ActualHeight - 68;
         }
 
         private void DataCodeing_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

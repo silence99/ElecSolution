@@ -1,4 +1,4 @@
-﻿using Emergence_WPF.ViewModel;
+﻿using Emergence.Common.ViewModel;
 using System;
 using System.IO;
 using System.Reflection;

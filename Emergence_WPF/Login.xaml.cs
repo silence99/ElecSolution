@@ -20,6 +20,7 @@ namespace Emergence_WPF
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             string userName = this.txtUserName.Text.Trim();
+#if Release
             string passwordStr = this.txtPassword.Password.Trim();
             if(string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(passwordStr))
             {
@@ -29,16 +30,19 @@ namespace Emergence_WPF
             {
                 if (RequestLogin(userName, passwordStr))
                 {
+#endif
                     MainWindow main = new MainWindow();
                     main.Show();
 
                     this.Close();
-                }
+#if Release
+        }
                 else
                 {
                     MessageBox.Show("用户名或密码不正确!");
                 }
             }
+#endif
         }
 
         private bool RequestLogin(string userName, string passwordStr)

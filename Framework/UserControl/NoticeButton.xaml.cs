@@ -67,7 +67,7 @@ namespace Framework
         /// <summary>
         /// 台号
         /// </summary>
-        public string Content
+        public new string Content
         {
             set { button1.Content = value; }
             get { return button1.Content.ToString(); }

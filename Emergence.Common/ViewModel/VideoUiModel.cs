@@ -1,7 +1,7 @@
 ﻿using Framework;
 using System;
 
-namespace Emergence_WPF.ViewModel
+namespace Emergence.Common.ViewModel
 {
     public class VideoUiModel : NotificationObject
     {

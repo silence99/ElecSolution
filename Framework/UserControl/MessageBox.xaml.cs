@@ -26,7 +26,7 @@ namespace Framework
         /// <summary>
         /// 消息框标题
         /// </summary>
-        public string Title {
+        public new string Title {
             get { return txtTitle.Text; }
             set { txtTitle.Text = value; }
         }

@@ -192,7 +192,7 @@
       <DependentUpon>HintPasswordBox.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModel\NotificationObject.cs" />
+    <Compile Include="ViewModel\MasterEventUiModel.cs" />
     <Compile Include="ViewModel\VideoUiModel.cs" />
     <Compile Include="ViewModel\VM_MasterEventManagement.cs" />
     <Compile Include="Views\Event\EventMasterPage.xaml.cs">
@@ -200,6 +200,9 @@
     </Compile>
     <Compile Include="Views\Event\MasterEventManagement.xaml.cs">
       <DependentUpon>MasterEventManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPage\VideoCollection.xaml.cs">
+      <DependentUpon>VideoCollection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Video.xaml.cs">
       <DependentUpon>Video.xaml</DependentUpon>
@@ -313,6 +316,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPage\VideoCollection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -710,9 +717,21 @@
     <Resource Include="Image\e.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Busniess\Busniess.csproj">
+      <Project>{579fc0bf-c4aa-4b0b-80da-5b7580d6618c}</Project>
+      <Name>Busniess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Emergence.Common\Emergence.Common.csproj">
+      <Project>{fa639882-2d69-4822-81d3-4764f08ae196}</Project>
+      <Name>Emergence.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Framework\Framework.csproj">
       <Project>{cc84392e-728a-40c7-bf45-c6f83f615c0e}</Project>
       <Name>Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{33739869-9643-4427-90e3-4d9c907f6e49}</Project>
+      <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

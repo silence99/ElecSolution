@@ -1,4 +1,7 @@
-﻿using Emergence_WPF.Comm;
+﻿using Busniess.Strategies;
+using Emergence.Common.ViewModel;
+using Emergence_WPF.Comm;
+using Framework;
 using System.Windows;
 using System.Windows.Input;
 
@@ -14,11 +17,26 @@ namespace Emergence_WPF
         EmergencyInformation Information = null;
         NotificationNavigation Navigation = null;
         ReportCenter report = null;
+        MainPageUiModel _uiModel;
+        public MainPageUiModel UiModel
+        {
+            get
+            {
+                return _uiModel;
+            }
+            set
+            {
+                _uiModel = value;
+            }
+        }
+        MainPageStrategyController StrategyController { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
             loginname.Text = "用户" + CommHelp.Name;
+            UiModel = new MainPageUiModel();
+            StrategyController = new MainPageStrategyController(UiModel);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -35,22 +53,22 @@ namespace Emergence_WPF
             this.Left = 0.0;
             this.Top = 0.0;
             this.Width = SystemParameters.PrimaryScreenWidth;
-            this.Height = SystemParameters.PrimaryScreenHeight;    
+            this.Height = SystemParameters.PrimaryScreenHeight;
             //Maincontrol = new MainUserControl2();
             Maincontrol = new UserControl_MainPage();
             //Maincontrol.bind(this.ActualWidth, this.ActualHeight);
-
+            Maincontrol.UiModel = UiModel;
             maingrid.Children.Add(Maincontrol);
 
         }
-        
+
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (Maincontrol != null) 
+            if (Maincontrol != null)
             {
                 Maincontrol.Close();
             }
-            clear(); 
+            clear();
             maingrid.Children.Clear();
             //Maincontrol = new MainUserControl2();
             Maincontrol = new UserControl_MainPage();
@@ -105,7 +123,7 @@ namespace Emergence_WPF
             }
             Maincontrol = null;
             Information = null;
-            clear(); 
+            clear();
             maingrid.Children.Clear();
             Navigation = new NotificationNavigation();
             var ff = this.ActualWidth - 1000;
@@ -119,7 +137,7 @@ namespace Emergence_WPF
             EmergencyCommandCenter center = new EmergencyCommandCenter();
             center.ShowDialog();
         }
-        void clear() 
+        void clear()
         {
             Maincontrol = null;
             Information = null;
@@ -133,7 +151,7 @@ namespace Emergence_WPF
             }
             Maincontrol = null;
             Information = null;
-            clear(); 
+            clear();
             maingrid.Children.Clear();
             report = new ReportCenter();
             var ff = this.ActualWidth - 1000;

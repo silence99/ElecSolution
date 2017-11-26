@@ -2,7 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mainpage="clr-namespace:Emergence_WPF.Views.MainPage"
              mc:Ignorable="d" Loaded="UserControl_Loaded" SizeChanged="UserControl_SizeChanged" >
     <UserControl.Resources>
         <ResourceDictionary>
@@ -118,24 +119,7 @@
 
                 <TextBlock Margin="10,13,0,0" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif">视频资料</TextBlock>
             </StackPanel>
-            <ScrollViewer Name="VideoScroll" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
-                <ScrollViewer.Content>
-                    <StackPanel Width="270" Orientation="Vertical" >
-                        <Image  Margin="0,0,0,0" Source="/Image/11.jpg" Stretch="Fill" Width="270" Height="150" HorizontalAlignment="Right" ></Image>
-                        <Image  Margin="0,5,0,0"  Source="/Image/22.jpg" Stretch="Fill" Width="270" Height="150" HorizontalAlignment="Right" ></Image>
-                        <Image  Margin="0,5,0,0"  Source="/Image/33.jpg" Stretch="Fill" Width="270" Height="150" HorizontalAlignment="Right" ></Image>
-                        <Image  Margin="0,5,0,0"  Source="/Image/22.jpg" Stretch="Fill" Width="270" Height="150" HorizontalAlignment="Right" ></Image>
-                        <Image  Margin="0,5,0,0"  Source="/Image/33.jpg" Stretch="Fill" Width="270" Height="150" HorizontalAlignment="Right" ></Image>
-                        <Image  Margin="0,5,0,0"  Source="/Image/22.jpg" Stretch="Fill" Width="270" Height="150" HorizontalAlignment="Right" ></Image>
-                        <Image  Margin="0,5,0,0"  Source="/Image/11.jpg" Stretch="Fill" Width="270" Height="150" HorizontalAlignment="Right" ></Image>
-                        <Image  Margin="0,5,0,0"  Source="/Image/22.jpg" Stretch="Fill" Width="270" Height="150" HorizontalAlignment="Right" ></Image>
-                        <Image  Margin="0,5,0,0"  Source="/Image/33.jpg" Stretch="Fill" Width="270" Height="150" HorizontalAlignment="Right" ></Image>
-                        <Image  Margin="0,5,0,0"  Source="/Image/22.jpg" Stretch="Fill" Width="270" Height="150" HorizontalAlignment="Right" ></Image>
-                        <Image  Margin="0,5,0,0"  Source="/Image/33.jpg" Stretch="Fill" Width="270" Height="150" HorizontalAlignment="Right" ></Image>
-                        <Image  Margin="0,5,0,0"  Source="/Image/22.jpg" Stretch="Fill" Width="270" Height="150" HorizontalAlignment="Right" ></Image>
-                    </StackPanel>
-                </ScrollViewer.Content>
-            </ScrollViewer>
+            <mainpage:VideoCollection x:Name="Videos"/>
         </StackPanel>
         <Image Grid.Row="0" Grid.Column="1" Margin="5,5,5,0"  Source="/Image/MainPage/MaterialsSummary.png" Stretch="Fill" Width="420" Height="234" HorizontalAlignment="Right" ></Image>
         <Image Grid.Row="1" Grid.Column="1" Margin="5,5,5,0"  Source="/Image/MainPage/EmergencyPersonSummary.png" Stretch="Fill" Width="420" Height="234" HorizontalAlignment="Right" ></Image>

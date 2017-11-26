@@ -51,17 +51,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\IBatisNet.Common.dll</HintPath>
     </Reference>
-    <Reference Include="IBatisNet.Common.Logging.Log4Net, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\IBatisNet.Common.Logging.Log4Net.dll</HintPath>
-    </Reference>
     <Reference Include="IBatisNet.DataMapper, Version=1.6.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Lib\IBatisNet.DataMapper.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
+    <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\log4net.dll</HintPath>
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -83,6 +79,12 @@
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Spring.Aop">
+      <HintPath>..\ThirdParty\spring.net\Spring.Aop.dll</HintPath>
+    </Reference>
+    <Reference Include="Spring.Core">
+      <HintPath>..\ThirdParty\spring.net\Spring.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.configuration" />
@@ -97,9 +99,15 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ErrorHandler.cs" />
     <Compile Include="FastJSON\FastJOSN.cs" />
     <Compile Include="Http\HttpHelper.cs" />
     <Compile Include="Infrastructure\NameRegions.cs" />
+    <Compile Include="INotifyPropertyChanged.cs" />
+    <Compile Include="IStrategy.cs" />
+    <Compile Include="Mapper.cs" />
+    <Compile Include="NotificationObject.cs" />
+    <Compile Include="NotifierManager.cs" />
     <Compile Include="Pipe\ClientPipe.cs" />
     <Compile Include="Pipe\PipeServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,7 +116,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="PropertyChangedEventArgs.cs" />
+    <Compile Include="PropertyChangeError.cs" />
+    <Compile Include="PropertyChangeException.cs" />
+    <Compile Include="PropertyInterceptor.cs" />
+    <Compile Include="PropertyMethodMatchPointcut.cs" />
+    <Compile Include="ProxyFactoryExtendion.cs" />
     <Compile Include="Save2File\SaveFile.cs" />
+    <Compile Include="Strategy.cs" />
+    <Compile Include="StrategyController.cs" />
+    <Compile Include="StrategyRegistry.cs" />
     <Compile Include="UserControl\BoolToVisibilityConverter.cs" />
     <Compile Include="UserControl\NoticeButton.xaml.cs">
       <DependentUpon>NoticeButton.xaml</DependentUpon>
@@ -238,12 +255,6 @@
     <Content Include="Lib\IBatisNet.Common.Logging.Log4Net.xml" />
     <Content Include="Lib\IBatisNet.Common.xml" />
     <Content Include="Lib\IBatisNet.DataMapper.dll" />
-    <Content Include="Lib\log4net.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Lib\log4net.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Lib\System.Windows.Interactivity.dll" />
     <Resource Include="UserControl\num-bg-hover.png" />
     <Resource Include="UserControl\num-bg.png" />
@@ -458,24 +469,17 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
-      <Project>{293BD83C-ED47-4A7C-9D08-615FF5697681}</Project>
-      <Name>DataAccess</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Command\" />
-    <Folder Include="Common\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
