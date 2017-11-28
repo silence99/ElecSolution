@@ -44,6 +44,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMapper.cs" />
+    <Compile Include="Mappers\MasterEventMapper.cs" />
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\MasterEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

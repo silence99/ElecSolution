@@ -1,4 +1,5 @@
 ﻿using Emergence_WPF.Model;
+using Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Emergence_WPF.ViewModel
 {
-    public class VM_MasterEventManagement
+    public class VM_MasterEventManagement: NotificationObject
     {
         //Grid related variables
         private int _pageSize = 0;
@@ -31,7 +32,8 @@ namespace Emergence_WPF.ViewModel
         public string TxtTime { get => _txtTime; set => _txtTime = value; }
         public string TxtSubmitParty { get => _txtSubmitParty; set => _txtSubmitParty = value; }
         public string TxtLocate { get => _txtLocate; set => _txtLocate = value; }
+        public bool IsClick { get; set; }
 
-        public List<MasterEvent> masterEventList = new List<MasterEvent>();
+        public List<MasterEventUiModel> masterEventList = new List<MasterEventUiModel>();
     }
 }

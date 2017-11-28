@@ -62,7 +62,5 @@ namespace Busniess.Strategies
             };
 
         }
-
-
     }
 }

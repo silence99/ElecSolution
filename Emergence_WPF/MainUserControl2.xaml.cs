@@ -71,7 +71,7 @@ namespace Emergence_WPF
 
         List<Event> Events = new List<Event>();
 
-        UserControl1 control = new UserControl1();
+        BMap control = new BMap();
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
 

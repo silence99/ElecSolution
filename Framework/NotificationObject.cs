@@ -30,11 +30,6 @@ namespace Framework
         private static Stack<KeyValuePair<NotificationObject, string>> _eventStack = new Stack<KeyValuePair<NotificationObject, string>>();
         private List<string> _overriden = new List<string>();
         private List<string> _readonly = new List<string>();
-        private List<string> _bindingToUI = new List<string>();
-        protected Dictionary<string, bool> _disabled = new Dictionary<string, bool>();
-        protected Dictionary<string, bool> _required = new Dictionary<string, bool>();
-        protected Dictionary<string, object> _invisiabled = new Dictionary<string, object>();
-        private static NotifierManager _notifyManager = new NotifierManager();
 
         public NotificationObject(ErrorHandler handler = null)
         {
@@ -51,12 +46,6 @@ namespace Framework
             {
                 Interlocked.Decrement(ref _initialization);
             }
-        }
-
-        public virtual void SetVisiable(string refProperty, object visiable) { }
-        public virtual void SetRequired(string refProperty, bool required) { }
-        public virtual void SetEnbaled(string refProperty, bool enabled)
-        {
         }
 
         public void SetReadOnlyMode(bool readOnly)

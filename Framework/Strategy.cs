@@ -66,7 +66,7 @@ namespace Framework
         {
             if (notifier != null)
             {
-                _registry.RegisterHandler(notifier, propertyName, changingHandler, changedHandler);
+                _registry.RegisterOwener(notifier, propertyName, changingHandler, changedHandler);
                 if (!_registered.Contains(notifier))
                 {
                     notifier.PropertyChangedEx += (sender, args) => { Invoke(sender, args, PropertyChangeEvent.Changed); };
@@ -84,7 +84,7 @@ namespace Framework
         {
             if (notifier != null)
             {
-                _registry.UnregisterHandler(notifier, propertyName, changingHandler, changedHandler);
+                _registry.UnregisterOwener(notifier, propertyName, changingHandler, changedHandler);
             }
             else
             {

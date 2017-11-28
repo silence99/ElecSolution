@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using Framework;
+using System.Collections.Generic;
 
 namespace Emergence_WPF.ViewModel
 {
-    public class MasterEventUiModel
+    public class MasterEventUiModel : NotificationObject
     {
         public virtual long ID { get; set; }
         public virtual bool IsCheck { get; set; }

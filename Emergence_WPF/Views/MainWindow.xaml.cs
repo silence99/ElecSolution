@@ -1,7 +1,6 @@
 ﻿using Busniess.Strategies;
 using Emergence.Common.ViewModel;
 using Emergence_WPF.Comm;
-using Framework;
 using System.Windows;
 using System.Windows.Input;
 
@@ -29,6 +28,7 @@ namespace Emergence_WPF
                 _uiModel = value;
             }
         }
+
         MainPageStrategyController StrategyController { get; set; }
 
         public MainWindow()
@@ -37,6 +37,7 @@ namespace Emergence_WPF
             loginname.Text = "用户" + CommHelp.Name;
             UiModel = new MainPageUiModel();
             StrategyController = new MainPageStrategyController(UiModel);
+            UiModel.PropertyChangedEx += (sender, args) => { if (args.PropertyName == "Name") { } };
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

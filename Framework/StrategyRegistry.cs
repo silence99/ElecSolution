@@ -20,12 +20,12 @@ namespace Framework
             Unregister(notifier, propertyName, null, handler);
         }
 
-        public void RegisterHandler(NotificationObject notifier, string propertyName, PropertyChangedHandlerEx changingHandler, PropertyChangedHandlerEx changedHandler)
+        public void RegisterOwener(NotificationObject notifier, string propertyName, PropertyChangedHandlerEx changingHandler, PropertyChangedHandlerEx changedHandler)
         {
             Register(notifier, propertyName, changingHandler, changedHandler);
         }
 
-        public void UnregisterHandler(NotificationObject notifier, string propertyName, PropertyChangedHandlerEx changingHandler, PropertyChangedHandlerEx changedHandler)
+        public void UnregisterOwener(NotificationObject notifier, string propertyName, PropertyChangedHandlerEx changingHandler, PropertyChangedHandlerEx changedHandler)
         {
             Unregister(notifier, propertyName, changingHandler, changedHandler);
         }

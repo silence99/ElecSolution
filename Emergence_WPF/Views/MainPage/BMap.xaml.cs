@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using WebBrowserOnTransparentWindow;
 
 namespace Emergence_WPF
@@ -19,13 +9,13 @@ namespace Emergence_WPF
     /// <summary>
     /// UserControl1.xaml 的交互逻辑
     /// </summary>
-          
-	//	 [System.Runtime.InteropServices.ComVisible(true)]
-    public partial class UserControl1 : UserControl
+
+    //	 [System.Runtime.InteropServices.ComVisible(true)]
+    public partial class BMap : UserControl
     {
         private System.Windows.Forms.WebBrowser webBrowser;//= new System.Windows.Forms.WebBrowser();
         WebBrowserOverlayWF wbo = null;
-        public UserControl1()
+        public BMap()
         {
             InitializeComponent();
 
@@ -41,28 +31,29 @@ namespace Emergence_WPF
                     wbo = new WebBrowserOverlayWF(host);
                     webBrowser = wbo.WebBrowser;
 
-                    webBrowser.Navigate(new Uri(System.Environment.CurrentDirectory + @"/BMap.html", UriKind.RelativeOrAbsolute));//获取根目录的html文件  
-                  //  webBrowser.ObjectForScripting = this;
+                    webBrowser.Navigate(new Uri(Path.GetFullPath(@"Views\MainPage\BMap.html")));
+                    //获取根目录的html文件  
+                                                                                                //  webBrowser.ObjectForScripting = this;
 
-                //    object[] objs = new object[2] {
-                //double.Parse("120.136940"),
-                //double.Parse("30.268970")};
-                //    webBrowser.Document.InvokeScript("addMarker", objs);
+                    //    object[] objs = new object[2] {
+                    //double.Parse("120.136940"),
+                    //double.Parse("30.268970")};
+                    //    webBrowser.Document.InvokeScript("addMarker", objs);
                 };
             }
             catch (Exception)
             {
-               
-              
+
+
             }
-           
-           
+
+
         }
         public void close()
         {
             if (wbo != null)
             {
-                 this.Visibility = Visibility.Collapsed;
+                this.Visibility = Visibility.Collapsed;
                 // webBrowser.Dispose();
                 wbo._placementTarget.Visibility = Visibility.Collapsed;
                 wbo._placementTarget.Width = 0;
@@ -70,7 +61,7 @@ namespace Emergence_WPF
                 wbo.OnSizeLocationChanged();
 
             }
-            
+
         }
         private void Move_Click(object sender, RoutedEventArgs e)
         {
@@ -80,7 +71,7 @@ namespace Emergence_WPF
             webBrowser.Document.InvokeScript("MoveToPoint", objs);
 
         }
-        public void Bind(string jing,string wei) 
+        public void Bind(string jing, string wei)
         {
             object[] objs = new object[2] {
                 double.Parse(jing),

@@ -30,7 +30,7 @@ namespace Emergence_WPF
                 _uiModel = value;
                 Videos.UiModel = UiModel.MasterEvents[0].Videos;
             }
-        }
+        }        
 
         public UserControl_MainPage()
         {
@@ -73,7 +73,7 @@ namespace Emergence_WPF
 
         List<Event> Events = new List<Event>();
 
-        UserControl1 control = new UserControl1();
+        BMap control = new BMap();
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
 

@@ -21,7 +21,7 @@ namespace Emergence_WPF
             public string ExecutionStatus { get; set; }
         }
         List<Task> list = new List<Task>();
-        UserControl1 control = new UserControl1();
+        BMap control = new BMap();
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             map.Children.Add(control);   

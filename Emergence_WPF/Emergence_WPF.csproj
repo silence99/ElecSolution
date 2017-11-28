@@ -107,6 +107,7 @@
     <Compile Include="EmergencyOrganization.xaml.cs">
       <DependentUpon>EmergencyOrganization.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EmergencyUserControl.cs" />
     <Compile Include="MainUserControl2.xaml.cs">
       <DependentUpon>MainUserControl2.xaml</DependentUpon>
     </Compile>
@@ -182,8 +183,8 @@
     <Compile Include="Model\ListViewBehavior.cs" />
     <Compile Include="Model\SortInfo.cs" />
     <Compile Include="Model\UIElementAdorner.cs" />
-    <Compile Include="UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
+    <Compile Include="Views\MainPage\BMap.xaml.cs">
+      <DependentUpon>BMap.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControl\UserControl_MainPage.xaml.cs">
       <DependentUpon>UserControl_MainPage.xaml</DependentUpon>
@@ -204,8 +205,11 @@
     <Compile Include="Views\MainPage\VideoCollection.xaml.cs">
       <DependentUpon>VideoCollection.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Video.xaml.cs">
+    <Compile Include="Views\MainPage\Video.xaml.cs">
       <DependentUpon>Video.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainPage\Weather.xaml.cs">
+      <DependentUpon>Weather.xaml</DependentUpon>
     </Compile>
     <Compile Include="WebBrowserOverlay.xaml.cs">
       <DependentUpon>WebBrowserOverlay.xaml</DependentUpon>
@@ -323,6 +327,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MainPage\Weather.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -350,7 +358,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserControl1.xaml">
+    <Page Include="Views\MainPage\BMap.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -370,7 +378,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Video.xaml">
+    <Page Include="Views\MainPage\Video.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -692,6 +700,135 @@
     <Resource Include="Image\MainPage\EmergencyPersonSummary.png" />
     <Resource Include="Image\MainPage\Weather.png" />
     <Resource Include="Image\MainPage\MaterialsSummary.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\10.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\11.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\12.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\13.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\14.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\15.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\17.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\18.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\19.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\20.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\21.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\22.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\23.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\24.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\25.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\26.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\27.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\28.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\29.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\30.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\301.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\302.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\31.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\49.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\53.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\54.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\55.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\56.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\57.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\58.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\7.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\8.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\9.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Image\MainPage\WeatherIcons\99.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Content Include="xml\TaskTracking.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -707,7 +844,7 @@
     <Content Include="xml\Emergence.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="BMap.html">
+    <Content Include="Views\MainPage\BMap.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="Image\a.png" />
