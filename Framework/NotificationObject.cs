@@ -227,22 +227,48 @@ namespace Framework
             UIChanged = true;
         }
 
-        public virtual void ApplyToUI(string property)
+        public static object Copy(object source, object target)
         {
-            throw new NotImplementedException("Apply to UI not implemented");
-        }
-
-        protected void TriggerNotifyToUIEvent(PropertyChangedEventArgs args)
-        {
-            if (PropertyChanged != null)
+            throw new NotImplementedException();
+            if (source == null)
             {
-                PropertyChanged(this, args);
+                return null;
             }
-        }
 
-        protected virtual void ApplyMetaDataToUI()
-        {
-            throw new NotImplementedException("Apply meta data to UI not implemented");
+            if (source.GetType().IsValueType || source is string)
+            {
+                return source;
+            }
+
+            MemberInfo[] memberCollection = source.GetType().GetMembers();
+            if (target == null)
+            {
+                target = Activator.CreateInstance(source.GetType());
+            }
+
+            foreach (MemberInfo member in memberCollection)
+            {
+                if (member.MemberType == MemberTypes.Field)
+                {
+                    FieldInfo field = (FieldInfo)member;
+                    object fieldValue = field.GetValue(source);
+                    object targetFieldValue = field.GetValue(target);
+                    field.SetValue(target, Copy(fieldValue, target));
+                }
+                else if (member.MemberType == MemberTypes.Property)
+                {
+                    PropertyInfo myProperty = (PropertyInfo)member;
+                    MethodInfo info = myProperty.GetSetMethod();
+                    if (info != null)
+                    {
+                        object propertyValue = myProperty.GetValue(source);
+                        object targetpropertyValue = myProperty.GetValue(target);
+                        myProperty.SetValue(target, Copy(propertyValue, targetpropertyValue));
+                    }
+                }
+            }
+
+            return target;
         }
     }
 }

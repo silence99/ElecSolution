@@ -20,6 +20,7 @@ namespace Emergence_WPF.Views.MainPage
     /// </summary>
     public partial class Weather : UserControl
     {
+        protected Weather UIModel = new Weather();
         public Weather()
         {
             InitializeComponent();
