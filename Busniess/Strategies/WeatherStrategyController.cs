@@ -1,26 +1,26 @@
 ﻿using Busniess.MainPageSvr;
+using Emergence.Common;
+using Emergence.Common.Mappers;
 using Emergence.Common.Model;
+using Emergence.Common.ViewModel;
 using Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Busniess.Strategies
 {
-    public class WeatherStrategyController : StrategyController<Weather>
+    public class WeatherStrategyController : StrategyController<WeatherUiModel>
     {
         WeatherService service = new WeatherService();
+        IMapper<Weather, WeatherUiModel> mapper = new WeatherMapper();
 
-        public WeatherStrategyController(Weather uiModel)
+        public WeatherStrategyController(WeatherUiModel uiModel)
             : base(null, uiModel, null)
         {
         }
 
         public override void InitializationUiModel()
         {
-            UIModel = service.ProcessRequest(null);
+            var weather = service.ProcessRequest(null);
+            mapper.MapToUiModel(weather, UIModel);
         }
     }
 }

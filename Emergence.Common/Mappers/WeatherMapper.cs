@@ -44,7 +44,8 @@ namespace Emergence.Common.Mappers
                         Date = data.Daily[i].Date,
                         WeatherName = data.Daily[i].WeatherName,
                         TempHigh = data.Daily[i].Day.TempHigh,
-                        TempLow = data.Daily[i].Night.TempLow
+                        TempLow = data.Daily[i].Night.TempLow,
+                        Img = data.Daily[i].Day.Img
                     };
                 }
             }

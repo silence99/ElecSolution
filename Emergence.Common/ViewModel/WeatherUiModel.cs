@@ -1,4 +1,5 @@
 ﻿using Framework;
+using System.IO;
 
 namespace Emergence.Common.ViewModel
 {
@@ -21,8 +22,40 @@ namespace Emergence.Common.ViewModel
         public virtual string Img { get; set; }
         public virtual string WindDirect { get; set; }
         public virtual string WindPower { get; set; }
-        public virtual string WindSpeed { get; set; }        
+        public virtual string WindSpeed { get; set; }
         public virtual WeatherUiModelBase[] Daily { get; set; }
+
+        public string ImageFullPath
+        {
+            get
+            {
+                return Path.GetFullPath(string.Format(@"DebugImage\MainPage\WeatherIcons\{0}.png", Img));
+            }
+        }
+
+        public string TempDisplay
+        {
+            get
+            {
+                return string.Format("{0}℃", Temp);
+            }
+        }
+
+        public string TempLowHighDisplay
+        {
+            get
+            {
+                return string.Format("{0}~{1}℃", TempLow, TempHigh);
+            }
+        }
+
+        public string WindDisplay
+        {
+            get
+            {
+                return string.Format("{0}    {1}", WindDirect, WindPower);
+            }
+        }
     }
 
 }

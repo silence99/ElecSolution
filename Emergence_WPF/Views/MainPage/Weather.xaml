@@ -16,41 +16,41 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Image Name="TodayIcon" Source="D:\Work\Code\electricity\Emergence_WPF\Image\MainPage\WeatherIcons\0.png" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+        <Image Name="TodayIcon" Source="{Binding Path=ImageFullPath}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
         <StackPanel Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" >
-            <Label Content="3℃" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="晴" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="西风    二级" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="湿度    21%" Foreground="White" FontFamily="Microsoft Sans Serif"/>
+            <Label Content="{Binding Path=TempDisplay}" Foreground="White" FontFamily="Microsoft Sans Serif"/>
+            <Label Content="{Binding Path=WeatherName}" Foreground="White" FontFamily="Microsoft Sans Serif"/>
+            <Label Content="{Binding Path=TempDisplay}" Foreground="White" FontFamily="Microsoft Sans Serif"/>
+            <Label Content="{Binding Path=TempLowHighDisplay}" Foreground="White" FontFamily="Microsoft Sans Serif"/>
         </StackPanel>
         <StackPanel Name="Af1Panel" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" >
             <StackPanel>
-                <Image Name="Af1Icon" Source="D:\Work\Code\electricity\Emergence_WPF\Image\MainPage\WeatherIcons\1.png" Width="70"/>
+                <Image Name="Af1Icon" Source="{Binding Path=Daily[0].ImageFullPath}" Width="70"/>
                 <Label Content="明天" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-                <Label Content="阴转晴" Name="Af1" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-                <Label Content="-4~7℃" Name="Af1Degree" HorizontalAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
+                <Label Content="{Binding Path=Daily[0].WeatherName}" Name="Af1" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
+                <Label Content="{Binding Path=Daily[0].TempLowHighDisplay}" Name="Af1Degree" HorizontalAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="1">
-            <Image Name="Af2Icon" Source="D:\Work\Code\electricity\Emergence_WPF\Image\MainPage\WeatherIcons\2.png" Width="70"/>
+            <Image Name="Af2Icon" Source="{Binding Path=Daily[1].ImageFullPath}" Width="70"/>
             <Label Content="后天" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="阴" Name="Af2"  HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="-4~7℃" Name="Af2Degree" HorizontalAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
+            <Label Content="{Binding Path=Daily[1].WeatherName}" Name="Af2"  HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
+            <Label Content="{Binding Path=Daily[1].TempLowHighDisplay}" Name="Af2Degree" HorizontalAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="2">
-            <Image Name="Af3Icon" Source="D:\Work\Code\electricity\Emergence_WPF\Image\MainPage\WeatherIcons\2.png" Width="70"/>
+            <Image Name="Af3Icon" Source="{Binding Path=Daily[2].ImageFullPath}" Width="70"/>
             <Label Content="后天" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="阴" Name="Af3"  HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="-4~7℃" Name="Af3Degree" HorizontalAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
+            <Label Content="{Binding Path=Daily[2].WeatherName}" Name="Af3"  HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
+            <Label Content="{Binding Path=Daily[2].TempLowHighDisplay}" Name="Af3Degree" HorizontalAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
         </StackPanel>
         <StackPanel Name="Af4Panel" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" >
             <StackPanel>
-                <Image Name="Af4Icon" Source="D:\Work\Code\electricity\Emergence_WPF\Image\MainPage\WeatherIcons\1.png" Width="70"/>
+                <Image Name="Af4Icon" Source="{Binding Path=Daily[3].ImageFullPath}" Width="70"/>
                 <Label Content="明天" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-                <Label Content="阴转晴" Name="Af4" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-                <Label Content="-4~7℃" Name="Af4Degree" HorizontalAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
+                <Label Content="{Binding Path=Daily[3].WeatherName}" Name="Af4" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
+                <Label Content="{Binding Path=Daily[3].TempLowHighDisplay}" Name="Af4Degree" HorizontalAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
             </StackPanel>
         </StackPanel>
-        
+
     </Grid>
 </UserControl>

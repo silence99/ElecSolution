@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Busniess.Strategies;
+using Emergence.Common.ViewModel;
+using Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Globalization;
 
 namespace Emergence_WPF.Views.MainPage
 {
@@ -20,10 +24,13 @@ namespace Emergence_WPF.Views.MainPage
     /// </summary>
     public partial class Weather : UserControl
     {
-        protected Weather UIModel = new Weather();
+        protected WeatherUiModel UIModel = new WeatherUiModel();
+        protected StrategyController<WeatherUiModel> strategyController = null;
         public Weather()
         {
             InitializeComponent();
+            DataContext = UIModel;
+            strategyController = new WeatherStrategyController(UIModel);
         }
     }
 }
