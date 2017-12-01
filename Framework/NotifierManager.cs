@@ -31,7 +31,7 @@ namespace Framework
                     {
                         foreach (var property in item.Value)
                         {
-                            item.Key.ApplyToUI(property);
+                            //item.Key.ApplyToUI(property);
                         }
                         item.Value.Clear();
                     }

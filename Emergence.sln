@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Busniess", "Busniess\Busnie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emergence.Common", "Emergence.Common\Emergence.Common.csproj", "{FA639882-2D69-4822-81D3-4764F08AE196}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{29FB5BA9-037C-4A13-B119-06DE130DB868}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{FA639882-2D69-4822-81D3-4764F08AE196}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA639882-2D69-4822-81D3-4764F08AE196}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA639882-2D69-4822-81D3-4764F08AE196}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29FB5BA9-037C-4A13-B119-06DE130DB868}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29FB5BA9-037C-4A13-B119-06DE130DB868}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29FB5BA9-037C-4A13-B119-06DE130DB868}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29FB5BA9-037C-4A13-B119-06DE130DB868}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

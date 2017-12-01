@@ -697,9 +697,141 @@
     <Resource Include="Image\Icon_User.png" />
     <Resource Include="Image\EmergencyPersonSummary.png" />
     <Resource Include="Image\MaterialsSummary.png" />
+    <Resource Include="DebugImage\MainPage\EmergencyPersonSummary.png" />
+    <Resource Include="DebugImage\MainPage\Weather.png" />
+    <Resource Include="DebugImage\MainPage\MaterialsSummary.png" />
+    <Resource Include="DebugImage\MainPage\WeatherIcons\0.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\10.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\11.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\12.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\13.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\14.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\15.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\16.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\17.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\18.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\19.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\20.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\21.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\22.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\23.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\24.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\25.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\26.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\27.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\28.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\29.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\30.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\301.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\302.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\31.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\32.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\49.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\5.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\53.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\54.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\55.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\56.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\57.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\58.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\6.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\7.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\8.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\9.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="DebugImage\MainPage\WeatherIcons\99.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Image\MainPage\EmergencyPersonSummary.png" />
-    <Resource Include="Image\MainPage\Weather.png" />
     <Resource Include="Image\MainPage\MaterialsSummary.png" />
+    <Resource Include="Image\MainPage\Weather.png" />
     <Resource Include="Image\MainPage\WeatherIcons\0.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -873,7 +1005,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>if not exist $(TargetDir)lib (mkdir $(TargetDir)lib&amp;&amp;xcopy $(SolutionDir)ThirdParty\lib $(TargetDir)lib /E)</PreBuildEvent>
+    <PreBuildEvent>if not exist $(TargetDir)lib (mkdir $(TargetDir)lib&amp;&amp;xcopy $(SolutionDir)ThirdParty\lib $(TargetDir)lib /E)
+if not exist $(TargetDir)DebugImage\MainPage\WeatherIcons (mkdir $(TargetDir)DebugImage\MainPage\WeatherIcons &amp;&amp; xcopy $(ProjectDir)DebugImage\MainPage\WeatherIcons $(TargetDir)DebugImage\MainPage\WeatherIcons /E)</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
