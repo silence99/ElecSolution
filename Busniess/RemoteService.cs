@@ -9,7 +9,7 @@ namespace Busniess
 
         public RemoteService()
         {
-
+            HttpHelper = new HttpHelper();
         }
 
         protected virtual void InitializeHttpRequest(Request request) { throw new NotImplementedException(); }

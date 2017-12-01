@@ -76,5 +76,7 @@ namespace Emergence_WPF.Comm
             }
             return strbul.ToString();
         }
+
+
     }
 }

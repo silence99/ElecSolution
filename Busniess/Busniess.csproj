@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="IRemoteService.cs" />
     <Compile Include="IService.cs" />
+    <Compile Include="MainPageSvr\LoginServices.cs" />
     <Compile Include="MainPageSvr\MasterEventService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemoteService.cs" />
