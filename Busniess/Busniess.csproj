@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authorization\AuthorizationControl.cs" />
+    <Compile Include="Authorization\IAuthorizationControl.cs" />
     <Compile Include="IRemoteService.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="MainPageSvr\LoginServices.cs" />

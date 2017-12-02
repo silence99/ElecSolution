@@ -60,6 +60,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -183,6 +184,12 @@
     <Compile Include="Model\ListViewBehavior.cs" />
     <Compile Include="Model\SortInfo.cs" />
     <Compile Include="Model\UIElementAdorner.cs" />
+    <Compile Include="Views\Event\MasterEventDetail.xaml.cs">
+      <DependentUpon>MasterEventDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Event\SubEventDetail.xaml.cs">
+      <DependentUpon>SubEventDetail.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage\BMap.xaml.cs">
       <DependentUpon>BMap.xaml</DependentUpon>
     </Compile>
@@ -323,6 +330,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Event\MasterEventDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Event\SubEventDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainPage\VideoCollection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -417,7 +432,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Comm\zuo1.png" />

@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft;
+using Emergence.Common.Authorization;
 using Emergence.Common.Model;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
@@ -30,7 +31,7 @@ namespace Emergence_WPF
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             string userName = this.txtUserName.Text.Trim();
-#if Release
+//#if Release
             string passwordStr = this.txtPassword.Password.Trim();
             if(string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(passwordStr))
             {
@@ -40,19 +41,19 @@ namespace Emergence_WPF
             {
                 if (RequestLogin(userName, passwordStr))
                 {
-#endif
+//#endif
             MainWindow main = new MainWindow();
             main.Show();
 
             this.Close();
-#if Release
+//#if Release
         }
                 else
                 {
                     MessageBox.Show("用户名或密码不正确!");
                 }
             }
-#endif
+//#endif
         }
 
         private bool RequestLogin(string userName, string passwordStr)
@@ -94,9 +95,10 @@ namespace Emergence_WPF
             lim.TokenSecret = jsonObj.result.tokenSecret;
             lim.Nick = jsonObj.result.nike;
 
-            Application.Current.Properties["CurrentUser"] = lim;
+            //Application.Current.Properties["CurrentUser"] = lim;
             //lim.Authorization = Convert.ToBase64String(Encoding.UTF8.GetBytes("token="+lim.Token+"&signature"))
 
+            AuthorizationControl.SetLogin(lim);
             return true;
         }
 

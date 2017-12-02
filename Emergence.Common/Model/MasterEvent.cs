@@ -13,6 +13,6 @@
         public string SubmitParty { get; set; }
         public string TelephoneNumber { get; set; }
         public string SubmitDept { get; set; }
-        public string Locate { get; set; }
+        public string Locale { get; set; }
     }
 }
