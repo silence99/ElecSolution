@@ -1,10 +1,10 @@
-﻿using Busniess.MainPageSvr;
+﻿using Business.MainPageSvr;
 using Emergence.Common.ViewModel;
 using Framework;
 using System;
 using System.Collections.Generic;
 
-namespace Busniess.Strategies
+namespace Business.Strategies
 {
     public class MainPageStrategyController : StrategyController<MainPageUiModel>
     {

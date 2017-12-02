@@ -1003,9 +1003,9 @@
     <Resource Include="Image\e.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Busniess\Busniess.csproj">
+    <ProjectReference Include="..\Busniess\Business.csproj">
       <Project>{579fc0bf-c4aa-4b0b-80da-5b7580d6618c}</Project>
-      <Name>Busniess</Name>
+      <Name>Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\Emergence.Common\Emergence.Common.csproj">
       <Project>{fa639882-2d69-4822-81d3-4764f08ae196}</Project>

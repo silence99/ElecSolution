@@ -47,12 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authorization\AuthorizationControl.cs" />
-    <Compile Include="Authorization\IAuthorizationControl.cs" />
-    <Compile Include="Authorization\TimeControl.cs" />
     <Compile Include="IMapper.cs" />
     <Compile Include="Mappers\MasterEventMapper.cs" />
     <Compile Include="Mappers\WeatherMapper.cs" />
+    <Compile Include="Model\DictItem.cs" />
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\LoginInModel.cs" />
     <Compile Include="Model\MasterEvent.cs" />

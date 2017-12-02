@@ -1,11 +1,11 @@
-﻿using Busniess.MainPageSvr;
+﻿using Business.MainPageSvr;
 using Emergence.Common;
 using Emergence.Common.Mappers;
 using Emergence.Common.Model;
 using Emergence.Common.ViewModel;
 using Framework;
 
-namespace Busniess.Strategies
+namespace Business.Strategies
 {
     public class WeatherStrategyController : StrategyController<WeatherUiModel>
     {

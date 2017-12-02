@@ -5,13 +5,13 @@ using System.Configuration;
 using System.Collections.Generic;
 using System.Text;
 using Newtonsoft;
-using Emergence.Common.Authorization;
+using Emergence.Business.CommonControl;
 using Emergence.Common.Model;
 using Newtonsoft.Json;
 using System.Security.Cryptography;
 using System.IO;
 using System;
-using Busniess.MainPageSvr;
+using Business.MainPageSvr;
 
 namespace Emergence_WPF
 {

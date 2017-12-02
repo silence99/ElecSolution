@@ -1,7 +1,7 @@
 ﻿using System;
 using Framework.Http;
 
-namespace Busniess
+namespace Business
 {
     public abstract class RemoteService<Response, Request> : IRemoteService<Response, Request>
     {

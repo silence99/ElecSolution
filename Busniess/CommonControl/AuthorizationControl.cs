@@ -8,7 +8,7 @@ using Emergence.Common.Model;
 using System.Security.Cryptography;
 using System.IO;
 
-namespace Emergence.Common.Authorization
+namespace Emergence.Business.CommonControl
 {
     public static class AuthorizationControl
     {

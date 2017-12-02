@@ -2,7 +2,7 @@
 using Framework.Http;
 using Newtonsoft.Json;
 
-namespace Busniess.MainPageSvr
+namespace Business.MainPageSvr
 {
     public class WeatherService : RemoteService<Weather, object>
     {

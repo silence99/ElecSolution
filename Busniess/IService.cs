@@ -1,4 +1,4 @@
-﻿namespace Busniess
+﻿namespace Business
 {
     public interface IService<Response, Request>
     {

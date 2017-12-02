@@ -2,7 +2,7 @@
 using Framework.Http;
 using System.Collections.Generic;
 
-namespace Busniess.MainPageSvr
+namespace Business.MainPageSvr
 {
     public class MasterEventService : RemoteService<List<MasterEvent>, object>
     {

@@ -1,4 +1,4 @@
-﻿using Busniess.Strategies;
+﻿using Business.Strategies;
 using Emergence.Common.ViewModel;
 using Framework;
 using System;

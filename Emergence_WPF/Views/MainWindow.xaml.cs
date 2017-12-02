@@ -1,4 +1,4 @@
-﻿using Busniess.Strategies;
+﻿using Business.Strategies;
 using Emergence.Common.ViewModel;
 using Emergence_WPF.Comm;
 using System.Windows;

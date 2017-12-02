@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emergence_WPF", "Emergence_
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{33739869-9643-4427-90E3-4D9C907F6E49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Busniess", "Busniess\Busniess.csproj", "{579FC0BF-C4AA-4B0B-80DA-5B7580D6618C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Busniess\Business.csproj", "{579FC0BF-C4AA-4B0B-80DA-5B7580D6618C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emergence.Common", "Emergence.Common\Emergence.Common.csproj", "{FA639882-2D69-4822-81D3-4764F08AE196}"
 EndProject

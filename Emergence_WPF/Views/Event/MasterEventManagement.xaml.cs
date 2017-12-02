@@ -1,4 +1,4 @@
-﻿using Emergence.Common.Authorization;
+﻿using Emergence.Business.CommonControl;
 using Emergence_WPF.Comm;
 using Emergence_WPF.ViewModel;
 using Framework.Http;

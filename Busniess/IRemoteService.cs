@@ -1,6 +1,6 @@
 ﻿using Framework.Http;
 
-namespace Busniess
+namespace Business
 {
     public interface IRemoteService<Response, Request>: IService<Response, Request>
     {
