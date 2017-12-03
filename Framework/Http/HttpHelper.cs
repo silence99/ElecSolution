@@ -278,7 +278,7 @@ namespace Framework.Http
                     //验证在得到结果时是否有传入数据
                     if (!string.IsNullOrEmpty(objhttpItem.Postdata))
                     {
-                        byte[] buffer = Encoding.Default.GetBytes(objhttpItem.Postdata);
+                        byte[] buffer = Encoding.UTF8.GetBytes(objhttpItem.Postdata);
                         request.ContentLength = buffer.Length;
                         request.GetRequestStream().Write(buffer, 0, buffer.Length);
                     }
