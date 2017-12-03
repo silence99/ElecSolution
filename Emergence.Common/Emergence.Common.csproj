@@ -55,7 +55,9 @@
     <Compile Include="Model\LoginInModel.cs" />
     <Compile Include="Model\MasterEvent.cs" />
     <Compile Include="Model\ChildEvent.cs" />
+    <Compile Include="Model\RequestResult.cs" />
     <Compile Include="Model\Task.cs" />
+    <Compile Include="Model\Vedio.cs" />
     <Compile Include="Model\Weather.cs" />
     <Compile Include="Model\RequestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

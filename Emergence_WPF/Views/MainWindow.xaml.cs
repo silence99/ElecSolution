@@ -89,7 +89,7 @@ namespace Emergence_WPF
             Navigation = null;
             clear();
             maingrid.Children.Clear();
-            EventMasterPage information = new EventMasterPage();
+            MasterEventManagement information = new MasterEventManagement();
             //Information = new EmergencyInformation();
             //var ff = this.ActualWidth - 1000;
             //var hh = this.ActualHeight - 630;

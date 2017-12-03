@@ -1,4 +1,5 @@
-﻿using Emergence_WPF.Model;
+﻿using Emergence.Common.Model;
+using Emergence_WPF.Views;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,6 +28,13 @@ namespace Emergence_WPF
             MasterEventManagement masterInformation = new MasterEventManagement();
             gridEventMain.Children.Clear();
             gridEventMain.Children.Add(masterInformation);
+        }
+
+        public void ChangePageToMasterEventDetails(MasterEvent me)
+        {
+            MasterEventDetail masterDetails = new MasterEventDetail(me);
+            gridEventMain.Children.Clear();
+            gridEventMain.Children.Add(masterDetails);
         }
         
 
@@ -61,9 +69,12 @@ namespace Emergence_WPF
             // main.Children.Add(infor);
         }
 
-        void Clear()
+        public void Clear()
         {
 
         }
+
+        public void DoItNow()
+        { }
     }
 }

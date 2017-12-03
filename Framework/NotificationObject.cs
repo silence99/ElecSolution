@@ -127,7 +127,7 @@ namespace Framework
             HandleErrors();
         }
 
-        private void RaisePropertyChangedEvent(PropertyChangedEventArgsEx args)
+        public void RaisePropertyChangedEvent(PropertyChangedEventArgsEx args)
         {
             InvokeEventAndRepositoryRegisterHandlers(args, PropertyChangeEvent.Changed);
             // _notifyManager.RegisterToNotify(this, args.PropertyName);

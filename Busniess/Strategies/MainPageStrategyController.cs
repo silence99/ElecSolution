@@ -1,4 +1,5 @@
 ﻿using Business.MainPageSvr;
+using Busniess.Services.EventSvr;
 using Emergence.Common.ViewModel;
 using Framework;
 using System;
@@ -8,7 +9,7 @@ namespace Business.Strategies
 {
     public class MainPageStrategyController : StrategyController<MainPageUiModel>
     {
-        private MasterEventService service = new MasterEventService();
+        private GetMasterEventSvr service = new GetMasterEventSvr();
         public MainPageStrategyController(MainPageUiModel uiModel) :
             base(null, uiModel, new List<Strategy>())
         {
