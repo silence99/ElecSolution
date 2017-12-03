@@ -11,13 +11,13 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Image Name="TodayIcon" Source="{Binding Path=ImageFullPath}" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
-        <StackPanel Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Bottom" >
+        <Image Name="TodayIcon" Source="{Binding Path=ImageFullPath}" Grid.Row="0" Grid.Column="1" />
+        <StackPanel Grid.Row="0" Grid.Column="2" VerticalAlignment="Bottom" >
             <Label Content="{Binding Path=TempDisplay}" Foreground="White" FontFamily="Microsoft Sans Serif"/>
             <Label Content="{Binding Path=WeatherName}" Foreground="White" FontFamily="Microsoft Sans Serif"/>
             <Label Content="{Binding Path=TempDisplay}" Foreground="White" FontFamily="Microsoft Sans Serif"/>
@@ -38,7 +38,7 @@
             <Label Content="{Binding Path=Daily[1].TempLowHighDisplay}" Name="Af2Degree" HorizontalAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="2">
-            <Image Name="Af3Icon" Source="{Binding Path=Daily[2].ImageFullPath}" Width="70"/>
+            <Image Name="Af3Icon" Source="{Binding Path=Daily[2].ImageFullPath}" Width="70" Height="auto"/>
             <Label Content="后天" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
             <Label Content="{Binding Path=Daily[2].WeatherName}" Name="Af3"  HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
             <Label Content="{Binding Path=Daily[2].TempLowHighDisplay}" Name="Af3Degree" HorizontalAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>

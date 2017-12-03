@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="1024" d:DesignWidth="800"
               Loaded="UserControl_Loaded">
-    <UserControl.Resources>
+
+        <UserControl.Resources>
         <ResourceDictionary>
             <Style TargetType="DataGrid">
                 <!--网格线颜色-->
@@ -38,42 +39,44 @@
                             <Border x:Name="BackgroundBorder" BorderThickness="0,1,0,1"
                              BorderBrush="#000000"
                               Width="Auto">
-                                <Grid  Background="#006F69">
+                                <Grid Background="#006F69">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
                                     <ContentPresenter  Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    <Path x:Name="SortArrow" Visibility="Collapsed" Data="M0,0 L1,0 0.5,1 z" Stretch="Fill"  Grid.Column="2" Width="8" Height="6" Fill="White" Margin="0,0,5,0"
+                                    <Path x:Name="SortArrow" Visibility="Collapsed" Data="M0,0 L1,0 0.5,1 z" Stretch="Fill"  Grid.Column="2" Width="8" Height="6" Margin="0,0,5,0"
                             VerticalAlignment="Center" RenderTransformOrigin="1,1" />
                                     <Rectangle Width="1" Fill="#FFFFFF" HorizontalAlignment="Right" Grid.ColumnSpan="1" />
                                 </Grid>
                             </Border>
                         </ControlTemplate>
+
                     </Setter.Value>
                 </Setter>
-                <Setter Property="Height" Value="60"/>
+                <Setter Property="MinHeight" Value="40"/>
             </Style>
             <!--行样式触发-->
             <!--背景色改变必须先设置cellStyle 因为cellStyle会覆盖rowStyle样式-->
             <Style  TargetType="DataGridRow">
-                <Setter Property="Background" Value="#000000" />
+                <Setter Property="Background" Value="#F3F3F3" />
                 <Setter Property="FontSize" Value="16" />
-                <Setter Property="Height" Value="57"/>
-                <Setter Property="Foreground" Value="#FFFFFF" />
+                <Setter Property="Height" Value="auto"/>
+                <Setter Property="Foreground" Value="#000000" />
                 <Style.Triggers>
                     <!--隔行换色-->
                     <Trigger Property="AlternationIndex" Value="0" >
-                        <Setter Property="Background" Value="#242424" />
+                        <Setter Property="Background" Value="#FFFFFF" />
                     </Trigger>
                     <Trigger Property="AlternationIndex" Value="1" >
-                        <Setter Property="Background" Value="#181818" />
+                        <Setter Property="Background" Value="#F0F0F0" />
                     </Trigger>
                     <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="#090909"/>
-                        <!--<Setter Property="Foreground" Value="White"/>-->
+                        <Setter Property="Background" Value="#E0E0E0"/>
+                        <Setter Property="Foreground" Value="#000000" />
                     </Trigger>
                     <Trigger Property="IsSelected" Value="True">
-                        <Setter Property="Foreground" Value="#FFFFFF"/>
+                        <Setter Property="Background" Value="#E6E6E6"/>
+                        <Setter Property="Foreground" Value="#000000" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -91,7 +94,8 @@
                 </Setter>
                 <Style.Triggers>
                     <Trigger Property="IsSelected" Value="True">
-                        <Setter Property="Foreground" Value="#FFFFFF"/>
+                        <Setter Property="Background" Value="#E6E6E6"/>
+                        <Setter Property="Foreground" Value="#000000" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -99,18 +103,18 @@
     </UserControl.Resources>
 
     <Grid  Name="gridEventMain">
-        <StackPanel Name="top2" HorizontalAlignment="Stretch" VerticalAlignment="Top" Orientation="Vertical">
-            <StackPanel Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" Orientation="Horizontal">
+        <DockPanel Name="top2" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+            <DockPanel DockPanel.Dock="Top" Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" >
                 <Label Name="labelPageTitle" Foreground="White" FontSize="20" HorizontalAlignment="Left" Padding="25" Margin="20,0,0,0" >主事件列表</Label>
-            </StackPanel>
-            <Grid>
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
-                    <DockPanel Margin="20">
+            </DockPanel>
+            <Grid DockPanel.Dock="Top" >
+                <DockPanel HorizontalAlignment="Stretch">
+                    <DockPanel DockPanel.Dock="Top"  Margin="20">
                         <DockPanel Height="60" HorizontalAlignment="Stretch" Name="head" DockPanel.Dock="Top" Background="#CCE2E1">
                             <TextBlock FontSize="20" DockPanel.Dock="Left" TextAlignment="Center" HorizontalAlignment="Left" Margin="51,15,0,0" Foreground="Black">搜索</TextBlock>
                             <Button Name="masterEventSearchButton" FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="right" Margin="0,0,51,0" Foreground="White" Content="搜索" Click="masterEventSearchButton_Click"></Button>
                         </DockPanel>
-                        <Grid ShowGridLines="False" Name="gridTest">
+                        <Grid ShowGridLines="False" Name="gridTest" DockPanel.Dock="Top" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100"></RowDefinition>
                             </Grid.RowDefinitions>
@@ -143,7 +147,7 @@
                             </StackPanel>
                         </Grid>
                     </DockPanel>
-                    <DockPanel Margin="20,0,20,20">
+                    <DockPanel Margin="20,0,20,20"  DockPanel.Dock="Top" >
                         <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
                             <Button FontSize="16" Width="180" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="51,0,0,0" Foreground="White" Content="创建主事件">
                                 <!--<Button.Template>
@@ -154,8 +158,17 @@
                             </Button>
                             <Button FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="right" Margin="0,0,51,0" Foreground="White" Content="删除事件"></Button>
                         </DockPanel>
-                        <StackPanel Orientation="Vertical">
-                            <DataGrid Name="Grid_MasterEvent" CanUserAddRows="False"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden"  
+                        <DockPanel DockPanel.Dock="Top">
+                            <DockPanel DockPanel.Dock="Bottom" LastChildFill="True" Margin="0,5,0,0">
+                                <local:Pager Height="30" Width="auto" 
+                     TotalCount="{Binding TotalCount,Mode=TwoWay}"
+                     PageSize="{Binding PageSize,Mode=TwoWay}"
+                     PageIndex="{Binding PageIndex,Mode=TwoWay}"
+                     TotalPage="{Binding TotalPage,Mode=TwoWay}"
+                     PageChanged="Pager_OnPageChanged">
+                                </local:Pager>
+                            </DockPanel>
+                            <DataGrid DockPanel.Dock="Top" Name="Grid_MasterEvent" CanUserAddRows="False"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Auto"  
                                     RowHeaderWidth="0" HeadersVisibility="Column" HorizontalAlignment="Stretch" Background="Transparent" 
                                     IsReadOnly="True" AlternationCount="2" AutoGenerateColumns="False" SelectionChanged="Grid_MasterEvent_SelectionChanged" ItemsSource="{Binding}" MouseDoubleClick="Grid_MasterEvent_MouseDoubleClick">
 
@@ -177,19 +190,19 @@
                                     <DataGridTextColumn  Binding="{Binding Path=Locale}" x:Name="f8" Header="地点"  Width="2*" ></DataGridTextColumn>
                                 </DataGrid.Columns>
                             </DataGrid>
-                            <StackPanel  VerticalAlignment="Bottom" Margin="0,5,0,0">
-                                <local:Pager Height="30" Width="auto" VerticalAlignment="Bottom"
+                            <!--<DockPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
+                                <local:Pager Height="30" Width="auto" 
                      TotalCount="{Binding TotalCount,Mode=TwoWay}"
                      PageSize="{Binding PageSize,Mode=TwoWay}"
                      PageIndex="{Binding PageIndex,Mode=TwoWay}"
                      TotalPage="{Binding TotalPage,Mode=TwoWay}"
                      PageChanged="Pager_OnPageChanged">
                                 </local:Pager>
-                            </StackPanel>
-                        </StackPanel>
+                            </DockPanel>-->
+                        </DockPanel>
                     </DockPanel>
-                </StackPanel>
+                </DockPanel>
             </Grid>
-        </StackPanel>
+        </DockPanel>
     </Grid>
 </UserControl>

@@ -11,8 +11,8 @@ namespace Emergence_WPF.ViewModel
     public class VM_MasterEventManagement: NotificationObject
     {
         //Grid related variables
-        private int _pageSize = 10;
-        private int _pageIndex = 0;
+        private int _pageSize = 5;
+        private int _pageIndex = 1;
         private int _totalCount = 0;
         private int _totalPage = 0;
 

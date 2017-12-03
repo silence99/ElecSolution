@@ -85,6 +85,10 @@ namespace Emergence_WPF
             if (rr.Result.MasterEventList != null)
             {
                 masterEventVM.masterEventList = rr.Result.MasterEventList.ToList();
+                List<MasterEvent> mml = new List<MasterEvent>();
+                mml.Add(rr.Result.MasterEventList[0]);
+                mml.Add(rr.Result.MasterEventList[1]);
+                mml.Add(rr.Result.MasterEventList[2]);
                 omList = new ObservableCollection<MasterEvent>(rr.Result.MasterEventList.ToList());
                 this.Grid_MasterEvent.DataContext = omList;
             }

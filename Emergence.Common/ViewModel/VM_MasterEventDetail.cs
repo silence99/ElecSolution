@@ -10,7 +10,7 @@ namespace Emergence.Common.ViewModel
     public class VM_MasterEventDetail
     {
         //Grid related variables
-        private int _pageSize = 5;
+        private int _pageSize = 15;
         private int _pageIndex = 1;
         private int _totalCount = 0;
         private int _totalPage = 0;
