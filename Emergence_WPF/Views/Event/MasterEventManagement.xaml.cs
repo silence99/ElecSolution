@@ -13,6 +13,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -142,7 +143,7 @@ namespace Emergence_WPF
             {
                 StringBuilder postData = new StringBuilder();
                 //postData.Append("id=" + i.ToString());
-                postData.Append("&serialNumber=MD" + i.ToString().PadLeft(6, '0'));
+                postData.Append("serialNumber=MD" + i.ToString().PadLeft(6, '0'));
                 postData.Append("&title=测试主事件标题" + i.ToString());
                 postData.Append("&eventType=event_1");
                 postData.Append("&grade=grade_1");
@@ -153,8 +154,7 @@ namespace Emergence_WPF
                 postData.Append("&submitDept=消防一中队");
                 postData.Append("&locale=湖州市礼数街消防支队");
                 postData.Append("&longitude=120.000");
-                postData.Append("&latitude=120.000");
-
+                postData.Append("&latitude=120.000");                
                 HttpResult hr = HttpCommon.HttpPost(loginURL, postData.ToString(), "", "application/x-www-form-urlencoded", headers);
             }
 

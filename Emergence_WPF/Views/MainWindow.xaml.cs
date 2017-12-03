@@ -77,6 +77,7 @@ namespace Emergence_WPF
             //var hh = this.ActualHeight - 630;
             //Maincontrol.bind(1000 + ff, 550 + hh);
             maingrid.Children.Add(Maincontrol);
+            Maincontrol.UiModel = UiModel;
         }
 
         private void Image_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)

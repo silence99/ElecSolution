@@ -33,7 +33,7 @@ namespace Emergence_WPF
 
                     webBrowser.Navigate(new Uri(Path.GetFullPath(@"Views\MainPage\BMap.html")));
                     //获取根目录的html文件  
-                                                                                                //  webBrowser.ObjectForScripting = this;
+                    //  webBrowser.ObjectForScripting = this;
 
                     //    object[] objs = new object[2] {
                     //double.Parse("120.136940"),
@@ -75,8 +75,15 @@ namespace Emergence_WPF
         {
             object[] objs = new object[2] {
                 double.Parse(jing),
-                double.Parse(wei)};
+                double.Parse(wei)
+            };
+            webBrowser.Document.InvokeScript("removeOverlay");
             webBrowser.Document.InvokeScript("addMarker", objs);
+            objs = new object[2] {
+                double.Parse(jing),
+                double.Parse(wei)
+            };
+            webBrowser.Document.InvokeScript("MoveToPoint", objs);
         }
         private void Mark_Click(object sender, RoutedEventArgs e)
         {
