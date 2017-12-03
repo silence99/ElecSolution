@@ -6,8 +6,9 @@
              xmlns:wpf="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Name="GridVideo">
-        <Image Name="VideoImage" MouseDown="OnImageClick" Margin="0,5,0,0"  Stretch="Fill" HorizontalAlignment="Right"/>
-        <wpf:VlcControl Name="VideoPlay" Visibility="Hidden"/>
+    <Grid Name="GridVideo" Margin="0, 0, 0, 0">
+        <Rectangle Margin="0,0,0,0" Opacity="0" MouseDown="Rectangle_MouseDown" Panel.ZIndex="3"/>
+        <Image Name="VideoImage" MouseDown="OnImageClick" Panel.ZIndex="2"/>
+        <wpf:VlcControl Name="VideoPlay" Visibility="Hidden" Panel.ZIndex="1"/>
     </Grid>
 </UserControl>

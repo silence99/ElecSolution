@@ -121,5 +121,24 @@ namespace Emergence_WPF.Views
         {
             player.MediaPlayer.Play();
         }
+
+        private void Rectangle_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 1)
+            {
+                VideoImage.Visibility = Visibility.Hidden;
+                VideoPlay.Visibility = Visibility.Visible;
+                if (State == VideoStatus.Pasue || State == VideoStatus.Stop)
+                {
+                    State = VideoStatus.Playing;
+                    Start(VideoPlay);
+                }
+                else
+                {
+                    State = VideoStatus.Pasue;
+                    Stop(VideoPlay);
+                }
+            }
+        }
     }
 }

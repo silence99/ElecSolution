@@ -16,42 +16,43 @@ using System.Windows.Shapes;
 
 namespace Emergence_WPF.Views.MainPage
 {
-    /// <summary>
-    /// VideoCollection.xaml 的交互逻辑
-    /// </summary>
-    public partial class VideoCollection : UserControl
-    {
-        List<VideoUiModel> _uiMode = null;
-        public List<VideoUiModel> UiModel
-        {
-            get
-            {
-                return _uiMode;
-            }
-            set
-            {
-                _uiMode = value;
-                RefreshVideos();
-            }
-        }
+	/// <summary>
+	/// VideoCollection.xaml 的交互逻辑
+	/// </summary>
+	public partial class VideoCollection : UserControl
+	{
+		List<VideoUiModel> _uiMode = null;
+		public List<VideoUiModel> UiModel
+		{
+			get
+			{
+				return _uiMode;
+			}
+			set
+			{
+				_uiMode = value;
+				RefreshVideos();
+			}
+		}
 
-        public VideoCollection()
-        {
-            InitializeComponent();
-        }
+		public VideoCollection()
+		{
+			InitializeComponent();
+		}
 
-        private void RefreshVideos()
-        {
-            StackPanel container = new StackPanel();
+		private void RefreshVideos()
+		{
+			Content.Children.Clear();
+			StackPanel container = new StackPanel();
 
-            foreach (var uiModel in UiModel)
-            {
-                Video video = new Video();
-                video.UiModel = uiModel;
-                container.Children.Add(video);
-            }
+			foreach (var uiModel in UiModel)
+			{
+				Video video = new Video();
+				video.UiModel = uiModel;
+				container.Children.Add(video);
+			}
 
-            VideoScroll.Content = container;
-        }
-    }
+			Content.Children.Add(container);
+		}
+	}
 }
