@@ -54,6 +54,7 @@
     <Compile Include="IService.cs" />
     <Compile Include="Services\CommonSvr\DictSvr.cs" />
     <Compile Include="Services\EventSvr\GetMasterEventSvr.cs" />
+    <Compile Include="Services\EventSvr\GetSubEventSvr.cs" />
     <Compile Include="Services\MainPageSvr\LoginServices.cs" />
     <Compile Include="Services\MainPageSvr\WeatherService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

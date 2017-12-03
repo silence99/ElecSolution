@@ -161,7 +161,7 @@
 
                                 <DataGrid.Columns >
                                     <!--<DataGridCheckBoxColumn Selector.IsSelected="{Binding Path=IsChecked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" x:Name="f1" Header=""  Width="0.5*" />-->
-                                    <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn Width="0.5*">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <CheckBox IsChecked="{Binding isChecked, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>

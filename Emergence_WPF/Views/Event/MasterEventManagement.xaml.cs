@@ -92,7 +92,7 @@ namespace Emergence_WPF
 
         private void masterEventSearchButton_Click(object sender, RoutedEventArgs e)
         {
-            RequestMasterEventList();
+            GenerateSimulatedData();
         }
 
         private void Cbx_CheckAll_Click(object sender, RoutedEventArgs e)
@@ -140,8 +140,8 @@ namespace Emergence_WPF
                 //postData.Append("id=" + i.ToString());
                 postData.Append("&serialNumber=MD" + i.ToString().PadLeft(6, '0'));
                 postData.Append("&title=测试主事件标题" + i.ToString());
-                postData.Append("&eventType=type0");
-                postData.Append("&grade=0");
+                postData.Append("&eventType=event_1");
+                postData.Append("&grade=grade_1");
                 postData.Append("&time=" + dateTime);
                 postData.Append("&describe=主事件" + i.ToString());
                 postData.Append("&submitParty=张美娜");

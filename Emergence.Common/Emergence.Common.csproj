@@ -56,6 +56,7 @@
     <Compile Include="Model\MasterEvent.cs" />
     <Compile Include="Model\ChildEvent.cs" />
     <Compile Include="Model\RequestResult.cs" />
+    <Compile Include="Model\SubEvent.cs" />
     <Compile Include="Model\Task.cs" />
     <Compile Include="Model\Vedio.cs" />
     <Compile Include="Model\Weather.cs" />
@@ -64,7 +65,9 @@
     <Compile Include="ViewModel\MainPageUiModel.cs" />
     <Compile Include="ViewModel\MasterEventUiModel.cs" />
     <Compile Include="ViewModel\VideoUiModel.cs" />
+    <Compile Include="ViewModel\VM_MasterEventDetail.cs" />
     <Compile Include="ViewModel\VM_MasterEventManagement.cs" />
+    <Compile Include="ViewModel\VM_SubEventDetail.cs" />
     <Compile Include="ViewModel\WeatherUiModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Emergence.Common.Model;
+using Emergence.Common.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,33 @@ namespace Emergence_WPF
     /// </summary>
     public partial class SubEventDetail : UserControl
     {
-        public SubEventDetail()
+        SubEvent se;
+        MasterEvent me;
+        VM_SubEventDetail subEventDetailVM;
+
+        public SubEventDetail(SubEvent seL, MasterEvent meL)
         {
             InitializeComponent();
+            se = seL;
+            me = meL;
+            subEventDetailVM = new VM_SubEventDetail();
+            subEventDetailVM.SubEventInfo = seL;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            SP_SubEventDetail.DataContext = subEventDetailVM.SubEventInfo;
+        }
+
+
+        private void labelPageReturn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (me != null)
+            {
+                MasterEventDetail md = new MasterEventDetail(me);
+                this.gridSubDetail.Children.Clear();
+                this.gridSubDetail.Children.Add(md);
+            }
         }
     }
 }

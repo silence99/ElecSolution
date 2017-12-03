@@ -31,9 +31,9 @@ namespace Emergence_WPF
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             string userName = this.txtUserName.Text.Trim();
-//#if Release
+            //#if Release
             string passwordStr = this.txtPassword.Password.Trim();
-            if(string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(passwordStr))
+            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(passwordStr))
             {
                 MessageBox.Show("用户名或密码不能为空");
             }
@@ -41,19 +41,19 @@ namespace Emergence_WPF
             {
                 if (RequestLogin(userName, passwordStr))
                 {
-//#endif
-            MainWindow main = new MainWindow();
-            main.Show();
+                    //#endif
+                    MainWindow main = new MainWindow();
+                    main.Show();
 
-            this.Close();
-//#if Release
-        }
+                    this.Close();
+                    //#if Release
+                }
                 else
                 {
                     MessageBox.Show("用户名或密码不正确!");
                 }
             }
-//#endif
+            //#endif
         }
 
         private bool RequestLogin(string userName, string passwordStr)
@@ -99,6 +99,8 @@ namespace Emergence_WPF
             //lim.Authorization = Convert.ToBase64String(Encoding.UTF8.GetBytes("token="+lim.Token+"&signature"))
 
             AuthorizationControl.SetLogin(lim);
+            
+
             return true;
         }
 
