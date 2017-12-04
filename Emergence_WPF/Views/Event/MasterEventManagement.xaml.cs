@@ -3,7 +3,6 @@ using Emergence.Business.CommonControl;
 using Emergence.Common.Model;
 using Emergence_WPF.Comm;
 using Emergence_WPF.ViewModel;
-using Emergence_WPF.Views;
 using Framework.Http;
 using Newtonsoft.Json;
 using System;
@@ -171,6 +170,12 @@ namespace Emergence_WPF
                 this.gridEventMain.Children.Add(md);
             }
             //md.SetMasterEventDetail(dg.CurrentItem as MasterEvent);
+        }
+
+        private void Btn_CreateMasterEvent_Click(object sender, RoutedEventArgs e)
+        {
+            AddMasterEvent ame = new AddMasterEvent();
+            ame.ShowDialog();
         }
     }
 }

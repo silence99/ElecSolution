@@ -75,7 +75,7 @@ namespace Emergence_WPF
         {
             string subEventURL = ConfigurationSettings.AppSettings["BaseURL"].ToString() + ConfigurationSettings.AppSettings["GetSubEventListURL"].ToString();
 
-            gSubSvr.RequestData = "&pageIndex=" + subEventVM.PageIndex + "&pageSize=" + subEventVM.PageSize + "&mainEventId=1"; // + subEventVM.MasterEventInfo.Id;
+            gSubSvr.RequestData = "&pageIndex=" + subEventVM.PageIndex + "&pageSize=" + subEventVM.PageSize + "&mainEventId="+me.Id; // + subEventVM.MasterEventInfo.Id;
 
             SubEventListResponse rr = gSubSvr.ProcessRequest(subEventURL);
             if (rr != null && rr.Result.SubEventList != null)
@@ -144,6 +144,12 @@ namespace Emergence_WPF
                 this.gridEventDetail.Children.Clear();
                 this.gridEventDetail.Children.Add(sd);
             }
+        }
+
+        private void Btn_CreateSubEvent_Click(object sender, RoutedEventArgs e)
+        {
+            AddSubEvent ame = new AddSubEvent();
+            ame.ShowDialog();
         }
     }
 }

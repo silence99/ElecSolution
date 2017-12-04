@@ -1,11 +1,11 @@
-﻿<Window x:Class="Emergence_WPF.AddMasterEvent"
+﻿<Window x:Class="Emergence_WPF.AddSubEvent"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Background="White" WindowStartupLocation="CenterScreen"
-        Title="创建主事件" Height="966" Width="1000">
+        Title="创建子事件" Height="966" Width="1000">
     <DockPanel>
         <DockPanel Background="#006f69" Height="120" Name="titleEventMasterPage" Width="auto"  DockPanel.Dock="Top" VerticalAlignment="Top" HorizontalAlignment="Stretch">
             <DockPanel Name="DP_CreateMasterEvent" Width="122" DockPanel.Dock="Left" HorizontalAlignment="Left" Background="#005651" MouseLeftButtonDown="DP_CreateMasterEvent_MouseLeftButtonDown" >

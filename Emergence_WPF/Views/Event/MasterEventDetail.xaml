@@ -168,8 +168,8 @@
                     <DockPanel Margin="20,0,20,20" DockPanel.Dock="Top">
                         <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
                             <TextBlock FontSize="20" DockPanel.Dock="Left" TextAlignment="Center" HorizontalAlignment="Left" Margin="51,15,0,0" Foreground="Black">子事件列表</TextBlock>
-
-                            <Button Name="Btn_DeleteSubEvent" FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="right" Margin="0,0,51,0" Foreground="White" Content="删除子事件" Click="Button_Btn_DeleteSubEventClick"/>
+                            <Button Name="Btn_DeleteSubEvent" FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Right" HorizontalAlignment="right" Margin="51,0,51,0" Foreground="White" Content="删除子事件" Click="Button_Btn_DeleteSubEventClick"/>
+                            <Button Name="Btn_CreateMasterEvent" FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="51,0,0,0" Foreground="White" Content="创建子事件" Click="Btn_CreateSubEvent_Click"/>
                         </DockPanel>
                         <DockPanel  DockPanel.Dock="Top">
                             <DataGrid  DockPanel.Dock="Top" Name="Grid_SubEvent" CanUserAddRows="False"  ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"  

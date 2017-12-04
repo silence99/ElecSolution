@@ -133,23 +133,23 @@
                             </Grid.ColumnDefinitions>
                             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="0" >
                                 <TextBlock Text="标题" HorizontalAlignment="Left" Padding="0,5,5,5" Margin="20,22,10,0"/>
-                                <TextBox Name="SubTitleTextBox" Text="{Binding Path=ChildTitle}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center" IsEnabled="False"/>
+                                <TextBox Name="SubTitleTextBox" Text="{Binding Path=ChildTitle}" Height="34" Width="Auto" MinWidth="80" Margin="25,5,0,5"  VerticalContentAlignment="Center" IsEnabled="False"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="1" Grid.Row="0" >
                                 <TextBlock Text="时间" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,22,10,0"/>
-                                <TextBox Name="SubTimeTextBox" Text="{Binding Path=ChildTime}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center" IsEnabled="False"/>
+                                <TextBox Name="SubTimeTextBox" Text="{Binding Path=ChildTime}" Height="34" Width="80" MinWidth="80" Margin="25,5,0,5"  VerticalContentAlignment="Center" IsEnabled="False"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="2" Grid.Row="0" >
                                 <TextBlock Text="地区" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,22,10,0"/>
-                                <TextBox Name="SubLocaleTextBox" Text="{Binding Path=ChildLocale}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center" IsEnabled="False"/>
+                                <TextBox Name="SubLocaleTextBox" Text="{Binding Path=ChildLocale}" Height="34" Width="Auto" MinWidth="80" Margin="25,5,0,5"  VerticalContentAlignment="Center" IsEnabled="False"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="3" Grid.Row="0" >
                                 <TextBlock Text="报送人" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,22,10,0"/>
-                                <TextBox Name="SubSubmitPartyTextBox" Text="{Binding Path=ChildSubmitParty}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center" IsEnabled="False"/>
+                                <TextBox Name="SubSubmitPartyTextBox" Text="{Binding Path=ChildSubmitParty}" Height="34" Width="Auto" MinWidth="80" Margin="0,5,0,5"  VerticalContentAlignment="Center" IsEnabled="False"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="4" Grid.Row="0" >
                                 <TextBlock Text="联系电话" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,22,10,0"/>
-                                <TextBox Name="SubSubmitTelephoneNumberTextBox" Text="{Binding Path=ChildSubmitTelephoneNumber}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center" IsEnabled="False"/>
+                                <TextBox Name="SubSubmitTelephoneNumberTextBox" Text="{Binding Path=ChildSubmitTelephoneNumber}" Height="34" Width="Auto" MinWidth="80" Margin="0,5,0,5"  VerticalContentAlignment="Center" IsEnabled="False"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="5" Grid.Row="0" >
                                 <TextBlock Text="报送单位" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,22,10,0"/>
@@ -165,7 +165,7 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="2" Grid.Row="1" >
                                 <TextBlock Text="事件状态" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,22,10,0"/>
-                                <TextBox Name="SubEventStateTextBox" Text="{Binding Path=ChildEventState}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center" IsEnabled="False"/>
+                                <TextBox Name="SubEventStateTextBox" Text="{Binding Path=ChildEventState}" Height="34" Width="Auto" MinWidth="80" Margin="0,5,0,5"  VerticalContentAlignment="Center" IsEnabled="False"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="6">
                                 <TextBlock Text="简介" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,22,10,0"/>
@@ -177,13 +177,13 @@
                     </DockPanel>
                     <DockPanel DockPanel.Dock="Top" Margin="20,0,20,20">
                         <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
-                            <TextBlock FontSize="20" DockPanel.Dock="Left" TextAlignment="Center" HorizontalAlignment="Left" Margin="51,15,0,0" Foreground="Black">子事件列表</TextBlock>
+                            <TextBlock FontSize="20" DockPanel.Dock="Left" TextAlignment="Center" HorizontalAlignment="Left" Margin="51,15,0,0" Foreground="Black">任务列表</TextBlock>
 
-                            <Button FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="right" Margin="0,0,51,0" Foreground="White" Content="删除子事件"></Button>
+                            <Button FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="right" Margin="0,0,51,0" Foreground="White" Content="删除任务"></Button>
                         </DockPanel>
                         <DataGrid DockPanel.Dock="Top" Name="DataCodeing" CanUserAddRows="False"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Auto"  
                                     RowHeaderWidth="0" HeadersVisibility="Column" HorizontalAlignment="Stretch" Background="Transparent" 
-                                    IsReadOnly="True" AlternationCount="2" AutoGenerateColumns="False" ItemsSource="{Binding masterEventList}">
+                                    IsReadOnly="True" AlternationCount="2" AutoGenerateColumns="False" ItemsSource="{Binding masterEventList}" Margin="0,-1,0,0">
 
                                 <DataGrid.Columns >
                                     <DataGridCheckBoxColumn Binding="{Binding IsCheck}" x:Name="f1" Header=""  Width="0.5*" />

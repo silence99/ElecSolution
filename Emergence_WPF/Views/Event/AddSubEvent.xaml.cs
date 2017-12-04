@@ -17,11 +17,11 @@ namespace Emergence_WPF
     /// <summary>
     /// Interaction logic for AddMasterEvent.xaml
     /// </summary>
-    public partial class AddMasterEvent : Window
+    public partial class AddSubEvent : Window
     {
         public bool isclose = false;
 
-        public AddMasterEvent()
+        public AddSubEvent()
         {
             InitializeComponent();
             DP_MasterEventCreateTime.Text = DateTime.Now.ToString("yyyy-MM-dd");
