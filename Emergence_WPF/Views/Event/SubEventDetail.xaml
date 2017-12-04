@@ -104,10 +104,12 @@
 
     <Grid  Name="gridSubDetail">
         <DockPanel Name="top2" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-            <DockPanel Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  VerticalAlignment="Top" DockPanel.Dock="Top">
-                <Label Name="labelPageReturn" Foreground="White" FontSize="20" MouseLeftButtonDown="labelPageReturn_MouseLeftButtonDown"  HorizontalAlignment="Left" Padding="25" Margin="20,0,0,0">&lt; 返回</Label>
-                <Label Name="labelPageTitle" Foreground="White" FontSize="20" HorizontalAlignment="Left" Background="#005651" Padding="25" Margin="20,0,0,0" >子事件详情/任务列表</Label>
-            </DockPanel>
+            <Border BorderBrush="#62a6a3" BorderThickness="0,1,0,0" DockPanel.Dock="Top">
+                <DockPanel Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  VerticalAlignment="Top" DockPanel.Dock="Top">
+                    <Label Name="labelPageReturn" Foreground="White" FontSize="20" MouseLeftButtonDown="labelPageReturn_MouseLeftButtonDown"  HorizontalAlignment="Left" Padding="25" Margin="20,0,0,0">&lt; 返回</Label>
+                    <Label Name="labelPageTitle" Foreground="White" FontSize="20" HorizontalAlignment="Left" Background="#005651" Padding="25" Margin="20,0,0,0" >子事件详情/任务列表</Label>
+                </DockPanel>
+            </Border>
             <Grid DockPanel.Dock="Top">
                 <DockPanel  Name="SP_SubEventDetail" HorizontalAlignment="Stretch" DockPanel.Dock="Top">
                     <DockPanel Margin="20" DockPanel.Dock="Top">

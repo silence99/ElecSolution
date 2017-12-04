@@ -1,0 +1,18 @@
+﻿<Window x:Class="Emergence_WPF.Views.Event.AddMasterEvent"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Emergence_WPF.Views.Event"
+        mc:Ignorable="d"
+        Background="White" WindowStartupLocation="CenterScreen"
+        Title="创建主事件" Height="966" Width="1000">
+    <DockPanel>
+        <DockPanel Background="#006f69" Height="120" Name="titleEventMasterPage" Width="auto"  DockPanel.Dock="Top" VerticalAlignment="Top" HorizontalAlignment="Stretch">
+            <DockPanel Width="122" DockPanel.Dock="Left" HorizontalAlignment="Left" Background="#005651" >
+                <Image Margin="0,25,40,59" Width="45" Height="36" Source="/Image/Event/Icon_Create.png"  HorizontalAlignment="Right" Cursor="Hand" DockPanel.Dock="Top"></Image>
+                <Label Name="labelCreateMasterEvent" Foreground="White" FontSize="16" Height="30" HorizontalAlignment="Left" Padding="25" Margin="0,0,0,0" DockPanel.Dock="Bottom">生成</Label>
+            </DockPanel>
+        </DockPanel>
+    </DockPanel>
+</Window>

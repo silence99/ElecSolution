@@ -49,7 +49,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Image\bbbb.ico</ApplicationIcon>
+    <ApplicationIcon>Image\NotUse\bbbb.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -184,6 +184,9 @@
     <Compile Include="Model\ListViewBehavior.cs" />
     <Compile Include="Model\SortInfo.cs" />
     <Compile Include="Model\UIElementAdorner.cs" />
+    <Compile Include="Views\Event\AddMasterEvent.xaml.cs">
+      <DependentUpon>AddMasterEvent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Event\MasterEventDetail.xaml.cs">
       <DependentUpon>MasterEventDetail.xaml</DependentUpon>
     </Compile>
@@ -330,6 +333,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Event\AddMasterEvent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Event\MasterEventDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -438,25 +445,25 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Comm\zuo1.png" />
-    <Resource Include="Image\11.jpg" />
-    <Resource Include="Image\22.jpg" />
-    <Resource Include="Image\33.jpg" />
-    <Resource Include="Image\leftlogin.png" />
-    <Resource Include="Image\login.png" />
-    <Resource Include="Image\weather.png" />
-    <Resource Include="Image\weather2.png" />
-    <Resource Include="Image\zuo1.png" />
+    <Resource Include="Image\NotUse\11.jpg" />
+    <Resource Include="Image\NotUse\22.jpg" />
+    <Resource Include="Image\NotUse\33.jpg" />
+    <Resource Include="Image\NotUse\leftlogin.png" />
+    <Resource Include="Image\NotUse\login.png" />
+    <Resource Include="Image\NotUse\weather.png" />
+    <Resource Include="Image\NotUse\weather2.png" />
+    <Resource Include="Image\NotUse\zuo1.png" />
     <Resource Include="zuo1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\1.png" />
-    <Resource Include="Image\2.png" />
-    <Resource Include="Image\3.png" />
-    <Resource Include="Image\4.png" />
-    <Resource Include="Image\5.png" />
+    <Resource Include="Image\NotUse\1.png" />
+    <Resource Include="Image\NotUse\2.png" />
+    <Resource Include="Image\NotUse\3.png" />
+    <Resource Include="Image\NotUse\4.png" />
+    <Resource Include="Image\NotUse\5.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Image\6.png" />
+    <Resource Include="Image\NotUse\6.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -655,54 +662,54 @@
     <Content Include="DebugImage\选中.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Image\bbbb.ico" />
-    <Resource Include="Image\333.png" />
-    <Resource Include="Image\head背景.png" />
-    <Resource Include="Image\右箭头.png" />
-    <Resource Include="Image\左箭头.png" />
-    <Resource Include="Image\启动.png" />
-    <Resource Include="Image\cc.png" />
-    <Resource Include="Image\圆点1.png" />
-    <Resource Include="Image\圆点2.png" />
-    <Resource Include="Image\时间背景.png" />
-    <Resource Include="Image\全球显示.png" />
-    <Resource Include="Image\放大.png" />
-    <Resource Include="Image\漫游.png" />
-    <Resource Include="Image\缩小.png" />
-    <Resource Include="Image\kk.png" />
-    <Resource Include="Image\菜单背景.png" />
-    <Resource Include="Image\视频源.png" />
-    <Resource Include="Image\上.png" />
-    <Resource Include="Image\下.png" />
-    <Resource Include="Image\加.png" />
-    <Resource Include="Image\右.png" />
-    <Resource Include="Image\左.png" />
-    <Resource Include="Image\播放.png" />
-    <Resource Include="Image\无人机.png" />
-    <Resource Include="Image\暂停.png" />
-    <Resource Include="Image\视频按钮.png" />
-    <Resource Include="Image\选中.png" />
-    <Resource Include="Image\1111.png" />
-    <Resource Include="Image\c1.png" />
-    <Resource Include="Image\c2.png" />
-    <Resource Include="Image\c3.png" />
-    <Resource Include="Image\c4.png" />
-    <Resource Include="Image\7月30号－1.jpg" />
-    <Resource Include="Image\7月30号－2.jpg" />
-    <Resource Include="Image\事件生成.png" />
-    <Resource Include="Image\保存.png" />
-    <Resource Include="Image\刷新.png" />
-    <Resource Include="Image\返回.png" />
-    <Resource Include="Image\全屏.jpg" />
-    <Resource Include="Image\短信.jpg" />
-    <Resource Include="Image\全屏.png" />
-    <Resource Include="Image\短信.png" />
-    <Resource Include="Image\beijing.png" />
-    <Resource Include="Image\xiangshang.png" />
-    <Resource Include="Image\xiangxia.png" />
-    <Resource Include="Image\weather3.png" />
-    <Resource Include="Image\bar.png" />
-    <Resource Include="Image\pie.png" />
+    <Resource Include="Image\NotUse\bbbb.ico" />
+    <Resource Include="Image\NotUse\333.png" />
+    <Resource Include="Image\NotUse\head背景.png" />
+    <Resource Include="Image\NotUse\右箭头.png" />
+    <Resource Include="Image\NotUse\左箭头.png" />
+    <Resource Include="Image\NotUse\启动.png" />
+    <Resource Include="Image\NotUse\cc.png" />
+    <Resource Include="Image\NotUse\圆点1.png" />
+    <Resource Include="Image\NotUse\圆点2.png" />
+    <Resource Include="Image\NotUse\时间背景.png" />
+    <Resource Include="Image\NotUse\全球显示.png" />
+    <Resource Include="Image\NotUse\放大.png" />
+    <Resource Include="Image\NotUse\漫游.png" />
+    <Resource Include="Image\NotUse\缩小.png" />
+    <Resource Include="Image\NotUse\kk.png" />
+    <Resource Include="Image\NotUse\菜单背景.png" />
+    <Resource Include="Image\NotUse\视频源.png" />
+    <Resource Include="Image\NotUse\上.png" />
+    <Resource Include="Image\NotUse\下.png" />
+    <Resource Include="Image\NotUse\加.png" />
+    <Resource Include="Image\NotUse\右.png" />
+    <Resource Include="Image\NotUse\左.png" />
+    <Resource Include="Image\NotUse\播放.png" />
+    <Resource Include="Image\NotUse\无人机.png" />
+    <Resource Include="Image\NotUse\暂停.png" />
+    <Resource Include="Image\NotUse\视频按钮.png" />
+    <Resource Include="Image\NotUse\选中.png" />
+    <Resource Include="Image\NotUse\1111.png" />
+    <Resource Include="Image\NotUse\c1.png" />
+    <Resource Include="Image\NotUse\c2.png" />
+    <Resource Include="Image\NotUse\c3.png" />
+    <Resource Include="Image\NotUse\c4.png" />
+    <Resource Include="Image\NotUse\7月30号－1.jpg" />
+    <Resource Include="Image\NotUse\7月30号－2.jpg" />
+    <Resource Include="Image\NotUse\事件生成.png" />
+    <Resource Include="Image\NotUse\保存.png" />
+    <Resource Include="Image\NotUse\刷新.png" />
+    <Resource Include="Image\NotUse\返回.png" />
+    <Resource Include="Image\NotUse\全屏.jpg" />
+    <Resource Include="Image\NotUse\短信.jpg" />
+    <Resource Include="Image\NotUse\全屏.png" />
+    <Resource Include="Image\NotUse\短信.png" />
+    <Resource Include="Image\NotUse\beijing.png" />
+    <Resource Include="Image\NotUse\xiangshang.png" />
+    <Resource Include="Image\NotUse\xiangxia.png" />
+    <Resource Include="Image\NotUse\weather3.png" />
+    <Resource Include="Image\NotUse\bar.png" />
+    <Resource Include="Image\NotUse\pie.png" />
     <Resource Include="Image\Icon_FullScreen.png" />
     <Resource Include="Image\Icon_Graph.png" />
     <Resource Include="Image\Icon_Home.png" />
@@ -712,8 +719,8 @@
     <Resource Include="Image\Icon_MainBrand.png" />
     <Resource Include="Image\Icon_Message.png" />
     <Resource Include="Image\Icon_User.png" />
-    <Resource Include="Image\EmergencyPersonSummary.png" />
-    <Resource Include="Image\MaterialsSummary.png" />
+    <Resource Include="Image\NotUse\EmergencyPersonSummary.png" />
+    <Resource Include="Image\NotUse\MaterialsSummary.png" />
     <Resource Include="DebugImage\MainPage\EmergencyPersonSummary.png" />
     <Resource Include="DebugImage\MainPage\Weather.png" />
     <Resource Include="DebugImage\MainPage\MaterialsSummary.png" />
@@ -978,6 +985,7 @@
     <Resource Include="Image\MainPage\WeatherIcons\99.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Image\Event\Icon_Create.png" />
     <Content Include="xml\TaskTracking.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -996,11 +1004,11 @@
     <Content Include="Views\MainPage\BMap.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Image\a.png" />
-    <Resource Include="Image\b.png" />
-    <Resource Include="Image\c.png" />
-    <Resource Include="Image\d.png" />
-    <Resource Include="Image\e.png" />
+    <Resource Include="Image\NotUse\a.png" />
+    <Resource Include="Image\NotUse\b.png" />
+    <Resource Include="Image\NotUse\c.png" />
+    <Resource Include="Image\NotUse\d.png" />
+    <Resource Include="Image\NotUse\e.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Busniess\Business.csproj">
@@ -1020,6 +1028,7 @@
       <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>if not exist $(TargetDir)lib (mkdir $(TargetDir)lib&amp;&amp;xcopy $(SolutionDir)ThirdParty\lib $(TargetDir)lib /E)

@@ -104,9 +104,11 @@
 
     <Grid  Name="gridEventMain">
         <DockPanel Name="top2" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-            <DockPanel DockPanel.Dock="Top" Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" >
-                <Label Name="labelPageTitle" Foreground="White" FontSize="20" HorizontalAlignment="Left" Padding="25" Margin="20,0,0,0" >主事件列表</Label>
-            </DockPanel>
+            <Border BorderBrush="#62a6a3" BorderThickness="0,1,0,0" DockPanel.Dock="Top">
+                <DockPanel DockPanel.Dock="Top" Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" >
+                    <Label Name="labelPageTitle" Foreground="White" FontSize="20" HorizontalAlignment="Left" Padding="25" Margin="20,0,0,0" >主事件列表</Label>
+                </DockPanel>
+            </Border>
             <Grid DockPanel.Dock="Top" >
                 <DockPanel HorizontalAlignment="Stretch">
                     <DockPanel DockPanel.Dock="Top"  Margin="20">
