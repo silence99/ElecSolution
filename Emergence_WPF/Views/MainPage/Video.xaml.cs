@@ -9,136 +9,143 @@ using Vlc.DotNet.Wpf;
 
 namespace Emergence_WPF.Views
 {
-    /// <summary>
-    /// Video.xaml 的交互逻辑
-    /// </summary>
-    public partial class Video : UserControl
-    {
-        public Video()
-        {
-            InitializeComponent();
-            VideoPlay.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
-            VideoPlay.MediaPlayer.EndInit();
+	/// <summary>
+	/// Video.xaml 的交互逻辑
+	/// </summary>
+	public partial class Video : UserControl
+	{
+		public Video()
+		{
+			InitializeComponent();
+			VideoPlay.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
+			VideoPlay.MediaPlayer.EndInit();
 
-            VideoPlay.MediaPlayer.Click += MediaPlayer_Click;
-        }
+			VideoPlay.MediaPlayer.Click += MediaPlayer_Click;
+			VideoPlay.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
+		}
 
-        private void MediaPlayer_Click(object sender, EventArgs e)
-        {
-            Stop(VideoPlay);
-        }
+		private void MediaPlayer_TimeChanged(object sender, Vlc.DotNet.Core.VlcMediaPlayerTimeChangedEventArgs e)
+		{
+			VideoPlay.MediaPlayer.Audio.Volume = 0;
+		}
 
-        private void OnVlcControlNeedsLibDirectory(object sender, Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs e)
-        {
-            var currentAssembly = Assembly.GetEntryAssembly();
-            var currentDirectory = new FileInfo(currentAssembly.Location).DirectoryName;
-            if (currentDirectory == null)
-                return;
+		private void MediaPlayer_Click(object sender, EventArgs e)
+		{
+			Stop(VideoPlay);
+		}
 
-            if (IntPtr.Size == 4)
-                e.VlcLibDirectory = new DirectoryInfo(Path.Combine(currentDirectory, @"lib\x86\"));
-            else
-                e.VlcLibDirectory = new DirectoryInfo(Path.Combine(currentDirectory, @"lib\x64\"));
-        }
+		private void OnVlcControlNeedsLibDirectory(object sender, Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs e)
+		{
+			var currentAssembly = Assembly.GetEntryAssembly();
+			var currentDirectory = new FileInfo(currentAssembly.Location).DirectoryName;
+			if (currentDirectory == null)
+				return;
 
-        public static readonly DependencyProperty UiModelProperty =
-           DependencyProperty.Register("UiModel", typeof(VideoUiModel),
-           typeof(Video),
-           new PropertyMetadata(new VideoUiModel(), new PropertyChangedCallback(OnViewModelChanged)));
+			if (IntPtr.Size == 4)
+				e.VlcLibDirectory = new DirectoryInfo(Path.Combine(currentDirectory, @"lib\x86\"));
+			else
+				e.VlcLibDirectory = new DirectoryInfo(Path.Combine(currentDirectory, @"lib\x64\"));
+		}
 
-        public static readonly DependencyProperty VideoStatusProperty =
-           DependencyProperty.Register("State", typeof(VideoStatus),
-           typeof(Video),
-           new PropertyMetadata(VideoStatus.Stop, new PropertyChangedCallback(OnViewStateChanged)));
+		public static readonly DependencyProperty UiModelProperty =
+		   DependencyProperty.Register("UiModel", typeof(VideoUiModel),
+		   typeof(Video),
+		   new PropertyMetadata(new VideoUiModel(), new PropertyChangedCallback(OnViewModelChanged)));
 
-        public VideoUiModel UiModel
-        {
-            get { return (VideoUiModel)GetValue(UiModelProperty); }
+		public static readonly DependencyProperty VideoStatusProperty =
+		   DependencyProperty.Register("State", typeof(VideoStatus),
+		   typeof(Video),
+		   new PropertyMetadata(VideoStatus.Stop, new PropertyChangedCallback(OnViewStateChanged)));
 
-            set
-            {
-                SetValue(UiModelProperty, value);
-                if (UiModel.ImageUri != null)
-                {
-                    var source = new BitmapImage(); ;
-                    source.BeginInit();
+		public VideoUiModel UiModel
+		{
+			get { return (VideoUiModel)GetValue(UiModelProperty); }
 
-                    source.UriSource = new Uri(Path.GetFullPath(UiModel.ImageUri));
-                    source.EndInit();
-                    VideoImage.Source = source;
-                }
-            }
-        }
+			set
+			{
+				SetValue(UiModelProperty, value);
+				if (UiModel.ImageUri != null)
+				{
+					var source = new BitmapImage(); ;
+					source.BeginInit();
 
-        public VideoStatus State
-        {
-            get { return (VideoStatus)GetValue(VideoStatusProperty); }
-            set { SetValue(VideoStatusProperty, value); }
-        }
+					source.UriSource = new Uri(Path.GetFullPath(UiModel.ImageUri));
+					source.EndInit();
+					VideoImage.Source = source;
+				}
+			}
+		}
 
-        public void OnImageClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (e.ClickCount == 1)
-            {
-                var img = sender as Image;
-                img.Visibility = Visibility.Hidden;
-                VideoPlay.Visibility = Visibility.Visible;
-                Start(VideoPlay);
-            }
-        }
+		public VideoStatus State
+		{
+			get { return (VideoStatus)GetValue(VideoStatusProperty); }
+			set { SetValue(VideoStatusProperty, value); }
+		}
+
+		public void OnImageClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			if (e.ClickCount == 1)
+			{
+				var img = sender as Image;
+				img.Visibility = Visibility.Hidden;
+				VideoPlay.Visibility = Visibility.Visible;
+				Start(VideoPlay);
+			}
+		}
 
 
-        static void OnViewModelChanged(object sender, DependencyPropertyChangedEventArgs args)
-        {
+		static void OnViewModelChanged(object sender, DependencyPropertyChangedEventArgs args)
+		{
 
-        }
+		}
 
-        static void OnViewStateChanged(object sender, DependencyPropertyChangedEventArgs args)
-        {
-            var videoCtl = sender as Video;
-            if (videoCtl != null)
-            {
-                videoCtl.Start(videoCtl.VideoPlay);
-            }
-        }
+		static void OnViewStateChanged(object sender, DependencyPropertyChangedEventArgs args)
+		{
+			var videoCtl = sender as Video;
+			if (videoCtl != null)
+			{
+				videoCtl.Start(videoCtl.VideoPlay);
+			}
+		}
 
-        public void Start(VlcControl player)
-        {
-            player.MediaPlayer.Play(UiModel.Uri);
-        }
+		public void Start(VlcControl player)
+		{
+			player.MediaPlayer.Play(UiModel.Uri);
+			player.MediaPlayer.Audio.Volume = 0;
+		}
 
-        private void Stop(VlcControl player)
-        {
-            player.MediaPlayer.Stop();
-        }
+		private void Stop(VlcControl player)
+		{
+			player.MediaPlayer.Stop();
+		}
 
-        private void Pause(VlcControl player)
-        {
-            player.MediaPlayer.Pause();
-        }
+		private void Pause(VlcControl player)
+		{
+			player.MediaPlayer.Pause();
+		}
 
-        private void Resume(VlcControl player)
-        {
-            player.MediaPlayer.Play();
-        }
+		private void Resume(VlcControl player)
+		{
+			player.MediaPlayer.Play();
+		}
 
-        private void Rectangle_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (e.ClickCount == 1)
-            {
-                VideoImage.Visibility = Visibility.Hidden;
-                VideoPlay.Visibility = Visibility.Visible;
-                if (State == VideoStatus.Pasue || State == VideoStatus.Stop)
-                {
-                    State = VideoStatus.Playing;
-                    Start(VideoPlay);
-                }
-                else
-                {
-                    State = VideoStatus.Pasue;
-                    Stop(VideoPlay);
-                }
-            }
-        }
-    }
+		private void Rectangle_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			if (e.ClickCount == 1)
+			{
+				VideoImage.Visibility = Visibility.Hidden;
+				VideoPlay.Visibility = Visibility.Visible;
+				if (State == VideoStatus.Pasue || State == VideoStatus.Stop)
+				{
+					State = VideoStatus.Playing;
+					Start(VideoPlay);
+				}
+				else
+				{
+					State = VideoStatus.Pasue;
+					Stop(VideoPlay);
+				}
+			}
+		}
+	}
 }
