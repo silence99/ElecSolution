@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Background="White" WindowStartupLocation="CenterScreen"
-        Title="创建主事件" Height="966" Width="1000">
-    <DockPanel>
+        Title="创建主事件" Height="800" Width="1000">
+    <DockPanel Background="#F3F3F3">
         <DockPanel Background="#006f69" Height="120" Name="titleEventMasterPage" Width="auto"  DockPanel.Dock="Top" VerticalAlignment="Top" HorizontalAlignment="Stretch">
             <DockPanel Name="DP_CreateMasterEvent" Width="122" DockPanel.Dock="Left" HorizontalAlignment="Left" Background="#005651" MouseLeftButtonDown="DP_CreateMasterEvent_MouseLeftButtonDown" >
                 <Image Margin="0,36,0,0" Width="45" Height="36" Source="/Image/Event/Icon_Create_Cut.png"  HorizontalAlignment="Center" Cursor="Hand" DockPanel.Dock="Top"  VerticalAlignment="Top" Stretch="UniformToFill"/>
@@ -37,10 +37,12 @@
             <TextBox Name="TitleTextBox" Text="{Binding Path=Id}" Grid.Column="3" Grid.Row="0" Height="34" Width="Auto" MinWidth="160"  VerticalContentAlignment="Center" HorizontalAlignment="Left"  Margin="0,20,0,0"/>
 
             <TextBlock Text="类型"  Grid.Column="4" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center"  FontSize="16" Margin="0,20,20,0"/>
-            <ComboBox Grid.Column="5" Grid.Row="0" Height="34" Width="Auto" MinWidth="160"  VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,20,20,0"/>
+            <TextBox Name="EventTypeTextBox" Text="{Binding Path=Id}" Grid.Column="5" Grid.Row="0" Height="34" Width="Auto" MinWidth="160"  VerticalContentAlignment="Center" HorizontalAlignment="Left"  Margin="0,20,0,0"/>
+            <!--<ComboBox Grid.Column="5" Grid.Row="0" Height="34" Width="Auto" MinWidth="160"  VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="0,20,20,0"/>-->
 
             <TextBlock Text="等级"  Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"  FontSize="16" Margin="0,0,20,0"/>
-            <ComboBox Grid.Column="1" Grid.Row="1" Height="34" Width="Auto" MinWidth="160"  VerticalContentAlignment="Center" HorizontalAlignment="Left"/>
+            <TextBox Name="EventLevelTextBox" Text="{Binding Path=Id}" Grid.Column="1" Grid.Row="1" Height="34" Width="Auto" MinWidth="160"  VerticalContentAlignment="Center" HorizontalAlignment="Left"  Margin="0,0,0,0"/>
+            <!--<ComboBox Grid.Column="1" Grid.Row="1" Height="34" Width="Auto" MinWidth="160"  VerticalContentAlignment="Center" HorizontalAlignment="Left"/>-->
 
             <TextBlock Text="地点"  Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center"  FontSize="16" Margin="0,0,20,0"/>
             <TextBox Name="EventLocaleTextBox" Text="{Binding Path=Id}" Grid.Column="3" Grid.Row="1" Height="34" Width="Auto" MinWidth="160"  VerticalContentAlignment="Center" HorizontalAlignment="Left"/>

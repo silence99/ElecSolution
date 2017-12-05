@@ -169,7 +169,7 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="6">
                                 <TextBlock Text="简介" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,22,10,0"/>
-                                <TextBox Name="SubEventRemarksTextBox" Text="{Binding Path=ChildRemarks}" Height="34" Width="Auto" MinWidth="600" MinHeight="90" Margin="0,5,0,5" TextWrapping="Wrap" IsEnabled="False"/>
+                                <TextBox Name="SubEventRemarksTextBox" Text="{Binding Path=ChildRemarks}" Height="34" Width="Auto" MinWidth="600" MinHeight="90" Margin="25,5,0,5" TextWrapping="Wrap" IsEnabled="False"/>
                             </StackPanel>
                         </Grid>
 

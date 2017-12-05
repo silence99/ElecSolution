@@ -11,7 +11,15 @@ namespace Utils
         };
         public static T ConvertToObject<T>(string json)
         {
-            return JsonConvert.DeserializeObject<T>(json);
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(json);
+            }
+            catch (System.Exception)
+            {
+                return default(T);
+            }
+
         }
     }
 }
