@@ -57,7 +57,7 @@
     <Compile Include="Model\ChildEvent.cs" />
     <Compile Include="Model\RequestResult.cs" />
     <Compile Include="Model\SubEvent.cs" />
-    <Compile Include="Model\Task.cs" />
+    <Compile Include="Model\EventTask.cs" />
     <Compile Include="Model\Vedio.cs" />
     <Compile Include="Model\Weather.cs" />
     <Compile Include="Model\RequestModel.cs" />

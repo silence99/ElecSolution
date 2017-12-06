@@ -23,5 +23,8 @@ namespace Emergence.Common.ViewModel
         public int TotalCount { get => _totalCount; set => _totalCount = value; }
         public int TotalPage { get => _totalPage; set => _totalPage = value; }
         public SubEvent SubEventInfo { get => _subEventInfo; set => _subEventInfo = value; }
+
+        public List<EventTask> subEventList = new List<EventTask>();
+
     }
 }
