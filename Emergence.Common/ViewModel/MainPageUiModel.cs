@@ -15,7 +15,7 @@ namespace Emergence.Common.ViewModel
 		}
 		public virtual double Left { get; set; }
 		public virtual double Top { get; set; }
-		public virtual double Heigh { get; set; }
+		public virtual double Height { get; set; }
 		public virtual double Width { get; set; }
 		public virtual WindowState WindowState { get; set; }
 		public virtual WindowStyle WindowStyle { get; set; }

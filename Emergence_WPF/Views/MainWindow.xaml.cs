@@ -5,6 +5,8 @@ using Emergence_WPF.Views;
 using System.Windows;
 using System.Windows.Input;
 using Framework;
+using Emergence_WPF.Util;
+using System.Windows.Controls;
 
 namespace Emergence_WPF
 {
@@ -24,12 +26,18 @@ namespace Emergence_WPF
 			}
 			set
 			{
+				MainPageUiModel model = null;
+				if (value != null)
+				{
+					model = (value.IsAopWapper ? value : value.CreateAopProxy());
+				}
+
 				PropertyChangedEx?.Invoke(UiModel, new PropertyChangedEventArgsEx("UIModel")
 				{
 					OldValue = _uiModel,
-					NewValue = value,
+					NewValue = model,
 				});
-				_uiModel = value;
+				_uiModel = model;
 			}
 		}
 
@@ -45,16 +53,13 @@ namespace Emergence_WPF
 
 		public void InitUiModel()
 		{
-			UiModel = new MainPageUiModel()
-			{
-				Left = 0.0,
-				Top = 0.0,
-				Width = SystemParameters.PrimaryScreenWidth,
-				Heigh = SystemParameters.PrimaryScreenHeight,
-				WindowState = WindowState.Normal,
-				WindowStyle = WindowStyle.SingleBorderWindow,
-				ResizeMode = ResizeMode.CanResize
-			};
+			//UiModel.Left = 0.0;
+			UiModel.Top = 0.0;
+			UiModel.Width = SystemParameters.PrimaryScreenWidth;
+			UiModel.Height = SystemParameters.PrimaryScreenHeight;
+			//UiModel.WindowState = WindowState.Normal;
+			//UiModel.WindowStyle = WindowStyle.SingleBorderWindow;
+			UiModel.ResizeMode = ResizeMode.CanResize;
 			DataContext = UiModel;
 			StrategyController = new MainPageStrategyController(UiModel);
 		}
@@ -71,9 +76,8 @@ namespace Emergence_WPF
 		private void HomeBtn_Click(object sender, MouseButtonEventArgs e)
 		{
 			maingrid.Children.Clear();
-			var Maincontrol = new UserControl_MainPage();
-			maingrid.Children.Add(Maincontrol);
-			Maincontrol.UiModel = UiModel;
+			var mainPage = ObjectFactory.GetInstance<UserControl>("mainPagePanel");
+			maingrid.Children.Add(mainPage);
 		}
 
 		private void MasterEventBtn_Click(object sender, MouseButtonEventArgs e)
@@ -84,12 +88,12 @@ namespace Emergence_WPF
 		}
 
 		private void LogoutBtn_Click(object sender, MouseButtonEventArgs e)
-		{	
+		{
 			Login login = new Login();
 			login.Show();
 			Close();
 		}
-		
+
 		private void Image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			maingrid.Children.Clear();
