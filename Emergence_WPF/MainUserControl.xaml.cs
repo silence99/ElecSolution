@@ -146,7 +146,7 @@ namespace Emergence_WPF
         {
             if (control != null)
             {
-                control.close();
+                control.Close();
                 control = null;
             }
         }

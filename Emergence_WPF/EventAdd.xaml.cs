@@ -1,4 +1,5 @@
-﻿using Emergence_WPF.Comm;
+﻿using Emergence.Common;
+using Emergence_WPF.Comm;
 using Emergence_WPF.Model;
 using System;
 using System.Collections.Generic;

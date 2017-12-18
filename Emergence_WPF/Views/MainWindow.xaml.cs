@@ -1,166 +1,119 @@
 ﻿using Business.Strategies;
 using Emergence.Common.ViewModel;
 using Emergence_WPF.Comm;
+using Emergence_WPF.Views;
 using System.Windows;
 using System.Windows.Input;
+using Framework;
 
 namespace Emergence_WPF
 {
-    /// <summary>
-    /// MainWindow.xaml 的交互逻辑
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        //MainUserControl2 Maincontrol = null;
-        UserControl_MainPage Maincontrol = null;
-        EmergencyInformation Information = null;
-        NotificationNavigation Navigation = null;
-        ReportCenter report = null;
-        MainPageUiModel _uiModel;
-        public MainPageUiModel UiModel
-        {
-            get
-            {
-                return _uiModel;
-            }
-            set
-            {
-                _uiModel = value;
-            }
-        }
+	/// <summary>
+	/// MainWindow.xaml 的交互逻辑
+	/// </summary>
+	public partial class MainWindow : Window, IEmergencyInit, INotifyPropertyChangedEx
+	{
+		private MainPageUiModel _uiModel;
+		public event PropertyChangedHandlerEx PropertyChangedEx;
+		public MainPageStrategyController StrategyController { get; set; }
+		public MainPageUiModel UiModel
+		{
+			get
+			{
+				return _uiModel;
+			}
+			set
+			{
+				PropertyChangedEx?.Invoke(UiModel, new PropertyChangedEventArgsEx("UIModel")
+				{
+					OldValue = _uiModel,
+					NewValue = value,
+				});
+				_uiModel = value;
+			}
+		}
 
-        MainPageStrategyController StrategyController { get; set; }
+		public MainWindow()
+		{
+			InitializeComponent();
+		}
 
-        public MainWindow()
-        {
-            InitializeComponent();
-            loginname.Text = "用户" + CommHelp.Name;
-            UiModel = new MainPageUiModel();
-            StrategyController = new MainPageStrategyController(UiModel);
-            UiModel.PropertyChangedEx += (sender, args) => { if (args.PropertyName == "Name") { } };
-        }
+		public void BindingUiModel(StrategyController parent, StrategyController strategyController, NotificationObject uiModel)
+		{//mainwindows don't need call this function
+			throw new System.NotImplementedException();
+		}
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            Information = null;
-            Navigation = null;
+		public void InitUiModel()
+		{
+			UiModel = new MainPageUiModel()
+			{
+				Left = 0.0,
+				Top = 0.0,
+				Width = SystemParameters.PrimaryScreenWidth,
+				Heigh = SystemParameters.PrimaryScreenHeight,
+				WindowState = WindowState.Normal,
+				WindowStyle = WindowStyle.SingleBorderWindow,
+				ResizeMode = ResizeMode.CanResize
+			};
+			DataContext = UiModel;
+			StrategyController = new MainPageStrategyController(UiModel);
+		}
 
-            //Default set full screen
-            this.WindowState = WindowState.Normal;
-            this.WindowStyle = WindowStyle.SingleBorderWindow;
-            this.ResizeMode = ResizeMode.CanResize;
-            //this.Topmost = true;
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			InitUiModel();
+			var Maincontrol = new UserControl_MainPage();
+			Maincontrol.UiModel = UiModel;
+			maingrid.Children.Add(Maincontrol);
 
-            this.Left = 0.0;
-            this.Top = 0.0;
-            this.Width = SystemParameters.PrimaryScreenWidth;
-            this.Height = SystemParameters.PrimaryScreenHeight;
-            //Maincontrol = new MainUserControl2();
-            Maincontrol = new UserControl_MainPage();
-            //Maincontrol.bind(this.ActualWidth, this.ActualHeight);
-            Maincontrol.UiModel = UiModel;
-            maingrid.Children.Add(Maincontrol);
+		}
 
-        }
+		private void HomeBtn_Click(object sender, MouseButtonEventArgs e)
+		{
+			maingrid.Children.Clear();
+			var Maincontrol = new UserControl_MainPage();
+			maingrid.Children.Add(Maincontrol);
+			Maincontrol.UiModel = UiModel;
+		}
 
-        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (Maincontrol != null)
-            {
-                Maincontrol.Close();
-            }
-            clear();
-            maingrid.Children.Clear();
-            //Maincontrol = new MainUserControl2();
-            Maincontrol = new UserControl_MainPage();
-            //var ff = this.ActualWidth - 1000;
-            //var hh = this.ActualHeight - 630;
-            //Maincontrol.bind(1000 + ff, 550 + hh);
-            maingrid.Children.Add(Maincontrol);
-            Maincontrol.UiModel = UiModel;
-        }
+		private void MasterEventBtn_Click(object sender, MouseButtonEventArgs e)
+		{
+			maingrid.Children.Clear();
+			MasterEventManagement information = new MasterEventManagement();
+			maingrid.Children.Add(information);
+		}
 
-        private void Image_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
-        {
-            if (Maincontrol != null)
-            {
-                Maincontrol.Close();
-            }
-            Maincontrol = null;
-            Navigation = null;
-            clear();
-            maingrid.Children.Clear();
-            MasterEventManagement information = new MasterEventManagement();
-            //Information = new EmergencyInformation();
-            //var ff = this.ActualWidth - 1000;
-            //var hh = this.ActualHeight - 630;
-            //Information.bind(1000 + ff, 550 + hh);
-            maingrid.Children.Add(information);
+		private void LogoutBtn_Click(object sender, MouseButtonEventArgs e)
+		{	
+			Login login = new Login();
+			login.Show();
+			Close();
+		}
+		
+		private void Image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+		{
+			maingrid.Children.Clear();
+			var Navigation = new NotificationNavigation();
+			var ff = this.ActualWidth - 1000;
+			var hh = this.ActualHeight - 630;
+			Navigation.bind(1000 + ff, 550 + hh);
+			maingrid.Children.Add(Navigation);
+		}
 
-        }
+		private void Image_MouseLeftButtonDown_2(object sender, MouseButtonEventArgs e)
+		{
+			EmergencyCommandCenter center = new EmergencyCommandCenter();
+			center.ShowDialog();
+		}
 
-        private void StackPanel_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            Login login = new Login();
-            login.Show();
-            this.Close();
-        }
-
-        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-        }
-
-        private void maingrid_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-
-        }
-
-        private void Image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
-
-            if (Maincontrol != null)
-            {
-                Maincontrol.Close();
-            }
-            Maincontrol = null;
-            Information = null;
-            clear();
-            maingrid.Children.Clear();
-            Navigation = new NotificationNavigation();
-            var ff = this.ActualWidth - 1000;
-            var hh = this.ActualHeight - 630;
-            Navigation.bind(1000 + ff, 550 + hh);
-            maingrid.Children.Add(Navigation);
-        }
-
-        private void Image_MouseLeftButtonDown_2(object sender, MouseButtonEventArgs e)
-        {
-            EmergencyCommandCenter center = new EmergencyCommandCenter();
-            center.ShowDialog();
-        }
-        void clear()
-        {
-            Maincontrol = null;
-            Information = null;
-            Navigation = null;
-        }
-        private void Image_MouseLeftButtonDown_3(object sender, MouseButtonEventArgs e)
-        {
-            if (Maincontrol != null)
-            {
-                Maincontrol.Close();
-            }
-            Maincontrol = null;
-            Information = null;
-            clear();
-            maingrid.Children.Clear();
-            report = new ReportCenter();
-            var ff = this.ActualWidth - 1000;
-            var hh = this.ActualHeight - 630;
-            report.bind(1000 + ff, 550 + hh);
-            maingrid.Children.Add(report);
-        }
-
-    }
+		private void Image_MouseLeftButtonDown_3(object sender, MouseButtonEventArgs e)
+		{
+			maingrid.Children.Clear();
+			var report = new ReportCenter();
+			var ff = this.ActualWidth - 1000;
+			var hh = this.ActualHeight - 630;
+			report.bind(1000 + ff, 550 + hh);
+			maingrid.Children.Add(report);
+		}
+	}
 }

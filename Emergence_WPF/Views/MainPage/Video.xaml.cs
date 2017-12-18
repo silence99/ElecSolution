@@ -147,5 +147,13 @@ namespace Emergence_WPF.Views
 				}
 			}
 		}
+
+		private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+		{
+			if(VideoPlay != null)
+			{
+				VideoPlay.MediaPlayer.Dispose();
+			}
+		}
 	}
 }

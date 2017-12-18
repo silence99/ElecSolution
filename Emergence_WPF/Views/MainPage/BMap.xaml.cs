@@ -49,17 +49,17 @@ namespace Emergence_WPF
 
 
         }
-        public void close()
+
+        public void Close()
         {
             if (wbo != null)
             {
                 this.Visibility = Visibility.Collapsed;
-                // webBrowser.Dispose();
                 wbo._placementTarget.Visibility = Visibility.Collapsed;
                 wbo._placementTarget.Width = 0;
                 wbo._placementTarget.Height = 0;
                 wbo.OnSizeLocationChanged();
-
+				wbo.WebBrowser.Dispose();
             }
 
         }
@@ -102,5 +102,10 @@ namespace Emergence_WPF
         {
             webBrowser.Document.InvokeScript("removeOverlay", null);
         }
-    }
+
+		private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+		{
+			Close();
+		}
+	}
 }

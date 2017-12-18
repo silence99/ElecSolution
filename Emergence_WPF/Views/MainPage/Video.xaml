@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:wpf="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300" Unloaded="UserControl_Unloaded">
     <Grid Name="GridVideo" Margin="0, 0, 0, 0">
         <Rectangle Margin="0,0,0,0" Opacity="0" MouseDown="Rectangle_MouseDown" Panel.ZIndex="3"/>
         <Image Name="VideoImage" MouseDown="OnImageClick" Panel.ZIndex="2"/>

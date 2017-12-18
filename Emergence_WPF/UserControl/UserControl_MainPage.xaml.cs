@@ -9,9 +9,6 @@ using System.Xml;
 
 namespace Emergence_WPF
 {
-    /// <summary>
-    /// Interaction logic for UserControl_MainPage.xaml
-    /// </summary>
     public partial class UserControl_MainPage : UserControl
     {
         private int _totalCount = 3;
@@ -116,15 +113,6 @@ namespace Emergence_WPF
 
             this.DataCodeing.ItemsSource = Events;
         }
-        public void Close()
-        {
-            if (control != null)
-            {
-                control.close();
-                control = null;
-            }
-        }
-
 
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {

@@ -58,7 +58,12 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Spring.Core, Version=1.3.2.40943, Culture=neutral, PublicKeyToken=65e474d141e25e07, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\spring.net\Spring.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
@@ -94,7 +99,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Comm\CommHelp.cs" />
     <Compile Include="Comm\PageChangedEventArg.cs" />
     <Compile Include="Comm\Pager.cs" />
     <Compile Include="Comm\PasswordBoxHelper.cs" />
@@ -108,7 +112,7 @@
     <Compile Include="EmergencyOrganization.xaml.cs">
       <DependentUpon>EmergencyOrganization.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EmergencyUserControl.cs" />
+    <Compile Include="EmergencyControl.cs" />
     <Compile Include="MainUserControl2.xaml.cs">
       <DependentUpon>MainUserControl2.xaml</DependentUpon>
     </Compile>
@@ -184,6 +188,7 @@
     <Compile Include="Model\ListViewBehavior.cs" />
     <Compile Include="Model\SortInfo.cs" />
     <Compile Include="Model\UIElementAdorner.cs" />
+    <Compile Include="Util\ObjectFactory.cs" />
     <Compile Include="Views\Event\AddSubEvent.xaml.cs">
       <DependentUpon>AddSubEvent.xaml</DependentUpon>
     </Compile>
@@ -196,6 +201,7 @@
     <Compile Include="Views\Event\SubEventDetail.xaml.cs">
       <DependentUpon>SubEventDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\IEmergencyInit.cs" />
     <Compile Include="Views\MainPage\BMap.xaml.cs">
       <DependentUpon>BMap.xaml</DependentUpon>
     </Compile>
@@ -994,6 +1000,9 @@
     </Resource>
     <Resource Include="Image\Event\Icon_Create.png" />
     <Resource Include="Image\Event\Icon_Create_Cut.png" />
+    <Resource Include="objects.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Content Include="xml\TaskTracking.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
