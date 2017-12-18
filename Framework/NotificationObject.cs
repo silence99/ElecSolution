@@ -75,7 +75,7 @@ namespace Framework
 
         public object Invoke(IMethodInvocation invocation)
         {
-            string propertyName = invocation.Method.Name.Substring(3);
+            string propertyName = invocation.Method.Name.Substring(4);
             if (ReadOnlyMode)
             {
                 Logger.Debug("notifier is readonly");
@@ -130,10 +130,10 @@ namespace Framework
         public void RaisePropertyChangedEvent(PropertyChangedEventArgsEx args)
         {
             InvokeEventAndRepositoryRegisterHandlers(args, PropertyChangeEvent.Changed);
-            // _notifyManager.RegisterToNotify(this, args.PropertyName);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(args.PropertyName));
-            HandleErrors();
-        }
+			// _notifyManager.RegisterToNotify(this, args.PropertyName);
+			PropertyChanged?.Invoke(AopWapper, new PropertyChangedEventArgs(args.PropertyName));
+			HandleErrors();
+		}
 
         private void HandleErrors()
         {
