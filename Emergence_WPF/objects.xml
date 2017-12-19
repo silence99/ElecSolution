@@ -8,13 +8,6 @@
     <property name="WindowStyle" >
       <value type="System.Windows.WindowStyle">SingleBorderWindow</value>
     </property>
-  </object>
-  <object id="mainWindow" type="Emergence_WPF.MainWindow, Emergence_WPF" singleton="false">
-    <property name="UiModel" ref="mainWindowUiModel"/>
-  </object>
-  <object id="mainPagePanel" type="Emergence_WPF.UserControl_MainPage, Emergence_WPF" singleton="false">
-    <property name="UiModel" ref="mainWindowUiModel"/>
-  </object>
-  
+  </object>  
 </objects>
 

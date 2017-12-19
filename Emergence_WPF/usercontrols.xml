@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<objects xmlns="http://www.springframework.net">
+  <object id="mainWindow" type="Emergence_WPF.MainWindow, Emergence_WPF" singleton="false">
+  </object>
+  <object id="mainPagePanel" type="Emergence_WPF.UserControl_MainPage, Emergence_WPF" singleton="false">
+    <property name="UiModel" ref="mainWindowUiModel"/>
+  </object>
+
+</objects>

@@ -44,10 +44,13 @@ namespace Emergence_WPF
 
 		public void InitUiModel()
 		{
+			UiModel.Left = 0.0;
 			UiModel.Top = 0.0;
 			UiModel.Width = SystemParameters.PrimaryScreenWidth;
 			UiModel.Height = SystemParameters.PrimaryScreenHeight;
 			UiModel.ResizeMode = ResizeMode.CanResize;
+			UiModel.WindowState = WindowState.Normal;
+			UiModel.WindowStyle = WindowStyle.SingleBorderWindow;
 			DataContext = UiModel;
 			StrategyController = new MainPageStrategyController(UiModel);
 		}
