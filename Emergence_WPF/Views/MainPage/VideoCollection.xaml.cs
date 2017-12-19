@@ -1,25 +1,15 @@
 ﻿using Emergence.Common.ViewModel;
+using Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Emergence_WPF.Views.MainPage
 {
 	/// <summary>
 	/// VideoCollection.xaml 的交互逻辑
 	/// </summary>
-	public partial class VideoCollection : UserControl
+	public partial class VideoCollection : UserControl, IEmergencyControl<NotificationObject>
 	{
 		List<VideoUiModel> _uiMode = null;
 		public List<VideoUiModel> UiModel
@@ -34,6 +24,11 @@ namespace Emergence_WPF.Views.MainPage
 				RefreshVideos();
 			}
 		}
+
+		NotificationObject IEmergencyControl<NotificationObject>.UiModel { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		public StrategyController StrategyController { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+		public string StrategyControllerName => throw new NotImplementedException();
 
 		public VideoCollection()
 		{
@@ -53,6 +48,16 @@ namespace Emergence_WPF.Views.MainPage
 			}
 
 			Content.Children.Add(container);
+		}
+
+		public void BindingUiModel(StrategyController parent, StrategyController strategyController, NotificationObject uiModel)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void InitUiModel()
+		{
+			throw new NotImplementedException();
 		}
 	}
 }

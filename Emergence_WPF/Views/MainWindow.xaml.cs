@@ -1,7 +1,6 @@
 ﻿using Business.Strategies;
 using Emergence.Common.ViewModel;
 using Emergence_WPF.Util;
-using Emergence_WPF.Views;
 using Framework;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,10 +11,10 @@ namespace Emergence_WPF
 	/// <summary>
 	/// MainWindow.xaml 的交互逻辑
 	/// </summary>
-	public partial class MainWindow : Window, IEmergencyInit
+	public partial class MainWindow : Window, IEmergencyControl<MainPageUiModel>
 	{
 		private MainPageUiModel _uiModel;
-		public MainPageStrategyController StrategyController { get; set; }
+		public StrategyController StrategyController { get; set; }
 		public MainPageUiModel UiModel
 		{
 			get
@@ -26,6 +25,11 @@ namespace Emergence_WPF
 			{
 				_uiModel = value == null ? null : (value.IsAopWapper ? value : value.CreateAopProxy());
 			}
+		}
+
+		public string StrategyControllerName
+		{
+			get { return "mainWindowsStrategyController"; }
 		}
 
 		public MainWindow()

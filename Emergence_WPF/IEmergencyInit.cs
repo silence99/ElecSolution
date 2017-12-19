@@ -1,6 +1,6 @@
 ﻿using Framework;
 
-namespace Emergence_WPF.Views
+namespace Emergence_WPF
 {
 	interface IEmergencyInit
 	{

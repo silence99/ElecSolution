@@ -201,7 +201,8 @@
     <Compile Include="Views\Event\SubEventDetail.xaml.cs">
       <DependentUpon>SubEventDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\IEmergencyInit.cs" />
+    <Compile Include="IEmergencyControl.cs" />
+    <Compile Include="IEmergencyInit.cs" />
     <Compile Include="Views\MainPage\BMap.xaml.cs">
       <DependentUpon>BMap.xaml</DependentUpon>
     </Compile>
