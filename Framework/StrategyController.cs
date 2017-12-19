@@ -2,10 +2,11 @@
 
 namespace Framework
 {
-	public class StrategyController<T> : StrategyController
+	public class StrategyController : Strategy
 	{
-		protected T UIModel;
-		public StrategyController(Strategy parent, T uiModel, IList<Strategy> strategies) :
+		protected IList<Strategy> Strategies { get; set; }
+		protected NotificationObject UIModel;
+		public StrategyController(Strategy parent, NotificationObject uiModel, IList<Strategy> strategies) :
 			base(parent)
 		{
 			Strategies = strategies;
@@ -31,14 +32,5 @@ namespace Framework
 				}
 			}
 		}
-	}
-
-	public abstract class StrategyController : Strategy
-	{
-		protected IList<Strategy> Strategies { get; set; }
-		public StrategyController(Strategy parent) : base(parent)
-		{
-		}
-
 	}
 }

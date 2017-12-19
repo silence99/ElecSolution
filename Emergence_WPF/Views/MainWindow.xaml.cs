@@ -1,12 +1,11 @@
 ﻿using Business.Strategies;
 using Emergence.Common.ViewModel;
-using Emergence_WPF.Comm;
-using Emergence_WPF.Views;
-using System.Windows;
-using System.Windows.Input;
-using Framework;
 using Emergence_WPF.Util;
+using Emergence_WPF.Views;
+using Framework;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Emergence_WPF
 {
