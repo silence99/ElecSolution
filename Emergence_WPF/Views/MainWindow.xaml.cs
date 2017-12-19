@@ -13,10 +13,9 @@ namespace Emergence_WPF
 	/// <summary>
 	/// MainWindow.xaml 的交互逻辑
 	/// </summary>
-	public partial class MainWindow : Window, IEmergencyInit, INotifyPropertyChangedEx
+	public partial class MainWindow : Window, IEmergencyInit
 	{
 		private MainPageUiModel _uiModel;
-		public event PropertyChangedHandlerEx PropertyChangedEx;
 		public MainPageStrategyController StrategyController { get; set; }
 		public MainPageUiModel UiModel
 		{
@@ -26,18 +25,7 @@ namespace Emergence_WPF
 			}
 			set
 			{
-				MainPageUiModel model = null;
-				if (value != null)
-				{
-					model = (value.IsAopWapper ? value : value.CreateAopProxy());
-				}
-
-				PropertyChangedEx?.Invoke(UiModel, new PropertyChangedEventArgsEx("UIModel")
-				{
-					OldValue = _uiModel,
-					NewValue = model,
-				});
-				_uiModel = model;
+				_uiModel = value == null ? null : (value.IsAopWapper ? value : value.CreateAopProxy());
 			}
 		}
 
@@ -53,12 +41,9 @@ namespace Emergence_WPF
 
 		public void InitUiModel()
 		{
-			//UiModel.Left = 0.0;
 			UiModel.Top = 0.0;
 			UiModel.Width = SystemParameters.PrimaryScreenWidth;
 			UiModel.Height = SystemParameters.PrimaryScreenHeight;
-			//UiModel.WindowState = WindowState.Normal;
-			//UiModel.WindowStyle = WindowStyle.SingleBorderWindow;
 			UiModel.ResizeMode = ResizeMode.CanResize;
 			DataContext = UiModel;
 			StrategyController = new MainPageStrategyController(UiModel);

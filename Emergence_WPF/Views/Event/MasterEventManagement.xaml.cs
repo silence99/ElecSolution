@@ -25,157 +25,173 @@ using System.Windows.Shapes;
 
 namespace Emergence_WPF
 {
-    /// <summary>
-    /// Interaction logic for MasterEventManagement.xaml
-    /// </summary>
-    public partial class MasterEventManagement : UserControl
-    {
-        VM_MasterEventManagement masterEventVM;
-        GetMasterEventSvr gMasterSvr;
-        ObservableCollection<MasterEvent> omList;
-        public delegate void ChangePageDelegate(MasterEvent me);
-        public event ChangePageDelegate ChangePageEvent;
+	/// <summary>
+	/// Interaction logic for MasterEventManagement.xaml
+	/// </summary>
+	public partial class MasterEventManagement : UserControl
+	{
+		VM_MasterEventManagement masterEventVM;
+		GetMasterEventSvr gMasterSvr;
+		ObservableCollection<MasterEvent> omList;
+		public delegate void ChangePageDelegate(MasterEvent me);
+		public event ChangePageDelegate ChangePageEvent;
 
-        public MasterEventManagement()
-        {
-            InitializeComponent();
-        }
+		public MasterEventManagement()
+		{
+			InitializeComponent();
+		}
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            masterEventVM = new VM_MasterEventManagement();
-            gMasterSvr = new GetMasterEventSvr();
-            RequestMasterEventList();
-            this.DataContext = masterEventVM;
-            //GenerateSimulatedData();
-        }
+		private void UserControl_Loaded(object sender, RoutedEventArgs e)
+		{
+			masterEventVM = new VM_MasterEventManagement();
+			gMasterSvr = new GetMasterEventSvr();
+			RequestMasterEventList();
+			this.DataContext = masterEventVM;
+			//GenerateSimulatedData();
+		}
 
-        private void Grid_MasterEvent_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            DataGrid gridList = sender as DataGrid;
+		private void Grid_MasterEvent_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			DataGrid gridList = sender as DataGrid;
 
-            if (gridList.SelectedItems.Count > 0)
-            {
-                foreach (MasterEvent dd in gridList.SelectedItems)
-                {
-                    dd.IsChecked = true;
-                }
-            }
-        }
+			if (gridList.SelectedItems.Count > 0)
+			{
+				foreach (MasterEvent dd in gridList.SelectedItems)
+				{
+					dd.IsChecked = true;
+				}
+			}
+		}
 
-        private void Pager_OnPageChanged(object sender, PageChangedEventArg e)
-        {
-            var x = e.PageIndex;
-        }
+		private void Pager_OnPageChanged(object sender, PageChangedEventArg e)
+		{
+			var x = e.PageIndex;
+		}
 
-        private List<MasterEventUiModel> GetMasterEvents(int pageNum, int count)
-        {
-            List<MasterEventUiModel> meList = new List<MasterEventUiModel>();
+		private List<MasterEventUiModel> GetMasterEvents(int pageNum, int count)
+		{
+			List<MasterEventUiModel> meList = new List<MasterEventUiModel>();
 
-            return meList;
-        }
+			return meList;
+		}
 
-        private void RequestMasterEventList()
-        {
-            string masterEventURL = ConfigurationSettings.AppSettings["BaseURL"].ToString() + ConfigurationSettings.AppSettings["GetMainEventListURL"].ToString();
+		private void RequestMasterEventList()
+		{
+			string masterEventURL = ConfigurationSettings.AppSettings["BaseURL"].ToString() + ConfigurationSettings.AppSettings["GetMainEventListURL"].ToString();
 
-            gMasterSvr.RequestData = "&pageIndex=" + masterEventVM.PageIndex + "&pageSize=" + masterEventVM.PageSize;
+			gMasterSvr.RequestData = "&pageIndex=" + masterEventVM.PageIndex + "&pageSize=" + masterEventVM.PageSize;
 
-            MasterEventListResponse rr = gMasterSvr.ProcessRequest(masterEventURL);
-            if (rr.Result.MasterEventList != null)
-            {
-                masterEventVM.masterEventList = rr.Result.MasterEventList.ToList();
-                List<MasterEvent> mml = new List<MasterEvent>();
-                mml.Add(rr.Result.MasterEventList[0]);
-                mml.Add(rr.Result.MasterEventList[1]);
-                mml.Add(rr.Result.MasterEventList[2]);
-                omList = new ObservableCollection<MasterEvent>(rr.Result.MasterEventList.ToList());
-                this.Grid_MasterEvent.DataContext = omList;
-            }
-        }
+			MasterEventListResponse rr = gMasterSvr.ProcessRequest(masterEventURL);
+			if (rr.Result.MasterEventList != null)
+			{
+				masterEventVM.masterEventList = rr.Result.MasterEventList.ToList();
+				List<MasterEvent> mml = new List<MasterEvent>();
+				var master = new MasterEvent()
+				{
+					Title = "aaaa"
+				};
+				mml.Add(master);
+				omList = new ObservableCollection<MasterEvent>(mml);
+				this.Grid_MasterEvent.DataContext = omList;
+			}
+		}
 
-        private void masterEventSearchButton_Click(object sender, RoutedEventArgs e)
-        {
-            GenerateSimulatedData();
-        }
+		private void masterEventSearchButton_Click(object sender, RoutedEventArgs e)
+		{
+			GenerateSimulatedData();
+		}
 
-        private void Cbx_CheckAll_Click(object sender, RoutedEventArgs e)
-        {
-            foreach(var item in Grid_MasterEvent.Items)
-            {
-                DataGridTemplateColumn templeCm = Grid_MasterEvent.Columns[0] as DataGridTemplateColumn;
-                FrameworkElement fwElement = Grid_MasterEvent.Columns[0].GetCellContent(item);
-                if (fwElement != null)
-                {
-                    CheckBox cBox = templeCm.CellTemplate.FindName("cb", fwElement) as CheckBox;
-                    if (cBox.IsChecked == true)
-                    {
-                        cBox.IsChecked = false;
-                    }
-                    else
-                    {
-                        if (cBox != null)
-                        {
-                            cBox.IsChecked = true;
-                        }
-                        else
-                        {
-                            cBox.IsChecked = false;
-                        }
-                    }
-                }
-            }
-        }
-        private void GenerateSimulatedData()
-        {
-            string loginURL = ConfigurationSettings.AppSettings["BaseURL"].ToString() + ConfigurationSettings.AppSettings["AddMainEventURL"].ToString();
-            List<HeaderInfo> headers = new List<HeaderInfo>();
-            //headers.Add(new HeaderInfo("Content-Type", "application/x-www-form-urlencoded"));
-            string dateTime = TimeControl.GenerateTimeStamp();
-            string signString = dateTime + "POST/mainEvent";
-            string authorization = AuthorizationControl.GetAuthorization(signString);
-            
-            headers.Add(new HeaderInfo("X-Project-Date", dateTime));
-            headers.Add(new HeaderInfo("Authorization", authorization));
+		private void Cbx_CheckAll_Click(object sender, RoutedEventArgs e)
+		{
+			foreach (var item in Grid_MasterEvent.Items)
+			{
+				DataGridTemplateColumn templeCm = Grid_MasterEvent.Columns[0] as DataGridTemplateColumn;
+				FrameworkElement fwElement = Grid_MasterEvent.Columns[0].GetCellContent(item);
+				if (fwElement != null)
+				{
+					CheckBox cBox = templeCm.CellTemplate.FindName("cb", fwElement) as CheckBox;
+					if (cBox.IsChecked == true)
+					{
+						cBox.IsChecked = false;
+					}
+					else
+					{
+						if (cBox != null)
+						{
+							cBox.IsChecked = true;
+						}
+						else
+						{
+							cBox.IsChecked = false;
+						}
+					}
+				}
+			}
+		}
+		private void GenerateSimulatedData()
+		{
+			string loginURL = ConfigurationSettings.AppSettings["BaseURL"].ToString() + ConfigurationSettings.AppSettings["AddMainEventURL"].ToString();
+			List<HeaderInfo> headers = new List<HeaderInfo>();
+			//headers.Add(new HeaderInfo("Content-Type", "application/x-www-form-urlencoded"));
+			string dateTime = TimeControl.GenerateTimeStamp();
+			string signString = dateTime + "POST/mainEvent";
+			string authorization = AuthorizationControl.GetAuthorization(signString);
 
-            for (int i = 1; i < 21; i++)
-            {
-                StringBuilder postData = new StringBuilder();
-                //postData.Append("id=" + i.ToString());
-                postData.Append("serialNumber=MD" + i.ToString().PadLeft(6, '0'));
-                postData.Append("&title=测试主事件标题" + i.ToString());
-                postData.Append("&eventType=event_1");
-                postData.Append("&grade=grade_1");
-                postData.Append("&time=" + dateTime);
-                postData.Append("&describe=主事件" + i.ToString());
-                postData.Append("&submitParty=张美娜");
-                postData.Append("&telephoneNumber=13333333333");
-                postData.Append("&submitDept=消防一中队");
-                postData.Append("&locale=湖州市礼数街消防支队");
-                postData.Append("&longitude=120.000");
-                postData.Append("&latitude=120.000");                
-                HttpResult hr = HttpCommon.HttpPost(loginURL, postData.ToString(), "", "application/x-www-form-urlencoded", headers);
-            }
+			headers.Add(new HeaderInfo("X-Project-Date", dateTime));
+			headers.Add(new HeaderInfo("Authorization", authorization));
 
-        }
+			for (int i = 1; i < 21; i++)
+			{
+				StringBuilder postData = new StringBuilder();
+				//postData.Append("id=" + i.ToString());
+				postData.Append("serialNumber=MD" + i.ToString().PadLeft(6, '0'));
+				postData.Append("&title=测试主事件标题" + i.ToString());
+				postData.Append("&eventType=event_1");
+				postData.Append("&grade=grade_1");
+				postData.Append("&time=" + dateTime);
+				postData.Append("&describe=主事件" + i.ToString());
+				postData.Append("&submitParty=张美娜");
+				postData.Append("&telephoneNumber=13333333333");
+				postData.Append("&submitDept=消防一中队");
+				postData.Append("&locale=湖州市礼数街消防支队");
+				postData.Append("&longitude=120.000");
+				postData.Append("&latitude=120.000");
+				HttpResult hr = HttpCommon.HttpPost(loginURL, postData.ToString(), "", "application/x-www-form-urlencoded", headers);
+			}
 
-        private void Grid_MasterEvent_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var dg = e.Source as DataGrid;
-            MasterEvent me = dg.SelectedItem as MasterEvent;
-            if (me != null)
-            {
-                MasterEventDetail md = new MasterEventDetail(me);
-                this.gridEventMain.Children.Clear();
-                this.gridEventMain.Children.Add(md);
-            }
-            //md.SetMasterEventDetail(dg.CurrentItem as MasterEvent);
-        }
+		}
 
-        private void Btn_CreateMasterEvent_Click(object sender, RoutedEventArgs e)
-        {
-            AddMasterEvent ame = new AddMasterEvent();
-            ame.ShowDialog();
-        }
-    }
+		private void Grid_MasterEvent_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			var dg = e.Source as DataGrid;
+			MasterEvent me = dg.SelectedItem as MasterEvent;
+			if (me != null)
+			{
+				MasterEventDetail md = new MasterEventDetail(me);
+				md.GoBack += GoBack_Handler;
+				top2.Visibility = Visibility.Hidden;
+				//this.gridEventMain.Children.Clear();
+				this.gridEventMain.Children.Add(md);
+			}
+			//md.SetMasterEventDetail(dg.CurrentItem as MasterEvent);
+		}
+
+		private void GoBack_Handler(object sender, EventArgs args)
+		{
+			var obj = sender as MasterEventDetail;
+			if (obj != null)
+			{
+
+				obj.GoBack -= GoBack_Handler;
+				this.gridEventMain.Children.Remove(obj);
+				top2.Visibility = Visibility.Visible;
+			}
+		}
+
+		private void Btn_CreateMasterEvent_Click(object sender, RoutedEventArgs e)
+		{
+			AddMasterEvent ame = new AddMasterEvent();
+			ame.ShowDialog();
+		}
+	}
 }

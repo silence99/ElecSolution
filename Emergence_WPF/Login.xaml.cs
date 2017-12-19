@@ -1,18 +1,13 @@
-﻿using Emergence_WPF.Comm;
-using System.Windows;
-using Framework.Http;
-using System.Configuration;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft;
+﻿using Business.MainPageSvr;
 using Emergence.Business.CommonControl;
 using Emergence.Common.Model;
-using Newtonsoft.Json;
-using System.Security.Cryptography;
-using System.IO;
-using System;
-using Business.MainPageSvr;
+using Emergence_WPF.Comm;
 using Emergence_WPF.Util;
+using Framework.Http;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Windows;
 
 namespace Emergence_WPF
 {

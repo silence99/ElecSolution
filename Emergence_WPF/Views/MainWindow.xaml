@@ -1,4 +1,4 @@
-﻿<Window x:Class="Emergence_WPF.MainWindow" 
+﻿<Window x:Class="Emergence_WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         WindowStartupLocation="CenterScreen" MinHeight="630" MinWidth="1000"
