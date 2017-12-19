@@ -9,14 +9,15 @@ namespace Emergence_WPF.Views.MainPage
 	/// Weather.xaml 的交互逻辑
 	/// </summary>
 	public partial class Weather : UserControl
-    {
-        protected WeatherUiModel UIModel = new WeatherUiModel();
-        protected StrategyController strategyController = null;
-        public Weather()
-        {
-            InitializeComponent();
-            DataContext = UIModel;
-            strategyController = new WeatherStrategyController(UIModel);
-        }
-    }
+	{
+		protected WeatherUiModel UIModel = new WeatherUiModel();
+		protected StrategyController strategyController = null;
+		public Weather()
+		{
+			InitializeComponent();
+			DataContext = UIModel;
+			strategyController = new WeatherStrategyController();
+			strategyController.InitializationUiModel(UIModel);
+		}
+	}
 }

@@ -1,4 +1,5 @@
-﻿using Framework;
+﻿using Emergence.Common.ViewModel;
+using Framework;
 using System.Collections.Generic;
 
 namespace Emergence_WPF.ViewModel

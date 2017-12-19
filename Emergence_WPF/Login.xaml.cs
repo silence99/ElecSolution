@@ -1,6 +1,6 @@
-﻿using Business.MainPageSvr;
-using Emergence.Business.CommonControl;
+﻿using Emergence.Business.CommonControl;
 using Emergence.Common.Model;
+using Emergence.Common.ViewModel;
 using Emergence_WPF.Comm;
 using Emergence_WPF.Util;
 using Framework.Http;
@@ -16,12 +16,9 @@ namespace Emergence_WPF
 	/// </summary>
 	public partial class Login : Window
 	{
-		public LoginServices loginS;
-
 		public Login()
 		{
 			InitializeComponent();
-			loginS = new LoginServices();
 		}
 
 		private void LoginButton_Click(object sender, RoutedEventArgs e)
@@ -39,6 +36,11 @@ namespace Emergence_WPF
 				{
 					//#endif
 					var main = ObjectFactory.GetInstance<MainWindow>("mainWindow");
+					var mainWindowUiModel = new MainWindowUiModel()
+					{
+						UserName = this.txtUserName.Text
+					};
+					main.BindingUiModel(null, null, mainWindowUiModel);
 					if (main == null)
 					{
 						MessageBox.Show("应用程序错误，请联系管理员。");
@@ -96,18 +98,8 @@ namespace Emergence_WPF
 			lim.TokenSecret = jsonObj.result.tokenSecret;
 			lim.Nick = jsonObj.result.nike;
 
-			//Application.Current.Properties["CurrentUser"] = lim;
-			//lim.Authorization = Convert.ToBase64String(Encoding.UTF8.GetBytes("token="+lim.Token+"&signature"))
-
 			AuthorizationControl.SetLogin(lim);
-
-
 			return true;
-		}
-
-		private void CacheRequestToken(HttpResult hr)
-		{
-
 		}
 
 	}

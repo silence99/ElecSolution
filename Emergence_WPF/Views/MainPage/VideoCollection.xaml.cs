@@ -21,7 +21,6 @@ namespace Emergence_WPF.Views.MainPage
 			set
 			{
 				_uiMode = value;
-				RefreshVideos();
 			}
 		}
 

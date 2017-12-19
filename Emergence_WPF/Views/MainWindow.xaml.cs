@@ -11,11 +11,11 @@ namespace Emergence_WPF
 	/// <summary>
 	/// MainWindow.xaml 的交互逻辑
 	/// </summary>
-	public partial class MainWindow : Window, IEmergencyControl<MainPageUiModel>
+	public partial class MainWindow : Window, IEmergencyControl<MainWindowUiModel>
 	{
-		private MainPageUiModel _uiModel;
+		private MainWindowUiModel _uiModel;
 		public StrategyController StrategyController { get; set; }
-		public MainPageUiModel UiModel
+		public MainWindowUiModel UiModel
 		{
 			get
 			{
@@ -38,10 +38,16 @@ namespace Emergence_WPF
 		}
 
 		public void BindingUiModel(StrategyController parent, StrategyController strategyController, NotificationObject uiModel)
-		{//mainwindows don't need call this function
-			throw new System.NotImplementedException();
+		{
+			UiModel = uiModel as MainWindowUiModel;
+			InitUiModel();
+			StrategyController = strategyController;
+			DataContext = uiModel;
 		}
 
+		/// <summary>
+		/// create ui model for main window
+		/// </summary>
 		public void InitUiModel()
 		{
 			UiModel.Left = 0.0;
@@ -51,24 +57,24 @@ namespace Emergence_WPF
 			UiModel.ResizeMode = ResizeMode.CanResize;
 			UiModel.WindowState = WindowState.Normal;
 			UiModel.WindowStyle = WindowStyle.SingleBorderWindow;
-			DataContext = UiModel;
-			StrategyController = new MainPageStrategyController(UiModel);
+			// main page ui model is empty, filled when showing main page
+			UiModel.MainPageData = new MainPageUiModel();
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			InitUiModel();
-			var Maincontrol = new UserControl_MainPage();
-			Maincontrol.UiModel = UiModel;
-			maingrid.Children.Add(Maincontrol);
-
+			// show main page first
+			ShowMainPage();
 		}
 
+		/// <summary>
+		/// click event hanlder of home button
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private void HomeBtn_Click(object sender, MouseButtonEventArgs e)
 		{
-			maingrid.Children.Clear();
-			var mainPage = ObjectFactory.GetInstance<UserControl>("mainPagePanel");
-			maingrid.Children.Add(mainPage);
+			ShowMainPage();
 		}
 
 		private void MasterEventBtn_Click(object sender, MouseButtonEventArgs e)
@@ -109,6 +115,18 @@ namespace Emergence_WPF
 			var hh = this.ActualHeight - 630;
 			report.bind(1000 + ff, 550 + hh);
 			maingrid.Children.Add(report);
+		}
+
+		/// <summary>
+		/// show home page(switch to home page)
+		/// </summary>
+		private void ShowMainPage()
+		{
+			// get panel, binding panel ui model, add to main window
+			var mainPage = ObjectFactory.GetInstance<UserControl_MainPage>("mainPagePanel");
+			mainPage.BindingUiModel(StrategyController, ObjectFactory.GetInstance<MainPageStrategyController>(mainPage.StrategyControllerName), UiModel.MainPageData.CreateAopProxy());
+			maingrid.Children.Clear();
+			maingrid.Children.Add(mainPage);
 		}
 	}
 }

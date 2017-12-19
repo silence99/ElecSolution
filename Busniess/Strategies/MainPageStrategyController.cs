@@ -9,18 +9,14 @@ namespace Business.Strategies
 	public class MainPageStrategyController : StrategyController
 	{
 		private GetMasterEventSvr service = new GetMasterEventSvr();
-		public MainPageStrategyController(MainPageUiModel uiModel) :
-			base(null, uiModel, new List<Strategy>())
+		public MainPageStrategyController() :
+			base(null, new List<Strategy>())
 		{
-			if (!(UIModel is MainPageUiModel))
-			{
-				throw new Exception("wrong type of UiModel type for creating MainPageStrategyController ");
-			}
 		}
 
-		public override void InitializationUiModel()
+		public override void InitializationUiModel(NotificationObject uiModel)
 		{
-			base.InitializationUiModel();
+			UIModel = uiModel;
 			var model = UIModel as MainPageUiModel;
 			//for test
 			model.MasterEvents = new List<MasterEventUiModel>()
@@ -65,6 +61,7 @@ namespace Business.Strategies
 				}
 			};
 
+			base.InitializationUiModel(uiModel);
 		}
 	}
 }

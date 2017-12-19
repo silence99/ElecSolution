@@ -12,13 +12,14 @@ namespace Business.Strategies
         WeatherService service = new WeatherService();
         IMapper<Weather, WeatherUiModel> mapper = new WeatherMapper();
 
-        public WeatherStrategyController(WeatherUiModel uiModel)
-            : base(null, uiModel, null)
+        public WeatherStrategyController()
+            : base(null, null)
         {
         }
 
-        public override void InitializationUiModel()
+        public override void InitializationUiModel(NotificationObject uiModel)
         {
+			UIModel = uiModel;
             var weather = service.ProcessRequest(null);
             mapper.MapToUiModel(weather, UIModel as WeatherUiModel);
         }

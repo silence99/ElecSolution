@@ -6,19 +6,18 @@ namespace Framework
 	{
 		protected IList<Strategy> Strategies { get; set; }
 		protected NotificationObject UIModel;
-		public StrategyController(Strategy parent, NotificationObject uiModel, IList<Strategy> strategies) :
+		public StrategyController(Strategy parent, IList<Strategy> strategies) :
 			base(parent)
 		{
 			Strategies = strategies;
-
-			UIModel = uiModel;
-			InitializationUiModel();
-			RegisterProperties();
-			PostInitializationUiModel();
 		}
 
 
-		public virtual void InitializationUiModel() { }
+		public virtual void InitializationUiModel(NotificationObject instance)
+		{
+			RegisterProperties();
+			PostInitializationUiModel();
+		}
 
 		public virtual void PostInitializationUiModel() { }
 
