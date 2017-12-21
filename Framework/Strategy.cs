@@ -9,7 +9,7 @@ namespace Framework
 	{
 		protected ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 		private Strategy _parent = null;
-		private StrategyRegistry _registry = null;
+		private StrategyRegistry _registry = new StrategyRegistry();
 		private Dictionary<string, PropertyChangedHandlerEx> _actions = null;
 		private List<NotificationObject> _registered = new List<NotificationObject>();
 

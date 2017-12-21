@@ -1,6 +1,4 @@
 ﻿using Emergence.Common.ViewModel;
-using Framework;
-using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
 
@@ -9,54 +7,25 @@ namespace Emergence_WPF.Views.MainPage
 	/// <summary>
 	/// VideoCollection.xaml 的交互逻辑
 	/// </summary>
-	public partial class VideoCollection : UserControl, IEmergencyControl<NotificationObject>
+	public partial class VideoCollection : UserControl
 	{
-		List<VideoUiModel> _uiMode = null;
-		public List<VideoUiModel> UiModel
-		{
-			get
-			{
-				return _uiMode;
-			}
-			set
-			{
-				_uiMode = value;
-			}
-		}
-
-		public NotificationObject ViewModel { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-		public StrategyController StrategyController { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-		public string StrategyControllerName => throw new NotImplementedException();
-
 		public VideoCollection()
 		{
 			InitializeComponent();
 		}
 
-		private void RefreshVideos()
+		public void BindingViewModel(List<VideoViewModel> videos)
 		{
 			Content.Children.Clear();
-			StackPanel container = new StackPanel();
-
-			foreach (var uiModel in UiModel)
+			foreach (var item in videos)
 			{
 				Video video = new Video();
-				video.UiModel = uiModel;
-				container.Children.Add(video);
+				Content.Children.Add(video);
+				video.SetValue(DockPanel.DockProperty, Dock.Top);
+				video.Margin = new System.Windows.Thickness(0, 0, 0, 0);
+				video.Height = ActualWidth;
+				video.BindingViewModel(item);
 			}
-
-			Content.Children.Add(container);
-		}
-
-		public void BindingUiModel(StrategyController parent, NotificationObject uiModel)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void InitUiModel()
-		{
-			throw new NotImplementedException();
 		}
 	}
 }

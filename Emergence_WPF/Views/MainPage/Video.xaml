@@ -3,12 +3,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:wpf="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf"
+             xmlns:forms="clr-namespace:Vlc.DotNet.Forms;assembly=Vlc.DotNet.Forms"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Unloaded="UserControl_Unloaded">
-    <Grid Name="GridVideo" Margin="0, 0, 0, 0">
-        <Rectangle Margin="0,0,0,0" Opacity="0" MouseDown="Rectangle_MouseDown" Panel.ZIndex="3"/>
-        <Image Name="VideoImage" MouseDown="OnImageClick" Panel.ZIndex="2"/>
-        <wpf:VlcControl Name="VideoPlay" Visibility="Hidden" Panel.ZIndex="1"/>
+             d:DesignHeight="200" d:DesignWidth="200" Unloaded="UserControl_Unloaded" Height="{Binding Path=Height}"
+             Width="{Binding Path=Wdith}" MinHeight="100">
+    <Grid Name="GridVideo" Margin="0, 0, 0, 0" >
+        <WindowsFormsHost Margin="0,0,0,0" >
+            <forms:VlcControl Margin="0,0,0,0" x:Name="VideoPlay" VlcLibDirectoryNeeded="OnVlcControlNeedsLibDirectory"
+                              Click="MediaPlayer_Click" TimeChanged="MediaPlayer_TimeChanged"/>
+        </WindowsFormsHost>
     </Grid>
 </UserControl>

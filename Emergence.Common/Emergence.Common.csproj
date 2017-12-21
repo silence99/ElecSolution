@@ -67,11 +67,11 @@
     <Compile Include="ViewModel\MainPageUiModel.cs" />
     <Compile Include="ViewModel\MainWindowUiModel.cs" />
     <Compile Include="ViewModel\MasterEventUiModel.cs" />
-    <Compile Include="ViewModel\VideoUiModel.cs" />
+    <Compile Include="ViewModel\VideoViewModel.cs" />
     <Compile Include="ViewModel\VM_MasterEventDetail.cs" />
     <Compile Include="ViewModel\VM_MasterEventManagement.cs" />
     <Compile Include="ViewModel\VM_SubEventDetail.cs" />
-    <Compile Include="ViewModel\WeatherUiModel.cs" />
+    <Compile Include="ViewModel\WeatherViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Framework\Framework.csproj">

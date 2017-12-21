@@ -62,6 +62,7 @@
     <Compile Include="RemoteService.cs" />
     <Compile Include="Strategies\LogInStrategyController.cs" />
     <Compile Include="Strategies\MainPageStrategyController.cs" />
+    <Compile Include="Strategies\VideoStrategyController.cs" />
     <Compile Include="Strategies\WeatherStrategyController.cs" />
   </ItemGroup>
   <ItemGroup>

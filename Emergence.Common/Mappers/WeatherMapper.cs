@@ -4,14 +4,14 @@ using System;
 
 namespace Emergence.Common.Mappers
 {
-    public class WeatherMapper : IMapper<Weather, WeatherUiModel>
+    public class WeatherMapper : IMapper<Weather, WeatherViewModel>
     {
-        public void MapToDataModel(WeatherUiModel uiModel, Weather model)
+        public void MapToDataModel(WeatherViewModel uiModel, Weather model)
         {
             throw new NotImplementedException();
         }
 
-        public void MapToUiModel(Weather data, WeatherUiModel uiModel)
+        public void MapToUiModel(Weather data, WeatherViewModel uiModel)
         {
             if (data == null || uiModel == null)
             {

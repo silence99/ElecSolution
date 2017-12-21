@@ -3,7 +3,7 @@ using System.IO;
 
 namespace Emergence.Common.ViewModel
 {
-    public class WeatherUiModel : WeatherUiModelBase
+    public class WeatherViewModel : WeatherUiModelBase
     {
         public virtual string City { get; set; }
         public virtual string Cityid { get; set; }

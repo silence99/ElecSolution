@@ -18,6 +18,6 @@ namespace Emergence_WPF.ViewModel
         public virtual string TelephoneNumber { get; set; }
         public virtual string SubmitDept { get; set; }
         public virtual string Locate { get; set; }
-        public virtual List<VideoUiModel> Videos { get; set; }
+        public virtual List<VideoViewModel> Videos { get; set; }
     }
 }

@@ -1,10 +1,12 @@
-﻿using Emergence.Common.ViewModel;
+﻿using Busniess.Strategies;
+using Emergence.Common.ViewModel;
+using Emergence_WPF.Util;
+using Framework;
 using System;
 using System.IO;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using Vlc.DotNet.Wpf;
 
 namespace Emergence_WPF.Views
@@ -14,24 +16,43 @@ namespace Emergence_WPF.Views
 	/// </summary>
 	public partial class Video : UserControl
 	{
+		public VideoViewModel ViewModel { get; set; }
+		public StrategyController StrategyController { get; set; }
 		public Video()
 		{
 			InitializeComponent();
-			VideoPlay.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
-			VideoPlay.MediaPlayer.EndInit();
-
-			VideoPlay.MediaPlayer.Click += MediaPlayer_Click;
-			VideoPlay.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
+			VideoPlay.EndInit();
+			VideoPlay.BackgroundImage = System.Drawing.Image.FromFile(VideoViewModel.DefaultImageUri);
 		}
 
 		private void MediaPlayer_TimeChanged(object sender, Vlc.DotNet.Core.VlcMediaPlayerTimeChangedEventArgs e)
 		{
-			VideoPlay.MediaPlayer.Audio.Volume = 0;
+			VideoPlay.Audio.Volume = 0;
+		}
+
+		public void BindingViewModel(VideoViewModel viewModel)
+		{
+			ViewModel = viewModel;
+			//DataContext = ViewModel;
+			//StrategyController = ObjectFactory.GetInstance<VideoStrategyController>(Constant.Services.VideoStrategyController);
+			//StrategyController.RegisterListener(viewModel, "Width", (sender, args) => { ViewModel.Height = ViewModel.Height; });
 		}
 
 		private void MediaPlayer_Click(object sender, EventArgs e)
 		{
-			Stop(VideoPlay);
+			var obj = sender as Vlc.DotNet.Forms.VlcControl;
+			if (obj != null)
+			{
+				if (!obj.IsPlaying)
+				{
+					obj.Play(ViewModel.Uri);
+					obj.Audio.Volume = 0;
+				}
+				else
+				{
+					obj.Pause();
+				}
+			}
 		}
 
 		private void OnVlcControlNeedsLibDirectory(object sender, Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs e)
@@ -47,112 +68,17 @@ namespace Emergence_WPF.Views
 				e.VlcLibDirectory = new DirectoryInfo(Path.Combine(currentDirectory, @"lib\x64\"));
 		}
 
-		public static readonly DependencyProperty UiModelProperty =
-		   DependencyProperty.Register("UiModel", typeof(VideoUiModel),
-		   typeof(Video),
-		   new PropertyMetadata(new VideoUiModel(), new PropertyChangedCallback(OnViewModelChanged)));
-
-		public static readonly DependencyProperty VideoStatusProperty =
-		   DependencyProperty.Register("State", typeof(VideoStatus),
-		   typeof(Video),
-		   new PropertyMetadata(VideoStatus.Stop, new PropertyChangedCallback(OnViewStateChanged)));
-
-		public VideoUiModel UiModel
-		{
-			get { return (VideoUiModel)GetValue(UiModelProperty); }
-
-			set
-			{
-				SetValue(UiModelProperty, value);
-				if (UiModel.ImageUri != null)
-				{
-					var source = new BitmapImage(); ;
-					source.BeginInit();
-
-					source.UriSource = new Uri(Path.GetFullPath(UiModel.ImageUri));
-					source.EndInit();
-					VideoImage.Source = source;
-				}
-			}
-		}
-
-		public VideoStatus State
-		{
-			get { return (VideoStatus)GetValue(VideoStatusProperty); }
-			set { SetValue(VideoStatusProperty, value); }
-		}
-
-		public void OnImageClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-		{
-			if (e.ClickCount == 1)
-			{
-				var img = sender as Image;
-				img.Visibility = Visibility.Hidden;
-				VideoPlay.Visibility = Visibility.Visible;
-				Start(VideoPlay);
-			}
-		}
-
-
-		static void OnViewModelChanged(object sender, DependencyPropertyChangedEventArgs args)
-		{
-
-		}
-
-		static void OnViewStateChanged(object sender, DependencyPropertyChangedEventArgs args)
-		{
-			var videoCtl = sender as Video;
-			if (videoCtl != null)
-			{
-				videoCtl.Start(videoCtl.VideoPlay);
-			}
-		}
-
 		public void Start(VlcControl player)
 		{
-			player.MediaPlayer.Play(UiModel.Uri);
+			player.MediaPlayer.Play(ViewModel.Uri);
 			player.MediaPlayer.Audio.Volume = 0;
-		}
-
-		private void Stop(VlcControl player)
-		{
-			player.MediaPlayer.Stop();
-		}
-
-		private void Pause(VlcControl player)
-		{
-			player.MediaPlayer.Pause();
-		}
-
-		private void Resume(VlcControl player)
-		{
-			player.MediaPlayer.Play();
-		}
-
-		private void Rectangle_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-		{
-			if (e.ClickCount == 1)
-			{
-				VideoImage.Visibility = Visibility.Hidden;
-				VideoPlay.Visibility = Visibility.Visible;
-				if (State == VideoStatus.Pasue || State == VideoStatus.Stop)
-				{
-					State = VideoStatus.Playing;
-					Start(VideoPlay);
-				}
-				else
-				{
-					State = VideoStatus.Pasue;
-					Stop(VideoPlay);
-				}
-			}
 		}
 
 		private void UserControl_Unloaded(object sender, RoutedEventArgs e)
 		{
-			if(VideoPlay != null)
+			if (VideoPlay != null)
 			{
-				VideoPlay.MediaPlayer.Dispose();
+				VideoPlay.Dispose();
 			}
 		}
 	}

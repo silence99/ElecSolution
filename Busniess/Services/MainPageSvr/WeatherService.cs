@@ -1,46 +1,65 @@
 ﻿using Emergence.Common.Model;
 using Framework.Http;
 using Newtonsoft.Json;
+using System;
+using System.IO;
 
 namespace Business.MainPageSvr
 {
-    public class WeatherService : RemoteService<Weather, object>
-    {
-        protected override void InitializeHttpRequest(object request)
-        {
-            HttpHelper = new HttpHelper();
-        }
+	public class WeatherService
+	{
+		private string _weatherData = "weather.json";
+		protected string WeatherData
+		{
+			get { return _weatherData; }
+			set { _weatherData = value; }
+		}
 
-        protected override HttpResult HttpReqeust()
-        {
+		public Weather GetWeather()
+		{
+			var data = string.Empty;
+			if (!LocalDataValid())
+			{
+				var http = new HttpHelper();
+				HttpItem httpItem = new HttpItem()
+				{
+					Method = "GET",
+					URL = "http://jisutianqi.market.alicloudapi.com/weather/query?city=安顺",
+					Header = new System.Net.WebHeaderCollection()
+				};
+				httpItem.Header["Authorization"] = "APPCODE 845c52bbefba41829dacc4642147fd58";
+				var result = http.GetHtml(httpItem);
+				data = result.Html;
+				File.WriteAllText(WeatherData, data);
+			}
+			else
+			{
+				data = File.ReadAllText(WeatherData);
+			}
 
-            HttpItem httpItem = new HttpItem()
-            {
-                Method = "GET",
-                URL = "http://jisutianqi.market.alicloudapi.com/weather/query?city=安顺",
-                Header = new System.Net.WebHeaderCollection()
-            };
-            httpItem.Header["Authorization"] = "APPCODE 845c52bbefba41829dacc4642147fd58";
-            return HttpHelper.GetHtml(httpItem);
-        }
+			var response = Utils.JSONHelper.ConvertToObject<WeatherApiModel>(data);
+			return response.Weather;
+		}
 
-        protected override Weather AnalyzeResponse(HttpResult result)
-        {
-            var response = Utils.JSONHelper.ConvertToObject<WeatherApiModel>(result.Html);
-            return response.Weather;
-        }
-    }
+		private bool LocalDataValid()
+		{
+			var info = new FileInfo(WeatherData);
+			var span = DateTime.Now - info.LastWriteTime;
 
-    public class WeatherApiModel
-    {
+			return span.Minutes <= 14;
+		}
+	}
 
-        [JsonProperty("status")]
-        public string Status { get; set; }
+	public class WeatherApiModel
+	{
 
-        [JsonProperty("msg")]
-        public string Msg { get; set; }
+		[JsonProperty("status")]
+		public string Status { get; set; }
 
-        [JsonProperty("result")]
-        public Weather Weather { get; set; }
-    }
+		[JsonProperty("msg")]
+		public string Msg { get; set; }
+
+		[JsonProperty("result")]
+		public Weather Weather { get; set; }
+	}
 }

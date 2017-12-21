@@ -110,8 +110,8 @@
             <ColumnDefinition Width="430"></ColumnDefinition>
             <ColumnDefinition Width="270"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Margin="0,5,0,0">
-            <StackPanel Margin="0,0,0,10" Height="48" Width="160" Orientation="Horizontal" HorizontalAlignment="Left">
+        <DockPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Margin="0,5,0,0">
+            <StackPanel Margin="0,0,0,10" DockPanel.Dock="Top" Height="48" Width="160" Orientation="Horizontal" HorizontalAlignment="Left">
                 <StackPanel.Background>
                     <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5" MappingMode="RelativeToBoundingBox">
                         <GradientStop Color="#99FFFFFF" Offset="1"/>
@@ -119,10 +119,10 @@
                     </LinearGradientBrush>
                 </StackPanel.Background>
 
-                <TextBlock Margin="10,13,0,0" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif">视频资料</TextBlock>
+                <TextBlock Margin="10,13,0,0" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top">视频资料</TextBlock>
             </StackPanel>
-            <mainpage:VideoCollection x:Name="Videos"/>
-        </StackPanel>
+            <mainpage:VideoCollection x:Name="VideoList" Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+        </DockPanel>
         <Image Grid.Row="0" Grid.Column="1" Margin="5,5,5,0"  Source="/Image/MainPage/MaterialsSummary.png" Stretch="Fill" Width="420" Height="234" HorizontalAlignment="Right" ></Image>
         <Image Grid.Row="1" Grid.Column="1" Margin="5,5,5,0"  Source="/Image/MainPage/EmergencyPersonSummary.png" Stretch="Fill" Width="420" Height="234" HorizontalAlignment="Right" ></Image>
         <Canvas Grid.Row="2" Grid.Column="1" Margin="5,5,5,0" Width="420" Height="234">
@@ -183,7 +183,7 @@
                       IsReadOnly="True"
                       AlternationCount="2" 
                       AutoGenerateColumns="False" 
-                      SelectionChanged="DataCodeing_SelectionChanged" 
+                      SelectionChanged="MasterEvent_SelectionChanged" 
                       DockPanel.Dock="Bottom">
                 <DataGrid.Columns >
                     <DataGridTextColumn Width="*"  Binding="{Binding Path=MessageHeader}" x:Name="f1" Header="信息标题" ></DataGridTextColumn>

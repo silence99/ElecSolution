@@ -7,21 +7,21 @@ using Framework;
 
 namespace Business.Strategies
 {
-    public class WeatherStrategyController : StrategyController
-    {
-        WeatherService service = new WeatherService();
-        IMapper<Weather, WeatherUiModel> mapper = new WeatherMapper();
+	public class WeatherStrategyController : StrategyController
+	{
+		WeatherService service = new WeatherService();
+		IMapper<Weather, WeatherViewModel> mapper = new WeatherMapper();
 
-        public WeatherStrategyController()
-            : base(null, null)
-        {
-        }
+		public WeatherStrategyController()
+			: base(null, null)
+		{
+		}
 
-        public override void InitializationUiModel(NotificationObject uiModel)
-        {
+		public override void InitializationUiModel(NotificationObject uiModel)
+		{
 			UIModel = uiModel;
-            var weather = service.ProcessRequest(null);
-            mapper.MapToUiModel(weather, UIModel as WeatherUiModel);
-        }
-    }
+			var weather = service.GetWeather();
+			mapper.MapToUiModel(weather, UIModel as WeatherViewModel);
+		}
+	}
 }

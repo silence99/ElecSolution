@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Business;
+﻿using Business;
 using Emergence.Business.CommonControl;
 using Emergence.Common.Model;
 using Framework.Http;
-using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Busniess.Services.EventSvr
 {
-    public class GetTaskSvr : RemoteService<TaskListResponse, string>
+	public class GetTaskSvr : RemoteService<TaskListResponse, string>
     {
         private string _url;
         private string _requestData;
