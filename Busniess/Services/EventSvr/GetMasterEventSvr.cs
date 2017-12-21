@@ -3,15 +3,10 @@ using Emergence.Business.CommonControl;
 using Emergence.Common.Model;
 using Framework.Http;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Busniess.Services.EventSvr
 {
-    public class GetMasterEventSvr : RemoteService<MasterEventListResponse, string>
+	public class GetMasterEventSvr : RemoteService<MasterEventListResponse, string>
     {
         private string _url;
         private string _requestData;

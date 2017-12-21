@@ -170,7 +170,6 @@ namespace Emergence_WPF
 				MasterEventDetail md = new MasterEventDetail(me);
 				md.GoBack += GoBack_Handler;
 				top2.Visibility = Visibility.Hidden;
-				//this.gridEventMain.Children.Clear();
 				this.gridEventMain.Children.Add(md);
 			}
 			//md.SetMasterEventDetail(dg.CurrentItem as MasterEvent);

@@ -498,6 +498,9 @@
   <ItemGroup>
     <Resource Include="Themes\zuo1.png" />
     <Content Include="bin\Debug\xml\Emergence.xml" />
+    <None Include="BMap.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="DebugImage\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

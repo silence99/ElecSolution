@@ -18,7 +18,7 @@
             <DockPanel Height="80" HorizontalAlignment="Stretch" Name="head" DockPanel.Dock="Top" Background="#006F69">
                 <Image Canvas.Left="20" Margin="10,0,0,3" DockPanel.Dock="Left" Source="/Image/Icon_MainBrand.png" HorizontalAlignment="Left" ></Image>
                 <TextBlock FontSize="30" DockPanel.Dock="Left" TextAlignment="Center" Foreground="White" HorizontalAlignment="Left" Margin="10,20,0,0">应急指挥中心管理应用平台</TextBlock>
-                <StackPanel DockPanel.Dock="Right"  Orientation="Horizontal" Name="headright" HorizontalAlignment="Right">
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Name="headright" HorizontalAlignment="Right">
                     <Image Margin="0,0,30,0" Width="30" Height="30" MouseLeftButtonDown="HomeBtn_Click" Source="/Image/Icon_Home.png" HorizontalAlignment="Right" Cursor="Hand" ></Image>
                     <Image Margin="0,0,30,0" Width="30" Height="30" MouseLeftButtonDown="MasterEventBtn_Click" Source="/Image/Icon_Lighting.png" HorizontalAlignment="Right" Cursor="Hand"></Image>
                     <Image Margin="0,0,30,0" Width="30" Height="30" Source="/Image/Icon_Message.png"  MouseLeftButtonDown="Image_MouseRightButtonDown" HorizontalAlignment="Right" Cursor="Hand"></Image>

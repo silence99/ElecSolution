@@ -28,14 +28,7 @@ namespace Emergence_WPF
       
 
         }
-        public void Close()
-        {
-            if (control != null)
-            {
-                control.Close();
-                control = null;
-            }
-        }
+        
         private void Item_GotFocus(object sender, RoutedEventArgs e)
         {
             

@@ -15,7 +15,7 @@ namespace Emergence_WPF
 	{
 		private MainWindowUiModel _uiModel;
 		public StrategyController StrategyController { get; set; }
-		public MainWindowUiModel UiModel
+		public MainWindowUiModel ViewModel
 		{
 			get
 			{
@@ -37,11 +37,11 @@ namespace Emergence_WPF
 			InitializeComponent();
 		}
 
-		public void BindingUiModel(StrategyController parent, StrategyController strategyController, NotificationObject uiModel)
+		public void BindingUiModel(StrategyController parent, NotificationObject uiModel)
 		{
-			UiModel = uiModel as MainWindowUiModel;
+			ViewModel = uiModel as MainWindowUiModel;
 			InitUiModel();
-			StrategyController = strategyController;
+			// StrategyController = ObjectFactory.GetInstance<StrategyController>(StrategyControllerName);
 			DataContext = uiModel;
 		}
 
@@ -50,15 +50,15 @@ namespace Emergence_WPF
 		/// </summary>
 		public void InitUiModel()
 		{
-			UiModel.Left = 0.0;
-			UiModel.Top = 0.0;
-			UiModel.Width = SystemParameters.PrimaryScreenWidth;
-			UiModel.Height = SystemParameters.PrimaryScreenHeight;
-			UiModel.ResizeMode = ResizeMode.CanResize;
-			UiModel.WindowState = WindowState.Normal;
-			UiModel.WindowStyle = WindowStyle.SingleBorderWindow;
+			ViewModel.Left = 0.0;
+			ViewModel.Top = 0.0;
+			ViewModel.Width = SystemParameters.PrimaryScreenWidth;
+			ViewModel.Height = SystemParameters.PrimaryScreenHeight;
+			ViewModel.ResizeMode = ResizeMode.CanResize;
+			ViewModel.WindowState = WindowState.Normal;
+			ViewModel.WindowStyle = WindowStyle.SingleBorderWindow;
 			// main page ui model is empty, filled when showing main page
-			UiModel.MainPageData = new MainPageUiModel();
+			ViewModel.MainPageData = new MainPageUiModel();
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -124,7 +124,7 @@ namespace Emergence_WPF
 		{
 			// get panel, binding panel ui model, add to main window
 			var mainPage = ObjectFactory.GetInstance<UserControl_MainPage>("mainPagePanel");
-			mainPage.BindingUiModel(StrategyController, ObjectFactory.GetInstance<MainPageStrategyController>(mainPage.StrategyControllerName), UiModel.MainPageData.CreateAopProxy());
+			mainPage.BindingUiModel(StrategyController, ViewModel.MainPageData.CreateAopProxy());
 			maingrid.Children.Clear();
 			maingrid.Children.Add(mainPage);
 		}

@@ -38,7 +38,7 @@ namespace Emergence.Business.CommonControl
             }
         }
 
-        private static string HmacSha1Sign(string text, string key)
+        public static string HmacSha1Sign(string text, string key)
         {
             Encoding encode = Encoding.UTF8;
             byte[] byteData = encode.GetBytes(text);

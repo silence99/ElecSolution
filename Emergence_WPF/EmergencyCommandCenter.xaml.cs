@@ -54,7 +54,7 @@ namespace Emergence_WPF
             }
             if (geo != null)
             {
-                geo.Close();
+                
                 main.Inlines.Clear();
                 clear();
                 video = new LiveVideo();
@@ -81,7 +81,6 @@ namespace Emergence_WPF
             if (geo != null)
             {
                 main.Inlines.Clear();
-                geo.Close();
                 clear();
               
                 scr = new FullScreen1();

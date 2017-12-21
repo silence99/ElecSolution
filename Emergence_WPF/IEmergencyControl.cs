@@ -5,7 +5,7 @@ namespace Emergence_WPF
 	interface IEmergencyControl<T>: IEmergencyInit where T : NotificationObject
 	{
 		string StrategyControllerName { get; }
-		T UiModel { get; set; }
+		T ViewModel { get; set; }
 		StrategyController StrategyController { get; set; }
 	}
 }

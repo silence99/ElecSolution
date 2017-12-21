@@ -40,7 +40,7 @@ namespace Emergence_WPF
 					{
 						UserName = this.txtUserName.Text
 					};
-					main.BindingUiModel(null, null, mainWindowUiModel);
+					main.BindingUiModel(null, mainWindowUiModel);
 					if (main == null)
 					{
 						MessageBox.Show("应用程序错误，请联系管理员。");

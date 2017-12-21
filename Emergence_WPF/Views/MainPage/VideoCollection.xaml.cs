@@ -24,7 +24,7 @@ namespace Emergence_WPF.Views.MainPage
 			}
 		}
 
-		NotificationObject IEmergencyControl<NotificationObject>.UiModel { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+		public NotificationObject ViewModel { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 		public StrategyController StrategyController { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 		public string StrategyControllerName => throw new NotImplementedException();
@@ -49,7 +49,7 @@ namespace Emergence_WPF.Views.MainPage
 			Content.Children.Add(container);
 		}
 
-		public void BindingUiModel(StrategyController parent, StrategyController strategyController, NotificationObject uiModel)
+		public void BindingUiModel(StrategyController parent, NotificationObject uiModel)
 		{
 			throw new NotImplementedException();
 		}
