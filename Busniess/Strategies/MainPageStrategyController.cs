@@ -8,7 +8,7 @@ namespace Business.Strategies
 {
 	public class MainPageStrategyController : StrategyController
 	{
-		private GetMasterEventSvr service = new GetMasterEventSvr();
+		private MasterEventService service = new MasterEventService();
 		public MainPageStrategyController() :
 			base(null, new List<Strategy>())
 		{

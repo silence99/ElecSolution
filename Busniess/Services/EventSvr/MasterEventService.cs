@@ -1,52 +1,108 @@
-﻿using Business;
-using Emergence.Business.CommonControl;
+﻿using Busniess.CommonControl;
 using Emergence.Common.Model;
 using Emergence.Common.ViewModel;
 using Framework.Http;
+using log4net;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Net;
+using System.Reflection;
 using System.Xml;
 
 namespace Busniess.Services.EventSvr
 {
-	public class GetMasterEventSvr : RemoteService<MasterEventListResponse, string>
+	public class MasterEventService
 	{
-		private string _url;
-		private string _requestData;
+		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+		private HttpHelper HttpHelper = new HttpHelper();
 
-		public string Url { get => _url; }
-		public string RequestData { get => _requestData; set => _requestData = value; }
-
-		protected override void InitializeHttpRequest(string url)
+		public MasterEventListResponse GetMasterEvents(int pageIndex, int pageSize)
 		{
-			HttpHelper = new HttpHelper();
-			_url = url;
-			RequestData = "";
+			return GetMasterEvents(pageIndex, pageSize, string.Empty, default(DateTime), default(DateTime), string.Empty);
 		}
 
-		protected override HttpResult HttpReqeust()
+		public MasterEventListResponse GetMasterEvents(int pageIndex, int pageSize, string title,
+			DateTime start, DateTime end, string loaction)
 		{
-			var hd = new System.Net.WebHeaderCollection();
-			string timeSpan = TimeControl.GenerateTimeStamp();
-			string signString = timeSpan + "GET/getMainEventList";
-			string authorization = AuthorizationControl.GetAuthorization(signString);
-			//Add headers
-			hd.Add("X-Project-Date", timeSpan);
-			hd.Add("Authorization", authorization);
-			HttpItem httpItem = new HttpItem()
+			try
 			{
-				Method = "GET",
-				URL = Url + RequestData,
-				Header = hd
-			};
-			return HttpHelper.GetHtml(httpItem);
+				string serviceName = ConfigurationManager.AppSettings["GetMainEventListApi"] ?? "/getMainEventList?v=v1.0";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+													{
+														{ "pageIndex", pageIndex.ToString() },
+														{ "pageSize", pageSize.ToString() },
+														{ "title", title },
+														{ "locale", loaction }
+													};
+				if (default(DateTime) != start)
+				{
+					pairs.Add("startTime", start.ToString("yyyyMMdd"));
+				}
+				if (default(DateTime) != end)
+				{
+					pairs.Add("endTime", end.ToString("yyyyMMdd"));
+				}
+				Logger.InfoFormat("Do Service - {0}", serviceName);
+				HttpResult result = RequestControl.Request(serviceName, "GET", pairs);
+				if (result.StatusCode == 200)
+				{
+					Logger.DebugFormat("Get Master events service response:{0}", result.Html);
+					return Utils.JSONHelper.ConvertToObject<MasterEventListResponse>(result.Html);
+				}
+				else
+				{
+					Logger.ErrorFormat("Get Master events error{0}: {1}", result.StatusCode, result.Html);
+					throw new Exception(result.Html);
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Error(ex);
+				throw;
+			}
 		}
 
-		protected override MasterEventListResponse AnalyzeResponse(HttpResult result)
+		public bool CreateMasterEvent(long id, string title, string eventType, string grade, DateTime time, string description, string location, double longitude, double latitude, Func<string, bool> callback = null)
 		{
-			var response = Utils.JSONHelper.ConvertToObject<MasterEventListResponse>(result.Html);
-			return response;
+			return UpdateMasterEvent(-1, title, eventType, grade, time, description, location, longitude, latitude, callback);
+		}
+
+		public bool UpdateMasterEvent(long id, string title, string eventType, string grade, DateTime time, string description, string location, double longitude, double latitude, Func<string, bool> callback)
+		{
+			string serviceName = ConfigurationManager.AppSettings["mainEventApi"] ?? "mainEvent";
+			Dictionary<string, string> pairs = new Dictionary<string, string>()
+			{
+				{ "title", title },
+				{ "eventType", eventType },
+				{ "grade", grade },
+				{ "time", time.ToString("yyyyMMdd") },
+				{ "describe", description },
+				{ "locale", location },
+				{ "longitude", longitude.ToString() },
+				{ "latitude", latitude.ToString() }
+			};
+			if (id != -1)
+			{
+				pairs.Add("id", id.ToString());
+			}
+			var result = RequestControl.Request(serviceName, "POST", pairs);
+			if (result.StatusCode != 200)
+			{
+				return false;
+			}
+			else
+			{
+				if (callback != null)
+				{
+					return callback.Invoke(result.Html);
+				}
+				else
+				{
+					return RequestControl.DefaultValide(result.Html);
+				}
+			}
 		}
 
 		public List<Event> GetMasterEventForMainPage()

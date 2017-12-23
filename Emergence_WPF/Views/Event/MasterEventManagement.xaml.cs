@@ -31,7 +31,7 @@ namespace Emergence_WPF
 	public partial class MasterEventManagement : UserControl
 	{
 		VM_MasterEventManagement masterEventVM;
-		GetMasterEventSvr gMasterSvr;
+		MasterEventService gMasterSvr;
 		ObservableCollection<MasterEvent> omList;
 		public delegate void ChangePageDelegate(MasterEvent me);
 		public event ChangePageDelegate ChangePageEvent;
@@ -44,7 +44,7 @@ namespace Emergence_WPF
 		private void UserControl_Loaded(object sender, RoutedEventArgs e)
 		{
 			masterEventVM = new VM_MasterEventManagement();
-			gMasterSvr = new GetMasterEventSvr();
+			gMasterSvr = new MasterEventService();
 			RequestMasterEventList();
 			this.DataContext = masterEventVM;
 			//GenerateSimulatedData();
@@ -77,21 +77,12 @@ namespace Emergence_WPF
 
 		private void RequestMasterEventList()
 		{
-			string masterEventURL = ConfigurationSettings.AppSettings["BaseURL"].ToString() + ConfigurationSettings.AppSettings["GetMainEventListURL"].ToString();
-
-			gMasterSvr.RequestData = "&pageIndex=" + masterEventVM.PageIndex + "&pageSize=" + masterEventVM.PageSize;
-
-			MasterEventListResponse rr = gMasterSvr.ProcessRequest(masterEventURL);
+			MasterEventListResponse rr = gMasterSvr.GetMasterEvents(masterEventVM.PageIndex, masterEventVM.PageSize);
 			if (rr.Result.MasterEventList != null)
 			{
 				masterEventVM.masterEventList = rr.Result.MasterEventList.ToList();
-				List<MasterEvent> mml = new List<MasterEvent>();
-				var master = new MasterEvent()
-				{
-					Title = "aaaa"
-				};
-				mml.Add(master);
-				omList = new ObservableCollection<MasterEvent>(mml);
+				
+				omList = new ObservableCollection<MasterEvent>(rr.Result.MasterEventList);
 				this.Grid_MasterEvent.DataContext = omList;
 			}
 		}

@@ -10,5 +10,7 @@
 		public string GetMasterEventService = "masterEventService.GetMasterEvent";
 		public string WeatherService = "weatherService";
 		public string VideoStrategyController = "videoStrategyController";
+		public string LoginService = "loginService";
 	}
+	
 }

@@ -38,6 +38,7 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.1-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -49,11 +50,12 @@
   <ItemGroup>
     <Compile Include="CommonControl\AuthorizationControl.cs" />
     <Compile Include="CommonControl\DictControl.cs" />
+    <Compile Include="CommonControl\RequestControl.cs" />
     <Compile Include="CommonControl\TimeControl.cs" />
     <Compile Include="IRemoteService.cs" />
     <Compile Include="IService.cs" />
     <Compile Include="Services\CommonSvr\DictSvr.cs" />
-    <Compile Include="Services\EventSvr\GetMasterEventSvr.cs" />
+    <Compile Include="Services\EventSvr\MasterEventService.cs" />
     <Compile Include="Services\EventSvr\GetSubEventSvr.cs" />
     <Compile Include="Services\EventSvr\GetTaskSvr.cs" />
     <Compile Include="Services\MainPageSvr\LoginServices.cs" />

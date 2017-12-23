@@ -1,26 +1,34 @@
-﻿using Emergence.Common.Model;
+﻿using Busniess.CommonControl;
 using Framework.Http;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace Business.MainPageSvr
 {
-    public class LoginServices: RemoteService<LoginInModel, Dictionary<string,string>>
-    {
-        protected override void InitializeHttpRequest(Dictionary<string, string> requestInfo)
-        {
-            // this need implement when call remote http service
-        }
+	public class LoginServices
+	{
+		public bool LogIn(string userName, string password, Func<string, bool> callback)
+		{
+			string serviceName = ConfigurationManager.AppSettings["LoginApi"] ?? "login";
+			List<HeaderInfo> headers = new List<HeaderInfo>();
+			Dictionary<string, string> pairs = new Dictionary<string, string>()
+			{
+				{"name", userName },
+				{"pwd", password }
+			};
 
-        protected override HttpResult HttpReqeust()
-        {
-            // this need implement when call remote http service
-            return null;
-        }
+			HttpResult hr = RequestControl.Request(serviceName, "POST", pairs, null, false, (item) =>
+			{
+				item.ContentType = "application/x-www-form-urlencoded";
+				item.ResultType = ResultType.String;
+			});
+			if (callback != null)
+			{
+				return callback(hr.Html);
+			}
 
-        protected override LoginInModel AnalyzeResponse(HttpResult result)
-        {
-            LoginInModel login = new LoginInModel();
-            return login;
-        }
-    }
+			return true;
+		}
+	}
 }

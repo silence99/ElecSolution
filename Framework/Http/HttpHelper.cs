@@ -30,12 +30,18 @@ namespace Framework.Http
         private HttpWebRequest request = null;
         //获取影响流的数据对象
         private HttpWebResponse response = null;
-        /// <summary>
-        /// 根据相传入的数据，得到相应页面数据
-        /// </summary>
-        /// <param name="strPostdata">传入的数据Post方式,get方式传NUll或者空字符串都可以</param>
-        /// <returns>string类型的响应数据</returns>
-        private HttpResult GetHttpRequestData(HttpItem objhttpitem)
+
+
+		public HttpWebRequest Request
+		{
+			get { return request; }
+		}
+		/// <summary>
+		/// 根据相传入的数据，得到相应页面数据
+		/// </summary>
+		/// <param name="strPostdata">传入的数据Post方式,get方式传NUll或者空字符串都可以</param>
+		/// <returns>string类型的响应数据</returns>
+		private HttpResult GetHttpRequestData(HttpItem objhttpitem)
         {
             //返回参数
             HttpResult result = new HttpResult();

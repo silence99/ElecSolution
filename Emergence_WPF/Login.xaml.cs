@@ -1,4 +1,5 @@
-﻿using Emergence.Business.CommonControl;
+﻿using Business.MainPageSvr;
+using Emergence.Business.CommonControl;
 using Emergence.Common.Model;
 using Emergence.Common.ViewModel;
 using Emergence_WPF.Comm;
@@ -59,19 +60,12 @@ namespace Emergence_WPF
 			//#endif
 		}
 
-		private bool RequestLogin(string userName, string passwordStr)
+		private bool SetAuthorization(string responseHtml)
 		{
-			string loginURL = ConfigurationManager.AppSettings["BaseURL"].ToString() + ConfigurationManager.AppSettings["LoginURL"].ToString();
-			string password = PasswordBoxHelper.GetMD5Password(passwordStr);
-			string postData = @"name=" + userName + "&&pwd=" + password;
-			List<HeaderInfo> headers = new List<HeaderInfo>();
-			//headers.Add(new HeaderInfo("Content-Type", "application/x-www-form-urlencoded"));
-			HttpResult hr = HttpCommon.HttpPost(loginURL, postData, "", "application/x-www-form-urlencoded", headers);
-
 			LoginInModel lim = new LoginInModel();
 
 			var jsonObj = JsonConvert.DeserializeAnonymousType(
-			   hr.Html,
+			   responseHtml,
 			   new
 			   {
 				   code = 0,
@@ -100,6 +94,12 @@ namespace Emergence_WPF
 
 			AuthorizationControl.SetLogin(lim);
 			return true;
+		}
+		private bool RequestLogin(string userName, string passwordStr)
+		{
+			string password = PasswordBoxHelper.GetMD5Password(passwordStr);
+			var loginService = new LoginServices();
+			return loginService.LogIn(userName, password, SetAuthorization);
 		}
 
 	}

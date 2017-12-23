@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <objects xmlns="http://www.springframework.net">
-  <object id="masterEventService.GetMasterEvent" type="Busniess.Services.EventSvr.GetMasterEventSvr, Busniess"></object>
+  <object id="masterEventService.GetMasterEvent" type="Busniess.Services.EventSvr.MasterEventService, Busniess"></object>
   <object id="weatherService" type="Business.MainPageSvr.WeatherService, Busniess"></object>
+  <object id="loginService" type="Business.MainPageSvr.LoginServices, Busniess"></object>
 </objects>
 
