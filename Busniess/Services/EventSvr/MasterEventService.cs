@@ -66,11 +66,6 @@ namespace Busniess.Services.EventSvr
 
 		public bool CreateMasterEvent(long id, string title, string eventType, string grade, DateTime time, string description, string location, double longitude, double latitude, Func<string, bool> callback = null)
 		{
-			return UpdateMasterEvent(-1, title, eventType, grade, time, description, location, longitude, latitude, callback);
-		}
-
-		public bool UpdateMasterEvent(long id, string title, string eventType, string grade, DateTime time, string description, string location, double longitude, double latitude, Func<string, bool> callback)
-		{
 			string serviceName = ConfigurationManager.AppSettings["mainEventApi"] ?? "mainEvent";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()
 			{
@@ -83,13 +78,11 @@ namespace Busniess.Services.EventSvr
 				{ "longitude", longitude.ToString() },
 				{ "latitude", latitude.ToString() }
 			};
-			if (id != -1)
-			{
-				pairs.Add("id", id.ToString());
-			}
+			Logger.InfoFormat("创建主事件：{0}", title);
 			var result = RequestControl.Request(serviceName, "POST", pairs);
 			if (result.StatusCode != 200)
 			{
+				Logger.WarnFormat("创建主事件失败 -- {0}", title);
 				return false;
 			}
 			else
@@ -102,6 +95,83 @@ namespace Busniess.Services.EventSvr
 				{
 					return RequestControl.DefaultValide(result.Html);
 				}
+			}
+		}
+
+		public bool UpdateMasterEvent(long id, string title, string eventType, string grade, DateTime time, string description, string location, double longitude, double latitude, Func<string, bool> callback)
+		{
+			string serviceName = ConfigurationManager.AppSettings["mainEventApi"] ?? "mainEvent";
+			Dictionary<string, string> pairs = new Dictionary<string, string>()
+			{
+				{"id", id.ToString() },
+				{ "title", title },
+				{ "eventType", eventType },
+				{ "grade", grade },
+				{ "time", time.ToString("yyyyMMdd") },
+				{ "describe", description },
+				{ "locale", location },
+				{ "longitude", longitude.ToString() },
+				{ "latitude", latitude.ToString() }
+			};
+			Logger.InfoFormat("更新主事件：{0}", title);
+			var result = RequestControl.Request(serviceName, "PUT", pairs);
+			if (result.StatusCode != 200)
+			{
+				Logger.WarnFormat("更新主事件失败：{0}", title);
+				Logger.Warn(result.Html);
+				return false;
+			}
+			else
+			{
+				if (callback != null)
+				{
+					return callback.Invoke(result.Html);
+				}
+				else
+				{
+					return RequestControl.DefaultValide(result.Html);
+				}
+			}
+		}
+
+		public bool UpdateMasterEventState(List<long> ids, int state)
+		{
+			if (ids == null || ids.Count == 0)
+			{
+				Logger.Warn("主事件ID列表为空，不能更新主事件事件状态");
+				return true;
+			}
+
+			var idstring = string.Join(",", ids.ToArray());
+
+			string serviceName = ConfigurationManager.AppSettings["mainEventChangeStateApi"] ?? "mainEvent/state";
+			Dictionary<string, string> pairs = new Dictionary<string, string>()
+			{
+				{ "ids", idstring },
+				{ "state", state.ToString() }
+			};
+
+			Logger.DebugFormat("更新主事件事件状态 -- {0}", state);
+			var result = RequestControl.Request(serviceName, "PUT", pairs);
+			if (result.StatusCode != 200)
+			{
+				Logger.WarnFormat("更新主事件事件状态失败 -- {0}", state);
+				Logger.WarnFormat(result.Html);
+				return false;
+			}
+			else
+			{
+				var success = RequestControl.DefaultValide(result.Html);
+				if (success)
+				{
+					Logger.InfoFormat("更新主事件状态成功 -- {0}", state);
+				}
+				else
+				{
+					Logger.WarnFormat("更新主事件状态失败 -- {0}", state);
+				}
+
+				return success;
 			}
 		}
 

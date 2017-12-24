@@ -29,7 +29,7 @@ namespace Busniess.Services.EventSvr
 														{ "mainEventId", mainEventId.ToString() },
 														{ "childTitle", title }
 													};
-				var result = RequestControl.Request(serviceName, "POST", pairs);
+				var result = RequestControl.Request(serviceName, "GET", pairs);
 				if (result.StatusCode == 200)
 				{
 					Logger.DebugFormat("Get Master events service response:{0}", result.Html);
@@ -49,11 +49,6 @@ namespace Busniess.Services.EventSvr
 
 		public bool CreateChildEvent(string mainEventId, string title, string location, string grade, string remark, string latitude, string longitude, string personLiable)
 		{
-			return UpdateChildEvent(-1, mainEventId, title, location, grade, remark, latitude, longitude, personLiable);
-		}
-
-		public bool UpdateChildEvent(long id, string mainEventId, string title, string location, string grade, string remark, string latitude, string longitude, string personLiable)
-		{
 			string serviceName = ConfigurationManager.AppSettings["childEventApi"] ?? "childEvent";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()
 			{
@@ -66,15 +61,12 @@ namespace Busniess.Services.EventSvr
 				{ "childLatitude", latitude.ToString() },
 				{ "personLiable", personLiable }
 			};
-			if (id != -1)
-			{
-				pairs.Add("id", id.ToString());
-			}
-			Logger.DebugFormat("创建/更新子事件 -- {0}", title);
+
+			Logger.DebugFormat("创建子事件 -- {0}", title);
 			var result = RequestControl.Request(serviceName, "POST", pairs);
 			if (result.StatusCode != 200)
 			{
-				Logger.WarnFormat("创建/更新子事件失败 -- {0}", title);
+				Logger.WarnFormat("创建子事件失败 -- {0}", title);
 				Logger.WarnFormat(result.Html);
 				return false;
 			}
@@ -83,11 +75,52 @@ namespace Busniess.Services.EventSvr
 				var success = RequestControl.DefaultValide(result.Html);
 				if (success)
 				{
-					Logger.InfoFormat("创建/更新子事件成功 -- {0}", title);
+					Logger.InfoFormat("创建子事件成功 -- {0}", title);
 				}
 				else
 				{
-					Logger.WarnFormat("创建/更新子事件失败 -- {0}", title);
+					Logger.WarnFormat("创建子事件失败 -- {0}", title);
+					Logger.Warn(result.Html);
+				}
+
+				return success;
+			}
+		}
+
+		public bool UpdateChildEvent(long id, string mainEventId, string title, string location, string grade, string remark, string latitude, string longitude, string personLiable)
+		{
+			string serviceName = ConfigurationManager.AppSettings["childEventApi"] ?? "childEvent";
+			Dictionary<string, string> pairs = new Dictionary<string, string>()
+			{
+				{"id", id.ToString() },
+				{ "childTitle", title },
+				{ "mainEventId", mainEventId },
+				{ "childLocale", location },
+				{ "childGrade", grade },
+				{ "childRemarks", remark },
+				{ "childLongitude", longitude.ToString() },
+				{ "childLatitude", latitude.ToString() },
+				{ "personLiable", personLiable }
+			};
+
+			Logger.DebugFormat("更新子事件 -- {0}", title);
+			var result = RequestControl.Request(serviceName, "PUT", pairs);
+			if (result.StatusCode != 200)
+			{
+				Logger.WarnFormat("更新子事件失败 -- {0}", title);
+				Logger.WarnFormat(result.Html);
+				return false;
+			}
+			else
+			{
+				var success = RequestControl.DefaultValide(result.Html);
+				if (success)
+				{
+					Logger.InfoFormat("更新子事件成功 -- {0}", title);
+				}
+				else
+				{
+					Logger.WarnFormat("更新子事件失败 -- {0}", title);
 					Logger.Warn(result.Html);
 				}
 
@@ -99,7 +132,7 @@ namespace Busniess.Services.EventSvr
 		{
 			if (ids == null || ids.Count == 0)
 			{
-				Logger.Warn("子事件ID列表为空，不能更新子事件");
+				Logger.Warn("子事件ID列表为空，不能更新子事件状态");
 				return true;
 			}
 
@@ -112,11 +145,11 @@ namespace Busniess.Services.EventSvr
 				{ "state", state.ToString() }
 			};
 
-			Logger.DebugFormat("创建/更新子事件状态 -- {0}", state);
-			var result = RequestControl.Request(serviceName, "POST", pairs);
+			Logger.DebugFormat("更新子事件状态 -- {0}", state);
+			var result = RequestControl.Request(serviceName, "PUT", pairs);
 			if (result.StatusCode != 200)
 			{
-				Logger.WarnFormat("创建/更新子事件状态失败 -- {0}", state);
+				Logger.WarnFormat("更新子事件状态失败 -- {0}", state);
 				Logger.WarnFormat(result.Html);
 				return false;
 			}
@@ -125,11 +158,11 @@ namespace Busniess.Services.EventSvr
 				var success = RequestControl.DefaultValide(result.Html);
 				if (success)
 				{
-					Logger.InfoFormat("创建/更新子事件状态成功 -- {0}", state);
+					Logger.InfoFormat("更新子事件状态成功 -- {0}", state);
 				}
 				else
 				{
-					Logger.WarnFormat("创建/更新子事件状态失败 -- {0}", state);
+					Logger.WarnFormat("更新子事件状态失败 -- {0}", state);
 				}
 
 				return success;
