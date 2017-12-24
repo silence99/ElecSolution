@@ -57,6 +57,7 @@
     <Compile Include="Model\LoginInModel.cs" />
     <Compile Include="Model\MasterEvent.cs" />
     <Compile Include="Model\ChildEvent.cs" />
+    <Compile Include="Model\MaterialModel.cs" />
     <Compile Include="Model\RequestResult.cs" />
     <Compile Include="Model\SubEvent.cs" />
     <Compile Include="Model\EventTask.cs" />

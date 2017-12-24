@@ -12,7 +12,6 @@ namespace Busniess.Services.Team
 	{
 		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-
 		public EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetTeam(int pageIndex, int pageSize, string teamName, string personCharge, string teamDept)
 		{
 			try
@@ -48,7 +47,7 @@ namespace Busniess.Services.Team
 		{
 			try
 			{
-				string serviceName = ConfigurationManager.AppSettings["getBindingTeamListApi"] ?? "getBindingTeamList";
+				string serviceName = ConfigurationManager.AppSettings["getTeamsUnbindingApi"] ?? "getBindingTeamList";
 				Dictionary<string, string> pairs = new Dictionary<string, string>()
 													{
 														{ "pageIndex", pageIndex.ToString() },
@@ -68,6 +67,35 @@ namespace Busniess.Services.Team
 			catch (Exception ex)
 			{
 				Logger.Error("获取未绑定到事件的队伍数据异常", ex);
+				throw;
+			}
+		}
+
+		public EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetbindingTeam(int pageIndex, int pageSize, long childEventId)
+		{
+			try
+			{
+				string serviceName = ConfigurationManager.AppSettings["getTeamsBindingToSubevent"] ?? "childEvent/getTeamList";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+													{
+														{ "pageIndex", pageIndex.ToString() },
+														{ "pageSize", pageSize.ToString() },
+														{ "childEventId", childEventId.ToString() }
+													};
+				var result = RequestControl.Request(serviceName, "GET", pairs);
+				if (result.StatusCode == 200)
+				{
+					Logger.DebugFormat("获取绑定到事件的队伍数据:{0}", result.Html);
+					return Utils.JSONHelper.ConvertToObject<EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>>>(result.Html);
+				}
+				else
+				{
+					throw new Exception(result.Html);
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Error("获取绑定到事件的队伍数据异常", ex);
 				throw;
 			}
 		}
