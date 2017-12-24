@@ -17,7 +17,7 @@ namespace Emergence_WPF
 
 		private void UserControl_Loaded(object sender, RoutedEventArgs e)
 		{
-			var svc = ServiceManager.Instance.GetService<MasterEventService>(Constant.Services.GetMasterEventService);
+			var svc = ServiceManager.Instance.GetService<MasterEventService>(Constant.Services.MasterEventService);
 			this.DataCodeing.ItemsSource = svc.GetMasterEventForMainPage();
 			VideoList.BindingViewModel(svc.GetVideos());
 		}

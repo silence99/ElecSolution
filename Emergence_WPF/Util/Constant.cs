@@ -7,10 +7,11 @@
 
 	public class ServicesNames
 	{
-		public string GetMasterEventService = "masterEventService.GetMasterEvent";
+		public string MasterEventService = "masterEventService";
 		public string WeatherService = "weatherService";
 		public string VideoStrategyController = "videoStrategyController";
 		public string LoginService = "loginService";
+		public string SubeventService = "subeventService";
 	}
-	
+
 }
