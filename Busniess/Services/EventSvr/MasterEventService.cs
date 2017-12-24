@@ -28,7 +28,7 @@ namespace Busniess.Services.EventSvr
 		{
 			try
 			{
-				string serviceName = ConfigurationManager.AppSettings["GetMainEventListApi"] ?? "/getMainEventList?v=v1.0";
+				string serviceName = ConfigurationManager.AppSettings["GetMainEventListApi"] ?? "getMainEventList";
 				Dictionary<string, string> pairs = new Dictionary<string, string>()
 													{
 														{ "pageIndex", pageIndex.ToString() },

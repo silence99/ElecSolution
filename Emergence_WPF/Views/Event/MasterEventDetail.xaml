@@ -103,7 +103,7 @@
         <DockPanel Name="top2" HorizontalAlignment="Stretch" VerticalAlignment="Top">
             <Border BorderBrush="#62a6a3" BorderThickness="0,1,0,0" DockPanel.Dock="Top">
             <DockPanel Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" DockPanel.Dock="Top">
-                <Label Name="labelPageReturn" Foreground="White" MouseLeftButtonDown="labelPageReturn_MouseLeftButtonDown" FontSize="20" HorizontalAlignment="Left" Padding="25" Margin="20,0,0,0">&lt; 返回</Label>
+                <Label Name="labelPageReturn" Foreground="White" MouseLeftButtonDown="GobackButton_Click" FontSize="20" HorizontalAlignment="Left" Padding="25" Margin="20,0,0,0">&lt; 返回</Label>
                 <Label Name="labelPageTitle" Foreground="White" FontSize="20" HorizontalAlignment="Left" Background="#005651" Padding="25" Margin="20,0,0,0" >主事件详情/子事件列表</Label>
             </DockPanel>
             </Border>

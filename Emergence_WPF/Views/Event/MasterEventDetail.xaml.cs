@@ -2,6 +2,7 @@
 using Emergence.Business.CommonControl;
 using Emergence.Common.Model;
 using Emergence.Common.ViewModel;
+using Emergence_WPF.Util;
 using Framework.Http;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,6 @@ namespace Emergence_WPF
 	public partial class MasterEventDetail : UserControl
 	{
 		MasterEvent me;
-		GetSubEventSvr gSubSvr;
 		VM_MasterEventDetail subEventVM;
 		ObservableCollection<SubEvent> omSubList;
 		public event EventHandler GoBack;
@@ -30,10 +30,10 @@ namespace Emergence_WPF
 		{
 			InitializeComponent();
 			me = sme;
-			gSubSvr = new GetSubEventSvr();
 			subEventVM = new VM_MasterEventDetail();
 			subEventVM.MasterEventInfo = sme;
 		}
+
 		private void UserControl_Loaded(object sender, RoutedEventArgs e)
 		{
 			//SetMasterEventDetail();
@@ -42,12 +42,9 @@ namespace Emergence_WPF
 		}
 
 
-		private void labelPageReturn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		private void GobackButton_Click(object sender, MouseButtonEventArgs e)
 		{
 			GoBack?.Invoke(this, new EventArgs());
-			//MasterEventManagement em = new MasterEventManagement();
-			//this.gridEventDetail.Children.Clear();
-			//this.gridEventDetail.Children.Add(em);
 		}
 
 		private void SetMasterEventDetail()
@@ -64,15 +61,14 @@ namespace Emergence_WPF
 
 		private void RequestSubEventList()
 		{
-			string subEventURL = ConfigurationManager.AppSettings["BaseURL"].ToString() + ConfigurationManager.AppSettings["GetSubEventListURL"].ToString();
 
-			gSubSvr.RequestData = "&pageIndex=" + subEventVM.PageIndex + "&pageSize=" + subEventVM.PageSize + "&mainEventId=" + me.Id; // + subEventVM.MasterEventInfo.Id;
+			var gSubSvr = ServiceManager.Instance.GetService<SubeventService>(Constant.Services.SubeventService);
 
-			SubEventListResponse rr = gSubSvr.ProcessRequest(subEventURL);
-			if (rr != null && rr.Result.SubEventList != null)
+			var rr = gSubSvr.GetSubevents(subEventVM.PageIndex, subEventVM.PageSize, me.Id);
+			if (rr != null && rr.Result.Data != null)
 			{
-				subEventVM.subEventList = rr.Result.SubEventList.ToList();
-				omSubList = new ObservableCollection<SubEvent>(rr.Result.SubEventList.ToList());
+				subEventVM.subEventList = rr.Result.Data.ToList();
+				omSubList = new ObservableCollection<SubEvent>(rr.Result.Data.ToList());
 				this.Grid_SubEvent.DataContext = omSubList;
 			}
 		}

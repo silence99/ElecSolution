@@ -1,15 +1,18 @@
 ﻿using Emergence.Business.CommonControl;
 using Framework.Http;
+using log4net;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
+using System.Reflection;
 
 namespace Busniess.CommonControl
 {
 	public class RequestControl
 	{
+		private static ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 		public static string GetUrl(string serviceName, Dictionary<string, string> param)
 		{
 			var version = ConfigurationManager.AppSettings["Version"] ?? "v1.0";
@@ -34,7 +37,7 @@ namespace Busniess.CommonControl
 		{
 			var hd = new WebHeaderCollection();
 			string timeSpan = TimeControl.GenerateTimeStamp();
-			string signString = timeSpan + "GET/getMainEventList";
+			string signString = timeSpan + string.Format("{0}/{1}", method, serviceName);
 			string authorization = AuthorizationControl.GetAuthorization(signString);
 			hd.Add("X-Project-Date", timeSpan);
 			hd.Add("Authorization", authorization);
@@ -101,18 +104,20 @@ namespace Busniess.CommonControl
 
 		public static bool DefaultValide(string html)
 		{
-			var response = Utils.JSONHelper.ConvertToObject<EmergencyHttpResponse>(html);
-			if(response.Code == 1)
+			var response = Utils.JSONHelper.ConvertToObject<EmergencyCommonResponse>(html);
+			if (response.Code == 1)
 			{
+				Logger.Debug("HTTP请求返回成功信息");
 				return true;
 			}
 			else
 			{
+				Logger.WarnFormat("HTTP请求返回失败信息，{0}", response.Message);
 				return false;
 			}
 		}
 
-		public class EmergencyHttpResponse
+		public class EmergencyCommonResponse
 		{
 			[JsonProperty("code")]
 			public int Code { get; set; }
