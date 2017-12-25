@@ -61,7 +61,10 @@
     <Compile Include="Model\RequestResult.cs" />
     <Compile Include="Model\SubEvent.cs" />
     <Compile Include="Model\EventTask.cs" />
+    <Compile Include="Model\AnnouncementModel.cs" />
     <Compile Include="Model\TeamModel.cs" />
+    <Compile Include="Model\MaterialsStatisticsModel.cs" />
+    <Compile Include="Model\TeamStatisticsModel.cs" />
     <Compile Include="Model\Vedio.cs" />
     <Compile Include="Model\Weather.cs" />
     <Compile Include="Model\RequestModel.cs" />
