@@ -15,5 +15,6 @@ namespace Emergence.Common.ViewModel
 		public virtual ResizeMode ResizeMode { get; set; }
 		public string UserNameLabel { get { return "用户" + UserName; } }
 		public virtual MainPageUiModel MainPageData { get; set; }
+		public StatisticsViewModel Statistics { get; set; }
 	}
 }

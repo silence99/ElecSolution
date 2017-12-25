@@ -8,6 +8,6 @@ namespace Emergence.Common.Model
 		[JsonProperty("totalQuantity")]
 		public int TotalQuantity { get; set; }
 		[JsonProperty("materialsName")]
-		public int MaterialsName { get; set; }
+		public string MaterialsName { get; set; }
 	}
 }

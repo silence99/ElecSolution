@@ -170,16 +170,24 @@
                      PageChanged="Pager_OnPageChanged">
                                 </local:Pager>
                             </DockPanel>
-                            <DataGrid DockPanel.Dock="Top" Name="Grid_MasterEvent" CanUserAddRows="False"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Auto"  
-                                    RowHeaderWidth="0" HeadersVisibility="Column" HorizontalAlignment="Stretch" Background="Transparent" 
-                                    IsReadOnly="True" AlternationCount="2" AutoGenerateColumns="False" SelectionChanged="Grid_MasterEvent_SelectionChanged" ItemsSource="{Binding}" MouseDoubleClick="Grid_MasterEvent_MouseDoubleClick">
-
+                            <DataGrid DockPanel.Dock="Top" 
+                                      Name="Grid_MasterEvent" 
+                                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                                      RowHeaderWidth="0" HeadersVisibility="Column"
+                                      HorizontalAlignment="Stretch" Background="Transparent"
+                                      AlternationCount="2"
+                                      AutoGenerateColumns="False" 
+                                      ItemsSource="{Binding}"
+                                      MouseDoubleClick="Grid_MasterEvent_MouseDoubleClick">
                                 <DataGrid.Columns >
-                                    <!--<DataGridCheckBoxColumn Selector.IsSelected="{Binding Path=IsChecked,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" x:Name="f1" Header=""  Width="0.5*" />-->
                                     <DataGridTemplateColumn Width="0.5*">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <CheckBox IsChecked="{Binding isChecked, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                                                <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"
+                                                          HorizontalAlignment="Center" 
+                                                          VerticalAlignment="Center">                                                    
+                                                </CheckBox>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>

@@ -52,15 +52,7 @@ namespace Emergence_WPF
 
 		private void Grid_MasterEvent_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			DataGrid gridList = sender as DataGrid;
-
-			if (gridList.SelectedItems.Count > 0)
-			{
-				foreach (MasterEvent dd in gridList.SelectedItems)
-				{
-					dd.IsChecked = true;
-				}
-			}
+			
 		}
 
 		private void Pager_OnPageChanged(object sender, PageChangedEventArg e)
@@ -82,7 +74,7 @@ namespace Emergence_WPF
 			{
 				masterEventVM.masterEventList = rr.Result.MasterEventList.ToList();
 				
-				omList = new ObservableCollection<MasterEvent>(rr.Result.MasterEventList);
+				omList = new ObservableCollection<MasterEvent>(masterEventVM.masterEventList);
 				this.Grid_MasterEvent.DataContext = omList;
 			}
 		}
@@ -183,5 +175,7 @@ namespace Emergence_WPF
 			AddMasterEvent ame = new AddMasterEvent();
 			ame.ShowDialog();
 		}
+
+		
 	}
 }

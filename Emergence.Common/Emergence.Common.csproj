@@ -72,6 +72,9 @@
     <Compile Include="ViewModel\MainPageUiModel.cs" />
     <Compile Include="ViewModel\MainWindowUiModel.cs" />
     <Compile Include="ViewModel\MasterEventUiModel.cs" />
+    <Compile Include="ViewModel\MaterialsStatisticsViewModel.cs" />
+    <Compile Include="ViewModel\StatisticsViewModel.cs" />
+    <Compile Include="ViewModel\TeamStatisticsViewModel.cs" />
     <Compile Include="ViewModel\VideoViewModel.cs" />
     <Compile Include="ViewModel\VM_MasterEventDetail.cs" />
     <Compile Include="ViewModel\VM_MasterEventManagement.cs" />

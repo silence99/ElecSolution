@@ -7,46 +7,46 @@ namespace Emergence.Common.Model
     {
         private bool isChecked = false;
         
-        public bool IsChecked { get => isChecked; set
+        public virtual bool IsChecked { get => isChecked;
+			set
             {
                 if(isChecked == value)
                 {
                     return;
                 }
                 isChecked = value;
-                RaisePropertyChangedEvent(new PropertyChangedEventArgsEx("IsChecked"));
             }
         }
 
         [JsonProperty("eventType")]
-        public string EventType { get; set; }
+        public virtual string EventType { get; set; }
 
         [JsonProperty("eventTypeName")]
-        public string EventTypeName { get; set; }
+        public virtual string EventTypeName { get; set; }
 
         [JsonProperty("grade")]
-        public string Grade { get; set; }
+        public virtual string Grade { get; set; }
 
         [JsonProperty("gradeName")]
-        public string GradeName { get; set; }
+        public virtual string GradeName { get; set; }
 
         [JsonProperty("id")]
-        public int Id { get; set; }
+        public virtual int Id { get; set; }
 
         [JsonProperty("latitude")]
-        public string Latitude { get; set; }
+        public virtual string Latitude { get; set; }
 
         [JsonProperty("locale")]
-        public string Locale { get; set; }
+        public virtual string Locale { get; set; }
 
         [JsonProperty("longitude")]
-        public string Longitude { get; set; }
+        public virtual string Longitude { get; set; }
 
         [JsonProperty("remarks")]
-        public string Remarks { get; set; }
+        public virtual string Remarks { get; set; }
 
         [JsonProperty("serialNumber")]
-        public string SerialNumber { get; set; }
+        public virtual string SerialNumber { get; set; }
 
         [JsonProperty("submitDept")]
         public string SubmitDept { get; set; }
@@ -55,15 +55,15 @@ namespace Emergence.Common.Model
         public string SubmitParty { get; set; }
 
         [JsonProperty("telephoneNumber")]
-        public string TelephoneNumber { get; set; }
+        public virtual string TelephoneNumber { get; set; }
 
         [JsonProperty("time")]
-        public string Time { get; set; }
+        public virtual string Time { get; set; }
 
         [JsonProperty("title")]
-        public string Title { get; set; }
+        public virtual string Title { get; set; }
 
         [JsonProperty("videos")]
-        public Video[] Videos { get; set; }
+        public virtual Video[] Videos { get; set; }
     }
 }
