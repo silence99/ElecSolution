@@ -11,7 +11,7 @@ namespace Emergence.Common.Mappers
             throw new NotImplementedException();
         }
 
-        public void MapToUiModel(Weather data, WeatherViewModel uiModel)
+        public void MapToViewModel(Weather data, WeatherViewModel uiModel)
         {
             if (data == null || uiModel == null)
             {

@@ -51,6 +51,7 @@
     <Compile Include="CommHelp.cs" />
     <Compile Include="IMapper.cs" />
     <Compile Include="Mappers\MasterEventMapper.cs" />
+    <Compile Include="Mappers\TeamStatisticsModelMapper.cs" />
     <Compile Include="Mappers\WeatherMapper.cs" />
     <Compile Include="Model\DictItem.cs" />
     <Compile Include="Model\Event.cs" />

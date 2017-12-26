@@ -72,6 +72,7 @@
     <Compile Include="Strategies\MainPageStrategyController.cs" />
     <Compile Include="Strategies\VideoStrategyController.cs" />
     <Compile Include="Strategies\WeatherStrategyController.cs" />
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Emergence.Common\Emergence.Common.csproj">

@@ -2,10 +2,10 @@
 
 namespace Emergence.Common
 {
-    public interface IMapper<Model, UiModel>
-        where UiModel : NotificationObject
+    public interface IMapper<Model, ViewModel>
+        where ViewModel : NotificationObject
     {
-        void MapToUiModel(Model data, UiModel uiModel);
-        void MapToDataModel(UiModel uiModel, Model model);
+        void MapToViewModel(Model data, ViewModel viewModel);
+        void MapToDataModel(ViewModel viewModel, Model model);
     }
 }

@@ -12,6 +12,7 @@
 		public string VideoStrategyController = "videoStrategyController";
 		public string LoginService = "loginService";
 		public string SubeventService = "subeventService";
+		public string TeamStatisticsService = "teamStatisticsService";
 	}
 
 }

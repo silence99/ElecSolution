@@ -11,7 +11,7 @@ namespace Utils.Mappers
             throw new System.NotImplementedException();
         }
 
-        public void MapToUiModel(MasterEvent data, MasterEventUiModel uiModel)
+        public void MapToViewModel(MasterEvent data, MasterEventUiModel uiModel)
         {
             throw new System.NotImplementedException();
         }

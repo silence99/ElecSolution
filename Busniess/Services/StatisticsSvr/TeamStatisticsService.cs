@@ -1,5 +1,7 @@
 ﻿using Busniess.CommonControl;
+using Emergence.Common.Mappers;
 using Emergence.Common.Model;
+using Emergence.Common.ViewModel;
 using log4net;
 using System;
 using System.Configuration;
@@ -11,7 +13,7 @@ namespace Busniess.Services.StatisticsSvr
 	{
 		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-		public EmergencyHttpResponse<TeamStatisticsModel> GetTeamStatistics()
+		private EmergencyHttpResponse<TeamStatisticsModel> GetTeamStatisticsData()
 		{
 			try
 			{
@@ -31,6 +33,22 @@ namespace Busniess.Services.StatisticsSvr
 			{
 				Logger.Error("获取队伍统计数据异常", ex);
 				throw;
+			}
+		}
+
+		public TeamStatisticsViewModel GetTeamStatistics()
+		{
+			var response = GetTeamStatisticsData();
+			if (response.Code != 1)
+			{
+				Util.ShowError(string.Format("获取统计信息失败：{0}", response.Message));
+				return null;
+			}
+			else
+			{
+				TeamStatisticsViewModel viewModel = new TeamStatisticsViewModel();
+				new TeamStatisticsModelMapper().MapToViewModel(response.Result, viewModel);
+				return viewModel;
 			}
 		}
 	}

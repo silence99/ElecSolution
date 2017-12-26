@@ -21,7 +21,7 @@ namespace Business.Strategies
 		{
 			UIModel = uiModel;
 			var weather = service.GetWeather();
-			mapper.MapToUiModel(weather, UIModel as WeatherViewModel);
+			mapper.MapToViewModel(weather, UIModel as WeatherViewModel);
 		}
 	}
 }
