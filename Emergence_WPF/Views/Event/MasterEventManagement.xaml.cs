@@ -1,8 +1,10 @@
 ﻿using Busniess.Services.EventSvr;
+using Busniess.Strategies;
 using Emergence.Business.CommonControl;
 using Emergence.Common.Model;
 using Emergence_WPF.Comm;
 using Emergence_WPF.ViewModel;
+using Framework;
 using Framework.Http;
 using System;
 using System.Collections.Generic;
@@ -23,17 +25,21 @@ namespace Emergence_WPF
 	{
 		Emergence.Common.ViewModel.VM_MasterEventManagement ViewModel;
 		MasterEventService gMasterSvr;
+		MasterEventManagementStrategyController StrategyController = null;
 		public delegate void GoToDetailHandler(MasterEvent masterEvent);
 		public event GoToDetailHandler GoToDetail;
+
 
 		public MasterEventManagement()
 		{
 			InitializeComponent();
+			StrategyController = new MasterEventManagementStrategyController();
 		}
+
 
 		private void UserControl_Loaded(object sender, RoutedEventArgs e)
 		{
-			ViewModel = new Emergence.Common.ViewModel.VM_MasterEventManagement();
+			ViewModel = new Emergence.Common.ViewModel.VM_MasterEventManagement().CreateAopProxy();
 			gMasterSvr = new MasterEventService();
 			RequestMasterEventList();
 			this.DataContext = ViewModel;
@@ -41,7 +47,7 @@ namespace Emergence_WPF
 
 		private void Pager_OnPageChanged(object sender, PageChangedEventArg e)
 		{
-			var x = e.PageIndex;
+			RequestMasterEventList();
 		}
 
 		private void RequestMasterEventList()
@@ -54,6 +60,7 @@ namespace Emergence_WPF
 				ViewModel.TotalCount = masterEvents.Count;
 				ViewModel.PageIndex = masterEvents.PageIndex;
 				ViewModel.PageSize = masterEvents.PageSize;
+				ViewModel.TotalPage = ViewModel.TotalCount == 0 ? 0 : (int)Math.Ceiling((double)ViewModel.TotalCount / ViewModel.PageSize);
 			}
 		}
 

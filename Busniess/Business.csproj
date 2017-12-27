@@ -70,6 +70,7 @@
     <Compile Include="Services\TeamSvr\TeamService.cs" />
     <Compile Include="Strategies\LogInStrategyController.cs" />
     <Compile Include="Strategies\MainPageStrategyController.cs" />
+    <Compile Include="Strategies\MasterEventManagementStrategyController.cs" />
     <Compile Include="Strategies\VideoStrategyController.cs" />
     <Compile Include="Strategies\WeatherStrategyController.cs" />
     <Compile Include="Util.cs" />

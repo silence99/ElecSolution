@@ -203,7 +203,7 @@
                                       AlternationCount="2"
                                       AutoGenerateColumns="False" 
                                       ColumnHeaderHeight="70"
-                                      ItemsSource="{Binding MasterEvents}"
+                                      ItemsSource="{Binding MasterEvents, Mode=TwoWay}"
                                       RowHeight="50"
                                       AlternatingRowBackground="#f3f3f3"
                                       HorizontalGridLinesBrush="#dcdcdc"
