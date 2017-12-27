@@ -6,6 +6,7 @@
              xmlns:emergence_wpf="clr-namespace:Emergence_WPF"
              xmlns:mainpage="clr-namespace:Emergence_WPF.Views.MainPage"
              xmlns:metrochart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+             xmlns:charts="clr-namespace:Emergence_WPF.Views.Charts"
              mc:Ignorable="d" Loaded="UserControl_Loaded">
 
     <UserControl.Resources>
@@ -154,47 +155,7 @@
                 </Style>
             </UserControl.Style>
         </UserControl>-->
-        <Button Grid.Column="1" Grid.Row="0" Width="100" Height="100" Content="70%">
-            <Button.Style>
-                <Style TargetType="Button">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="Button">
-                                <Grid>
-                                    <Ellipse Width="100" Height="100">
-                                        <Ellipse.Fill>
-                                            <SolidColorBrush Color="#FFFF00D6">
-                                            </SolidColorBrush>
-                                        </Ellipse.Fill>
-                                    </Ellipse>
-                                    <Path>
-                                        <Path.Data>
-                                            <PathGeometry>
-                                                <PathFigure StartPoint="50,50"   >
-                                                    <LineSegment Point="50,0"/>
-                                                    <ArcSegment Point="50,100" Size="50,50" SweepDirection="Counterclockwise"/>
-                                                    <LineSegment Point="50,50"/>
-                                                </PathFigure>
-                                            </PathGeometry>
-                                        </Path.Data>
-                                        <Path.Fill>
-                                            <SolidColorBrush Color="#FF737377"/>
-                                        </Path.Fill>
-                                    </Path>
-                                    <Ellipse Width="80" Height="80">
-                                        <Ellipse.Fill>
-                                            <SolidColorBrush Color="White">
-                                            </SolidColorBrush>
-                                        </Ellipse.Fill>
-                                    </Ellipse>
-                                    <ContentControl VerticalAlignment="Center" HorizontalAlignment="Center" Content="{TemplateBinding Content}"/>
-                                </Grid>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Button.Style>
-        </Button>
+        <charts:TeamPersonChart Margin="0,0,0,0" Grid.Column="1" Grid.Row="0"/>
         <UserControl Name="TeamStatitics" Grid.Row="1" Grid.Column="1">
             <UserControl.Style>
                 <Style TargetType="UserControl">
@@ -214,14 +175,14 @@
                                    ValueMember="Value" />
                                         </metrochart:ClusteredColumnChart.Series>
                                     </metrochart:ClusteredColumnChart>
-                                </Border>                                
+                                </Border>
                             </DataTemplate>
                         </Setter.Value>
                     </Setter>
                 </Style>
             </UserControl.Style>
         </UserControl>
-        
+
         <Canvas Grid.Row="2" Grid.Column="1" Margin="5,5,5,0" Width="420" Height="234">
             <mainpage:Weather  HorizontalAlignment="Right" />
         </Canvas>

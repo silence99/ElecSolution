@@ -24,6 +24,21 @@ namespace Emergence.Common.Mappers
 			viewModel.TeamMemberUseTotal = model.TeamMemberUseTotal;
 			viewModel.TeamTotal = model.TeamTotal;
 			viewModel.TeamUseTotal = model.TeamUseTotal;
+			int personPer = viewModel.TeamMemberTotal == 0 ?
+							0 :
+							(int)(100 * ((double)viewModel.TeamMemberUseTotal / viewModel.TeamMemberTotal));
+			int teamPer = viewModel.TeamTotal == 0 ?
+							0 :
+							(int)(100 * ((double)viewModel.TeamUseTotal / viewModel.TeamTotal));
+
+			personPer = 50;
+			teamPer = 40;
+			if (viewModel.Statistics == null)
+			{
+				viewModel.Statistics = new System.Collections.ObjectModel.ObservableCollection<KeyValuePair<string, int>>();
+			}
+			viewModel.Statistics.Add(new KeyValuePair<string, int>("已用人数/总人数", personPer));
+			viewModel.Statistics.Add(new KeyValuePair<string, int>("已用队伍/总队伍", teamPer));
 		}
 	}
 }

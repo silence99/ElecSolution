@@ -5,11 +5,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"              
              xmlns:local="clr-namespace:Emergence_WPF.Comm"
              mc:Ignorable="d" 
-             d:DesignHeight="1024" d:DesignWidth="800"
+             d:DesignHeight="1920" d:DesignWidth="1080"
               Loaded="UserControl_Loaded">
 
-        <UserControl.Resources>
+    <UserControl.Resources>
         <ResourceDictionary>
+            <Style TargetType="DataGridRow" x:Key="oddEvenRowStyle">
+                <Style.Triggers>
+                    <Trigger Property="ItemsControl.AlternationIndex" 
+                                 Value="1">
+                        <Setter Property="Foreground" Value="#f3f3f3" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="Button" x:Key="roundConnerButtonStyle">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="10,10,10,10" Background="{TemplateBinding Background}">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" ></ContentPresenter>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
             <Style TargetType="DataGrid">
                 <!--网格线颜色-->
                 <Setter Property="CanUserResizeColumns" Value="false"/>
@@ -103,74 +122,79 @@
     </UserControl.Resources>
 
     <Grid  Name="gridEventMain">
-        <DockPanel Name="top2" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-            <Border BorderBrush="#62a6a3" BorderThickness="0,1,0,0" DockPanel.Dock="Top">
-                <DockPanel DockPanel.Dock="Top" Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" >
-                    <Label Name="labelPageTitle" Foreground="White" FontSize="20" HorizontalAlignment="Left" Padding="25" Margin="20,0,0,0" >主事件列表</Label>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0" Grid.Row="0" Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" >
+            <Label Name="labelPageTitle" Foreground="White" FontSize="20" HorizontalAlignment="Left" Padding="25" Margin="20,0,0,0" >主事件列表</Label>
+        </DockPanel>
+        <DockPanel Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" Background="White">
+            <Border DockPanel.Dock="Top" Margin="20, 21, 20, 20" CornerRadius="10">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.75"/>
+                </Border.Effect>
+                <DockPanel Margin="0,0,0,0">
+                    <DockPanel Height="60" HorizontalAlignment="Stretch" Name="head" DockPanel.Dock="Top" Background="#CCE2E1">
+                        <TextBlock FontSize="20" DockPanel.Dock="Left" TextAlignment="Center" HorizontalAlignment="Left" Margin="51,15,0,0" Foreground="Black">搜索</TextBlock>
+                        <Button Name="masterEventSearchButton" FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" Style="{StaticResource roundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,51,0" Foreground="White" Content="搜索" Click="masterEventSearchButton_Click"></Button>
+                    </DockPanel>
+                    <Grid ShowGridLines="False" Name="gridTest" DockPanel.Dock="Top" Background="White">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="0" >
+                            <TextBlock Text="序号" HorizontalAlignment="Left" Padding="0,5,5,5" Margin="20,37,10,0"/>
+                            <TextBox Name="SerialNumberTextBox" Text="{Binding Path=_txtSerialNumber}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5" VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="1" Grid.Row="0" >
+                            <TextBlock Text="标题" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
+                            <TextBox Name="TitleTextBox" Text="{Binding Path=_txtTitle}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="2" Grid.Row="0" >
+                            <TextBlock Text="时间点" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
+                            <TextBox Name="TimeTextBox" Text="{Binding Path=_txtTime}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="3" Grid.Row="0" >
+                            <TextBlock Text="报送人" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
+                            <TextBox Name="SubmitPartyTextBox" Text="{Binding Path=_txtSubmitParty}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="4" Grid.Row="0" >
+                            <TextBlock Text="地点" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
+                            <TextBox Name="LocateTextBox" Text="{Binding Path=_txtLocate}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
                 </DockPanel>
             </Border>
-            <Grid DockPanel.Dock="Top" >
-                <DockPanel HorizontalAlignment="Stretch">
-                    <DockPanel DockPanel.Dock="Top"  Margin="20">
-                        <DockPanel Height="60" HorizontalAlignment="Stretch" Name="head" DockPanel.Dock="Top" Background="#CCE2E1">
-                            <TextBlock FontSize="20" DockPanel.Dock="Left" TextAlignment="Center" HorizontalAlignment="Left" Margin="51,15,0,0" Foreground="Black">搜索</TextBlock>
-                            <Button Name="masterEventSearchButton" FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="right" Margin="0,0,51,0" Foreground="White" Content="搜索" Click="masterEventSearchButton_Click"></Button>
-                        </DockPanel>
-                        <Grid ShowGridLines="False" Name="gridTest" DockPanel.Dock="Top" >
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="100"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="0" >
-                                <TextBlock Text="序号" HorizontalAlignment="Left" Padding="0,5,5,5" Margin="20,37,10,0"/>
-                                <TextBox Name="SerialNumberTextBox" Text="{Binding Path=_txtSerialNumber}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5" VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="1" Grid.Row="0" >
-                                <TextBlock Text="标题" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
-                                <TextBox Name="TitleTextBox" Text="{Binding Path=_txtTitle}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="2" Grid.Row="0" >
-                                <TextBlock Text="时间点" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
-                                <TextBox Name="TimeTextBox" Text="{Binding Path=_txtTime}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="3" Grid.Row="0" >
-                                <TextBlock Text="报送人" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
-                                <TextBox Name="SubmitPartyTextBox" Text="{Binding Path=_txtSubmitParty}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="4" Grid.Row="0" >
-                                <TextBlock Text="地点" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
-                                <TextBox Name="LocateTextBox" Text="{Binding Path=_txtLocate}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
-                            </StackPanel>
-                        </Grid>
+
+            <DockPanel Margin="20,0,20,20"  DockPanel.Dock="Top" >
+                <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
+                    <Button Name="Btn_CreateMasterEvent" FontSize="16" Width="180" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="51,0,0,0" Foreground="White" Content="创建主事件" Click="Btn_CreateMasterEvent_Click" Style="{StaticResource roundConnerButtonStyle}">
+                    </Button>
+                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" DockPanel.Dock="Right" Margin="1644,0,148,0" Foreground="White" Content="归档" Style="{StaticResource roundConnerButtonStyle}" HorizontalAlignment="Right"></Button>
+                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="1752,0,40,0" Foreground="White" Content="删除事件" Style="{StaticResource roundConnerButtonStyle}"></Button>
+                </DockPanel>
+                <DockPanel DockPanel.Dock="Top">
+                    <DockPanel DockPanel.Dock="Bottom" LastChildFill="True" Margin="0,5,0,0">
+                        <local:Pager Height="30" Width="auto" 
+                             TotalCount="{Binding TotalCount,Mode=TwoWay}"
+                             PageSize="{Binding PageSize,Mode=TwoWay}"
+                             PageIndex="{Binding PageIndex,Mode=TwoWay}"
+                             TotalPage="{Binding TotalPage,Mode=TwoWay}"
+                             PageChanged="Pager_OnPageChanged">
+                        </local:Pager>
                     </DockPanel>
-                    <DockPanel Margin="20,0,20,20"  DockPanel.Dock="Top" >
-                        <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
-                            <Button Name="Btn_CreateMasterEvent" FontSize="16" Width="180" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="51,0,0,0" Foreground="White" Content="创建主事件" Click="Btn_CreateMasterEvent_Click">
-                                <!--<Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="5,5,5,5"></Border>
-                        </ControlTemplate>
-                    </Button.Template>-->
-                            </Button>
-                            <Button FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="right" Margin="0,0,51,0" Foreground="White" Content="删除事件"></Button>
-                        </DockPanel>
-                        <DockPanel DockPanel.Dock="Top">
-                            <DockPanel DockPanel.Dock="Bottom" LastChildFill="True" Margin="0,5,0,0">
-                                <local:Pager Height="30" Width="auto" 
-                     TotalCount="{Binding TotalCount,Mode=TwoWay}"
-                     PageSize="{Binding PageSize,Mode=TwoWay}"
-                     PageIndex="{Binding PageIndex,Mode=TwoWay}"
-                     TotalPage="{Binding TotalPage,Mode=TwoWay}"
-                     PageChanged="Pager_OnPageChanged">
-                                </local:Pager>
-                            </DockPanel>
-                            <DataGrid DockPanel.Dock="Top" 
+                    <DataGrid DockPanel.Dock="Top" 
                                       Name="Grid_MasterEvent" 
                                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                       ScrollViewer.VerticalScrollBarVisibility="Auto" 
@@ -178,41 +202,32 @@
                                       HorizontalAlignment="Stretch" Background="Transparent"
                                       AlternationCount="2"
                                       AutoGenerateColumns="False" 
+                                      ColumnHeaderHeight="70"
                                       ItemsSource="{Binding}"
+                                      RowStyle="{StaticResource oddEvenRowStyle}"
                                       MouseDoubleClick="Grid_MasterEvent_MouseDoubleClick">
-                                <DataGrid.Columns >
-                                    <DataGridTemplateColumn Width="0.5*">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"
+                        <DataGrid.Columns >
+                            <DataGridTemplateColumn Width="0.5*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"
                                                           HorizontalAlignment="Center" 
-                                                          VerticalAlignment="Center">                                                    
-                                                </CheckBox>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                    <DataGridTextColumn  Binding="{Binding Path=SerialNumber}" x:Name="f2" Header="序号" Width="*" ></DataGridTextColumn>
-                                    <DataGridTextColumn  Binding="{Binding Path=Title}" x:Name="f3" Header="标题"  Width="*" ></DataGridTextColumn>
-                                    <DataGridTextColumn  Binding="{Binding Path=EventTypeName}" x:Name="f4" Header="类型"  Width="*" ></DataGridTextColumn>
-                                    <DataGridTextColumn  Binding="{Binding Path=GradeName}" x:Name="f5" Header="等级"  Width="*" ></DataGridTextColumn>
-                                    <DataGridTextColumn  Binding="{Binding Path=Time}" x:Name="f6" Header="时间点"  Width="*" ></DataGridTextColumn>
-                                    <DataGridTextColumn  Binding="{Binding Path=SubmitParty}" x:Name="f7" Header="报送人"  Width="*" ></DataGridTextColumn>
-                                    <DataGridTextColumn  Binding="{Binding Path=Locale}" x:Name="f8" Header="地点"  Width="2*" ></DataGridTextColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                            <!--<DockPanel DockPanel.Dock="Bottom" Margin="0,5,0,0">
-                                <local:Pager Height="30" Width="auto" 
-                     TotalCount="{Binding TotalCount,Mode=TwoWay}"
-                     PageSize="{Binding PageSize,Mode=TwoWay}"
-                     PageIndex="{Binding PageIndex,Mode=TwoWay}"
-                     TotalPage="{Binding TotalPage,Mode=TwoWay}"
-                     PageChanged="Pager_OnPageChanged">
-                                </local:Pager>
-                            </DockPanel>-->
-                        </DockPanel>
-                    </DockPanel>
+                                                          VerticalAlignment="Center">
+                                        </CheckBox>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=SerialNumber}" x:Name="f2" Header="序号" Width="*" ></DataGridTextColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=Title}" x:Name="f3" Header="标题"  Width="*" ></DataGridTextColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=EventTypeName}" x:Name="f4" Header="类型"  Width="*" ></DataGridTextColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=GradeName}" x:Name="f5" Header="等级"  Width="*" ></DataGridTextColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=Time}" x:Name="f6" Header="时间点"  Width="*" ></DataGridTextColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=SubmitParty}" x:Name="f7" Header="报送人"  Width="*" ></DataGridTextColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=Locale}" x:Name="f8" Header="地点"  Width="2*" ></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </DockPanel>
-            </Grid>
+            </DockPanel>
         </DockPanel>
     </Grid>
 </UserControl>

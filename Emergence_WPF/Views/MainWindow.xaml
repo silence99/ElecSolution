@@ -7,8 +7,8 @@
         ResizeMode="{Binding Path=ResizeMode, Mode=TwoWay}"
         WindowState="{Binding Path=WindowState, Mode=TwoWay}"
         WindowStyle="{Binding Path=WindowStyle, Mode=TwoWay}"
-        Height="{Binding Path=Height, Mode=TwoWay}"
-        Width="{Binding Path=Width, Mode=TwoWay}"
+        Height="1080"
+        Width="1920"
         Left="{Binding Path=Left, Mode=TwoWay}"
         Top="{Binding Path=Top, Mode=TwoWay}">
 
