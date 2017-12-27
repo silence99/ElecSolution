@@ -64,7 +64,7 @@ namespace Emergence_WPF
 
 			var gSubSvr = ServiceManager.Instance.GetService<SubeventService>(Constant.Services.SubeventService);
 
-			var rr = gSubSvr.GetSubevents(subEventVM.PageIndex, subEventVM.PageSize, me.Id);
+			var rr = gSubSvr.GetSubevents(subEventVM.PageIndex, subEventVM.PageSize, me.ID);
 			if (rr != null && rr.Result.Data != null)
 			{
 				subEventVM.subEventList = rr.Result.Data.ToList();

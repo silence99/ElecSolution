@@ -14,7 +14,7 @@
                 <Style.Triggers>
                     <Trigger Property="ItemsControl.AlternationIndex" 
                                  Value="1">
-                        <Setter Property="Foreground" Value="#f3f3f3" />
+                        <Setter Property="Background" Value="#f3f3f3" />
                     </Trigger>
                 </Style.Triggers>
             </Style>
@@ -190,7 +190,7 @@
                              TotalCount="{Binding TotalCount,Mode=TwoWay}"
                              PageSize="{Binding PageSize,Mode=TwoWay}"
                              PageIndex="{Binding PageIndex,Mode=TwoWay}"
-                             TotalPage="{Binding TotalPage,Mode=TwoWay}"
+                             TotalPage="{Binding TotalPage}"
                              PageChanged="Pager_OnPageChanged">
                         </local:Pager>
                     </DockPanel>
@@ -203,14 +203,19 @@
                                       AlternationCount="2"
                                       AutoGenerateColumns="False" 
                                       ColumnHeaderHeight="70"
-                                      ItemsSource="{Binding}"
-                                      RowStyle="{StaticResource oddEvenRowStyle}"
+                                      ItemsSource="{Binding MasterEvents}"
+                                      RowHeight="50"
+                                      AlternatingRowBackground="#f3f3f3"
+                                      HorizontalGridLinesBrush="#dcdcdc"
+                                      VerticalGridLinesBrush="#dcdcdc"
+                                      BorderBrush="#dcdcdc"
+                                      CanUserAddRows="False"
                                       MouseDoubleClick="Grid_MasterEvent_MouseDoubleClick">
                         <DataGrid.Columns >
-                            <DataGridTemplateColumn Width="0.5*">
+                            <DataGridTemplateColumn Width="40">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <CheckBox IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"
+                                        <CheckBox Width="16" IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"
                                                           HorizontalAlignment="Center" 
                                                           VerticalAlignment="Center">
                                         </CheckBox>
@@ -222,8 +227,8 @@
                             <DataGridTextColumn  Binding="{Binding Path=EventTypeName}" x:Name="f4" Header="类型"  Width="*" ></DataGridTextColumn>
                             <DataGridTextColumn  Binding="{Binding Path=GradeName}" x:Name="f5" Header="等级"  Width="*" ></DataGridTextColumn>
                             <DataGridTextColumn  Binding="{Binding Path=Time}" x:Name="f6" Header="时间点"  Width="*" ></DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=SubmitParty}" x:Name="f7" Header="报送人"  Width="*" ></DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=Locale}" x:Name="f8" Header="地点"  Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=Locale}" x:Name="f7" Header="地点"  Width="2*" ></DataGridTextColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=Remarks}" x:Name="f8" Header="描述"  Width="*" ></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </DockPanel>

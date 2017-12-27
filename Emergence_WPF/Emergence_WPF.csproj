@@ -222,7 +222,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ViewModel\MasterEventUiModel.cs" />
-    <Compile Include="ViewModel\VM_MasterEventManagement.cs" />
     <Compile Include="Views\Event\EventMasterPage.xaml.cs">
       <DependentUpon>EventMasterPage.xaml</DependentUpon>
     </Compile>

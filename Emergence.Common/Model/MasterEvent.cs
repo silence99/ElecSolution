@@ -31,7 +31,7 @@ namespace Emergence.Common.Model
         public virtual string GradeName { get; set; }
 
         [JsonProperty("id")]
-        public virtual int Id { get; set; }
+        public virtual int ID { get; set; }
 
         [JsonProperty("latitude")]
         public virtual string Latitude { get; set; }
@@ -49,10 +49,10 @@ namespace Emergence.Common.Model
         public virtual string SerialNumber { get; set; }
 
         [JsonProperty("submitDept")]
-        public string SubmitDept { get; set; }
+        public virtual string SubmitDept { get; set; }
 
         [JsonProperty("submitParty")]
-        public string SubmitParty { get; set; }
+        public virtual string SubmitParty { get; set; }
 
         [JsonProperty("telephoneNumber")]
         public virtual string TelephoneNumber { get; set; }

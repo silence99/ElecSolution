@@ -72,7 +72,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\MainPageUiModel.cs" />
     <Compile Include="ViewModel\MainWindowUiModel.cs" />
-    <Compile Include="ViewModel\MasterEventUiModel.cs" />
+    <Compile Include="ViewModel\MasterEventViewModel.cs" />
     <Compile Include="ViewModel\MaterialsStatisticsViewModel.cs" />
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="ViewModel\TeamStatisticsViewModel.cs" />

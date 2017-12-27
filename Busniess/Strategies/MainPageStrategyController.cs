@@ -19,45 +19,45 @@ namespace Business.Strategies
 			UIModel = uiModel;
 			var model = UIModel as MainPageUiModel;
 			//for test
-			model.MasterEvents = new List<MasterEventUiModel>()
+			model.MasterEvents = new List<MasterEventViewModel>()
 			{
-				new MasterEventUiModel()
+				new MasterEventViewModel()
 				{
-					 ID = 0,
-					 Describe = "Description",
-					 Videos = new List<VideoViewModel>()
-					 {
-						 new VideoViewModel()
-						 {
-							  ImageUri =@"DebugImage/11.jpg",
-							  Uri = new Uri("http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi")
-						 },
-						 new VideoViewModel()
-						 {
-							  ImageUri = "DebugImage/11.jpg",
-							  Uri = new Uri("http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi")
-						 },
-						 new VideoViewModel()
-						 {
-							  ImageUri = "DebugImage/11.jpg",
-							  Uri = new Uri("http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi")
-						 },
-						 new VideoViewModel()
-						 {
-							  ImageUri = "DebugImage/11.jpg",
-							  Uri = new Uri("http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi")
-						 },
-						 new VideoViewModel()
-						 {
-							  ImageUri ="DebugImage/11.jpg",
-							  Uri = new Uri("http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi")
-						 },
-						 new VideoViewModel()
-						 {
-							  ImageUri = "DebugImage/11.jpg",
-							  Uri = new Uri("http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi")
-						 }
-					 }
+					 //ID = 0,
+					 //Describe = "Description",
+					 //Videos = new List<VideoViewModel>()
+					 //{
+						// new VideoViewModel()
+						// {
+						//	  ImageUri =@"DebugImage/11.jpg",
+						//	  Uri = new Uri("http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi")
+						// },
+						// new VideoViewModel()
+						// {
+						//	  ImageUri = "DebugImage/11.jpg",
+						//	  Uri = new Uri("http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi")
+						// },
+						// new VideoViewModel()
+						// {
+						//	  ImageUri = "DebugImage/11.jpg",
+						//	  Uri = new Uri("http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi")
+						// },
+						// new VideoViewModel()
+						// {
+						//	  ImageUri = "DebugImage/11.jpg",
+						//	  Uri = new Uri("http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi")
+						// },
+						// new VideoViewModel()
+						// {
+						//	  ImageUri ="DebugImage/11.jpg",
+						//	  Uri = new Uri("http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi")
+						// },
+						// new VideoViewModel()
+						// {
+						//	  ImageUri = "DebugImage/11.jpg",
+						//	  Uri = new Uri("http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi")
+						// }
+					 //}
 				}
 			};
 

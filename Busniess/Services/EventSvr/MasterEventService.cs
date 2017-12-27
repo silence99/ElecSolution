@@ -3,11 +3,10 @@ using Emergence.Common.Model;
 using Emergence.Common.ViewModel;
 using Framework.Http;
 using log4net;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Net;
+using System.Linq;
 using System.Reflection;
 using System.Xml;
 
@@ -18,12 +17,34 @@ namespace Busniess.Services.EventSvr
 		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 		private HttpHelper HttpHelper = new HttpHelper();
 
-		public MasterEventListResponse GetMasterEvents(int pageIndex, int pageSize)
+
+		public MasterEventViewModel GetMasterEvents(int pageIndex, int pageSize)
 		{
 			return GetMasterEvents(pageIndex, pageSize, string.Empty, default(DateTime), default(DateTime), string.Empty);
 		}
 
-		public MasterEventListResponse GetMasterEvents(int pageIndex, int pageSize, string title,
+		public MasterEventViewModel GetMasterEvents(int pageIndex, int pageSize, string title,
+			DateTime start, DateTime end, string loaction)
+		{
+			var response = GetMasterEventsData(pageIndex, pageSize, title, start, end, loaction);
+			if (response.Code != 1)
+			{
+				Util.ShowError(string.Format("获取统计信息失败：{0}", response.Message));
+				return null;
+			}
+			else
+			{
+				var result = new MasterEventViewModel();
+				result.Count = response.Result.Count;
+				result.PageIndex = response.Result.PageIndex;
+				result.PageSize = response.Result.PageSize;
+				result.MasterEvents = new System.Collections.ObjectModel.ObservableCollection<MasterEvent>(response.Result.Data);
+
+				return result;
+			}
+		}
+
+		private EmergencyHttpResponse<EmergencyHttpListResult<MasterEvent>> GetMasterEventsData(int pageIndex, int pageSize, string title,
 			DateTime start, DateTime end, string loaction)
 		{
 			try
@@ -49,7 +70,7 @@ namespace Busniess.Services.EventSvr
 				if (result.StatusCode == 200)
 				{
 					Logger.DebugFormat("Get Master events service response:{0}", result.Html);
-					return Utils.JSONHelper.ConvertToObject<MasterEventListResponse>(result.Html);
+					return Utils.JSONHelper.ConvertToObject<EmergencyHttpResponse<EmergencyHttpListResult<MasterEvent>>>(result.Html);
 				}
 				else
 				{
@@ -245,34 +266,7 @@ namespace Busniess.Services.EventSvr
 						 }
 			};
 		}
-	}
 
 
-	public class MasterEventListResponse
-	{
-
-		[JsonProperty("code")]
-		public int Code { get; set; }
-
-		[JsonProperty("message")]
-		public string Message { get; set; }
-
-		[JsonProperty("result")]
-		public MasterEventListResult Result { get; set; }
-	}
-
-	public class MasterEventListResult
-	{
-		[JsonProperty("count")]
-		public int Count { get; set; }
-
-		[JsonProperty("data")]
-		public MasterEvent[] MasterEventList { get; set; }
-
-		[JsonProperty("pageIndex")]
-		public int PageIndex { get; set; }
-
-		[JsonProperty("pageSize")]
-		public int PageSize { get; set; }
 	}
 }

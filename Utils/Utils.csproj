@@ -48,8 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JSON.cs" />
-    <Compile Include="IMapper.cs" />
-    <Compile Include="Mappers\MasterEventMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

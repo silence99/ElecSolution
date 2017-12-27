@@ -4,14 +4,14 @@ using Emergence.Common.ViewModel;
 
 namespace Utils.Mappers
 {
-    public class MasterEventMapper : IMapper<MasterEvent, MasterEventUiModel>
+    public class MasterEventMapper : IMapper<MasterEvent, MasterEventViewModel>
     {
-        public void MapToDataModel(MasterEventUiModel uiModel, MasterEvent model)
+        public void MapToDataModel(MasterEventViewModel uiModel, MasterEvent model)
         {
             throw new System.NotImplementedException();
         }
 
-        public void MapToViewModel(MasterEvent data, MasterEventUiModel uiModel)
+        public void MapToViewModel(MasterEvent data, MasterEventViewModel uiModel)
         {
             throw new System.NotImplementedException();
         }
