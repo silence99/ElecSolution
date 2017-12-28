@@ -24,7 +24,7 @@ namespace Emergence_WPF
 	public partial class MasterEventManagement : UserControl
 	{
 		Emergence.Common.ViewModel.VM_MasterEventManagement ViewModel;
-		MasterEventService gMasterSvr;
+		MasterEventService MasterEventService;
 		MasterEventManagementStrategyController StrategyController = null;
 		public delegate void GoToDetailHandler(MasterEvent masterEvent);
 		public event GoToDetailHandler GoToDetail;
@@ -40,7 +40,7 @@ namespace Emergence_WPF
 		private void UserControl_Loaded(object sender, RoutedEventArgs e)
 		{
 			ViewModel = new Emergence.Common.ViewModel.VM_MasterEventManagement().CreateAopProxy();
-			gMasterSvr = new MasterEventService();
+			MasterEventService = new MasterEventService();
 			RequestMasterEventList();
 			this.DataContext = ViewModel;
 		}
@@ -53,7 +53,7 @@ namespace Emergence_WPF
 		private void RequestMasterEventList()
 		{
 			//var masterEvents = gMasterSvr.GetMasterEvents(ViewModel.PageIndex, ViewModel.PageSize);
-			var masterEvents = gMasterSvr.GetMasterEvents(ViewModel.PageIndex, 2, ViewModel.TxtTitle, default(DateTime), default(DateTime), string.Empty);
+			var masterEvents = MasterEventService.GetMasterEvents(ViewModel.PageIndex, 2, ViewModel.TxtTitle, default(DateTime), default(DateTime), string.Empty);
 			if (masterEvents != null)
 			{
 				ViewModel.MasterEvents = masterEvents.MasterEvents;
@@ -66,7 +66,7 @@ namespace Emergence_WPF
 
 		private void masterEventSearchButton_Click(object sender, RoutedEventArgs e)
 		{
-
+			RequestMasterEventList();
 		}
 
 		//private void GenerateSimulatedData()
@@ -113,6 +113,12 @@ namespace Emergence_WPF
 		{
 			AddMasterEvent ame = new AddMasterEvent();
 			ame.ShowDialog();
+		}
+
+		private void DeleteMasterEventHandler(object sender, RoutedEventArgs e)
+		{
+			var events = ViewModel.MasterEvents.Where(ent => ent.IsChecked).Select(ent => (long)ent.ID).ToList();
+			MasterEventService.UpdateMasterEventState(events, 9); // state:9 删除, 1 归档, 0 正常
 		}
 	}
 }

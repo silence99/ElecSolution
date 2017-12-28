@@ -23,7 +23,7 @@ namespace Emergence.Common.ViewModel
 		public VM_MasterEventManagement()
 		{
 			PageSize = 5;
-			PageIndex = 0;
+			PageIndex = 1;
 			TotalCount = 0;
 		}
 	}

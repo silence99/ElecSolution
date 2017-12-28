@@ -1,7 +1,9 @@
 ﻿using Business.Strategies;
+using Emergence.Common.Model;
 using Emergence.Common.ViewModel;
 using Emergence_WPF.Util;
 using Framework;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -26,6 +28,7 @@ namespace Emergence_WPF
 				_uiModel = value == null ? null : (value.IsAopWapper ? value : value.CreateAopProxy());
 			}
 		}
+		private Control CurrentPage { get; set; }
 
 		public string StrategyControllerName
 		{
@@ -79,9 +82,7 @@ namespace Emergence_WPF
 
 		private void MasterEventBtn_Click(object sender, MouseButtonEventArgs e)
 		{
-			maingrid.Children.Clear();
-			MasterEventManagement information = new MasterEventManagement();
-			maingrid.Children.Add(information);
+			GoToMasterEventMangementPage();
 		}
 
 		private void LogoutBtn_Click(object sender, MouseButtonEventArgs e)
@@ -126,6 +127,40 @@ namespace Emergence_WPF
 			var mainPage = ObjectFactory.GetInstance<UserControl_MainPage>("mainPagePanel");
 			maingrid.Children.Clear();
 			maingrid.Children.Add(mainPage);
+		}
+
+		private void GoToMasterEventMangementPage()
+		{
+			maingrid.Children.Clear();
+			MasterEventManagement information = new MasterEventManagement();
+			CurrentPage = information;
+			information.GoToDetail += GotoMasterEventDetailPage;
+
+			maingrid.Children.Add(information);
+		}
+
+
+		private void GotoMasterEventDetailPage(MasterEvent master)
+		{
+			maingrid.Children.Clear();
+			var cur = CurrentPage as MasterEventManagement;
+			if (cur != null)
+			{
+				cur.GoToDetail -= GotoMasterEventDetailPage;
+			}
+			MasterEventDetail md = new MasterEventDetail(master);
+			md.GoBack += GoBack_Handler;
+			maingrid.Children.Add(md);
+		}
+
+		private void GoBack_Handler(object sender, EventArgs e)
+		{
+			var obj = sender as MasterEventDetail;
+			if (obj != null)
+			{
+				obj.GoBack -= GoBack_Handler;
+			}
+			GoToMasterEventMangementPage();
 		}
 	}
 }
