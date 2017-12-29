@@ -69,6 +69,12 @@
                 anchor: BMAP_ANCHOR_BOTTOM_LEFT
             });
             map.addControl(ctrlSca);
+
+            map.addTileLayer(new BMap.PanoramaCoverageLayer());
+
+            var stCtrl = new BMap.PanoramaControl(); //构造全景控件
+            stCtrl.setOffset(new BMap.Size(20, 20));
+            map.addControl(stCtrl);//添加全景控件
         }
 
         //清除覆盖物
@@ -139,7 +145,7 @@
         //异步调用百度js
         function map_load() {
             var load = document.createElement("script");
-            load.src = "http://api.map.baidu.com/api?v=1.4&callback=map_init";
+            load.src = "http://api.map.baidu.com/api?v=2.0&ak=Al1RHKoegwlx1qze9lliMGd2TjhuCn3O&callback=map_init";
             document.body.appendChild(load);
         }
         window.onload = map_load;

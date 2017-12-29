@@ -44,7 +44,8 @@ namespace Emergence_WPF
 			//}
 
 			browser.Navigate(new Uri(Path.GetFullPath(@"BMap.html")));
-
+			browser.ScriptErrorsSuppressed = false;
+			
 		}
 
 		private void Move_Click(object sender, RoutedEventArgs e)
