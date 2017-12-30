@@ -18,7 +18,7 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
-            <Style TargetType="Button" x:Key="roundConnerButtonStyle">
+            <Style TargetType="Button" x:Key="RoundConnerButtonStyle">
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="{x:Type Button}">
@@ -140,7 +140,7 @@
                 <DockPanel Margin="0,0,0,0">
                     <DockPanel Height="60" HorizontalAlignment="Stretch" Name="head" DockPanel.Dock="Top" Background="#CCE2E1">
                         <TextBlock FontSize="20" DockPanel.Dock="Left" TextAlignment="Center" HorizontalAlignment="Left" Margin="51,15,0,0" Foreground="Black">搜索</TextBlock>
-                        <Button Name="masterEventSearchButton" FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" Style="{StaticResource roundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,51,0" Foreground="White" Content="搜索" Click="masterEventSearchButton_Click"></Button>
+                        <Button Name="masterEventSearchButton" FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,51,0" Foreground="White" Content="搜索" Click="masterEventSearchButton_Click"></Button>
                     </DockPanel>
                     <Grid ShowGridLines="False" Name="gridTest" DockPanel.Dock="Top" Background="White">
                         <Grid.RowDefinitions>
@@ -179,9 +179,9 @@
 
             <DockPanel Margin="20,0,20,20"  DockPanel.Dock="Top" >
                 <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
-                    <Button Name="Btn_CreateMasterEvent" FontSize="16" Width="180" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="51,0,0,0" Foreground="White" Content="创建主事件" Click="Btn_CreateMasterEvent_Click" Style="{StaticResource roundConnerButtonStyle}">
+                    <Button Name="Btn_CreateMasterEvent" FontSize="16" Width="180" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="51,0,0,0" Foreground="White" Content="创建主事件" Click="Btn_CreateMasterEvent_Click" Style="{StaticResource RoundConnerButtonStyle}">
                     </Button>
-                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,40,0" Foreground="White" Content="删除事件" Style="{StaticResource roundConnerButtonStyle}" Click="DeleteMasterEventHandler"></Button>
+                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,40,0" Foreground="White" Content="删除事件" Style="{StaticResource RoundConnerButtonStyle}" Click="DeleteMasterEventHandler"></Button>
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Top">
                     <DockPanel DockPanel.Dock="Bottom" LastChildFill="True" Margin="0,5,0,0">

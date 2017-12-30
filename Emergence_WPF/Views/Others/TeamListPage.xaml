@@ -1,0 +1,129 @@
+﻿<Page x:Class="Emergence_WPF.Views.Others.TeamListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Emergence_WPF.Views.Others"
+      xmlns:local1="clr-namespace:Emergence_WPF.Comm"
+      mc:Ignorable="d" 
+      d:DesignHeight="1000" d:DesignWidth="1920"
+      Title="TeamListPage">
+
+    <Grid>
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="../../style/Generic.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="18.6*"/>
+            <RowDefinition Height="73.4*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Column="0" Grid.Row="0" Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" >
+            <Label Name="TeamListTitle" Margin="20,0,0,0" Style="{StaticResource SelectedLabel}">队伍列表</Label>
+            <Label Name="MaterialListTile">物资列表</Label>
+        </DockPanel>
+        <DockPanel Grid.Column="0" Grid.Row="1" Background="White">
+            <Border DockPanel.Dock="Top" Margin="20, 21, 20, 20" CornerRadius="10">
+                <Border.Effect>
+                    <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.75"/>
+                </Border.Effect>
+                <DockPanel Margin="0,0,0,0">
+                    <DockPanel Height="60" HorizontalAlignment="Stretch" Name="head" DockPanel.Dock="Top" Background="#CCE2E1">
+                        <TextBlock FontSize="20" DockPanel.Dock="Left" TextAlignment="Center" HorizontalAlignment="Left" Margin="51,15,0,0" Foreground="Black">搜索</TextBlock>
+                        <Button Name="BtnSearch" FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,51,0" Foreground="White" Content="搜索" Click="Search_Handler"></Button>
+                    </DockPanel>
+                    <Grid ShowGridLines="False" Name="gridTest" DockPanel.Dock="Top" Background="White">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="0" >
+                            <TextBlock Text="序号" HorizontalAlignment="Left" Padding="0,5,5,5" Margin="20,37,10,0"/>
+                            <TextBox Name="SerialNumberTextBox" Text="{Binding Path=_txtSerialNumber, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5" VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="1" Grid.Row="0" >
+                            <TextBlock Text="标题" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
+                            <TextBox Name="TitleTextBox" Text="{Binding Path=_txtTitle, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="2" Grid.Row="0" >
+                            <TextBlock Text="时间点" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
+                            <TextBox Name="TimeTextBox" Text="{Binding Path=_txtTime, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="3" Grid.Row="0" >
+                            <TextBlock Visibility="Hidden" Text="报送人" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
+                            <TextBox Visibility="Hidden" Name="SubmitPartyTextBox" Text="{Binding Path=_txtSubmitParty, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="4" Grid.Row="0" >
+                            <TextBlock Text="地址" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
+                            <TextBox Name="LocateTextBox" Text="{Binding Path=_txtLocate, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </DockPanel>
+            </Border>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Top" Grid.Row="2" Background="White">
+            <DockPanel Margin="20,0,20,0"  DockPanel.Dock="Top" >
+                <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
+                    <Button Name="BtnAdd" FontSize="16" Width="82" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="51,0,0,0" Foreground="White" Content="添加" Style="{StaticResource RoundConnerButtonStyle}" Click="Add_Handler">
+                    </Button>
+                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,40,0" Foreground="White" Content="删除" Style="{StaticResource RoundConnerButtonStyle}" Click="Delete_Handler"></Button>
+                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" HorizontalAlignment="Right" Margin="0,0,20,0" Foreground="White" Content="导入" Style="{StaticResource RoundConnerButtonStyle}" Click="Import_Handler"></Button>
+                </DockPanel>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Bottom" LastChildFill="True" Margin="20,5,20,0">
+                <local1:Pager Height="30" Width="auto" 
+                             TotalCount="{Binding TotalCount,Mode=TwoWay}"
+                             PageSize="{Binding PageSize,Mode=TwoWay}"
+                             PageIndex="{Binding PageIndex,Mode=TwoWay}"
+                             TotalPage="{Binding TotalPage}"
+                             PageChanged="Pager_OnPageChanged">
+                </local1:Pager>
+            </DockPanel>
+            <DataGrid DockPanel.Dock="Top" Margin="20,0,20,0"
+                                      Name="Grid_MasterEvent" 
+                                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                      ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                                      RowHeaderWidth="0" HeadersVisibility="Column"
+                                      HorizontalAlignment="Stretch" Background="Transparent"
+                                      AlternationCount="2"
+                                      AutoGenerateColumns="False" 
+                                      ColumnHeaderHeight="70"
+                                      ItemsSource="{Binding MasterEvents, Mode=TwoWay}"
+                                      RowHeight="50"
+                                      AlternatingRowBackground="#f3f3f3"
+                                      HorizontalGridLinesBrush="#dcdcdc"
+                                      VerticalGridLinesBrush="#dcdcdc"
+                                      BorderBrush="#dcdcdc"
+                                      CanUserAddRows="False">
+                <DataGrid.Columns >                    
+                    <DataGridTemplateColumn Width="40">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox Width="16" IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"
+                                                          HorizontalAlignment="Center" 
+                                                          VerticalAlignment="Center">
+                                </CheckBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=SerialNumber}" x:Name="f2" Header="序号" Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=Title}" x:Name="f3" Header="队伍名称"  Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=EventTypeName}" x:Name="f4" Header="所属单位"  Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=GradeName}" x:Name="f5" Header="人数"  Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=Time}" x:Name="f6" Header="队长"  Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=Locale}" x:Name="f7" Header="队长电话"  Width="2*" ></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Grid>
+</Page>
