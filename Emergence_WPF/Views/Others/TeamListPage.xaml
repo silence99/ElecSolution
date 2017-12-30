@@ -130,9 +130,30 @@
                            Placement="Top"
                VerticalOffset="-30"
                HorizontalOffset="360">
-            <Canvas Background="Green">
-                <Button Canvas.Left="4" Canvas.Top="45">Popup中的button</Button>
-            </Canvas>
+            <DockPanel>
+                <DockPanel DockPanel.Dock="Top" Height="40">
+                    <Label Width="40" Content="X" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <Border Width="1" BorderThickness="1" BorderBrush="#D9D9D9" Margin="0,0,0,0" HorizontalAlignment="Left"/>
+                    <Label Content="添加队员" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                    <Button Content="完成" HorizontalAlignment="Right" Margin="0,0,40,0" Width="40"/>
+                </DockPanel>
+                <Border Margin="2,0,0,0" Background="#F3F3F3" BorderThickness="1">
+                    <StackPanel Orientation="Vertical">
+                        <DockPanel Height="60" VerticalAlignment="Top">
+                            <Label Content="队伍名称" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"/>
+                            <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5,20,0,0"/>
+                            <Label Content="所属单位" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"/>
+                            <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5, 20, 0, 0"/>
+                        </DockPanel>
+                        <DockPanel Height="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,20,0,0">
+                            <Label Content="单位地址" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"/>
+                            <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5, 0, 0, 0"/>
+                            <Label Content="队长姓名" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"/>
+                            <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left"/>
+                        </DockPanel>
+                    </StackPanel>
+                </Border>
+            </DockPanel>
         </Popup>
     </Grid>
 </Page>
