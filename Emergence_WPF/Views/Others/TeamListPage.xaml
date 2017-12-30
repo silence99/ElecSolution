@@ -35,7 +35,7 @@
                         <TextBlock FontSize="20" DockPanel.Dock="Left" TextAlignment="Center" HorizontalAlignment="Left" Margin="51,15,0,0" Foreground="Black">搜索</TextBlock>
                         <Button Name="BtnSearch" FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,51,0" Foreground="White" Content="搜索" Click="Search_Handler"></Button>
                     </DockPanel>
-                    <Grid ShowGridLines="False" Name="gridTest" DockPanel.Dock="Top" Background="White">
+                    <Grid ShowGridLines="False" Name="GridSearchBlock" DockPanel.Dock="Top" Background="White">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="100"></RowDefinition>
                         </Grid.RowDefinitions>
@@ -62,7 +62,7 @@
                 </DockPanel>
             </Border>
         </DockPanel>
-        <DockPanel DockPanel.Dock="Top" Grid.Row="2" Background="White">
+        <DockPanel DockPanel.Dock="Top" Grid.Row="2" Background="White" Name="PanelData">
             <DockPanel Margin="20,0,20,0"  DockPanel.Dock="Top" >
                 <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
                     <Button Name="BtnAdd" FontSize="16" Width="82" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="51,0,0,0" Foreground="White" Content="添加" Style="{StaticResource RoundConnerButtonStyle}" Click="Add_Handler">
@@ -81,21 +81,19 @@
                 </local1:Pager>
             </DockPanel>
             <DataGrid DockPanel.Dock="Top" Margin="20,0,20,0"
-                                      Name="Grid_MasterEvent" 
-                                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                                      ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                                      RowHeaderWidth="0" HeadersVisibility="Column"
-                                      HorizontalAlignment="Stretch" Background="Transparent"
-                                      AlternationCount="2"
-                                      AutoGenerateColumns="False" 
-                                      ColumnHeaderHeight="70"
-                                      ItemsSource="{Binding Teams, Mode=TwoWay}"
-                                      RowHeight="50"
-                                      AlternatingRowBackground="#f3f3f3"
-                                      HorizontalGridLinesBrush="#dcdcdc"
-                                      VerticalGridLinesBrush="#dcdcdc"
-                                      BorderBrush="#dcdcdc"
-                                      CanUserAddRows="False">
+                    Name="GridTeamList" 
+                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                    Background="Transparent"
+                    AutoGenerateColumns="False" 
+                    ColumnHeaderHeight="70"
+                    ItemsSource="{Binding Teams, Mode=TwoWay}"
+                    RowHeight="50"
+                    AlternatingRowBackground="#f3f3f3"
+                    HorizontalGridLinesBrush="#dcdcdc"
+                    VerticalGridLinesBrush="#dcdcdc"
+                    BorderBrush="#dcdcdc"
+                    CanUserAddRows="False">
                 <DataGrid.Columns >
                     <DataGridTemplateColumn Width="40">
                         <DataGridTemplateColumn.CellTemplate>
@@ -113,8 +111,28 @@
                     <DataGridTextColumn  Binding="{Binding Path=TotalNumber}" x:Name="f5" Header="人数"  Width="*" ></DataGridTextColumn>
                     <DataGridTextColumn  Binding="{Binding Path=PersonCharge}" x:Name="f6" Header="队长"  Width="*" ></DataGridTextColumn>
                     <DataGridTextColumn  Binding="{Binding Path=PersonChargePhone}" x:Name="f7" Header="队长电话" Width="2*" ></DataGridTextColumn>
+                    <DataGridTemplateColumn Width="50">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="../../Image/Common/Icon_edit.png" MouseLeftButtonUp="Edit_Handler" Width="25" Height="25" Tag="{Binding}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>
+        <Popup x:Name="PopupEditTeam" Width="{Binding Path=PopupWidth}" Height="{Binding Path= PopupHeight}"  
+                           StaysOpen="True"   
+                           IsOpen="False"   
+                           AllowsTransparency="True"  
+                           PopupAnimation="Slide"  
+                           PlacementTarget="{Binding ElementName=PanelData}"  
+                           Placement="Top"
+               VerticalOffset="-30"
+               HorizontalOffset="360">
+            <Canvas Background="Green">
+                <Button Canvas.Left="4" Canvas.Top="45">Popup中的button</Button>
+            </Canvas>
+        </Popup>
     </Grid>
 </Page>
