@@ -142,25 +142,37 @@ namespace Emergence_WPF
 
 		private void GotoMasterEventDetailPage(MasterEvent master)
 		{
-			maingrid.Children.Clear();
-			var cur = CurrentPage as MasterEventManagement;
-			if (cur != null)
-			{
-				cur.GoToDetail -= GotoMasterEventDetailPage;
-			}
-			MasterEventDetail md = new MasterEventDetail(master);
-			md.GoBack += GoBack_Handler;
-			maingrid.Children.Add(md);
+			//maingrid.Children.Clear();
+			//var cur = CurrentPage as MasterEventManagement;
+			//if (cur != null)
+			//{
+			//	cur.GoToDetail -= GotoMasterEventDetailPage;
+			//}
+			//MasterEventDetail md = new MasterEventDetail(master);
+			//md.GoBack += GoBack_Handler;
+			//maingrid.Children.Add(md);
 		}
 
 		private void GoBack_Handler(object sender, EventArgs e)
 		{
-			var obj = sender as MasterEventDetail;
-			if (obj != null)
-			{
-				obj.GoBack -= GoBack_Handler;
-			}
-			GoToMasterEventMangementPage();
+			//var obj = sender as MasterEventDetail;
+			//if (obj != null)
+			//{
+			//	obj.GoBack -= GoBack_Handler;
+			//}
+			//GoToMasterEventMangementPage();
+		}
+
+		private void GraphBtn_Click(object sender, MouseButtonEventArgs e)
+		{
+			this.frmMain.Navigate(new System.Uri(@".\Views\Event\MasterEventDetail.xaml", UriKind.Relative));
+
+			//maingrid.Children.Clear();
+			//var report = new ReportCenter();
+			//var ff = this.ActualWidth - 1000;
+			//var hh = this.ActualHeight - 630;
+			//report.bind(1000 + ff, 550 + hh);
+			//maingrid.Children.Add(report);
 		}
 	}
 }

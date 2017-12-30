@@ -1028,6 +1028,12 @@
     <None Include="services.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Resource Include="Image\Common\Icon_Address.png" />
+    <Resource Include="Image\Common\Icon_Create.png" />
+    <Resource Include="Image\Common\Icon_Delete.png" />
+    <Resource Include="Image\Common\Icon_Edit.png" />
+    <Resource Include="Image\Common\Icon_Magnify.png" />
+    <Resource Include="Image\Common\Icon_Search.png" />
     <Content Include="xml\TaskTracking.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
