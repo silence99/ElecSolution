@@ -1,4 +1,5 @@
 ﻿using Busniess.Services.Team;
+using Emergence.Common.Model;
 using Emergence.Business.ViewModel;
 using Emergence_WPF.Comm;
 using Framework;
@@ -44,13 +45,15 @@ namespace Emergence_WPF.Views.Others
 		private void Search_Handler(object sender, RoutedEventArgs e)
 		{
 			ViewModel.PageIndex = 1;
+			ViewModel.PopupWidth = 640;
+			ViewModel.PopupHeight = 360;
 			GetTeams();
 		}
 
 		private void GetTeams()
 		{
 			var teams = TeamService.GetTeam(ViewModel.PageIndex, ViewModel.PageSize, ViewModel.QueryTeamName, ViewModel.QueryChargeName, ViewModel.QueryDepartment);
-			ViewModel.Teams = new ObservableCollection<Emergence.Common.Model.TeamModel>(teams.Data.Select(o => o.CreateAopProxy()));
+			ViewModel.Teams = new ObservableCollection<TeamModel>(teams.Data.Select(o => o.CreateAopProxy()));
 			ViewModel.PageIndex = teams.PageIndex;
 			ViewModel.PageSize = teams.PageSize;
 			ViewModel.TotalCount = teams.Count;
@@ -72,6 +75,11 @@ namespace Emergence_WPF.Views.Others
 				DataContext = ViewModel;
 			}
 			GetTeams();
+		}
+
+		private void Edit_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			ViewModel.CurrentTeam = (sender as Control).DataContext as TeamModel;
 		}
 	}
 }
