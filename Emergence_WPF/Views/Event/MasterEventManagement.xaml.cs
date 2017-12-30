@@ -106,31 +106,7 @@ namespace Emergence_WPF
 		{
 			var dg = e.Source as DataGrid;
 			MasterEvent me = dg.SelectedItem as MasterEvent;
-<<<<<<< Updated upstream
 			GoToDetail?.Invoke(me);
-=======
-			if (me != null)
-            {
-                //MasterEventDetail md = new MasterEventDetail(me);
-                MasterEventDetail md = new MasterEventDetail();
-                //md.GoBack += GoBack_Handler;
-				top2.Visibility = Visibility.Hidden;
-				this.gridEventMain.Children.Add(md);
-			}
-			//md.SetMasterEventDetail(dg.CurrentItem as MasterEvent);
-		}
-
-		private void GoBack_Handler(object sender, EventArgs args)
-		{
-			var obj = sender as MasterEventDetail;
-			if (obj != null)
-			{
-
-				//obj.GoBack -= GoBack_Handler;
-				this.gridEventMain.Children.Remove(obj);
-				top2.Visibility = Visibility.Visible;
-			}
->>>>>>> Stashed changes
 		}
 
 		private void Btn_CreateMasterEvent_Click(object sender, RoutedEventArgs e)

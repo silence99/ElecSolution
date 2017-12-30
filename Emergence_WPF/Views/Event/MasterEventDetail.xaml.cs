@@ -1,21 +1,21 @@
-﻿using System;
+﻿using Busniess.Services.EventSvr;
+using Emergence.Business.CommonControl;
+using Emergence.Common.Model;
+using Emergence.Common.ViewModel;
+using Emergence_WPF.Util;
+using Framework.Http;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Emergence_WPF
 {
-<<<<<<< Updated upstream
 	/// <summary>
 	/// Interaction logic for MasterEventDetail.xaml
 	/// </summary>
@@ -139,16 +139,4 @@ namespace Emergence_WPF
 			ame.ShowDialog();
 		}
 	}
-=======
-    /// <summary>
-    /// Interaction logic for MasterEventDetail.xaml
-    /// </summary>
-    public partial class MasterEventDetail : Page
-    {
-        public MasterEventDetail()
-        {
-            InitializeComponent();
-        }
-    }
->>>>>>> Stashed changes
 }

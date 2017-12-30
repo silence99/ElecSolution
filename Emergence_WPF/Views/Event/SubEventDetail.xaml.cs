@@ -53,9 +53,7 @@ namespace Emergence_WPF
         {
             if (me != null)
             {
-
-                //MasterEventDetail md = new MasterEventDetail(me);
-                MasterEventDetail md = new MasterEventDetail();
+                MasterEventDetail md = new MasterEventDetail(me);
                 this.gridSubDetail.Children.Clear();
                 this.gridSubDetail.Children.Add(md);
             }

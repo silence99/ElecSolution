@@ -27,8 +27,7 @@ namespace Emergence_WPF
 
         public void ChangePageToMasterEventDetails(MasterEvent me)
         {
-            //MasterEventDetail masterDetails = new MasterEventDetail(me);
-            MasterEventDetail masterDetails = new MasterEventDetail();
+            MasterEventDetail masterDetails = new MasterEventDetail(me);
             gridEventMain.Children.Clear();
             gridEventMain.Children.Add(masterDetails);
         }
