@@ -1,5 +1,5 @@
 ﻿using Busniess.Services.StatisticsSvr;
-using Emergence.Common.ViewModel;
+using Emergence.Business.ViewModel;
 using Emergence_WPF.Util;
 using System.Windows.Controls;
 

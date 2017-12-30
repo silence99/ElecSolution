@@ -1,6 +1,6 @@
 ﻿using Framework;
 
-namespace Emergence.Common
+namespace Emergence.Business
 {
     public interface IMapper<Model, ViewModel>
         where ViewModel : NotificationObject

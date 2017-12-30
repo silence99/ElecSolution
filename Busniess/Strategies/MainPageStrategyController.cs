@@ -1,5 +1,5 @@
 ﻿using Busniess.Services.EventSvr;
-using Emergence.Common.ViewModel;
+using Emergence.Business.ViewModel;
 using Framework;
 using System;
 using System.Collections.Generic;

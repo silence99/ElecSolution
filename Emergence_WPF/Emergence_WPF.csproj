@@ -221,7 +221,6 @@
       <DependentUpon>HintPasswordBox.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModel\MasterEventUiModel.cs" />
     <Compile Include="Views\Event\EventMasterPage.xaml.cs">
       <DependentUpon>EventMasterPage.xaml</DependentUpon>
     </Compile>

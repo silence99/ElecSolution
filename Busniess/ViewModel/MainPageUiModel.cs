@@ -1,12 +1,13 @@
 ﻿using Framework;
+using Emergence.Common.Model;
 using System.Collections.Generic;
 
-namespace Emergence.Common.ViewModel
+namespace Emergence.Business.ViewModel
 {
 	public class MainPageUiModel : NotificationObject
 	{
 		public virtual List<MasterEventViewModel> MasterEvents { get; set; }
 
-		public virtual List<Model.Event> EventsForReview { get; set; }
+		public virtual List<Event> EventsForReview { get; set; }
 	}
 }

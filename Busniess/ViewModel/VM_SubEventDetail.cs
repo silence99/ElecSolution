@@ -5,25 +5,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Emergence.Common.ViewModel
+namespace Emergence.Business.ViewModel
 {
-    public class VM_MasterEventDetail
+    public class VM_SubEventDetail
     {
         //Grid related variables
-        private int _pageSize = 15;
+        private int _pageSize = 5;
         private int _pageIndex = 1;
         private int _totalCount = 0;
         private int _totalPage = 0;
 
         //master event related variables
-        private MasterEvent _masterEventInfo;
+        private SubEvent _subEventInfo;
 
-        public MasterEvent MasterEventInfo { get => _masterEventInfo; set => _masterEventInfo = value; }
         public int PageSize { get => _pageSize; set => _pageSize = value; }
         public int PageIndex { get => _pageIndex; set => _pageIndex = value; }
         public int TotalCount { get => _totalCount; set => _totalCount = value; }
         public int TotalPage { get => _totalPage; set => _totalPage = value; }
+        public SubEvent SubEventInfo { get => _subEventInfo; set => _subEventInfo = value; }
 
-        public List<SubEvent> subEventList = new List<SubEvent>();
+        public List<EventTask> subEventList = new List<EventTask>();
+
     }
 }

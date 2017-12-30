@@ -1,8 +1,8 @@
 ﻿using Emergence.Common.Model;
-using Emergence.Common.ViewModel;
+using Emergence.Business.ViewModel;
 using System;
 
-namespace Emergence.Common.Mappers
+namespace Emergence.Business.Mappers
 {
     public class WeatherMapper : IMapper<Weather, WeatherViewModel>
     {

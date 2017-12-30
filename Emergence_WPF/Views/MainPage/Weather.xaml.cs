@@ -1,5 +1,5 @@
 ﻿using Business.Strategies;
-using Emergence.Common.ViewModel;
+using Emergence.Business.ViewModel;
 using Framework;
 using System.Windows.Controls;
 

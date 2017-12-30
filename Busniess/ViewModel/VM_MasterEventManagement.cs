@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Emergence.Common.ViewModel
+namespace Emergence.Business.ViewModel
 {
 	public class VM_MasterEventManagement : NotificationObject
 	{

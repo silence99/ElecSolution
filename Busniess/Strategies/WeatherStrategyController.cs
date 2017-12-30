@@ -1,8 +1,8 @@
 ﻿using Business.MainPageSvr;
-using Emergence.Common;
-using Emergence.Common.Mappers;
+using Emergence.Business.Mappers;
 using Emergence.Common.Model;
-using Emergence.Common.ViewModel;
+using Emergence.Business;
+using Emergence.Business.ViewModel;
 using Framework;
 
 namespace Business.Strategies

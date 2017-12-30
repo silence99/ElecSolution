@@ -1,6 +1,6 @@
 ﻿using Busniess.Services.EventSvr;
 using Emergence.Common.Model;
-using Emergence.Common.ViewModel;
+using Emergence.Business.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

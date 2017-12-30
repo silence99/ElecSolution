@@ -1,4 +1,4 @@
-﻿using Emergence.Common.ViewModel;
+﻿using Emergence.Business.ViewModel;
 using System.Collections.Generic;
 using System.Windows.Controls;
 

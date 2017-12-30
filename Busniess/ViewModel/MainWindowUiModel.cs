@@ -1,7 +1,8 @@
 ﻿using Framework;
+using Emergence.Common.Model;
 using System.Windows;
 
-namespace Emergence.Common.ViewModel
+namespace Emergence.Business.ViewModel
 {
 	public class MainWindowUiModel : NotificationObject
 	{

@@ -1,6 +1,6 @@
 ﻿using Busniess.CommonControl;
 using Emergence.Common.Model;
-using Emergence.Common.ViewModel;
+using Emergence.Business.ViewModel;
 using Framework.Http;
 using log4net;
 using System;

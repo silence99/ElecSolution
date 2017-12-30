@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using Emergence.Common.Model;
 
-namespace Emergence.Common.ViewModel
+namespace Emergence.Business.ViewModel
 {
 	public class StatisticsViewModel
 	{

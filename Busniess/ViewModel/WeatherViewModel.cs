@@ -1,7 +1,7 @@
 ﻿using Framework;
 using System.IO;
 
-namespace Emergence.Common.ViewModel
+namespace Emergence.Business.ViewModel
 {
     public class WeatherViewModel : WeatherUiModelBase
     {

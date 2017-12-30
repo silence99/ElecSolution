@@ -1,8 +1,8 @@
 ﻿using Emergence.Common;
 using Emergence.Common.Model;
-using Emergence.Common.ViewModel;
+using Emergence.Business.ViewModel;
 
-namespace Utils.Mappers
+namespace Emergence.Business.Mappers
 {
     public class MasterEventMapper : IMapper<MasterEvent, MasterEventViewModel>
     {

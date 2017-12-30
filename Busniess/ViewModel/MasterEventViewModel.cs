@@ -1,8 +1,9 @@
 ﻿using Emergence.Common.Model;
 using Framework;
 using System.Collections.ObjectModel;
+using Emergence.Common.Model;
 
-namespace Emergence.Common.ViewModel
+namespace Emergence.Business.ViewModel
 {
 	public class MasterEventViewModel : NotificationObject
 	{

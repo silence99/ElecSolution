@@ -3,7 +3,6 @@ using Busniess.Strategies;
 using Emergence.Business.CommonControl;
 using Emergence.Common.Model;
 using Emergence_WPF.Comm;
-using Emergence_WPF.ViewModel;
 using Framework;
 using Framework.Http;
 using System;
@@ -16,6 +15,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
+
 namespace Emergence_WPF
 {
 	/// <summary>
@@ -23,7 +23,7 @@ namespace Emergence_WPF
 	/// </summary>
 	public partial class MasterEventManagement : UserControl
 	{
-		Emergence.Common.ViewModel.VM_MasterEventManagement ViewModel;
+		Emergence.Business.ViewModel.VM_MasterEventManagement ViewModel;
 		MasterEventService MasterEventService;
 		MasterEventManagementStrategyController StrategyController = null;
 		public delegate void GoToDetailHandler(MasterEvent masterEvent);
@@ -39,7 +39,7 @@ namespace Emergence_WPF
 
 		private void UserControl_Loaded(object sender, RoutedEventArgs e)
 		{
-			ViewModel = new Emergence.Common.ViewModel.VM_MasterEventManagement().CreateAopProxy();
+			ViewModel = new Emergence.Business.ViewModel.VM_MasterEventManagement().CreateAopProxy();
 			MasterEventService = new MasterEventService();
 			RequestMasterEventList();
 			this.DataContext = ViewModel;

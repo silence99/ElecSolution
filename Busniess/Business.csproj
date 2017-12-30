@@ -37,6 +37,10 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework">
+      <HintPath>..\packages\PresentationFramework.4.6.0\lib\PresentationFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
@@ -46,6 +50,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommonControl\AuthorizationControl.cs" />
@@ -53,8 +58,12 @@
     <Compile Include="CommonControl\RequestControl.cs" />
     <Compile Include="CommonControl\TimeControl.cs" />
     <Compile Include="EmergencyHttpResponse.cs" />
+    <Compile Include="IMapper.cs" />
     <Compile Include="IRemoteService.cs" />
     <Compile Include="IService.cs" />
+    <Compile Include="Mappers\MasterEventMapper.cs" />
+    <Compile Include="Mappers\TeamStatisticsModelMapper.cs" />
+    <Compile Include="Mappers\WeatherMapper.cs" />
     <Compile Include="Services\AnnouncementSvr\AnnouncementService.cs" />
     <Compile Include="Services\CommonSvr\DictSvr.cs" />
     <Compile Include="Services\EventSvr\MasterEventService.cs" />
@@ -74,6 +83,20 @@
     <Compile Include="Strategies\VideoStrategyController.cs" />
     <Compile Include="Strategies\WeatherStrategyController.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="ViewModel\MainPageUiModel.cs" />
+    <Compile Include="ViewModel\MainWindowUiModel.cs" />
+    <Compile Include="ViewModel\MasterEventDetailViewModel.cs" />
+    <Compile Include="ViewModel\MasterEventViewModel.cs" />
+    <Compile Include="ViewModel\MaterialsStatisticsViewModel.cs" />
+    <Compile Include="ViewModel\StatisticsViewModel.cs" />
+    <Compile Include="ViewModel\TeamDetailPageViewModel.cs" />
+    <Compile Include="ViewModel\TeamListPageViewModel.cs" />
+    <Compile Include="ViewModel\TeamStatisticsViewModel.cs" />
+    <Compile Include="ViewModel\VideoViewModel.cs" />
+    <Compile Include="ViewModel\VM_MasterEventDetail.cs" />
+    <Compile Include="ViewModel\VM_MasterEventManagement.cs" />
+    <Compile Include="ViewModel\VM_SubEventDetail.cs" />
+    <Compile Include="ViewModel\WeatherViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Emergence.Common\Emergence.Common.csproj">

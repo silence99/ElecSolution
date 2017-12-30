@@ -1,12 +1,12 @@
 ﻿using Emergence.Common.Model;
-using Emergence.Common.ViewModel;
+using Emergence.Business.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Emergence.Common.Mappers
+namespace Emergence.Business.Mappers
 {
 	public class TeamStatisticsModelMapper : IMapper<TeamStatisticsModel, TeamStatisticsViewModel>
 	{

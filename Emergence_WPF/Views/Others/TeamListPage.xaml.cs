@@ -1,5 +1,5 @@
 ﻿using Busniess.Services.Team;
-using Emergence.Common.ViewModel;
+using Emergence.Business.ViewModel;
 using Emergence_WPF.Comm;
 using Framework;
 using System;

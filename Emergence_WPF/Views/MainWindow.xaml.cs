@@ -1,6 +1,6 @@
 ﻿using Business.Strategies;
 using Emergence.Common.Model;
-using Emergence.Common.ViewModel;
+using Emergence.Business.ViewModel;
 using Emergence_WPF.Util;
 using Framework;
 using System;

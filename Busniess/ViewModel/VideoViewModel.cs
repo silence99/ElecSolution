@@ -1,7 +1,8 @@
 ﻿using Framework;
 using System;
+using Emergence.Common.Model;
 
-namespace Emergence.Common.ViewModel
+namespace Emergence.Business.ViewModel
 {
 	public class VideoViewModel : NotificationObject
 	{
