@@ -1,4 +1,11 @@
-﻿using System.Windows;
+﻿using Busniess.Services.Team;
+using Emergence.Common.ViewModel;
+using Emergence_WPF.Comm;
+using Framework;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Emergence_WPF.Views.Others
@@ -8,7 +15,8 @@ namespace Emergence_WPF.Views.Others
 	/// </summary>
 	public partial class TeamListPage : Page
 	{
-
+		private TeamListPageViewModel ViewModel { get; set; }
+		private TeamService TeamService = new TeamService();
 		public TeamListPage()
 		{
 			InitializeComponent();
@@ -16,7 +24,11 @@ namespace Emergence_WPF.Views.Others
 
 		private void Delete_Handler(object sender, RoutedEventArgs e)
 		{
-
+			var teams = ViewModel.Teams.Where(team => team.IsChecked).ToList();
+			if (teams != null && teams.Count != 0)
+			{
+				TeamService.DeleteTeam(teams.Select(t => t.ID.ToString()).ToList());
+			}
 		}
 
 		private void Import_Handler(object sender, RoutedEventArgs e)
@@ -31,7 +43,35 @@ namespace Emergence_WPF.Views.Others
 
 		private void Search_Handler(object sender, RoutedEventArgs e)
 		{
+			ViewModel.PageIndex = 1;
+			GetTeams();
+		}
 
+		private void GetTeams()
+		{
+			var teams = TeamService.GetTeam(ViewModel.PageIndex, ViewModel.PageSize, ViewModel.QueryTeamName, ViewModel.QueryChargeName, ViewModel.QueryDepartment);
+			ViewModel.Teams = new ObservableCollection<Emergence.Common.Model.TeamModel>(teams.Data.Select(o => o.CreateAopProxy()));
+			ViewModel.PageIndex = teams.PageIndex;
+			ViewModel.PageSize = teams.PageSize;
+			ViewModel.TotalCount = teams.Count;
+			ViewModel.TotalPage = teams.PageSize == 0 ? 0 : (int)Math.Ceiling((double)teams.Count / teams.PageSize);
+		}
+
+		private void Pager_OnPageChanged(object sender, PageChangedEventArg e)
+		{
+			GetTeams();
+		}
+
+		private void Page_Loaded(object sender, RoutedEventArgs e)
+		{
+			if (ViewModel == null)
+			{
+				ViewModel = new TeamListPageViewModel().CreateAopProxy();
+				ViewModel.PageIndex = 1;
+				ViewModel.PageSize = 10;
+				DataContext = ViewModel;
+			}
+			GetTeams();
 		}
 	}
 }

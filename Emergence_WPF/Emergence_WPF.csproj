@@ -237,6 +237,9 @@
     <Compile Include="Views\MainPage\Weather.xaml.cs">
       <DependentUpon>Weather.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Others\TeamDetailPage.xaml.cs">
+      <DependentUpon>TeamDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Others\TeamListPage.xaml.cs">
       <DependentUpon>TeamListPage.xaml</DependentUpon>
     </Compile>
@@ -434,6 +437,10 @@
     <Page Include="Views\MainPage\Video.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Others\TeamDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Others\TeamListPage.xaml">
       <SubType>Designer</SubType>

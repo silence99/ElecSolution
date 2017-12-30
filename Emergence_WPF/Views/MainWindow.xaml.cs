@@ -95,11 +95,8 @@ namespace Emergence_WPF
 		private void Image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			maingrid.Children.Clear();
-			var Navigation = new NotificationNavigation();
-			var ff = this.ActualWidth - 1000;
-			var hh = this.ActualHeight - 630;
-			Navigation.bind(1000 + ff, 550 + hh);
-			maingrid.Children.Add(Navigation);
+			frmMain.NavigationService.Navigate(new Uri(@".\Views\Others\TeamListPage.xaml", UriKind.Relative));
+			frmMain.NavigationService.Refresh();
 		}
 
 		private void Image_MouseLeftButtonDown_2(object sender, MouseButtonEventArgs e)

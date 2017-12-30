@@ -5,17 +5,18 @@ namespace Emergence.Common.Model
 {
 	public class TeamModel : NotificationObject
 	{
+		public virtual bool IsChecked { get; set; }
 		[JsonProperty("id")]
-		public long ID { get; set; }
+		public virtual long ID { get; set; }
 		[JsonProperty("personCharge")]
-		public string PersonCharge { get; set; }
+		public virtual string PersonCharge { get; set; }
 		[JsonProperty("personChargePhone")]
-		public string PersonChargePhone { get; set; }
+		public virtual string PersonChargePhone { get; set; }
 		[JsonProperty("teamDept")]
-		public string TeamDept { get; set; }
+		public virtual string TeamDept { get; set; }
 		[JsonProperty("teamName")]
-		public string TeamName { get; set; }
+		public virtual string TeamName { get; set; }
 		[JsonProperty("totalNumber")]
-		public int TotalNumber { get; set; }
+		public virtual int TotalNumber { get; set; }
 	}
 }

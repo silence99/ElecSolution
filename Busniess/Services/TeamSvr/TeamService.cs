@@ -12,11 +12,30 @@ namespace Busniess.Services.Team
 	{
 		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-		public EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetTeam(int pageIndex, int pageSize, string teamName, string personCharge, string teamDept)
+		public EmergencyHttpListResult<TeamModel> GetTeam(int pageIndex, int pageSize)
+		{
+			return GetTeam(pageIndex, pageSize, string.Empty, string.Empty, string.Empty);
+		}
+
+		public EmergencyHttpListResult<TeamModel> GetTeam(int pageIndex, int pageSize, string teamName, string personCharge, string teamDept)
+		{
+			var response = GetTeamData(pageIndex, pageSize, teamName, personCharge, teamDept);
+			if (response.Code != 1)
+			{
+				Util.ShowError(string.Format("获取统计信息失败：{0}", response.Message));
+				return null;
+			}
+			else
+			{
+				return response.Result;
+			}
+		}
+
+		public EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetTeamData(int pageIndex, int pageSize, string teamName, string personCharge, string teamDept)
 		{
 			try
 			{
-				string serviceName = ConfigurationManager.AppSettings["subEventListApi"] ?? "getChildEventList";
+				string serviceName = ConfigurationManager.AppSettings["getTeamListApi"] ?? "getTeamList";
 				Dictionary<string, string> pairs = new Dictionary<string, string>()
 													{
 														{ "pageIndex", pageIndex.ToString() },
@@ -43,7 +62,7 @@ namespace Busniess.Services.Team
 			}
 		}
 
-		public EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetUnbindedTeam(int pageIndex, int pageSize)
+		public EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetUnbindedTeamData(int pageIndex, int pageSize)
 		{
 			try
 			{
@@ -71,7 +90,7 @@ namespace Busniess.Services.Team
 			}
 		}
 
-		public EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetbindingTeam(int pageIndex, int pageSize, long childEventId)
+		public EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetbindingTeamData(int pageIndex, int pageSize, long childEventId)
 		{
 			try
 			{
@@ -188,7 +207,7 @@ namespace Busniess.Services.Team
 			}
 		}
 
-		public bool UpdateTeam(long id, string teamName, string charge, string chargePhone, string teamDept  )
+		public bool UpdateTeam(long id, string teamName, string charge, string chargePhone, string teamDept)
 		{
 			string serviceName = ConfigurationManager.AppSettings["teamApi"] ?? "team";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()
