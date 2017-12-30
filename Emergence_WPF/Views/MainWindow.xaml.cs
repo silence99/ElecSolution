@@ -67,7 +67,7 @@ namespace Emergence_WPF
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			// show main page first
-			ShowMainPage();
+			//ShowMainPage();
 		}
 
 		/// <summary>
@@ -108,14 +108,16 @@ namespace Emergence_WPF
 			center.ShowDialog();
 		}
 
-		private void Image_MouseLeftButtonDown_3(object sender, MouseButtonEventArgs e)
+		private void GraphBtn_Click(object sender, MouseButtonEventArgs e)
 		{
-			maingrid.Children.Clear();
-			var report = new ReportCenter();
-			var ff = this.ActualWidth - 1000;
-			var hh = this.ActualHeight - 630;
-			report.bind(1000 + ff, 550 + hh);
-			maingrid.Children.Add(report);
+            this.frmMain.Navigate(new System.Uri(@".\Views\Event\MasterEventDetail.xaml", UriKind.Relative));
+            
+			//maingrid.Children.Clear();
+			//var report = new ReportCenter();
+			//var ff = this.ActualWidth - 1000;
+			//var hh = this.ActualHeight - 630;
+			//report.bind(1000 + ff, 550 + hh);
+			//maingrid.Children.Add(report);
 		}
 
 		/// <summary>

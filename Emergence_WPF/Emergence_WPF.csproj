@@ -206,6 +206,9 @@
     <Compile Include="Views\Event\MasterEventDetail.xaml.cs">
       <DependentUpon>MasterEventDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Event\MasterEventDetail1.xaml.cs">
+      <DependentUpon>MasterEventDetail1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Event\SubEventDetail.xaml.cs">
       <DependentUpon>SubEventDetail.xaml</DependentUpon>
     </Compile>
@@ -362,6 +365,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Event\MasterEventDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Event\MasterEventDetail1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
