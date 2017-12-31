@@ -79,7 +79,8 @@ namespace Emergence_WPF.Views.Others
 
 		private void Edit_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-			ViewModel.CurrentTeam = (sender as Control).DataContext as TeamModel;
+			ViewModel.CurrentTeam = (sender as Image).DataContext as TeamModel;
+			ViewModel.IsPopoupOpen = true;
 		}
 	}
 }

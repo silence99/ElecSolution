@@ -17,7 +17,7 @@ namespace Emergence.Business.ViewModel
 		public virtual TeamModel CurrentTeam { get; set; }
 		public virtual double PopupWidth { get; set; }
 		public virtual double PopupHeight { get; set; }
-		
+		public virtual bool IsPopoupOpen { get; set; }
 
 		public TeamListPageViewModel()
 		{
@@ -25,6 +25,7 @@ namespace Emergence.Business.ViewModel
 			PageSize = 10;
 			TotalCount = 0;
 			TotalPage = 0;
+			IsPopoupOpen = false;
 		}
 	}
 }

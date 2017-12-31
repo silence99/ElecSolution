@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <objects xmlns="http://www.springframework.net">
-  <object id="mainWindowUiModel" type="Emergence.Business.ViewModel.MainPageUiModel, Emergence.Common">
+  <object id="mainWindowUiModel" type="Emergence.Business.ViewModel.MainWindowUiModel, Busniess">
     <!--<property name="Left" value="1.0"/>
     <property name="WindowState">
       <value type="System.Windows.WindowState">Normal</value>
