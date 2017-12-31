@@ -155,11 +155,12 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="0" >
                             <TextBlock Text="序号" HorizontalAlignment="Left" Padding="0,5,5,5" Margin="20,37,10,0"/>
-                            <TextBox Name="SerialNumberTextBox" Text="{Binding Path=_txtSerialNumber, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5" VerticalContentAlignment="Center"/>
+                            <TextBox Name="SerialNumberTextBox" Text="{Binding Path=TxtTitle, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5" VerticalContentAlignment="Center"/>
+                            <!--<TextBox Name="SerialNumberTextBox" Text="{Binding Path=_txtSerialNumber, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5" VerticalContentAlignment="Center"/>-->
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="1" Grid.Row="0" >
                             <TextBlock Text="标题" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
-                            <TextBox Name="TitleTextBox" Text="{Binding Path=_txtTitle, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
+                            <TextBox Name="TitleTextBox" Text="{Binding Path=TxtTitle, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="2" Grid.Row="0" >
                             <TextBlock Text="时间点" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>

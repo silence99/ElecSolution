@@ -18,6 +18,19 @@ namespace Emergence.Business.ViewModel
 		public virtual double PopupWidth { get; set; }
 		public virtual double PopupHeight { get; set; }
 		public virtual bool IsPopoupOpen { get; set; }
+		public virtual bool IsPageEnabled { get; set; }
+
+		public void PopupTeamEdit()
+		{
+			IsPopoupOpen = true;
+			IsPageEnabled = false;
+		}
+
+		public void ClosePopup()
+		{
+			IsPopoupOpen = false;
+			IsPageEnabled = true;
+		}
 
 		public TeamListPageViewModel()
 		{
@@ -26,6 +39,9 @@ namespace Emergence.Business.ViewModel
 			TotalCount = 0;
 			TotalPage = 0;
 			IsPopoupOpen = false;
+			IsPageEnabled = true;
+			PopupWidth = 640;
+			PopupHeight = 360;
 		}
 	}
 }

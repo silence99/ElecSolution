@@ -14,6 +14,10 @@
                 <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary Source="../../style/Generic.xaml"/>
                 </ResourceDictionary.MergedDictionaries>
+                <Style TargetType="Label" x:Key="PopupLable">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
             </ResourceDictionary>
         </Grid.Resources>
         <Grid.RowDefinitions>
@@ -21,11 +25,30 @@
             <RowDefinition Height="18.6*"/>
             <RowDefinition Height="73.4*"/>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Column="0" Grid.Row="0" Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" >
+        <DockPanel Grid.Column="0" Grid.Row="0" Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" IsEnabled="{Binding Path=IsPageEnabled}">
+            <DockPanel.Style>
+                <Style TargetType="DockPanel">
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="#005651"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DockPanel.Style>
             <Label Name="TeamListTitle" Margin="20,0,0,0" Style="{StaticResource SelectedLabel}">队伍列表</Label>
-            <Label Name="MaterialListTile">物资列表</Label>
+            <Label Name="MaterialListTile" MouseLeftButtonUp="NavigateToMaterialPage_Handler">物资列表</Label>
         </DockPanel>
-        <DockPanel Grid.Column="0" Grid.Row="1" Background="White">
+        <DockPanel Grid.Column="0" Grid.Row="1" Background="White" IsEnabled="{Binding Path=IsPageEnabled}">
+            <DockPanel.Style>
+                <Style TargetType="DockPanel">
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="Black"/>
+                            <Setter Property="Opacity" Value="0.7"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DockPanel.Style>
             <Border DockPanel.Dock="Top" Margin="20, 21, 20, 20" CornerRadius="10">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.75"/>
@@ -62,7 +85,7 @@
                 </DockPanel>
             </Border>
         </DockPanel>
-        <DockPanel DockPanel.Dock="Top" Grid.Row="2" Background="White" Name="PanelData">
+        <DockPanel DockPanel.Dock="Top" Grid.Row="2" Background="White" Name="PanelData" IsEnabled="{Binding Path=IsPageEnabled}">
             <DockPanel Margin="20,0,20,0"  DockPanel.Dock="Top" >
                 <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
                     <Button Name="BtnAdd" FontSize="16" Width="82" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="51,0,0,0" Foreground="White" Content="添加" Style="{StaticResource RoundConnerButtonStyle}" Click="Add_Handler">
@@ -93,7 +116,8 @@
                     HorizontalGridLinesBrush="#dcdcdc"
                     VerticalGridLinesBrush="#dcdcdc"
                     BorderBrush="#dcdcdc"
-                    CanUserAddRows="False">
+                    CanUserAddRows="False"
+                      MouseDoubleClick="NavigateToTeamDetailPage_Handler">
                 <DataGrid.Columns >
                     <DataGridTemplateColumn Width="40">
                         <DataGridTemplateColumn.CellTemplate>
@@ -121,35 +145,37 @@
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>
-        <Popup x:Name="PopupEditTeam" Width="{Binding Path=PopupWidth}" Height="{Binding Path= PopupHeight}"  
-                           StaysOpen="True"   
-                           IsOpen="False"   
-                           AllowsTransparency="True"  
-                           PopupAnimation="Slide"  
-                           PlacementTarget="{Binding ElementName=PanelData}"  
-                           Placement="Top"
-               VerticalOffset="-30"
-               HorizontalOffset="360">
-            <DockPanel>
+        <Popup 
+            x:Name="PopupEditTeam" 
+            Width="{Binding Path=PopupWidth}" 
+            Height="{Binding Path= PopupHeight}"  
+            StaysOpen="True"   
+            IsOpen="{Binding Path=IsPopoupOpen}"   
+            AllowsTransparency="True"  
+            PopupAnimation="Slide"  
+            PlacementTarget="{Binding ElementName=PanelData}"  
+            Placement="Top"
+            HorizontalOffset="360">
+            <DockPanel Background="White">
                 <DockPanel DockPanel.Dock="Top" Height="40">
-                    <Label Width="40" Content="X" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+                    <Label Style="{StaticResource PopupLable}" Width="40" Content="X" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" MouseLeftButtonUp="ClosePopup_Handler"/>
                     <Border Width="1" BorderThickness="1" BorderBrush="#D9D9D9" Margin="0,0,0,0" HorizontalAlignment="Left"/>
-                    <Label Content="添加队员" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                    <Button Content="完成" HorizontalAlignment="Right" Margin="0,0,40,0" Width="40"/>
+                    <Label Style="{StaticResource PopupLable}" Content="添加队员" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+                    <Button Content="完成" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,40,0" Width="40" Click="Update_Handler"/>
                 </DockPanel>
                 <Border Margin="2,0,0,0" Background="#F3F3F3" BorderThickness="1">
                     <StackPanel Orientation="Vertical">
                         <DockPanel Height="60" VerticalAlignment="Top">
-                            <Label Content="队伍名称" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5,20,0,0"/>
-                            <Label Content="所属单位" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5, 20, 0, 0"/>
+                            <Label Style="{StaticResource PopupLable}" Content="队伍名称" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"/>
+                            <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5,20,0,0" Text="{Binding Path=CurrentTeam.TeamName, Mode=TwoWay}"/>
+                            <Label Style="{StaticResource PopupLable}" Content="所属单位" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"/>
+                            <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5, 20, 0, 0" Text="{Binding Path=CurrentTeam.TeamDept,Mode=TwoWay}"/>
                         </DockPanel>
                         <DockPanel Height="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,20,0,0">
-                            <Label Content="单位地址" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"/>
+                            <Label Style="{StaticResource PopupLable}" Content="单位地址" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"/>
                             <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5, 0, 0, 0"/>
-                            <Label Content="队长姓名" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left"/>
+                            <Label Style="{StaticResource PopupLable}" Content="队长姓名" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"/>
+                            <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Text="{Binding Path=CurrentTeam.PersonCharge, Mode=TwoWay}"/>
                         </DockPanel>
                     </StackPanel>
                 </Border>

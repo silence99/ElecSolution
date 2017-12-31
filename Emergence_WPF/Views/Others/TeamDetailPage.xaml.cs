@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Emergence_WPF.Comm;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Emergence_WPF.Views.Others
@@ -37,6 +38,15 @@ namespace Emergence_WPF.Views.Others
 		private void Click_SearchTextBox(object sender, RoutedEventArgs e)
 		{
 
+		}
+
+		private void GridTeamList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+
+		}
+
+		private void Pager_OnPageChanged(object sender, PageChangedEventArg e)
+		{
 		}
 	}
 }
