@@ -121,5 +121,10 @@ namespace Emergence_WPF.Views.Others
 			ViewModel.CancelEditButtonVisibility = Visibility.Visible;
 			ViewModel.EditTeamButtonLabel = "更新";
 		}
+
+		private void CompletePersonUpdate_Handler(object sender, RoutedEventArgs e)
+		{
+			ViewModel.ClosePopup();
+		}
 	}
 }
