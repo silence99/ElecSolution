@@ -4,7 +4,7 @@ using Emergence.Common.Model;
 using Framework.Http;
 using System.Collections.Generic;
 
-namespace Busniess.Services.EventSvr
+namespace Busniess.Services
 {
 	public class GetTaskSvr : RemoteService<TaskListResponse, string>
     {

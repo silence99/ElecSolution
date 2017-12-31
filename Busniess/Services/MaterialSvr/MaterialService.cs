@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
 
-namespace Busniess.Services.MaterialSvr
+namespace Busniess.Services
 {
 	public class MaterialService
 	{

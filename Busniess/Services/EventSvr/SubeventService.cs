@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Reflection;
 
-namespace Busniess.Services.EventSvr
+namespace Busniess.Services
 {
 	public class SubeventService
 	{

@@ -10,7 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml;
 
-namespace Busniess.Services.EventSvr
+namespace Busniess.Services
 {
 	public class MasterEventService
 	{

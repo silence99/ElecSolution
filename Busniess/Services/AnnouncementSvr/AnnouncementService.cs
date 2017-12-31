@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Busniess.Services.AnnouncementSvr
+namespace Busniess.Services
 {
 	public class AnnouncementService
 	{

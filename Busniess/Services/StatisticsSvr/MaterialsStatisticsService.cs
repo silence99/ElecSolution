@@ -5,7 +5,7 @@ using System;
 using System.Configuration;
 using System.Reflection;
 
-namespace Busniess.Services.StatisticsSvr
+namespace Busniess.Services
 {
 	public class MaterialsStatisticsService
 	{

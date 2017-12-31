@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <objects xmlns="http://www.springframework.net">
-  <object id="masterEventService" type="Busniess.Services.EventSvr.MasterEventService, Busniess"></object>
+  <object id="masterEventService" type="Busniess.Services.MasterEventService, Busniess"></object>
   <object id="weatherService" type="Business.MainPageSvr.WeatherService, Busniess"></object>
   <object id="loginService" type="Business.MainPageSvr.LoginServices, Busniess"></object>
-  <object id="subeventService" type="Busniess.Services.EventSvr.SubeventService, Busniess"></object>
-  <object id="teamStatisticsService" type="Busniess.Services.StatisticsSvr.TeamStatisticsService, Busniess"></object>
+  <object id="subeventService" type="Busniess.Services.SubeventService, Busniess"></object>
+  <object id="teamStatisticsService" type="Busniess.Servicesss.TeamStatisticsService, Busniess"></object>
 </objects>
 
