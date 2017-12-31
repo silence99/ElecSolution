@@ -4,7 +4,7 @@ namespace Emergence.Common.Model
 {
 	public class PersonModel
 	{
-
+		public virtual bool IsChecked { get; set; }
 		[JsonProperty("id")]
 		public virtual long ID { get; set; }
 		[JsonProperty("name")]
