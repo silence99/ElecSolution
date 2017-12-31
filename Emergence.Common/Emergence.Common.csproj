@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommHelp.cs" />
+    <Compile Include="Data\Enumerator.cs" />
     <Compile Include="Model\DictItem.cs" />
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\LoginInModel.cs" />
@@ -78,5 +79,6 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

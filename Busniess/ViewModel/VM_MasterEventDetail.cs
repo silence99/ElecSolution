@@ -39,7 +39,7 @@ namespace Emergence.Business.ViewModel
 
 
         #region [Command]
-        public DelegateCommand<string> SearchSubEventListCommand { get; set; }
+        public DelegateCommand SearchSubEventListCommand { get; private set; }
         #endregion
 
         public VM_MasterEventDetail(MasterEvent mEvent)
@@ -49,7 +49,7 @@ namespace Emergence.Business.ViewModel
             teamService = new TeamService();
             materialService = new MaterialService();
 
-            SearchSubEventListCommand = new DelegateCommand<string>(SerachSubEventListAction);
+            SearchSubEventListCommand = new DelegateCommand(SerachSubEventListAction);
 
             if (mEvent != null)
             {
@@ -70,9 +70,9 @@ namespace Emergence.Business.ViewModel
 
 
         #region [Private Method]
-        private void SerachSubEventListAction(string searchCondition)
+        public void SerachSubEventListAction()
         {
-            var subEvents = subEventService.GetSubevents(0, 1000, this.MasterEventInfo.ID, searchCondition).Result;
+            var subEvents = subEventService.GetSubevents(0, 1000, this.MasterEventInfo.ID, "").Result;
             SubEventList = new ObservableCollection<SubEvent>(subEvents.Data.Select(o => o.CreateAopProxy()));
         }
         

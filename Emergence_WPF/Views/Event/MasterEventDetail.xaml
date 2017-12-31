@@ -275,7 +275,7 @@
                 <TextBox Grid.Row="0" Style="{StaticResource TextBoxSearch}"></TextBox>
                 <DockPanel Grid.Row="2">
                     <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" FontSize="20px" Margin="28 0 0 0"  Content="子事件列表"></Label>
-                    <Button Style="{StaticResource ImageButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 14 0" Command="{Binding SearchSubEventListCommand}" Click="Button_Click"/>
+                    <Button Style="{StaticResource ImageButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 14 0" Command="{Binding SearchSubEventListCommand}"/>
                     <!--<Image DockPanel.Dock="Right" Width="18" Height="18" Margin="0 0 -150 0" Source="/Image/Common/Icon_Create.png"/>-->
                 </DockPanel>
                 <DockPanel Grid.Row="3">

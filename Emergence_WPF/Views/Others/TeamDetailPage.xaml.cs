@@ -1,5 +1,4 @@
 ﻿using Busniess.Services;
-using Busniess.Services.TeamSvr;
 using Emergence.Business.ViewModel;
 using Emergence.Common.Model;
 using Emergence_WPF.Comm;

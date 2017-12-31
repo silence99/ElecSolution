@@ -4,7 +4,7 @@ using log4net;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Busniess.Services.TeamSvr
+namespace Busniess.Services
 {
 	public class PersonService
 	{
