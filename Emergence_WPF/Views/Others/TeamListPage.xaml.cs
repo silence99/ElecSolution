@@ -81,7 +81,6 @@ namespace Emergence_WPF.Views.Others
 		{
 			ViewModel.CurrentTeam = (sender as Image).DataContext as TeamModel;
 			ViewModel.PopupTeamEdit();
-			GetTeams();
 		}
 
 		private void NavigateToMaterialPage_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -110,7 +109,7 @@ namespace Emergence_WPF.Views.Others
 
 		private void NavigateToTeamDetailPage_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-			NavigationService.Navigate(new Uri("./Views/Others/TeamDetailPage.xaml", UriKind.Relative));
+			NavigationService.Navigate(new TeamDetailPage(GridTeamList.SelectedItem as TeamModel));
 		}
 	}
 }

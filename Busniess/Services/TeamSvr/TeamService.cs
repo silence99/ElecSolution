@@ -31,7 +31,7 @@ namespace Busniess.Services
 			}
 		}
 
-		public EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetTeamData(int pageIndex, int pageSize, string teamName, string personCharge, string teamDept)
+		private EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetTeamData(int pageIndex, int pageSize, string teamName, string personCharge, string teamDept)
 		{
 			try
 			{
@@ -62,7 +62,7 @@ namespace Busniess.Services
 			}
 		}
 
-		public EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetUnbindedTeamData(int pageIndex, int pageSize)
+		private EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetUnbindedTeamData(int pageIndex, int pageSize)
 		{
 			try
 			{
@@ -90,7 +90,7 @@ namespace Busniess.Services
 			}
 		}
 
-		public EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetbindingTeamData(int pageIndex, int pageSize, long childEventId)
+		private EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetbindingTeamData(int pageIndex, int pageSize, long childEventId)
 		{
 			try
 			{
@@ -287,6 +287,16 @@ namespace Busniess.Services
 
 				return success;
 			}
+		}
+
+		public EmergencyHttpListResult<PersonModel> GetTeamPersons(int pageIndex, int pageSize, long teamId, string Name = "")
+		{
+			return null;
+		}
+
+		public bool DeleteTeamMembers(List<string> ids)
+		{
+			return true;
 		}
 	}
 }

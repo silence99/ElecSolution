@@ -1,5 +1,6 @@
 ﻿using Emergence.Common.Model;
-using Emergence.Common.Model;
+using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace Emergence.Business.ViewModel
 {
@@ -9,6 +10,28 @@ namespace Emergence.Business.ViewModel
 		public virtual int PageIndex { get; set; }
 		public virtual int TotalCount { get; set; }
 		public virtual int TotalPage { get; set; }
+		public virtual ObservableCollection<PersonModel> Members { get; set; }
+
+		public virtual double PopupWidth { get; set; }
+		public virtual double PopupHeight { get; set; }
+		public virtual bool IsPopoupOpen { get; set; }
+		public virtual bool IsPageEnabled { get; set; }
+		public virtual PersonModel CurrentPerson { get; set; }
+		public virtual bool IsTeamEditModel { get; set; }
+		public virtual Visibility CancelEditButtonVisibility { get; set; }
+		public virtual string EditTeamButtonLabel { get; set; }
+
+		public void PopupTeamEdit()
+		{
+			IsPopoupOpen = true;
+			IsPageEnabled = false;
+		}
+
+		public void ClosePopup()
+		{
+			IsPopoupOpen = false;
+			IsPageEnabled = true;
+		}
 
 		public TeamDetailPageViewModel()
 		{
@@ -16,6 +39,9 @@ namespace Emergence.Business.ViewModel
 			PageSize = 10;
 			TotalCount = 0;
 			TotalPage = 0;
+			IsPopoupOpen = false;
+			IsPageEnabled = true;
+			EditTeamButtonLabel = "编辑"; //1.编辑 2.更新
 		}
 	}
 }
