@@ -8,22 +8,25 @@ using System.Text;
 using System.Threading.Tasks;
 using Emergence.Common.Data;
 using Busniess.Services;
+using Prism.Commands;
 
 namespace Emergence.Business.ViewModel
 {
     public class VM_MasterEventDetail : NotificationObject
     {
+        #region [Services]
         MasterEventService masterEventService;
         SubeventService subEventService;
         TeamService teamService;
         MaterialService materialService;
+        #endregion
 
-
-        public virtual MasterEvent MasterEventInfo { get => MasterEventInfo; set => MasterEventInfo = value; }
+        #region [Property]
+        public virtual MasterEvent MasterEventInfo { get; set; }
 
         public virtual string SubEventSearchValue { get; set; }
 
-        public virtual ObservableCollection<SubEvent> SubEventList { get => SubEventList; set => SubEventList = value; }
+        public virtual ObservableCollection<SubEvent> SubEventList { get; set; }
 
         public virtual SubEvent SubEventDetail { get; set; }
 
@@ -32,13 +35,26 @@ namespace Emergence.Business.ViewModel
         public virtual ObservableCollection<TeamModel> TeamList { get; set; }
 
         public virtual ObservableCollection<MaterialModel> MaterialList { get; set; }
+        #endregion
 
-        public VM_MasterEventDetail()
+
+        #region [Command]
+        public DelegateCommand<string> SearchSubEventListCommand { get; set; }
+        #endregion
+
+        public VM_MasterEventDetail(MasterEvent mEvent)
         {
             masterEventService = new MasterEventService();
             subEventService = new SubeventService();
             teamService = new TeamService();
             materialService = new MaterialService();
+
+            SearchSubEventListCommand = new DelegateCommand<string>(SerachSubEventListAction);
+
+            if (mEvent != null)
+            {
+                InitializVM(mEvent);
+            }
         }
 
         #region [Public Method]
@@ -51,8 +67,15 @@ namespace Emergence.Business.ViewModel
 
         #endregion
 
-        #region [Private Method]
 
+
+        #region [Private Method]
+        private void SerachSubEventListAction(string searchCondition)
+        {
+            var subEvents = subEventService.GetSubevents(0, 1000, this.MasterEventInfo.ID, searchCondition).Result;
+            SubEventList = new ObservableCollection<SubEvent>(subEvents.Data.Select(o => o.CreateAopProxy()));
+        }
+        
         #endregion
     }
 

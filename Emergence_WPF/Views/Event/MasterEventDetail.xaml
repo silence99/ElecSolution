@@ -45,8 +45,7 @@
         </Style>
         <!--Search button with icon style-->
         <Style  x:Key="TextBoxSearch" TargetType="{x:Type TextBox}">
-            <Setter Property="Width" Value="280"/>
-            <Setter Property="Height" Value="41"/>
+            <Setter Property="Margin" Value="30 15 30 15"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
@@ -161,6 +160,19 @@
                 </Style>
             </Style.Resources>
         </Style>
+        <Style x:Key="ButtonImage" TargetType="{x:Type Image}">
+            <Setter Property="Height" Value="18px"/>
+            <Setter Property="Width" Value="18px"/>
+        </Style>
+        <Style x:Key="ImageButton" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Image Height="18px" Width="18px" Source="/Image/Common/Icon_Create.png" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
     <Grid>
         <Grid Name="Grid_MasterEventDetail" ShowGridLines="False" Background="White">
@@ -263,7 +275,8 @@
                 <TextBox Grid.Row="0" Style="{StaticResource TextBoxSearch}"></TextBox>
                 <DockPanel Grid.Row="2">
                     <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" FontSize="20px" Margin="28 0 0 0"  Content="子事件列表"></Label>
-                    <Image DockPanel.Dock="Right" Width="18" Height="18" Margin="0 0 -150 0" Source="/Image/Common/Icon_Create.png"/>
+                    <Button Style="{StaticResource ImageButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 14 0" Command="{Binding SearchSubEventListCommand}" Click="Button_Click"/>
+                    <!--<Image DockPanel.Dock="Right" Width="18" Height="18" Margin="0 0 -150 0" Source="/Image/Common/Icon_Create.png"/>-->
                 </DockPanel>
                 <DockPanel Grid.Row="3">
                     <DataGrid  DockPanel.Dock="Top" Name="Grid_SubEventList" CanUserAddRows="False"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Auto"  

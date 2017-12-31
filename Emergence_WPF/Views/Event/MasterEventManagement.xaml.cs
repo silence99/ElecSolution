@@ -22,7 +22,7 @@ namespace Emergence_WPF
 	/// <summary>
 	/// Interaction logic for MasterEventManagement.xaml
 	/// </summary>
-	public partial class MasterEventManagement : UserControl
+	public partial class MasterEventManagement : Page
 	{
 		Emergence.Business.ViewModel.VM_MasterEventManagement ViewModel;
 		MasterEventService MasterEventService;
@@ -38,7 +38,7 @@ namespace Emergence_WPF
 		}
 
 
-		private void UserControl_Loaded(object sender, RoutedEventArgs e)
+		private void Page_Loaded(object sender, RoutedEventArgs e)
 		{
 			ViewModel = new VM_MasterEventManagement().CreateAopProxy();
 			MasterEventService = new MasterEventService();
@@ -107,7 +107,8 @@ namespace Emergence_WPF
 		{
 			var dg = e.Source as DataGrid;
 			MasterEvent me = dg.SelectedItem as MasterEvent;
-			GoToDetail?.Invoke(me);
+            this.NavigationService.Navigate(new MasterEventDetail(me));
+			//GoToDetail?.Invoke(me);
 		}
 
 		private void Btn_CreateMasterEvent_Click(object sender, RoutedEventArgs e)
@@ -121,5 +122,6 @@ namespace Emergence_WPF
 			var events = ViewModel.MasterEvents.Where(ent => ent.IsChecked).Select(ent => (long)ent.ID).ToList();
 			MasterEventService.UpdateMasterEventState(events, 9); // state:9 删除, 1 归档, 0 正常
 		}
-	}
+        
+    }
 }

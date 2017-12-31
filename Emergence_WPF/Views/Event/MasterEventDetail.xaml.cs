@@ -26,17 +26,21 @@ namespace Emergence_WPF
         VM_MasterEventDetail ViewModel;
         //Material
 
-        public MasterEventDetail(string masterEventID)
+        public MasterEventDetail(MasterEvent masterEventID)
         {
             InitializeComponent();
 
-            ViewModel = new VM_MasterEventDetail().CreateAopProxy();
+            ViewModel = new VM_MasterEventDetail(masterEventID).CreateAopProxy();
             this.DataContext = ViewModel;
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
         }
-        
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

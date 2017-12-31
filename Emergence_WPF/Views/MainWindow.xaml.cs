@@ -82,7 +82,9 @@ namespace Emergence_WPF
 
 		private void MasterEventBtn_Click(object sender, MouseButtonEventArgs e)
 		{
-			GoToMasterEventMangementPage();
+            MasterEventManagement mem = new MasterEventManagement();
+            frmMain.NavigationService.Navigate(new MasterEventManagement());
+			//GoToMasterEventMangementPage();
 		}
 
 		private void LogoutBtn_Click(object sender, MouseButtonEventArgs e)
@@ -94,7 +96,7 @@ namespace Emergence_WPF
 
 		private void Image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
 		{
-			maingrid.Children.Clear();
+			//maingrid.Children.Clear();
 			frmMain.NavigationService.Navigate(new Uri(@".\Views\Others\TeamListPage.xaml", UriKind.Relative));
 			frmMain.NavigationService.Refresh();
 		}
@@ -107,12 +109,12 @@ namespace Emergence_WPF
 
 		private void Image_MouseLeftButtonDown_3(object sender, MouseButtonEventArgs e)
 		{
-			maingrid.Children.Clear();
+			//maingrid.Children.Clear();
 			var report = new ReportCenter();
 			var ff = this.ActualWidth - 1000;
 			var hh = this.ActualHeight - 630;
 			report.bind(1000 + ff, 550 + hh);
-			maingrid.Children.Add(report);
+			//maingrid.Children.Add(report);
 		}
 
 		/// <summary>
@@ -122,18 +124,18 @@ namespace Emergence_WPF
 		{
 			// get panel, binding panel ui model, add to main window
 			var mainPage = ObjectFactory.GetInstance<UserControl_MainPage>("mainPagePanel");
-			maingrid.Children.Clear();
-			maingrid.Children.Add(mainPage);
+			//maingrid.Children.Clear();
+			//maingrid.Children.Add(mainPage);
 		}
 
 		private void GoToMasterEventMangementPage()
 		{
-			maingrid.Children.Clear();
-			MasterEventManagement information = new MasterEventManagement();
-			CurrentPage = information;
-			information.GoToDetail += GotoMasterEventDetailPage;
+			//maingrid.Children.Clear();
+			//MasterEventManagement information = new MasterEventManagement();
+			//CurrentPage = information;
+			//information.GoToDetail += GotoMasterEventDetailPage;
 
-			maingrid.Children.Add(information);
+			//maingrid.Children.Add(information);
 		}
 
 
