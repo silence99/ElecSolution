@@ -12,12 +12,12 @@ namespace Busniess.Services
 	{
 		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-		public EmergencyHttpResponse<EmergencyHttpListResult<SubEvent>> GetSubevents(int pageIndex, int pageSize, long mainEventId)
+		public EmergencyHttpResponse<EmergencyHttpListResult<SubEvent>> GetSubevents(int pageIndex, int pageSize, int mainEventId)
 		{
 			return GetSubevents(pageIndex, pageSize, mainEventId, string.Empty);
 		}
 
-		public EmergencyHttpResponse<EmergencyHttpListResult<SubEvent>> GetSubevents(int pageIndex, int pageSize, long mainEventId, string title)
+		public EmergencyHttpResponse<EmergencyHttpListResult<SubEvent>> GetSubevents(int pageIndex, int pageSize, int mainEventId, string title)
 		{
 			try
 			{

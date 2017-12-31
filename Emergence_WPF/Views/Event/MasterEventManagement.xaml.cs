@@ -14,6 +14,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Emergence.Business.ViewModel;
 
 
 namespace Emergence_WPF
@@ -39,7 +40,7 @@ namespace Emergence_WPF
 
 		private void UserControl_Loaded(object sender, RoutedEventArgs e)
 		{
-			ViewModel = new Emergence.Business.ViewModel.VM_MasterEventManagement().CreateAopProxy();
+			ViewModel = new VM_MasterEventManagement().CreateAopProxy();
 			MasterEventService = new MasterEventService();
 			RequestMasterEventList();
 			this.DataContext = ViewModel;
