@@ -90,7 +90,7 @@
                 </local1:Pager>
             </DockPanel>
             <DataGrid DockPanel.Dock="Top" Margin="20,0,20,0"
-                                      Name="Grid_MasterEvent" 
+                                      Name="GridTeamList" 
                                       ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                                       ScrollViewer.VerticalScrollBarVisibility="Auto" 
                                       RowHeaderWidth="0" HeadersVisibility="Column"
@@ -104,7 +104,8 @@
                                       HorizontalGridLinesBrush="#dcdcdc"
                                       VerticalGridLinesBrush="#dcdcdc"
                                       BorderBrush="#dcdcdc"
-                                      CanUserAddRows="False">
+                                      CanUserAddRows="False"
+                      MouseDoubleClick="GridTeamList_MouseDoubleClick">
                 <DataGrid.Columns >                    
                     <DataGridTemplateColumn Width="40">
                         <DataGridTemplateColumn.CellTemplate>

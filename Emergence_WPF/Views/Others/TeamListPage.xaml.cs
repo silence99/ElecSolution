@@ -30,6 +30,7 @@ namespace Emergence_WPF.Views.Others
 			{
 				TeamService.DeleteTeam(teams.Select(t => t.ID.ToString()).ToList());
 			}
+			GetTeams();
 		}
 
 		private void Import_Handler(object sender, RoutedEventArgs e)
@@ -39,14 +40,13 @@ namespace Emergence_WPF.Views.Others
 
 		private void Add_Handler(object sender, RoutedEventArgs e)
 		{
-
+			ViewModel.CurrentTeam = new TeamModel();
+			ViewModel.PopupTeamEdit();
 		}
 
 		private void Search_Handler(object sender, RoutedEventArgs e)
 		{
 			ViewModel.PageIndex = 1;
-			ViewModel.PopupWidth = 640;
-			ViewModel.PopupHeight = 360;
 			GetTeams();
 		}
 
@@ -80,7 +80,37 @@ namespace Emergence_WPF.Views.Others
 		private void Edit_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
 			ViewModel.CurrentTeam = (sender as Image).DataContext as TeamModel;
-			ViewModel.IsPopoupOpen = true;
+			ViewModel.PopupTeamEdit();
+			GetTeams();
+		}
+
+		private void NavigateToMaterialPage_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			NavigationService.Navigate(new Uri("./Views/Others/MaterialListPage.xaml", UriKind.Relative));
+		}
+
+		private void Update_Handler(object sender, RoutedEventArgs e)
+		{
+			ViewModel.ClosePopup();
+			if (ViewModel.CurrentTeam.ID == 0)
+			{
+				TeamService.CreateTeam(ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept);
+			}
+			else
+			{
+				TeamService.UpdateTeam(ViewModel.CurrentTeam.ID, ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept);
+			}
+			GetTeams();
+		}
+
+		private void ClosePopup_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			ViewModel.ClosePopup();
+		}
+
+		private void NavigateToTeamDetailPage_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			NavigationService.Navigate(new Uri("./Views/Others/TeamDetailPage.xaml", UriKind.Relative));
 		}
 	}
 }

@@ -79,7 +79,7 @@ namespace Busniess.CommonControl
 		{
 			HttpHelper helper = new HttpHelper();
 			var head = useCommonHead ? GetCommonHead(serviceName, method) : new WebHeaderCollection();
-			var isGet = method.Trim().ToUpper() == "GET";
+			var isGet = method.Trim().ToUpper() != "POST";
 			var url = isGet ? GetUrl(serviceName, param) : GetUrl(serviceName, null);
 			if (extendHead != null)
 			{
