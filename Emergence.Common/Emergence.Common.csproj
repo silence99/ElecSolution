@@ -79,6 +79,18 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="DLL\Iesi.Collections.dll" />
+    <Content Include="DLL\Microsoft.Expression.Interactions.dll" />
+    <Content Include="DLL\Microsoft.Practices.EnterpriseLibrary.Common.dll" />
+    <Content Include="DLL\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll" />
+    <Content Include="DLL\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll" />
+    <Content Include="DLL\Microsoft.Practices.EnterpriseLibrary.Logging.dll" />
+    <Content Include="DLL\Microsoft.Practices.Prism.dll" />
+    <Content Include="DLL\Microsoft.Practices.Prism.UnityExtensions.dll" />
+    <Content Include="DLL\Microsoft.Practices.Unity.dll" />
+    <Content Include="DLL\Microsoft.Practices.Unity.Interception.dll" />
+    <Content Include="DLL\System.Windows.Interactivity.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

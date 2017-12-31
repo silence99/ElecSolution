@@ -225,12 +225,12 @@
                         <Label Grid.Column="0" Grid.Row="5" Style="{StaticResource MasterEventDetailLeftLabel}" >地址</Label>
                         <Label Grid.Column="0" Grid.Row="6" Style="{StaticResource MasterEventDetailLeftLabel}" >描述</Label>
 
-                        <Label Grid.Column="1" Grid.Row="1" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventDetail.Title}" />
-                        <Label Grid.Column="1" Grid.Row="2" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventDetail.Title}" />
-                        <Label Grid.Column="1" Grid.Row="3" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventDetail.Title}" />
-                        <Label Grid.Column="1" Grid.Row="4" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventDetail.Title}" />
-                        <Label Grid.Column="1" Grid.Row="5" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventDetail.Title}" />
-                        <Label Grid.Column="1" Grid.Row="6" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventDetail.Title}" />
+                        <Label Grid.Column="1" Grid.Row="1" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.Title}" />
+                        <Label Grid.Column="1" Grid.Row="2" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.GradeName}" />
+                        <Label Grid.Column="1" Grid.Row="3" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.eventTypeName}" />
+                        <Label Grid.Column="1" Grid.Row="4" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.Time}" />
+                        <Label Grid.Column="1" Grid.Row="5" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.Locale}" />
+                        <Label Grid.Column="1" Grid.Row="6" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.Remarks}" />
                     </Grid>
                 </Border>
                 <Border Name="LeftGridRow3Border" BorderBrush="#4D9A96" BorderThickness="0 0 0 2" Grid.Column="0" Grid.Row="2">
@@ -275,7 +275,7 @@
                 <TextBox Grid.Row="0" Style="{StaticResource TextBoxSearch}"></TextBox>
                 <DockPanel Grid.Row="2">
                     <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" FontSize="20px" Margin="28 0 0 0"  Content="子事件列表"></Label>
-                    <Button Style="{StaticResource ImageButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 14 0" Command="{Binding SearchSubEventListCommand}"/>
+                    <Button Style="{StaticResource ImageButton}" Name="Btn_CreateSubEvent" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 14 0" Command="{Binding}"/>
                     <!--<Image DockPanel.Dock="Right" Width="18" Height="18" Margin="0 0 -150 0" Source="/Image/Common/Icon_Create.png"/>-->
                 </DockPanel>
                 <DockPanel Grid.Row="3">
@@ -328,23 +328,26 @@
                 <Border Grid.Row="0" BorderBrush="#D3D3D3" BorderThickness="0 0 0 2" >
                     <DockPanel>
                         <Label DockPanel.Dock="Left" Style="{StaticResource RightLabel}" Content="子事件详情" FontSize="20px" Margin="19 0 0 0"/>
-                        <Button Style="{StaticResource ButtonBase}" DockPanel.Dock="Right" Name="Btn_UpdateSubEvent" Width="80" HorizontalAlignment="Right" Margin="0,0,30,0" Content="编辑"/>
+                        <Button Style="{StaticResource ButtonBase}" DockPanel.Dock="Right" Name="Btn_UpdateSubEvent" Width="80" HorizontalAlignment="Right" Margin="0,0,30,0" Content="编辑" Command="{Binding Path=SearchSubEventListCommand}">
+                        </Button>
                     </DockPanel>
                 </Border>
-                <Canvas Grid.Row="3" Background="#F9F9F9" Margin="15 0 15 0">
-                    <Label Style="{StaticResource RightLabel}" FontSize="18" Canvas.Left="25" Canvas.Top="10" Content="任务进度"/>
-                    <Line X1="60" Y1="75" X2="1110" Y2="75" Stroke="#AAAAAA" StrokeThickness="4"/>
-                    <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="39" Canvas.Top="54" Fill="#FF6868"/>
-                    <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="38" Canvas.Top="95" Content="登记"/>
-                    <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="301.5" Canvas.Top="54" Fill="#AAAAAA"/>
-                    <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="300.5" Canvas.Top="95" Content="发布"/>
-                    <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="564" Canvas.Top="54" Fill="#AAAAAA"/>
-                    <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="563" Canvas.Top="95" Content="接受"/>
-                    <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="826.5" Canvas.Top="54" Fill="#AAAAAA"/>
-                    <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="825.5" Canvas.Top="95" Content="执行"/>
-                    <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="1089" Canvas.Top="54" Fill="#AAAAAA"/>
-                    <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="1088" Canvas.Top="95" Content="完成"/>
-                </Canvas>
+                <Viewbox Grid.Row="3" Margin="15 0 15 0" Stretch="Fill">
+                    <Canvas Background="#F9F9F9" Width="1170" Height="150">
+                        <Label Style="{StaticResource RightLabel}" FontSize="18" Canvas.Left="25" Canvas.Top="10" Content="任务进度"/>
+                        <Line X1="60" Y1="75" X2="1110" Y2="75" Stroke="#AAAAAA" StrokeThickness="4"/>
+                        <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="39" Canvas.Top="54" Fill="#FF6868"/>
+                        <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="38" Canvas.Top="95" Content="登记"/>
+                        <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="301.5" Canvas.Top="54" Fill="#AAAAAA"/>
+                        <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="300.5" Canvas.Top="95" Content="发布"/>
+                        <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="564" Canvas.Top="54" Fill="#AAAAAA"/>
+                        <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="563" Canvas.Top="95" Content="接受"/>
+                        <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="826.5" Canvas.Top="54" Fill="#AAAAAA"/>
+                        <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="825.5" Canvas.Top="95" Content="执行"/>
+                        <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="1089" Canvas.Top="54" Fill="#AAAAAA"/>
+                        <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="1088" Canvas.Top="95" Content="完成"/>
+                    </Canvas>
+                </Viewbox>
                 <DockPanel Grid.Row="4">
                     <Label Style="{StaticResource RightLabel}" FontSize="18" DockPanel.Dock="Left" Margin="22 0 0 0" Content="队伍列表"/>
                     <Image DockPanel.Dock="Right" Width="18" Height="18" HorizontalAlignment="Right" Margin="0 0 39 0" Source="/Image/Common/Icon_Delete.png"/>

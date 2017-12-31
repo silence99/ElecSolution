@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Emergence.Common.Data;
 using Busniess.Services;
-using Prism.Commands;
+using System.Windows;
+using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 
 namespace Emergence.Business.ViewModel
 {
@@ -22,6 +24,8 @@ namespace Emergence.Business.ViewModel
         #endregion
 
         #region [Property]
+
+        private IEventAggregator eventAggregator;
         public virtual MasterEvent MasterEventInfo { get; set; }
 
         public virtual string SubEventSearchValue { get; set; }
@@ -39,18 +43,19 @@ namespace Emergence.Business.ViewModel
 
 
         #region [Command]
-        public DelegateCommand SearchSubEventListCommand { get; private set; }
+        public DelegateCommand<object> SearchSubEventListCommand { get; private set; }
         #endregion
 
-        public VM_MasterEventDetail(MasterEvent mEvent)
+        public VM_MasterEventDetail(MasterEvent mEvent)//, IEventAggregator eventAggregator)
         {
             masterEventService = new MasterEventService();
             subEventService = new SubeventService();
             teamService = new TeamService();
             materialService = new MaterialService();
+            //this.eventAggregator = eventAggregator;
 
-            SearchSubEventListCommand = new DelegateCommand(SerachSubEventListAction);
-
+            SearchSubEventListCommand = new DelegateCommand<object>(new Action<object>(SerachSubEventListAction));
+            
             if (mEvent != null)
             {
                 InitializVM(mEvent);
@@ -70,10 +75,12 @@ namespace Emergence.Business.ViewModel
 
 
         #region [Private Method]
-        public void SerachSubEventListAction()
+        public void SerachSubEventListAction(object e)
         {
-            var subEvents = subEventService.GetSubevents(0, 1000, this.MasterEventInfo.ID, "").Result;
-            SubEventList = new ObservableCollection<SubEvent>(subEvents.Data.Select(o => o.CreateAopProxy()));
+            System.Windows.MessageBox.Show("调用成功");
+
+            //var subEvents = subEventService.GetSubevents(0, 1000, this.MasterEventInfo.ID, "").Result;
+            //SubEventList = new ObservableCollection<SubEvent>(subEvents.Data.Select(o => o.CreateAopProxy()));
         }
         
         #endregion
