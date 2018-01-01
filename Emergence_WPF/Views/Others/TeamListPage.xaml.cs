@@ -109,7 +109,11 @@ namespace Emergence_WPF.Views.Others
 
 		private void NavigateToTeamDetailPage_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-			NavigationService.Navigate(new TeamDetailPage(GridTeamList.SelectedItem as TeamModel));
+			var team = GridTeamList.SelectedItem as TeamModel;
+			if (team != null)
+			{
+				NavigationService.Navigate(new TeamDetailPage(team));
+			}
 		}
 	}
 }

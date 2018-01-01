@@ -2,6 +2,7 @@
 using Emergence.Business.ViewModel;
 using Emergence.Common.Model;
 using Emergence_WPF.Comm;
+using Framework;
 using System;
 using System.Linq;
 using System.Windows;
@@ -15,7 +16,6 @@ namespace Emergence_WPF.Views.Others
 	public partial class TeamDetailPage : Page
 	{
 		TeamDetailPageViewModel ViewModel { get; set; }
-		PersonService PersonService = new PersonService();
 		TeamService TeamService = new TeamService();
 		public TeamDetailPage(TeamModel team)
 		{
@@ -25,7 +25,8 @@ namespace Emergence_WPF.Views.Others
 
 		private void InitViewModel(TeamModel team)
 		{
-			ViewModel = new TeamDetailPageViewModel();
+			ViewModel = new TeamDetailPageViewModel().CreateAopProxy();
+			DataContext = ViewModel;
 			ViewModel.ID = team.ID;
 			ViewModel.PersonCharge = team.PersonCharge;
 			ViewModel.PersonChargePhone = team.PersonChargePhone;
@@ -39,6 +40,7 @@ namespace Emergence_WPF.Views.Others
 		private void Delete_Handler(object sender, RoutedEventArgs e)
 		{
 			TeamService.DeleteTeamMembers(ViewModel.Members.Where(mbr => mbr.IsChecked).Select(mbr => mbr.ID.ToString()).ToList());
+			SyncTeamMembers();
 		}
 
 		private void ClosePopup_Handler(object sender, RoutedEventArgs e)
@@ -54,12 +56,14 @@ namespace Emergence_WPF.Views.Others
 		private void Add_Handler(object sender, RoutedEventArgs e)
 		{
 			ViewModel.CurrentPerson = new PersonModel();
+			ViewModel.IsAddMember = true;
 			ViewModel.PopupTeamEdit();
 		}
 
 		private void Edit_Handler(object sender, RoutedEventArgs e)
 		{
 			ViewModel.CurrentPerson = (sender as Image).DataContext as PersonModel;
+			ViewModel.IsAddMember = false;
 			ViewModel.PopupTeamEdit();
 		}
 
@@ -81,7 +85,7 @@ namespace Emergence_WPF.Views.Others
 
 		private void SyncTeamMembers()
 		{
-			var result = PersonService.GetTeamDetails(ViewModel.PageIndex, ViewModel.PageSize, ViewModel.ID);
+			var result = TeamService.GetTeamPersons(ViewModel.PageIndex, ViewModel.PageSize, ViewModel.ID);
 			ViewModel.PageIndex = result.PageIndex;
 			ViewModel.PageSize = result.PageSize;
 			ViewModel.TotalCount = result.Count;
@@ -103,6 +107,21 @@ namespace Emergence_WPF.Views.Others
 
 		}
 
+		private void EditTeamMember_Handler(object sender, RoutedEventArgs e)
+		{
+			ViewModel.ClosePopup();
+			if (ViewModel.IsAddMember)
+			{
+				TeamService.CreateTeamMember(ViewModel.ID.ToString(), ViewModel.CurrentPerson.Name, ViewModel.CurrentPerson.PhoneNumber, ViewModel.CurrentPerson.Place);
+			}
+			else
+			{
+				TeamService.UpdateTeamMember(ViewModel.CurrentPerson.ID, ViewModel.ID.ToString(), ViewModel.CurrentPerson.Name, ViewModel.CurrentPerson.PhoneNumber, ViewModel.CurrentPerson.Place);
+			}
+
+			SyncTeamMembers();
+		}
+
 		private void CancelEdit_Handler(object sender, RoutedEventArgs e)
 		{
 			CancelEditMode();
@@ -122,9 +141,10 @@ namespace Emergence_WPF.Views.Others
 			ViewModel.EditTeamButtonLabel = "更新";
 		}
 
-		private void CompletePersonUpdate_Handler(object sender, RoutedEventArgs e)
+		private void GoBack(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-			ViewModel.ClosePopup();
+			NavigationService.Navigate(new Uri(@".\Views\Others\TeamListPage.xaml", UriKind.Relative));
+			NavigationService.RemoveBackEntry();
 		}
 	}
 }

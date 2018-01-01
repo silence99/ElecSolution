@@ -20,6 +20,7 @@ namespace Emergence.Business.ViewModel
 		public virtual bool IsTeamEditModel { get; set; }
 		public virtual Visibility CancelEditButtonVisibility { get; set; }
 		public virtual string EditTeamButtonLabel { get; set; }
+		public bool IsAddMember { get; set; }
 
 		public void PopupTeamEdit()
 		{
@@ -42,6 +43,11 @@ namespace Emergence.Business.ViewModel
 			IsPopoupOpen = false;
 			IsPageEnabled = true;
 			EditTeamButtonLabel = "编辑"; //1.编辑 2.更新
+			CancelEditButtonVisibility = Visibility.Hidden;
+			IsTeamEditModel = false;
+
+			PopupHeight = 360;
+			PopupWidth = 640;
 		}
 	}
 }
