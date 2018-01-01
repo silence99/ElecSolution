@@ -41,13 +41,10 @@ namespace Emergence.Business.ViewModel
 
 
         #region [Command]
-        public virtual DelegateCommand<object> SearchSubEventListCommand { get; set; }
+        public virtual DelegateCommand SearchSubEventListCommand { get; set; }
         #endregion
-        public VM_MasterEventDetail()
-        {
-            SearchSubEventListCommand = new DelegateCommand<object>(new Action<object>(SerachSubEventListAction));
-        }
-        public VM_MasterEventDetail(MasterEvent mEvent)//, IEventAggregator eventAggregator)
+
+        public VM_MasterEventDetail(MasterEvent mEvent)
         {
             masterEventService = new MasterEventService();
             subEventService = new SubeventService();
@@ -55,7 +52,7 @@ namespace Emergence.Business.ViewModel
             materialService = new MaterialService();
             //this.eventAggregator = eventAggregator;
 
-            SearchSubEventListCommand = new DelegateCommand<object>(new Action<object>(SerachSubEventListAction));
+            SearchSubEventListCommand = new DelegateCommand(new Action(GetSubEventListOb));
             
             if (mEvent != null)
             {
@@ -76,28 +73,22 @@ namespace Emergence.Business.ViewModel
 
 
         #region [Private Method]
-        private void SerachSubEventListAction(object e)
-        {
-            System.Windows.MessageBox.Show("调用成功");
-
-            //var subEvents = subEventService.GetSubevents(0, 1000, this.MasterEventInfo.ID, "").Result;
-            //SubEventList = new ObservableCollection<SubEvent>(subEvents.Data.Select(o => o.CreateAopProxy()));
-        }
 
         private void GetSubEventListOb()
         {
+            System.Windows.MessageBox.Show("GetSubEventListOb");
             var subEvents = subEventService.GetSubevents(0, 1000, this.MasterEventInfo.ID, SubEventSearchValue ?? "").Result;
             SubEventList = new ObservableCollection<SubEvent>(subEvents.Data.Select(o => o.CreateAopProxy()));
         }
         private void GetTeamListOb()
         {
-            //var teams = teamService. subEventService.GetSubevents(0, 1000, this.MasterEventInfo.ID, SubEventSearchValue ?? "").Result;
-            //SubEventList = new ObservableCollection<SubEvent>(subEvents.Data.Select(o => o.CreateAopProxy()));
+            var teams = teamService.GetbindingTeamData(0, 1000, SubEventDetail.Id).Result;
+            TeamList = new ObservableCollection<TeamModel>(teams.Data.Select(o => o.CreateAopProxy()));
         }
         private void GetMaterialListOb()
         {
-            var subEvents = subEventService.GetSubevents(0, 1000, this.MasterEventInfo.ID, SubEventSearchValue ?? "").Result;
-            SubEventList = new ObservableCollection<SubEvent>(subEvents.Data.Select(o => o.CreateAopProxy()));
+            var materials = materialService.GetMaterialsBindingToSubevent(0, 1000, this.MasterEventInfo.ID).Result;
+            MaterialList = new ObservableCollection<MaterialModel>(materials.Data.Select(o => o.CreateAopProxy()));
         }
         #endregion
     }

@@ -90,7 +90,7 @@ namespace Busniess.Services
 			}
 		}
 
-		private EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetbindingTeamData(int pageIndex, int pageSize, long childEventId)
+        public EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetbindingTeamData(int pageIndex, int pageSize, long childEventId)
 		{
 			try
 			{
@@ -129,7 +129,7 @@ namespace Busniess.Services
 			return BindingUnbindingTeamToSubevnt(subevent, ids, "DELETE");
 		}
 
-		private bool BindingUnbindingTeamToSubevnt(long subeventId, List<long> ids, string method)
+        public bool BindingUnbindingTeamToSubevnt(long subeventId, List<long> ids, string method)
 		{
 			var msg = method == "POST" ? "绑定队伍到子事件" : "解绑子事件绑定的队伍";
 			if (ids == null || ids.Count == 0)

@@ -12,7 +12,7 @@ namespace Emergence.Common.Model
     {
         public virtual bool IsChecked { get; set; }
         [JsonProperty("id")]
-        public virtual long Id { get; set; }
+        public virtual int Id { get; set; }
         [JsonProperty("childGrade")]
         public virtual string ChildGrade { get; set; }
         [JsonProperty("childGradeName")]
