@@ -291,12 +291,159 @@ namespace Busniess.Services
 
 		public EmergencyHttpListResult<PersonModel> GetTeamPersons(int pageIndex, int pageSize, long teamId, string Name = "")
 		{
-			return null;
+			var response = GetTeamMembersData(pageIndex, pageSize, teamId, Name);
+			if (response.Code != 1)
+			{
+				Util.ShowError(string.Format("获取统计信息失败：{0}", response.Message));
+				return null;
+			}
+			else
+			{
+				return response.Result;
+			}
+		}
+
+		public bool CreateTeamMember(string teamId, string name, string phoneNumber, string place)
+		{
+			string serviceName = ConfigurationManager.AppSettings["updataTeamMemberApi"] ?? "team/teamMember";
+			Dictionary<string, string> pairs = new Dictionary<string, string>()
+			{
+				{ "teamId", teamId },
+				{ "name", name },
+				{ "phoneNumber", phoneNumber },
+				{ "place", place }
+			};
+
+			Logger.DebugFormat("创建队伍成员 -- {0}", name);
+			var result = RequestControl.Request(serviceName, "POST", pairs);
+			if (result.StatusCode != 200)
+			{
+				Logger.WarnFormat("创建更新队伍成员失败 -- {0}", name);
+				Logger.WarnFormat(result.Html);
+				return false;
+			}
+			else
+			{
+				var success = RequestControl.DefaultValide(result.Html);
+				if (success)
+				{
+					Logger.InfoFormat("创建更新队伍成员成功 -- {0}", name);
+				}
+				else
+				{
+					Logger.WarnFormat("创建更新队伍成员失败 -- {0}", name);
+					Logger.Warn(result.Html);
+				}
+
+				return success;
+			}
+		}
+
+		public bool UpdateTeamMember(long id, string teamId, string name, string phoneNumber, string place)
+		{
+			string serviceName = ConfigurationManager.AppSettings["updataTeamMemberApi"] ?? "team/teamMember";
+			Dictionary<string, string> pairs = new Dictionary<string, string>()
+			{
+				{ "id", id.ToString() },
+				{ "teamId", teamId },
+				{ "name", name },
+				{ "phoneNumber", phoneNumber },
+				{ "place", place }
+			};
+
+			Logger.DebugFormat("更新队伍成员 -- {0}", name);
+			var result = RequestControl.Request(serviceName, "PUT", pairs);
+			if (result.StatusCode != 200)
+			{
+				Logger.WarnFormat("更新队伍成员失败 -- {0}", name);
+				Logger.WarnFormat(result.Html);
+				return false;
+			}
+			else
+			{
+				var success = RequestControl.DefaultValide(result.Html);
+				if (success)
+				{
+					Logger.InfoFormat("更新队伍成员成功 -- {0}", name);
+				}
+				else
+				{
+					Logger.WarnFormat("更新队伍成员失败 -- {0}", name);
+					Logger.Warn(result.Html);
+				}
+
+				return success;
+			}
 		}
 
 		public bool DeleteTeamMembers(List<string> ids)
 		{
-			return true;
+			if (ids == null || ids.Count == 0)
+			{
+				Logger.Warn("队伍成员ID列表为空，不能删除队伍成员");
+				return true;
+			}
+
+			var idstring = string.Join(",", ids.ToArray());
+			string serviceName = ConfigurationManager.AppSettings["updataTeamMemberApi"] ?? "team/teamMember";
+			Dictionary<string, string> pairs = new Dictionary<string, string>()
+			{
+				{ "ids", idstring }
+			};
+
+			Logger.DebugFormat("删除队伍成员 -- ID(s):{0}", ids);
+			var result = RequestControl.Request(serviceName, "DELETE", pairs);
+			if (result.StatusCode != 200)
+			{
+				Logger.WarnFormat("删除队伍成员失败 -- ID(s):{0}", ids);
+				Logger.WarnFormat(result.Html);
+				return false;
+			}
+			else
+			{
+				var success = RequestControl.DefaultValide(result.Html);
+				if (success)
+				{
+					Logger.InfoFormat("删除队伍成员成功 -- ID(s):{0}", ids);
+				}
+				else
+				{
+					Logger.WarnFormat("删除队伍成员失败 -- ID(s):{0}", ids);
+					Logger.Warn(result.Html);
+				}
+
+				return success;
+			}
+		}
+
+		private EmergencyHttpResponse<EmergencyHttpListResult<PersonModel>> GetTeamMembersData(int pageIndex, int pageSize, long teamId, string memberName)
+		{
+			try
+			{
+				string serviceName = ConfigurationManager.AppSettings["getTeamMemberListApi"] ?? "getTeamMemberList";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+													{
+														{ "pageIndex", pageIndex.ToString() },
+														{ "pageSize", pageSize.ToString() },
+														{ "teamId", teamId.ToString() },
+														{ "name", memberName },
+													};
+				var result = RequestControl.Request(serviceName, "GET", pairs);
+				if (result.StatusCode == 200)
+				{
+					Logger.DebugFormat("获取队伍成员数据:{0}", result.Html);
+					return Utils.JSONHelper.ConvertToObject<EmergencyHttpResponse<EmergencyHttpListResult<PersonModel>>>(result.Html);
+				}
+				else
+				{
+					throw new Exception(result.Html);
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Error("获取队伍成员数据异常", ex);
+				throw;
+			}
 		}
 	}
 }

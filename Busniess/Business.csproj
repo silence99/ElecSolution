@@ -124,6 +124,7 @@
     <Compile Include="ViewModel\MainWindowUiModel.cs" />
     <Compile Include="ViewModel\MasterEventDetailViewModel.cs" />
     <Compile Include="ViewModel\MasterEventViewModel.cs" />
+    <Compile Include="ViewModel\MaterialListPageViewModel.cs" />
     <Compile Include="ViewModel\MaterialsStatisticsViewModel.cs" />
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="ViewModel\TeamDetailPageViewModel.cs" />

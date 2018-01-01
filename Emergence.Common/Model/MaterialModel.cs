@@ -7,7 +7,7 @@ namespace Emergence.Common.Model
     {
         public virtual bool IsChecked { get; set; }
         [JsonProperty("id")]
-		public virtual long ID { get; set; }
+		public virtual int ID { get; set; }
 		[JsonProperty("bigMaterials")]
 		public virtual int IsBigMaterials { get; set; }
 		[JsonProperty("consumables")]

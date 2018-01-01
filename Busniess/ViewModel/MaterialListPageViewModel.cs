@@ -1,26 +1,26 @@
 ﻿using Emergence.Common.Model;
+using Framework;
 using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace Emergence.Business.ViewModel
 {
-	public class TeamDetailPageViewModel : TeamModel
+	public class MaterialListPageViewModel : NotificationObject
 	{
+		public virtual ObservableCollection<MaterialModel> Materials { get; set; }
 		public virtual int PageSize { get; set; }
 		public virtual int PageIndex { get; set; }
 		public virtual int TotalCount { get; set; }
 		public virtual int TotalPage { get; set; }
-		public virtual ObservableCollection<PersonModel> Members { get; set; }
-
+		public virtual string QueryMaterialsName { get; set; }
+		public virtual string QueryMaterialsNumber { get; set; }
+		public virtual string QueryMaterialsDept { get; set; }
+		public virtual int QueryIsConsumable { get; set; }
+		public virtual MaterialModel CurrentMaterial { get; set; }
 		public virtual double PopupWidth { get; set; }
 		public virtual double PopupHeight { get; set; }
 		public virtual bool IsPopoupOpen { get; set; }
 		public virtual bool IsPageEnabled { get; set; }
-		public virtual PersonModel CurrentPerson { get; set; }
-		public virtual bool IsTeamEditModel { get; set; }
-		public virtual Visibility CancelEditButtonVisibility { get; set; }
-		public virtual string EditTeamButtonLabel { get; set; }
-		public bool IsAddMember { get; set; }
+		public virtual bool IsCreateMaterial { get; set; }
 
 		public void PopupTeamEdit()
 		{
@@ -34,7 +34,7 @@ namespace Emergence.Business.ViewModel
 			IsPageEnabled = true;
 		}
 
-		public TeamDetailPageViewModel()
+		public MaterialListPageViewModel()
 		{
 			PageIndex = 1;
 			PageSize = 10;
@@ -42,12 +42,9 @@ namespace Emergence.Business.ViewModel
 			TotalPage = 0;
 			IsPopoupOpen = false;
 			IsPageEnabled = true;
-			EditTeamButtonLabel = "编辑"; //1.编辑 2.更新
-			CancelEditButtonVisibility = Visibility.Hidden;
-			IsTeamEditModel = false;
-
-			PopupHeight = 360;
 			PopupWidth = 640;
+			PopupHeight = 360;
+			IsCreateMaterial = false;
 		}
 	}
 }
