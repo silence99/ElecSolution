@@ -4,24 +4,29 @@ using Newtonsoft.Json;
 namespace Emergence.Common.Model
 {
 	public class MaterialModel: NotificationObject
-	{
-		[JsonProperty("id")]
-		public long ID { get; set; }
+    {
+        public virtual bool IsChecked { get; set; }
+        [JsonProperty("id")]
+		public virtual long ID { get; set; }
 		[JsonProperty("bigMaterials")]
-		public int IsBigMaterials { get; set; }
+		public virtual int IsBigMaterials { get; set; }
 		[JsonProperty("consumables")]
-		public int IsConsumable { get; set; }
+		public virtual int IsConsumable { get; set; }
 		[JsonProperty("materialsDept")]
-		public string MaterialsDept { get; set; }
+		public virtual string MaterialsDept { get; set; }
 		[JsonProperty("materialsName")]
-		public string MaterialsName { get; set; }
+		public virtual string MaterialsName { get; set; }
 		[JsonProperty("materialsNumber")]
-		public string MaterialsNumber { get; set; }
+		public virtual string MaterialsNumber { get; set; }
 		[JsonProperty("materialsType")]
-		public string MaterialsType { get; set; }
+		public virtual string MaterialsType { get; set; }
 		[JsonProperty("materialsTypeName")]
-		public string MaterialsTypeName { get; set; }
+		public virtual string MaterialsTypeName { get; set; }
 		[JsonProperty("totalQuantity")]
-		public int TotalQuantity { get; set; }
-	}
+		public virtual int TotalQuantity { get; set; }
+        public MaterialModel()
+        {
+            IsChecked = false;
+        }
+    }
 }

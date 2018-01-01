@@ -24,7 +24,7 @@ public DelegateCommand<object> ClickCommand { get; private set; }
         {
             InitializeComponent();
 
-            ViewModel = new VM_MasterEventDetail(masterEventID);//.CreateAopProxy();
+            ViewModel = new VM_MasterEventDetail(masterEventID).CreateAopProxy();
             this.DataContext = ViewModel;
 
             this.ClickCommand = new DelegateCommand<object>(OnClick);

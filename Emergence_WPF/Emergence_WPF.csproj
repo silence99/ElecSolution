@@ -1097,6 +1097,9 @@
     <Resource Include="Image\Common\Icon_Edit.png" />
     <Resource Include="Image\Common\Icon_Magnify.png" />
     <Resource Include="Image\Common\Icon_Search.png" />
+    <Resource Include="Image\Common\Icon_Archive.png" />
+    <Resource Include="Image\Common\Icon_Back.png" />
+    <Resource Include="Image\Common\Icon_Hidden.png" />
     <Content Include="xml\TaskTracking.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

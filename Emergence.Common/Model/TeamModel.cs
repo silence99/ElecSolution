@@ -20,5 +20,9 @@ namespace Emergence.Common.Model
 		public virtual string TeamName { get; set; }
 		[JsonProperty("totalNumber")]
 		public virtual int TotalNumber { get; set; }
-	}
+        public TeamModel()
+        {
+            IsChecked = false;
+        }
+    }
 }

@@ -36,6 +36,17 @@
         <Style TargetType="Label" x:Key="StatusRightLabel" BasedOn="{StaticResource RightLabel}">
             <Setter Property="FontSize" Value="16"/>
         </Style>
+        <Style TargetType="Label" x:Key="SubEventDetailNameLabel" BasedOn="{StaticResource StatusRightLabel}">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+        <Style TargetType="Label" x:Key="SubEventDetailValueLabel" BasedOn="{StaticResource StatusRightLabel}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="30 0 150 0"/>
+        </Style>
+        <!--Base TextBox style-->
+        <Style TargetType="TextBox" x:Key="BaseTextBox">
+            <Setter Property="Height" Value="34px"/>
+        </Style>
         <!--Base button style-->
         <Style TargetType="Button" x:Key="ButtonBase">
             <Setter Property="FontSize" Value="16"/>
@@ -43,7 +54,7 @@
             <Setter Property="Background" Value="#006F69"/>
             <Setter Property="Foreground" Value="White"/>
         </Style>
-        <!--Search button with icon style-->
+        <!--Search textbox with icon style-->
         <Style  x:Key="TextBoxSearch" TargetType="{x:Type TextBox}">
             <Setter Property="Margin" Value="30 15 30 15"/>
             <Setter Property="Template">
@@ -160,15 +171,84 @@
                 </Style>
             </Style.Resources>
         </Style>
-        <Style x:Key="ButtonImage" TargetType="{x:Type Image}">
+        <Style x:Key="BaseImageButton" TargetType="{x:Type Button}">
             <Setter Property="Height" Value="18px"/>
             <Setter Property="Width" Value="18px"/>
         </Style>
-        <Style x:Key="ImageButton" TargetType="{x:Type Button}">
+        <Style x:Key="CreateImageButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseImageButton}">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Image Height="18px" Width="18px" Source="/Image/Common/Icon_Create.png" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="DeleteImageButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseImageButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Image Height="18px" Width="18px" Source="/Image/Common/Icon_Delete.png" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="EditImageButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseImageButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Image Height="18px" Width="18px" Source="/Image/Common/Icon_Edit.png" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="BackImageButton" TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="27"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Image Height="27px" Width="30px" Source="/Image/Common/Icon_Back.png" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ArchiveImageButton" TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="21"/>
+            <Setter Property="Width" Value="24"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Image Height="21px" Width="24px" Source="/Image/Common/Icon_Archive.png" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="HiddenImageButton" TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="13"/>
+            <Setter Property="Width" Value="62"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Image Height="13px" Width="62px" Source="/Image/Common/Hidden_Back.png" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CircleSelectedButton" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="39" Canvas.Top="54" Fill="#FF6868"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CircleUnselectedButton" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="39" Canvas.Top="54" Fill="#AAAAAA"/>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -197,8 +277,8 @@
                 </Grid.ColumnDefinitions>
                 <Border Name="LeftGridRow1Border" BorderBrush="#4D9A96" BorderThickness="0 0 0 2" Grid.Column="0" Grid.Row="0">
                     <DockPanel>
-                        <Image DockPanel.Dock="Left" Grid.Column="0" Width="30" Height="27" Margin="10 0 10 0" Source="/Image/Event/Icon_Create.png"/>
-                        <Image DockPanel.Dock="Right" Grid.Column="0" Width="24" Height="21" Margin="10 0 10 0" Source="/Image/Event/Icon_Create.png"/>
+                        <Button Style="{StaticResource BackImageButton}" DockPanel.Dock="Left" Margin="10 0 10 0" />
+                        <Button Style="{StaticResource ArchiveImageButton}" DockPanel.Dock="Right" Margin="10 0 10 0"/>
                         <Label DockPanel.Dock="Left" FontSize="20px" Style="{StaticResource LeftLabel}">主事件详情</Label>
                     </DockPanel>
                 </Border>
@@ -275,24 +355,15 @@
                 <TextBox Grid.Row="0" Style="{StaticResource TextBoxSearch}"></TextBox>
                 <DockPanel Grid.Row="2">
                     <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" FontSize="20px" Margin="28 0 0 0"  Content="子事件列表"></Label>
-                    <Button Style="{StaticResource ImageButton}" Name="Btn_CreateSubEvent" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 14 0" Command="{Binding}"/>
+                    <Button Style="{StaticResource CreateImageButton}" Name="Btn_CreateSubEvent" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 14 0" Command="{Binding}"/>
                     <!--<Image DockPanel.Dock="Right" Width="18" Height="18" Margin="0 0 -150 0" Source="/Image/Common/Icon_Create.png"/>-->
                 </DockPanel>
                 <DockPanel Grid.Row="3">
                     <DataGrid  DockPanel.Dock="Top" Name="Grid_SubEventList" CanUserAddRows="False"  ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Auto"  
                                     HeadersVisibility="None" HorizontalAlignment="Stretch" Background="Transparent" 
-                                    AutoGenerateColumns="False" ItemsSource="{Binding}" Margin="1" BorderThickness="0px">
+                                    AutoGenerateColumns="False" ItemsSource="{Binding Path=SubEventList}" Margin="1" BorderThickness="0px">
                         <DataGrid.Columns >
-                            <DataGridTextColumn Width="0.6*" Binding="{Binding Path=SubEventTitle}" x:Name="f1" Header="子事件标题"  >
-                                <DataGridTextColumn.ElementStyle>
-                                    <Style TargetType="TextBlock">
-                                        <Setter Property="FontSize" Value="16"/>
-                                        <Setter Property="TextWrapping" Value="Wrap"/>
-                                        <Setter Property="Height" Value="auto"/>
-                                    </Style>
-                                </DataGridTextColumn.ElementStyle>
-                            </DataGridTextColumn>
-                            <DataGridTextColumn Width="0.3*" Binding="{Binding Path=ChildTitle}" x:Name="f2" Header="时间"  >
+                            <DataGridTextColumn Width="0.6*" Binding="{Binding Path=ChildTitle}" x:Name="f1" Header="子事件标题"  >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="FontSize" Value="16"/>
@@ -332,19 +403,42 @@
                         </Button>
                     </DockPanel>
                 </Border>
+                <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.25*"></RowDefinition>
+                        <RowDefinition Height="0.25*"></RowDefinition>
+                        <RowDefinition Height="0.5*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                        <ColumnDefinition Width="0.1*"/>
+                        <ColumnDefinition Width="0.4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="0" Grid.Row="0" Content="子事件标题"></Label>
+                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="1" Grid.Row="0" Content="{Binding Path=SubEventDetail.ChildTitle}"></Label>
+                    <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="2" Grid.Row="0" Content="等级"></Label>
+                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="3" Grid.Row="0" Content="{Binding Path=SubEventDetail.ChildGradeName}"></Label>
+                    <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="0" Grid.Row="1" Content="负责人"></Label>
+                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="1" Grid.Row="1" Content="{Binding Path=SubEventDetail.ChildTitle}"></Label>
+                    <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="2" Grid.Row="1" Content="详细地址"></Label>
+                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="3" Grid.Row="1" Content="{Binding Path=SubEventDetail.ChildLocale}"></Label>
+                    <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="0" Grid.Row="2" Content="简介"></Label>
+                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Content="{Binding Path=SubEventDetail.ChildRemarks}"></Label>
+                </Grid>
                 <Viewbox Grid.Row="3" Margin="15 0 15 0" Stretch="Fill">
                     <Canvas Background="#F9F9F9" Width="1170" Height="150">
                         <Label Style="{StaticResource RightLabel}" FontSize="18" Canvas.Left="25" Canvas.Top="10" Content="任务进度"/>
                         <Line X1="60" Y1="75" X2="1110" Y2="75" Stroke="#AAAAAA" StrokeThickness="4"/>
-                        <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="39" Canvas.Top="54" Fill="#FF6868"/>
+                        <Button DockPanel.Dock="Left" Style="{StaticResource CircleSelectedButton}" Canvas.Left="39" Canvas.Top="54"/>
                         <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="38" Canvas.Top="95" Content="登记"/>
-                        <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="301.5" Canvas.Top="54" Fill="#AAAAAA"/>
+                        <Button DockPanel.Dock="Left" Style="{StaticResource CircleSelectedButton}" Canvas.Left="301.5" Canvas.Top="54"/>
                         <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="300.5" Canvas.Top="95" Content="发布"/>
-                        <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="564" Canvas.Top="54" Fill="#AAAAAA"/>
+                        <Button DockPanel.Dock="Left" Style="{StaticResource CircleSelectedButton}" Canvas.Left="563" Canvas.Top="54"/>
                         <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="563" Canvas.Top="95" Content="接受"/>
-                        <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="826.5" Canvas.Top="54" Fill="#AAAAAA"/>
+                        <Button DockPanel.Dock="Left" Style="{StaticResource CircleSelectedButton}" Canvas.Left="826.5" Canvas.Top="54"/>
                         <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="825.5" Canvas.Top="95" Content="执行"/>
-                        <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="1089" Canvas.Top="54" Fill="#AAAAAA"/>
+                        <Button DockPanel.Dock="Left" Style="{StaticResource CircleUnselectedButton}" Canvas.Left="1089" Canvas.Top="54" />
                         <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="1088" Canvas.Top="95" Content="完成"/>
                     </Canvas>
                 </Viewbox>
@@ -354,17 +448,17 @@
                     <Image DockPanel.Dock="Right" Width="18" Height="18" HorizontalAlignment="Right" Margin="0 0 20 0" Source="/Image/Common/Icon_Create.png"/>
                 </DockPanel>
                 <DockPanel Grid.Row="5" Background="#F9F9F9">
-                    <DataGrid Style="{StaticResource DataGridRight}"  DockPanel.Dock="Top" Name="Grid_SubEvent"  ItemsSource="{Binding}" Margin="2">
+                    <DataGrid Style="{StaticResource DataGridRight}"  DockPanel.Dock="Top" Name="Grid_Team"  ItemsSource="{Binding Path=TeamList, Mode=TwoWay}" Margin="2">
                         <DataGrid.Columns >
                             <DataGridTemplateColumn Width="0.3*" x:Name="dw1">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <CheckBox IsChecked="{Binding isChecked, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                                        <CheckBox IsChecked="{Binding Path=IsChecked, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <!--<DataGridCheckBoxColumn Binding="{Binding IsCheck}" x:Name="f1" Header=""  Width="0.5*" />-->
-                            <DataGridTextColumn  Binding="{Binding Path=ChildTitle}" x:Name="dw2" Header="队伍名称" Width="*" >
+                            <DataGridTextColumn  Binding="{Binding Path=TeamName, Mode=TwoWay}" x:Name="dw2" Header="队伍名称" Width="*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -372,7 +466,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=ChildTime}" x:Name="dw3" Header="人数"  Width="0.5*" >
+                            <DataGridTextColumn  Binding="{Binding Path=TotalNumber, Mode=TwoWay}" x:Name="dw3" Header="人数"  Width="0.5*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -380,7 +474,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=ChildLocale}" x:Name="dw4" Header="所属单位"  Width="1.5*" >
+                            <DataGridTextColumn  Binding="{Binding Path=TeamDeptName, Mode=TwoWay}" x:Name="dw4" Header="所属单位"  Width="1.5*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -388,7 +482,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=ChildSubmitParty}" x:Name="dw5" Header="队长"  Width="0.8*" >
+                            <DataGridTextColumn  Binding="{Binding Path=PersonCharge, Mode=TwoWay}" x:Name="dw5" Header="队长"  Width="0.8*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -396,7 +490,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=ChildSubmitDept}" x:Name="dw6" Header="队长电话"  Width="*" >
+                            <DataGridTextColumn  Binding="{Binding Path=ChildSubmitDept, Mode=TwoWay}" x:Name="dw6" Header="队长电话"  Width="*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -414,12 +508,12 @@
                 </DockPanel>
 
                 <DockPanel Grid.Row="7" Background="#F9F9F9">
-                    <DataGrid Style="{StaticResource DataGridRight}"  DockPanel.Dock="Top" Name="DataGrid_Metairls"  ItemsSource="{Binding}" Margin="2">
+                    <DataGrid Style="{StaticResource DataGridRight}"  DockPanel.Dock="Top" Name="DataGrid_Metairls"  ItemsSource="{Binding Path=MaterialList,  Mode=TwoWay}" Margin="2">
                         <DataGrid.Columns >
                             <DataGridTemplateColumn Width="0.3*" x:Name="wz1">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <CheckBox IsChecked="{Binding isChecked, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                                        <CheckBox IsChecked="{Binding Path = IsChecked, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
