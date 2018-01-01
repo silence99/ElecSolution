@@ -168,25 +168,30 @@ namespace Busniess.Services
 			}
 		}
 
-		public bool CreateMaterial(string materialName, string materialNumber, string materialType, string materialsDept, int consumables, int big, int total)
+		public bool CreateMaterial(MaterialModel model)
 		{
+			if (model.IsEmpty)
+			{
+				Logger.Warn("Material entity is empty, creating failure");
+				return true;
+			}
 			string serviceName = ConfigurationManager.AppSettings["materialUpdateApi"] ?? "materials";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()
 			{
-				{ "materialsName", materialName },
-				{ "materialsNumber", materialNumber },
-				{ "materialsType", materialType },
-				{ "materialsDept", materialsDept },
-				{ "consumables", consumables.ToString() },
-				{ "bigMaterials", big.ToString() },
-				{ "totalQuantity", total.ToString() }
+				{ "materialsName", model.MaterialsName },
+				{ "materialsNumber", model.MaterialsNumber },
+				{ "materialsType", model.MaterialsType },
+				{ "materialsDept", model.MaterialsDept },
+				{ "consumables", model.IsConsumable.ToString() },
+				{ "bigMaterials", model.IsBigMaterials.ToString() },
+				{ "totalQuantity", model.TotalQuantity.ToString() }
 			};
 
-			Logger.DebugFormat("创建物资 -- {0}", materialName);
+			Logger.DebugFormat("创建物资 -- {0}", model.MaterialsName);
 			var result = RequestControl.Request(serviceName, "POST", pairs);
 			if (result.StatusCode != 200)
 			{
-				Logger.WarnFormat("创建物资失败 -- {0}", materialName);
+				Logger.WarnFormat("创建物资失败 -- {0}", model.MaterialsName);
 				Logger.WarnFormat(result.Html);
 				return false;
 			}
@@ -195,11 +200,11 @@ namespace Busniess.Services
 				var success = RequestControl.DefaultValide(result.Html);
 				if (success)
 				{
-					Logger.InfoFormat("创建物资成功 -- {0}", materialName);
+					Logger.InfoFormat("创建物资成功 -- {0}", model.MaterialsName);
 				}
 				else
 				{
-					Logger.WarnFormat("创建物资失败 -- {0}", materialName);
+					Logger.WarnFormat("创建物资失败 -- {0}", model.MaterialsName);
 					Logger.Warn(result.Html);
 				}
 
@@ -207,26 +212,32 @@ namespace Busniess.Services
 			}
 		}
 
-		public bool UpdateMaterial(string id, string materialName, string materialNumber, string materialType, string materialsDept, int consumables, int big, int total)
+		public bool UpdateMaterial(MaterialModel model)
 		{
+			if (model.IsEmpty)
+			{
+				Logger.Warn("Material entity is empty, updating failure");
+				return true;
+			}
+
 			string serviceName = ConfigurationManager.AppSettings["materialUpdateApi"] ?? "materials";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()
 			{
-				{ "id", id },
-				{ "materialsName", materialName },
-				{ "materialsNumber", materialNumber },
-				{ "materialsType", materialType },
-				{ "materialsDept", materialsDept },
-				{ "consumables", consumables.ToString() },
-				{ "bigMaterials", big.ToString() },
-				{ "totalQuantity", total.ToString() }
+				{ "id", model.ID.ToString() },
+				{ "materialsName", model.MaterialsName },
+				{ "materialsNumber", model.MaterialsNumber },
+				{ "materialsType", model.MaterialsType },
+				{ "materialsDept", model.MaterialsDept },
+				{ "consumables", model.IsConsumable.ToString() },
+				{ "bigMaterials", model.IsBigMaterials.ToString() },
+				{ "totalQuantity", model.TotalQuantity.ToString() }
 			};
 
-			Logger.DebugFormat("更新物资 -- {0}", materialName);
+			Logger.DebugFormat("更新物资 -- {0}", model.MaterialsName);
 			var result = RequestControl.Request(serviceName, "PUT", pairs);
 			if (result.StatusCode != 200)
 			{
-				Logger.WarnFormat("更新物资失败 -- {0}", materialName);
+				Logger.WarnFormat("更新物资失败 -- {0}", model.MaterialsName);
 				Logger.WarnFormat(result.Html);
 				return false;
 			}
@@ -235,11 +246,11 @@ namespace Busniess.Services
 				var success = RequestControl.DefaultValide(result.Html);
 				if (success)
 				{
-					Logger.InfoFormat("更新物资成功 -- {0}", materialName);
+					Logger.InfoFormat("更新物资成功 -- {0}", model.MaterialsName);
 				}
 				else
 				{
-					Logger.WarnFormat("更新物资失败 -- {0}", materialName);
+					Logger.WarnFormat("更新物资失败 -- {0}", model.MaterialsName);
 					Logger.Warn(result.Html);
 				}
 

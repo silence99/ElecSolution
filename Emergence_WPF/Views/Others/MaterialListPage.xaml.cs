@@ -2,6 +2,7 @@
 using Emergence.Business.ViewModel;
 using Emergence.Common.Model;
 using Emergence_WPF.Comm;
+using Framework;
 using System;
 using System.Linq;
 using System.Windows;
@@ -27,8 +28,9 @@ namespace Emergence_WPF.Views.Others
 		private void InitViewModel()
 		{
 			Service = new MaterialService();
-			ViewModel = new MaterialListPageViewModel();
+			ViewModel = new MaterialListPageViewModel().CreateAopProxy();
 			SyncMaterials();
+			DataContext = ViewModel;
 		}
 
 		private void Pager_OnPageChanged(object sender, PageChangedEventArg e)
@@ -57,6 +59,8 @@ namespace Emergence_WPF.Views.Others
 		private void BtnAdd_Click(object sender, RoutedEventArgs e)
 		{
 			//popu up edit dialog
+			ViewModel.IsCreateMaterial = true;
+			ViewModel.PopupTitle = "添加物资";
 			ViewModel.CurrentMaterial = new MaterialModel();
 			ViewModel.PopupTeamEdit();
 		}
@@ -77,6 +81,8 @@ namespace Emergence_WPF.Views.Others
 
 		private void EditMaterial_Click(object sender, MouseButtonEventArgs e)
 		{
+			ViewModel.IsCreateMaterial = false;
+			ViewModel.PopupTitle = "更新物资";
 			ViewModel.CurrentMaterial = (sender as Image).DataContext as MaterialModel;
 			ViewModel.PopupTeamEdit();
 		}
@@ -88,14 +94,17 @@ namespace Emergence_WPF.Views.Others
 
 		private void UpdateMaterial_Click(object sender, RoutedEventArgs e)
 		{
+			ViewModel.ClosePopup();
 			if (ViewModel.IsCreateMaterial)
 			{
-				Service.CreateMaterial(ViewModel.CurrentMaterial.MaterialsName, ViewModel.CurrentMaterial.MaterialsNumber, ViewModel.CurrentMaterial.MaterialsType, ViewModel.CurrentMaterial.MaterialsDept, ViewModel.CurrentMaterial.IsConsumable, ViewModel.CurrentMaterial.IsBigMaterials, ViewModel.CurrentMaterial.TotalQuantity);
+				Service.CreateMaterial(ViewModel.CurrentMaterial);
 			}
 			else
 			{
-				Service.UpdateMaterial(ViewModel.CurrentMaterial.ID.ToString(), ViewModel.CurrentMaterial.MaterialsName, ViewModel.CurrentMaterial.MaterialsNumber, ViewModel.CurrentMaterial.MaterialsType, ViewModel.CurrentMaterial.MaterialsDept, ViewModel.CurrentMaterial.IsConsumable, ViewModel.CurrentMaterial.IsBigMaterials, ViewModel.CurrentMaterial.TotalQuantity);
+				Service.UpdateMaterial(ViewModel.CurrentMaterial);
 			}
+
+			SyncMaterials();
 		}
 	}
 }

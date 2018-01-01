@@ -1,4 +1,5 @@
-﻿using Emergence.Common.Model;
+﻿using Business.Services;
+using Emergence.Common.Model;
 using Framework;
 using System.Collections.ObjectModel;
 
@@ -21,6 +22,8 @@ namespace Emergence.Business.ViewModel
 		public virtual bool IsPopoupOpen { get; set; }
 		public virtual bool IsPageEnabled { get; set; }
 		public virtual bool IsCreateMaterial { get; set; }
+		public virtual string PopupTitle { get; set; }
+		public virtual ObservableCollection<DictItem> MaterialTypes { get; set; }
 
 		public void PopupTeamEdit()
 		{
@@ -45,6 +48,9 @@ namespace Emergence.Business.ViewModel
 			PopupWidth = 640;
 			PopupHeight = 360;
 			IsCreateMaterial = false;
+			PopupTitle = "添加物资"; //添加物资、修改物资
+
+			MaterialTypes = new ObservableCollection<DictItem>(MetaDataService.MaterialTypes);
 		}
 	}
 }

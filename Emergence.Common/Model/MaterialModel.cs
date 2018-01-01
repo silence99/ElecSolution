@@ -28,5 +28,13 @@ namespace Emergence.Common.Model
         {
             IsChecked = false;
         }
-    }
+
+		public virtual bool IsEmpty
+		{
+			get
+			{
+				return string.IsNullOrEmpty(MaterialsName);
+			}
+		}
+	}
 }

@@ -72,7 +72,11 @@ namespace Busniess.CommonControl
 
 		public static HttpResult Request(string serviceName, string method, Dictionary<string, string> param, bool useCommonHead = true)
 		{
-			return Request(serviceName, method, param, null, useCommonHead, null);
+			return Request(serviceName, method, param, null, useCommonHead, (item) =>
+			{
+				item.ContentType = "application/x-www-form-urlencoded";
+				item.ResultType = ResultType.String;
+			});
 		}
 
 		public static HttpResult Request(string serviceName, string method, Dictionary<string, string> param, Dictionary<string, string> extendHead, bool useCommonHead, Action<HttpItem> initHttpItem)
