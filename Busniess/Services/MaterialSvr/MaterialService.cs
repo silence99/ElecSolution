@@ -12,7 +12,22 @@ namespace Busniess.Services
 	{
 		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-		public EmergencyHttpResponse<EmergencyHttpListResult<MaterialModel>> GetMeterials(int pageIndex, int pageSize, string materialName, string materialNumber, string materialDept, int consumables)
+
+		public EmergencyHttpListResult<MaterialModel> GetMaterials(int pageIndex, int pageSize, string materialName, string materialNumber, string materialDept, int consumables)
+		{
+			var response = GetMeterialsData(pageIndex, pageSize, materialName, materialNumber, materialDept, consumables);
+			if (response.Code != 1)
+			{
+				Util.ShowError(string.Format("获取物资失败：{0}", response.Message));
+				return null;
+			}
+			else
+			{
+				return response.Result;
+			}
+		}
+
+		private EmergencyHttpResponse<EmergencyHttpListResult<MaterialModel>> GetMeterialsData(int pageIndex, int pageSize, string materialName, string materialNumber, string materialDept, int consumables)
 		{
 			try
 			{
