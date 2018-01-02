@@ -11,11 +11,11 @@ namespace Emergence.Common.Data
         #region [MasterEventDetailPage]
         public enum SubEventStatus
         {
-            Registed,
-            Published,
-            Accepted,
-            Executed,
-            Completed
+            Registed = 0,
+            Published = 1,
+            Accepted = 2,
+            Executed = 3,
+            Completed = 5
         }
             #endregion
     }

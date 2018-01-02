@@ -54,7 +54,7 @@ namespace Emergence_WPF
 		private void RequestMasterEventList()
 		{
 			//var masterEvents = gMasterSvr.GetMasterEvents(ViewModel.PageIndex, ViewModel.PageSize);
-			var masterEvents = MasterEventService.GetMasterEvents(ViewModel.PageIndex, 2, ViewModel.TxtTitle, default(DateTime), default(DateTime), string.Empty);
+			var masterEvents = MasterEventService.GetMasterEvents(ViewModel.PageIndex, 1000, ViewModel.TxtTitle, default(DateTime), default(DateTime), string.Empty);
 			if (masterEvents != null)
 			{
 				ViewModel.MasterEvents = masterEvents.MasterEvents;

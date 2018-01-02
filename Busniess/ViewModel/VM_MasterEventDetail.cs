@@ -41,7 +41,9 @@ namespace Emergence.Business.ViewModel
 
 
         #region [Command]
-        public virtual DelegateCommand SearchSubEventListCommand { get; set; }
+        public virtual DelegateCommand<string> SearchSubEventListCommand { get; set; }
+        public virtual DelegateCommand<string> SelectSubEventCommand { get; set; }
+        public virtual DelegateCommand<string> DeleteSubEventCommand { get; set; }
         #endregion
 
         public VM_MasterEventDetail(MasterEvent mEvent)
@@ -52,8 +54,10 @@ namespace Emergence.Business.ViewModel
             materialService = new MaterialService();
             //this.eventAggregator = eventAggregator;
 
-            SearchSubEventListCommand = new DelegateCommand(new Action(GetSubEventListOb));
-            
+            SearchSubEventListCommand = new DelegateCommand<string>(new Action<string>(SearchSubEventAction));
+            SelectSubEventCommand = new DelegateCommand<string>(new Action<string>(SelectSubEventAction));
+            DeleteSubEventCommand = new DelegateCommand<string>(new Action<string>(DeleteSubEventAction));
+
             if (mEvent != null)
             {
                 InitializVM(mEvent);
@@ -73,13 +77,72 @@ namespace Emergence.Business.ViewModel
 
 
         #region [Private Method]
-
-        private void GetSubEventListOb()
+        private void SearchSubEventAction(string searchCondition)
         {
-            System.Windows.MessageBox.Show("GetSubEventListOb");
-            var subEvents = subEventService.GetSubevents(0, 1000, this.MasterEventInfo.ID, SubEventSearchValue ?? "").Result;
+            if (!string.IsNullOrEmpty(searchCondition))
+            {
+                GetSubEventListOb(searchCondition);
+            }
+        }
+        private void SelectSubEventAction(string subEventID)
+        {
+
+        }
+        private void DeleteSubEventAction(string subEventID)
+        {
+            if (!string.IsNullOrEmpty(subEventID))
+            {
+                List<string> ids = new List<string>();
+                ids.Add(subEventID);
+                var result = this.UpdateSubEvent(ids, 9);
+                if (result)
+                {
+                    ShowMessageBox("删除成功！");
+                }
+                else
+                {
+                    ShowMessageBox("删除失败！");
+                }
+                GetSubEventListOb("");
+            }
+        }
+
+        private bool UpdateSubEvent(List<string> subEventIDs, int status)
+        {
+            if (subEventIDs != null && subEventIDs.Count() > 0 && status >= 0)
+            {
+                var result = subEventService.UpdateChildeEventState(subEventIDs, 9);
+                return result;
+            }
+            return false;
+        }
+
+        private void GetSubEventListOb(string searchCondition)
+        {
+            var subEvents = subEventService.GetSubevents(0, 1000, this.MasterEventInfo.ID, searchCondition ?? "").Result;
             SubEventList = new ObservableCollection<SubEvent>(subEvents.Data.Select(o => o.CreateAopProxy()));
         }
+
+        private void GetSelectedSubEventInfo(string subEventID)
+        {
+            if(!string.IsNullOrEmpty(subEventID))
+            {
+                int tempID = -1;
+                if (int.TryParse(subEventID, out tempID))
+                {
+                    var subEvent = this.SubEventList.FirstOrDefault(a => a.Id == tempID);
+                    RefershSubEventDetailBlock();
+                }
+            }
+        }
+
+        private void RefershSubEventDetailBlock()
+        {
+            GetTeamListOb();
+            GetMaterialListOb();
+            ResetSubEventStatus();
+        }
+
         private void GetTeamListOb()
         {
             var teams = teamService.GetbindingTeamData(0, 1000, SubEventDetail.Id).Result;
@@ -89,6 +152,16 @@ namespace Emergence.Business.ViewModel
         {
             var materials = materialService.GetMaterialsBindingToSubevent(0, 1000, this.MasterEventInfo.ID).Result;
             MaterialList = new ObservableCollection<MaterialModel>(materials.Data.Select(o => o.CreateAopProxy()));
+        }
+
+        private void ResetSubEventStatus()
+        {
+
+        }
+
+        private void ShowMessageBox(string value)
+        {
+            System.Windows.MessageBox.Show(value);
         }
         #endregion
     }
@@ -103,7 +176,7 @@ namespace Emergence.Business.ViewModel
 
         public SubTaskStatus(string status)
         {
-             var statusValue  =  (int)Enum.Parse(typeof(Enumerator.SubEventStatus), status);
+            var statusValue = (int)Enum.Parse(typeof(Enumerator.SubEventStatus), status);
             string selectedColor = "";
             string unSelectedColor = "";
 
