@@ -278,6 +278,9 @@
     <Compile Include="Views\Others\MaterialListPage.xaml.cs">
       <DependentUpon>MaterialListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Others\MessageNotificationPage.xaml.cs">
+      <DependentUpon>MessageNotificationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Others\TeamDetailPage.xaml.cs">
       <DependentUpon>TeamDetailPage.xaml</DependentUpon>
     </Compile>
@@ -480,6 +483,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Others\MaterialListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Others\MessageNotificationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
