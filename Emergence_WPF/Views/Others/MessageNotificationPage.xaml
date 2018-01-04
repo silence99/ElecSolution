@@ -47,7 +47,7 @@
                 <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
                     <Label FontSize="16" Foreground="#006f69" Height="36" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="20,0,0,0">手机号码</Label>
                     <Image Source="../../Image/Common/Icon_Create.png" Margin="10, 10, 10, 10"/>
-                    <Button FontSize="16" Width="82" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="20,0,0,0" Foreground="White" Content="导入" Style="{StaticResource RoundConnerButtonStyle}" Click="Add_Handler">
+                    <Button FontSize="16" Width="82" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="20,0,0,0" Foreground="White" Content="导入" Style="{StaticResource RoundConnerButtonStyle}">
                     </Button>
                     
                     <Button FontSize="16" Width="88" Height="36" Background="#006f69" HorizontalAlignment="Right" Margin="0,0,20,0" Foreground="White" Content="删除" Style="{StaticResource RoundConnerButtonStyle}"></Button>
@@ -75,8 +75,7 @@
                     HorizontalGridLinesBrush="#dcdcdc"
                     VerticalGridLinesBrush="#dcdcdc"
                     BorderBrush="#dcdcdc"
-                    CanUserAddRows="False"
-                      MouseDoubleClick="NavigateToTeamDetailPage_Handler">
+                    CanUserAddRows="False">
                 <DataGrid.Columns >
                     <DataGridTemplateColumn Width="40">
                         <DataGridTemplateColumn.CellTemplate>
@@ -93,7 +92,7 @@
                     <DataGridTemplateColumn Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="../../Image/Common/Icon_edit.png" MouseLeftButtonUp="Edit_Handler" Width="25" Height="25" Tag="{Binding}"/>
+                                <Image Source="../../Image/Common/Icon_edit.png" Width="25" Height="25" Tag="{Binding}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -113,10 +112,10 @@
             HorizontalOffset="360">
             <DockPanel Background="White">
                 <DockPanel DockPanel.Dock="Top" Height="40">
-                    <Label Style="{StaticResource PopupLable}" Width="40" Content="X" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" MouseLeftButtonUp="ClosePopup_Handler"/>
+                    <Label Style="{StaticResource PopupLable}" Width="40" Content="X" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
                     <Border Width="1" BorderThickness="1" BorderBrush="#D9D9D9" Margin="0,0,0,0" HorizontalAlignment="Left"/>
                     <Label Style="{StaticResource PopupLable}" Content="添加队员" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                    <Button Content="完成" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,40,0" Width="40" Click="Update_Handler"/>
+                    <Button Content="完成" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,40,0" Width="40" />
                 </DockPanel>
                 <Border Margin="2,0,0,0" Background="#F3F3F3" BorderThickness="1">
                     <StackPanel Orientation="Vertical">

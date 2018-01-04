@@ -27,7 +27,7 @@ namespace Busniess.Services
 														{ "pageIndex", pageIndex.ToString() },
 														{ "pageSize", pageSize.ToString() },
 														{ "mainEventId", mainEventId.ToString() },
-														{ "childTitle", title }
+														{ "searchInfo", title }
 													};
 				var result = RequestControl.Request(serviceName, "GET", pairs);
 				if (result.StatusCode == 200)
@@ -138,7 +138,7 @@ namespace Busniess.Services
 
 			var idstring = string.Join(",", ids.ToArray());
 
-			string serviceName = ConfigurationManager.AppSettings["childEventApi"] ?? "childEvent";
+			string serviceName = ConfigurationManager.AppSettings["childEventUpdateApi"] ?? "childEvent/state";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()
 			{
 				{ "ids", idstring },

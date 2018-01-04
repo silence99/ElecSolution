@@ -17,6 +17,9 @@ namespace Emergence.Common.Data
             Executed = 3,
             Completed = 5
         }
-            #endregion
+
+        public static string EllipseSelectedColor = "#FF6868";
+        public static string EllipseUnselectedColor = "#AAAAAA";
+        #endregion
     }
 }

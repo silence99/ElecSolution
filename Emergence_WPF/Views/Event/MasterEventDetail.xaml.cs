@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using Emergence.Business.ViewModel;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Unity;
+using System.Data;
 
 namespace Emergence_WPF
 {
@@ -23,35 +24,30 @@ public DelegateCommand<object> ClickCommand { get; private set; }
         public MasterEventDetail(MasterEvent masterEventID)
         {
             InitializeComponent();
-
             ViewModel = new VM_MasterEventDetail(masterEventID).CreateAopProxy();
             this.DataContext = ViewModel;
 
-            this.ClickCommand = new DelegateCommand<object>(OnClick);
-
-            this.Btn_CreateSubEvent.DataContext = ClickCommand;
         }
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            if (ViewModel.SubEventList.Count > 0)
+            {
+                DataGridRow row = (DataGridRow)this.Grid_SubEventList.ItemContainerGenerator.ContainerFromIndex(0);
+                row.IsSelected = true;
+                var item = row.Item as SubEvent;
+                ViewModel.SelectSubEventAction(item.Id.ToString());
+            }
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        
+        private void Grid_SubEventList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-        }
-
-
-        public void OnClick(object e)
-        {
-            System.Windows.MessageBox.Show("调用成功");
-            //do something
-        }
-
-        public bool CanExecute(object e)
-        {
-            return true;
-            //do something
+            DataGrid dg = sender as DataGrid;
+            var item = dg.CurrentItem as SubEvent;
+            //DataRowView item = cell.Item as DataRowView;
+            if (item != null)
+            {
+                ViewModel.SelectSubEventAction(item.Id.ToString());
+            }
         }
     }
 }

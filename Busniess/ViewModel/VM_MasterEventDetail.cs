@@ -17,10 +17,10 @@ namespace Emergence.Business.ViewModel
     public class VM_MasterEventDetail : NotificationObject
     {
         #region [Services]
-        MasterEventService masterEventService;
-        SubeventService subEventService;
-        TeamService teamService;
-        MaterialService materialService;
+        public virtual MasterEventService masterEventService { get; set; }
+        public virtual SubeventService subEventService { get; set; }
+        public virtual TeamService teamService { get; set; }
+        public virtual MaterialService materialService { get; set; }
         #endregion
 
         #region [Property]
@@ -32,18 +32,20 @@ namespace Emergence.Business.ViewModel
 
         public virtual SubEvent SubEventDetail { get; set; }
 
-        public virtual SubTaskStatus SubTaskStatuColor { get; set; }
-
         public virtual ObservableCollection<TeamModel> TeamList { get; set; }
 
         public virtual ObservableCollection<MaterialModel> MaterialList { get; set; }
+        
+        public virtual SubEventStatus SBStatus { get; set; }
         #endregion
 
 
         #region [Command]
         public virtual DelegateCommand<string> SearchSubEventListCommand { get; set; }
         public virtual DelegateCommand<string> SelectSubEventCommand { get; set; }
-        public virtual DelegateCommand<string> DeleteSubEventCommand { get; set; }
+        public virtual DelegateCommand<int?> DeleteSubEventCommand { get; set; }
+        public virtual DelegateCommand<string> UpdateSubEventStatusCommand { get; set; }
+
         #endregion
 
         public VM_MasterEventDetail(MasterEvent mEvent)
@@ -52,11 +54,13 @@ namespace Emergence.Business.ViewModel
             subEventService = new SubeventService();
             teamService = new TeamService();
             materialService = new MaterialService();
+            SBStatus = new SubEventStatus("").CreateAopProxy();
             //this.eventAggregator = eventAggregator;
 
             SearchSubEventListCommand = new DelegateCommand<string>(new Action<string>(SearchSubEventAction));
             SelectSubEventCommand = new DelegateCommand<string>(new Action<string>(SelectSubEventAction));
-            DeleteSubEventCommand = new DelegateCommand<string>(new Action<string>(DeleteSubEventAction));
+            DeleteSubEventCommand = new DelegateCommand<int?>(DeleteSubEventAction);
+            UpdateSubEventStatusCommand = new DelegateCommand<string>(new Action<string>(UpdateSubEventStatusAction), new Func<string, bool>(CheckSubEventStatusCanChangeAction));
 
             if (mEvent != null)
             {
@@ -84,16 +88,42 @@ namespace Emergence.Business.ViewModel
                 GetSubEventListOb(searchCondition);
             }
         }
-        private void SelectSubEventAction(string subEventID)
+        public void SelectSubEventAction(string subEventID)
         {
-
+            RefershSubEventDetailBlock(subEventID);
         }
-        private void DeleteSubEventAction(string subEventID)
+
+        private void UpdateSubEventStatusAction(string status)
         {
-            if (!string.IsNullOrEmpty(subEventID))
+            if (!string.IsNullOrEmpty(status))
             {
                 List<string> ids = new List<string>();
-                ids.Add(subEventID);
+                var st = Enum.Parse(typeof(Enumerator.SubEventStatus), status).GetHashCode();
+                ids.Add(SubEventDetail.Id.ToString());
+                var result = this.UpdateSubEvent(ids, st);
+                if (result)
+                {
+                    SBStatus.SetSubEventStatus(status);
+                }
+            }
+        }
+        private bool CheckSubEventStatusCanChangeAction(string status)
+        {
+            if(string.IsNullOrEmpty(status))
+            {
+                return false;
+            }
+            else
+            {
+                return SBStatus.StatusColorList[status] == Enumerator.EllipseUnselectedColor;
+            }
+        }
+        private void DeleteSubEventAction(int? subEventID)
+        {
+            if (subEventID != null)
+            {
+                List<string> ids = new List<string>();
+                ids.Add(subEventID.ToString());
                 var result = this.UpdateSubEvent(ids, 9);
                 if (result)
                 {
@@ -111,7 +141,7 @@ namespace Emergence.Business.ViewModel
         {
             if (subEventIDs != null && subEventIDs.Count() > 0 && status >= 0)
             {
-                var result = subEventService.UpdateChildeEventState(subEventIDs, 9);
+                var result = subEventService.UpdateChildeEventState(subEventIDs, status);
                 return result;
             }
             return false;
@@ -120,27 +150,38 @@ namespace Emergence.Business.ViewModel
         private void GetSubEventListOb(string searchCondition)
         {
             var subEvents = subEventService.GetSubevents(0, 1000, this.MasterEventInfo.ID, searchCondition ?? "").Result;
-            SubEventList = new ObservableCollection<SubEvent>(subEvents.Data.Select(o => o.CreateAopProxy()));
+            var thisAop = this.AopWapper as VM_MasterEventDetail;
+            thisAop.SubEventList = new ObservableCollection<SubEvent>(subEvents.Data.Select(o => o.CreateAopProxy()));
+            //SubEventList.Clear();
+            //SubEventList.join(result);
         }
 
         private void GetSelectedSubEventInfo(string subEventID)
         {
-            if(!string.IsNullOrEmpty(subEventID))
+            if (!string.IsNullOrEmpty(subEventID))
             {
                 int tempID = -1;
                 if (int.TryParse(subEventID, out tempID))
                 {
                     var subEvent = this.SubEventList.FirstOrDefault(a => a.Id == tempID);
-                    RefershSubEventDetailBlock();
+                    RefershSubEventDetailBlock(subEvent.Id.ToString());
                 }
             }
         }
 
-        private void RefershSubEventDetailBlock()
+        private void RefershSubEventDetailBlock(string subEventID)
         {
-            GetTeamListOb();
-            GetMaterialListOb();
-            ResetSubEventStatus();
+            var subEvent = this.SubEventList.FirstOrDefault(a => a.Id.ToString() == subEventID);
+            SubEventDetail = subEvent;
+            //GetTeamListOb();
+            //GetMaterialListOb();
+            SBStatus.ResetSubEventStatus();
+            int sbStatus = -1;
+            if (int.TryParse(SubEventDetail.State, out sbStatus))
+            {
+                Enum.GetName(typeof(Enumerator.SubEventStatus), sbStatus);
+                SBStatus.SetSubEventStatus(SubEventDetail.State);
+            }
         }
 
         private void GetTeamListOb()
@@ -153,11 +194,7 @@ namespace Emergence.Business.ViewModel
             var materials = materialService.GetMaterialsBindingToSubevent(0, 1000, this.MasterEventInfo.ID).Result;
             MaterialList = new ObservableCollection<MaterialModel>(materials.Data.Select(o => o.CreateAopProxy()));
         }
-
-        private void ResetSubEventStatus()
-        {
-
-        }
+        
 
         private void ShowMessageBox(string value)
         {
@@ -166,54 +203,97 @@ namespace Emergence.Business.ViewModel
         #endregion
     }
 
-    public struct SubTaskStatus
+    public class SubEventStatus : NotificationObject
     {
-        public string RegistedColor { get; set; }
-        public string PublishedColor { get; set; }
-        public string AcceptedColor { get; set; }
-        public string ExecutedColor { get; set; }
-        public string CompletedColor { get; set; }
+        public virtual string Registed { get; set; }
+        public virtual string Published { get; set; }
+        public virtual string Accepted { get; set; }
+        public virtual string Executed { get; set; }
+        public virtual string Completed { get; set; }
 
-        public SubTaskStatus(string status)
+        public virtual string selectedColor { get; set; }
+        public virtual string unSelectedColor { get; set; }
+
+        public virtual Dictionary<string, string> StatusColorList { get; set; }
+
+        public SubEventStatus(string status)
         {
-            var statusValue = (int)Enum.Parse(typeof(Enumerator.SubEventStatus), status);
-            string selectedColor = "";
-            string unSelectedColor = "";
+            selectedColor = Enumerator.EllipseSelectedColor;
+            unSelectedColor = Enumerator.EllipseUnselectedColor;
 
-            RegistedColor = unSelectedColor;
-            PublishedColor = unSelectedColor;
-            AcceptedColor = unSelectedColor;
-            ExecutedColor = unSelectedColor;
-            CompletedColor = unSelectedColor;
+            Registed = unSelectedColor;
+            Published = unSelectedColor;
+            Accepted = unSelectedColor;
+            Executed = unSelectedColor;
+            Completed = unSelectedColor;
+            StatusColorList = new Dictionary<string, string>();
+            StatusColorList.Add("Registed", unSelectedColor);
+            StatusColorList.Add("Published", unSelectedColor);
+            StatusColorList.Add("Accepted", unSelectedColor);
+            StatusColorList.Add("Executed", unSelectedColor);
+            StatusColorList.Add("Completed", unSelectedColor);
+            SetSubEventStatus(status);
+        }
 
-            if (statusValue > 0)
+        public void ResetSubEventStatus()
+        {
+            Registed = unSelectedColor;
+            Published = unSelectedColor;
+            Accepted = unSelectedColor;
+            Executed = unSelectedColor;
+            Completed = unSelectedColor;
+            StatusColorList["Registed"] = unSelectedColor;
+            StatusColorList["Published"] = unSelectedColor;
+            StatusColorList["Accepted"] = unSelectedColor;
+            StatusColorList["Executed"] = unSelectedColor;
+            StatusColorList["Completed"] = unSelectedColor;
+        }
+        public void SetSubEventStatus(string status)
+        {
+            if (!string.IsNullOrEmpty(status))
             {
+                var statusValue = (int)Enum.Parse(typeof(Enumerator.SubEventStatus), status);
                 switch (statusValue)
                 {
                     case (int)Enumerator.SubEventStatus.Registed:
-                        RegistedColor = selectedColor;
+                        this.Registed = selectedColor;
+                        this.StatusColorList["Registed"] = selectedColor;
                         break;
                     case (int)Enumerator.SubEventStatus.Published:
-                        RegistedColor = selectedColor;
-                        PublishedColor = selectedColor;
+                        this.Registed = selectedColor;
+                        this.Published = selectedColor;
+                        this.StatusColorList["Registed"] = selectedColor;
+                        this.StatusColorList["Published"] = selectedColor;
                         break;
                     case (int)Enumerator.SubEventStatus.Accepted:
-                        RegistedColor = selectedColor;
-                        PublishedColor = selectedColor;
-                        AcceptedColor = selectedColor;
+                        this.Registed = selectedColor;
+                        this.Published = selectedColor;
+                        this.Accepted = selectedColor;
+                        this.StatusColorList["Registed"] = selectedColor;
+                        this.StatusColorList["Published"] = selectedColor;
+                        this.StatusColorList["Accepted"] = selectedColor;
                         break;
                     case (int)Enumerator.SubEventStatus.Executed:
-                        RegistedColor = selectedColor;
-                        PublishedColor = selectedColor;
-                        AcceptedColor = selectedColor;
-                        PublishedColor = selectedColor;
-                        ExecutedColor = selectedColor;
+                        this.Registed = selectedColor;
+                        this.Published = selectedColor;
+                        this.Accepted = selectedColor;
+                        this.Executed = selectedColor;
+                        this.StatusColorList["Registed"] = selectedColor;
+                        this.StatusColorList["Published"] = selectedColor;
+                        this.StatusColorList["Accepted"] = selectedColor;
+                        this.StatusColorList["Executed"] = selectedColor;
                         break;
                     case (int)Enumerator.SubEventStatus.Completed:
-                        RegistedColor = selectedColor;
-                        AcceptedColor = selectedColor;
-                        ExecutedColor = selectedColor;
-                        CompletedColor = selectedColor;
+                        this.Registed = selectedColor;
+                        this.Published = selectedColor;
+                        this.Accepted = selectedColor;
+                        this.Executed = selectedColor;
+                        this.Completed = selectedColor;
+                        this.StatusColorList["Registed"] = selectedColor;
+                        this.StatusColorList["Published"] = selectedColor;
+                        this.StatusColorList["Accepted"] = selectedColor;
+                        this.StatusColorList["Executed"] = selectedColor;
+                        this.StatusColorList["Completed"] = selectedColor;
                         break;
                     default:
                         break;
