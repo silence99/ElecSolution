@@ -21,7 +21,7 @@
             </ResourceDictionary>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="8*"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="60*"/>
         </Grid.RowDefinitions>
@@ -29,12 +29,12 @@
             <Label Margin="20,0,0,0" Style="{StaticResource SelectedLabel}">通知事件</Label>
             <Label>历史记录</Label>
         </DockPanel>
-        <DockPanel Grid.Column="0" Grid.Row="1" Background="White" IsEnabled="{Binding Path=IsPageEnabled}" Margin="0, 20, 0,0">
+        <DockPanel Grid.Column="0" Grid.Row="1" Background="White" IsEnabled="{Binding Path=IsPageEnabled}">
             <DockPanel Margin="20, 20, 20, 0" DockPanel.Dock="Top">
                 <DockPanel Height="60" VerticalAlignment="Top">
-                    <Label Width="60" Height="36" VerticalContentAlignment="Bottom" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black">发送方式</Label>
+                    <Label Width="60" Height="36" VerticalContentAlignment="Bottom" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Foreground="Black" Padding="0">发送方式</Label>
                     <ComboBox Width="160" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Bottom"></ComboBox>
-                    <Label Width="60" Height="36" Margin="20,0,0,0" VerticalContentAlignment="Bottom" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black">预设选择</Label>
+                    <Label Width="60" Height="36" Margin="20,0,0,0" VerticalContentAlignment="Bottom" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" Padding="0" FontSize="20">预设选择</Label>
                     <ComboBox Width="160" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Bottom"></ComboBox>
                 </DockPanel>
             </DockPanel>

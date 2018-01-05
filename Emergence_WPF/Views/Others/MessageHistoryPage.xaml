@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Emergence_WPF.Views.Others"
+      xmlns:local1="clr-namespace:Emergence_WPF.Comm"
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="1920"
       Title="MessageHistoryPage">
@@ -34,7 +35,16 @@
             <Image Margin="0,0,50,0" HorizontalAlignment="Right" Width="28" Height="37" Source="../../Image/Common/Icon_Delete.png"/>
         </DockPanel>
         <DockPanel Grid.Row="2" Grid.Column="0" Background="White">
-            <DataGrid DockPanel.Dock="Top" Margin="20,0,20,0"
+            <DockPanel DockPanel.Dock="Bottom" LastChildFill="True" Margin="20,5,20,15">
+                <local1:Pager Height="30" Width="auto" 
+                             TotalCount="{Binding TotalCount,Mode=TwoWay}"
+                             PageSize="{Binding PageSize,Mode=TwoWay}"
+                             PageIndex="{Binding PageIndex,Mode=TwoWay}"
+                             TotalPage="{Binding TotalPage, Mode=TwoWay}"
+                             PageChanged="Pager_OnPageChanged">
+                </local1:Pager>
+            </DockPanel>
+            <DataGrid DockPanel.Dock="Top" Margin="20,0,20,5"
                     Name="GridData" 
                     ScrollViewer.HorizontalScrollBarVisibility="Hidden"
                     ScrollViewer.VerticalScrollBarVisibility="Auto" 
