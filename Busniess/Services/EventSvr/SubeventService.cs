@@ -87,7 +87,47 @@ namespace Busniess.Services
 			}
 		}
 
-		public bool UpdateChildEvent(long id, string mainEventId, string title, string location, string grade, string remark, string latitude, string longitude, string personLiable)
+        public bool CreateChildEvent(string mainEventId, SubEvent subEvent)
+        {
+            string serviceName = ConfigurationManager.AppSettings["childEventApi"] ?? "childEvent";
+            Dictionary<string, string> pairs = new Dictionary<string, string>()
+            {
+                { "childTitle", subEvent.ChildTitle },
+                { "mainEventId", mainEventId },
+                { "childLocale", subEvent.ChildLocale },
+                { "childGrade", subEvent.ChildGrade },
+                { "childRemarks", subEvent.ChildRemarks },
+                { "childLongitude", subEvent.ChildLongitude.ToString() },
+                { "childLatitude", subEvent.ChildLatitude.ToString() },
+                { "personLiable", subEvent.PersonLiable }
+            };
+
+            Logger.DebugFormat("创建子事件 -- {0}", subEvent.ChildTitle);
+            var result = RequestControl.Request(serviceName, "POST", pairs);
+            if (result.StatusCode != 200)
+            {
+                Logger.WarnFormat("创建子事件失败 -- {0}", subEvent.ChildTitle);
+                Logger.WarnFormat(result.Html);
+                return false;
+            }
+            else
+            {
+                var success = RequestControl.DefaultValide(result.Html);
+                if (success)
+                {
+                    Logger.InfoFormat("创建子事件成功 -- {0}", subEvent.ChildTitle);
+                }
+                else
+                {
+                    Logger.WarnFormat("创建子事件失败 -- {0}", subEvent.ChildTitle);
+                    Logger.Warn(result.Html);
+                }
+
+                return success;
+            }
+        }
+
+        public bool UpdateChildEvent(long id, string mainEventId, string title, string location, string grade, string remark, string latitude, string longitude, string personLiable)
 		{
 			string serviceName = ConfigurationManager.AppSettings["childEventApi"] ?? "childEvent";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()

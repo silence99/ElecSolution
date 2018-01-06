@@ -9,328 +9,13 @@
       d:DesignHeight="1000" d:DesignWidth="1920"
       Title="MasterEventDetail" Loaded="Page_Loaded">
     <Page.Resources>
-        
-        <!--Grid left Label base style-->
-        <Style TargetType="Label" x:Key="LeftLabel">
-            <Setter Property="FontFamily" Value="PingFang-SC-Medium"/>
-            <Setter Property="Foreground" Value="#FFFFFF"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-        <!--Grid right part Label base style-->
-        <Style TargetType="Label" x:Key="RightLabel">
-            <Setter Property="FontFamily" Value="PingFang-SC-Medium"/>
-            <Setter Property="Foreground" Value="#000000"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-        <!--Master event detail left label style-->
-        <Style TargetType="Label" x:Key="MasterEventDetailLeftLabel" BasedOn="{StaticResource LeftLabel}">
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="FontSize" Value="18"/>
-        </Style>
-        <!--Master event detail right label style-->
-        <Style TargetType="Label" x:Key="MasterEventDetailRightLabel" BasedOn="{StaticResource LeftLabel}">
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="Margin" Value="10 0 0 0"/>
-        </Style>
-        <!--Status label style-->
-        <Style TargetType="Label" x:Key="StatusRightLabel" BasedOn="{StaticResource RightLabel}">
-            <Setter Property="FontSize" Value="16"/>
-        </Style>
-        <Style TargetType="Label" x:Key="SubEventDetailNameLabel" BasedOn="{StaticResource StatusRightLabel}">
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-        </Style>
-        <Style TargetType="Label" x:Key="SubEventDetailValueLabel" BasedOn="{StaticResource StatusRightLabel}">
-            <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Margin" Value="30 0 150 0"/>
-        </Style>
-        <!--Base TextBox style-->
-        <Style TargetType="TextBox" x:Key="BaseTextBox">
-            <Setter Property="Height" Value="34px"/>
-        </Style>
-        <!--Base button style-->
-        <Style TargetType="Button" x:Key="ButtonBase">
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Height" Value="36"/>
-            <Setter Property="Background" Value="#006F69"/>
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
-        <!--Search textbox with icon style-->
-        <Style  x:Key="TextBoxSearch" TargetType="{x:Type TextBox}">
-            <Setter Property="Margin" Value="30 15 30 15"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TextBox}">
-                        <Border BorderBrush="#AAAAAA" BorderThickness="1px">
-                            <Grid Background="White">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition  Width="40"/>
-                                </Grid.ColumnDefinitions>
-                                <Image Grid.Column="1" Width="30" Height="30" Source="/Image/Common/Icon_Search.png"/>
-                            </Grid>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <!--Base button style-->
-        <Style x:Key="EllipseStatus" TargetType="{x:Type Ellipse}">
-            <Setter Property="Height" Value="42"/>
-            <Setter Property="Width" Value="42"/>
-        </Style>
-        <!--CanUserAddRows="False"  ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"  
-                                    RowHeaderWidth="0" HeadersVisibility="Column" HorizontalAlignment="Stretch" Background="Transparent" 
-                                    IsReadOnly="True" AlternationCount="2" AutoGenerateColumns="False"-->
-        <!--grid right column data grid style-->
-        <Style x:Key="DataGridRight" TargetType="DataGrid">
-            <!--grid right column data grid line style-->
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="AlternationCount" Value="2"/>
-            <Setter Property="AutoGenerateColumns" Value="false"/>
-            <Setter Property="CanUserResizeColumns" Value="false"/>
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="#FFFFFF" />
-            <Setter Property="HorizontalGridLinesBrush">
-                <Setter.Value>
-                    <SolidColorBrush Color="#000000"/>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="VerticalGridLinesBrush">
-                <Setter.Value>
-                    <SolidColorBrush Color="#000000"/>
-                </Setter.Value>
-            </Setter>
-            <Style.Resources>
-                <Style TargetType="DataGridColumnHeader">
-                    <Setter Property="SnapsToDevicePixels" Value="True" />
-                    <Setter Property="MinWidth" Value="0" />
-                    <Setter Property="MinHeight" Value="60" />
-                    <Setter Property="Foreground" Value="#FFFFFF" />
-                    <Setter Property="FontSize" Value="16" />
-                    <Setter Property="Cursor" Value="Hand" />
-                    <Setter Property="Height" Value="auto"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="DataGridColumnHeader">
-                                <Border x:Name="BackgroundBorder" BorderThickness="1" BorderBrush="#FFFFFF" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                    <Grid Background="#006F69">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <ContentPresenter  Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                                    </Grid>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-
-                <!--单元格样式触发-->
-                <Style TargetType="DataGridCell">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="DataGridCell">
-                                <TextBlock TextAlignment="Center" VerticalAlignment="Center"  >
-                                    <ContentPresenter />
-                                </TextBlock>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#E6E6E6"/>
-                            <Setter Property="Foreground" Value="#000000" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-                <!--行样式触发-->
-                <!--背景色改变必须先设置cellStyle 因为cellStyle会覆盖rowStyle样式-->
-                <Style TargetType="DataGridRow">
-                    <Setter Property="Background" Value="#F3F3F3" />
-                    <Setter Property="FontSize" Value="16" />
-                    <Setter Property="Height" Value="auto"/>
-                    <Setter Property="Foreground" Value="#000000" />
-                    <Style.Triggers>
-                        <!--隔行换色-->
-                        <Trigger Property="AlternationIndex" Value="0" >
-                            <Setter Property="Background" Value="#FFFFFF" />
-                        </Trigger>
-                        <Trigger Property="AlternationIndex" Value="1" >
-                            <Setter Property="Background" Value="#F0F0F0" />
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#E0E0E0"/>
-                            <Setter Property="Foreground" Value="#000000" />
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#E6E6E6"/>
-                            <Setter Property="Foreground" Value="#000000" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Style.Resources>
-        </Style>
-        <!--grid right column data grid style-->
-        <Style x:Key="SubEventListDataGrid" TargetType="DataGrid">
-            <!--grid right column data grid line style-->
-            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
-            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-            <Setter Property="AlternationCount" Value="1"/>
-            <Setter Property="AutoGenerateColumns" Value="false"/>
-            <Setter Property="CanUserResizeColumns" Value="false"/>
-            <Setter Property="CanUserSortColumns" Value="False"/>
-            <Setter Property="IsReadOnly" Value="False"/>
-            <Setter Property="HeadersVisibility" Value="None"/>
-            <Setter Property="Background" Value="#F5F5F5" />
-            <Setter Property="Margin" Value="1"/>
-            <Setter Property="BorderBrush" Value="#AAAAAA"/>
-            <Setter Property="BorderThickness" Value="0 1 0 1"/>
-            <Setter Property="VerticalGridLinesBrush" Value="#F5F5F5" />
-            <Setter Property="HorizontalGridLinesBrush">
-                <Setter.Value>
-                    <SolidColorBrush Color="#AAAAAA"/>
-                </Setter.Value>
-            </Setter>
-            <Style.Resources>
-                <!--单元格样式触发-->
-                <Style TargetType="DataGridCell">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="DataGridCell">
-                                <TextBlock TextAlignment="Center" VerticalAlignment="Center"  >
-                                    <ContentPresenter />
-                                </TextBlock>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#F5F5F5"/>
-                            <Setter Property="Foreground" Value="#000000" />
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-                <!--行样式触发-->
-                <!--背景色改变必须先设置cellStyle 因为cellStyle会覆盖rowStyle样式-->
-                <Style TargetType="DataGridRow">
-                    <Setter Property="Background" Value="#F3F3F3" />
-                    <Setter Property="FontSize" Value="16" />
-                    <Setter Property="Height" Value="90px"/>
-                    <Setter Property="Foreground" Value="#000000" />
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#E0E0E0"/>
-                            <Setter Property="Foreground" Value="#000000" />
-                            <Setter Property="BorderThickness" Value="0"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" Value="#FFFFFF"/>
-                            <Setter Property="Foreground" Value="#000000" />
-                            <Setter Property="BorderThickness" Value="0"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Style.Resources>
-        </Style>
-        <Style x:Key="BaseImageButton" TargetType="{x:Type Button}">
-            <Setter Property="Height" Value="18px"/>
-            <Setter Property="Width" Value="18px"/>
-        </Style>
-        <Style x:Key="CreateImageButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseImageButton}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Height="18px" Width="18px" Source="/Image/Common/Icon_Create.png" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="DeleteImageButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseImageButton}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Height="18px" Width="18px" Source="/Image/Common/Icon_Delete.png" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="EditImageButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseImageButton}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Height="18px" Width="18px" Source="/Image/Common/Icon_Edit.png" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="BackImageButton" TargetType="{x:Type Button}">
-            <Setter Property="Height" Value="27"/>
-            <Setter Property="Width" Value="30"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Height="27px" Width="30px" Source="/Image/Common/Icon_Back.png" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="ArchiveImageButton" TargetType="{x:Type Button}">
-            <Setter Property="Height" Value="21"/>
-            <Setter Property="Width" Value="24"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Height="21px" Width="24px" Source="/Image/Common/Icon_Archive.png" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="HiddenImageButton" TargetType="{x:Type Button}">
-            <Setter Property="Height" Value="13"/>
-            <Setter Property="Width" Value="62"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Height="13px" Width="62px" Source="/Image/Common/Icon_Hidden.png" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="SearchImageButton" TargetType="{x:Type Button}">
-            <Setter Property="Height" Value="30"/>
-            <Setter Property="Width" Value="30"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Image Height="30px" Width="30px" Source="/Image/Common/Icon_Search.png" />
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <Style x:Key="CircleSelectedButton" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="39" Canvas.Top="54" Fill="#FF6868"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="CircleUnselectedButton" TargetType="{x:Type Button}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="39" Canvas.Top="54" Fill="#AAAAAA"/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../style/MasterEventDetailStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Page.Resources>
-    <Grid>
+    <Grid IsEnabled="{Binding Path=PageEnabled,Mode=TwoWay}">
         <Grid Name="Grid_MasterEventDetail" ShowGridLines="False" Background="White">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
@@ -381,12 +66,12 @@
                         <Label Grid.Column="0" Grid.Row="5" Style="{StaticResource MasterEventDetailLeftLabel}" >地址</Label>
                         <Label Grid.Column="0" Grid.Row="6" Style="{StaticResource MasterEventDetailLeftLabel}" >描述</Label>
 
-                        <Label Grid.Column="1" Grid.Row="1" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.Title}" />
-                        <Label Grid.Column="1" Grid.Row="2" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.GradeName}" />
-                        <Label Grid.Column="1" Grid.Row="3" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.EventTypeName}" />
-                        <Label Grid.Column="1" Grid.Row="4" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.Time}" />
-                        <Label Grid.Column="1" Grid.Row="5" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.Locale}" />
-                        <Label Grid.Column="1" Grid.Row="6" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.Remarks}" />
+                        <Label Grid.Column="1" Grid.Row="1" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.Title,Mode=TwoWay}" />
+                        <Label Grid.Column="1" Grid.Row="2" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.GradeName,Mode=TwoWay}" />
+                        <Label Grid.Column="1" Grid.Row="3" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.EventTypeName,Mode=TwoWay}" />
+                        <Label Grid.Column="1" Grid.Row="4" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.Time,Mode=TwoWay}" />
+                        <Label Grid.Column="1" Grid.Row="5" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.Locale,Mode=TwoWay}" />
+                        <Label Grid.Column="1" Grid.Row="6" Style="{StaticResource MasterEventDetailRightLabel}" Content="{Binding MasterEventInfo.Remarks,Mode=TwoWay}" />
                     </Grid>
                 </Border>
                 <Border Name="LeftGridRow3Border" BorderBrush="#4D9A96" BorderThickness="0 0 0 2" Grid.Column="0" Grid.Row="2">
@@ -442,13 +127,13 @@
                 <!--<TextBox Grid.Row="0" Style="{StaticResource TextBoxSearch}"></TextBox>-->
                 <DockPanel Grid.Row="2">
                     <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" FontSize="20px" Margin="28 0 0 0"  Content="子事件列表"></Label>
-                    <Button Style="{StaticResource CreateImageButton}" Name="Btn_CreateSubEvent" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 14 0" Command="{Binding}"/>
+                    <Button Style="{StaticResource CreateImageButton}" Name="Btn_CreateSubEvent" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 14 0" Command="{Binding Path=StartCreateSubEventCommand}"/>
                     <!--<Image DockPanel.Dock="Right" Width="18" Height="18" Margin="0 0 -150 0" Source="/Image/Common/Icon_Create.png"/>-->
                 </DockPanel>
                 <DockPanel Grid.Row="3">
                     <DataGrid  DockPanel.Dock="Top" Name="Grid_SubEventList" Style="{StaticResource SubEventListDataGrid}" ItemsSource="{Binding Path=SubEventList,Mode=TwoWay}" SelectionChanged="Grid_SubEventList_SelectionChanged">
                         <DataGrid.Columns >
-                            <DataGridTextColumn Width="0.6*" Binding="{Binding Path=ChildTitle}" x:Name="f1" Header="子事件标题" IsReadOnly="True">
+                            <DataGridTextColumn Width="0.6*" Binding="{Binding Path=ChildTitle,Mode=TwoWay}" x:Name="f1" Header="子事件标题" IsReadOnly="True">
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="FontSize" Value="16"/>
@@ -482,7 +167,7 @@
                 <Border Grid.Row="0" BorderBrush="#D3D3D3" BorderThickness="0 0 0 2" >
                     <DockPanel>
                         <Label DockPanel.Dock="Left" Style="{StaticResource RightLabel}" Content="子事件详情" FontSize="20px" Margin="19 0 0 0"/>
-                        <Button Style="{StaticResource ButtonBase}" DockPanel.Dock="Right" Name="Btn_UpdateSubEvent" Width="80" HorizontalAlignment="Right" Margin="0,0,30,0" Content="编辑" Command="{Binding Path=SearchSubEventListCommand}">
+                        <Button Style="{StaticResource ButtonBase}" DockPanel.Dock="Right" Name="Btn_UpdateSubEvent" Width="80" HorizontalAlignment="Right" Margin="0,0,30,0" Content="编辑" Command="{Binding Path=StartUpdateSubEventCommand}">
                         </Button>
                     </DockPanel>
                 </Border>
@@ -499,15 +184,15 @@
                         <ColumnDefinition Width="0.4*"/>
                     </Grid.ColumnDefinitions>
                     <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="0" Grid.Row="0" Content="子事件标题"></Label>
-                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="1" Grid.Row="0" Content="{Binding Path=SubEventDetail.ChildTitle}"></Label>
+                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="1" Grid.Row="0" Content="{Binding Path=SubEventDetail.ChildTitle,Mode=TwoWay}"></Label>
                     <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="2" Grid.Row="0" Content="等级"></Label>
-                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="3" Grid.Row="0" Content="{Binding Path=SubEventDetail.ChildGradeName}"></Label>
+                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="3" Grid.Row="0" Content="{Binding Path=SubEventDetail.ChildGradeName,Mode=TwoWay}"></Label>
                     <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="0" Grid.Row="1" Content="负责人"></Label>
-                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="1" Grid.Row="1" Content="{Binding Path=SubEventDetail.ChildTitle}"></Label>
+                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="1" Grid.Row="1" Content="{Binding Path=SubEventDetail.ChildTitle,Mode=TwoWay}"></Label>
                     <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="2" Grid.Row="1" Content="详细地址"></Label>
-                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="3" Grid.Row="1" Content="{Binding Path=SubEventDetail.ChildLocale}"></Label>
+                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="3" Grid.Row="1" Content="{Binding Path=SubEventDetail.ChildLocale,Mode=TwoWay}"></Label>
                     <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="0" Grid.Row="2" Content="简介"></Label>
-                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Content="{Binding Path=SubEventDetail.ChildRemarks}"></Label>
+                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Content="{Binding Path=SubEventDetail.ChildRemarks,Mode=TwoWay}"></Label>
                 </Grid>
                 <Viewbox Grid.Row="3" Margin="15 0 15 0" Stretch="Fill">
                     <Canvas Background="#F9F9F9" Width="1170" Height="150">
@@ -537,8 +222,8 @@
                 </Viewbox>
                 <DockPanel Grid.Row="4">
                     <Label Style="{StaticResource RightLabel}" FontSize="18" DockPanel.Dock="Left" Margin="22 0 0 0" Content="队伍列表"/>
-                    <Image DockPanel.Dock="Right" Width="18" Height="18" HorizontalAlignment="Right" Margin="0 0 39 0" Source="/Image/Common/Icon_Delete.png"/>
-                    <Image DockPanel.Dock="Right" Width="18" Height="18" HorizontalAlignment="Right" Margin="0 0 20 0" Source="/Image/Common/Icon_Create.png"/>
+                    <Button Style="{StaticResource DeleteImageButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 39 0" Command="{Binding Path=DeleteTeamCommand}"/>
+                    <Button Style="{StaticResource CreateImageButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Command="{Binding Path=StratSelectTeamCommand}"/>
                 </DockPanel>
                 <DockPanel Grid.Row="5" Background="#F9F9F9">
                     <DataGrid Style="{StaticResource DataGridRight}"  DockPanel.Dock="Top" Name="Grid_Team"  ItemsSource="{Binding Path=TeamList, Mode=TwoWay}" Margin="2">
@@ -596,8 +281,8 @@
                 </DockPanel>
                 <DockPanel Grid.Row="6">
                     <Label Style="{StaticResource RightLabel}" FontSize="18" DockPanel.Dock="Left" Margin="22 0 0 0" Content="物资列表"/>
-                    <Image DockPanel.Dock="Right" Width="18" Height="18" HorizontalAlignment="Right" Margin="0 0 39 0" Source="/Image/Common/Icon_Delete.png"/>
-                    <Image DockPanel.Dock="Right" Width="18" Height="18" HorizontalAlignment="Right" Margin="0 0 20 0" Source="/Image/Common/Icon_Create.png"/>
+                    <Button Style="{StaticResource DeleteImageButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 39 0" Command="{Binding Path=DeleteMaterialCommand}"/>
+                    <Button Style="{StaticResource CreateImageButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Command="{Binding Path=StartSelectMaterialCommand}"/>
                 </DockPanel>
 
                 <DockPanel Grid.Row="7" Background="#F9F9F9">
@@ -611,7 +296,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <!--<DataGridCheckBoxColumn Binding="{Binding IsCheck}" x:Name="f1" Header=""  Width="0.5*" />-->
-                            <DataGridTextColumn  Binding="{Binding Path=ChildTitle}" x:Name="wz2" Header="编号" Width="*" >
+                            <DataGridTextColumn  Binding="{Binding Path=ChildTitle,Mode=TwoWay}" x:Name="wz2" Header="编号" Width="*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -619,7 +304,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=ChildTime}" x:Name="wz3" Header="名称"  Width="*" >
+                            <DataGridTextColumn  Binding="{Binding Path=ChildTime,Mode=TwoWay}" x:Name="wz3" Header="名称"  Width="*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -627,7 +312,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=ChildLocale}" x:Name="wz4" Header="所属单位"  Width="2*" >
+                            <DataGridTextColumn  Binding="{Binding Path=ChildLocale,Mode=TwoWay}" x:Name="wz4" Header="所属单位"  Width="2*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -635,7 +320,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=ChildSubmitParty}" x:Name="wz5" Header="数量"  Width="*" >
+                            <DataGridTextColumn  Binding="{Binding Path=ChildSubmitParty,Mode=TwoWay}" x:Name="wz5" Header="数量"  Width="*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -649,55 +334,220 @@
             </Grid>
         </Grid>
 
-        <!--<Popup 
+        <Popup 
             x:Name="PopupEditSubEvent" 
-            Width="{Binding Path=PopupWidth}" 
-            Height="{Binding Path= PopupHeight}"  
+            Width="600px" 
+            Height="450px"  
             StaysOpen="True"   
-            IsOpen="{Binding Path=IsPopoupOpen}"   
+            IsOpen="{Binding Path=SubEventEditPopup.IsOpen}"   
             AllowsTransparency="True"  
             PopupAnimation="Slide"  
-            PlacementTarget="{Binding ElementName=PanelData}"  
-            Placement="Top"
-            HorizontalOffset="360">
-            <DockPanel Background="White">
-                <DockPanel DockPanel.Dock="Top" Height="40">
-                    <Label Style="{StaticResource PopupLable}" Width="40" Content="X" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" MouseLeftButtonUp="ClosePopup_Click"/>
-                    <Border Width="1" BorderThickness="1" BorderBrush="#D9D9D9" Margin="0,0,0,0" HorizontalAlignment="Left"/>
-                    <Label Style="{StaticResource PopupLable}" Content="{Binding PopupTitle}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                    <Button Content="完成" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,40,0" Width="40" Click="UpdateMaterial_Click"/>
-                </DockPanel>
-                <Border Margin="2,0,0,0" Background="#F3F3F3" BorderThickness="1">
-                    <StackPanel Orientation="Vertical">
-                        <DockPanel Height="60" VerticalAlignment="Top">
-                            <Label Style="{StaticResource PopupLable}" Content="名称" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5,20,0,0" Text="{Binding Path=CurrentMaterial.MaterialsName, Mode=TwoWay}"/>
-                            <Label Style="{StaticResource PopupLable}" Content="序号" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5, 20, 0, 0" Text="{Binding Path=CurrentMaterial.MaterialsNumber,Mode=TwoWay}"/>
-                        </DockPanel>
-                        <DockPanel Height="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,20,0,0">
-                            <Label Style="{StaticResource PopupLable}" Content="类型" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
-                            <ComboBox Height="30" VerticalAlignment="Center" Width="120" HorizontalAlignment="Left" Margin="5, 0, 0, 0" 
-                                      ItemsSource="{Binding Path=MaterialTypes}"
-                                      DisplayMemberPath="Name"
-                                      SelectedValue="{Binding CurrentMaterial.MaterialsType}"
-                                      SelectedValuePath="Value"/>
-                            <Label Style="{StaticResource PopupLable}" Content="所属单位" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Center" Width="120" HorizontalAlignment="Left" Text="{Binding Path=CurrentMaterial.MaterialsDept, Mode=TwoWay}"/>
-                        </DockPanel>
-                        <DockPanel Height="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,20,0,0">
-                            <Label Style="{StaticResource PopupLable}" Content="是否消耗品" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Center" Width="120" HorizontalAlignment="Left" Margin="5, 0, 0, 0" Text="{Binding Path=CurrentMaterial.IsConsumable, Mode=TwoWay}"/>
-                            <Label Style="{StaticResource PopupLable}" Content="是否大物件" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Center" Width="120" HorizontalAlignment="Left" Text="{Binding Path=CurrentMaterial.IsBigMaterials, Mode=TwoWay}"/>
-                        </DockPanel>
-                        <DockPanel Height="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,20,0,0">
-                            <Label Style="{StaticResource PopupLable}" Content="数量" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Center" Width="120" HorizontalAlignment="Left" Margin="5, 0, 0, 0" Text="{Binding Path=CurrentMaterial.TotalQuantity, Mode=TwoWay}"/>
-                        </DockPanel>
-                    </StackPanel>
-                </Border>
-            </DockPanel>
-        </Popup>-->
+            PlacementTarget="{Binding ElementName=Grid_MasterEventDetail}"  
+            Placement="Center">
+
+            <Border BorderBrush="#BFBFBF" BorderThickness="1">
+                <Grid Background="#FFFFFF">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50px"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0">
+                        <Button Style="{StaticResource CreateImageButton}" Command="{Binding Path=CloseSubEventEditCommand}" DockPanel.Dock="Left" Margin="19 0 19 0" />
+                        <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
+                        <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" Content="{Binding Path=SubEventEditPopup.PopupName}" Margin="19 0 0 0"/>
+                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Command="{Binding Path=CreateSubEventCommand}" Content="完成" Width="88px"/>
+                    </DockPanel>
+                    <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
+                        <Grid Background="#F3F3F3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="87px"></RowDefinition>
+                                <RowDefinition Height="68px"></RowDefinition>
+                                <RowDefinition Height="68px"></RowDefinition>
+                                <RowDefinition Height="177px"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.35*"/>
+                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.35*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="标题" Margin="0 22 0 0"/>
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventTitle" Width="458px" Margin="20 18 0 0"  Text="{Binding Path=SubEventEdit.ChildTitle,Mode=TwoWay}"/>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="等级"/>
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="1" Grid.Column="1" Name="Txt_EditSubEventGrade" Width="160px" Margin="20 0 0 0" Text="{Binding Path=SubEventEdit.ChildGradeName,Mode=TwoWay}"/>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="2" Content="负责人"/>
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="1" Grid.Column="3" Name="Txt_EditSubEventPersonLiable" Width="160px" Margin="20 0 0 0" Text="{Binding Path=SubEventEdit.ChildGradeName,Mode=TwoWay}"/>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="地址"/>
+                            <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Width="458px" Height="34px" Margin="-8 0 0 0" BorderBrush="#BFBFBF" BorderThickness="1">
+                                <Grid VerticalAlignment="Center"  Background="#FFFFFF">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="40px"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Style="{StaticResource AddressImageButton}" Grid.Column="1" Command="{Binding Path=SearchSubEventListCommand}" CommandParameter="{Binding Path=SubEventSearchValue}"></Button>
+                                    <TextBox Name="SubEventEditAddressTextBox" Grid.Column="0" Style="{StaticResource ImageTextBox}" Text="{Binding Path=SubEventEdit.ChildLocale, Mode=TwoWay}"></TextBox>
+                                </Grid>
+                            </Border>
+                            <!--<TextBox Style="{StaticResource TextBoxMap}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventLocale" Width="458px" Margin="-8 0 0 0"  Text="{Binding Path=SubEventEdit.ChildLocale,Mode=TwoWay}"/>-->
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="3" Grid.Column="0" Content="描述" VerticalAlignment="Top" Margin="0 19 0 0"/>
+                            <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventRemark" Width="458px" VerticalAlignment="Top"  Margin="20 17 0 0"  Text="{Binding Path=SubEventEdit.ChildLocale,Mode=TwoWay}"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
+        </Popup>
+        <Popup 
+            x:Name="PopupSelectTeam" 
+            Width="600px" 
+            Height="450px"  
+            StaysOpen="True"   
+            IsOpen="{Binding Path=TeamSelectPopup.IsOpen}"   
+            AllowsTransparency="True"  
+            PopupAnimation="Slide"  
+            PlacementTarget="{Binding ElementName=Grid_MasterEventDetail}"  
+            Placement="Center">
+
+            <Border BorderBrush="#BFBFBF" BorderThickness="1">
+                <Grid Background="#FFFFFF">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50px"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0">
+                        <Button Style="{StaticResource CreateImageButton}" Command="{Binding Path=CloseSelectTeamCommand}" DockPanel.Dock="Left" Margin="19 0 19 0" />
+                        <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
+                        <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" Content="{Binding Path=TeamSelectPopup.PopupName,Mode=TwoWay}" Margin="19 0 0 0"/>
+                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Command="{Binding Path=SelectTeamCommand}" Width="88px"/>
+                    </DockPanel>
+                    <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
+                        <DataGrid Style="{StaticResource DataGridRight}"  DockPanel.Dock="Top" Name="Grid_SelectTeam"  ItemsSource="{Binding Path=UnSelectedTeamList, Mode=TwoWay}" Margin="2">
+                            <DataGrid.Columns >
+                                <DataGridTemplateColumn Width="0.3*" x:Name="dws1">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path=IsChecked, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <!--<DataGridCheckBoxColumn Binding="{Binding IsCheck}" x:Name="f1" Header=""  Width="0.5*" />-->
+                                <DataGridTextColumn  Binding="{Binding Path=TeamName, Mode=TwoWay}" x:Name="dws2" Header="队伍名称" Width="*" >
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="TextWrapping" Value="Wrap"/>
+                                            <Setter Property="Height" Value="auto"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn  Binding="{Binding Path=TotalNumber, Mode=TwoWay}" x:Name="dws3" Header="人数"  Width="0.5*" >
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="TextWrapping" Value="Wrap"/>
+                                            <Setter Property="Height" Value="auto"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn  Binding="{Binding Path=TeamDeptName, Mode=TwoWay}" x:Name="dws4" Header="所属单位"  Width="1.5*" >
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="TextWrapping" Value="Wrap"/>
+                                            <Setter Property="Height" Value="auto"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn  Binding="{Binding Path=PersonCharge, Mode=TwoWay}" x:Name="dws5" Header="队长"  Width="0.8*" >
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="TextWrapping" Value="Wrap"/>
+                                            <Setter Property="Height" Value="auto"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn  Binding="{Binding Path=ChildSubmitDept, Mode=TwoWay}" x:Name="dws6" Header="队长电话"  Width="*" >
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="TextWrapping" Value="Wrap"/>
+                                            <Setter Property="Height" Value="auto"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </Border>
+                </Grid>
+            </Border>
+        </Popup>
+        <Popup 
+            x:Name="PopupSelectMaterial" 
+            Width="600px" 
+            Height="450px"  
+            StaysOpen="True"   
+            IsOpen="{Binding Path=MaterialSelectPopup.IsOpen}"   
+            AllowsTransparency="True"  
+            PopupAnimation="Slide"  
+            PlacementTarget="{Binding ElementName=Grid_MasterEventDetail}"  
+            Placement="Center">
+            <Border BorderBrush="#BFBFBF" BorderThickness="1">
+                <Grid Background="#FFFFFF">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50px"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0">
+                        <Button Style="{StaticResource CreateImageButton}" Command="{Binding Path=CloseSelectMaterialCommand}" DockPanel.Dock="Left" Margin="19 0 19 0" />
+                        <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
+                        <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" Content="{Binding Path=MaterialSelectPopup.PopupName}" Margin="19 0 0 0"/>
+                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Command="{Binding Path=SelectMaterialCommand,Mode=TwoWay}" Width="88px"/>
+                    </DockPanel>
+                    <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
+                        <DataGrid Style="{StaticResource DataGridRight}"  DockPanel.Dock="Top" Name="DataGrid_SelectMetairls"  ItemsSource="{Binding Path=UnSelectedMaterialList,  Mode=TwoWay}" Margin="2">
+                            <DataGrid.Columns >
+                                <DataGridTemplateColumn Width="0.3*" x:Name="wzs1">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding Path = IsChecked, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <!--<DataGridCheckBoxColumn Binding="{Binding IsCheck}" x:Name="f1" Header=""  Width="0.5*" />-->
+                                <DataGridTextColumn  Binding="{Binding Path=ChildTitle,Mode=TwoWay}" x:Name="wzs2" Header="编号" Width="*" >
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="TextWrapping" Value="Wrap"/>
+                                            <Setter Property="Height" Value="auto"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn  Binding="{Binding Path=ChildTime,Mode=TwoWay}" x:Name="wzs3" Header="名称"  Width="*" >
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="TextWrapping" Value="Wrap"/>
+                                            <Setter Property="Height" Value="auto"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn  Binding="{Binding Path=ChildLocale,Mode=TwoWay}" x:Name="wzs4" Header="所属单位"  Width="2*" >
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="TextWrapping" Value="Wrap"/>
+                                            <Setter Property="Height" Value="auto"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                                <DataGridTextColumn  Binding="{Binding Path=ChildSubmitParty,Mode=TwoWay}" x:Name="wzs5" Header="数量"  Width="*" >
+                                    <DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="TextWrapping" Value="Wrap"/>
+                                            <Setter Property="Height" Value="auto"/>
+                                        </Style>
+                                    </DataGridTextColumn.ElementStyle>
+                                </DataGridTextColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+                    </Border>
+                </Grid>
+            </Border>
+        </Popup>
     </Grid>
 </Page>

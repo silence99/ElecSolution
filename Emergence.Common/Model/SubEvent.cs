@@ -37,6 +37,8 @@ namespace Emergence.Common.Model
         public SubEvent()
         {
             IsChecked = false;
+            ChildLongitude = "321.110";
+            ChildLatitude = "321.110";
         }
     }
 }

@@ -1,0 +1,392 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:Emergence_WPF.style">
+
+    <!--Grid left Label base style-->
+    <Style TargetType="Label" x:Key="LeftLabel">
+        <Setter Property="FontFamily" Value="PingFang-SC-Medium"/>
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <!--Grid right part Label base style-->
+    <Style TargetType="Label" x:Key="RightLabel">
+        <Setter Property="FontFamily" Value="PingFang-SC-Medium"/>
+        <Setter Property="Foreground" Value="#000000"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <!--Master event detail left label style-->
+    <Style TargetType="Label" x:Key="MasterEventDetailLeftLabel" BasedOn="{StaticResource LeftLabel}">
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
+    <!--Master event detail right label style-->
+    <Style TargetType="Label" x:Key="MasterEventDetailRightLabel" BasedOn="{StaticResource LeftLabel}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Margin" Value="10 0 0 0"/>
+    </Style>
+    <!--Status label style-->
+    <Style TargetType="Label" x:Key="StatusRightLabel" BasedOn="{StaticResource RightLabel}">
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+    <Style TargetType="Label" x:Key="SubEventDetailNameLabel" BasedOn="{StaticResource StatusRightLabel}">
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+    </Style>
+    <Style TargetType="Label" x:Key="SubEventDetailValueLabel" BasedOn="{StaticResource StatusRightLabel}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="30 0 150 0"/>
+    </Style>
+    <!--Base TextBox style-->
+    <Style TargetType="TextBox" x:Key="BaseTextBox">
+        <Setter Property="Height" Value="34px"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+    </Style>
+    <!--Popup TextBox style-->
+    <Style TargetType="TextBox" x:Key="PopupTextBox" BasedOn="{StaticResource BaseTextBox}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+    </Style>
+    <!--Popup Multple Line TextBox style-->
+    <Style TargetType="TextBox" x:Key="PopupMultTextBox" BasedOn="{StaticResource PopupTextBox}">
+        <Setter Property="Height" Value="112px"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="AcceptsReturn" Value="True"/>
+        <Setter Property="AcceptsTab" Value="True"/>
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+    </Style>
+    <!--Image TextBox style-->
+    <Style TargetType="TextBox" x:Key="ImageTextBox" BasedOn="{StaticResource PopupTextBox}">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <!--Search textbox with icon style-->
+    <Style  x:Key="TextBoxSearch" TargetType="{x:Type TextBox}">
+        <Setter Property="Margin" Value="30 15 30 15"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border BorderBrush="#AAAAAA" BorderThickness="1px">
+                        <Grid Background="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition  Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="1" Width="30" Height="30" Source="/Image/Common/Icon_Search.png"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--Map textbox with icon style-->
+    <Style  x:Key="TextBoxMap" TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseTextBox}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border BorderBrush="#AAAAAA" BorderThickness="1px">
+                        <Grid Background="White">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition  Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="1" Width="20" Height="26" Source="/Image/Common/Icon_Address.png"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!--Base button style-->
+    <Style TargetType="Button" x:Key="ButtonBase">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Height" Value="36"/>
+        <Setter Property="Background" Value="#006F69"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+    <!--Ellipse style-->
+    <Style x:Key="EllipseStatus" TargetType="{x:Type Ellipse}">
+        <Setter Property="Height" Value="42"/>
+        <Setter Property="Width" Value="42"/>
+    </Style>
+    <!--CanUserAddRows="False"  ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto"  
+                                    RowHeaderWidth="0" HeadersVisibility="Column" HorizontalAlignment="Stretch" Background="Transparent" 
+                                    IsReadOnly="True" AlternationCount="2" AutoGenerateColumns="False"-->
+    <!--grid right column data grid style-->
+    <Style x:Key="DataGridRight" TargetType="DataGrid">
+        <!--grid right column data grid line style-->
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="AlternationCount" Value="2"/>
+        <Setter Property="AutoGenerateColumns" Value="false"/>
+        <Setter Property="CanUserResizeColumns" Value="false"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="#FFFFFF" />
+        <Setter Property="HorizontalGridLinesBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="#000000"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="VerticalGridLinesBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="#000000"/>
+            </Setter.Value>
+        </Setter>
+        <Style.Resources>
+            <Style TargetType="DataGridColumnHeader">
+                <Setter Property="SnapsToDevicePixels" Value="True" />
+                <Setter Property="MinWidth" Value="0" />
+                <Setter Property="MinHeight" Value="60" />
+                <Setter Property="Foreground" Value="#FFFFFF" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Height" Value="auto"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="DataGridColumnHeader">
+                            <Border x:Name="BackgroundBorder" BorderThickness="1" BorderBrush="#FFFFFF" Width="Auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Grid Background="#006F69">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <ContentPresenter  Margin="0,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--单元格样式触发-->
+            <Style TargetType="DataGridCell">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="DataGridCell">
+                            <TextBlock TextAlignment="Center" VerticalAlignment="Center"  >
+                                    <ContentPresenter />
+                            </TextBlock>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="#E6E6E6"/>
+                        <Setter Property="Foreground" Value="#000000" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <!--行样式触发-->
+            <!--背景色改变必须先设置cellStyle 因为cellStyle会覆盖rowStyle样式-->
+            <Style TargetType="DataGridRow">
+                <Setter Property="Background" Value="#F3F3F3" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Height" Value="auto"/>
+                <Setter Property="Foreground" Value="#000000" />
+                <Style.Triggers>
+                    <!--隔行换色-->
+                    <Trigger Property="AlternationIndex" Value="0" >
+                        <Setter Property="Background" Value="#FFFFFF" />
+                    </Trigger>
+                    <Trigger Property="AlternationIndex" Value="1" >
+                        <Setter Property="Background" Value="#F0F0F0" />
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#E0E0E0"/>
+                        <Setter Property="Foreground" Value="#000000" />
+                    </Trigger>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="#E6E6E6"/>
+                        <Setter Property="Foreground" Value="#000000" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <!--grid right column data grid style-->
+    <Style x:Key="SubEventListDataGrid" TargetType="DataGrid">
+        <!--grid right column data grid line style-->
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="AlternationCount" Value="1"/>
+        <Setter Property="AutoGenerateColumns" Value="false"/>
+        <Setter Property="CanUserResizeColumns" Value="false"/>
+        <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="IsReadOnly" Value="False"/>
+        <Setter Property="HeadersVisibility" Value="None"/>
+        <Setter Property="Background" Value="#F5F5F5" />
+        <Setter Property="Margin" Value="1"/>
+        <Setter Property="BorderBrush" Value="#AAAAAA"/>
+        <Setter Property="BorderThickness" Value="0 1 0 1"/>
+        <Setter Property="VerticalGridLinesBrush" Value="#F5F5F5" />
+        <Setter Property="HorizontalGridLinesBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="#AAAAAA"/>
+            </Setter.Value>
+        </Setter>
+        <Style.Resources>
+            <!--单元格样式触发-->
+            <Style TargetType="DataGridCell">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="DataGridCell">
+                            <TextBlock TextAlignment="Center" VerticalAlignment="Center"  >
+                                    <ContentPresenter />
+                            </TextBlock>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="#F5F5F5"/>
+                        <Setter Property="Foreground" Value="#000000" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <!--行样式触发-->
+            <!--背景色改变必须先设置cellStyle 因为cellStyle会覆盖rowStyle样式-->
+            <Style TargetType="DataGridRow">
+                <Setter Property="Background" Value="#F3F3F3" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Height" Value="90px"/>
+                <Setter Property="Foreground" Value="#000000" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#E0E0E0"/>
+                        <Setter Property="Foreground" Value="#000000" />
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Trigger>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="#FFFFFF"/>
+                        <Setter Property="Foreground" Value="#000000" />
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Style.Resources>
+    </Style>
+    <Style x:Key="BaseImageButton" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="18px"/>
+        <Setter Property="Width" Value="18px"/>
+    </Style>
+    <Style x:Key="CreateImageButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseImageButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Image Height="18px" Width="18px" Source="/Image/Common/Icon_Create.png" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="DeleteImageButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseImageButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Image Height="18px" Width="18px" Source="/Image/Common/Icon_Delete.png" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="EditImageButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseImageButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Image Height="18px" Width="18px" Source="/Image/Common/Icon_Edit.png" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="BackImageButton" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="27"/>
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Image Height="27px" Width="30px" Source="/Image/Common/Icon_Back.png" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ArchiveImageButton" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="21"/>
+        <Setter Property="Width" Value="24"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Image Height="21px" Width="24px" Source="/Image/Common/Icon_Archive.png" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="HiddenImageButton" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="13"/>
+        <Setter Property="Width" Value="62"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Image Height="13px" Width="62px" Source="/Image/Common/Icon_Hidden.png" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="SearchImageButton" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Image Height="30px" Width="30px" Source="/Image/Common/Icon_Search.png" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="AddressImageButton" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="26"/>
+        <Setter Property="Width" Value="20"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Image Height="26px" Width="20px" Source="/Image/Common/Icon_Address.png" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CircleSelectedButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="39" Canvas.Top="54" Fill="#FF6868"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="CircleUnselectedButton" TargetType="{x:Type Button}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="39" Canvas.Top="54" Fill="#AAAAAA"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="Button" x:Key="RoundConnerButton">
+        <Setter Property="Background" Value="#006F69"/>
+        <Setter Property="Foreground" Value="#FFFFFF"/>
+        <Setter Property="FontFamily" Value="PingFang-SC-ExtraLight"/>
+        <Setter Property="FontSize" Value="16px"/>
+        <Setter Property="Height" Value="36px"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="10,10,10,10" Background="{TemplateBinding Background}">
+                        <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" ></ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
