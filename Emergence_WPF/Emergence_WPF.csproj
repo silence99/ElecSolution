@@ -275,8 +275,23 @@
     <Compile Include="Views\MainPage\Weather.xaml.cs">
       <DependentUpon>Weather.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Others\AnnouncementManagementPage.xaml.cs">
+      <DependentUpon>AnnouncementManagementPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Others\CameraManagementPage.xaml.cs">
+      <DependentUpon>CameraManagementPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Others\ManagementPage.xaml.cs">
+      <DependentUpon>ManagementPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Others\MasterEventArchiveManagementPage.xaml.cs">
+      <DependentUpon>MasterEventArchiveManagementPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Others\MaterialListPage.xaml.cs">
       <DependentUpon>MaterialListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Others\MessageHistoryPage.xaml.cs">
+      <DependentUpon>MessageHistoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Others\MessageNotificationPage.xaml.cs">
       <DependentUpon>MessageNotificationPage.xaml</DependentUpon>
@@ -482,7 +497,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Others\AnnouncementManagementPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Others\CameraManagementPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Others\ManagementPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Others\MasterEventArchiveManagementPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Others\MaterialListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Others\MessageHistoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1107,6 +1142,7 @@
     <Resource Include="Image\Common\Icon_Archive.png" />
     <Resource Include="Image\Common\Icon_Back.png" />
     <Resource Include="Image\Common\Icon_Hidden.png" />
+    <Resource Include="Image\Common\Icon_Brand.ico" />
     <Content Include="xml\TaskTracking.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
