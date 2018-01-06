@@ -37,7 +37,7 @@ namespace Emergence_WPF
 				{
 					//#endif
 					var main = ObjectFactory.GetInstance<MainWindow>("mainWindow");
-					var mainWindowUiModel = new MainWindowUiModel()
+					var mainWindowUiModel = new MainWindowViewModel()
 					{
 						UserName = this.txtUserName.Text
 					};

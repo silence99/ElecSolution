@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Emergence_WPF.Views.Others
 {
@@ -23,6 +11,48 @@ namespace Emergence_WPF.Views.Others
 		public ManagementPage()
 		{
 			InitializeComponent();
+			InitPage();
+		}
+
+		private void InitPage()
+		{
+			ChangeStyle(Menu1);
+			ManagementPagesFrame.Navigate(new CameraManagementPage());
+		}
+
+		private void SwitchToCameroPage_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			ChangeStyle(sender as Label);
+			ManagementPagesFrame.Navigate(new CameraManagementPage());
+		}
+
+		private void SwitchToAnnouncementPage_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			ChangeStyle(sender as Label);
+			ManagementPagesFrame.Navigate(new AnnouncementManagementPage());
+		}
+
+		private void SwitchToArchivePage_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			ChangeStyle(sender as Label);
+			ManagementPagesFrame.Navigate(new MasterEventArchiveManagementPage());
+		}
+
+		private void SwitchToUpgradePage_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			ChangeStyle(sender as Label);
+			ManagementPagesFrame.Navigate(new UpgradeManagementPage());
+		}
+
+		private void ChangeStyle(Label label)
+		{
+			var brushWhite = new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"));
+			var brushSeleted = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#006f69"));
+			Menu1.Background = brushWhite;
+			Menu2.Background = brushWhite;
+			Menu3.Background = brushWhite;
+			Menu4.Background = brushWhite;
+			label.Background = brushSeleted;
 		}
 	}
 }

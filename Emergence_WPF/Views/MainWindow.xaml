@@ -3,6 +3,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"      
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d" 
         d:DesignHeight="1080" d:DesignWidth="1920"
         WindowStartupLocation="CenterScreen" MinHeight="630" MinWidth="1000"
@@ -26,6 +27,13 @@
                     <Image Margin="0,0,30,0" Width="30" Height="30" Source="/Image/Icon_Message.png"  MouseLeftButtonDown="Image_MouseRightButtonDown" HorizontalAlignment="Right" Cursor="Hand"></Image>
                     <Image Margin="0,0,30,0" Width="30" Height="30" Tag="MasterEventDetail" Source="/Image/Icon_Graph.png"  MouseLeftButtonDown="GraphBtn_Click" HorizontalAlignment="Right" Cursor="Hand"></Image>
                     <Image Margin="0,0,30,0" Width="30" Height="30" Source="/Image/Icon_FullScreen.png" HorizontalAlignment="Right" MouseLeftButtonDown="Image_MouseLeftButtonDown_2" Cursor="Hand"></Image>
+                    <Image Margin="0,0,30,0" Width="30" Height="30" Source="/Image/Icon_Gear.png" HorizontalAlignment="Right" Cursor="Hand">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter=".\Views\Others\ManagementPage.xaml" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
                     <TextBlock Margin="0,20,30,0" Foreground="White" FontSize="30" FontFamily="Microsoft Sans Serif">|</TextBlock>
                     <Image Margin="0,0,18,0" Width="30" Height="30" Source="/Image/Icon_User.png"  HorizontalAlignment="Right" Cursor="Hand"></Image>
                     <TextBlock Margin="0,30,30,30" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif" Name="loginname" >用户 C</TextBlock>

@@ -11,11 +11,11 @@ namespace Emergence_WPF
 	/// </summary>
 	public partial class UserControl_MainPage : UserControl
 	{
-		private MainWindowUiModel ViewModel { get; set; }
+		private MainWindowViewModel ViewModel { get; set; }
 		public UserControl_MainPage()
 		{
 			InitializeComponent();
-			ViewModel = new MainWindowUiModel()
+			ViewModel = new MainWindowViewModel()
 			{
 				Statistics = new StatisticsViewModel()
 				{
