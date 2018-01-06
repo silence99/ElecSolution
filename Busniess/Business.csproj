@@ -120,7 +120,7 @@
     <Compile Include="Strategies\WeatherStrategyController.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="ViewModel\MainPageUiModel.cs" />
-    <Compile Include="ViewModel\MainWindowUiModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\MasterEventDetailViewModel.cs" />
     <Compile Include="ViewModel\MasterEventViewModel.cs" />
     <Compile Include="ViewModel\MaterialListPageViewModel.cs" />

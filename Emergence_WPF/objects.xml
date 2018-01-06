@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <objects xmlns="http://www.springframework.net">
-  <object id="mainWindowUiModel" type="Emergence.Business.ViewModel.MainWindowUiModel, Busniess">
-    <!--<property name="Left" value="1.0"/>
+  <!--<object id="mainWindowUiModel" type="Emergence.Business.ViewModel.MainWindowUiModel, Busniess">
+    --><!--<property name="Left" value="1.0"/>
     <property name="WindowState">
       <value type="System.Windows.WindowState">Normal</value>
     </property>
     <property name="WindowStyle" >
       <value type="System.Windows.WindowStyle">SingleBorderWindow</value>
-    </property>-->
-  </object>  
+    </property>--><!--
+  </object>-->  
 </objects>
 

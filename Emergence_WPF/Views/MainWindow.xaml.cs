@@ -13,19 +13,18 @@ namespace Emergence_WPF
 	/// <summary>
 	/// MainWindow.xaml 的交互逻辑
 	/// </summary>
-	public partial class MainWindow : Window, IEmergencyControl<MainWindowUiModel>
+	public partial class MainWindow : Window
 	{
-		private MainWindowUiModel _uiModel;
-		public StrategyController StrategyController { get; set; }
-		public MainWindowUiModel ViewModel
+		private MainWindowViewModel _viewModel;
+		public MainWindowViewModel ViewModel
 		{
 			get
 			{
-				return _uiModel;
+				return _viewModel;
 			}
 			set
 			{
-				_uiModel = value == null ? null : (value.IsAopWapper ? value : value.CreateAopProxy());
+				_viewModel = value == null ? null : (value.IsAopWapper ? value : value.CreateAopProxy());
 			}
 		}
 		private Control CurrentPage { get; set; }
@@ -42,9 +41,8 @@ namespace Emergence_WPF
 
 		public void BindingUiModel(StrategyController parent, NotificationObject uiModel)
 		{
-			ViewModel = uiModel as MainWindowUiModel;
+			ViewModel = uiModel as MainWindowViewModel;
 			InitUiModel();
-			// StrategyController = ObjectFactory.GetInstance<StrategyController>(StrategyControllerName);
 			DataContext = uiModel;
 		}
 
@@ -62,6 +60,7 @@ namespace Emergence_WPF
 			ViewModel.WindowStyle = WindowStyle.SingleBorderWindow;
 			// main page ui model is empty, filled when showing main page
 			ViewModel.MainPageData = new MainPageUiModel();
+			ViewModel.NavigateCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand<string>((uri) => frmMain.NavigationService.Navigate(new Uri(uri, UriKind.Relative)));
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
