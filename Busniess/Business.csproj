@@ -121,6 +121,7 @@
     <Compile Include="Util.cs" />
     <Compile Include="ViewModel\MainPageUiModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\ManagementPageViewModel.cs" />
     <Compile Include="ViewModel\MasterEventDetailViewModel.cs" />
     <Compile Include="ViewModel\MasterEventViewModel.cs" />
     <Compile Include="ViewModel\MaterialListPageViewModel.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="ViewModel\TeamListPageViewModel.cs" />
     <Compile Include="ViewModel\TeamStatisticsViewModel.cs" />
     <Compile Include="ViewModel\VideoViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="ViewModel\VM_MasterEventDetail.cs" />
     <Compile Include="ViewModel\VM_MasterEventManagement.cs" />
     <Compile Include="ViewModel\VM_SubEventDetail.cs" />

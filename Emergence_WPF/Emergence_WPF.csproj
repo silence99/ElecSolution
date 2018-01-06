@@ -301,6 +301,9 @@
     <Compile Include="Views\Others\TeamListPage.xaml.cs">
       <DependentUpon>TeamListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Others\UpgradeManagementPage.xaml.cs">
+      <DependentUpon>UpgradeManagementPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WebBrowserOverlay.xaml.cs">
       <DependentUpon>WebBrowserOverlay.xaml</DependentUpon>
     </Compile>
@@ -531,6 +534,10 @@
     <Page Include="Views\Others\TeamListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Others\UpgradeManagementPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="WebBrowserOverlay.xaml">
       <SubType>Designer</SubType>
