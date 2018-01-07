@@ -6,13 +6,14 @@ namespace Emergence.Common.Model
 {
 	public class AnnouncementModel : NotificationObject
 	{
+		public virtual bool IsChecked { get; set; }
 		[JsonProperty("content")]
-		public string Content { get; set; }
+		public virtual string Content { get; set; }
 		[JsonProperty("id")]
-		public int ID { get; set; }
+		public virtual long ID { get; set; }
 		[JsonProperty("time")]
-		public DateTime Time { get; set; }
+		public virtual DateTime Time { get; set; }
 		[JsonProperty("title")]
-		public string Title { get; set; }
+		public virtual string Title { get; set; }
 	}
 }

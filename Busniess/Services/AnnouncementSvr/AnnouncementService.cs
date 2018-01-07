@@ -1,13 +1,11 @@
 ﻿using Busniess.CommonControl;
+using Emergence.Business.CommonControl;
 using Emergence.Common.Model;
 using log4net;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Busniess.Services
 {
@@ -15,7 +13,31 @@ namespace Busniess.Services
 	{
 		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-		public EmergencyHttpResponse<EmergencyHttpListResult<AnnouncementModel>> GetAnnounments(int pageIndex, int pageSize)
+		public EmergencyHttpListResult<AnnouncementModel> GetAnnouncements(int pageIndex, int pageSize)
+		{
+			var response = GetAnnounments(pageIndex, pageSize);
+			if (response.Code != 1)
+			{
+				Util.ShowError(string.Format("获取公告信息失败：{0}", response.Message));
+				return null;
+			}
+			else
+			{
+				return response.Result;
+			}
+		}
+
+		public bool CreateAnnouncement(AnnouncementModel model)
+		{
+			return CreateAnnouncement(model.Title, TimeControl.GetMillisecons(model.Time), model.Content);
+		}
+
+		public bool UpdateAnnouncement(AnnouncementModel model)
+		{
+			return UpdateAnnouncement(model.ID, model.Title, TimeControl.GetMillisecons(model.Time), model.Content);
+		}
+
+		private EmergencyHttpResponse<EmergencyHttpListResult<AnnouncementModel>> GetAnnounments(int pageIndex, int pageSize)
 		{
 			try
 			{
@@ -43,7 +65,7 @@ namespace Busniess.Services
 			}
 		}
 
-		public bool CreateAnnouncement(string title, long time, string content)
+		private bool CreateAnnouncement(string title, long time, string content)
 		{
 			string serviceName = ConfigurationManager.AppSettings["UpdateNoticeApi"] ?? "notice";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()
@@ -78,7 +100,7 @@ namespace Busniess.Services
 			}
 		}
 
-		public bool UpdateMaterial(long id, string title, long time, string content)
+		private bool UpdateAnnouncement(long id, string title, long time, string content)
 		{
 			string serviceName = ConfigurationManager.AppSettings["UpdateNoticeApi"] ?? "notice";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()
