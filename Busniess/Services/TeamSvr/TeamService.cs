@@ -62,7 +62,7 @@ namespace Busniess.Services
 			}
 		}
 
-		private EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetUnbindedTeamData(int pageIndex, int pageSize)
+		public EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetUnbindedTeamData(int pageIndex, int pageSize)
 		{
 			try
 			{

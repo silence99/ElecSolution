@@ -1,0 +1,166 @@
+﻿<Page x:Class="Emergence_WPF.Views.Event.SubEventPopup_Detail"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Emergence_WPF.Views.Event"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="SubEventPopup_Detail">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../style/MasterEventDetailStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Name="Grid_SubEventPopup_Detail" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.08*"></RowDefinition>
+            <RowDefinition Height="0.23*"></RowDefinition>
+            <RowDefinition Height="0.016*"></RowDefinition>
+            <RowDefinition Height="0.150*"></RowDefinition>
+            <RowDefinition Height="0.052*"></RowDefinition>
+            <RowDefinition Height="0.210*"></RowDefinition>
+            <RowDefinition Height="0.052*"></RowDefinition>
+            <RowDefinition Height="0.210*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Border Grid.Row="0" BorderBrush="#D3D3D3" BorderThickness="0 0 0 2" >
+            <DockPanel>
+                <Label DockPanel.Dock="Left" Style="{StaticResource RightLabel}" Content="子事件详情" FontSize="20px" Margin="19 0 0 0"/>
+            </DockPanel>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.25*"></RowDefinition>
+                <RowDefinition Height="0.25*"></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.1*"/>
+                <ColumnDefinition Width="0.4*"/>
+            </Grid.ColumnDefinitions>
+            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="0" Grid.Row="0" Content="子事件标题"></Label>
+            <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="1" Grid.Row="0" Content="{Binding Path=SubEventDetail.ChildTitle,Mode=TwoWay}"></Label>
+            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="2" Grid.Row="0" Content="等级"></Label>
+            <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="3" Grid.Row="0" Content="{Binding Path=SubEventDetail.ChildGradeName,Mode=TwoWay}"></Label>
+            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="0" Grid.Row="1" Content="负责人"></Label>
+            <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="1" Grid.Row="1" Content="{Binding Path=SubEventDetail.ChildTitle,Mode=TwoWay}"></Label>
+            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="2" Grid.Row="1" Content="详细地址"></Label>
+            <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="3" Grid.Row="1" Content="{Binding Path=SubEventDetail.ChildLocale,Mode=TwoWay}"></Label>
+            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="0" Grid.Row="2" Content="简介"></Label>
+            <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Content="{Binding Path=SubEventDetail.ChildRemarks,Mode=TwoWay}"></Label>
+        </Grid>
+        <Viewbox Grid.Row="3" Margin="15 0 15 0" Stretch="Fill">
+            <Canvas Background="#F9F9F9" Width="1170" Height="150">
+                <Label Style="{StaticResource RightLabel}" FontSize="18" Canvas.Left="25" Canvas.Top="10" Content="任务进度"/>
+                <Line X1="60" Y1="75" X2="1110" Y2="75" Stroke="#AAAAAA" StrokeThickness="4"/>
+                <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="39" Canvas.Top="54" Fill="{Binding Path=SBStatus.Registed,Mode=TwoWay}"/>
+                <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="38" Canvas.Top="95" Content="登记"/>
+                <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="301.5" Canvas.Top="54" Fill="{Binding Path=SBStatus.Published}"/>
+                <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="300.5" Canvas.Top="95" Content="发布"/>
+                <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="563" Canvas.Top="54" Fill="{Binding Path=SBStatus.Accepted}"/>
+                <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="563" Canvas.Top="95" Content="接受"/>
+                <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="826.5" Canvas.Top="54" Fill="{Binding Path=SBStatus.Executed}"/>
+                <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="825.5" Canvas.Top="95" Content="执行"/>
+                <Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="1089" Canvas.Top="54" Fill="{Binding Path=SBStatus.Completed}"/>
+                <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="1088" Canvas.Top="95" Content="完成"/>
+            </Canvas>
+        </Viewbox>
+        <DockPanel Grid.Row="4">
+            <Label Style="{StaticResource RightLabel}" FontSize="18" DockPanel.Dock="Left" Margin="22 0 0 0" Content="队伍列表"/>
+        </DockPanel>
+        <DockPanel Grid.Row="5" Background="#F9F9F9">
+            <DataGrid Style="{StaticResource DataGridRight}"  DockPanel.Dock="Top" Name="Grid_Team"  ItemsSource="{Binding Path=TeamList, Mode=TwoWay}" Margin="2">
+                <DataGrid.Columns >
+                    <!--<DataGridCheckBoxColumn Binding="{Binding IsCheck}" x:Name="f1" Header=""  Width="0.5*" />-->
+                    <DataGridTextColumn  Binding="{Binding Path=TeamName, Mode=TwoWay}" x:Name="dw2" Header="队伍名称" Width="*" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="Height" Value="auto"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=TotalNumber, Mode=TwoWay}" x:Name="dw3" Header="人数"  Width="0.5*" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="Height" Value="auto"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=TeamDeptName, Mode=TwoWay}" x:Name="dw4" Header="所属单位"  Width="1.5*" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="Height" Value="auto"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=PersonCharge, Mode=TwoWay}" x:Name="dw5" Header="队长"  Width="0.8*" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="Height" Value="auto"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=ChildSubmitDept, Mode=TwoWay}" x:Name="dw6" Header="队长电话"  Width="*" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="Height" Value="auto"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+        <DockPanel Grid.Row="6">
+            <Label Style="{StaticResource RightLabel}" FontSize="18" DockPanel.Dock="Left" Margin="22 0 0 0" Content="物资列表"/>
+        </DockPanel>
+
+        <DockPanel Grid.Row="7" Background="#F9F9F9">
+            <DataGrid Style="{StaticResource DataGridRight}"  DockPanel.Dock="Top" Name="DataGrid_Metairls"  ItemsSource="{Binding Path=MaterialList,  Mode=TwoWay}" Margin="2">
+                <DataGrid.Columns >
+                    <!--<DataGridCheckBoxColumn Binding="{Binding IsCheck}" x:Name="f1" Header=""  Width="0.5*" />-->
+                    <DataGridTextColumn  Binding="{Binding Path=ChildTitle,Mode=TwoWay}" x:Name="wz2" Header="编号" Width="*" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="Height" Value="auto"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=ChildTime,Mode=TwoWay}" x:Name="wz3" Header="名称"  Width="*" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="Height" Value="auto"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=ChildLocale,Mode=TwoWay}" x:Name="wz4" Header="所属单位"  Width="2*" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="Height" Value="auto"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=ChildSubmitParty,Mode=TwoWay}" x:Name="wz5" Header="数量"  Width="*" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="Height" Value="auto"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+    </Grid>
+</Page>

@@ -6,6 +6,7 @@ using Emergence.Business.ViewModel;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Unity;
 using System.Data;
+using System.Windows.Media;
 
 namespace Emergence_WPF
 {
@@ -16,10 +17,10 @@ namespace Emergence_WPF
     {
         public VM_MasterEventDetail ViewModel { get; set; }
         //{
-    //        get { return this.DataContext as VM_MasterEventDetail; }
-    //set { this.DataContext = value; }
-//}
-public DelegateCommand<object> ClickCommand { get; private set; }
+        //        get { return this.DataContext as VM_MasterEventDetail; }
+        //set { this.DataContext = value; }
+        //}
+        public DelegateCommand<object> ClickCommand { get; private set; }
 
         public MasterEventDetail(MasterEvent masterEventID)
         {
@@ -38,7 +39,7 @@ public DelegateCommand<object> ClickCommand { get; private set; }
                 ViewModel.SelectSubEventAction(item.Id.ToString());
             }
         }
-        
+
         private void Grid_SubEventList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataGrid dg = sender as DataGrid;
@@ -48,6 +49,31 @@ public DelegateCommand<object> ClickCommand { get; private set; }
             {
                 ViewModel.SelectSubEventAction(item.Id.ToString());
             }
+        }
+
+        private void Btn_PublishSubEvent_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Btn_AmplifySubEvent_Click(object sender, RoutedEventArgs e)
+        {
+            this.PopupSubEventAmplify.IsOpen = !this.PopupSubEventAmplify.IsOpen;
+            DependencyObject parent = this.PopupSubEventAmplify.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    var mainWin = Application.Current.MainWindow;
+                    element.Height = 768;// mainWin.Height;
+                    element.Width = 1366;// mainWin.Width;
+                    break;
+                }
+            }
+            while (parent != null);
         }
     }
 }
