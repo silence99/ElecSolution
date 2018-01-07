@@ -144,6 +144,7 @@
     <Compile Include="Comm\Pager.cs" />
     <Compile Include="Comm\PasswordBoxHelper.cs" />
     <Compile Include="Comm\StringFormatConverter.cs" />
+    <Compile Include="Comm\WheelChart.cs" />
     <Compile Include="EmergencyCommandCenter.xaml.cs">
       <DependentUpon>EmergencyCommandCenter.xaml</DependentUpon>
     </Compile>
