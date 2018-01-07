@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:local="clr-namespace:Emergence_WPF"
+      xmlns:chart="clr-namespace:Emergence_WPF.Comm"
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="1920"
       Title="MasterEventDetail" Loaded="Page_Loaded">
@@ -78,7 +79,9 @@
                     <DockPanel>
                         <Label DockPanel.Dock="Top" Style="{StaticResource LeftLabel}" VerticalAlignment="Top" FontSize="16px" Content="队伍展示"/>
                         <Border DockPanel.Dock="Top" BorderBrush="#4D9A96" BorderThickness="0 2 0 0" Grid.Column="0" Grid.Row="2"/>
-                        <Grid Name="Grid_ArmyChart" DockPanel.Dock="Bottom"></Grid>
+                        <Grid Name="Grid_ArmyChart" DockPanel.Dock="Bottom">
+                            <chart:WheelChart Width="100" Radius="50" Height="100" Value="90" Total="100" InnerRadius="40"/>
+                        </Grid>
                     </DockPanel>
                 </Border>
                 <Border Name="LeftGridRow4Border" BorderBrush="#4D9A96" BorderThickness="0 0 0 2" Grid.Column="0" Grid.Row="3">
