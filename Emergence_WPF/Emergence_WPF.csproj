@@ -232,6 +232,9 @@
     <Compile Include="Util\Constant.cs" />
     <Compile Include="Util\ObjectFactory.cs" />
     <Compile Include="Util\ServiceManager.cs" />
+    <Compile Include="Views\AddressPicker.xaml.cs">
+      <DependentUpon>AddressPicker.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Charts\TeamPersonChart.xaml.cs">
       <DependentUpon>TeamPersonChart.xaml</DependentUpon>
     </Compile>
@@ -430,6 +433,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddressPicker.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1175,6 +1182,7 @@
     <Resource Include="Image\Common\Icon_Hidden.png" />
     <Resource Include="Image\Common\Icon_Brand.ico" />
     <Resource Include="Image\Icon_Gear.png" />
+    <Content Include="Views\AddressPicker.html" />
     <Resource Include="Image\Common\Icon_Cancel.png" />
     <Content Include="xml\TaskTracking.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

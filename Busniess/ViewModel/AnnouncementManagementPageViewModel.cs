@@ -112,6 +112,7 @@ namespace Busniess.ViewModel
 			CleanMessage();
 			var model = this.CreateAopProxy();
 			model.Current = new AnnouncementModel().CreateAopProxy();
+			model.Current.Time = DateTime.Now;
 			model.IsAdding = true;
 			model.IsPopupOpen = true;
 		}
