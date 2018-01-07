@@ -1,4 +1,5 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿
+    <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Emergence_WPF.style">
 
@@ -279,6 +280,15 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style x:Key="CancelImageButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseImageButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Image Height="19px" Width="19px" Source="/Image/Common/Icon_Cancel.png" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style x:Key="DeleteImageButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseImageButton}">
         <Setter Property="Template">
             <Setter.Value>
@@ -350,6 +360,18 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Image Height="26px" Width="20px" Source="/Image/Common/Icon_Address.png" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="AmplifyImageButton" TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="22"/>
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Image Height="22px" Width="22px" Source="/Image/Common/Icon_Magnify.png" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
