@@ -4,13 +4,14 @@
         xmlns:control="clr-namespace:Emergence_WPF"
         ResizeMode="NoResize"
         Background="White" 
-        Height="484px"
+        Height="454px"
         Width="490px"
         WindowStartupLocation="CenterScreen"
         Title="应急指挥管理平台" 
-        WindowStyle="SingleBorderWindow">
+        WindowStyle="None">
     <Grid>
-        <!--<DockPanel Height="40" VerticalAlignment="Top">
+        <StackPanel Orientation="Vertical">
+            <DockPanel Height="40" VerticalAlignment="Top">
                 <Label Margin="0,0,20,0" Content="X" Width="20" Height="20" Padding="0" HorizontalAlignment="Right"/>
             </DockPanel>
             <StackPanel Margin="0,110,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -35,7 +36,7 @@
             </Border.Effect>
             <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
                 <StackPanel Margin="0,7,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Image Width="92" Height="78" Source="./Image/Common/Icon_Emergence_Middle.png"></Image>
+                    <Image Width="92" Height="78" Source="./Image/Common/Icon_Brand.ico"></Image>
                     <Label Margin="12, 0, 0, 0" Foreground="#006F69" FontSize="20" VerticalContentAlignment="Center" FontFamily="PingFang-SC-Heavy" Content="国网龙泉市供电公司应急指挥平台"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="30,27,0,0" HorizontalAlignment="Left">
@@ -68,56 +69,60 @@
                     </TextBox>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="30,30,0,0">
-                    <Label VerticalAlignment="Center" Foreground="#31605A" FontSize="20">密码:</Label>
-                    <control:HintPasswordBox VerticalContentAlignment="Center" FontSize="16" Foreground="#FF776B5F" Width="250" Margin="20,0,0,0" 
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Margin="0,50,0,0">
+                        <Label VerticalAlignment="Center" Foreground="#31605A" FontSize="20">密码:</Label>
+                        <control:HintPasswordBox VerticalContentAlignment="Center" FontSize="16" Foreground="#FF776B5F" Width="250" Margin="20,0,0,0" 
         	Height="40" x:Name="txtPassword" HintText="密 码" Hint="密 码">
 
-                    </control:HintPasswordBox>
-                </StackPanel>
-                <!--<DockPanel Margin="0,20,0,0" Height="15">
+                        </control:HintPasswordBox>
+                    </StackPanel>
+
+                    <DockPanel Margin="0,20,0,0" Height="15">
                         <CheckBox Content="记住密码" Margin="0,0,0,0"></CheckBox>
                         <Label Content="忘记密码？" Margin="0,0,0,0" HorizontalAlignment="Right" FontSize="12" Padding="0" VerticalAlignment="Center" Foreground="#006f69"></Label>
-                    </DockPanel>-->
-                <DockPanel Height="40" Margin="60, 64, 60, 0" Background="#006f69">
-                    <Button Click="LoginButton_Click"  Cursor="Hand" Content="登  录" Foreground="White">
-                        <Button.Style>
-                            <Style  TargetType="{x:Type Button}">
-                                <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-                                <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
-                                <Setter Property="Background" Value="Transparent"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate  TargetType="{x:Type Button}">
-                                            <Border x:Name="border"  
+                    </DockPanel>
+                    <DockPanel Height="40" Margin="0, 15, 0, 0" Background="#006f69">
+                        <Button Click="LoginButton_Click"  Cursor="Hand" Content="登  录" Foreground="White">
+                            <Button.Style>
+                                <Style  TargetType="{x:Type Button}">
+                                    <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+                                    <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate  TargetType="{x:Type Button}">
+                                                <Border x:Name="border"  
                                                         BorderThickness="1" BorderBrush="#68B0E8" 
                                                         Background="{TemplateBinding Background}" 
                                                         CornerRadius="0.5"
                                                         HorizontalAlignment="Stretch"
                                                         VerticalAlignment="Stretch" Padding="{TemplateBinding Padding}"
                                                         Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
-                                                <Label x:Name="lbContent" Content="{TemplateBinding Content}" FontSize="20" 
+                                                    <Label x:Name="lbContent" Content="{TemplateBinding Content}" FontSize="20" 
                                                            Padding="0,10" Background="Transparent" Height="45"  
                                                            Foreground="White"
                                                            VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" TargetName="border" Value="#8CC890"></Setter>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" TargetName="border" Value="#8CC890"></Setter>
 
 
-                                                    <Setter Property="Foreground" TargetName="lbContent" Value="White"></Setter>
-                                                    <!--<Setter Property="Opacity" TargetName="border" Value="0.6"></Setter>-->
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                </DockPanel>
-            </StackPanel>
-        </Border>
+                                                        <Setter Property="Foreground" TargetName="lbContent" Value="White"></Setter>
+                                                        <!--<Setter Property="Opacity" TargetName="border" Value="0.6"></Setter>-->
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </DockPanel>
+
+                </StackPanel>
+            </Border>
+
+        </StackPanel>
     </Grid>
 </Window>
