@@ -13,6 +13,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../../style/MasterEventDetailStyle.xaml" />
+                <ResourceDictionary Source="../../style/Generic.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
@@ -80,7 +81,7 @@
                         <Label DockPanel.Dock="Top" Style="{StaticResource LeftLabel}" VerticalAlignment="Top" FontSize="16px" Content="队伍展示"/>
                         <Border DockPanel.Dock="Top" BorderBrush="#4D9A96" BorderThickness="0 2 0 0" Grid.Column="0" Grid.Row="2"/>
                         <Grid Name="Grid_ArmyChart" DockPanel.Dock="Bottom">
-                            <chart:WheelChart Width="100" Radius="50" Height="100" Value="90" Total="100" InnerRadius="40"/>
+                            <chart:WheelChart Width="100" Radius="50" Height="100" Value="90" Total="100" InnerDiameter="80"/>
                         </Grid>
                     </DockPanel>
                 </Border>

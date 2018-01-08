@@ -70,7 +70,6 @@
                                 </PathGeometry>
                             </Path.Data>
                         </Path>
-                        <Ellipse Fill="{TemplateBinding InnerCircleColor}" Width="{TemplateBinding InnerRadius}" Height="{TemplateBinding InnerRadius}"/>
                         <Path Fill="{TemplateBinding RestSectorColor}">
                             <Path.Data>
                                 <PathGeometry>
@@ -81,6 +80,7 @@
                                 </PathGeometry>
                             </Path.Data>
                         </Path>
+                        <Ellipse Fill="{TemplateBinding InnerCircleColor}" Width="{TemplateBinding InnerDiameter}" Height="{TemplateBinding InnerDiameter}"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

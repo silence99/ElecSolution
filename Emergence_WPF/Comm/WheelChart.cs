@@ -13,11 +13,11 @@ namespace Emergence_WPF.Comm
 			new FrameworkPropertyMetadata(1.0, OnSensitivePropertyChanged));
 		public double Radius { get { return (double)GetValue(RadiusProperty); } set { SetValue(RadiusProperty, value); } }
 
-		public readonly static DependencyProperty InnerRadiusProperty = DependencyProperty.Register("InnerRadius",
+		public readonly static DependencyProperty InnerDiameterProperty = DependencyProperty.Register("InnerDiameter",
 			typeof(double),
 			typeof(WheelChart),
 			new FrameworkPropertyMetadata(0.0));
-		public double InnerRadius { get { return (double)GetValue(InnerRadiusProperty); } set { SetValue(InnerRadiusProperty, value); } }
+		public double InnerDiameter { get { return (double)GetValue(InnerDiameterProperty); } set { SetValue(InnerDiameterProperty, value); } }
 
 		public readonly static DependencyProperty SweepDirectionProperty = DependencyProperty.Register("SweepDirection ",
 			typeof(SweepDirection),
@@ -116,7 +116,7 @@ namespace Emergence_WPF.Comm
 		public readonly static DependencyProperty RestSectorColorProperty = DependencyProperty.Register("RestSectorColor",
 				typeof(Brush),
 				typeof(WheelChart),
-				new FrameworkPropertyMetadata(new SolidColorBrush((Color)ColorConverter.ConvertFromString("Black"))));
+				new FrameworkPropertyMetadata(new SolidColorBrush((Color)ColorConverter.ConvertFromString("Green"))));
 		public Brush RestSectorColor
 		{
 			get { return (Brush)GetValue(RestSectorColorProperty); }
@@ -147,7 +147,7 @@ namespace Emergence_WPF.Comm
 		public WheelChart()
 		{
 			Radius = Width / 2;
-			InnerRadius = Radius / 2;
+			InnerDiameter = Radius / 2;
 			Center = new Point(Radius, Radius);
 			InitAngleOffset = 90;
 			Total = 1;
@@ -163,7 +163,7 @@ namespace Emergence_WPF.Comm
 		private Point GetArcEndPoint()
 		{
 			var angle = Total == 0 ? 0 : 360 * Value / Total;
-			angle = SweepDirection == SweepDirection.Clockwise ? InitAngleOffset - angle : InitAngleOffset + angle;
+			angle = SweepDirection == SweepDirection.Clockwise ? InitAngleOffset + angle : InitAngleOffset - angle;
 			var point = GetPoint(angle);
 			return new Point(Center.X - point.X, Center.Y - point.Y);
 		}
@@ -201,9 +201,9 @@ namespace Emergence_WPF.Comm
 			ArcSize = new Size(Radius, Radius);
 			ArcStart = GetArcStartPoint();
 			ArcEnd = GetArcEndPoint();
-			if (InnerRadius >= Radius)
+			if (InnerDiameter >= 2 * Radius)
 			{
-				InnerRadius = Radius / 2;
+				InnerDiameter = Radius / 2;
 			}
 		}
 	}

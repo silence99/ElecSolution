@@ -3,20 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:chart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+             xmlns:chart="clr-namespace:Emergence_WPF.Comm"
              mc:Ignorable="d" 
              d:DesignHeight="234" d:DesignWidth="420" Loaded="UserControl_Loaded">
     <Grid>
-        <chart:RadialGaugeChart ChartSubTitle="" 
-                                ChartTitle="" 
-                                Background="White" 
-                                Margin="0,0,0,0">
-            <chart:RadialGaugeChart.Series>
-                <chart:ChartSeries DisplayMember="Key"
-                            ItemsSource="{Binding Path=Statistics}"
-                            SeriesTitle="队伍展示"
-                            ValueMember="Value" />
-            </chart:RadialGaugeChart.Series>
-        </chart:RadialGaugeChart>
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="../../style/Generic.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="190"/>
+            <ColumnDefinition Width="190"/>
+        </Grid.ColumnDefinitions>
+        <chart:WheelChart Grid.Column="0" Width="190" Height="190" Margin="0,0,0,0" VerticalAlignment="Top" 
+                          Value="{Binding TeamUseTotal}" Total="{Binding TeamTotal}" Radius="95" InnerDiameter="100">
+        </chart:WheelChart>
+        <chart:WheelChart Grid.Column="1" Width="190" Height="190" Margin="0,0,0,0" VerticalAlignment="Top"
+                          Value="{Binding TeamMemberUseTotal}" Total="{Binding TeamMemberTotal}" Radius="95" InnerDiameter="100">
+        </chart:WheelChart>
     </Grid>
 </UserControl>
