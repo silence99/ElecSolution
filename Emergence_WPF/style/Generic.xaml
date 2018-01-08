@@ -81,6 +81,7 @@
                             </Path.Data>
                         </Path>
                         <Ellipse Fill="{TemplateBinding InnerCircleColor}" Width="{TemplateBinding InnerDiameter}" Height="{TemplateBinding InnerDiameter}"/>
+                        <Label Content="{TemplateBinding Content}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" Foreground="Black"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

@@ -129,6 +129,11 @@ namespace Emergence_WPF.Comm
 				new FrameworkPropertyMetadata(new SolidColorBrush((Color)ColorConverter.ConvertFromString("White"))));
 		public Brush InnerCircleColor { get { return (Brush)GetValue(InnerCircleColorProperty); } set { SetValue(InnerCircleColorProperty, value); } }
 
+		public readonly static DependencyProperty ContentProperty = DependencyProperty.Register("Content",
+				typeof(string),
+				typeof(WheelChart),
+				new FrameworkPropertyMetadata("0.00%"));
+		public string Content { get { return (string)GetValue(ContentProperty); } set { SetValue(ContentProperty, value); } }
 
 
 		static WheelChart()
@@ -205,6 +210,7 @@ namespace Emergence_WPF.Comm
 			{
 				InnerDiameter = Radius / 2;
 			}
+			Content = (Total == 0 ? 0 : Value / Total).ToString("P2");
 		}
 	}
 }
