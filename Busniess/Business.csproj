@@ -120,6 +120,7 @@
     <Compile Include="Strategies\VideoStrategyController.cs" />
     <Compile Include="Strategies\WeatherStrategyController.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="ViewModel\AddMasterEventViewModel.cs" />
     <Compile Include="ViewModel\AnnouncementManagementPageViewModel.cs" />
     <Compile Include="ViewModel\MainPageUiModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />

@@ -4,12 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"              
              xmlns:local="clr-namespace:Emergence_WPF.Comm"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1920"
               Loaded="Page_Loaded">
 
     <Page.Resources>
         <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
             <Style TargetType="DataGridRow" x:Key="oddEvenRowStyle">
                 <Style.Triggers>
                     <Trigger Property="ItemsControl.AlternationIndex" 
@@ -233,5 +238,65 @@
                 </DockPanel>
             </DockPanel>
         </DockPanel>
+
+        <Popup 
+            x:Name="PopupItem" 
+            Width="800" 
+            Height="332"  
+            StaysOpen="True"   
+            IsOpen="{Binding Path=IsPopupOpen}"   
+            AllowsTransparency="True"  
+            PopupAnimation="Slide"
+            Placement="Top"
+            HorizontalOffset="{Binding PopupOffsetX}"
+            VerticalOffset="{Binding PopupOffsetY}"
+            >
+            <DockPanel Background="White">
+                <DockPanel DockPanel.Dock="Top" Height="50">
+                    <Label Width="40" Content="X" HorizontalAlignment="Left">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseUp">
+                                <i:InvokeCommandAction Command="{Binding PopupCloseCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Label>
+                    <Border Width="1" BorderThickness="1" BorderBrush="#D9D9D9" Margin="0,0,0,0" HorizontalAlignment="Left"/>
+                    <Label Content="创建主时间"/>
+                    <Button Content="完成" FontSize="16" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,36,0" Width="88" Height="36" Background="#006f69" Foreground="White">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding UpdateCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                </DockPanel>
+                <Border Margin="2,0,0,0" Background="#F3F3F3" BorderThickness="1">
+                    <StackPanel Orientation="Vertical">
+                        <DockPanel Height="60" VerticalAlignment="Top">
+                            <Label Content="标题" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"/>
+                            <TextBox Height="30" VerticalAlignment="Top" Width="300" HorizontalAlignment="Left" Margin="0,20,0,0" Text="{Binding Path=Current.Title, Mode=TwoWay}"/>
+                            <Label Content="类型" Height="30" Width="170" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Margin="0,20,0,0"/>
+                            <ComboBox Height="30" VerticalAlignment="Top" Width="160" HorizontalAlignment="Left" Margin="20 20, 0, 0" Text="{Binding Path=Current.Time,Mode=TwoWay}"/>
+                        </DockPanel>
+                        <DockPanel Height="60" VerticalAlignment="Top">
+                            <Label Content="等级" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"/>
+                            <ComboBox Height="30" VerticalAlignment="Top" Width="160" HorizontalAlignment="Left" Margin="0,20,0,0" Text="{Binding Path=Current.Title, Mode=TwoWay}"/>
+                            <Label Content="地址" Height="30" Width="170" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Margin="0,20,0,0"/>
+                            <Border Height="30" Width="300" BorderThickness="1">
+                                <Grid Background="White">
+                                    <TextBox Height="30" Width="280" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Current.Time,Mode=TwoWay}" BorderThickness="0"/>
+                                    <Image Height="30" Width="20" HorizontalAlignment="Right" Source="../../Image/Common/Icon_address.png"/>
+                                </Grid>
+                            </Border>
+
+                        </DockPanel>
+                        <DockPanel Height="120" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,20,0,0">
+                            <Label Content="描述" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"/>
+                            <TextBox VerticalAlignment="Top" Width="650" Height="120" HorizontalAlignment="Left" Margin="0, 0, 0, 0" Text="{Binding Current.Content}"/>
+                        </DockPanel>
+                    </StackPanel>
+                </Border>
+            </DockPanel>
+        </Popup>
     </Grid>
 </Page>

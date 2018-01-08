@@ -51,19 +51,14 @@ namespace Emergence.Common.Model
         [JsonProperty("submitDept")]
         public virtual string SubmitDept { get; set; }
 
-        [JsonProperty("submitParty")]
-        public virtual string SubmitParty { get; set; }
-
-        [JsonProperty("telephoneNumber")]
-        public virtual string TelephoneNumber { get; set; }
-
         [JsonProperty("time")]
         public virtual string Time { get; set; }
 
         [JsonProperty("title")]
         public virtual string Title { get; set; }
+		
+		[JsonProperty("noCommitChildEventCount")]
+		public virtual int NoCommitChildEventCount { get; set; }
 
-        [JsonProperty("videos")]
-        public virtual Video[] Videos { get; set; }
-    }
+	}
 }
