@@ -54,7 +54,7 @@ namespace Emergence_WPF
 		private void RequestMasterEventList()
 		{
 			//var masterEvents = gMasterSvr.GetMasterEvents(ViewModel.PageIndex, ViewModel.PageSize);
-			var masterEvents = MasterEventService.GetMasterEvents(ViewModel.PageIndex, 1000, ViewModel.TxtTitle, default(DateTime), default(DateTime), string.Empty);
+			var masterEvents = MasterEventService.GetMasterEvents(ViewModel.PageIndex, 20, ViewModel.TxtTitle, default(DateTime), default(DateTime), string.Empty);
 			if (masterEvents != null)
 			{
 				ViewModel.MasterEvents = masterEvents.MasterEvents;
@@ -69,39 +69,6 @@ namespace Emergence_WPF
 		{
 			RequestMasterEventList();
 		}
-
-		//private void GenerateSimulatedData()
-		//{
-		//	string loginURL = ConfigurationSettings.AppSettings["BaseURL"].ToString() + ConfigurationSettings.AppSettings["AddMainEventURL"].ToString();
-		//	List<HeaderInfo> headers = new List<HeaderInfo>();
-		//	//headers.Add(new HeaderInfo("Content-Type", "application/x-www-form-urlencoded"));
-		//	string dateTime = TimeControl.GenerateTimeStamp();
-		//	string signString = dateTime + "POST/mainEvent";
-		//	string authorization = AuthorizationControl.GetAuthorization(signString);
-
-		//	headers.Add(new HeaderInfo("X-Project-Date", dateTime));
-		//	headers.Add(new HeaderInfo("Authorization", authorization));
-
-		//	for (int i = 1; i < 21; i++)
-		//	{
-		//		StringBuilder postData = new StringBuilder();
-		//		//postData.Append("id=" + i.ToString());
-		//		postData.Append("serialNumber=MD" + i.ToString().PadLeft(6, '0'));
-		//		postData.Append("&title=测试主事件标题" + i.ToString());
-		//		postData.Append("&eventType=event_1");
-		//		postData.Append("&grade=grade_1");
-		//		postData.Append("&time=" + dateTime);
-		//		postData.Append("&describe=主事件" + i.ToString());
-		//		postData.Append("&submitParty=张美娜");
-		//		postData.Append("&telephoneNumber=13333333333");
-		//		postData.Append("&submitDept=消防一中队");
-		//		postData.Append("&locale=湖州市礼数街消防支队");
-		//		postData.Append("&longitude=120.000");
-		//		postData.Append("&latitude=120.000");
-		//		HttpResult hr = HttpCommon.HttpPost(loginURL, postData.ToString(), "", "application/x-www-form-urlencoded", headers);
-		//	}
-
-		//}
 
 		private void Grid_MasterEvent_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{

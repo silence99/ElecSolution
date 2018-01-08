@@ -60,7 +60,7 @@ namespace Emergence_WPF
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             var svc = ServiceManager.Instance.GetService<MasterEventService>(Constant.Services.MasterEventService);
-            this.DataCodeing.ItemsSource = svc.GetMasterEventForMainPage();
+            //this.DataCodeing.ItemsSource = svc.GetMasterEventForMainPage();
             VideoList.BindingViewModel(svc.GetVideos());
         }
 
