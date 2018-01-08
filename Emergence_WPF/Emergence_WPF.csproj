@@ -274,6 +274,9 @@
     <Compile Include="Views\Event\MasterEventManagement.xaml.cs">
       <DependentUpon>MasterEventManagement.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MainPage\EmergenceMainPage.xaml.cs">
+      <DependentUpon>EmergenceMainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage\VideoCollection.xaml.cs">
       <DependentUpon>VideoCollection.xaml</DependentUpon>
     </Compile>
@@ -462,6 +465,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Event\SubEventPopup_Video.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPage\EmergenceMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1176,6 +1183,8 @@
     <Resource Include="Image\Common\Icon_Brand.ico" />
     <Resource Include="Image\Icon_Gear.png" />
     <Resource Include="Image\Common\Icon_Cancel.png" />
+    <Resource Include="Image\Common\Icon_Emergence_Large.png" />
+    <Resource Include="Image\Common\Icon_Emergence_Middle.png" />
     <Content Include="xml\TaskTracking.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
