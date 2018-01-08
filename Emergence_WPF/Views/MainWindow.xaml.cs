@@ -55,9 +55,9 @@ namespace Emergence_WPF
 			ViewModel.Top = 0.0;
 			ViewModel.Width = SystemParameters.PrimaryScreenWidth;
 			ViewModel.Height = SystemParameters.PrimaryScreenHeight;
-			ViewModel.ResizeMode = ResizeMode.CanResize;
-			ViewModel.WindowState = WindowState.Normal;
-			ViewModel.WindowStyle = WindowStyle.SingleBorderWindow;
+			ViewModel.ResizeMode = ResizeMode.NoResize;
+			ViewModel.WindowState = WindowState.Maximized;
+			ViewModel.WindowStyle = WindowStyle.None;
 			// main page ui model is empty, filled when showing main page
 			ViewModel.MainPageData = new MainPageUiModel();
 			ViewModel.NavigateCommand = new Microsoft.Practices.Prism.Commands.DelegateCommand<string>((uri) => frmMain.NavigationService.Navigate(new Uri(uri, UriKind.Relative)));
@@ -120,14 +120,15 @@ namespace Emergence_WPF
 		/// show home page(switch to home page)
 		/// </summary>
 		private void ShowMainPage()
-		{
-			// get panel, binding panel ui model, add to main window
-			var mainPage = ObjectFactory.GetInstance<UserControl_MainPage>("mainPagePanel");
-			//maingrid.Children.Clear();
-			//maingrid.Children.Add(mainPage);
-		}
+        {
+            frmMain.NavigationService.Navigate(new EmergenceMainPage());
+            // get panel, binding panel ui model, add to main window
+            //var mainPage = ObjectFactory.GetInstance<UserControl_MainPage>("mainPagePanel");
+            //maingrid.Children.Clear();
+            //maingrid.Children.Add(mainPage);
+        }
 
-		private void GoToMasterEventMangementPage()
+        private void GoToMasterEventMangementPage()
 		{
 			//maingrid.Children.Clear();
 			//MasterEventManagement information = new MasterEventManagement();

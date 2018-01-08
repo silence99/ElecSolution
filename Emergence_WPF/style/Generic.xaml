@@ -143,4 +143,65 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    <Style x:Key="Grid_WithOutHeader_Black" TargetType="DataGrid">
+        <!--grid right column data grid line style-->
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="AlternationCount" Value="1"/>
+        <Setter Property="AutoGenerateColumns" Value="false"/>
+        <Setter Property="CanUserResizeColumns" Value="false"/>
+        <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="IsReadOnly" Value="False"/>
+        <Setter Property="HeadersVisibility" Value="None"/>
+        <Setter Property="Background" Value="#242424" />
+        <Setter Property="Margin" Value="1"/>
+        <Setter Property="BorderBrush" Value="#AAAAAA"/>
+        <Setter Property="BorderThickness" Value="0 1 0 1"/>
+        <Setter Property="VerticalGridLinesBrush" Value="#F5F5F5" />
+        <Setter Property="HorizontalGridLinesBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="#AAAAAA"/>
+            </Setter.Value>
+        </Setter>
+        <Style.Resources>
+            <!--单元格样式触发-->
+            <Style TargetType="DataGridCell">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="DataGridCell">
+                            <TextBlock TextAlignment="Center" VerticalAlignment="Center"  >
+                                    <ContentPresenter />
+                            </TextBlock>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="#F5F5F5"/>
+                        <Setter Property="Foreground" Value="#000000" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <!--行样式触发-->
+            <!--背景色改变必须先设置cellStyle 因为cellStyle会覆盖rowStyle样式-->
+            <Style TargetType="DataGridRow">
+                <Setter Property="Background" Value="#F3F3F3" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="Height" Value="90px"/>
+                <Setter Property="Foreground" Value="#000000" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#E0E0E0"/>
+                        <Setter Property="Foreground" Value="#000000" />
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Trigger>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="#FFFFFF"/>
+                        <Setter Property="Foreground" Value="#000000" />
+                        <Setter Property="BorderThickness" Value="0"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Style.Resources>
+    </Style>
 </ResourceDictionary>
