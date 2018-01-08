@@ -166,50 +166,9 @@ namespace Busniess.Services
 
 				return success;
 			}
-        }
-        public bool UpdateChildEvent(string mainEventId, SubEvent subEvent)
-        {
-            string serviceName = ConfigurationManager.AppSettings["childEventApi"] ?? "childEvent";
-            Dictionary<string, string> pairs = new Dictionary<string, string>()
-            {
-                {"id", subEvent.Id.ToString() },
-                { "childTitle", subEvent.ChildTitle },
-                { "mainEventId", mainEventId },
-                { "childLocale", subEvent.ChildLocale },
-                { "childGrade", subEvent.ChildGrade },
-                { "childRemarks", subEvent.ChildRemarks },
-                { "childLongitude", subEvent.ChildLongitude.ToString() },
-                { "childLatitude", subEvent.ChildLatitude.ToString() },
-                { "personLiable", subEvent.PersonLiable }
-            };
+		}
 
-            Logger.DebugFormat("更新子事件 -- {0}", subEvent.ChildTitle);
-            var result = RequestControl.Request(serviceName, "PUT", pairs);
-            if (result.StatusCode != 200)
-            {
-                Logger.WarnFormat("更新子事件失败 -- {0}", subEvent.ChildTitle);
-                Logger.WarnFormat(result.Html);
-                return false;
-            }
-            else
-            {
-                var success = RequestControl.DefaultValide(result.Html);
-                if (success)
-                {
-                    Logger.InfoFormat("更新子事件成功 -- {0}", subEvent.ChildTitle);
-                }
-                else
-                {
-                    Logger.WarnFormat("更新子事件失败 -- {0}", subEvent.ChildTitle);
-                    Logger.Warn(result.Html);
-                }
-
-                return success;
-            }
-        }
-
-
-        public bool UpdateChildeEventState(List<string> ids, int state)
+		public bool UpdateChildeEventState(List<string> ids, int state)
 		{
 			if (ids == null || ids.Count == 0)
 			{

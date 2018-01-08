@@ -44,7 +44,6 @@ namespace Emergence.Business.ViewModel
         public virtual bool PageEnabled { get; set; }
 
         public virtual PopupModel SubEventEditPopup { get; set; }
-        public virtual PopupModel SubEventAmplifyPopup { get; set; }
         public virtual PopupModel TeamSelectPopup { get; set; }
         public virtual PopupModel MaterialSelectPopup { get; set; }
         #endregion
@@ -69,8 +68,6 @@ namespace Emergence.Business.ViewModel
         public virtual DelegateCommand CloseSelectMaterialCommand { get; set; }
         public virtual DelegateCommand SelectMaterialCommand { get; set; }
         public virtual DelegateCommand DeleteMaterialCommand { get; set; }
-        public virtual DelegateCommand StartAmplifySubEventCommand { get; set; }
-        public virtual DelegateCommand CloseAmplifySubEventCommand { get; set; }
 
         #endregion
 
@@ -104,9 +101,6 @@ namespace Emergence.Business.ViewModel
             CloseSelectMaterialCommand = new DelegateCommand(new Action(CloseSelectMaterialAction));
             SelectMaterialCommand = new DelegateCommand(new Action(SelectMaterialAction));
             DeleteMaterialCommand = new DelegateCommand(new Action(DeleteMaterialAction));
-            StartAmplifySubEventCommand = new DelegateCommand(new Action(StartSubEventAmplifyAction));
-            CloseAmplifySubEventCommand = new DelegateCommand(new Action(CloseSubEventAmplifyAction));
-
             if (mEvent != null)
             {
                 InitializVM(mEvent);
@@ -228,31 +222,11 @@ namespace Emergence.Business.ViewModel
 
         private void UpdateSubEventAction()
         {
-            if (SubEventEdit != null)
-            {
-                var result = subEventService.UpdateChildEvent(MasterEventInfo.ID.ToString(), SubEventEdit);
-                if (result)
-                {
-                    ShowMessageBox("编辑子事件成功！");
-                    SetPageEnableStatus(true);
-                    this.SubEventEditPopup.IsOpen = false;
-                    this.SubEventEdit = new SubEvent();
-                }
-                else
-                {
-                    ShowMessageBox("编辑子事件失败！");
-                }
-                GetSubEventListOb("");
-            }
+            this.SubEventEditPopup.IsOpen = false;
+            this.SubEventEdit = new SubEvent();
         }
         private void StartSelectTeamAction()
         {
-            var thisAop = this.AopWapper as VM_MasterEventDetail;
-            var unbindedTeamList = teamService.GetUnbindedTeamData(0, 10000).Result.Data;
-            if (unbindedTeamList != null)
-            {
-                thisAop.UnSelectedTeamList = new ObservableCollection<TeamModel>(unbindedTeamList.Select(a => a.CreateAopProxy()));
-            }
             this.TeamSelectPopup.PopupName = "选择队伍";
             this.TeamSelectPopup.IsOpen = true;
             SetPageEnableStatus(false);
@@ -261,52 +235,18 @@ namespace Emergence.Business.ViewModel
         {
             SetPageEnableStatus(true);
             this.TeamSelectPopup.IsOpen = false;
-            this.UnSelectedTeamList = new ObservableCollection<TeamModel>();
         }
         private void SelectTeamAction()
         {
-            var thisAop = this.AopWapper as VM_MasterEventDetail;
-            var ids = UnSelectedTeamList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
-            var result = teamService.BindingUnbindingTeamToSubevnt(SubEventDetail.Id, ids,"POST");
-            if (result)
-            {
-                ShowMessageBox("添加成功！");
-                SetPageEnableStatus(true);
-                thisAop.SubEventEditPopup.IsOpen = false;
-                thisAop.SubEventEdit = new SubEvent();
-            }
-            else
-            {
-                ShowMessageBox("添加失败！");
-            }
-            GetTeamListOb();
+            SetPageEnableStatus(true);
+            this.TeamSelectPopup.IsOpen = false;
         }
         private void DeleteTeamAction()
         {
-            var thisAop = this.AopWapper as VM_MasterEventDetail;
-            var ids = TeamList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
-            var result = teamService.BindingUnbindingTeamToSubevnt(SubEventDetail.Id, ids, "DELETE");
-            if (result)
-            {
-                ShowMessageBox("删除成功！");
-                SetPageEnableStatus(true);
-                thisAop.SubEventEditPopup.IsOpen = false;
-                thisAop.SubEventEdit = new SubEvent();
-            }
-            else
-            {
-                ShowMessageBox("删除失败！");
-            }
-            GetTeamListOb();
+            ShowMessageBox("Delete Team success");
         }
         private void StartSelectMaterialAction()
         {
-            var thisAop = this.AopWapper as VM_MasterEventDetail;
-            var unbindedMaterialList = materialService.GetUnbindedMaterials(0, 10000).Result.Data;
-            if (unbindedMaterialList != null)
-            {
-                thisAop.UnSelectedMaterialList = new ObservableCollection<MaterialModel>(unbindedMaterialList.Select(a => a.CreateAopProxy()));
-            }
             this.MaterialSelectPopup.PopupName = "选择物资";
             this.MaterialSelectPopup.IsOpen = true;
             SetPageEnableStatus(false);
@@ -315,54 +255,15 @@ namespace Emergence.Business.ViewModel
         {
             SetPageEnableStatus(true);
             this.MaterialSelectPopup.IsOpen = false;
-            this.UnSelectedMaterialList = new ObservableCollection<MaterialModel>();
         }
         private void SelectMaterialAction()
         {
-            var thisAop = this.AopWapper as VM_MasterEventDetail;
-            var ids = UnSelectedMaterialList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
-            var result = materialService.BindingMaterialToSubevnt(SubEventDetail.Id, ids);
-            if (result)
-            {
-                ShowMessageBox("添加成功！");
-                SetPageEnableStatus(true);
-                thisAop.MaterialSelectPopup.IsOpen = false;
-            }
-            else
-            {
-                ShowMessageBox("添加失败！");
-            }
-            GetMaterialListOb();
+            SetPageEnableStatus(true);
+            this.MaterialSelectPopup.IsOpen = false;
         }
         private void DeleteMaterialAction()
         {
-            var thisAop = this.AopWapper as VM_MasterEventDetail;
-            var ids = UnSelectedMaterialList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
-            var result = materialService.UnbindingMaterialFromSubevnt(SubEventDetail.Id, ids);
-            if (result)
-            {
-                ShowMessageBox("删除成功！");
-                SetPageEnableStatus(true);
-                thisAop.MaterialSelectPopup.IsOpen = false;
-            }
-            else
-            {
-                ShowMessageBox("删除失败！");
-            }
-            GetMaterialListOb();
-        }
-        private void StartSubEventAmplifyAction()
-        {
-            var thisAop = this.AopWapper as VM_MasterEventDetail;
-            this.SubEventAmplifyPopup.PopupName = "选择物资";
-            this.SubEventAmplifyPopup.IsOpen = true;
-            SetPageEnableStatus(false);
-        }
-        private void CloseSubEventAmplifyAction()
-        {
-            var thisAop = this.AopWapper as VM_MasterEventDetail;
-            SetPageEnableStatus(true);
-            thisAop.SubEventAmplifyPopup.IsOpen = false;
+            ShowMessageBox("Delete Material success");
         }
 
         #endregion
@@ -378,15 +279,13 @@ namespace Emergence.Business.ViewModel
         }
         private void GetTeamListOb()
         {
-            var thisAop = this.AopWapper as VM_MasterEventDetail;
             var teams = teamService.GetbindingTeamData(0, 1000, SubEventDetail.Id).Result;
-            thisAop.TeamList = new ObservableCollection<TeamModel>(teams.Data.Select(o => o.CreateAopProxy()));
+            TeamList = new ObservableCollection<TeamModel>(teams.Data.Select(o => o.CreateAopProxy()));
         }
         private void GetMaterialListOb()
         {
-            var thisAop = this.AopWapper as VM_MasterEventDetail;
-            var materials = materialService.GetMaterialsBindingToSubevent(0, 1000, this.SubEventDetail.Id).Result;
-            thisAop.MaterialList = new ObservableCollection<MaterialModel>(materials.Data.Select(o => o.CreateAopProxy()));
+            var materials = materialService.GetMaterialsBindingToSubevent(0, 1000, this.MasterEventInfo.ID).Result;
+            MaterialList = new ObservableCollection<MaterialModel>(materials.Data.Select(o => o.CreateAopProxy()));
         }
 
         private bool UpdateSubEvent(List<string> subEventIDs, int status)
@@ -423,8 +322,8 @@ namespace Emergence.Business.ViewModel
         {
             var subEvent = this.SubEventList.FirstOrDefault(a => a.Id.ToString() == subEventID);
             SubEventDetail = subEvent;
-            GetTeamListOb();
-            GetMaterialListOb();
+            //GetTeamListOb();
+            //GetMaterialListOb();
             SBStatus.ResetSubEventStatus();
             int sbStatus = -1;
             if (int.TryParse(SubEventDetail.State, out sbStatus))

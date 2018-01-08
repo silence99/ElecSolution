@@ -253,15 +253,6 @@
     </Compile>
     <Compile Include="IEmergencyControl.cs" />
     <Compile Include="IEmergencyInit.cs" />
-    <Compile Include="Views\Event\SubEventPopup_Detail.xaml.cs">
-      <DependentUpon>SubEventPopup_Detail.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Event\SubEventPopup_Map.xaml.cs">
-      <DependentUpon>SubEventPopup_Map.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Event\SubEventPopup_Video.xaml.cs">
-      <DependentUpon>SubEventPopup_Video.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\MainPage\BMap.xaml.cs">
       <DependentUpon>BMap.xaml</DependentUpon>
     </Compile>
@@ -458,18 +449,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Event\SubEventDetail.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Event\SubEventPopup_Detail.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Event\SubEventPopup_Map.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Event\SubEventPopup_Video.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1184,7 +1163,6 @@
     <Resource Include="Image\Common\Icon_Brand.ico" />
     <Resource Include="Image\Icon_Gear.png" />
     <Content Include="Views\AddressPicker.html" />
-    <Resource Include="Image\Common\Icon_Cancel.png" />
     <Content Include="xml\TaskTracking.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
