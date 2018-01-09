@@ -24,5 +24,10 @@ namespace Emergence_WPF.Views.Others
 		{
 			InitializeComponent();
 		}
-	}
+
+        private void Pager_OnPageChanged(object sender, object e)
+        {
+
+        }
+    }
 }

@@ -102,5 +102,14 @@ namespace Emergence_WPF
 			return loginService.LogIn(userName, password, SetAuthorization);
 		}
 
-	}
+        private void Label_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Label_Exit_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
+    }
 }

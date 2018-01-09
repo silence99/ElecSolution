@@ -100,8 +100,8 @@ namespace Emergence_WPF
 		private void Image_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
 		{
 			//maingrid.Children.Clear();
-			frmMain.NavigationService.Navigate(new Uri(@".\Views\Others\TeamListPage.xaml", UriKind.Relative));
-			frmMain.NavigationService.Refresh();
+			frmMain.NavigationService.Navigate(new Uri(@".\Views\Others\MessageNotificationPage.xaml", UriKind.Relative));
+			//frmMain.NavigationService.Refresh();
 		}
 
 		private void Image_MouseLeftButtonDown_PopupMasterEventPage(object sender, MouseButtonEventArgs e)
@@ -173,7 +173,7 @@ namespace Emergence_WPF
 
 		private void GraphBtn_Click(object sender, MouseButtonEventArgs e)
 		{
-			this.frmMain.Navigate(new System.Uri(@".\Views\Event\MasterEventDetail.xaml", UriKind.Relative));
+			this.frmMain.Navigate(new System.Uri(@".\Views\Others\TeamListPage.xaml", UriKind.Relative));
 
 			//maingrid.Children.Clear();
 			//var report = new ReportCenter();

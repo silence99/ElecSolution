@@ -117,7 +117,7 @@
                         </Button.Style>
                     </Button>
                 </DockPanel>
-                <Label DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="12px" FontFamily="PingFang-SC-Regular" Margin="0 26 0 0" Foreground="#888888" Content="退出登录"/>
+                <Label DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="12px" FontFamily="PingFang-SC-Regular" Margin="0 26 0 0" MouseLeftButtonDown="Label_Exit_MouseLeftButtonDown" Foreground="#888888" Content="退出登录"/>
             </StackPanel>
         </Border>
     </Grid>
