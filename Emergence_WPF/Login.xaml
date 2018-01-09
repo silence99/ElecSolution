@@ -4,11 +4,11 @@
         xmlns:control="clr-namespace:Emergence_WPF"
         ResizeMode="NoResize"
         Background="White" 
-        Height="484px"
+        Height="454px"
         Width="490px"
         WindowStartupLocation="CenterScreen"
         Title="应急指挥管理平台" 
-        WindowStyle="SingleBorderWindow">
+        WindowStyle="None">
     <Grid>
         <!--<DockPanel Height="40" VerticalAlignment="Top">
                 <Label Margin="0,0,20,0" Content="X" Width="20" Height="20" Padding="0" HorizontalAlignment="Right"/>
@@ -34,15 +34,15 @@
                 </DropShadowEffect>
             </Border.Effect>
             <StackPanel HorizontalAlignment="Center" Orientation="Vertical">
-                <StackPanel Margin="0,7,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Image Width="92" Height="78" Source="./Image/Common/Icon_Emergence_Middle.png"></Image>
+                <StackPanel Margin="0,44,0,0" Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Image Width="67" Height="66" Source="./Image/Common/Icon_Emergence_Middle.png"></Image>
                     <Label Margin="12, 0, 0, 0" Foreground="#006F69" FontSize="20" VerticalContentAlignment="Center" FontFamily="PingFang-SC-Heavy" Content="国网龙泉市供电公司应急指挥平台"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="30,27,0,0" HorizontalAlignment="Left">
+                <!--<StackPanel Orientation="Horizontal" Margin="30,43,0,0" HorizontalAlignment="Left">
                     <Label Content="欢迎登陆" FontSize="24px" Foreground="#006f69" FontWeight="Bold"  FontFamily="PingFang-SC-Heavy" />
                     <Label Content="应急指挥平台" FontSize="16px" Foreground="#3D3D3D" VerticalContentAlignment="Center"  FontFamily="PingFang-SC-Heavy" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="30,22,0,0">
+                </StackPanel>-->
+                <StackPanel Orientation="Horizontal" Margin="30,43,0,0">
                     <Label VerticalAlignment="Center" Foreground="#31605A" FontSize="20">账号:</Label>
                     <TextBox Margin="20,0,0,0" FontSize="16" Foreground="#FF776B5F" Width="250" VerticalContentAlignment="Center" BorderBrush="#C3CCCB" 
                  Height="40" Name="txtUserName" MaxLength="10">
@@ -117,6 +117,7 @@
                         </Button.Style>
                     </Button>
                 </DockPanel>
+                <Label DockPanel.Dock="Top" HorizontalAlignment="Center" FontSize="12px" FontFamily="PingFang-SC-Regular" Margin="0 26 0 0" Foreground="#888888" Content="退出登录"/>
             </StackPanel>
         </Border>
     </Grid>
