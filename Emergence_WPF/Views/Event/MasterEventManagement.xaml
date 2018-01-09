@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:Emergence_WPF.Comm"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
-             d:DesignHeight="1080" d:DesignWidth="1920"
-              Loaded="Page_Loaded">
+             d:DesignHeight="1080" d:DesignWidth="1920">
 
     <Page.Resources>
         <ResourceDictionary>
@@ -144,7 +143,7 @@
                 <DockPanel Margin="0,0,0,0">
                     <DockPanel Height="60" HorizontalAlignment="Stretch" Name="head" DockPanel.Dock="Top" Background="#CCE2E1">
                         <TextBlock FontSize="20" DockPanel.Dock="Left" TextAlignment="Center" HorizontalAlignment="Left" Margin="51,15,0,0" Foreground="Black">搜索</TextBlock>
-                        <Button Name="masterEventSearchButton" FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,51,0" Foreground="White" Content="搜索" Click="masterEventSearchButton_Click"></Button>
+                        <Button Name="masterEventSearchButton" FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,51,0" Foreground="White" Content="搜索"></Button>
                     </DockPanel>
                     <Grid ShowGridLines="False" Name="gridTest" DockPanel.Dock="Top" Background="White">
                         <Grid.RowDefinitions>
@@ -270,7 +269,7 @@
                     <Button Content="完成" FontSize="16" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,36,0" Width="88" Height="36" Background="#006f69" Foreground="White">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding UpdateCommand}"/>
+                                <i:InvokeCommandAction Command="{Binding CreateCommand}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>
@@ -281,15 +280,27 @@
                             <Label Content="标题" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"/>
                             <TextBox Height="30" VerticalAlignment="Top" Width="300" HorizontalAlignment="Left" Margin="0,20,0,0" Text="{Binding Path=Current.Title, Mode=TwoWay}"/>
                             <Label Content="类型" Height="30" Width="170" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Margin="0,20,0,0"/>
-                            <ComboBox Height="30" VerticalAlignment="Top" Width="160" HorizontalAlignment="Left" Margin="20 20, 0, 0" Text="{Binding Path=Current.Time,Mode=TwoWay}"/>
+                            <ComboBox Height="30" VerticalAlignment="Top" Width="160" HorizontalAlignment="Left" Margin="20 20, 0, 0" 
+                                      Text="{Binding Path=Current.EventTypeName, Mode=TwoWay}" 
+                                      ItemsSource="{Binding EventTypes}" 
+                                      SelectedValue="{Binding Path=Current.EventType}" 
+                                      SelectedIndex="0" 
+                                      DisplayMemberPath="Name" 
+                                      SelectedValuePath="Value">
+                            </ComboBox>
                         </DockPanel>
                         <DockPanel Height="60" VerticalAlignment="Top">
                             <Label Content="等级" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"/>
-                            <ComboBox Height="30" VerticalAlignment="Top" Width="160" HorizontalAlignment="Left" Margin="0,20,0,0" Text="{Binding Path=Current.Title, Mode=TwoWay}"/>
+                            <ComboBox Height="30" VerticalAlignment="Top" Width="160" HorizontalAlignment="Left" Margin="0,20,0,0" 
+                                      Text="{Binding Path=Current.GradeName, Mode=TwoWay}" 
+                                      ItemsSource="{Binding EventGrades}" 
+                                      SelectedValue="{Binding Path=Current.Grade}" 
+                                      SelectedValuePath="Value"
+                                      DisplayMemberPath="Name"/>
                             <Label Content="地址" Height="30" Width="170" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Margin="0,20,0,0"/>
                             <Border Height="30" Width="300" BorderThickness="1">
                                 <Grid Background="White">
-                                    <TextBox Height="30" Width="280" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Current.Time,Mode=TwoWay}" BorderThickness="0"/>
+                                    <TextBox Height="30" Width="280" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Current.Locale,Mode=TwoWay}" BorderThickness="0" VerticalContentAlignment="Center"/>
                                     <Image Height="30" Width="20" HorizontalAlignment="Right" Source="../../Image/Common/Icon_address.png"/>
                                 </Grid>
                             </Border>
@@ -297,7 +308,7 @@
                         </DockPanel>
                         <DockPanel Height="120" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,20,0,0">
                             <Label Content="描述" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"/>
-                            <TextBox VerticalAlignment="Top" Width="650" Height="120" HorizontalAlignment="Left" Margin="0, 0, 0, 0" Text="{Binding Current.Content}"/>
+                            <TextBox VerticalAlignment="Top" Width="650" Height="120" HorizontalAlignment="Left" Margin="0, 0, 0, 0" Text="{Binding Current.Remarks}"/>
                         </DockPanel>
                     </StackPanel>
                 </Border>

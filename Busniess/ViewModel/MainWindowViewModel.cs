@@ -50,7 +50,7 @@ namespace Emergence.Business.ViewModel
 
         public void GetMasterEventList()
         {
-            var masterEvents = MasterEService.GetMasterEventsData(1, 5, "", default(DateTime), default(DateTime), string.Empty);
+            var masterEvents = MasterEService.GetMasterEventsData(1, 5, "");
             MasterEventList = new ObservableCollection<MasterEvent>( masterEvents.Result.Data.Select(a => a.CreateAopProxy()));
         }
 
