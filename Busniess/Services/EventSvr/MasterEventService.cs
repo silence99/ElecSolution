@@ -20,13 +20,12 @@ namespace Busniess.Services
 
 		public MasterEventViewModel GetMasterEvents(int pageIndex, int pageSize)
 		{
-			return GetMasterEvents(pageIndex, pageSize, string.Empty, default(DateTime), default(DateTime), string.Empty);
+			return GetMasterEvents(pageIndex, pageSize, string.Empty);
 		}
 
-		public MasterEventViewModel GetMasterEvents(int pageIndex, int pageSize, string title,
-			DateTime start, DateTime end, string loaction)
+		public MasterEventViewModel GetMasterEvents(int pageIndex, int pageSize, string searchInfo)
 		{
-			var response = GetMasterEventsData(pageIndex, pageSize, title, start, end, loaction);
+			var response = GetMasterEventsData(pageIndex, pageSize, searchInfo);
 			if (response.Code != 1)
 			{
 				Util.ShowError(string.Format("获取统计信息失败：{0}", response.Message));
@@ -44,8 +43,7 @@ namespace Busniess.Services
 			}
 		}
 
-		private EmergencyHttpResponse<EmergencyHttpListResult<MasterEvent>> GetMasterEventsData(int pageIndex, int pageSize, string title,
-			DateTime start, DateTime end, string loaction)
+		private EmergencyHttpResponse<EmergencyHttpListResult<MasterEvent>> GetMasterEventsData(int pageIndex, int pageSize, string searchInfo)
 		{
 			try
 			{
@@ -54,17 +52,9 @@ namespace Busniess.Services
 													{
 														{ "pageIndex", pageIndex.ToString() },
 														{ "pageSize", pageSize.ToString() },
-														{ "title", title },
-														{ "locale", loaction }
+														{ "searchInfo", searchInfo }
 													};
-				if (default(DateTime) != start)
-				{
-					pairs.Add("startTime", start.ToString("yyyyMMdd"));
-				}
-				if (default(DateTime) != end)
-				{
-					pairs.Add("endTime", end.ToString("yyyyMMdd"));
-				}
+
 				Logger.InfoFormat("Do Service - {0}", serviceName);
 				HttpResult result = RequestControl.Request(serviceName, "GET", pairs);
 				if (result.StatusCode == 200)
@@ -85,7 +75,12 @@ namespace Busniess.Services
 			}
 		}
 
-		public bool CreateMasterEvent(long id, string title, string eventType, string grade, DateTime time, string description, string location, double longitude, double latitude, Func<string, bool> callback = null)
+		public bool CreateMasterEvent(MasterEvent model)
+		{
+			return CreateMasterEvent(model.Title, model.EventType, model.Grade, model.Time, model.Remarks, model.Locale, double.Parse(model.Longitude), double.Parse(model.Latitude));
+		}
+
+		public bool CreateMasterEvent(string title, string eventType, string grade, string time, string description, string location, double longitude, double latitude, Func<string, bool> callback = null)
 		{
 			string serviceName = ConfigurationManager.AppSettings["mainEventApi"] ?? "mainEvent";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()
@@ -93,7 +88,7 @@ namespace Busniess.Services
 				{ "title", title },
 				{ "eventType", eventType },
 				{ "grade", grade },
-				{ "time", time.ToString("yyyyMMdd") },
+				{ "time", time },
 				{ "describe", description },
 				{ "locale", location },
 				{ "longitude", longitude.ToString() },
@@ -228,6 +223,16 @@ namespace Busniess.Services
 			}
 
 			return Events;
+		}
+
+		public bool DeleteMasterEvents(List<long> ids)
+		{
+			return UpdateMasterEventState(ids, 9);
+		}
+
+		public bool ArchiveMasterEvents(List<long> ids)
+		{
+			return UpdateMasterEventState(ids, 1);
 		}
 
 		public List<VideoViewModel> GetVideos()

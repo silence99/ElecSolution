@@ -4,7 +4,6 @@ using Emergence.Common.Model;
 using Framework;
 using Microsoft.Practices.Prism.Commands;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Linq;
@@ -21,11 +20,7 @@ namespace Emergence.Business.ViewModel
 		public virtual int PageIndex { get; set; }
 		public virtual int TotalCount { get; set; }
 		public virtual int TotalPage { get; set; }
-		public virtual string TxtSerialNumber { get; set; }
-		public virtual string TxtTitle { get; set; }
-		public virtual string TxtTime { get; set; }
-		public virtual string TxtSubmitParty { get; set; }
-		public virtual string TxtLocate { get; set; }
+		public virtual string SearchInfo { get; set; }
 
 		public virtual ObservableCollection<MasterEvent> MasterEvents { get; set; }
 
@@ -34,7 +29,7 @@ namespace Emergence.Business.ViewModel
 		public virtual double PopupOffsetY { get; set; }
 		public virtual MasterEvent Current { get; set; }
 
-		public virtual DelegateCommand UpdateCommand { get; set; }
+		public virtual DelegateCommand CreateCommand { get; set; }
 		public virtual DelegateCommand DeleteCommand { get; set; }
 		public virtual DelegateCommand PopupAddCommand { get; set; }
 		public virtual DelegateCommand<AnnouncementModel> PopupEditCommand { get; set; }
@@ -52,10 +47,9 @@ namespace Emergence.Business.ViewModel
 			PopupOffsetY = popupStartPoint.Y;
 			GetMasterEventsAction();
 
-			UpdateCommand = new DelegateCommand(UpdateAction);
+			CreateCommand = new DelegateCommand(CreateAction);
 			DeleteCommand = new DelegateCommand(DeleteAction);
 			PopupAddCommand = new DelegateCommand(PopupAddAction);
-			PopupEditCommand = new DelegateCommand<AnnouncementModel>(PopupEditAction);
 			PopupCloseCommand = new DelegateCommand(PopupCloseAction);
 		}
 
@@ -74,9 +68,7 @@ namespace Emergence.Business.ViewModel
 		{
 			var viewModel = IsAopWapper ? this : this.CreateAopProxy();
 			var masterEvents = MasterEventService.GetMasterEvents(viewModel.PageIndex,
-				viewModel.PageSize, TxtTitle,
-				default(DateTime), default(DateTime),
-				string.Empty);
+				viewModel.PageSize, SearchInfo);
 			if (masterEvents != null)
 			{
 				viewModel.MasterEvents = masterEvents.MasterEvents;
@@ -89,9 +81,9 @@ namespace Emergence.Business.ViewModel
 			}
 		}
 
-		private void UpdateAction()
+		private void CreateAction()
 		{
-			//MasterEventService.CreateMasterEvent(Current);
+			MasterEventService.CreateMasterEvent(Current);
 			CleanMessage();
 			PopupCloseAction();
 			GetMasterEventsAction();
@@ -99,14 +91,14 @@ namespace Emergence.Business.ViewModel
 
 		private void DeleteAction()
 		{
-			var ids = MasterEvents.Where(item => item.IsChecked).Select(item => item.ID.ToString()).ToList();
+			var ids = MasterEvents.Where(item => item.IsChecked).Select(item => (long)item.ID).ToList();
 			if (ids == null && ids.Count == 0)
 			{
 				Warn("没有选择删除的公告");
 			}
 			else
 			{
-				//MasterEventService(ids);
+				MasterEventService.DeleteMasterEvents(ids);
 				GetMasterEventsAction();
 			}
 		}
@@ -115,18 +107,9 @@ namespace Emergence.Business.ViewModel
 		{
 			CleanMessage();
 			var model = this.CreateAopProxy();
-			//model.Current = new AnnouncementModel().CreateAopProxy();
-			model.Current.Time = DateTime.Now;
-			//model.IsAdding = true;
+			model.Current = new MasterEvent().CreateAopProxy();
+			model.Current.Time = DateTime.Now.ToString();
 			model.IsPopupOpen = true;
-		}
-
-		public void PopupEditAction(AnnouncementModel model)
-		{
-			CleanMessage();
-			//Current = model;
-			//IsAdding = false;
-			IsPopupOpen = true;
 		}
 
 		private void PopupCloseAction()
@@ -151,7 +134,7 @@ namespace Emergence.Business.ViewModel
 		private void Warn(string message)
 		{
 			CleanMessage();
-			WarningMessage = "没有选择删除的公告";
+			WarningMessage = "没有选择删除的主事件";
 		}
 
 		private void Error(string message)

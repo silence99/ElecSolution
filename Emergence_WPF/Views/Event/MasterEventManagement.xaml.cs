@@ -24,13 +24,14 @@ namespace Emergence_WPF
 		public MasterEventManagement()
 		{
 			InitializeComponent();
+			ViewModel = new VM_MasterEventManagement().CreateAopProxy();
+			DataContext = ViewModel;
 		}
 
 
 		private void Page_Loaded(object sender, RoutedEventArgs e)
 		{
-			ViewModel = new VM_MasterEventManagement().CreateAopProxy();
-			this.DataContext = ViewModel;
+			
 		}
 
 		private void Pager_OnPageChanged(object sender, PageChangedEventArg e)
@@ -40,7 +41,7 @@ namespace Emergence_WPF
 
 		private void RequestMasterEventList()
 		{
-			var masterEvents = MasterEventService.GetMasterEvents(ViewModel.PageIndex, 1000, ViewModel.TxtTitle, default(DateTime), default(DateTime), string.Empty);
+			var masterEvents = MasterEventService.GetMasterEvents(ViewModel.PageIndex, ViewModel.PageSize);
 			if (masterEvents != null)
 			{
 				ViewModel.MasterEvents = masterEvents.MasterEvents;

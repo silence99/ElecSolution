@@ -11,18 +11,17 @@ namespace Emergence_WPF
 	/// </summary>
 	public partial class AddMasterEvent : Window
 	{
-		public bool isclose = false;
-		AddMasterEventViewModel ViewModel { get; set; }
-		public AddMasterEvent()
-		{
-			InitializeComponent();
-			ViewModel = new AddMasterEventViewModel().CreateAopProxy();
-			DataContext = ViewModel;
-		}
+		//public bool isclose = false;
+		//AddMasterEventViewModel ViewModel { get; set; }
+		//public AddMasterEvent()
+		//{
+		//	InitializeComponent();
+		//	ViewModel = new AddMasterEventViewModel().CreateAopProxy();
+		//	DataContext = ViewModel;
+		//}
 
 		private void DP_CreateMasterEvent_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
 		{
-			isclose = true;
 			this.Close();
 		}
 	}
