@@ -89,6 +89,7 @@
     <Content Include="DLL\Microsoft.Practices.EnterpriseLibrary.Logging.dll" />
     <Content Include="DLL\Microsoft.Practices.Prism.dll" />
     <Content Include="DLL\Microsoft.Practices.Prism.UnityExtensions.dll" />
+    <Content Include="DLL\Microsoft.Practices.ServiceLocation.dll" />
     <Content Include="DLL\Microsoft.Practices.Unity.dll" />
     <Content Include="DLL\Microsoft.Practices.Unity.Interception.dll" />
     <Content Include="DLL\System.Windows.Interactivity.dll" />

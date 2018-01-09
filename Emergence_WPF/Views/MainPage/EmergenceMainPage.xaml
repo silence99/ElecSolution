@@ -187,9 +187,9 @@
                 </DataGrid>
             </Border>
         </DockPanel>
-        <Viewbox x:Name="ViewBox_MainPageWeather" Grid.Row="1" Grid.Column="1" >
-            <Canvas Margin="5,5,5,5" Width="280" Height="160">
-                <local:Weather  HorizontalAlignment="Right" />
+        <Viewbox x:Name="ViewBox_MainPageWeather" Grid.Row="1" Grid.Column="1" Margin="5,5,5,5"  Stretch="Fill">
+            <Canvas Width="280px" Height="180px">
+                <local:Weather Canvas.Left="0" Canvas.Top="0" />
             </Canvas>
         </Viewbox>
         <UserControl Name="TeamStatitics" Grid.Row="2" Grid.Column="1" Margin="5 5 5 5">

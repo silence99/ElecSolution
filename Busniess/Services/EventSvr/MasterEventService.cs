@@ -43,7 +43,7 @@ namespace Busniess.Services
 			}
 		}
 
-		private EmergencyHttpResponse<EmergencyHttpListResult<MasterEvent>> GetMasterEventsData(int pageIndex, int pageSize, string searchInfo)
+		public EmergencyHttpResponse<EmergencyHttpListResult<MasterEvent>> GetMasterEventsData(int pageIndex, int pageSize, string searchInfo)
 		{
 			try
 			{
