@@ -40,17 +40,5 @@ namespace Emergence_WPF
 			this.NavigationService.Navigate(new MasterEventDetail(me));
 		}
 
-		private void Btn_CreateMasterEvent_Click(object sender, RoutedEventArgs e)
-		{
-			AddMasterEvent ame = new AddMasterEvent();
-			ame.ShowDialog();
-		}
-
-		private void DeleteMasterEventHandler(object sender, RoutedEventArgs e)
-		{
-			var events = ViewModel.MasterEvents.Where(ent => ent.IsChecked).Select(ent => (long)ent.ID).ToList();
-			MasterEventService.UpdateMasterEventState(events, 9); // state:9 删除, 1 归档, 0 正常
-		}
-
 	}
 }
