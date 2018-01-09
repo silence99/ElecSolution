@@ -11,6 +11,7 @@ using Busniess.Services;
 using System.Windows;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
+using Business.Services;
 
 namespace Emergence.Business.ViewModel
 {
@@ -38,6 +39,7 @@ namespace Emergence.Business.ViewModel
 		public virtual ObservableCollection<TeamModel> UnSelectedTeamList { get; set; }
 		public virtual ObservableCollection<MaterialModel> MaterialList { get; set; }
 		public virtual ObservableCollection<MaterialModel> UnSelectedMaterialList { get; set; }
+		public virtual ObservableCollection<DictItem> EventGrades { get; set; }
 
 		public virtual SubEventStatus SBStatus { get; set; }
 
@@ -85,6 +87,7 @@ namespace Emergence.Business.ViewModel
 			SubEventEditPopup = new PopupModel().CreateAopProxy();
 			TeamSelectPopup = new PopupModel().CreateAopProxy();
 			MaterialSelectPopup = new PopupModel().CreateAopProxy();
+			EventGrades = new ObservableCollection<DictItem>(MetaDataService.EventGrades);
 			//this.eventAggregator = eventAggregator;
 
 			SearchSubEventListCommand = new DelegateCommand<string>(new Action<string>(SearchSubEventAction));
@@ -185,8 +188,13 @@ namespace Emergence.Business.ViewModel
 
 		private void StartCreateSubEventAction()
 		{
-			this.SubEventEditPopup.PopupName = "创建子事件";
-			this.SubEventEditPopup.IsOpen = true;
+			SubEventEdit = SubEventEdit ?? new SubEvent()
+			{
+				ChildGrade = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Value,
+				ChildGradeName = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Name
+			};
+			SubEventEditPopup.PopupName = "创建子事件";
+			SubEventEditPopup.IsOpen = true;
 			SetPageEnableStatus(false);
 		}
 
@@ -203,7 +211,11 @@ namespace Emergence.Business.ViewModel
 		{
 			SetPageEnableStatus(true);
 			this.SubEventEditPopup.IsOpen = false;
-			this.SubEventEdit = new SubEvent();
+			this.SubEventEdit = new SubEvent()
+			{
+				ChildGrade = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Value,
+				ChildGradeName = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Name
+			};
 		}
 
 		private void CreateSubEventAction()
@@ -213,8 +225,8 @@ namespace Emergence.Business.ViewModel
 				var result = subEventService.CreateChildEvent(MasterEventInfo.ID.ToString(), SubEventEdit);
 				if (result)
 				{
-					ShowMessageBox("创建子事件成功！");
 					SetPageEnableStatus(true);
+					ShowMessageBox("创建子事件成功！");
 					this.SubEventEditPopup.IsOpen = false;
 					this.SubEventEdit = new SubEvent();
 				}
