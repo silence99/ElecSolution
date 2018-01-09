@@ -7,6 +7,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Business.Services;
 
 namespace Emergence_WPF
 {
@@ -50,11 +51,14 @@ namespace Emergence_WPF
 		/// create ui model for main window
 		/// </summary>
 		public void InitUiModel()
-		{
-			ViewModel.Left = 0.0;
+        {
+            ResolutionService.Width = SystemParameters.PrimaryScreenWidth;
+            ResolutionService.Height = SystemParameters.PrimaryScreenHeight;
+
+            ViewModel.Left = 0.0;
 			ViewModel.Top = 0.0;
-			ViewModel.Width = SystemParameters.PrimaryScreenWidth;
-			ViewModel.Height = SystemParameters.PrimaryScreenHeight;
+			ViewModel.Width = ResolutionService.Width;
+			ViewModel.Height = ResolutionService.Height;
 			ViewModel.ResizeMode = ResizeMode.NoResize;
 			ViewModel.WindowState = WindowState.Maximized;
 			ViewModel.WindowStyle = WindowStyle.None;

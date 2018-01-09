@@ -562,7 +562,7 @@
             AllowsTransparency="True"  
             PopupAnimation="Slide"  
             PlacementTarget="{Binding ElementName=Grid_MasterEventDetail}"  
-            Placement="Absolute">
+            Placement="Center">
             <Border BorderBrush="#BFBFBF" BorderThickness="1">
                 <Grid Name="Grid_SubEventPopup_Detail" Background="White">
                     <Grid.RowDefinitions>
@@ -624,7 +624,7 @@
                         <Label Style="{StaticResource RightLabel}" FontSize="18" DockPanel.Dock="Left" Margin="22 0 0 0" Content="队伍列表"/>
                     </DockPanel>
                     <DockPanel Grid.Row="5" Background="#F9F9F9">
-                        <DataGrid Style="{StaticResource DataGridRight}"  DockPanel.Dock="Top" Name="Grid_SBPopupTeam"  ItemsSource="{Binding Path=TeamList, Mode=TwoWay}" Margin="2">
+                        <DataGrid Style="{StaticResource DataGridRight}" DockPanel.Dock="Top" Name="Grid_SBPopupTeam"  ItemsSource="{Binding Path=TeamList, Mode=TwoWay}" Margin="2">
                             <DataGrid.Columns >
                                 <!--<DataGridCheckBoxColumn Binding="{Binding IsCheck}" x:Name="f1" Header=""  Width="0.5*" />-->
                                 <DataGridTextColumn  Binding="{Binding Path=TeamName, Mode=TwoWay}" x:Name="pdw2" Header="队伍名称" Width="*" >

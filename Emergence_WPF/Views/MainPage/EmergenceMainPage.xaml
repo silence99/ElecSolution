@@ -224,8 +224,14 @@
                 <charts:TeamPersonChart Canvas.Left="0" Canvas.Top="0" />
             </Canvas>
         </Viewbox>
-        
-        <emergence_wpf:BMap x:Name="map" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Margin="10 10 5 5" MinHeight="1" />
+
+        <DockPanel  Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Margin="10 10 5 5" >
+            <DockPanel Height="48px" HorizontalAlignment="Stretch" Name="head" DockPanel.Dock="Top" Background="#006F69" Visibility="Collapsed">
+                <Image Canvas.Left="20" Margin="10,0,0,3" DockPanel.Dock="Left" Source="/Image/Icon_MainBrand.png" HorizontalAlignment="Left" ></Image>
+                <TextBlock FontSize="20" DockPanel.Dock="Left" TextAlignment="Center" Foreground="White" HorizontalAlignment="Left" Margin="10,10,0,0">国网龙泉市供电公司应急指挥平台</TextBlock>
+            </DockPanel>
+            <emergence_wpf:BMap DockPanel.Dock="Top" x:Name="map" MinHeight="1" />
+        </DockPanel>
 
         <DockPanel Grid.Row="4" Grid.Column="0" >
             <DataGrid Name="DataGrid_MasterEvent" CanUserAddRows="False" 
