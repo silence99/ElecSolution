@@ -180,7 +180,7 @@
     <Style x:Key="Grid_WithOutHeader_Black" TargetType="DataGrid">
         <!--grid right column data grid line style-->
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
         <Setter Property="AlternationCount" Value="1"/>
         <Setter Property="AutoGenerateColumns" Value="false"/>
         <Setter Property="CanUserResizeColumns" Value="false"/>

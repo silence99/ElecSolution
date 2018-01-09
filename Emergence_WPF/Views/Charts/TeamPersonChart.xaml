@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:chart="clr-namespace:Emergence_WPF.Comm"
              mc:Ignorable="d" 
-             d:DesignHeight="234" d:DesignWidth="420" Loaded="UserControl_Loaded">
+             d:DesignHeight="180" d:DesignWidth="280" Loaded="UserControl_Loaded">
     <Grid>
         <Grid.Resources>
             <ResourceDictionary>
@@ -15,14 +15,20 @@
             </ResourceDictionary>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="190"/>
-            <ColumnDefinition Width="190"/>
+            <ColumnDefinition Width="140"/>
+            <ColumnDefinition Width="140"/>
         </Grid.ColumnDefinitions>
-        <chart:WheelChart Grid.Column="0" Width="190" Height="190" Margin="0,0,0,0" VerticalAlignment="Top" 
+        <DockPanel Grid.Column="0">
+            <Label DockPanel.Dock="Bottom" Content="已用人数/总人数" FontSize="12px"  Foreground="White" Margin="0 -20 0 0"/>
+            <chart:WheelChart  DockPanel.Dock="Bottom" Width="140" Height="140"
                           Value="{Binding TeamUseTotal}" Total="{Binding TeamTotal}" Radius="70" InnerDiameter="100">
         </chart:WheelChart>
-        <chart:WheelChart Grid.Column="1" Width="190" Height="190" Margin="0,0,0,0" VerticalAlignment="Top"
+        </DockPanel>
+        <DockPanel Grid.Column="1">
+            <Label DockPanel.Dock="Bottom" Content="已用队伍/总队伍" FontSize="12px"  Foreground="White" Margin="0 -20 0 0"/>
+            <chart:WheelChart Width="140" Height="140" 
                           Value="{Binding TeamMemberUseTotal}" Total="{Binding TeamMemberTotal}" Radius="70" InnerDiameter="100">
-        </chart:WheelChart>
+            </chart:WheelChart>
+        </DockPanel>
     </Grid>
 </UserControl>

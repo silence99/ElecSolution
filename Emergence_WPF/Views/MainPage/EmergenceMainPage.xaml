@@ -117,7 +117,7 @@
             <ColumnDefinition Width="1.5*"></ColumnDefinition>
             <ColumnDefinition Width="1.5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DockPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Margin="0,5,0,0">
+        <DockPanel Grid.Row="0" Grid.Column="2" Grid.RowSpan="4" Margin="5,10,10,10">
             <StackPanel Margin="0,0,0,10" DockPanel.Dock="Top" Height="48" Width="160" Orientation="Horizontal" HorizontalAlignment="Left">
                 <StackPanel.Background>
                     <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5" MappingMode="RelativeToBoundingBox">
@@ -219,7 +219,11 @@
             </UserControl.Style>
         </UserControl>
 
-        <charts:TeamPersonChart Margin="5 5 5 10" Grid.Column="1" Grid.Row="3"/>
+        <Viewbox Margin="5 5 5 10" Grid.Column="1" Grid.Row="3">
+            <Canvas Width="280px" Height="180px">
+                <charts:TeamPersonChart Canvas.Left="0" Canvas.Top="0" />
+            </Canvas>
+        </Viewbox>
         
         <emergence_wpf:BMap x:Name="map" Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Margin="10 10 5 5" MinHeight="1" />
 
