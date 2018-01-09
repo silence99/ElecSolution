@@ -9,6 +9,7 @@ using System.Configuration;
 using System.Linq;
 using System.Reflection;
 using System.Xml;
+using Emergence.Business.CommonControl;
 
 namespace Busniess.Services
 {
@@ -77,10 +78,12 @@ namespace Busniess.Services
 
 		public bool CreateMasterEvent(MasterEvent model)
 		{
-			return CreateMasterEvent(model.Title, model.EventType, model.Grade, model.Time, model.Remarks, model.Locale, double.Parse(model.Longitude), double.Parse(model.Latitude));
+			return CreateMasterEvent(model.Title, model.EventType, model.Grade, DateTime.Parse(model.Time), model.Remarks, model.Locale,
+				double.Parse(model.Longitude ?? "0"),
+				double.Parse(model.Latitude ?? "0"));
 		}
 
-		public bool CreateMasterEvent(string title, string eventType, string grade, string time, string description, string location, double longitude, double latitude, Func<string, bool> callback = null)
+		public bool CreateMasterEvent(string title, string eventType, string grade, DateTime time, string description, string location, double longitude, double latitude, Func<string, bool> callback = null)
 		{
 			string serviceName = ConfigurationManager.AppSettings["mainEventApi"] ?? "mainEvent";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()
@@ -88,7 +91,7 @@ namespace Busniess.Services
 				{ "title", title },
 				{ "eventType", eventType },
 				{ "grade", grade },
-				{ "time", time },
+				{ "time", TimeControl.GetMillisecons(time).ToString() },
 				{ "describe", description },
 				{ "locale", location },
 				{ "longitude", longitude.ToString() },

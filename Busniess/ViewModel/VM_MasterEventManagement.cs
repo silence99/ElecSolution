@@ -28,6 +28,8 @@ namespace Emergence.Business.ViewModel
 		public virtual double PopupOffsetX { get; set; }
 		public virtual double PopupOffsetY { get; set; }
 		public virtual MasterEvent Current { get; set; }
+		public virtual ObservableCollection<DictItem> EventTypes { get; set; }
+		public virtual ObservableCollection<DictItem> EventGrades { get; set; }
 
 		public virtual DelegateCommand CreateCommand { get; set; }
 		public virtual DelegateCommand DeleteCommand { get; set; }
@@ -51,6 +53,13 @@ namespace Emergence.Business.ViewModel
 			DeleteCommand = new DelegateCommand(DeleteAction);
 			PopupAddCommand = new DelegateCommand(PopupAddAction);
 			PopupCloseCommand = new DelegateCommand(PopupCloseAction);
+			EventTypes = new ObservableCollection<DictItem>(MetaDataService.EventTypes);
+			EventGrades = new ObservableCollection<DictItem>(MetaDataService.EventGrades);
+		}
+
+		public void SyncData()
+		{
+			GetMasterEventsAction();
 		}
 
 		private int GetPageSize()

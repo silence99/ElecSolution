@@ -28,33 +28,9 @@ namespace Emergence_WPF
 			DataContext = ViewModel;
 		}
 
-
-		private void Page_Loaded(object sender, RoutedEventArgs e)
-		{
-			
-		}
-
 		private void Pager_OnPageChanged(object sender, PageChangedEventArg e)
 		{
-			RequestMasterEventList();
-		}
-
-		private void RequestMasterEventList()
-		{
-			var masterEvents = MasterEventService.GetMasterEvents(ViewModel.PageIndex, ViewModel.PageSize);
-			if (masterEvents != null)
-			{
-				ViewModel.MasterEvents = masterEvents.MasterEvents;
-				ViewModel.TotalCount = masterEvents.Count;
-				ViewModel.PageIndex = masterEvents.PageIndex;
-				ViewModel.PageSize = masterEvents.PageSize;
-				ViewModel.TotalPage = ViewModel.TotalCount == 0 ? 0 : (int)Math.Ceiling((double)ViewModel.TotalCount / ViewModel.PageSize);
-			}
-		}
-
-		private void masterEventSearchButton_Click(object sender, RoutedEventArgs e)
-		{
-			RequestMasterEventList();
+			ViewModel.SyncData();
 		}
 
 		private void Grid_MasterEvent_MouseDoubleClick(object sender, MouseButtonEventArgs e)
