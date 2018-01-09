@@ -190,7 +190,13 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>
-                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,40,0" Foreground="White" Content="删除事件" Style="{StaticResource RoundConnerButtonStyle}" Click="DeleteMasterEventHandler"></Button>
+                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,40,0" Foreground="White" Content="删除事件" Style="{StaticResource RoundConnerButtonStyle}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding DeleteCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
                 </DockPanel>
                 <DockPanel DockPanel.Dock="Top">
                     <DockPanel DockPanel.Dock="Bottom" LastChildFill="True" Margin="0,5,0,0">

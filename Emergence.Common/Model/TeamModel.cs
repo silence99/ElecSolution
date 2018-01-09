@@ -22,7 +22,6 @@ namespace Emergence.Common.Model
 		public virtual int TotalNumber { get; set; }
         public TeamModel()
         {
-            IsChecked = false;
         }
     }
 }

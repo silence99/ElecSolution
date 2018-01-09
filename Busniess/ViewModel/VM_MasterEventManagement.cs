@@ -118,6 +118,10 @@ namespace Emergence.Business.ViewModel
 			var model = this.CreateAopProxy();
 			model.Current = new MasterEvent().CreateAopProxy();
 			model.Current.Time = DateTime.Now.ToString();
+			model.Current.EventType = EventTypes[0].Value;
+			model.Current.EventTypeName = EventTypes[0].Name;
+			model.Current.Grade = EventGrades[0].Value;
+			model.Current.GradeName = EventGrades[0].Name;
 			model.IsPopupOpen = true;
 		}
 
