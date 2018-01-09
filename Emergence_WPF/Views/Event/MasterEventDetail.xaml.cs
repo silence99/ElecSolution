@@ -7,6 +7,7 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Unity;
 using System.Data;
 using System.Windows.Media;
+using Business.Services;
 
 namespace Emergence_WPF
 {
@@ -67,9 +68,8 @@ namespace Emergence_WPF
                 if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
                 {
                     var element = parent as FrameworkElement;
-                    var mainWin = Application.Current.MainWindow;
-                    element.Height = 768;// mainWin.Height;
-                    element.Width = 1366;// mainWin.Width;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
                     break;
                 }
             }

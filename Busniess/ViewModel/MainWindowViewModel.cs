@@ -8,6 +8,7 @@ using System.Linq;
 using Busniess.Services;
 using System.Collections.ObjectModel;
 using Emergence.Common.Model;
+using Business.Services;
 
 namespace Emergence.Business.ViewModel
 {
@@ -24,6 +25,8 @@ namespace Emergence.Business.ViewModel
         public virtual ResizeMode ResizeMode { get; set; }
         public virtual string UserNameLabel { get { return "用户" + UserName; } }
         public virtual MainPageUiModel MainPageData { get; set; }
+        public virtual string MainWindowSubTitleVisible { get; set; }
+        public virtual PopupModel MainWindowPopup { get; set; }
         public virtual ObservableCollection<Notification> NotificationList { get; set; }
         public virtual ObservableCollection<MasterEvent> MasterEventList { get; set; }
         public StatisticsViewModel Statistics { get; set; }
@@ -37,6 +40,8 @@ namespace Emergence.Business.ViewModel
         {
             NoticeService = new AnnouncementService();
             MasterEService = new MasterEventService();
+            MainWindowPopup = new PopupModel().CreateAopProxy();
+            MainWindowSubTitleVisible = "Collapsed";
             GetNoticeList();
             GetMasterEventList();
         }
@@ -52,6 +57,18 @@ namespace Emergence.Business.ViewModel
         {
             var masterEvents = MasterEService.GetMasterEventsData(1, 5, "");
             MasterEventList = new ObservableCollection<MasterEvent>( masterEvents.Result.Data.Select(a => a.CreateAopProxy()));
+        }
+
+        public void ShowMainWindowPopup()
+        {
+            MainWindowPopup.PopupWidth = ResolutionService.Width.ToString();
+            MainWindowPopup.PopupHeight = ResolutionService.Height.ToString();
+            MainWindowPopup.IsOpen = true;
+        }
+
+        public void DisableMainWindowPopup()
+        {
+            MainWindowPopup.IsOpen = false;
         }
 
     }

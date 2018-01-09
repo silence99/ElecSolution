@@ -7,6 +7,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using Business.Services;
 
 namespace Emergence_WPF
 {
@@ -50,11 +51,14 @@ namespace Emergence_WPF
 		/// create ui model for main window
 		/// </summary>
 		public void InitUiModel()
-		{
-			ViewModel.Left = 0.0;
+        {
+            ResolutionService.Width = SystemParameters.PrimaryScreenWidth;
+            ResolutionService.Height = SystemParameters.PrimaryScreenHeight;
+
+            ViewModel.Left = 0.0;
 			ViewModel.Top = 0.0;
-			ViewModel.Width = SystemParameters.PrimaryScreenWidth;
-			ViewModel.Height = SystemParameters.PrimaryScreenHeight;
+			ViewModel.Width = ResolutionService.Width;
+			ViewModel.Height = ResolutionService.Height;
 			ViewModel.ResizeMode = ResizeMode.NoResize;
 			ViewModel.WindowState = WindowState.Maximized;
 			ViewModel.WindowStyle = WindowStyle.None;
@@ -100,11 +104,16 @@ namespace Emergence_WPF
 			frmMain.NavigationService.Refresh();
 		}
 
-		private void Image_MouseLeftButtonDown_2(object sender, MouseButtonEventArgs e)
-		{
-			EmergencyCommandCenter center = new EmergencyCommandCenter();
-			center.ShowDialog();
-		}
+		private void Image_MouseLeftButtonDown_PopupMasterEventPage(object sender, MouseButtonEventArgs e)
+        {
+            MainPagePopupWindow mainPopup = new MainPagePopupWindow();
+            mainPopup.Show();
+            //EmergenceMainPage emp = new EmergenceMainPage(true);
+            //Frame_MainWindowPopup.NavigationService.Navigate(emp);
+            //ViewModel.ShowMainWindowPopup();
+            //EmergencyCommandCenter center = new EmergencyCommandCenter();
+            //center.ShowDialog();
+        }
 
 		private void Image_MouseLeftButtonDown_3(object sender, MouseButtonEventArgs e)
 		{
