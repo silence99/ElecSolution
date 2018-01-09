@@ -56,6 +56,11 @@ namespace Emergence_WPF
 
             DataContext = ViewModel;
         }
+
+        public EmergenceMainPage(bool isShowMaxPop) : this()
+        {
+            ViewModel.MainWindowSubTitleVisible = isShowMaxPop ? "Visible" : "Collapsed";
+        }
        
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {

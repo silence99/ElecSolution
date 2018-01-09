@@ -26,7 +26,7 @@
                     <Image Margin="0,0,30,0" Width="30" Height="30" MouseLeftButtonDown="MasterEventBtn_Click" Source="/Image/Icon_Lighting.png" HorizontalAlignment="Right" Cursor="Hand"></Image>
                     <Image Margin="0,0,30,0" Width="30" Height="30" Source="/Image/Icon_Message.png"  MouseLeftButtonDown="Image_MouseRightButtonDown" HorizontalAlignment="Right" Cursor="Hand"></Image>
                     <Image Margin="0,0,30,0" Width="30" Height="30" Tag="MasterEventDetail" Source="/Image/Icon_Graph.png"  MouseLeftButtonDown="GraphBtn_Click" HorizontalAlignment="Right" Cursor="Hand"></Image>
-                    <Image Margin="0,0,30,0" Width="30" Height="30" Source="/Image/Icon_FullScreen.png" HorizontalAlignment="Right" MouseLeftButtonDown="Image_MouseLeftButtonDown_2" Cursor="Hand"></Image>
+                    <Image Margin="0,0,30,0" Width="30" Height="30" Source="/Image/Icon_FullScreen.png" HorizontalAlignment="Right" MouseLeftButtonDown="Image_MouseLeftButtonDown_PopupMasterEventPage" Cursor="Hand"></Image>
                     <Image Margin="0,0,30,0" Width="30" Height="30" Source="/Image/Icon_Gear.png" HorizontalAlignment="Right" Cursor="Hand">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseLeftButtonUp">
@@ -44,10 +44,20 @@
                     </StackPanel>
                 </StackPanel>
             </DockPanel>
-            <Grid Name="maingrid" DockPanel.Dock="Top" HorizontalAlignment="Stretch" VerticalAlignment="Top">
-            </Grid>
             <Frame Name="frmMain" DockPanel.Dock="Top" NavigationUIVisibility="Hidden"></Frame>
         </DockPanel>
-        <!--</Canvas>-->
+
+        <!--<Popup 
+            x:Name="PopupSelectMaterial" 
+            Width="{Binding Path=MainWindowPopup.PopupWidth}" 
+            Height="{Binding Path=MainWindowPopup.PopupHeight}"
+            StaysOpen="True"   
+            IsOpen="{Binding Path=MainWindowPopup.IsOpen}"   
+            AllowsTransparency="True"  
+            PopupAnimation="Slide"  
+            PlacementTarget="{Binding ElementName=Grid_MasterEventDetail}"  
+            Placement="Center">
+            <Frame x:Name="Frame_MainWindowPopup"></Frame>
+        </Popup>-->
     </Grid>
 </Window>

@@ -281,6 +281,9 @@
     <Compile Include="Views\MainPage\EmergenceMainPage.xaml.cs">
       <DependentUpon>EmergenceMainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MainPage\MainPagePopupWindow.xaml.cs">
+      <DependentUpon>MainPagePopupWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainPage\VideoCollection.xaml.cs">
       <DependentUpon>VideoCollection.xaml</DependentUpon>
     </Compile>
@@ -477,6 +480,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainPage\EmergenceMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPage\MainPagePopupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

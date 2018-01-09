@@ -104,11 +104,16 @@ namespace Emergence_WPF
 			frmMain.NavigationService.Refresh();
 		}
 
-		private void Image_MouseLeftButtonDown_2(object sender, MouseButtonEventArgs e)
-		{
-			EmergencyCommandCenter center = new EmergencyCommandCenter();
-			center.ShowDialog();
-		}
+		private void Image_MouseLeftButtonDown_PopupMasterEventPage(object sender, MouseButtonEventArgs e)
+        {
+            MainPagePopupWindow mainPopup = new MainPagePopupWindow();
+            mainPopup.Show();
+            //EmergenceMainPage emp = new EmergenceMainPage(true);
+            //Frame_MainWindowPopup.NavigationService.Navigate(emp);
+            //ViewModel.ShowMainWindowPopup();
+            //EmergencyCommandCenter center = new EmergencyCommandCenter();
+            //center.ShowDialog();
+        }
 
 		private void Image_MouseLeftButtonDown_3(object sender, MouseButtonEventArgs e)
 		{
