@@ -1,7 +1,13 @@
 ﻿using Framework;
 using Microsoft.Practices.Prism.Commands;
 using System.Windows;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Busniess.Services;
+using System.Collections.ObjectModel;
+using Emergence.Common.Model;
 
 namespace Emergence.Business.ViewModel
 {
@@ -18,20 +24,40 @@ namespace Emergence.Business.ViewModel
         public virtual ResizeMode ResizeMode { get; set; }
         public virtual string UserNameLabel { get { return "用户" + UserName; } }
         public virtual MainPageUiModel MainPageData { get; set; }
+        public virtual ObservableCollection<Notification> NotificationList { get; set; }
+        public virtual ObservableCollection<MasterEvent> MasterEventList { get; set; }
         public StatisticsViewModel Statistics { get; set; }
 
-        public virtual AnnouncementService noticeService { get; set; }
+        public virtual AnnouncementService NoticeService { get; set; }
+        public virtual MasterEventService MasterEService { get; set; }
 
-		public virtual DelegateCommand<string> NavigateCommand { get; set; }
+        public virtual DelegateCommand<string> NavigateCommand { get; set; }
 
         public MainWindowViewModel()
         {
-            
+            NoticeService = new AnnouncementService();
+            MasterEService = new MasterEventService();
+            GetNoticeList();
+            GetMasterEventList();
         }
 
         public void GetNoticeList()
         {
-
+            var data = NoticeService.GetAnnouncements(1, 10);
+            var model = IsAopWapper ? this : this.CreateAopProxy();
+            model.NotificationList = new ObservableCollection<Notification>(data.Data.Select(item => new Notification { NotificationTitle = item.Time.ToString("yyyy-MM-dd") + ":" + item.Title }).ToList().Select(a => a.CreateAopProxy()));
         }
-	}
+
+        public void GetMasterEventList()
+        {
+            var masterEvents = MasterEService.GetMasterEventsData(1, 5, "", default(DateTime), default(DateTime), string.Empty);
+            MasterEventList = new ObservableCollection<MasterEvent>( masterEvents.Result.Data.Select(a => a.CreateAopProxy()));
+        }
+
+    }
+
+    public class Notification : NotificationObject
+    {
+        public virtual string NotificationTitle { get; set; }
+    }
 }
