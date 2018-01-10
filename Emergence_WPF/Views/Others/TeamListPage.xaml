@@ -169,13 +169,15 @@
                             <Label Style="{StaticResource PopupLable}" Content="队伍名称" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"/>
                             <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5,20,0,0" Text="{Binding Path=CurrentTeam.TeamName, Mode=TwoWay}"/>
                             <Label Style="{StaticResource PopupLable}" Content="所属单位" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5, 20, 0, 0" Text="{Binding Path=CurrentTeam.TeamDept,Mode=TwoWay}"/>
+                            <ComboBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5, 20, 0, 0"
+                                     SelectedValue="{Binding Path=CurrentTeam.TeamDept,Mode=TwoWay}"
+                                     DisplayMemberPath="Name"
+                                     SelectedValuePath="Value"
+                                     ItemsSource="{Binding TeamDepts}"/>
                         </DockPanel>
                         <DockPanel Height="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,20,0,0">
                             <Label Style="{StaticResource PopupLable}" Content="单位地址" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"/>
                             <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5, 0, 0, 0"/>
-                            <Label Style="{StaticResource PopupLable}" Content="队长姓名" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Text="{Binding Path=CurrentTeam.PersonCharge, Mode=TwoWay}"/>
                         </DockPanel>
                     </StackPanel>
                 </Border>

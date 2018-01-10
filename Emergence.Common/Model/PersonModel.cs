@@ -1,8 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Framework;
+using Newtonsoft.Json;
 
 namespace Emergence.Common.Model
 {
-	public class PersonModel
+	public class PersonModel : NotificationObject
 	{
 		public virtual bool IsChecked { get; set; }
 		[JsonProperty("id")]
