@@ -32,7 +32,7 @@ namespace Emergence_WPF
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (ViewModel.SubEventList.Count > 0)
+            if (ViewModel.SubEventList != null && ViewModel.SubEventList.Count > 0)
             {
                 DataGridRow row = (DataGridRow)this.Grid_SubEventList.ItemContainerGenerator.ContainerFromIndex(0);
                 row.IsSelected = true;
