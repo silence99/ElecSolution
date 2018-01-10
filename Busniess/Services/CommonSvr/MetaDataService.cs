@@ -17,6 +17,9 @@ namespace Business.Services
 		public static string MaterialType = "materials_type";
 		public static string TeamDepartment = "team_dept";
 		public static string TeamMemberPlace = "team_member_placeteam_member_place";
+
+		public static string MaterialDept = "materials_dept";
+		public static string TemplateType = "template_type";
 	}
 
 	public class MetaDataService
@@ -28,6 +31,8 @@ namespace Business.Services
 		public static DictItem[] MaterialTypes { get { return GetMetaData(MetaDataType.MaterialType); } }
 		public static DictItem[] TeamDepartments { get { return GetMetaData(MetaDataType.TeamDepartment); } }
 		public static DictItem[] TeamMemberPlaces { get { return GetMetaData(MetaDataType.TeamMemberPlace); } }
+		public static DictItem[] MaterialDepts { get { return GetMetaData(MetaDataType.MaterialDept); } }
+		public static DictItem[] TemplateTypes { get { return GetMetaData(MetaDataType.TemplateType); } }
 
 		public static DictItem[] GetMetaData(string type)
 		{

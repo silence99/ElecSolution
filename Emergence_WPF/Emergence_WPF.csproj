@@ -140,6 +140,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Comm\Converters\Int2StringConverter.cs" />
     <Compile Include="Comm\PageChangedEventArg.cs" />
     <Compile Include="Comm\Pager.cs" />
     <Compile Include="Comm\PasswordBoxHelper.cs" />

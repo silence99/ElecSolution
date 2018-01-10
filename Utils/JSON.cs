@@ -15,7 +15,7 @@ namespace Utils
             {
                 return JsonConvert.DeserializeObject<T>(json);
             }
-            catch (System.Exception)
+            catch (System.Exception e)
             {
                 return default(T);
             }

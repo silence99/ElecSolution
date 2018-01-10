@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local1="clr-namespace:Emergence_WPF.Comm"
+      xmlns:convert="clr-namespace:Emergence_WPF.Comm.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="1920"
       Title="MaterialListPage">
@@ -17,6 +18,7 @@
                     <Setter Property="Foreground" Value="Black"/>
                     <Setter Property="Background" Value="Transparent"/>
                 </Style>
+                <convert:Int2StringConverter x:Key="Int2LabelConverter"/>
             </ResourceDictionary>
         </Grid.Resources>
         <Grid.RowDefinitions>
@@ -137,7 +139,7 @@
                     <DataGridTextColumn  Binding="{Binding Path=MaterialsNumber}" x:Name="f2" Header="编号" Width="*" ></DataGridTextColumn>
                     <DataGridTextColumn  Binding="{Binding Path=MaterialsName}" x:Name="f3" Header="名称"  Width="*" ></DataGridTextColumn>
                     <DataGridTextColumn  Binding="{Binding Path=MaterialsTypeName}" x:Name="f4" Header="类别"  Width="*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=MaterialsDept}" x:Name="f5" Header="所属单位"  Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=MaterialsDeptName}" x:Name="f5" Header="所属单位"  Width="*" ></DataGridTextColumn>
                     <DataGridTextColumn  Binding="{Binding Path=IsConsumable}" x:Name="f6" Header="是否消耗品"  Width="*" ></DataGridTextColumn>
                     <DataGridTextColumn  Binding="{Binding Path=IsBigMaterials}" x:Name="f7" Header="是否大物件" Width="2*" ></DataGridTextColumn>
                     <DataGridTextColumn  Binding="{Binding Path=TotalQuantity}" x:Name="f8" Header="数量" Width="2*" ></DataGridTextColumn>
@@ -185,13 +187,26 @@
                                       SelectedValue="{Binding CurrentMaterial.MaterialsType}"
                                       SelectedValuePath="Value"/>
                             <Label Style="{StaticResource PopupLable}" Content="所属单位" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Center" Width="120" HorizontalAlignment="Left" Text="{Binding Path=CurrentMaterial.MaterialsDept, Mode=TwoWay}"/>
+                            <ComboBox Height="30" VerticalAlignment="Center" Width="120" HorizontalAlignment="Left" 
+                                      Text="{Binding Path=CurrentMaterial.MaterialsDeptName, Mode=TwoWay}"
+                                      SelectedValue="{Binding CurrentMaterial.MaterialsDept}"
+                                      DisplayMemberPath="Name"
+                                      SelectedValuePath="Value"
+                                      ItemsSource="{Binding MaterialDepts}"/>
                         </DockPanel>
                         <DockPanel Height="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,20,0,0">
                             <Label Style="{StaticResource PopupLable}" Content="是否消耗品" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Center" Width="120" HorizontalAlignment="Left" Margin="5, 0, 0, 0" Text="{Binding Path=CurrentMaterial.IsConsumable, Mode=TwoWay}"/>
+                            <ComboBox Height="30" VerticalAlignment="Center" Width="120" HorizontalAlignment="Left" Margin="5, 0, 0, 0" 
+                                      SelectedValue="{Binding Path=CurrentMaterial.IsConsumable, Mode=TwoWay}"
+                                      DisplayMemberPath="Value"
+                                      SelectedValuePath="Key"
+                                      ItemsSource="{Binding IsConsumableEnums}"/>
                             <Label Style="{StaticResource PopupLable}" Content="是否大物件" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Center" Width="120" HorizontalAlignment="Left" Text="{Binding Path=CurrentMaterial.IsBigMaterials, Mode=TwoWay}"/>
+                            <ComboBox Height="30" VerticalAlignment="Center" Width="120" HorizontalAlignment="Left"
+                                      SelectedValue="{Binding Path=CurrentMaterial.IsBigMaterials, Mode=TwoWay}"
+                                      DisplayMemberPath="Value"
+                                      SelectedValuePath="Key"
+                                      ItemsSource="{Binding IsBigEnums}"/>
                         </DockPanel>
                         <DockPanel Height="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,20,0,0">
                             <Label Style="{StaticResource PopupLable}" Content="数量" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0"/>
