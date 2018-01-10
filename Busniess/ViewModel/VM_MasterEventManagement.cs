@@ -20,7 +20,7 @@ namespace Emergence.Business.ViewModel
 		public virtual int PageIndex { get; set; }
 		public virtual int TotalCount { get; set; }
 		public virtual int TotalPage { get; set; }
-		public virtual string SearchInfo { get; set; }
+		public virtual string MasterEventSearchValue { get; set; }
 
 		public virtual ObservableCollection<MasterEvent> MasterEvents { get; set; }
 
@@ -35,9 +35,11 @@ namespace Emergence.Business.ViewModel
 		public virtual DelegateCommand DeleteCommand { get; set; }
 		public virtual DelegateCommand PopupAddCommand { get; set; }
 		public virtual DelegateCommand<AnnouncementModel> PopupEditCommand { get; set; }
-		public virtual DelegateCommand PopupCloseCommand { get; set; }
+        public virtual DelegateCommand PopupCloseCommand { get; set; }
+        public virtual DelegateCommand<string> SearchMasterEventListCommand { get; set; }
+        
 
-		public VM_MasterEventManagement()
+        public VM_MasterEventManagement()
 		{
 			PageSize = GetPageSize();
 			PageIndex = 1;
@@ -47,19 +49,21 @@ namespace Emergence.Business.ViewModel
 			var popupStartPoint = ResolutionService.GetCenterControlOffset(880, 332);
 			PopupOffsetX = popupStartPoint.X;
 			PopupOffsetY = popupStartPoint.Y;
-			GetMasterEventsAction();
+            MasterEventSearchValue = "";
+			GetMasterEventsAction("");
 
 			CreateCommand = new DelegateCommand(CreateAction);
 			DeleteCommand = new DelegateCommand(DeleteAction);
 			PopupAddCommand = new DelegateCommand(PopupAddAction);
-			PopupCloseCommand = new DelegateCommand(PopupCloseAction);
-			EventTypes = new ObservableCollection<DictItem>(MetaDataService.EventTypes);
+            PopupCloseCommand = new DelegateCommand(PopupCloseAction);
+            SearchMasterEventListCommand = new DelegateCommand<string>(GetMasterEventsAction);
+            EventTypes = new ObservableCollection<DictItem>(MetaDataService.EventTypes);
 			EventGrades = new ObservableCollection<DictItem>(MetaDataService.EventGrades);
 		}
 
 		public void SyncData()
 		{
-			GetMasterEventsAction();
+			GetMasterEventsAction("");
 		}
 
 		private int GetPageSize()
@@ -73,11 +77,15 @@ namespace Emergence.Business.ViewModel
 			return t;
 		}
 
-		private void GetMasterEventsAction()
+		private void GetMasterEventsAction(string searchValue)
 		{
 			var viewModel = IsAopWapper ? this : this.CreateAopProxy();
+            if (string.IsNullOrEmpty(searchValue))
+            {
+                searchValue = viewModel.MasterEventSearchValue;
+            }
 			var masterEvents = MasterEventService.GetMasterEvents(viewModel.PageIndex,
-				viewModel.PageSize, SearchInfo);
+				viewModel.PageSize, searchValue);
 			if (masterEvents != null)
 			{
 				viewModel.MasterEvents = masterEvents.MasterEvents;
@@ -95,7 +103,7 @@ namespace Emergence.Business.ViewModel
 			MasterEventService.CreateMasterEvent(Current);
 			CleanMessage();
 			PopupCloseAction();
-			GetMasterEventsAction();
+			GetMasterEventsAction("");
 		}
 
 		private void DeleteAction()
@@ -108,7 +116,7 @@ namespace Emergence.Business.ViewModel
 			else
 			{
 				MasterEventService.DeleteMasterEvents(ids);
-				GetMasterEventsAction();
+				GetMasterEventsAction("");
 			}
 		}
 

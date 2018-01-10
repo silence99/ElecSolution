@@ -10,6 +10,10 @@
 
     <Page.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../style/MasterEventDetailStyle.xaml" />
+                <ResourceDictionary Source="../../style/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
             <Style TargetType="Label">
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
                 <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -127,73 +131,43 @@
     <Grid  Name="gridEventMain">
         <Grid.RowDefinitions>
             <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DockPanel Grid.Column="0" Grid.Row="0" Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" >
+        <Border BorderBrush="#62A6A3" Grid.Column="0" Grid.Row="0"  BorderThickness="0 1 0 0">
+        <DockPanel Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" >
             <Label Name="labelPageTitle" Foreground="White" FontSize="20" HorizontalAlignment="Left" Padding="25" Margin="20,0,0,0" >主事件列表</Label>
-        </DockPanel>
-        <DockPanel Grid.Column="0" Grid.Row="1" Margin="0,0,0,0" Background="White">
-            <Border DockPanel.Dock="Top" Margin="20, 21, 20, 20" CornerRadius="10">
-                <Border.Effect>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.75"/>
-                </Border.Effect>
-                <DockPanel Margin="0,0,0,0">
-                    <DockPanel Height="60" HorizontalAlignment="Stretch" Name="head" DockPanel.Dock="Top" Background="#CCE2E1">
-                        <TextBlock FontSize="20" DockPanel.Dock="Left" TextAlignment="Center" HorizontalAlignment="Left" Margin="51,15,0,0" Foreground="Black">搜索</TextBlock>
-                        <Button Name="masterEventSearchButton" FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,51,0" Foreground="White" Content="搜索"></Button>
-                    </DockPanel>
-                    <Grid ShowGridLines="False" Name="gridTest" DockPanel.Dock="Top" Background="White">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="100"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="0" >
-                            <TextBlock Text="序号" HorizontalAlignment="Left" Padding="0,5,5,5" Margin="20,37,10,0"/>
-                            <TextBox Name="SerialNumberTextBox" Text="{Binding Path=TxtTitle, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5" VerticalContentAlignment="Center"/>
-                            <!--<TextBox Name="SerialNumberTextBox" Text="{Binding Path=_txtSerialNumber, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5" VerticalContentAlignment="Center"/>-->
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="1" Grid.Row="0" >
-                            <TextBlock Text="标题" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
-                            <TextBox Name="TitleTextBox" Text="{Binding Path=TxtTitle, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="2" Grid.Row="0" >
-                            <TextBlock Text="时间点" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
-                            <TextBox Name="TimeTextBox" Text="{Binding Path=_txtTime, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="3" Grid.Row="0" >
-                            <TextBlock Visibility="Hidden" Text="报送人" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
-                            <TextBox Visibility="Hidden" Name="SubmitPartyTextBox" Text="{Binding Path=_txtSubmitParty, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="4" Grid.Row="0" >
-                            <TextBlock Text="地址" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
-                            <TextBox Name="LocateTextBox" Text="{Binding Path=_txtLocate, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </Grid>
-                </DockPanel>
+            </DockPanel>
+        </Border>
+        <DockPanel Grid.Column="0" Grid.Row="1" Background="#FFFFFF" Height="80" Width="auto"  HorizontalAlignment="Stretch" >
+            <Border Grid.Row="0" Height="41" Width="500px" DockPanel.Dock="Left" HorizontalAlignment="Left" BorderBrush="#D3D3D3" BorderThickness="1 1 1 1" Margin="20 0 0 0" Background="White">
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40px"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource SearchImageButton}" Grid.Column="1" Command="{Binding Path=SearchMasterEventListCommand}" CommandParameter="{Binding Path=MasterEventSearchValue}"></Button>
+                    <TextBox Name="SubEventSearchTextBox" Grid.Column="0" BorderThickness="0" Height="40px" TextAlignment="Left" VerticalAlignment="Center" FontSize="20"  VerticalContentAlignment="Center" Text="{Binding Path=MasterEventSearchValue, Mode=TwoWay}"></TextBox>
+                </Grid>
             </Border>
-
+        </DockPanel>
+        <DockPanel Grid.Column="0" Grid.Row="2" Margin="0,0,0,0" Background="White">
             <DockPanel Margin="20,0,20,20"  DockPanel.Dock="Top" >
                 <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
-                    <Button Name="Btn_CreateMasterEvent" FontSize="16" Width="180" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="51,0,0,0" Foreground="White" Content="创建主事件" Style="{StaticResource RoundConnerButtonStyle}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding PopupAddCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,40,0" Foreground="White" Content="删除事件" Style="{StaticResource RoundConnerButtonStyle}">
+                    <Button FontSize="16" Width="150" Height="36" Background="#006f69" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,20,0" Foreground="White" Content="删除主事件" Style="{StaticResource RoundConnerButtonStyle}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="Click">
                                 <i:InvokeCommandAction Command="{Binding DeleteCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+                    <Button Name="Btn_CreateMasterEvent" FontSize="16" Width="150" Height="36" Background="#006f69" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,20,0" Foreground="White" Content="创建主事件" Style="{StaticResource RoundConnerButtonStyle}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding PopupAddCommand}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>
@@ -248,45 +222,54 @@
                 </DockPanel>
             </DockPanel>
         </DockPanel>
-
         <Popup 
             x:Name="PopupItem" 
-            Width="800" 
-            Height="332"  
+            Width="600px" 
+            Height="450px"  
             StaysOpen="True"   
             IsOpen="{Binding Path=IsPopupOpen}"   
             AllowsTransparency="True"  
-            PopupAnimation="Slide"
-            Placement="Top"
-            HorizontalOffset="{Binding PopupOffsetX}"
-            VerticalOffset="{Binding PopupOffsetY}"
-            >
-            <DockPanel Background="White">
-                <DockPanel DockPanel.Dock="Top" Height="50">
-                    <Label Width="40" Content="X" HorizontalAlignment="Left">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseUp">
-                                <i:InvokeCommandAction Command="{Binding PopupCloseCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Label>
-                    <Border Width="1" BorderThickness="1" BorderBrush="#D9D9D9" Margin="0,0,0,0" HorizontalAlignment="Left"/>
-                    <Label Content="创建主时间"/>
-                    <Button Content="完成" FontSize="16" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,36,0" Width="88" Height="36" Background="#006f69" Foreground="White">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding CreateCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                </DockPanel>
-                <Border Margin="2,0,0,0" Background="#F3F3F3" BorderThickness="1">
-                    <StackPanel Orientation="Vertical">
-                        <DockPanel Height="60" VerticalAlignment="Top">
-                            <Label Content="标题" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Top" Width="300" HorizontalAlignment="Left" Margin="0,20,0,0" Text="{Binding Path=Current.Title, Mode=TwoWay}"/>
-                            <Label Content="类型" Height="30" Width="170" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Margin="0,20,0,0"/>
-                            <ComboBox Height="30" VerticalAlignment="Top" Width="160" HorizontalAlignment="Left" Margin="20 20, 0, 0" 
+            PopupAnimation="Slide"  
+            PlacementTarget="{Binding ElementName=Grid_MasterEventDetail}"  
+            Placement="Center">
+
+            <Border BorderBrush="#BFBFBF" BorderThickness="1">
+                <Grid Background="#FFFFFF">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50px"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0">
+                        <Button Style="{StaticResource CancelImageButton}" Command="{Binding Path=CloseSubEventEditCommand}" DockPanel.Dock="Left" Margin="19 0 19 0" />
+                        <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
+                        <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" Content="{Binding Path=SubEventEditPopup.PopupName}" Margin="19 0 0 0"/>
+                        <Button Content="完成" FontSize="16" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,36,0" Width="88" Height="36" Background="#006f69" Foreground="White">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding CreateCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </Button>
+                    </DockPanel>
+                    <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
+                        <Grid Background="#F3F3F3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="87px"></RowDefinition>
+                                <RowDefinition Height="68px"></RowDefinition>
+                                <RowDefinition Height="68px"></RowDefinition>
+                                <RowDefinition Height="177px"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.35*"/>
+                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.35*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="标题" Margin="0 22 0 0"/>
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventTitle" Width="436px" Margin="20 18 0 0"  
+                                     Text="{Binding Path=Current.Title, Mode=TwoWay}"/>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="类型"/>
+                            <ComboBox Grid.Row="1" Grid.Column="1" Height="30" VerticalAlignment="Top" Width="160" HorizontalAlignment="Left" Margin="20 20, 0, 0" 
                                       Text="{Binding Path=Current.EventTypeName, Mode=TwoWay}" 
                                       ItemsSource="{Binding EventTypes}" 
                                       SelectedValue="{Binding Path=Current.EventType}" 
@@ -294,31 +277,30 @@
                                       DisplayMemberPath="Name" 
                                       SelectedValuePath="Value">
                             </ComboBox>
-                        </DockPanel>
-                        <DockPanel Height="60" VerticalAlignment="Top">
-                            <Label Content="等级" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"/>
-                            <ComboBox Height="30" VerticalAlignment="Top" Width="160" HorizontalAlignment="Left" Margin="0,20,0,0" 
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="2" Content="等级"/>
+                            <ComboBox Height="30" VerticalAlignment="Top" Width="160" Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Left" Margin="0,20,0,0" 
                                       Text="{Binding Path=Current.GradeName, Mode=TwoWay}" 
                                       ItemsSource="{Binding EventGrades}" 
                                       SelectedValue="{Binding Path=Current.Grade}" 
                                       SelectedValuePath="Value"
                                       DisplayMemberPath="Name"/>
-                            <Label Content="地址" Height="30" Width="170" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Right" Margin="0,20,0,0"/>
-                            <Border Height="30" Width="300" BorderThickness="1">
-                                <Grid Background="White">
-                                    <TextBox Height="30" Width="280" Margin="0,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Text="{Binding Path=Current.Locale,Mode=TwoWay}" BorderThickness="0" VerticalContentAlignment="Center"/>
-                                    <Image Height="30" Width="20" HorizontalAlignment="Right" Source="../../Image/Common/Icon_address.png"/>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="地址"/>
+                            <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Width="458px" Height="34px" Margin="-8 0 0 0" BorderBrush="#BFBFBF" BorderThickness="1">
+                                <Grid VerticalAlignment="Center"  Background="#FFFFFF">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="40px"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Button Style="{StaticResource AddressImageButton}" Grid.Column="1" Command="{Binding Path=SearchSubEventListCommand}" CommandParameter="{Binding Path=SubEventSearchValue}"></Button>
+                                    <TextBox Name="SubEventEditAddressTextBox" Grid.Column="0" Style="{StaticResource ImageTextBox}" Text="{Binding Path=Current.Locale, Mode=TwoWay}"></TextBox>
                                 </Grid>
                             </Border>
-
-                        </DockPanel>
-                        <DockPanel Height="120" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,20,0,0">
-                            <Label Content="描述" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"/>
-                            <TextBox VerticalAlignment="Top" Width="650" Height="120" HorizontalAlignment="Left" Margin="0, 0, 0, 0" Text="{Binding Current.Remarks}"/>
-                        </DockPanel>
-                    </StackPanel>
-                </Border>
-            </DockPanel>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="3" Grid.Column="0" Content="描述" VerticalAlignment="Top" Margin="0 19 0 0"/>
+                            <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventRemark" Width="458px" VerticalAlignment="Top"  Margin="20 17 0 0"  Text="{Binding Path=Current.Remarks,Mode=TwoWay}"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Border>
         </Popup>
     </Grid>
 </Page>
