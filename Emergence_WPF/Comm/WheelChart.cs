@@ -203,6 +203,11 @@ namespace Emergence_WPF.Comm
 				IsLargeArc = true;
 				IsRestArcLarge = false;
 			}
+			else
+			{
+				IsLargeArc = false;
+				IsRestArcLarge = true;
+			}
 			ArcSize = new Size(Radius, Radius);
 			ArcStart = GetArcStartPoint();
 			ArcEnd = GetArcEndPoint();
