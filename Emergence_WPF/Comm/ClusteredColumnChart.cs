@@ -83,8 +83,8 @@ namespace Emergence_WPF.Comm
 
 		static ClusteredColumnChart()
 		{
-			HeightProperty.OverrideMetadata(typeof(ClusteredColumnChart), new FrameworkPropertyMetadata(Control.HeightProperty.DefaultMetadata.DefaultValue, Refresh));
-			WidthProperty.OverrideMetadata(typeof(ClusteredColumnChart), new FrameworkPropertyMetadata(Control.WidthProperty.DefaultMetadata.DefaultValue, Refresh));
+			HeightProperty.OverrideMetadata(typeof(ClusteredColumnChart), new FrameworkPropertyMetadata(300.0, Refresh));
+			WidthProperty.OverrideMetadata(typeof(ClusteredColumnChart), new FrameworkPropertyMetadata(300.0, Refresh));
 		}
 		private static void Refresh(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
