@@ -1,4 +1,5 @@
-﻿using Emergence.Common.Model;
+﻿using Business.Services;
+using Emergence.Common.Model;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -20,7 +21,9 @@ namespace Emergence.Business.ViewModel
 		public virtual bool IsTeamEditModel { get; set; }
 		public virtual Visibility CancelEditButtonVisibility { get; set; }
 		public virtual string EditTeamButtonLabel { get; set; }
-		public bool IsAddMember { get; set; }
+		public virtual bool IsAddMember { get; set; }
+
+		public virtual ObservableCollection<DictItem> Places { get; set; }
 
 		public void PopupTeamEdit()
 		{
@@ -48,6 +51,8 @@ namespace Emergence.Business.ViewModel
 
 			PopupHeight = 360;
 			PopupWidth = 640;
+
+			Places = new ObservableCollection<DictItem>(MetaDataService.TeamMemberPlaces);
 		}
 	}
 }

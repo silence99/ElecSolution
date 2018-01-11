@@ -156,33 +156,7 @@
             </UserControl.Style>
         </UserControl>-->
         <charts:TeamPersonChart Margin="0,0,0,0" Grid.Column="1" Grid.Row="0"/>
-        <UserControl Name="TeamStatitics" Grid.Row="1" Grid.Column="1">
-            <UserControl.Style>
-                <Style TargetType="UserControl">
-                    <Setter Property="Width" Value="420"/>
-                    <Setter Property="Height" Value="234"/>
-                    <Setter Property="HorizontalAlignment" Value="Right"/>
-                    <Setter Property="Margin" Value="5,5,5,0"/>
-                    <Setter Property="ContentTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <Border Margin="0,0,0,0">
-                                    <metrochart:ClusteredColumnChart ChartSubTitle="**" ChartTitle="主题">
-                                        <metrochart:ClusteredColumnChart.Series>
-                                            <metrochart:ChartSeries DisplayMember="Name"
-                                   ItemsSource="{Binding Path=Populations}"
-                                   SeriesTitle="World"
-                                   ValueMember="Value" />
-                                        </metrochart:ClusteredColumnChart.Series>
-                                    </metrochart:ClusteredColumnChart>
-                                </Border>
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </UserControl.Style>
-        </UserControl>
-
+        <charts:MaterialsChart Grid.Column="1" Grid.Row="1" Margin="0,0,0,0"/>
         <Canvas Grid.Row="2" Grid.Column="1" Margin="5,5,5,0" Width="420" Height="234">
             <mainpage:Weather  HorizontalAlignment="Right" />
         </Canvas>

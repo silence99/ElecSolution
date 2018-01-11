@@ -1,4 +1,5 @@
-﻿using Emergence.Common.Model;
+﻿using Business.Services;
+using Emergence.Common.Model;
 using Framework;
 using System.Collections.ObjectModel;
 
@@ -19,6 +20,8 @@ namespace Emergence.Business.ViewModel
 		public virtual double PopupHeight { get; set; }
 		public virtual bool IsPopoupOpen { get; set; }
 		public virtual bool IsPageEnabled { get; set; }
+
+		public virtual ObservableCollection<DictItem> TeamDepts { get; set; }
 
 		public void PopupTeamEdit()
 		{
@@ -42,6 +45,7 @@ namespace Emergence.Business.ViewModel
 			IsPageEnabled = true;
 			PopupWidth = 640;
 			PopupHeight = 360;
+			TeamDepts = new ObservableCollection<DictItem>(MetaDataService.TeamDepartments);
 		}
 	}
 }

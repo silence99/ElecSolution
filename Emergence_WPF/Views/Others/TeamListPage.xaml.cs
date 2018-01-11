@@ -30,6 +30,10 @@ namespace Emergence_WPF.Views.Others
 			{
 				TeamService.DeleteTeam(teams.Select(t => t.ID.ToString()).ToList());
 			}
+			else
+			{
+				System.Windows.MessageBox.Show("没有选择要删除的队伍");
+			}
 			GetTeams();
 		}
 
@@ -40,7 +44,8 @@ namespace Emergence_WPF.Views.Others
 
 		private void Add_Handler(object sender, RoutedEventArgs e)
 		{
-			ViewModel.CurrentTeam = new TeamModel();
+			ViewModel.CurrentTeam = new TeamModel().CreateAopProxy();
+			ViewModel.CurrentTeam.TeamDept = ViewModel.TeamDepts == null || ViewModel.TeamDepts.Count == 0 ? "" : ViewModel.TeamDepts[0].Value;
 			ViewModel.PopupTeamEdit();
 		}
 

@@ -55,7 +55,9 @@ namespace Emergence_WPF.Views.Others
 
 		private void Add_Handler(object sender, RoutedEventArgs e)
 		{
-			ViewModel.CurrentPerson = new PersonModel();
+			ViewModel.CurrentPerson = new PersonModel().CreateAopProxy();
+			ViewModel.CurrentPerson.Place = ViewModel == null || ViewModel.Places.Count == 0 ? "" : ViewModel.Places[0].Value;
+			ViewModel.CurrentPerson.PlaceName = ViewModel == null || ViewModel.Places.Count == 0 ? "" : ViewModel.Places[0].Name;
 			ViewModel.IsAddMember = true;
 			ViewModel.PopupTeamEdit();
 		}

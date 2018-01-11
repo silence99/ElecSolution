@@ -45,10 +45,12 @@ namespace Emergence_WPF.Views.Others
 
 		private void SyncMaterials()
 		{
-			var data = Service.GetMaterials(ViewModel.PageIndex, ViewModel.PageSize, ViewModel.QueryMaterialsName, ViewModel.QueryMaterialsNumber, ViewModel.QueryMaterialsDept, ViewModel.QueryIsConsumable);
+			var data = Service.GetMaterials(ViewModel.PageIndex, ViewModel.PageSize, string.Empty);
+			ViewModel.TotalCount = data.Count;
 			ViewModel.PageIndex = data.PageIndex;
 			ViewModel.PageSize = data.PageSize;
 			ViewModel.TotalPage = (int)Math.Ceiling((double)data.Count / data.PageSize);
+			ViewModel.Materials = new System.Collections.ObjectModel.ObservableCollection<MaterialModel>(data.Data);
 		}
 
 		private void BtnSearchMaterial_Click(object sender, RoutedEventArgs e)
@@ -61,7 +63,18 @@ namespace Emergence_WPF.Views.Others
 			//popu up edit dialog
 			ViewModel.IsCreateMaterial = true;
 			ViewModel.PopupTitle = "添加物资";
-			ViewModel.CurrentMaterial = new MaterialModel();
+			ViewModel.CurrentMaterial = new MaterialModel().CreateAopProxy();
+
+			ViewModel.CurrentMaterial.MaterialsDept = ViewModel.MaterialDepts == null || ViewModel.MaterialDepts.Count == 0 ?
+				"" : ViewModel.MaterialDepts[0].Value;
+			ViewModel.CurrentMaterial.MaterialsDeptName = ViewModel.MaterialDepts == null || ViewModel.MaterialDepts.Count == 0 ?
+				"" : ViewModel.MaterialDepts[0].Name;
+
+			ViewModel.CurrentMaterial.MaterialsType = ViewModel.MaterialTypes == null || ViewModel.MaterialTypes.Count == 0 ?
+				"" : ViewModel.MaterialTypes[0].Value;
+			ViewModel.CurrentMaterial.MaterialsTypeName = ViewModel.MaterialTypes == null || ViewModel.MaterialTypes.Count == 0 ?
+				"" : ViewModel.MaterialTypes[0].Name;
+
 			ViewModel.PopupTeamEdit();
 		}
 
@@ -70,8 +83,20 @@ namespace Emergence_WPF.Views.Others
 			var ids = ViewModel.Materials.Where(m => m.IsChecked).Select(m => m.ID.ToString()).ToList();
 			if (ids != null && ids.Count > 0)
 			{
-				Service.DeleteMaterial(ids);
+				if (Service.DeleteMaterial(ids))
+				{
+					System.Windows.MessageBox.Show("删除成功");
+				}
+				else
+				{
+					System.Windows.MessageBox.Show("删除失败");
+				}
 			}
+			else
+			{
+				System.Windows.MessageBox.Show("没有选择要删除的物资");
+			}
+			SyncMaterials();
 		}
 
 		private void BtnImport_Click(object sender, RoutedEventArgs e)

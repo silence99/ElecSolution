@@ -13,9 +13,9 @@ namespace Busniess.Services
 		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
 
-		public EmergencyHttpListResult<MaterialModel> GetMaterials(int pageIndex, int pageSize, string materialName, string materialNumber, string materialDept, int consumables)
+		public EmergencyHttpListResult<MaterialModel> GetMaterials(int pageIndex, int pageSize, string searchInfo)
 		{
-			var response = GetMeterialsData(pageIndex, pageSize, materialName, materialNumber, materialDept, consumables);
+			var response = GetMeterialsData(pageIndex, pageSize, searchInfo);
 			if (response.Code != 1)
 			{
 				Util.ShowError(string.Format("获取物资失败：{0}", response.Message));
@@ -27,7 +27,7 @@ namespace Busniess.Services
 			}
 		}
 
-		private EmergencyHttpResponse<EmergencyHttpListResult<MaterialModel>> GetMeterialsData(int pageIndex, int pageSize, string materialName, string materialNumber, string materialDept, int consumables)
+		private EmergencyHttpResponse<EmergencyHttpListResult<MaterialModel>> GetMeterialsData(int pageIndex, int pageSize, string searchInfo)
 		{
 			try
 			{
@@ -36,10 +36,7 @@ namespace Busniess.Services
 													{
 														{ "pageIndex", pageIndex.ToString() },
 														{ "pageSize", pageSize.ToString() },
-														{ "materialsName", materialName },
-														{ "materialsNumber", materialNumber },
-														{ "materialsDept", materialDept},
-														{ "consumables", consumables.ToString() }
+														{ "searchInfo", searchInfo }
 													};
 				var result = RequestControl.Request(serviceName, "GET", pairs);
 				if (result.StatusCode == 200)
