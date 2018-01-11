@@ -14,12 +14,12 @@ namespace Busniess.Services
 
 		public EmergencyHttpListResult<TeamModel> GetTeam(int pageIndex, int pageSize)
 		{
-			return GetTeam(pageIndex, pageSize, string.Empty, string.Empty, string.Empty);
+			return GetTeam(pageIndex, pageSize, string.Empty);
 		}
 
-		public EmergencyHttpListResult<TeamModel> GetTeam(int pageIndex, int pageSize, string teamName, string personCharge, string teamDept)
+		public EmergencyHttpListResult<TeamModel> GetTeam(int pageIndex, int pageSize, string searchInfo)
 		{
-			var response = GetTeamData(pageIndex, pageSize, teamName, personCharge, teamDept);
+			var response = GetTeamData(pageIndex, pageSize, searchInfo);
 			if (response.Code != 1)
 			{
 				Util.ShowError(string.Format("获取统计信息失败：{0}", response.Message));
@@ -31,7 +31,7 @@ namespace Busniess.Services
 			}
 		}
 
-		private EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetTeamData(int pageIndex, int pageSize, string teamName, string personCharge, string teamDept)
+		private EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetTeamData(int pageIndex, int pageSize, string searchInfo)
 		{
 			try
 			{
@@ -40,9 +40,7 @@ namespace Busniess.Services
 													{
 														{ "pageIndex", pageIndex.ToString() },
 														{ "pageSize", pageSize.ToString() },
-														{ "teamName", teamName },
-														{ "personCharge", personCharge },
-														{ "teamDept", teamDept}
+														{ "searchInfo", searchInfo }
 													};
 				var result = RequestControl.Request(serviceName, "GET", pairs);
 				if (result.StatusCode == 200)

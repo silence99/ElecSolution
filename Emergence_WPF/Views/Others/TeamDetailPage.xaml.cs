@@ -8,7 +8,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Emergence_WPF.Views.Others
+namespace Emergence_WPF
 {
 	/// <summary>
 	/// TeamListPage.xaml 的交互逻辑

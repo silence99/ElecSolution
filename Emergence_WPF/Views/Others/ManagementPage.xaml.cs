@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Emergence_WPF.Views.Others
+namespace Emergence_WPF
 {
 	/// <summary>
 	/// ManagementPage.xaml 的交互逻辑

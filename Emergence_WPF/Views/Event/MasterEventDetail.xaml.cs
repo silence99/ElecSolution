@@ -111,9 +111,9 @@ namespace Emergence_WPF
 
         private void ThreePopupMapButton_Click(object sender, RoutedEventArgs e)
         {
-            this.PopupMapAndVideo.IsOpen = !this.PopupSubEventAmplify.IsOpen;
+            this.PopupMapAndVideo.IsOpen = !this.PopupMapAndVideo.IsOpen;
             this.Frame_MEDPopupMapAndVideo.NavigationService.Navigate(SE_PM);
-            DependencyObject parent = this.PopupSubEventAmplify.Child;
+            DependencyObject parent = this.PopupMapAndVideo.Child;
             do
             {
                 parent = VisualTreeHelper.GetParent(parent);
@@ -132,9 +132,9 @@ namespace Emergence_WPF
 
         private void ThreePopupVideoButton_Click(object sender, RoutedEventArgs e)
         {
-            this.PopupMapAndVideo.IsOpen = !this.PopupSubEventAmplify.IsOpen;
+            this.PopupMapAndVideo.IsOpen = !this.PopupMapAndVideo.IsOpen;
             this.Frame_MEDPopupMapAndVideo.NavigationService.Navigate(SE_VE);
-            DependencyObject parent = this.PopupSubEventAmplify.Child;
+            DependencyObject parent = this.PopupMapAndVideo.Child;
             do
             {
                 parent = VisualTreeHelper.GetParent(parent);

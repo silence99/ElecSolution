@@ -32,6 +32,14 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style TargetType="Button" x:Key="RoundConnerGridOperationButtonStyle" BasedOn="{StaticResource RoundConnerButtonStyle}">
+        <Setter Property="FontSize" Value="16px"/>
+        <Setter Property="Width" Value="150px"/>
+        <Setter Property="Height" Value="36px"/>
+        <Setter Property="Background" Value="#006f69"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
 
     <!--Search button with icon style-->
     <Style  x:Key="TextBoxSearchStyle" TargetType="{x:Type TextBox}">

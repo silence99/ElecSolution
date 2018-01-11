@@ -195,30 +195,17 @@
     <Compile Include="NotificationTask.xaml.cs">
       <DependentUpon>NotificationTask.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Details.xaml.cs">
-      <DependentUpon>Details.xaml</DependentUpon>
-    </Compile>
     <Compile Include="NotificationNavigation.xaml.cs">
       <DependentUpon>NotificationNavigation.xaml</DependentUpon>
     </Compile>
     <Compile Include="NotificationSystem.xaml.cs">
       <DependentUpon>NotificationSystem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EmergencyEvent.xaml.cs">
-      <DependentUpon>EmergencyEvent.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="EventDetails.xaml.cs">
       <DependentUpon>EventDetails.xaml</DependentUpon>
     </Compile>
     <Compile Include="EventAdd.xaml.cs">
       <DependentUpon>EventAdd.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Information.xaml.cs">
-      <DependentUpon>Information.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EmergencyInformation.xaml.cs">
-      <DependentUpon>EmergencyInformation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Leadership.xaml.cs">
       <DependentUpon>Leadership.xaml</DependentUpon>
@@ -404,10 +391,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Details.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="NotificationNavigation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -416,10 +399,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="EmergencyEvent.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="EventDetails.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -427,14 +406,6 @@
     <Page Include="EventAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Information.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="EmergencyInformation.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Leadership.xaml">
       <SubType>Designer</SubType>

@@ -1,4 +1,4 @@
-﻿<Page x:Class="Emergence_WPF.Views.Others.TeamListPage"
+﻿<Page x:Class="Emergence_WPF.TeamListPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -13,6 +13,7 @@
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary Source="../../style/Generic.xaml"/>
+                    <ResourceDictionary Source="../../style/MasterEventDetailStyle.xaml"/>
                 </ResourceDictionary.MergedDictionaries>
                 <Style TargetType="Label" x:Key="PopupLable">
                     <Setter Property="Foreground" Value="Black"/>
@@ -21,24 +22,38 @@
             </ResourceDictionary>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="8*"/>
-            <RowDefinition Height="18.6*"/>
-            <RowDefinition Height="73.4*"/>
+            <RowDefinition Height="80px"/>
+            <RowDefinition Height="80px"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Column="0" Grid.Row="0" Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" IsEnabled="{Binding Path=IsPageEnabled}">
-            <DockPanel.Style>
-                <Style TargetType="DockPanel">
-                    <Style.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="#005651"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DockPanel.Style>
-            <Label Name="TeamListTitle" Margin="20,0,0,0" Style="{StaticResource SelectedLabel}">队伍列表</Label>
-            <Label Name="MaterialListTile" MouseLeftButtonUp="NavigateToMaterialPage_Handler">物资列表</Label>
+        <Border BorderBrush="#62A6A3" Grid.Column="0" Grid.Row="0"  BorderThickness="0 1 0 0">
+            <DockPanel Grid.Column="0" Grid.Row="0" Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" IsEnabled="{Binding Path=IsPageEnabled}">
+                <DockPanel.Style>
+                    <Style TargetType="DockPanel">
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#005651"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DockPanel.Style>
+                <Label Name="TeamListTitle" Margin="20,0,0,0" Style="{StaticResource SelectedLabel}">队伍列表</Label>
+                <Label Name="MaterialListTile" MouseLeftButtonUp="NavigateToMaterialPage_Handler">物资列表</Label>
+            </DockPanel>
+        </Border>
+        <DockPanel Grid.Column="0" Grid.Row="1" Background="#FFFFFF" Height="80" Width="auto"  HorizontalAlignment="Stretch" >
+            <Border Grid.Row="0" Height="41" Width="500px" DockPanel.Dock="Left" HorizontalAlignment="Left" BorderBrush="#D3D3D3" BorderThickness="1 1 1 1" Margin="20 0 0 0" Background="White">
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40px"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource SearchImageButton}" Grid.Column="1" Click="Search_Handler"></Button>
+                    <TextBox Name="SubEventSearchTextBox" Grid.Column="0" BorderThickness="0" Height="40px" TextAlignment="Left" VerticalAlignment="Center" FontSize="20"  VerticalContentAlignment="Center" Text="{Binding Path=SerachInfo, Mode=TwoWay}"></TextBox>
+                </Grid>
+            </Border>
         </DockPanel>
-        <DockPanel Grid.Column="0" Grid.Row="1" Background="White" IsEnabled="{Binding Path=IsPageEnabled}">
+        <!--<DockPanel Grid.Column="0" Grid.Row="1" Background="White" IsEnabled="{Binding Path=IsPageEnabled}">
             <DockPanel.Style>
                 <Style TargetType="DockPanel">
                     <Style.Triggers>
@@ -63,35 +78,37 @@
                             <RowDefinition Height="100"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="211*"></ColumnDefinition>
+                            <ColumnDefinition Width="165*"/>
+                            <ColumnDefinition Width="309*"></ColumnDefinition>
+                            <ColumnDefinition Width="30*"/>
+                            <ColumnDefinition Width="37*"/>
+                            <ColumnDefinition Width="376*"></ColumnDefinition>
+                            <ColumnDefinition Width="376*"></ColumnDefinition>
+                            <ColumnDefinition Width="376*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="0" >
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" >
                             <TextBlock Text="队伍名称" HorizontalAlignment="Left" Padding="0,5,5,5" Margin="20,37,10,0"/>
                             <TextBox Name="QueryTeamName" Text="{Binding Path=QueryTeamName, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5" VerticalContentAlignment="Center"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="1" Grid.Row="0" >
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="3" >
                             <TextBlock Text="所属单位" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
                             <TextBox Name="QueryDepartment" Text="{Binding Path=QueryDepartment, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="2" Grid.Row="0" >
+                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="5" Grid.Row="0" >
                             <TextBlock Text="队长" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
                             <TextBox Name="QueryChargeName" Text="{Binding Path=QueryChargeName, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
                         </StackPanel>
                     </Grid>
                 </DockPanel>
             </Border>
-        </DockPanel>
+        </DockPanel>-->
         <DockPanel DockPanel.Dock="Top" Grid.Row="2" Background="White" Name="PanelData" IsEnabled="{Binding Path=IsPageEnabled}">
             <DockPanel Margin="20,0,20,0"  DockPanel.Dock="Top" >
                 <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
-                    <Button Name="BtnAdd" FontSize="16" Width="82" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="51,0,0,0" Foreground="White" Content="添加" Style="{StaticResource RoundConnerButtonStyle}" Click="Add_Handler">
-                    </Button>
-                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,40,0" Foreground="White" Content="删除" Style="{StaticResource RoundConnerButtonStyle}" Click="Delete_Handler"></Button>
-                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" HorizontalAlignment="Right" Margin="0,0,20,0" Foreground="White" Content="导入" Style="{StaticResource RoundConnerButtonStyle}" Click="Import_Handler"></Button>
+                    <Button DockPanel.Dock="Right" Margin="0,0,20,0" Content="删除" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Delete_Handler"></Button>
+                    <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Import_Handler"></Button>
+                    <Button Name="BtnAdd" DockPanel.Dock="Right" Margin="0,0,20,0" Content="添加" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Add_Handler"/>
                 </DockPanel>
             </DockPanel>
             <DockPanel DockPanel.Dock="Bottom" LastChildFill="True" Margin="20,5,20,0">
@@ -105,19 +122,17 @@
             </DockPanel>
             <DataGrid DockPanel.Dock="Top" Margin="20,0,20,0"
                     Name="GridTeamList" 
-                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                    ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                    Background="Transparent"
+                      Style="{StaticResource DataGridRight}"
                     AutoGenerateColumns="False" 
-                    ColumnHeaderHeight="70"
                     ItemsSource="{Binding Teams, Mode=TwoWay}"
-                    RowHeight="50"
                     AlternatingRowBackground="#f3f3f3"
                     HorizontalGridLinesBrush="#dcdcdc"
                     VerticalGridLinesBrush="#dcdcdc"
                     BorderBrush="#dcdcdc"
                     CanUserAddRows="False"
-                      MouseDoubleClick="NavigateToTeamDetailPage_Handler">
+                    RowHeight="50"
+                    VerticalAlignment="Stretch"
+                    MouseDoubleClick="NavigateToTeamDetailPage_Handler">
                 <DataGrid.Columns >
                     <DataGridTemplateColumn Width="40">
                         <DataGridTemplateColumn.CellTemplate>

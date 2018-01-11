@@ -10,7 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 
-namespace Emergence_WPF.Views.Others
+namespace Emergence_WPF
 {
 	/// <summary>
 	/// MaterialListPage.xaml 的交互逻辑

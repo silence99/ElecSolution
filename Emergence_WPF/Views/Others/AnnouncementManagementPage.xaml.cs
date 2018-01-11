@@ -4,7 +4,7 @@ using Emergence_WPF.Comm;
 using Framework;
 using System.Windows.Controls;
 
-namespace Emergence_WPF.Views.Others
+namespace Emergence_WPF
 {
 	/// <summary>
 	/// AnnouncementManagementPage.xaml 的交互逻辑
@@ -19,7 +19,7 @@ namespace Emergence_WPF.Views.Others
 			DataContext = ViewModel;
 		}
 
-		private void Pager_OnPageChanged(object sender, PageChangedEventArg e)
+		private void Pager_OnPageChanged(object sender, Comm.PageChangedEventArg e)
 		{
 		}
 

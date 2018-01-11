@@ -14,8 +14,9 @@ namespace Emergence.Business.ViewModel
 		public virtual int TotalPage { get; set; }
 		public virtual string QueryTeamName { get; set; }
 		public virtual string QueryDepartment { get; set; }
-		public virtual string QueryChargeName { get; set; }
-		public virtual TeamModel CurrentTeam { get; set; }
+        public virtual string QueryChargeName { get; set; }
+        public virtual string SerachInfo { get; set; }
+        public virtual TeamModel CurrentTeam { get; set; }
 		public virtual double PopupWidth { get; set; }
 		public virtual double PopupHeight { get; set; }
 		public virtual bool IsPopoupOpen { get; set; }

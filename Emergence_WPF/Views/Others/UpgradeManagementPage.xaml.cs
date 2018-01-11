@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Emergence_WPF.Views.Others
+namespace Emergence_WPF
 {
 	/// <summary>
 	/// UpgradeManagementPage.xaml 的交互逻辑

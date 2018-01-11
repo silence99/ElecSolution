@@ -1,7 +1,7 @@
 ﻿using Emergence_WPF.Comm;
 using System.Windows.Controls;
 
-namespace Emergence_WPF.Views.Others
+namespace Emergence_WPF
 {
 	/// <summary>
 	/// MasterEventArchiveManagementPage.xaml 的交互逻辑

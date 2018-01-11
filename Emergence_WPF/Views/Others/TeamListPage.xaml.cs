@@ -9,7 +9,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Emergence_WPF.Views.Others
+namespace Emergence_WPF
 {
 	/// <summary>
 	/// TeamListPage.xaml 的交互逻辑
@@ -57,7 +57,7 @@ namespace Emergence_WPF.Views.Others
 
 		private void GetTeams()
 		{
-			var teams = TeamService.GetTeam(ViewModel.PageIndex, ViewModel.PageSize, ViewModel.QueryTeamName, ViewModel.QueryChargeName, ViewModel.QueryDepartment);
+			var teams = TeamService.GetTeam(ViewModel.PageIndex, ViewModel.PageSize, ViewModel.SerachInfo);
 			ViewModel.Teams = new ObservableCollection<TeamModel>(teams.Data.Select(o => o.CreateAopProxy()));
 			ViewModel.PageIndex = teams.PageIndex;
 			ViewModel.PageSize = teams.PageSize;

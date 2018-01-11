@@ -1,7 +1,7 @@
 ﻿using Emergence_WPF.Comm;
 using System.Windows.Controls;
 
-namespace Emergence_WPF.Views.Others
+namespace Emergence_WPF
 {
 	/// <summary>
 	/// CameraManagementPage.xaml 的交互逻辑
@@ -13,7 +13,7 @@ namespace Emergence_WPF.Views.Others
 			InitializeComponent();
 		}
 
-		private void Pager_OnPageChanged(object sender, PageChangedEventArg e)
+		private void Pager_OnPageChanged(object sender, Comm.PageChangedEventArg e)
 		{
 		}
 	}
