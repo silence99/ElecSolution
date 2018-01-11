@@ -74,12 +74,15 @@ namespace Emergence_WPF
 		private void GetTeams()
 		{
 			var teams = TeamService.GetTeam(ViewModel.PageIndex, ViewModel.PageSize, ViewModel.SerachInfo);
-			ViewModel.Teams = new ObservableCollection<TeamModel>(teams.Data.Select(o => o.CreateAopProxy()));
-			ViewModel.PageIndex = teams.PageIndex;
-			ViewModel.PageSize = teams.PageSize;
-			ViewModel.TotalCount = teams.Count;
-			ViewModel.TotalPage = teams.PageSize == 0 ? 0 : (int)Math.Ceiling((double)teams.Count / teams.PageSize);
-		}
+            if (teams != null)
+            {
+                ViewModel.Teams = new ObservableCollection<TeamModel>(teams.Data.Select(o => o.CreateAopProxy()));
+                ViewModel.PageIndex = teams.PageIndex;
+                ViewModel.PageSize = teams.PageSize;
+                ViewModel.TotalCount = teams.Count;
+                ViewModel.TotalPage = teams.PageSize == 0 ? 0 : (int)Math.Ceiling((double)teams.Count / teams.PageSize);
+            }
+        }
 
 		private void Pager_OnPageChanged(object sender, PageChangedEventArg e)
 		{

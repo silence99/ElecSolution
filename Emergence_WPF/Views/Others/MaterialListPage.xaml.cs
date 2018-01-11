@@ -1,4 +1,5 @@
-﻿using Busniess.Services;
+﻿using Business.Services;
+using Busniess.Services;
 using Emergence.Business.ViewModel;
 using Emergence.Common.Model;
 using Emergence_WPF.Comm;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Navigation;
 
 namespace Emergence_WPF
@@ -36,7 +38,17 @@ namespace Emergence_WPF
 		private void Pager_OnPageChanged(object sender, PageChangedEventArg e)
 		{
 			SyncMaterials();
-		}
+
+            ViewModel.CurrentMaterial.MaterialsDept = ViewModel.MaterialDepts == null || ViewModel.MaterialDepts.Count == 0 ?
+                "" : ViewModel.MaterialDepts[0].Value;
+            ViewModel.CurrentMaterial.MaterialsDeptName = ViewModel.MaterialDepts == null || ViewModel.MaterialDepts.Count == 0 ?
+                "" : ViewModel.MaterialDepts[0].Name;
+
+            ViewModel.CurrentMaterial.MaterialsType = ViewModel.MaterialTypes == null || ViewModel.MaterialTypes.Count == 0 ?
+                "" : ViewModel.MaterialTypes[0].Value;
+            ViewModel.CurrentMaterial.MaterialsTypeName = ViewModel.MaterialTypes == null || ViewModel.MaterialTypes.Count == 0 ?
+                "" : ViewModel.MaterialTypes[0].Name;
+        }
 
 		private void NavigateToMaterialPage(object sender, MouseButtonEventArgs e)
 		{
@@ -64,18 +76,22 @@ namespace Emergence_WPF
 			ViewModel.IsCreateMaterial = true;
 			ViewModel.PopupTitle = "添加物资";
 			ViewModel.CurrentMaterial = new MaterialModel().CreateAopProxy();
+            DependencyObject parent = this.PopupEditMaterial.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
 
-			ViewModel.CurrentMaterial.MaterialsDept = ViewModel.MaterialDepts == null || ViewModel.MaterialDepts.Count == 0 ?
-				"" : ViewModel.MaterialDepts[0].Value;
-			ViewModel.CurrentMaterial.MaterialsDeptName = ViewModel.MaterialDepts == null || ViewModel.MaterialDepts.Count == 0 ?
-				"" : ViewModel.MaterialDepts[0].Name;
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
 
-			ViewModel.CurrentMaterial.MaterialsType = ViewModel.MaterialTypes == null || ViewModel.MaterialTypes.Count == 0 ?
-				"" : ViewModel.MaterialTypes[0].Value;
-			ViewModel.CurrentMaterial.MaterialsTypeName = ViewModel.MaterialTypes == null || ViewModel.MaterialTypes.Count == 0 ?
-				"" : ViewModel.MaterialTypes[0].Name;
-
-			ViewModel.PopupTeamEdit();
+            ViewModel.PopupTeamEdit();
 		}
 
 		private void BtnDelete_Click(object sender, RoutedEventArgs e)
@@ -112,11 +128,6 @@ namespace Emergence_WPF
 			ViewModel.PopupTeamEdit();
 		}
 
-		private void ClosePopup_Click(object sender, MouseButtonEventArgs e)
-		{
-			ViewModel.ClosePopup();
-		}
-
 		private void UpdateMaterial_Click(object sender, RoutedEventArgs e)
 		{
 			ViewModel.ClosePopup();
@@ -131,5 +142,10 @@ namespace Emergence_WPF
 
 			SyncMaterials();
 		}
-	}
+
+        private void ClosePopup_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.ClosePopup();
+        }
+    }
 }

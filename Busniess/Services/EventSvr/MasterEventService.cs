@@ -202,7 +202,7 @@ namespace Busniess.Services
 			}
 			catch(Exception ex)
 			{
-				Logger.Fatal(string.Format("更新主事件状态失败 -- {0}", state),)
+                Logger.Fatal(string.Format("更新主事件状态失败 -- {0}", state));
 				return false;
 			}
 		}

@@ -55,7 +55,7 @@ namespace Emergence.Business.ViewModel
 		{
 			IsPopoupOpen = true;
 			IsPageEnabled = false;
-		}
+        }
 
 		public void ClosePopup()
 		{
@@ -71,8 +71,8 @@ namespace Emergence.Business.ViewModel
 			TotalPage = 0;
 			IsPopoupOpen = false;
 			IsPageEnabled = true;
-			PopupWidth = 640;
-			PopupHeight = 360;
+			PopupWidth = ResolutionService.Width;
+			PopupHeight = ResolutionService.Height;
 			IsCreateMaterial = false;
 			PopupTitle = "添加物资"; //添加物资、修改物资
 
