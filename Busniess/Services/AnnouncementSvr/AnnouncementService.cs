@@ -55,124 +55,155 @@ namespace Busniess.Services
 				}
 				else
 				{
-					throw new Exception(result.Html);
+					Logger.ErrorFormat("获取公告数据异常:\r\n{0}", result.Html);
+					return new EmergencyHttpResponse<EmergencyHttpListResult<AnnouncementModel>>()
+					{
+						Result = new EmergencyHttpListResult<AnnouncementModel>()
+					};
 				}
 			}
 			catch (Exception ex)
 			{
 				Logger.Error("获取公告数据异常", ex);
-				throw;
+				return new EmergencyHttpResponse<EmergencyHttpListResult<AnnouncementModel>>()
+				{
+					Result = new EmergencyHttpListResult<AnnouncementModel>()
+				};
 			}
 		}
 
 		private bool CreateAnnouncement(string title, long time, string content)
 		{
-			string serviceName = ConfigurationManager.AppSettings["UpdateNoticeApi"] ?? "notice";
-			Dictionary<string, string> pairs = new Dictionary<string, string>()
+			try
 			{
-				{ "title", title },
-				{ "time", time.ToString() },
-				{ "content", content }
-			};
+				string serviceName = ConfigurationManager.AppSettings["UpdateNoticeApi"] ?? "notice";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+													{
+														{ "title", title },
+														{ "time", time.ToString() },
+														{ "content", content }
+													};
 
-			Logger.DebugFormat("创建公告 -- {0}", title);
-			var result = RequestControl.Request(serviceName, "POST", pairs);
-			if (result.StatusCode != 200)
-			{
-				Logger.WarnFormat("创建公告失败 -- {0}", title);
-				Logger.WarnFormat(result.Html);
-				return false;
-			}
-			else
-			{
-				var success = RequestControl.DefaultValide(result.Html);
-				if (success)
+				Logger.DebugFormat("创建公告 -- {0}", title);
+				var result = RequestControl.Request(serviceName, "POST", pairs);
+				if (result.StatusCode != 200)
 				{
-					Logger.InfoFormat("创建公告成功 -- {0}", title);
+					Logger.WarnFormat("创建公告失败 -- {0}", title);
+					Logger.WarnFormat(result.Html);
+					return false;
 				}
 				else
 				{
-					Logger.WarnFormat("创建公告失败 -- {0}", title);
-					Logger.Warn(result.Html);
-				}
+					var success = RequestControl.DefaultValide(result.Html);
+					if (success)
+					{
+						Logger.InfoFormat("创建公告成功 -- {0}", title);
+					}
+					else
+					{
+						Logger.WarnFormat("创建公告失败 -- {0}", title);
+						Logger.Warn(result.Html);
+					}
 
-				return success;
+					return success;
+				}
+			}
+			catch (Exception e)
+			{
+				Logger.Fatal("创建公告失败", e);
+				return false;
 			}
 		}
 
 		private bool UpdateAnnouncement(long id, string title, long time, string content)
 		{
-			string serviceName = ConfigurationManager.AppSettings["UpdateNoticeApi"] ?? "notice";
-			Dictionary<string, string> pairs = new Dictionary<string, string>()
+			try
 			{
-				{ "id", id.ToString() },
-				{ "title", title },
-				{ "time", time.ToString() },
-				{ "content", content }
-			};
+				string serviceName = ConfigurationManager.AppSettings["UpdateNoticeApi"] ?? "notice";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+													{
+														{ "id", id.ToString() },
+														{ "title", title },
+														{ "time", time.ToString() },
+														{ "content", content }
+													};
 
-			Logger.DebugFormat("修改公告 -- {0}", title);
-			var result = RequestControl.Request(serviceName, "PUT", pairs);
-			if (result.StatusCode != 200)
-			{
-				Logger.WarnFormat("修改公告失败 -- {0}", title);
-				Logger.WarnFormat(result.Html);
-				return false;
-			}
-			else
-			{
-				var success = RequestControl.DefaultValide(result.Html);
-				if (success)
+				Logger.DebugFormat("修改公告 -- {0}", title);
+				var result = RequestControl.Request(serviceName, "PUT", pairs);
+				if (result.StatusCode != 200)
 				{
-					Logger.InfoFormat("修改公告成功 -- {0}", title);
+					Logger.WarnFormat("修改公告失败 -- {0}", title);
+					Logger.WarnFormat(result.Html);
+					return false;
 				}
 				else
 				{
-					Logger.WarnFormat("修改公告失败 -- {0}", title);
-					Logger.Warn(result.Html);
-				}
+					var success = RequestControl.DefaultValide(result.Html);
+					if (success)
+					{
+						Logger.InfoFormat("修改公告成功 -- {0}", title);
+					}
+					else
+					{
+						Logger.WarnFormat("修改公告失败 -- {0}", title);
+						Logger.Warn(result.Html);
+					}
 
-				return success;
+					return success;
+				}
+			}
+			catch (Exception e)
+			{
+				Logger.Fatal("修改公告失败", e);
+				return false;
 			}
 		}
 
 		public bool DeleteAnncoucement(List<string> ids)
 		{
-			if (ids == null || ids.Count == 0)
+			try
 			{
-				Logger.Warn("公告ID列表为空，不能删除公告");
-				return true;
-			}
+				if (ids == null || ids.Count == 0)
+				{
+					Logger.Warn("公告ID列表为空，不能删除公告");
+					return true;
+				}
 
-			var idstring = string.Join(",", ids.ToArray());
-			string serviceName = ConfigurationManager.AppSettings["UpdateNoticeApi"] ?? "notice";
-			Dictionary<string, string> pairs = new Dictionary<string, string>()
+				var idstring = string.Join(",", ids.ToArray());
+				string serviceName = ConfigurationManager.AppSettings["UpdateNoticeApi"] ?? "notice";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
 			{
 				{ "ids", idstring }
 			};
 
-			Logger.DebugFormat("删除公告 -- ID(s):{0}", ids);
-			var result = RequestControl.Request(serviceName, "DELETE", pairs);
-			if (result.StatusCode != 200)
-			{
-				Logger.WarnFormat("删除公告失败 -- ID(s):{0}", ids);
-				Logger.WarnFormat(result.Html);
-				return false;
-			}
-			else
-			{
-				var success = RequestControl.DefaultValide(result.Html);
-				if (success)
+				Logger.DebugFormat("删除公告 -- ID(s):{0}", ids);
+				var result = RequestControl.Request(serviceName, "DELETE", pairs);
+				if (result.StatusCode != 200)
 				{
-					Logger.InfoFormat("删除公告成功 -- ID(s):{0}", ids);
+					Logger.WarnFormat("删除公告失败 -- ID(s):{0}", ids);
+					Logger.WarnFormat(result.Html);
+					return false;
 				}
 				else
 				{
-					Logger.WarnFormat("删除公告失败 -- ID(s):{0}", ids);
-					Logger.Warn(result.Html);
-				}
+					var success = RequestControl.DefaultValide(result.Html);
+					if (success)
+					{
+						Logger.InfoFormat("删除公告成功 -- ID(s):{0}", ids);
+					}
+					else
+					{
+						Logger.WarnFormat("删除公告失败 -- ID(s):{0}", ids);
+						Logger.Warn(result.Html);
+					}
 
-				return success;
+					return success;
+				}
+			}
+			catch (Exception e)
+			{
+				Logger.Fatal("修改公告失败", e);
+				return false;
 			}
 		}
 	}

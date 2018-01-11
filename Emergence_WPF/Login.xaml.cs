@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Windows;
+using System;
 
 namespace Emergence_WPF
 {
@@ -33,28 +34,35 @@ namespace Emergence_WPF
 			}
 			else
 			{
-				if (RequestLogin(userName, passwordStr))
+				try
 				{
-					//#endif
-					var main = ObjectFactory.GetInstance<MainWindow>("mainWindow");
-					var mainWindowUiModel = new MainWindowViewModel()
+					if (RequestLogin(userName, passwordStr))
 					{
-						UserName = this.txtUserName.Text
-					};
-					main.BindingUiModel(null, mainWindowUiModel);
-					if (main == null)
-					{
-						MessageBox.Show("应用程序错误，请联系管理员。");
+						//#endif
+						var main = ObjectFactory.GetInstance<MainWindow>("mainWindow");
+						var mainWindowUiModel = new MainWindowViewModel()
+						{
+							UserName = this.txtUserName.Text
+						};
+						main.BindingUiModel(null, mainWindowUiModel);
+						if (main == null)
+						{
+							MessageBox.Show("应用程序错误，请联系管理员。");
+						}
+
+						main.Show();
+
+						this.Close();
+						//#if Release
 					}
-
-					main.Show();
-
-					this.Close();
-					//#if Release
+					else
+					{
+						MessageBox.Show("用户名或密码不正确!");
+					}
 				}
-				else
+				catch(Exception ex)
 				{
-					MessageBox.Show("用户名或密码不正确!");
+					MessageBox.Show("登录异常，请重试或联系管理员");
 				}
 			}
 			//#endif
@@ -102,14 +110,14 @@ namespace Emergence_WPF
 			return loginService.LogIn(userName, password, SetAuthorization);
 		}
 
-        private void Label_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
+		private void Label_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
 
-        }
+		}
 
-        private void Label_Exit_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            this.Close();
-        }
-    }
+		private void Label_Exit_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			this.Close();
+		}
+	}
 }
