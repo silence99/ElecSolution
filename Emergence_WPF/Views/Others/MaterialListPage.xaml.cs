@@ -45,7 +45,7 @@ namespace Emergence_WPF
 
 		private void SyncMaterials()
 		{
-			var data = Service.GetMaterials(ViewModel.PageIndex, ViewModel.PageSize, string.Empty);
+			var data = Service.GetMaterials(ViewModel.PageIndex, ViewModel.PageSize, ViewModel.SearchInfo ?? string.Empty );
 			ViewModel.TotalCount = data.Count;
 			ViewModel.PageIndex = data.PageIndex;
 			ViewModel.PageSize = data.PageSize;

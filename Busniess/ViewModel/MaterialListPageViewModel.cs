@@ -15,8 +15,9 @@ namespace Emergence.Business.ViewModel
 		public virtual int TotalPage { get; set; }
 		public virtual string QueryMaterialsName { get; set; }
 		public virtual string QueryMaterialsNumber { get; set; }
-		public virtual string QueryMaterialsDept { get; set; }
-		public virtual int QueryIsConsumable { get; set; }
+        public virtual string QueryMaterialsDept { get; set; }
+        public virtual string SearchInfo { get; set; }
+        public virtual int QueryIsConsumable { get; set; }
 		public virtual MaterialModel CurrentMaterial { get; set; }
 		public virtual double PopupWidth { get; set; }
 		public virtual double PopupHeight { get; set; }

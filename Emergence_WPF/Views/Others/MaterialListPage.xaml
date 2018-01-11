@@ -13,6 +13,7 @@
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary Source="../../style/Generic.xaml"/>
+                    <ResourceDictionary Source="../../style/MasterEventDetailStyle.xaml"/>
                 </ResourceDictionary.MergedDictionaries>
                 <Style TargetType="Label" x:Key="PopupLable">
                     <Setter Property="Foreground" Value="Black"/>
@@ -22,9 +23,9 @@
             </ResourceDictionary>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="8*"/>
-            <RowDefinition Height="18.6*"/>
-            <RowDefinition Height="73.4*"/>
+            <RowDefinition Height="80px"/>
+            <RowDefinition Height="80px"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Column="0" Grid.Row="0" Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" IsEnabled="{Binding Path=IsPageEnabled}">
             <DockPanel.Style>
@@ -39,67 +40,24 @@
             <Label Name="TeamListTitle" Margin="20,0,0,0" MouseLeftButtonUp="NavigateToMaterialPage">队伍列表</Label>
             <Label Name="MaterialListTile" Style="{StaticResource SelectedLabel}" >物资列表</Label>
         </DockPanel>
-        <DockPanel Grid.Column="0" Grid.Row="1" Background="White" IsEnabled="{Binding Path=IsPageEnabled}">
-            <DockPanel.Style>
-                <Style TargetType="DockPanel">
-                    <Style.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="Black"/>
-                            <Setter Property="Opacity" Value="0.7"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DockPanel.Style>
-            <Border DockPanel.Dock="Top" Margin="20, 21, 20, 20" CornerRadius="10">
-                <Border.Effect>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.75"/>
-                </Border.Effect>
-                <DockPanel Margin="0,0,0,0">
-                    <DockPanel Height="60" HorizontalAlignment="Stretch" Name="head" DockPanel.Dock="Top" Background="#CCE2E1">
-                        <TextBlock FontSize="20" DockPanel.Dock="Left" TextAlignment="Center" HorizontalAlignment="Left" Margin="51,15,0,0" Foreground="Black">搜索</TextBlock>
-                        <Button Name="BtnSearch" FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,51,0" Foreground="White" Content="搜索" Click="BtnSearchMaterial_Click"></Button>
-                    </DockPanel>
-                    <Grid ShowGridLines="False" Name="GridSearchBlock" DockPanel.Dock="Top" Background="White">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="100"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="0" >
-                            <TextBlock Text="编号" HorizontalAlignment="Left" Padding="0,5,5,5" Margin="20,37,10,0"/>
-                            <TextBox Name="QueryMaterialsNumber" Text="{Binding Path=QueryTeamName, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="1" Grid.Row="0" >
-                            <TextBlock Text="名称" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
-                            <TextBox Name="QueryMaterialsName" Text="{Binding Path=QueryDepartment, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="2" Grid.Row="0" >
-                            <TextBlock Text="所属单位" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
-                            <TextBox Name="QueryMaterialsDept" Text="{Binding Path=QueryChargeName, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="3" Grid.Row="0" >
-                            <TextBlock Text="是否消耗品" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
-                            <ComboBox Name="QueryIsConsumable" Text="{Binding Path=QueryChargeName, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center">
-                                <ComboBoxItem IsSelected="True" >是</ComboBoxItem>
-                                <ComboBoxItem>否</ComboBoxItem>
-                            </ComboBox>
-                        </StackPanel>
-                    </Grid>
-                </DockPanel>
+        <DockPanel Grid.Column="0" Grid.Row="1" Background="#FFFFFF" Height="80" Width="auto"  HorizontalAlignment="Stretch" >
+            <Border Grid.Row="0" Height="41" Width="500px" DockPanel.Dock="Left" HorizontalAlignment="Left" BorderBrush="#D3D3D3" BorderThickness="1 1 1 1" Margin="20 0 0 0" Background="White">
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40px"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource SearchImageButton}" Grid.Column="1" Click="BtnSearchMaterial_Click"></Button>
+                    <TextBox Name="SubEventSearchTextBox" Grid.Column="0" BorderThickness="0" Height="40px" TextAlignment="Left" VerticalAlignment="Center" FontSize="20"  VerticalContentAlignment="Center" Text="{Binding Path=SearchInfo, Mode=TwoWay}"></TextBox>
+                </Grid>
             </Border>
         </DockPanel>
         <DockPanel DockPanel.Dock="Top" Grid.Row="2" Background="White" Name="PanelData" IsEnabled="{Binding Path=IsPageEnabled}">
             <DockPanel Margin="20,0,20,0"  DockPanel.Dock="Top" >
                 <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
-                    <Button Name="BtnAdd" FontSize="16" Width="82" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="51,0,0,0" Foreground="White" Content="添加" Style="{StaticResource RoundConnerButtonStyle}" Click="BtnAdd_Click">
-                    </Button>
-                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,40,0" Foreground="White" Content="删除" Style="{StaticResource RoundConnerButtonStyle}" Click="BtnDelete_Click"></Button>
-                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" HorizontalAlignment="Right" Margin="0,0,20,0" Foreground="White" Content="导入" Style="{StaticResource RoundConnerButtonStyle}" Click="BtnImport_Click"></Button>
+                    <Button Name="BtnAdd" DockPanel.Dock="Right" Margin="0,0,20,0" Content="添加" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="BtnAdd_Click"/>
+                    <Button DockPanel.Dock="Right" Margin="0,0,20,0" Content="删除" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="BtnDelete_Click"></Button>
+                    <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="BtnImport_Click"></Button>
                 </DockPanel>
             </DockPanel>
             <DockPanel DockPanel.Dock="Bottom" LastChildFill="True" Margin="20,5,20,0">

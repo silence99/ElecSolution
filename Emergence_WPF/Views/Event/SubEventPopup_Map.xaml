@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
         <DockPanel Grid.Row="0">
             <Label DockPanel.Dock="Left" Style="{StaticResource RightLabel}" FontSize="20px" Margin="19 0 0 0" Content="指挥中心地图标会"/>
-            <Button DockPanel.Dock="Right" HorizontalAlignment="Right" Style="{StaticResource CancelImageButton}" Click="ClosePopup_Handler"  Margin="19 0 19 0" />
+            <Button DockPanel.Dock="Right" HorizontalAlignment="Right" Style="{StaticResource CancelImageButton}" Margin="19 0 19 0" />
         </DockPanel>
         <Border Grid.Row="1" BorderBrush="#006F69" BorderThickness="0 1 0 0" Background="#F9F9F9">
             <Grid Margin="22"></Grid>
