@@ -11,7 +11,20 @@ namespace Busniess.Services
 	{
 		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-		public EmergencyHttpResponse<MaterialsStatisticsModel[]> GetMaterialsStatistics()
+		public MaterialsStatisticsModel[] GetMaterialsStatistics()
+		{
+			var response = GetMaterialsStatisticsData();
+			if (response == null || response.Code != 1)
+			{
+				return new MaterialsStatisticsModel[0];
+			}
+			else
+			{
+				return response.Result;
+			}
+		}
+
+		private EmergencyHttpResponse<MaterialsStatisticsModel[]> GetMaterialsStatisticsData()
 		{
 			try
 			{
@@ -24,13 +37,14 @@ namespace Busniess.Services
 				}
 				else
 				{
-					throw new Exception(result.Html);
+					Logger.ErrorFormat("获取物资统计数据异常", result.Html);
+					return null;
 				}
 			}
 			catch (Exception ex)
 			{
 				Logger.Error("获取物资统计数据异常", ex);
-				throw;
+				return null;
 			}
 		}
 	}

@@ -1,13 +1,16 @@
 ﻿using Emergence.Common.Model;
 using Framework.Http;
+using log4net;
 using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Reflection;
 
 namespace Business.MainPageSvr
 {
 	public class WeatherService
 	{
+		private static ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 		private string _weatherData = "weather.json";
 		protected string WeatherData
 		{
@@ -20,21 +23,36 @@ namespace Business.MainPageSvr
 			var data = string.Empty;
 			if (!LocalDataValid())
 			{
-				var http = new HttpHelper();
-				HttpItem httpItem = new HttpItem()
+				try
 				{
-					Method = "GET",
-					URL = "http://jisutianqi.market.alicloudapi.com/weather/query?city=安顺",
-					Header = new System.Net.WebHeaderCollection()
-				};
-				httpItem.Header["Authorization"] = "APPCODE 845c52bbefba41829dacc4642147fd58";
-				var result = http.GetHtml(httpItem);
-				data = result.Html;
-				File.WriteAllText(WeatherData, data);
+					var http = new HttpHelper();
+					HttpItem httpItem = new HttpItem()
+					{
+						Method = "GET",
+						URL = "http://jisutianqi.market.alicloudapi.com/weather/query?city=安顺",
+						Header = new System.Net.WebHeaderCollection()
+					};
+					httpItem.Header["Authorization"] = "APPCODE 845c52bbefba41829dacc4642147fd58";
+					var result = http.GetHtml(httpItem);
+					data = result.Html;
+					File.WriteAllText(WeatherData, data);
+				}
+				catch (Exception ex)
+				{
+					System.Windows.MessageBox.Show("获取天气信息出错，请联系管理员。");
+					Logger.Fatal("获取天气信息出错，请联系管理员。", ex);
+					if (File.Exists(WeatherData))
+					{
+						data = File.ReadAllText(WeatherData);
+					}
+				}
 			}
 			else
 			{
-				data = File.ReadAllText(WeatherData);
+				if (File.Exists(WeatherData))
+				{
+					data = File.ReadAllText(WeatherData);
+				}
 			}
 
 			var response = Utils.JSONHelper.ConvertToObject<WeatherApiModel>(data);

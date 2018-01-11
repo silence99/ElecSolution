@@ -1,23 +1,20 @@
 ﻿using Busniess.CommonControl;
-using Emergence.Common.Model;
+using Emergence.Business.CommonControl;
 using Emergence.Business.ViewModel;
+using Emergence.Common.Model;
 using Framework.Http;
 using log4net;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Reflection;
 using System.Xml;
-using Emergence.Business.CommonControl;
 
 namespace Busniess.Services
 {
 	public class MasterEventService
 	{
 		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-		private HttpHelper HttpHelper = new HttpHelper();
-
 
 		public MasterEventViewModel GetMasterEvents(int pageIndex, int pageSize)
 		{
@@ -27,9 +24,9 @@ namespace Busniess.Services
 		public MasterEventViewModel GetMasterEvents(int pageIndex, int pageSize, string searchInfo)
 		{
 			var response = GetMasterEventsData(pageIndex, pageSize, searchInfo);
-			if (response.Code != 1)
+			
+			if (response == null ||  response.Code != 1)
 			{
-				Util.ShowError(string.Format("获取统计信息失败：{0}", response.Message));
 				return null;
 			}
 			else
@@ -66,13 +63,13 @@ namespace Busniess.Services
 				else
 				{
 					Logger.ErrorFormat("Get Master events error{0}: {1}", result.StatusCode, result.Html);
-					throw new Exception(result.Html);
+					return null;
 				}
 			}
 			catch (Exception ex)
 			{
 				Logger.Error(ex);
-				throw;
+				return null;
 			}
 		}
 
@@ -85,35 +82,43 @@ namespace Busniess.Services
 
 		public bool CreateMasterEvent(string title, string eventType, string grade, DateTime time, string description, string location, double longitude, double latitude, Func<string, bool> callback = null)
 		{
-			string serviceName = ConfigurationManager.AppSettings["mainEventApi"] ?? "mainEvent";
-			Dictionary<string, string> pairs = new Dictionary<string, string>()
+			try
 			{
-				{ "title", title },
-				{ "eventType", eventType },
-				{ "grade", grade },
-				{ "time", TimeControl.GetMillisecons(time).ToString() },
-				{ "describe", description },
-				{ "locale", location },
-				{ "longitude", longitude.ToString() },
-				{ "latitude", latitude.ToString() }
-			};
-			Logger.InfoFormat("创建主事件：{0}", title);
-			var result = RequestControl.Request(serviceName, "POST", pairs);
-			if (result.StatusCode != 200)
-			{
-				Logger.WarnFormat("创建主事件失败 -- {0}", title);
-				return false;
-			}
-			else
-			{
-				if (callback != null)
+				string serviceName = ConfigurationManager.AppSettings["mainEventApi"] ?? "mainEvent";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+													{
+														{ "title", title },
+														{ "eventType", eventType },
+														{ "grade", grade },
+														{ "time", TimeControl.GetMillisecons(time).ToString() },
+														{ "describe", description },
+														{ "locale", location },
+														{ "longitude", longitude.ToString() },
+														{ "latitude", latitude.ToString() }
+													};
+				Logger.InfoFormat("创建主事件：{0}", title);
+				var result = RequestControl.Request(serviceName, "POST", pairs);
+				if (result.StatusCode != 200)
 				{
-					return callback.Invoke(result.Html);
+					Logger.WarnFormat("创建主事件失败 -- {0}", title);
+					return false;
 				}
 				else
 				{
-					return RequestControl.DefaultValide(result.Html);
+					if (callback != null)
+					{
+						return callback.Invoke(result.Html);
+					}
+					else
+					{
+						return RequestControl.DefaultValide(result.Html);
+					}
 				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Fatal(string.Format("创建主事件失败 -- {0}", title), ex);
+				return false;
 			}
 		}
 
@@ -155,42 +160,50 @@ namespace Busniess.Services
 
 		public bool UpdateMasterEventState(List<long> ids, int state)
 		{
-			if (ids == null || ids.Count == 0)
+			try
 			{
-				Logger.Warn("主事件ID列表为空，不能更新主事件事件状态");
-				return true;
-			}
-
-			var idstring = string.Join(",", ids.ToArray());
-
-			string serviceName = ConfigurationManager.AppSettings["mainEventChangeStateApi"] ?? "mainEvent/state";
-			Dictionary<string, string> pairs = new Dictionary<string, string>()
-			{
-				{ "ids", idstring },
-				{ "state", state.ToString() }
-			};
-
-			Logger.DebugFormat("更新主事件事件状态 -- {0}", state);
-			var result = RequestControl.Request(serviceName, "PUT", pairs);
-			if (result.StatusCode != 200)
-			{
-				Logger.WarnFormat("更新主事件事件状态失败 -- {0}", state);
-				Logger.WarnFormat(result.Html);
-				return false;
-			}
-			else
-			{
-				var success = RequestControl.DefaultValide(result.Html);
-				if (success)
+				if (ids == null || ids.Count == 0)
 				{
-					Logger.InfoFormat("更新主事件状态成功 -- {0}", state);
+					Logger.Warn("主事件ID列表为空，不能更新主事件事件状态");
+					return true;
+				}
+
+				var idstring = string.Join(",", ids.ToArray());
+
+				string serviceName = ConfigurationManager.AppSettings["mainEventChangeStateApi"] ?? "mainEvent/state";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+													{
+														{ "ids", idstring },
+														{ "state", state.ToString() }
+													};
+
+				Logger.DebugFormat("更新主事件事件状态 -- {0}", state);
+				var result = RequestControl.Request(serviceName, "PUT", pairs);
+				if (result.StatusCode != 200)
+				{
+					Logger.WarnFormat("更新主事件事件状态失败 -- {0}", state);
+					Logger.WarnFormat(result.Html);
+					return false;
 				}
 				else
 				{
-					Logger.WarnFormat("更新主事件状态失败 -- {0}", state);
-				}
+					var success = RequestControl.DefaultValide(result.Html);
+					if (success)
+					{
+						Logger.InfoFormat("更新主事件状态成功 -- {0}", state);
+					}
+					else
+					{
+						Logger.WarnFormat("更新主事件状态失败 -- {0}", state);
+					}
 
-				return success;
+					return success;
+				}
+			}
+			catch(Exception ex)
+			{
+				Logger.Fatal(string.Format("更新主事件状态失败 -- {0}", state),)
+				return false;
 			}
 		}
 
