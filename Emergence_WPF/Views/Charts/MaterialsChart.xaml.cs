@@ -24,5 +24,11 @@ namespace Emergence_WPF.Views.Charts
 		{
 			InitializeComponent();
 		}
+
+		private void ClusteredColumnChart_Loaded(object sender, RoutedEventArgs e)
+		{
+			Chart.Width = ActualWidth;
+			Chart.Height = ActualHeight;
+		}
 	}
 }

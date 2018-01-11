@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -84,14 +83,15 @@ namespace Emergence_WPF.Comm
 
 		static ClusteredColumnChart()
 		{
-			HeightProperty.OverrideMetadata(typeof(ClusteredColumnChart), new FrameworkPropertyMetadata(10.0, Refresh));
-			WidthProperty.OverrideMetadata(typeof(ClusteredColumnChart), new FrameworkPropertyMetadata(10.0, Refresh));
+			HeightProperty.OverrideMetadata(typeof(ClusteredColumnChart), new FrameworkPropertyMetadata(Control.HeightProperty.DefaultMetadata.DefaultValue, Refresh));
+			WidthProperty.OverrideMetadata(typeof(ClusteredColumnChart), new FrameworkPropertyMetadata(Control.WidthProperty.DefaultMetadata.DefaultValue, Refresh));
 		}
 		private static void Refresh(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{
 			var obj = d as ClusteredColumnChart;
 			obj.ChartHeight = obj.Height - obj.ChartMarginBottom;
 			obj.ChartWidth = obj.Width - obj.ChartMarginLeft;
+			obj.RefreshVerticalLines();
 			obj.ColumnWidth = 0;
 			var tempHeights = new double[5];
 			var tempPoints = new Point[5];
@@ -102,12 +102,30 @@ namespace Emergence_WPF.Comm
 				obj.ColumnWidth = obj.ChartWidth / (2 * count + 1);
 				for (int i = 0; i < 5; i++)
 				{
-					tempHeights[i] = obj.Height - obj.ChartMarginBottom - span * (i + 1);
-					tempPoints[i].X = obj.ChartMarginLeft + obj.ColumnWidth * (2 * i + 1);
-					tempPoints[i].Y = obj.ChartHeight - tempHeights[i];
+					if (i < obj.ItemsSource.Length)
+					{
+						tempHeights[i] = (span * 5) * obj.ItemsSource[i] / 100;
+						tempPoints[i].X = obj.ChartMarginLeft + obj.ColumnWidth * (2 * i + 1);
+						tempPoints[i].Y = obj.ChartMarginBottom + tempHeights[i];
+					}
+					else
+					{
+						tempHeights[i] = 0;
+						tempPoints[i].X = 0;
+						tempPoints[i].Y = 0;
+					}
 				}
 				obj.ColumnHeights = tempHeights;
 				obj.ColumnPositions = tempPoints;
+			}
+		}
+
+		private void RefreshVerticalLines()
+		{
+			var span = ChartHeight / 6;
+			for (int i = 0; i < 5; i++)
+			{
+				VerticalLines[i] = span * (i + 1) + ChartMarginBottom;
 			}
 		}
 
