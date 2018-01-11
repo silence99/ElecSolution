@@ -420,7 +420,7 @@
             Height="450px"  
             StaysOpen="True"   
             IsOpen="{Binding Path=TeamSelectPopup.IsOpen}"   
-            AllowsTransparency="True"  
+            AllowsTransparency="False"  
             PopupAnimation="Slide"  
             PlacementTarget="{Binding ElementName=Grid_MasterEventDetail}"  
             Placement="Center">

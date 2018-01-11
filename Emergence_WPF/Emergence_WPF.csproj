@@ -142,6 +142,7 @@
     </ApplicationDefinition>
     <Compile Include="Comm\ClusteredColumnChart.cs" />
     <Compile Include="Comm\Converters\Int2StringConverter.cs" />
+    <Compile Include="Comm\FormControlHost.cs" />
     <Compile Include="Comm\PageChangedEventArg.cs" />
     <Compile Include="Comm\Pager.cs" />
     <Compile Include="Comm\PasswordBoxHelper.cs" />
@@ -236,6 +237,9 @@
     </Compile>
     <Compile Include="Views\Event\AddMasterEvent.xaml.cs">
       <DependentUpon>AddMasterEvent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Event\Map.xaml.cs">
+      <DependentUpon>Map.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Event\MasterEventDetail.xaml.cs">
       <DependentUpon>MasterEventDetail.xaml</DependentUpon>
@@ -436,6 +440,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Event\AddMasterEvent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Event\Map.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1188,6 +1196,9 @@
     <Resource Include="Image\Common\Icon_Cancel.png" />
     <Resource Include="Image\Common\Icon_Emergence_Large.png" />
     <Resource Include="Image\Common\Icon_Emergence_Middle.png" />
+    <None Include="Views\Event\SubEventsMap.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="xml\TaskTracking.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

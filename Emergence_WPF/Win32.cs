@@ -31,4 +31,6 @@ static class Win32
     [DllImport("user32.dll")]
     internal static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
 
+	[DllImport("user32.dll", EntryPoint = "DestroyWindow", CharSet = CharSet.Unicode)]
+	internal static extern bool DestroyWindow(IntPtr hwnd);
 };
