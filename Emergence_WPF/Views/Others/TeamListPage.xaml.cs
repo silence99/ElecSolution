@@ -8,6 +8,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using Business.Services;
 
 namespace Emergence_WPF
 {
@@ -46,10 +48,24 @@ namespace Emergence_WPF
 		{
 			ViewModel.CurrentTeam = new TeamModel().CreateAopProxy();
 			ViewModel.CurrentTeam.TeamDept = ViewModel.TeamDepts == null || ViewModel.TeamDepts.Count == 0 ? "" : ViewModel.TeamDepts[0].Value;
-			ViewModel.PopupTeamEdit();
-		}
+            DependencyObject parent = this.PopupEditTeam.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
 
-		private void Search_Handler(object sender, RoutedEventArgs e)
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
+            ViewModel.PopupTeamEdit();
+        }
+
+        private void Search_Handler(object sender, RoutedEventArgs e)
 		{
 			ViewModel.PageIndex = 1;
 			GetTeams();
@@ -107,11 +123,6 @@ namespace Emergence_WPF
 			GetTeams();
 		}
 
-		private void ClosePopup_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
-		{
-			ViewModel.ClosePopup();
-		}
-
 		private void NavigateToTeamDetailPage_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
 			var team = GridTeamList.SelectedItem as TeamModel;
@@ -120,5 +131,10 @@ namespace Emergence_WPF
 				NavigationService.Navigate(new TeamDetailPage(team));
 			}
 		}
-	}
+
+        private void ClosePopup_Handler(object sender, RoutedEventArgs e)
+        {
+            ViewModel.ClosePopup();
+        }
+    }
 }

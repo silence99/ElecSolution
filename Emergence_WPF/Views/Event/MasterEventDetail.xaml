@@ -15,7 +15,6 @@
                 <ResourceDictionary Source="../../style/MasterEventDetailStyle.xaml" />
                 <ResourceDictionary Source="../../style/Generic.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-            <SolidColorBrush Color="#000000" Opacity="0.5" x:Key="OpacityBrush"/>
         </ResourceDictionary>
     </Page.Resources>
     <Grid IsEnabled="{Binding Path=PageEnabled,Mode=TwoWay}">

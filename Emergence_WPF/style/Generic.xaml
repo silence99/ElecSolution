@@ -234,4 +234,5 @@
             </Style>
         </Style.Resources>
     </Style>
+    <SolidColorBrush Color="#000000" Opacity="0.5" x:Key="OpacityBrush"/>
 </ResourceDictionary>

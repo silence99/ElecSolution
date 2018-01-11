@@ -28,7 +28,9 @@ namespace Emergence.Business.ViewModel
 		{
 			IsPopoupOpen = true;
 			IsPageEnabled = false;
-		}
+            PopupHeight = ResolutionService.Height;
+            PopupWidth = ResolutionService.Width;
+        }
 
 		public void ClosePopup()
 		{
@@ -44,8 +46,6 @@ namespace Emergence.Business.ViewModel
 			TotalPage = 0;
 			IsPopoupOpen = false;
 			IsPageEnabled = true;
-			PopupWidth = 640;
-			PopupHeight = 360;
 			TeamDepts = new ObservableCollection<DictItem>(MetaDataService.TeamDepartments);
 		}
 	}
