@@ -16,10 +16,10 @@ namespace Busniess.Services
 		public EmergencyHttpListResult<MaterialModel> GetMaterials(int pageIndex, int pageSize, string searchInfo)
 		{
 			var response = GetMeterialsData(pageIndex, pageSize, searchInfo);
-			if (response.Code != 1)
+
+			if (response == null || response.Code != 1)
 			{
-				Util.ShowError(string.Format("获取物资失败：{0}", response.Message));
-				return null;
+				return new EmergencyHttpListResult<MaterialModel>();
 			}
 			else
 			{
@@ -46,13 +46,14 @@ namespace Busniess.Services
 				}
 				else
 				{
-					throw new Exception(result.Html);
+					Logger.Fatal(string.Format("获取物资数据异常:{0}", result.Html));
+					return null;
 				}
 			}
 			catch (Exception ex)
 			{
 				Logger.Error("获取物资数据异常", ex);
-				throw;
+				return null;
 			}
 		}
 
@@ -74,13 +75,13 @@ namespace Busniess.Services
 				}
 				else
 				{
-					throw new Exception(result.Html);
+					return null;
 				}
 			}
 			catch (Exception ex)
 			{
 				Logger.Error("获取未绑定到事件的物资数据异常", ex);
-				throw;
+				return null;
 			}
 		}
 
@@ -103,13 +104,14 @@ namespace Busniess.Services
 				}
 				else
 				{
-					throw new Exception(result.Html);
+					Logger.ErrorFormat("获取绑定到事件的物资数据异常: Code[{0}]", result.StatusCode);
+					return null;
 				}
 			}
 			catch (Exception ex)
 			{
 				Logger.Error("获取绑定到事件的物资数据异常", ex);
-				throw;
+				return null;
 			}
 		}
 
@@ -133,165 +135,196 @@ namespace Busniess.Services
 			}
 
 			var idstring = string.Join(",", ids.ToArray());
+			try
+			{
+				string serviceName = ConfigurationManager.AppSettings["bindingUnbindingMaterialApi"] ?? "childEvent/materials";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+													{
+														{ "materialsIds", idstring },
+														{ "childEventId", subeventId.ToString() }
+													};
 
-			string serviceName = ConfigurationManager.AppSettings["bindingUnbindingMaterialApi"] ?? "childEvent/materials";
-			Dictionary<string, string> pairs = new Dictionary<string, string>()
-			{
-				{ "materialsIds", idstring },
-				{ "childEventId", subeventId.ToString() }
-			};
-
-			Logger.Debug(msg);
-			var result = RequestControl.Request(serviceName, method, pairs);
-			if (result.StatusCode != 200)
-			{
-				Logger.WarnFormat("{0}失败 -- {1}: ({2})", msg, subeventId, idstring);
-				Logger.WarnFormat(result.Html);
-				return false;
-			}
-			else
-			{
-				var success = RequestControl.DefaultValide(result.Html);
-				if (success)
+				Logger.Debug(msg);
+				var result = RequestControl.Request(serviceName, method, pairs);
+				if (result.StatusCode != 200)
 				{
-					Logger.InfoFormat("{0}成功 -- {1}:({2})", msg, subeventId, idstring);
+					Logger.WarnFormat("{0}失败 -- {1}: ({2})", msg, subeventId, idstring);
+					Logger.WarnFormat(result.Html);
+					return false;
 				}
 				else
 				{
-					Logger.WarnFormat("{0}失败 -- {1}: ({2})", msg, subeventId, idstring);
-				}
+					var success = RequestControl.DefaultValide(result.Html);
+					if (success)
+					{
+						Logger.InfoFormat("{0}成功 -- {1}:({2})", msg, subeventId, idstring);
+					}
+					else
+					{
+						Logger.WarnFormat("{0}失败 -- {1}: ({2})", msg, subeventId, idstring);
+					}
 
-				return success;
+					return success;
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Error(string.Format("{0}失败 -- {1}: ({2})", msg, subeventId, idstring), ex);
+				return false;
 			}
 		}
 
 		public bool CreateMaterial(MaterialModel model)
 		{
-			if (model.IsEmpty)
+			try
 			{
-				Logger.Warn("Material entity is empty, creating failure");
-				return true;
-			}
-			string serviceName = ConfigurationManager.AppSettings["materialUpdateApi"] ?? "materials";
-			Dictionary<string, string> pairs = new Dictionary<string, string>()
-			{
-				{ "materialsName", model.MaterialsName },
-				{ "materialsNumber", model.MaterialsNumber },
-				{ "materialsType", model.MaterialsType },
-				{ "materialsDept", model.MaterialsDept },
-				{ "consumables", model.IsConsumable.ToString() },
-				{ "bigMaterials", model.IsBigMaterials.ToString() },
-				{ "totalQuantity", model.TotalQuantity.ToString() }
-			};
-
-			Logger.DebugFormat("创建物资 -- {0}", model.MaterialsName);
-			var result = RequestControl.Request(serviceName, "POST", pairs);
-			if (result.StatusCode != 200)
-			{
-				Logger.WarnFormat("创建物资失败 -- {0}", model.MaterialsName);
-				Logger.WarnFormat(result.Html);
-				return false;
-			}
-			else
-			{
-				var success = RequestControl.DefaultValide(result.Html);
-				if (success)
+				if (model.IsEmpty)
 				{
-					Logger.InfoFormat("创建物资成功 -- {0}", model.MaterialsName);
+					Logger.Warn("Material entity is empty, creating failure");
+					return true;
+				}
+				string serviceName = ConfigurationManager.AppSettings["materialUpdateApi"] ?? "materials";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+													{
+														{ "materialsName", model.MaterialsName },
+														{ "materialsNumber", model.MaterialsNumber },
+														{ "materialsType", model.MaterialsType },
+														{ "materialsDept", model.MaterialsDept },
+														{ "consumables", model.IsConsumable.ToString() },
+														{ "bigMaterials", model.IsBigMaterials.ToString() },
+														{ "totalQuantity", model.TotalQuantity.ToString() }
+													};
+
+				Logger.DebugFormat("创建物资 -- {0}", model.MaterialsName);
+				var result = RequestControl.Request(serviceName, "POST", pairs);
+				if (result.StatusCode != 200)
+				{
+					Logger.WarnFormat("创建物资失败 -- {0}", model.MaterialsName);
+					Logger.WarnFormat(result.Html);
+					return false;
 				}
 				else
 				{
-					Logger.WarnFormat("创建物资失败 -- {0}", model.MaterialsName);
-					Logger.Warn(result.Html);
-				}
+					var success = RequestControl.DefaultValide(result.Html);
+					if (success)
+					{
+						Logger.InfoFormat("创建物资成功 -- {0}", model.MaterialsName);
+					}
+					else
+					{
+						Logger.WarnFormat("创建物资失败 -- {0}", model.MaterialsName);
+						Logger.Warn(result.Html);
+					}
 
-				return success;
+					return success;
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Error(string.Format("创建物资失败 -- {0}", model.MaterialsName), ex);
+				return false;
 			}
 		}
 
 		public bool UpdateMaterial(MaterialModel model)
 		{
-			if (model.IsEmpty)
+			try
 			{
-				Logger.Warn("Material entity is empty, updating failure");
-				return true;
-			}
-
-			string serviceName = ConfigurationManager.AppSettings["materialUpdateApi"] ?? "materials";
-			Dictionary<string, string> pairs = new Dictionary<string, string>()
-			{
-				{ "id", model.ID.ToString() },
-				{ "materialsName", model.MaterialsName },
-				{ "materialsNumber", model.MaterialsNumber },
-				{ "materialsType", model.MaterialsType },
-				{ "materialsDept", model.MaterialsDept },
-				{ "consumables", model.IsConsumable.ToString() },
-				{ "bigMaterials", model.IsBigMaterials.ToString() },
-				{ "totalQuantity", model.TotalQuantity.ToString() }
-			};
-
-			Logger.DebugFormat("更新物资 -- {0}", model.MaterialsName);
-			var result = RequestControl.Request(serviceName, "PUT", pairs);
-			if (result.StatusCode != 200)
-			{
-				Logger.WarnFormat("更新物资失败 -- {0}", model.MaterialsName);
-				Logger.WarnFormat(result.Html);
-				return false;
-			}
-			else
-			{
-				var success = RequestControl.DefaultValide(result.Html);
-				if (success)
+				if (model.IsEmpty)
 				{
-					Logger.InfoFormat("更新物资成功 -- {0}", model.MaterialsName);
+					Logger.Warn("Material entity is empty, updating failure");
+					return true;
+				}
+
+				string serviceName = ConfigurationManager.AppSettings["materialUpdateApi"] ?? "materials";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+												{
+													{ "id", model.ID.ToString() },
+													{ "materialsName", model.MaterialsName },
+													{ "materialsNumber", model.MaterialsNumber },
+													{ "materialsType", model.MaterialsType },
+													{ "materialsDept", model.MaterialsDept },
+													{ "consumables", model.IsConsumable.ToString() },
+													{ "bigMaterials", model.IsBigMaterials.ToString() },
+													{ "totalQuantity", model.TotalQuantity.ToString() }
+												};
+
+				Logger.DebugFormat("更新物资 -- {0}", model.MaterialsName);
+				var result = RequestControl.Request(serviceName, "PUT", pairs);
+				if (result.StatusCode != 200)
+				{
+					Logger.WarnFormat("更新物资失败 -- {0}", model.MaterialsName);
+					Logger.WarnFormat(result.Html);
+					return false;
 				}
 				else
 				{
-					Logger.WarnFormat("更新物资失败 -- {0}", model.MaterialsName);
-					Logger.Warn(result.Html);
-				}
+					var success = RequestControl.DefaultValide(result.Html);
+					if (success)
+					{
+						Logger.InfoFormat("更新物资成功 -- {0}", model.MaterialsName);
+					}
+					else
+					{
+						Logger.WarnFormat("更新物资失败 -- {0}", model.MaterialsName);
+						Logger.Warn(result.Html);
+					}
 
-				return success;
+					return success;
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Error(string.Format("更新物资失败 -- {0}", model.MaterialsName), ex);
+				return false;
 			}
 		}
 
 		public bool DeleteMaterial(List<string> ids)
 		{
-			if (ids == null || ids.Count == 0)
+			try
 			{
-				Logger.Warn("物资ID列表为空，不能删除物资");
-				return true;
-			}
-
-			var idstring = string.Join(",", ids.ToArray());
-			string serviceName = ConfigurationManager.AppSettings["materialUpdateApi"] ?? "materials";
-			Dictionary<string, string> pairs = new Dictionary<string, string>()
-			{
-				{ "ids", idstring }
-			};
-
-			Logger.DebugFormat("删除物资 -- ID(s):{0}", ids);
-			var result = RequestControl.Request(serviceName, "DELETE", pairs);
-			if (result.StatusCode != 200)
-			{
-				Logger.WarnFormat("删除物资失败 -- ID(s):{0}", ids);
-				Logger.WarnFormat(result.Html);
-				return false;
-			}
-			else
-			{
-				var success = RequestControl.DefaultValide(result.Html);
-				if (success)
+				if (ids == null || ids.Count == 0)
 				{
-					Logger.InfoFormat("删除物资成功 -- ID(s):{0}", ids);
+					Logger.Warn("物资ID列表为空，不能删除物资");
+					return true;
+				}
+
+				var idstring = string.Join(",", ids.ToArray());
+				string serviceName = ConfigurationManager.AppSettings["materialUpdateApi"] ?? "materials";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+												{
+													{ "ids", idstring }
+												};
+
+				Logger.DebugFormat("删除物资 -- ID(s):{0}", ids);
+				var result = RequestControl.Request(serviceName, "DELETE", pairs);
+				if (result.StatusCode != 200)
+				{
+					Logger.WarnFormat("删除物资失败 -- ID(s):{0}", ids);
+					Logger.WarnFormat(result.Html);
+					return false;
 				}
 				else
 				{
-					Logger.WarnFormat("删除物资失败 -- ID(s):{0}", ids);
-					Logger.Warn(result.Html);
-				}
+					var success = RequestControl.DefaultValide(result.Html);
+					if (success)
+					{
+						Logger.InfoFormat("删除物资成功 -- ID(s):{0}", ids);
+					}
+					else
+					{
+						Logger.WarnFormat("删除物资失败 -- ID(s):{0}", ids);
+						Logger.Warn(result.Html);
+					}
 
-				return success;
+					return success;
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Error(string.Format("删除物资失败 -- ID(s):{0}", ids), ex);
+				return false;
 			}
 		}
 	}

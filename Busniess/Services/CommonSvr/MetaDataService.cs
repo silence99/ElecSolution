@@ -36,15 +36,23 @@ namespace Business.Services
 
 		public static DictItem[] GetMetaData(string type)
 		{
-			var response = GetMetaDataBase(type);
-			if (response.Code != 1)
+			try
 			{
-				Util.ShowError(string.Format("获取基础数据失败：{0}", response.Message));
-				return null;
+				var response = GetMetaDataBase(type);
+				if (response.Code != 1)
+				{
+					Util.ShowError(string.Format("获取基础数据失败：{0}", response.Message));
+					return new DictItem[0];
+				}
+				else
+				{
+					return response.Result;
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				return response.Result;
+				Logger.Fatal(string.Format("获取基础数据失败：{0}", type), ex);
+				return default(DictItem[]);
 			}
 		}
 
@@ -66,13 +74,19 @@ namespace Business.Services
 				}
 				else
 				{
-					throw new Exception(result.Html);
+					return new EmergencyHttpResponse<DictItem[]>()
+					{
+						Result = new DictItem[0]
+					};
 				}
 			}
 			catch (Exception ex)
 			{
 				Logger.Error("获取基础数据数据", ex);
-				throw;
+				return new EmergencyHttpResponse<DictItem[]>()
+				{
+					Result = new DictItem[0]
+				};
 			}
 		}
 	}

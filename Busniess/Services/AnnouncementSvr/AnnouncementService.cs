@@ -16,10 +16,12 @@ namespace Busniess.Services
 		public EmergencyHttpListResult<AnnouncementModel> GetAnnouncements(int pageIndex, int pageSize)
 		{
 			var response = GetAnnounments(pageIndex, pageSize);
-			if (response.Code != 1)
+			if (response == null || response.Code != 1)
 			{
-				Util.ShowError(string.Format("获取公告信息失败：{0}", response.Message));
-				return null;
+				return new EmergencyHttpListResult<AnnouncementModel>()
+				{
+					Data = new AnnouncementModel[0]
+				};
 			}
 			else
 			{
@@ -172,9 +174,9 @@ namespace Busniess.Services
 				var idstring = string.Join(",", ids.ToArray());
 				string serviceName = ConfigurationManager.AppSettings["UpdateNoticeApi"] ?? "notice";
 				Dictionary<string, string> pairs = new Dictionary<string, string>()
-			{
-				{ "ids", idstring }
-			};
+													{
+														{ "ids", idstring }
+													};
 
 				Logger.DebugFormat("删除公告 -- ID(s):{0}", ids);
 				var result = RequestControl.Request(serviceName, "DELETE", pairs);
@@ -202,7 +204,7 @@ namespace Busniess.Services
 			}
 			catch (Exception e)
 			{
-				Logger.Fatal("修改公告失败", e);
+				Logger.Fatal("删除公告失败", e);
 				return false;
 			}
 		}

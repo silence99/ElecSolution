@@ -26,13 +26,14 @@ namespace Busniess.Services
 				}
 				else
 				{
-					throw new Exception(result.Html);
+					Logger.ErrorFormat("获取队伍统计数据:{0}", result.Html);
+					return new EmergencyHttpResponse<TeamStatisticsModel>() { Result = new TeamStatisticsModel() };
 				}
 			}
 			catch (Exception ex)
 			{
 				Logger.Error("获取队伍统计数据异常", ex);
-				throw;
+				return new EmergencyHttpResponse<TeamStatisticsModel>() { Result = new TeamStatisticsModel() };
 			}
 		}
 
