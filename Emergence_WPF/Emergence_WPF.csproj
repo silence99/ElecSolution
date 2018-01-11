@@ -140,6 +140,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Comm\ClusteredColumnChart.cs" />
     <Compile Include="Comm\Converters\Int2StringConverter.cs" />
     <Compile Include="Comm\PageChangedEventArg.cs" />
     <Compile Include="Comm\Pager.cs" />
@@ -236,6 +237,9 @@
     <Compile Include="Util\ServiceManager.cs" />
     <Compile Include="Views\AddressPicker.xaml.cs">
       <DependentUpon>AddressPicker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Charts\MaterialsChart.xaml.cs">
+      <DependentUpon>MaterialsChart.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Charts\TeamPersonChart.xaml.cs">
       <DependentUpon>TeamPersonChart.xaml</DependentUpon>
@@ -445,6 +449,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddressPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Charts\MaterialsChart.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
