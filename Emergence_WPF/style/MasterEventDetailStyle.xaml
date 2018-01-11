@@ -377,6 +377,46 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ThreeSubEventButton" TargetType="{x:Type Button}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Image Height="58px" Width="66px" Source="/Image/Common/Icon_ThreePopupSubEvent.png" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ThreeMapButton" TargetType="{x:Type Button}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Image Height="66px" Width="70px" Source="/Image/Common/Icon_ThreePopupMap.png" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ThreeVideoButton" TargetType="{x:Type Button}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Image Height="59px" Width="71px" Source="/Image/Common/Icon_ThreePopupVideo.png" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ThreeCloseButton" TargetType="{x:Type Button}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Image Height="30px" Width="30px" Source="/Image/Common/Icon_ThreePopupClose.png" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <Style x:Key="CircleSelectedButton" TargetType="{x:Type Button}">
         <Setter Property="Template">
             <Setter.Value>
@@ -394,7 +434,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style> 
     <Style TargetType="Button" x:Key="RoundConnerButton">
         <Setter Property="Background" Value="#006F69"/>
         <Setter Property="Foreground" Value="#FFFFFF"/>

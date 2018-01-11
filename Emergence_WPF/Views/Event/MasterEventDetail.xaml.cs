@@ -8,6 +8,7 @@ using Microsoft.Practices.Unity;
 using System.Data;
 using System.Windows.Media;
 using Business.Services;
+using System.Windows.Input;
 
 namespace Emergence_WPF
 {
@@ -17,6 +18,9 @@ namespace Emergence_WPF
     public partial class MasterEventDetail : Page
     {
         public VM_MasterEventDetail ViewModel { get; set; }
+
+        public SubEventPopup_Map SE_PM { get; set; }
+        public SubEventPopup_Video SE_VE { get; set; }
         //{
         //        get { return this.DataContext as VM_MasterEventDetail; }
         //set { this.DataContext = value; }
@@ -28,7 +32,9 @@ namespace Emergence_WPF
             InitializeComponent();
             ViewModel = new VM_MasterEventDetail(masterEventID).CreateAopProxy();
             this.DataContext = ViewModel;
-
+            SE_PM = new SubEventPopup_Map();
+            SE_VE = new SubEventPopup_Video();
+            this.KeyDown += MasterEventDetail_KeyDown;
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -40,7 +46,13 @@ namespace Emergence_WPF
                 ViewModel.SelectSubEventAction(item.Id.ToString());
             }
         }
-
+        private void MasterEventDetail_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)//Esc键  
+            {
+                this.ViewModel.CloseAllPopupWindow();
+            }
+        }
         private void Grid_SubEventList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DataGrid dg = sender as DataGrid;
@@ -59,6 +71,26 @@ namespace Emergence_WPF
 
         private void Btn_AmplifySubEvent_Click(object sender, RoutedEventArgs e)
         {
+            this.PopupSelectThreeWindow.IsOpen = !this.PopupSelectThreeWindow.IsOpen;
+            DependencyObject parent = this.PopupSelectThreeWindow.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
+            //this.ViewModel.ThreePopupSelectOpenAction();
+        }
+
+        private void ThreePopupSubEventButton_Click(object sender, RoutedEventArgs e)
+        {
             this.PopupSubEventAmplify.IsOpen = !this.PopupSubEventAmplify.IsOpen;
             DependencyObject parent = this.PopupSubEventAmplify.Child;
             do
@@ -74,6 +106,49 @@ namespace Emergence_WPF
                 }
             }
             while (parent != null);
+            this.ViewModel.ThreePopupSelectCloseAction();
+        }
+
+        private void ThreePopupMapButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.PopupMapAndVideo.IsOpen = !this.PopupSubEventAmplify.IsOpen;
+            this.Frame_MEDPopupMapAndVideo.NavigationService.Navigate(SE_PM);
+            DependencyObject parent = this.PopupSubEventAmplify.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
+            this.ViewModel.ThreePopupSelectCloseAction();
+        }
+
+        private void ThreePopupVideoButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.PopupMapAndVideo.IsOpen = !this.PopupSubEventAmplify.IsOpen;
+            this.Frame_MEDPopupMapAndVideo.NavigationService.Navigate(SE_VE);
+            DependencyObject parent = this.PopupSubEventAmplify.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
+            this.ViewModel.ThreePopupSelectCloseAction();
         }
     }
 }

@@ -1197,6 +1197,10 @@
     <Resource Include="Image\Common\Icon_Hidden.png" />
     <Resource Include="Image\Common\Icon_Brand.ico" />
     <Resource Include="Image\Icon_Gear.png" />
+    <Resource Include="Image\Common\Icon_ThreePopupClose.png" />
+    <Resource Include="Image\Common\Icon_ThreePopupMap.png" />
+    <Resource Include="Image\Common\Icon_ThreePopupSubEvent.png" />
+    <Resource Include="Image\Common\Icon_ThreePopupVideo.png" />
     <Content Include="Views\AddressPicker.html" />
     <Resource Include="Image\Common\Icon_Cancel.png" />
     <Resource Include="Image\Common\Icon_Emergence_Large.png" />

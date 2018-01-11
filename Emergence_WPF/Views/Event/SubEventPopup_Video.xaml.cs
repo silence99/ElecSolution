@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Emergence_WPF.Views.Event
+namespace Emergence_WPF
 {
     /// <summary>
     /// Interaction logic for SubEventPopup_Video.xaml

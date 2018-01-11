@@ -15,6 +15,7 @@
                 <ResourceDictionary Source="../../style/MasterEventDetailStyle.xaml" />
                 <ResourceDictionary Source="../../style/Generic.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush Color="#000000" Opacity="0.5" x:Key="OpacityBrush"/>
         </ResourceDictionary>
     </Page.Resources>
     <Grid IsEnabled="{Binding Path=PageEnabled,Mode=TwoWay}">
@@ -392,6 +393,9 @@
                                       SelectedValue="{Binding SubEventEdit.ChildGrade, Mode=TwoWay}"
                                       SelectedValuePath="Value"
                                       DisplayMemberPath="Name"/>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="2" Content="负责人"/>
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="1" Grid.Column="3" Name="Txt_EditSubEventPersonLiable" Width="160px" Margin="20 0 0 0"  
+                                     Text="{Binding Path=SubEventEdit.PersonLiable, Mode=TwoWay}"/>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="地址"/>
                             <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Width="458px" Height="34px" Margin="-8 0 0 0" BorderBrush="#BFBFBF" BorderThickness="1">
                                 <Grid VerticalAlignment="Center"  Background="#FFFFFF">
@@ -432,7 +436,7 @@
                         <Button Style="{StaticResource CancelImageButton}" Command="{Binding Path=CloseSelectTeamCommand}" DockPanel.Dock="Left" Margin="19 0 19 0" />
                         <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
                         <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" Content="{Binding Path=TeamSelectPopup.PopupName,Mode=TwoWay}" Margin="19 0 0 0"/>
-                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Command="{Binding Path=SelectTeamCommand}" Width="88px"/>
+                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Command="{Binding Path=CloseAmplifySubEventCommand}" Width="88px"/>
                     </DockPanel>
                     <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
                         <DataGrid Style="{StaticResource DataGridRight}"  DockPanel.Dock="Top" Name="Grid_SelectTeam"  ItemsSource="{Binding Path=UnSelectedTeamList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2">
@@ -487,7 +491,6 @@
                                 </DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-
                     </Border>
                 </Grid>
             </Border>
@@ -566,6 +569,44 @@
         </Popup>
 
         <Popup 
+            x:Name="PopupSelectThreeWindow" 
+            Width="{Binding Path=ThreeWindowPopup.PopupWidth}" 
+            Height="{Binding Path=ThreeWindowPopup.PopupHeight}" 
+            StaysOpen="True"   
+            IsOpen="{Binding Path=ThreeWindowPopup.IsOpen}"   
+            AllowsTransparency="True"  
+            PopupAnimation="Slide"  
+            Placement="Center">
+            <Grid Background="{StaticResource OpacityBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Style="{StaticResource ThreeCloseButton}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 30 30 0" Command="{Binding Path=ThreePopupSelectCloseComman}"/>
+                <DockPanel Grid.Row="1" Height="160px" VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="1">
+                    <DockPanel DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 150 0">
+                        <DockPanel Height="120px" Width="120px" DockPanel.Dock="Top" Background="White">
+                            <Button Style="{StaticResource ThreeSubEventButton}" Name="ThreePopupSubEventButton" Click="ThreePopupSubEventButton_Click"/>
+                        </DockPanel>
+                        <Label Style="{StaticResource RightLabel}" FontSize="20" DockPanel.Dock="Top"  Foreground="#FFFFFF" Margin="0 10 0 0"  Content="主事件投屏"/>
+                    </DockPanel>
+                    <DockPanel DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0 0 0 0">
+                        <DockPanel Height="120px" Width="120px" DockPanel.Dock="Top" Background="White">
+                            <Button Style="{StaticResource ThreeMapButton}" Name="ThreePopupMapButton" Click="ThreePopupMapButton_Click"/>
+                        </DockPanel>
+                        <Label Style="{StaticResource RightLabel}" FontSize="20" DockPanel.Dock="Top" Foreground="#FFFFFF" Margin="0 10 0 0"  Content="地图标绘投屏"/>
+                    </DockPanel>
+                    <DockPanel DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="150 0 0 0">
+                        <DockPanel Height="120px" Width="120px" DockPanel.Dock="Top" Background="White">
+                            <Button Style="{StaticResource ThreeVideoButton}" Name="ThreePopupVideoButton" Click="ThreePopupVideoButton_Click"/>
+                        </DockPanel>
+                        <Label Style="{StaticResource RightLabel}" FontSize="20" DockPanel.Dock="Top"  Foreground="#FFFFFF" Margin="0 10 0 0" Content="摄像头信息投屏"/>
+                    </DockPanel>
+                </DockPanel>
+            </Grid>
+        </Popup>
+        <Popup 
             x:Name="PopupSubEventAmplify" 
             StaysOpen="True"   
             IsOpen="{Binding Path=SubEventAmplifyPopup.IsOpen}"   
@@ -588,7 +629,7 @@
                     <Border Grid.Row="0" BorderBrush="#D3D3D3" BorderThickness="0 0 0 2" >
                         <DockPanel>
                             <Label DockPanel.Dock="Left" Style="{StaticResource RightLabel}" Content="子事件详情" FontSize="20px" Margin="19 0 0 0"/>
-                            <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Command="{Binding Path=SelectTeamCommand}" Width="88px"/>
+                            <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Command="{Binding Path=CloseAmplifySubEventCommand}" Width="88px"/>
                         </DockPanel>
                     </Border>
                     <Grid Grid.Row="1">
@@ -725,6 +766,15 @@
                     </DockPanel>
                 </Grid>
             </Border>
+        </Popup>
+        <Popup 
+            x:Name="PopupMapAndVideo" 
+            StaysOpen="True"   
+            IsOpen="{Binding Path=SubEventAmplifyPopup.IsOpen}"   
+            AllowsTransparency="True"  
+            PopupAnimation="Slide"   
+            Placement="Center">
+            <Frame x:Name="Frame_MEDPopupMapAndVideo"></Frame>
         </Popup>
     </Grid>
 </Page>

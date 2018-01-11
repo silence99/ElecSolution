@@ -48,12 +48,14 @@ namespace Emergence.Business.ViewModel
 		public virtual PopupModel SubEventEditPopup { get; set; }
 		public virtual PopupModel SubEventAmplifyPopup { get; set; }
 		public virtual PopupModel TeamSelectPopup { get; set; }
-		public virtual PopupModel MaterialSelectPopup { get; set; }
-		#endregion
+        public virtual PopupModel MaterialSelectPopup { get; set; }
+        public virtual PopupModel ThreeWindowPopup { get; set; }
+        public virtual PopupModel MaxMapAndVideoPopup { get; set; }
+        #endregion
 
 
-		#region [Command]
-		public virtual DelegateCommand<string> SearchSubEventListCommand { get; set; }
+        #region [Command]
+        public virtual DelegateCommand<string> SearchSubEventListCommand { get; set; }
 		public virtual DelegateCommand<string> SelectSubEventCommand { get; set; }
 		public virtual DelegateCommand<int?> DeleteSubEventCommand { get; set; }
 		public virtual DelegateCommand<string> UpdateSubEventStatusCommand { get; set; }
@@ -72,11 +74,16 @@ namespace Emergence.Business.ViewModel
 		public virtual DelegateCommand SelectMaterialCommand { get; set; }
 		public virtual DelegateCommand DeleteMaterialCommand { get; set; }
 		public virtual DelegateCommand StartAmplifySubEventCommand { get; set; }
-		public virtual DelegateCommand CloseAmplifySubEventCommand { get; set; }
+        public virtual DelegateCommand CloseAmplifySubEventCommand { get; set; }
+        public virtual DelegateCommand ThreePopupSelecOpenCommand { get; set; }
+        public virtual DelegateCommand ThreePopupSelectCloseComman { get; set; }
+        public virtual DelegateCommand OpenFullScreenSubEventCommand { get; set; }
+        public virtual DelegateCommand OpenFullScreenMapCommand { get; set; }
+        public virtual DelegateCommand OpenFullScreenVideoCommand { get; set; }
 
-		#endregion
+        #endregion
 
-		public VM_MasterEventDetail(MasterEvent mEvent)
+        public VM_MasterEventDetail(MasterEvent mEvent)
 		{
 			PageEnabled = true;
 			masterEventService = new MasterEventService();
@@ -87,7 +94,10 @@ namespace Emergence.Business.ViewModel
 			SubEventEditPopup = new PopupModel().CreateAopProxy();
 			TeamSelectPopup = new PopupModel().CreateAopProxy();
 			MaterialSelectPopup = new PopupModel().CreateAopProxy();
-			EventGrades = new ObservableCollection<DictItem>(MetaDataService.EventGrades);
+            ThreeWindowPopup = new PopupModel().CreateAopProxy();
+            MaxMapAndVideoPopup = new PopupModel().CreateAopProxy();
+            SubEventAmplifyPopup = new PopupModel().CreateAopProxy();
+            EventGrades = new ObservableCollection<DictItem>(MetaDataService.EventGrades);
 			//this.eventAggregator = eventAggregator;
 
 			SearchSubEventListCommand = new DelegateCommand<string>(new Action<string>(SearchSubEventAction));
@@ -109,8 +119,14 @@ namespace Emergence.Business.ViewModel
 			DeleteMaterialCommand = new DelegateCommand(new Action(DeleteMaterialAction));
 			StartAmplifySubEventCommand = new DelegateCommand(new Action(StartSubEventAmplifyAction));
 			CloseAmplifySubEventCommand = new DelegateCommand(new Action(CloseSubEventAmplifyAction));
+            ThreePopupSelecOpenCommand = new DelegateCommand(new Action(ThreePopupSelectOpenAction));
+            ThreePopupSelectCloseComman = new DelegateCommand(new Action(ThreePopupSelectCloseAction));
+            OpenFullScreenSubEventCommand = new DelegateCommand(new Action(OpenFullScreenSubEventAction));
+            OpenFullScreenMapCommand = new DelegateCommand(new Action(OpenFullScreenMapAction));
+            OpenFullScreenVideoCommand = new DelegateCommand(new Action(OpenFullScreenVideoAction));
 
-			if (mEvent != null)
+
+            if (mEvent != null)
 			{
 				InitializVM(mEvent);
 			}
@@ -124,13 +140,23 @@ namespace Emergence.Business.ViewModel
 			SubEventList = new ObservableCollection<SubEvent>(subEvents.Data.Select(o => o.CreateAopProxy()));
 		}
 
-		#endregion
+        public void CloseAllPopupWindow()
+        {
+            var thisAop = this.AopWapper as VM_MasterEventDetail;
+            thisAop.MaterialSelectPopup.IsOpen = false;
+            thisAop.SubEventAmplifyPopup.IsOpen = false;
+            thisAop.MaxMapAndVideoPopup.IsOpen = false;
+            thisAop.SubEventEditPopup.IsOpen = false;
+            thisAop.TeamSelectPopup.IsOpen = false;
+        }
+
+        #endregion
 
 
 
-		#region [Private Method]
-		#region [Command Action]
-		private void SearchSubEventAction(string searchCondition)
+        #region [Private Method]
+        #region [Command Action]
+        private void SearchSubEventAction(string searchCondition)
 		{
 			if (!string.IsNullOrEmpty(searchCondition))
 			{
@@ -377,10 +403,35 @@ namespace Emergence.Business.ViewModel
 			thisAop.SubEventAmplifyPopup.IsOpen = false;
 		}
 
-		#endregion
+        public void ThreePopupSelectOpenAction()
+        {
+            var thisAop = this.AopWapper as VM_MasterEventDetail;
+            thisAop.ThreeWindowPopup.IsOpen = true;
+            thisAop.ThreeWindowPopup.PopupWidth = ResolutionService.Width.ToString();
+            thisAop.ThreeWindowPopup.PopupHeight = ResolutionService.Height.ToString();
+        }
+        public void ThreePopupSelectCloseAction()
+        {
+            var thisAop = this.AopWapper as VM_MasterEventDetail;
+            thisAop.ThreeWindowPopup.IsOpen = false;
+        }
+        public void OpenFullScreenSubEventAction()
+        {
 
-		#region [Request service Methods]
-		private void GetSubEventListOb(string searchCondition)
+        }
+        public void OpenFullScreenMapAction()
+        {
+
+        }
+        public void OpenFullScreenVideoAction()
+        {
+
+        }
+
+        #endregion
+
+        #region [Request service Methods]
+        private void GetSubEventListOb(string searchCondition)
 		{
 			var subEvents = subEventService.GetSubevents(0, 1000, this.MasterEventInfo.ID, searchCondition ?? "").Result;
 			var thisAop = this.AopWapper as VM_MasterEventDetail;
