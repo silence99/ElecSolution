@@ -55,6 +55,9 @@
     <Reference Include="De.TorstenMandelkow.MetroChart, Version=0.9.5818.20693, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ModernUICharts.WPF.Beta.0.9.1\lib\De.TorstenMandelkow.MetroChart.dll</HintPath>
     </Reference>
+    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\Emergence.Common\DLL\Iesi.Collections.dll</HintPath>
     </Reference>
@@ -238,6 +241,9 @@
     <Compile Include="Views\Event\AddMasterEvent.xaml.cs">
       <DependentUpon>AddMasterEvent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Event\MasterEventDetail_1024.xaml.cs">
+      <DependentUpon>MasterEventDetail_1024.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Event\SubEventPopup_VideoV2.xaml.cs">
       <DependentUpon>SubEventPopup_VideoV2.xaml</DependentUpon>
     </Compile>
@@ -354,6 +360,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="style\MasterEventDetailStyle_1024.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="TaskTracking.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -443,6 +453,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Event\AddMasterEvent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Event\MasterEventDetail_1024.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

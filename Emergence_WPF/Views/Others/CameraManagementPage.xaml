@@ -23,8 +23,8 @@
         <DockPanel>
             <DockPanel Height="60" DockPanel.Dock="Top">
                 <Label Margin="39,0,0,0" DockPanel.Dock="Left" Content="摄像头录入" FontSize="20" Foreground="Black" Padding="0" VerticalContentAlignment="Center"/>
-                <Button DockPanel.Dock="Right" Margin="0,0,20,0" Content="删除" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Delete_Handler"></Button>
-                <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Import_Handler"></Button>
+                <Button DockPanel.Dock="Right" Margin="0,0,20,0" Content="删除" Style="{StaticResource RoundConnerGridOperationButtonStyle}"></Button>
+                <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}"></Button>
             </DockPanel>
             <DockPanel Grid.Row="2" Grid.Column="0">
                 <DockPanel DockPanel.Dock="Bottom" Margin="20,5,20,15">

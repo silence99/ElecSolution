@@ -18,24 +18,24 @@
     <!--Master event detail left label style-->
     <Style TargetType="Label" x:Key="MasterEventDetailLeftLabel" BasedOn="{StaticResource LeftLabel}">
         <Setter Property="HorizontalAlignment" Value="Right"/>
-        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontSize" Value="14"/>
     </Style>
     <!--Master event detail right label style-->
     <Style TargetType="Label" x:Key="MasterEventDetailRightLabel" BasedOn="{StaticResource LeftLabel}">
         <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="FontSize" Value="18"/>
-        <Setter Property="Margin" Value="10 0 0 0"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="5 0 0 0"/>
     </Style>
     <!--Status label style-->
     <Style TargetType="Label" x:Key="StatusRightLabel" BasedOn="{StaticResource RightLabel}">
-        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontSize" Value="12"/>
     </Style>
     <Style TargetType="Label" x:Key="SubEventDetailNameLabel" BasedOn="{StaticResource StatusRightLabel}">
         <Setter Property="HorizontalAlignment" Value="Right"/>
     </Style>
     <Style TargetType="Label" x:Key="SubEventDetailValueLabel" BasedOn="{StaticResource StatusRightLabel}">
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="30 0 150 0"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Margin" Value="10 0 10 0"/>
     </Style>
     <!--Base TextBox style-->
     <Style TargetType="TextBox" x:Key="BaseTextBox">
@@ -102,8 +102,8 @@
     </Style>
     <!--Base button style-->
     <Style TargetType="Button" x:Key="ButtonBase">
-        <Setter Property="FontSize" Value="16"/>
-        <Setter Property="Height" Value="36"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Height" Value="30"/>
         <Setter Property="Background" Value="#006F69"/>
         <Setter Property="Foreground" Value="White"/>
     </Style>
@@ -139,7 +139,7 @@
             <Style TargetType="DataGridColumnHeader">
                 <Setter Property="SnapsToDevicePixels" Value="True" />
                 <Setter Property="MinWidth" Value="0" />
-                <Setter Property="MinHeight" Value="60" />
+                <Setter Property="MinHeight" Value="30" />
                 <Setter Property="Foreground" Value="#FFFFFF" />
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="Cursor" Value="Hand" />
@@ -341,13 +341,13 @@
         </Setter>
     </Style>
     <Style x:Key="SearchImageButton" TargetType="{x:Type Button}">
-        <Setter Property="Height" Value="30"/>
-        <Setter Property="Width" Value="30"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="Width" Value="25"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Image Height="30px" Width="30px" Source="/Image/Common/Icon_Search.png" />
+                    <Image Height="25px" Width="25px" Source="/Image/Common/Icon_Search.png" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

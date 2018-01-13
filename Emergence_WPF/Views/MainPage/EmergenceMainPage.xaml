@@ -192,8 +192,9 @@
                 <local:Weather Canvas.Left="0" Canvas.Top="0" />
             </Canvas>
         </Viewbox>
-        <charts:MaterialsChart Grid.Column="1" Grid.Row="2"/>
-
+        <Viewbox  Margin="5 5 5 5" Grid.Column="1" Grid.Row="2">
+            <charts:MaterialsChart/>
+        </Viewbox>
         <Viewbox Margin="5 5 5 10" Grid.Column="1" Grid.Row="3">
             <Canvas Width="280px" Height="180px">
                 <charts:TeamPersonChart Canvas.Left="0" Canvas.Top="0" />

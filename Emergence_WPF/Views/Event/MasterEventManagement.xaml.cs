@@ -1,4 +1,5 @@
-﻿using Busniess.Services;
+﻿using Business.Services;
+using Busniess.Services;
 using Busniess.Strategies;
 using Emergence.Business.ViewModel;
 using Emergence.Common.Model;
@@ -36,9 +37,16 @@ namespace Emergence_WPF
 		private void Grid_MasterEvent_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			var dg = e.Source as DataGrid;
-			MasterEvent me = dg.SelectedItem as MasterEvent;
-			this.NavigationService.Navigate(new MasterEventDetail(me));
-		}
+            MasterEvent me = dg.SelectedItem as MasterEvent;
+            if (ResolutionService.Width < 1366)
+            {
+                this.NavigationService.Navigate(new MasterEventDetail_1024(me));
+            }
+            else
+            {
+                this.NavigationService.Navigate(new MasterEventDetail(me));
+            }
+        }
 
 		private void masterEventSearchButton2_Click(object sender, RoutedEventArgs e)
 		{

@@ -309,7 +309,7 @@
                            PlacementTarget="{Binding ElementName= SubEventEditAddressTextBox}"  
                            Placement="Bottom"  
                            >
-            <views:AddressPicker/>
+            <!--<views:AddressPicker/>-->
         </Popup>
     </Grid>
 </Page>

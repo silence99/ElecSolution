@@ -22,22 +22,22 @@
                 <Image Canvas.Left="20" Margin="10,0,0,3" DockPanel.Dock="Left" Source="/Image/Icon_MainBrand.png" HorizontalAlignment="Left" ></Image>
                 <TextBlock FontSize="30" DockPanel.Dock="Left" TextAlignment="Center" Foreground="White" HorizontalAlignment="Left" Margin="10,20,0,0">应急指挥中心管理应用平台</TextBlock>
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Name="headright" HorizontalAlignment="Right">
-                    <Image Margin="0,0,30,0" Width="30" Height="30" Tag="" MouseLeftButtonDown="HomeBtn_Click" Source="/Image/Icon_Home.png" HorizontalAlignment="Right" Cursor="Hand" ></Image>
-                    <Image Margin="0,0,30,0" Width="30" Height="30" MouseLeftButtonDown="MasterEventBtn_Click" Source="/Image/Icon_Lighting.png" HorizontalAlignment="Right" Cursor="Hand"></Image>
-                    <Image Margin="0,0,30,0" Width="30" Height="30" Source="/Image/Icon_Message.png"  MouseLeftButtonDown="Image_MouseRightButtonDown" HorizontalAlignment="Right" Cursor="Hand"></Image>
-                    <Image Margin="0,0,30,0" Width="30" Height="30" Tag="MasterEventDetail" Source="/Image/Icon_Graph.png"  MouseLeftButtonDown="GraphBtn_Click" HorizontalAlignment="Right" Cursor="Hand"></Image>
-                    <Image Margin="0,0,30,0" Width="30" Height="30" Source="/Image/Icon_FullScreen.png" HorizontalAlignment="Right" MouseLeftButtonDown="Image_MouseLeftButtonDown_PopupMasterEventPage" Cursor="Hand"></Image>
-                    <Image Margin="0,0,30,0" Width="30" Height="30" Source="/Image/Icon_Gear.png" HorizontalAlignment="Right" Cursor="Hand">
+                    <Image Margin="0,0,20,0" Width="30" Height="30" Tag="" MouseLeftButtonDown="HomeBtn_Click" Source="/Image/Icon_Home.png" HorizontalAlignment="Right" Cursor="Hand" ></Image>
+                    <Image Margin="0,0,20,0" Width="30" Height="30" MouseLeftButtonDown="MasterEventBtn_Click" Source="/Image/Icon_Lighting.png" HorizontalAlignment="Right" Cursor="Hand"></Image>
+                    <Image Margin="0,0,20,0" Width="30" Height="30" Source="/Image/Icon_Message.png"  MouseLeftButtonDown="Image_MouseRightButtonDown" HorizontalAlignment="Right" Cursor="Hand"></Image>
+                    <Image Margin="0,0,20,0" Width="30" Height="30" Tag="MasterEventDetail" Source="/Image/Icon_Graph.png"  MouseLeftButtonDown="GraphBtn_Click" HorizontalAlignment="Right" Cursor="Hand"></Image>
+                    <Image Margin="0,0,20,0" Width="30" Height="30" Source="/Image/Icon_FullScreen.png" HorizontalAlignment="Right" MouseLeftButtonDown="Image_MouseLeftButtonDown_PopupMasterEventPage" Cursor="Hand"></Image>
+                    <Image Margin="0,0,20,0" Width="30" Height="30" Source="/Image/Icon_Gear.png" HorizontalAlignment="Right" Cursor="Hand">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="MouseLeftButtonUp">
                                 <i:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter=".\Views\Others\ManagementPage.xaml" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Image>
-                    <TextBlock Margin="0,20,30,0" Foreground="White" FontSize="30" FontFamily="Microsoft Sans Serif">|</TextBlock>
+                    <TextBlock Margin="0,20,20,0" Foreground="White" FontSize="30" FontFamily="Microsoft Sans Serif">|</TextBlock>
                     <Image Margin="0,0,18,0" Width="30" Height="30" Source="/Image/Icon_User.png"  HorizontalAlignment="Right" Cursor="Hand"></Image>
-                    <TextBlock Margin="0,30,30,30" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif" Name="loginname" >用户 C</TextBlock>
-                    <TextBlock Margin="0,20,30,0" Foreground="White" FontSize="30" FontFamily="Microsoft Sans Serif">|</TextBlock>
+                    <TextBlock Margin="0,30,20,30" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif" Name="loginname" >用户 C</TextBlock>
+                    <TextBlock Margin="0,20,20,0" Foreground="White" FontSize="30" FontFamily="Microsoft Sans Serif">|</TextBlock>
                     <StackPanel Orientation="Horizontal" MouseLeftButtonDown="LogoutBtn_Click">
                         <Image Margin="0,0,40,0" Width="30" Height="30" Source="/Image/Icon_LogOut.png" HorizontalAlignment="Right" Cursor="Hand"></Image>
                         <!--<TextBlock Foreground="White" FontSize="14" Padding="10,17,0,0">登出</TextBlock>-->
