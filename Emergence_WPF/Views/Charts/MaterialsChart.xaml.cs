@@ -11,5 +11,19 @@ namespace Emergence_WPF.Views.Charts
 		{
 			InitializeComponent();
 		}
+
+		static MaterialsChart()
+		{
+			WidthProperty.OverrideMetadata(typeof(MaterialsChart), new System.Windows.FrameworkPropertyMetadata(100.0, (sender, e) =>
+			{
+				var ctl = sender as MaterialsChart;
+				ctl.Chart.Width = ctl.Width;
+			}));
+			HeightProperty.OverrideMetadata(typeof(MaterialsChart), new System.Windows.FrameworkPropertyMetadata(100.0, (sender, e) =>
+			{
+				var ctl = sender as MaterialsChart;
+				ctl.Chart.Height = ctl.Height;
+			}));
+		}
 	}
 }

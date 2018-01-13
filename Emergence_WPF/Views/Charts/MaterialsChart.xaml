@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:Emergence_WPF.Views.Charts"
              xmlns:comm="clr-namespace:Emergence_WPF.Comm"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             mc:Ignorable="d" 
-             d:DesignHeight="400" d:DesignWidth="400">
+             mc:Ignorable="d" >
     <Grid Margin="0,0,0,0">
         <Grid.Resources>
             <x:Array x:Key="testData" Type="sys:Double">
