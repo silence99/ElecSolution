@@ -1,14 +1,13 @@
-﻿using Emergence.Common.Model;
+﻿using Business.Services;
+using Emergence.Business.ViewModel;
+using Emergence.Common.Model;
+using Emergence_WPF.Views.Event;
 using Framework;
+using Microsoft.Practices.Prism.Commands;
 using System.Windows;
 using System.Windows.Controls;
-using Emergence.Business.ViewModel;
-using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Unity;
-using System.Data;
-using System.Windows.Media;
-using Business.Services;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Emergence_WPF
 {
@@ -19,7 +18,6 @@ namespace Emergence_WPF
 	{
 		public VM_MasterEventDetail ViewModel { get; set; }
 
-		public SubEventPopup_Map SE_PM { get; set; }
 		public SubEventPopup_Video SE_VE { get; set; }
 		//{
 		//        get { return this.DataContext as VM_MasterEventDetail; }
@@ -32,7 +30,6 @@ namespace Emergence_WPF
 			InitializeComponent();
 			ViewModel = new VM_MasterEventDetail(masterEventID).CreateAopProxy();
 			this.DataContext = ViewModel;
-			SE_PM = new SubEventPopup_Map();
 			SE_VE = new SubEventPopup_Video();
 			this.KeyDown += MasterEventDetail_KeyDown;
 		}
@@ -71,28 +68,22 @@ namespace Emergence_WPF
 
 		private void Btn_AmplifySubEvent_Click(object sender, RoutedEventArgs e)
 		{
-			var win = new SubEventsMapV2()
+			this.PopupSelectThreeWindow.IsOpen = !this.PopupSelectThreeWindow.IsOpen;
+			DependencyObject parent = this.PopupSelectThreeWindow.Child;
+			do
 			{
-				WindowStyle = WindowStyle.None,
-				WindowState = WindowState.Maximized
-			};
-			win.Show();
-			//this.PopupSelectThreeWindow.IsOpen = !this.PopupSelectThreeWindow.IsOpen;
-			//DependencyObject parent = this.PopupSelectThreeWindow.Child;
-			//do
-			//{
-			//    parent = VisualTreeHelper.GetParent(parent);
+				parent = VisualTreeHelper.GetParent(parent);
 
-			//    if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
-			//    {
-			//        var element = parent as FrameworkElement;
-			//        element.Height = ResolutionService.Height;
-			//        element.Width = ResolutionService.Width;
-			//        break;
-			//    }
-			//}
-			//while (parent != null);
-			//this.ViewModel.ThreePopupSelectOpenAction();
+				if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+				{
+					var element = parent as FrameworkElement;
+					element.Height = ResolutionService.Height;
+					element.Width = ResolutionService.Width;
+					break;
+				}
+			}
+			while (parent != null);
+			this.ViewModel.ThreePopupSelectOpenAction();
 		}
 
 		private void ThreePopupSubEventButton_Click(object sender, RoutedEventArgs e)
@@ -117,43 +108,28 @@ namespace Emergence_WPF
 
 		private void ThreePopupMapButton_Click(object sender, RoutedEventArgs e)
 		{
-			this.PopupMapAndVideo.IsOpen = !this.PopupMapAndVideo.IsOpen;
-			this.Frame_MEDPopupMapAndVideo.NavigationService.Navigate(SE_PM);
-			DependencyObject parent = this.PopupMapAndVideo.Child;
-			do
+			var win = new SubEventsMapV2()
 			{
-				parent = VisualTreeHelper.GetParent(parent);
-
-				if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
-				{
-					var element = parent as FrameworkElement;
-					element.Height = ResolutionService.Height;
-					element.Width = ResolutionService.Width;
-					break;
-				}
-			}
-			while (parent != null);
+				WindowStyle = WindowStyle.None,
+				WindowState = WindowState.Maximized
+			};
+			win.Show();
 			this.ViewModel.ThreePopupSelectCloseAction();
 		}
 
 		private void ThreePopupVideoButton_Click(object sender, RoutedEventArgs e)
 		{
-			this.PopupMapAndVideo.IsOpen = !this.PopupMapAndVideo.IsOpen;
-			this.Frame_MEDPopupMapAndVideo.NavigationService.Navigate(SE_VE);
-			DependencyObject parent = this.PopupMapAndVideo.Child;
-			do
+			double latitude = 0;
+			double longitude = 0;
+			if (ViewModel != null && ViewModel.MasterEventInfo != null)
 			{
-				parent = VisualTreeHelper.GetParent(parent);
-
-				if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
-				{
-					var element = parent as FrameworkElement;
-					element.Height = ResolutionService.Height;
-					element.Width = ResolutionService.Width;
-					break;
-				}
+				latitude = string.IsNullOrEmpty(ViewModel.MasterEventInfo.Latitude) ? 0 : double.Parse(ViewModel.MasterEventInfo.Latitude);
+				longitude = string.IsNullOrEmpty(ViewModel.MasterEventInfo.Longitude) ? 0 : double.Parse(ViewModel.MasterEventInfo.Longitude);
 			}
-			while (parent != null);
+
+			SubEventPopup_VideoV2 video = new SubEventPopup_VideoV2();
+			video.SetCoordinate(latitude, longitude);
+			video.Show();
 			this.ViewModel.ThreePopupSelectCloseAction();
 		}
 	}

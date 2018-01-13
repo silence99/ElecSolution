@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="CommHelp.cs" />
     <Compile Include="Data\Enumerator.cs" />
+    <Compile Include="Model\CameraModel.cs" />
     <Compile Include="Model\DictItem.cs" />
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\LoginInModel.cs" />
