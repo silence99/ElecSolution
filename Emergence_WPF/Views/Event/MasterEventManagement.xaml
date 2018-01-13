@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"              
              xmlns:local="clr-namespace:Emergence_WPF.Comm"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             mc:Ignorable="d" 
+      xmlns:views="clr-namespace:Emergence_WPF.Views"
+      mc:Ignorable="d" 
              d:DesignHeight="1080" d:DesignWidth="1920">
 
     <Page.Resources>
@@ -138,8 +139,8 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Border BorderBrush="#62A6A3" Grid.Column="0" Grid.Row="0"  BorderThickness="0 1 0 0">
-        <DockPanel Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" >
-            <Label Name="labelPageTitle" Foreground="White" FontSize="20" HorizontalAlignment="Left" Padding="25" Margin="20,0,0,0" >主事件列表</Label>
+            <DockPanel Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" >
+                <Label Name="labelPageTitle" Foreground="White" FontSize="20" HorizontalAlignment="Left" Padding="25" Margin="20,0,0,0" >主事件列表</Label>
             </DockPanel>
         </Border>
         <DockPanel Grid.Column="0" Grid.Row="1" Background="#FFFFFF" Height="80" Width="auto"  HorizontalAlignment="Stretch" >
@@ -244,11 +245,7 @@
                         <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
                         <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" Content="{Binding Path=SubEventEditPopup.PopupName}" Margin="19 0 0 0"/>
                         <Button Content="完成" FontSize="16" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,36,0" Width="88" Height="36" Background="#006f69" Foreground="White">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Click">
-                                    <i:InvokeCommandAction Command="{Binding CreateCommand}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
+                            
                         </Button>
                     </DockPanel>
                     <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
@@ -291,7 +288,9 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="40px"/>
                                     </Grid.ColumnDefinitions>
-                                    <Button Style="{StaticResource AddressImageButton}" Grid.Column="1" Command="{Binding Path=SearchSubEventListCommand}" CommandParameter="{Binding Path=SubEventSearchValue}"></Button>
+                                    <Button Style="{StaticResource AddressImageButton}" Grid.Column="1" Click="Button_Click">
+                                        
+                                    </Button>
                                     <TextBox Name="SubEventEditAddressTextBox" Grid.Column="0" Style="{StaticResource ImageTextBox}" Text="{Binding Path=Current.Locale, Mode=TwoWay}"></TextBox>
                                 </Grid>
                             </Border>
@@ -301,6 +300,16 @@
                     </Border>
                 </Grid>
             </Border>
+        </Popup>
+        <Popup x:Name="pop1" Width="120" Height="120"  
+                           StaysOpen="True"   
+                           IsOpen="{Binding IsAddressPickPopup, Mode=TwoWay}"   
+                           AllowsTransparency="True"  
+                           PopupAnimation="Slide"  
+                           PlacementTarget="{Binding ElementName= SubEventEditAddressTextBox}"  
+                           Placement="Bottom"  
+                           >
+            <views:AddressPicker/>
         </Popup>
     </Grid>
 </Page>

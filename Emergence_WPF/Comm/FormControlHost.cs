@@ -1,10 +1,13 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 using System.Windows.Interop;
 
 namespace Emergence_WPF.Comm
 {
 	public class FormControlHost : HwndHost
 	{
+		IntPtr hwndControl;
+		IntPtr hwndHost;
 		public System.Windows.Forms.Control Control { get; set; }
 		public FormControlHost(System.Windows.Forms.Control control)
 		{

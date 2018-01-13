@@ -35,11 +35,14 @@ namespace Emergence.Business.ViewModel
 		public virtual DelegateCommand DeleteCommand { get; set; }
 		public virtual DelegateCommand PopupAddCommand { get; set; }
 		public virtual DelegateCommand<AnnouncementModel> PopupEditCommand { get; set; }
-        public virtual DelegateCommand PopupCloseCommand { get; set; }
-        public virtual DelegateCommand<string> SearchMasterEventListCommand { get; set; }
-        
+		public virtual DelegateCommand PopupCloseCommand { get; set; }
+		public virtual DelegateCommand<string> SearchMasterEventListCommand { get; set; }
+		public virtual DelegateCommand PopupAddressPickerCommand { get; set; }
+		public virtual DelegateCommand CloseAddressPickerCommand { get; set; }
+		public virtual bool IsAddressPickPopup { get; set; }
 
-        public VM_MasterEventManagement()
+
+		public VM_MasterEventManagement()
 		{
 			PageSize = GetPageSize();
 			PageIndex = 1;
@@ -49,15 +52,17 @@ namespace Emergence.Business.ViewModel
 			var popupStartPoint = ResolutionService.GetCenterControlOffset(880, 332);
 			PopupOffsetX = popupStartPoint.X;
 			PopupOffsetY = popupStartPoint.Y;
-            MasterEventSearchValue = "";
+			MasterEventSearchValue = "";
 			GetMasterEventsAction("");
 
 			CreateCommand = new DelegateCommand(CreateAction);
 			DeleteCommand = new DelegateCommand(DeleteAction);
 			PopupAddCommand = new DelegateCommand(PopupAddAction);
-            PopupCloseCommand = new DelegateCommand(PopupCloseAction);
-            SearchMasterEventListCommand = new DelegateCommand<string>(GetMasterEventsAction);
-            EventTypes = new ObservableCollection<DictItem>(MetaDataService.EventTypes);
+			PopupCloseCommand = new DelegateCommand(PopupCloseAction);
+			SearchMasterEventListCommand = new DelegateCommand<string>(GetMasterEventsAction);
+			PopupAddressPickerCommand = new DelegateCommand(PopupAddressPickerAction);
+			CloseAddressPickerCommand = new DelegateCommand(ClosePopupAddressPickerAction);
+			EventTypes = new ObservableCollection<DictItem>(MetaDataService.EventTypes);
 			EventGrades = new ObservableCollection<DictItem>(MetaDataService.EventGrades);
 		}
 
@@ -80,10 +85,10 @@ namespace Emergence.Business.ViewModel
 		private void GetMasterEventsAction(string searchValue)
 		{
 			var viewModel = IsAopWapper ? this : this.CreateAopProxy();
-            if (string.IsNullOrEmpty(searchValue))
-            {
-                searchValue = viewModel.MasterEventSearchValue;
-            }
+			if (string.IsNullOrEmpty(searchValue))
+			{
+				searchValue = viewModel.MasterEventSearchValue;
+			}
 			var masterEvents = MasterEventService.GetMasterEvents(viewModel.PageIndex,
 				viewModel.PageSize, searchValue);
 			if (masterEvents != null)
@@ -138,6 +143,17 @@ namespace Emergence.Business.ViewModel
 			CleanMessage();
 			var model = this.CreateAopProxy();
 			model.IsPopupOpen = false;
+		}
+
+		private void PopupAddressPickerAction()
+		{
+			var obj = this.CreateAopProxy();
+			obj.IsAddressPickPopup = true;
+		}
+		private void ClosePopupAddressPickerAction()
+		{
+			var obj = this.CreateAopProxy();
+			obj.IsAddressPickPopup = false;
 		}
 
 		private bool ValidateUpdateAction()

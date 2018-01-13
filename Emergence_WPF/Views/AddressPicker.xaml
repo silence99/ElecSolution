@@ -6,17 +6,7 @@
              xmlns:local="clr-namespace:Emergence_WPF"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <DockPanel LastChildFill="False">
-            <Button Content="确定" Click="ButtonOK_Click"/>
-            <Button Content="取消" Click="ButtonCancel_Click"/>
-        </DockPanel>
-        <DockPanel VerticalAlignment="Center">
-            <WebBrowser Name="WebBrowser" Source="AddressPicker.html"/>
-        </DockPanel>
+    <Grid >
+        <Border Name="MapContainer"/>
     </Grid>
 </UserControl>

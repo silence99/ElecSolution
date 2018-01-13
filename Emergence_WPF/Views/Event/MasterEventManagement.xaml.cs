@@ -40,10 +40,16 @@ namespace Emergence_WPF
 			this.NavigationService.Navigate(new MasterEventDetail(me));
 		}
 
-        private void masterEventSearchButton2_Click(object sender, RoutedEventArgs e)
-        {
-            Login lg = new Login();
-            lg.Show();
-        }
-    }
+		private void masterEventSearchButton2_Click(object sender, RoutedEventArgs e)
+		{
+			Login lg = new Login();
+			lg.Show();
+		}
+
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+			Login lg = new Login();
+			lg.Show();
+		}
+	}
 }
