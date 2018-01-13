@@ -57,6 +57,8 @@
     <Compile Include="Model\MasterEvent.cs" />
     <Compile Include="Model\ChildEvent.cs" />
     <Compile Include="Model\MaterialModel.cs" />
+    <Compile Include="Model\MessageModel.cs" />
+    <Compile Include="Model\MessageTemplateModel.cs" />
     <Compile Include="Model\PersonModel.cs" />
     <Compile Include="Model\PopupModel.cs" />
     <Compile Include="Model\RequestResult.cs" />

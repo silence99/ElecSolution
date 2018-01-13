@@ -327,5 +327,44 @@ namespace Busniess.Services
 				return false;
 			}
 		}
+
+		public bool ImportMaterials(string materialsJson)
+		{
+			try
+			{
+				string serviceName = ConfigurationManager.AppSettings["materailImportApi"] ?? "materials/import";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+												{
+													{ "materialsJson", materialsJson}
+												};
+
+				Logger.DebugFormat("导入物资:{0}", materialsJson);
+				var result = RequestControl.Request(serviceName, "POST", pairs);
+				if (result.StatusCode != 200)
+				{
+					Logger.WarnFormat("导入物资失败：{0}", result.Html);
+					return false;
+				}
+				else
+				{
+					var success = RequestControl.DefaultValide(result.Html);
+					if (success)
+					{
+						Logger.InfoFormat("导入物资成功:{0}", result.Html);
+					}
+					else
+					{
+						Logger.WarnFormat("导入物资失败:{0}", result.Html);
+					}
+
+					return success;
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Error("导入物资失败", ex);
+				return false;
+			}
+		}
 	}
 }

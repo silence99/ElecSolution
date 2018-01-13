@@ -16,5 +16,15 @@ namespace Emergence_WPF
 		private void Pager_OnPageChanged(object sender, Comm.PageChangedEventArg e)
 		{
 		}
+
+		private void DeleteButton_Click(object sender, System.Windows.RoutedEventArgs e)
+		{
+
+		}
+
+		private void ImportButton_Click(object sender, System.Windows.RoutedEventArgs e)
+		{
+
+		}
 	}
 }

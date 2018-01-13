@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Emergence_WPF"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid >
-        <Border Name="MapContainer"/>
+    <Grid>
+        <DockPanel Background="Black" Name="MapContainer" Unloaded="MapContainer_Unloaded" ClipToBounds="True"/>        
     </Grid>
 </UserControl>
