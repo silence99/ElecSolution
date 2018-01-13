@@ -472,7 +472,7 @@ namespace Busniess.Services
 												};
 
 				Logger.DebugFormat("导入队伍成员:{0}", teamId);
-				var result = RequestControl.Request(serviceName, "DELETE", pairs);
+				var result = RequestControl.Request(serviceName, "POST", pairs);
 				if (result.StatusCode != 200)
 				{
 					Logger.WarnFormat("导入队伍成员:{0}失败", teamId);
