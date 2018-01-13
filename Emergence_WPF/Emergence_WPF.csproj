@@ -238,8 +238,8 @@
     <Compile Include="Views\Event\AddMasterEvent.xaml.cs">
       <DependentUpon>AddMasterEvent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Event\Map.xaml.cs">
-      <DependentUpon>Map.xaml</DependentUpon>
+    <Compile Include="Views\Event\SubEventsMapV2.xaml.cs">
+      <DependentUpon>SubEventsMapV2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Event\MasterEventDetail.xaml.cs">
       <DependentUpon>MasterEventDetail.xaml</DependentUpon>
@@ -443,7 +443,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Event\Map.xaml">
+    <Page Include="Views\Event\SubEventsMapV2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -71,7 +71,7 @@ namespace Emergence_WPF
 
 		private void Btn_AmplifySubEvent_Click(object sender, RoutedEventArgs e)
 		{
-			var win = new Map()
+			var win = new SubEventsMapV2()
 			{
 				WindowStyle = WindowStyle.None,
 				WindowState = WindowState.Maximized
