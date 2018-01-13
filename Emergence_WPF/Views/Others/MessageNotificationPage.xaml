@@ -33,7 +33,7 @@
         <DockPanel Grid.Column="0" Grid.Row="1" Background="White" Margin="0 0 10 0" IsEnabled="{Binding Path=IsPageEnabled}">
             <DockPanel DockPanel.Dock="Top" Height="70px">
                 <Label FontSize="20px" DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black" Content="发送方式" Margin="40 0 0 0"/>
-                    <ComboBox DockPanel.Dock="Left" Width="200px" Height="40px" VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="25 0 0 0"></ComboBox>
+                <ComboBox DockPanel.Dock="Left" Width="200px" Height="40px" VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="25 0 0 0"></ComboBox>
                 <Label FontSize="20px" DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black" Content="预设选择" Margin="100 0 0 0"/>
                 <ComboBox DockPanel.Dock="Left" Width="200px" Height="40px" VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="25 0 0 0"></ComboBox>
             </DockPanel>
@@ -48,10 +48,10 @@
             <DockPanel Margin="20,0,20,0"  DockPanel.Dock="Top" >
                 <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
                     <Label FontSize="16" Foreground="#006f69" Height="36" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="20,0,0,0">手机号码</Label>
-                    <Button DockPanel.Dock="Right" Margin="0,0,20,0" Content="删除" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Delete_Handler"></Button>
-                    <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Import_Handler"></Button>
-                    <Button Name="BtnAdd" DockPanel.Dock="Right" Margin="0,0,20,0" Content="添加" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Add_Handler"/>
-                    
+                    <Button DockPanel.Dock="Right" Margin="0,0,20,0" Content="删除" Style="{StaticResource RoundConnerGridOperationButtonStyle}"></Button>
+                    <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}"></Button>
+                    <Button Name="BtnAdd" DockPanel.Dock="Right" Margin="0,0,20,0" Content="添加" Style="{StaticResource RoundConnerGridOperationButtonStyle}"/>
+
                     <!--<Image Source="../../Image/Common/Icon_Create.png" Margin="10, 10, 10, 10"/>
                     <Button FontSize="16" Width="82" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="20,0,0,0" Foreground="White" Content="导入" Style="{StaticResource RoundConnerButtonStyle}">
                     </Button>
@@ -122,10 +122,10 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <DockPanel Grid.Row="0">
-                        <Button Style="{StaticResource CancelImageButton}"   Click="ClosePopup_Handler" DockPanel.Dock="Left" Margin="19 0 19 0" />
+                        <Button Style="{StaticResource CancelImageButton}" DockPanel.Dock="Left" Margin="19 0 19 0" />
                         <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
                         <Label Style="{StaticResource RightLabel}" FontSize="20px"  DockPanel.Dock="Left" Content="添加人员" Margin="19 0 0 0"/>
-                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Width="88px" Click="EditTeamMember_Handler"/>
+                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,20,7" Content="完成" Width="88px" VerticalAlignment="Bottom"/>
                     </DockPanel>
                     <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
                         <Grid Background="#F3F3F3">
