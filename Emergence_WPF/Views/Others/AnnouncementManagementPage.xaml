@@ -14,6 +14,7 @@
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary Source="../../style/Generic.xaml"/>
+                    <ResourceDictionary Source="../../style/MasterEventDetailStyle.xaml"/>
                 </ResourceDictionary.MergedDictionaries>
                 <Style TargetType="Label">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -24,7 +25,7 @@
         <DockPanel>
             <DockPanel Height="66" DockPanel.Dock="Top">
                 <Label Margin="39,0,0,0" DockPanel.Dock="Left" Content="公告列表" FontSize="20" Foreground="Black" Padding="0" VerticalContentAlignment="Center"/>
-                <Image Source="../../Image/Common/Icon_Create.png" Width="20" Height="25" Margin="20">
+                <!--<Image Source="../../Image/Common/Icon_Create.png" Width="20" Height="25" Margin="20">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="MouseUp">
                             <i:InvokeCommandAction Command="{Binding PopupAddCommand}"/>
@@ -37,7 +38,9 @@
                             <i:InvokeCommandAction Command="{Binding DeleteCommand}"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                </Image>
+                </Image>-->
+                <Button DockPanel.Dock="Right" Margin="0,0,20,0" Content="删除" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Command="{Binding Path=DeleteCommand}"></Button>
+                <Button Name="BtnAdd" DockPanel.Dock="Right" Margin="0,0,20,0" Content="添加" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Command="{Binding Path=PopupAddCommand}"/>
             </DockPanel>
             <DockPanel>
                 <DockPanel DockPanel.Dock="Bottom" Margin="20,5,20,15">
@@ -74,10 +77,10 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Binding="{Binding ID, Mode=TwoWay}" Header="编号" Width="150" />
+                        <DataGridTextColumn Binding="{Binding ID, Mode=TwoWay}" Header="编号" Width="*" />
                         <DataGridTextColumn Binding="{Binding Title, Mode=TwoWay}" Header="标题" Width="*" />
-                        <DataGridTextColumn Binding="{Binding Content, Mode=TwoWay}" Header="内容" Width="*" />
-                        <DataGridTemplateColumn Width="100" Header="编辑">
+                        <DataGridTextColumn Binding="{Binding Content, Mode=TwoWay}" Header="内容" Width="3*" />
+                        <DataGridTemplateColumn Width="100" Header="操作">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Image Source="../../Image/Common/Icon_edit.png" Width="25" Height="25" Tag="{Binding}" MouseLeftButtonUp="PopupEdit_Click">                                        
@@ -91,50 +94,53 @@
         </DockPanel>
         <Popup 
             x:Name="PopupItem" 
-            Width="800" 
-            Height="332"  
+            Width="{Binding Path=PopupWidth}" 
+            Height="{Binding Path= PopupHeight}"  
             StaysOpen="True"   
-            IsOpen="{Binding Path=IsPopupOpen}"   
+            IsOpen="{Binding Path=IsPopoupOpen}"   
             AllowsTransparency="True"  
-            PopupAnimation="Slide"
-            Placement="Top"
-            HorizontalOffset="{Binding PopupOffsetX}"
-            VerticalOffset="{Binding PopupOffsetY}"
-            >
-            <DockPanel Background="White">
-                <DockPanel DockPanel.Dock="Top" Height="50">
-                    <Label Width="40" Content="X" HorizontalAlignment="Left">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="MouseUp">
-                                <i:InvokeCommandAction Command="{Binding PopupCloseCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Label>
-                    <Border Width="1" BorderThickness="1" BorderBrush="#D9D9D9" Margin="0,0,0,0" HorizontalAlignment="Left"/>
-                    <Label Content="新建公告"/>
-                    <Button Content="完成" FontSize="16" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,36,0" Width="88" Height="36" Background="#006f69" Foreground="White">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding UpdateCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </Button>
-                </DockPanel>
-                <Border Margin="2,0,0,0" Background="#F3F3F3" BorderThickness="1">
-                    <StackPanel Orientation="Vertical">
-                        <DockPanel Height="60" VerticalAlignment="Top">
-                            <Label Content="标题" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Top" Width="300" HorizontalAlignment="Left" Margin="0,20,0,0" Text="{Binding Path=Current.Title, Mode=TwoWay}"/>
-                            <Label Content="时间" Height="30" Width="190" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Top" Width="160" HorizontalAlignment="Left" Margin="0, 20, 0, 0" Text="{Binding Path=Current.Time,Mode=TwoWay}"/>
-                        </DockPanel>
-                        <DockPanel Height="120" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,20,0,0">
-                            <Label Content="内容" Height="30" Width="90" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,20,0,0"/>
-                            <TextBox VerticalAlignment="Top" Width="650" Height="120" HorizontalAlignment="Left" Margin="0, 0, 0, 0" Text="{Binding Current.Content}"/>
-                        </DockPanel>
-                    </StackPanel>
-                </Border>
-            </DockPanel>
+            PopupAnimation="Slide"  
+            Placement="Center">
+            <Grid Background="{StaticResource OpacityBrush}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid Background="#FFFFFF" Width="600px" Height="450px">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50px"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0">
+                        <Button Style="{StaticResource CancelImageButton}" Command="{Binding Path=PopupCloseCommand}" DockPanel.Dock="Left" Margin="19 0 19 0" />
+                        <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
+                        <Label Style="{StaticResource RightLabel}" FontSize="20px"  DockPanel.Dock="Left" Content="添加公告" Margin="19 0 0 0"/>
+                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Width="88px" Command="{Binding Path=UpdateCommand}">
+                        </Button>
+                    </DockPanel>
+                    <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
+                        <Grid Background="#F3F3F3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="117px"></RowDefinition>
+                                <RowDefinition Height="88px"></RowDefinition>
+                                <RowDefinition Height="88px"></RowDefinition>
+                                <RowDefinition Height="107px"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.35*"/>
+                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.35*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="标题" Margin="0 22 0 0"/>
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditNotiTitle" Width="458px" Margin="20 18 0 0"  
+                                     Text="{Binding Path=Current.Title, Mode=TwoWay}"/>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="时间"/>
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditNotiTime" Width="458px" Margin="20 18 0 0"  
+                                     Text="{Binding Path=Current.Time, Mode=TwoWay}"/>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="内容" Margin="0 0 0 0"/>
+                            <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" Name="Txt_EditNotiContent" Width="458px" VerticalAlignment="Top" Margin="20 30 0 0"  
+                                      Text="{Binding Path=Current.Content, Mode=TwoWay}"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
         </Popup>
     </Grid>
 </Page>

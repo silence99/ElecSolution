@@ -21,9 +21,10 @@
             </ResourceDictionary>
         </Grid.Resources>
         <DockPanel>
-            <DockPanel Height="66" DockPanel.Dock="Top">
+            <DockPanel Height="60" DockPanel.Dock="Top">
                 <Label Margin="39,0,0,0" DockPanel.Dock="Left" Content="摄像头录入" FontSize="20" Foreground="Black" Padding="0" VerticalContentAlignment="Center"/>
-                <Image Margin="0,0,50,0" HorizontalAlignment="Right" Width="28" Height="37" Source="../../Image/Common/Icon_Delete.png"/>
+                <Button DockPanel.Dock="Right" Margin="0,0,20,0" Content="删除" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Delete_Handler"></Button>
+                <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Import_Handler"></Button>
             </DockPanel>
             <DockPanel Grid.Row="2" Grid.Column="0">
                 <DockPanel DockPanel.Dock="Bottom" Margin="20,5,20,15">
@@ -60,7 +61,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="编号" Width="150" />
+                        <DataGridTextColumn Header="编号" Width="*" />
                         <DataGridTextColumn  Header="所属单位" Width="*" />
                         <DataGridTextColumn  Header="经纬度坐标" Width="*" />
                         <DataGridTextColumn  Header="详细地址" Width="*" />
@@ -68,7 +69,7 @@
                         <DataGridTextColumn  Header="生产商" Width="*" />
                         <DataGridTextColumn  Header="播放方式" Width="*" />
                         <DataGridTextColumn  Header="播放属性" Width="*" />
-                        <DataGridTextColumn  Header="所属系统(外部/单兵/无人机)" Width="200" />
+                        <DataGridTextColumn  Header="所属系统" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>
