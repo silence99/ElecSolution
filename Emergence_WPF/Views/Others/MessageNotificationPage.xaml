@@ -13,6 +13,7 @@
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary Source="../../style/Generic.xaml"/>
+                    <ResourceDictionary Source="../../style/MasterEventDetailStyle.xaml"/>
                 </ResourceDictionary.MergedDictionaries>
                 <Style TargetType="Label" x:Key="PopupLable">
                     <Setter Property="Foreground" Value="Black"/>
@@ -21,36 +22,41 @@
             </ResourceDictionary>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="60*"/>
+            <RowDefinition Height="80px"/>
+            <RowDefinition Height="310px"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Column="0" Grid.Row="0" Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" IsEnabled="{Binding Path=IsPageEnabled}">
             <Label Margin="20,0,0,0" Style="{StaticResource SelectedLabel}">通知事件</Label>
             <Label>历史记录</Label>
         </DockPanel>
-        <DockPanel Grid.Column="0" Grid.Row="1" Background="White" IsEnabled="{Binding Path=IsPageEnabled}">
-            <DockPanel Margin="20, 20, 20, 0" DockPanel.Dock="Top">
-                <DockPanel Height="60" VerticalAlignment="Top">
-                    <Label Width="60" Height="36" VerticalContentAlignment="Bottom" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Foreground="Black" Padding="0">发送方式</Label>
-                    <ComboBox Width="160" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Bottom"></ComboBox>
-                    <Label Width="60" Height="36" Margin="20,0,0,0" VerticalContentAlignment="Bottom" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="Black" Padding="0" FontSize="20">预设选择</Label>
-                    <ComboBox Width="160" Height="36" VerticalAlignment="Top" HorizontalAlignment="Left" VerticalContentAlignment="Bottom"></ComboBox>
-                </DockPanel>
+        <DockPanel Grid.Column="0" Grid.Row="1" Background="White" Margin="0 0 10 0" IsEnabled="{Binding Path=IsPageEnabled}">
+            <DockPanel DockPanel.Dock="Top" Height="70px">
+                <Label FontSize="20px" DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black" Content="发送方式" Margin="40 0 0 0"/>
+                    <ComboBox DockPanel.Dock="Left" Width="200px" Height="40px" VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="25 0 0 0"></ComboBox>
+                <Label FontSize="20px" DockPanel.Dock="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Black" Content="预设选择" Margin="100 0 0 0"/>
+                <ComboBox DockPanel.Dock="Left" Width="200px" Height="40px" VerticalAlignment="Center" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="25 0 0 0"></ComboBox>
             </DockPanel>
-            <DockPanel Height="190" Margin="20, 0, 20, 0" VerticalAlignment="Top">
-                <TextBlock></TextBlock>
+            <DockPanel Height="70px" DockPanel.Dock="Top">
+                <Label FontSize="20px" DockPanel.Dock="Left" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="Black" Content="预设内容" Margin="40 0 0 0"/>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                <TextBox Margin="20 0 0 20" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsEnabled="False"></TextBox>
             </DockPanel>
         </DockPanel>
         <DockPanel DockPanel.Dock="Top" Grid.Row="2" Background="White">
             <DockPanel Margin="20,0,20,0"  DockPanel.Dock="Top" >
                 <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
                     <Label FontSize="16" Foreground="#006f69" Height="36" Padding="0,0,0,0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="20,0,0,0">手机号码</Label>
-                    <Image Source="../../Image/Common/Icon_Create.png" Margin="10, 10, 10, 10"/>
+                    <Button DockPanel.Dock="Right" Margin="0,0,20,0" Content="删除" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Delete_Handler"></Button>
+                    <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Import_Handler"></Button>
+                    <Button Name="BtnAdd" DockPanel.Dock="Right" Margin="0,0,20,0" Content="添加" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Add_Handler"/>
+                    
+                    <!--<Image Source="../../Image/Common/Icon_Create.png" Margin="10, 10, 10, 10"/>
                     <Button FontSize="16" Width="82" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="20,0,0,0" Foreground="White" Content="导入" Style="{StaticResource RoundConnerButtonStyle}">
                     </Button>
                     
-                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" HorizontalAlignment="Right" Margin="0,0,20,0" Foreground="White" Content="删除" Style="{StaticResource RoundConnerButtonStyle}"></Button>
+                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" HorizontalAlignment="Right" Margin="0,0,20,0" Foreground="White" Content="删除" Style="{StaticResource RoundConnerButtonStyle}"></Button>-->
                 </DockPanel>
             </DockPanel>
             <!--<DockPanel DockPanel.Dock="Bottom" LastChildFill="True" Margin="20,5,20,0">
@@ -100,6 +106,52 @@
             </DataGrid>
         </DockPanel>
         <Popup 
+            x:Name="PopupEditTeamMember" 
+            Width="{Binding Path= PopupWidth}" 
+            Height="{Binding Path= PopupHeight}"  
+            StaysOpen="True"   
+            IsOpen="{Binding Path=IsPopoupOpen}"   
+            AllowsTransparency="True"  
+            PopupAnimation="Slide"  
+            Placement="Center">
+
+            <Grid Background="{StaticResource OpacityBrush}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid Background="#FFFFFF" Width="600px" Height="310px">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50px"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0">
+                        <Button Style="{StaticResource CancelImageButton}"   Click="ClosePopup_Handler" DockPanel.Dock="Left" Margin="19 0 19 0" />
+                        <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
+                        <Label Style="{StaticResource RightLabel}" FontSize="20px"  DockPanel.Dock="Left" Content="添加人员" Margin="19 0 0 0"/>
+                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Width="88px" Click="EditTeamMember_Handler"/>
+                    </DockPanel>
+                    <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
+                        <Grid Background="#F3F3F3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="117px"></RowDefinition>
+                                <RowDefinition Height="88px"></RowDefinition>
+                                <RowDefinition Height="55px"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.35*"/>
+                                <ColumnDefinition Width="0.15*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="姓名" Margin="0 22 0 0"/>
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Name="Txt_EditSubEventTitle" Width="260px" Margin="20 18 0 0"  
+                                     Text="{Binding Path=CurrentPerson.Name, Mode=TwoWay}"/>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="电话" Margin="0 0 0 0"/>
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Name="Txt_EditTeamAddress" Width="260px" Margin="20 0 0 0"  
+                                      Text="{Binding Path=CurrentPerson.PhoneNumber, Mode=TwoWay}"/>
+
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Popup>
+        <!--<Popup 
             x:Name="PopupEditTeam" 
             Width="{Binding Path=PopupWidth}" 
             Height="{Binding Path= PopupHeight}"  
@@ -108,8 +160,7 @@
             AllowsTransparency="True"  
             PopupAnimation="Slide"  
             PlacementTarget="{Binding ElementName=PanelData}"  
-            Placement="Top"
-            HorizontalOffset="360">
+            Placement="Center">
             <DockPanel Background="White">
                 <DockPanel DockPanel.Dock="Top" Height="40">
                     <Label Style="{StaticResource PopupLable}" Width="40" Content="X" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
@@ -134,6 +185,6 @@
                     </StackPanel>
                 </Border>
             </DockPanel>
-        </Popup>
+        </Popup>-->
     </Grid>
 </Page>
