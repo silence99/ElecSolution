@@ -88,7 +88,7 @@ namespace Busniess.Services
 			}
 		}
 
-        public EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetbindingTeamData(int pageIndex, int pageSize, long childEventId)
+		public EmergencyHttpResponse<EmergencyHttpListResult<TeamModel>> GetbindingTeamData(int pageIndex, int pageSize, long childEventId)
 		{
 			try
 			{
@@ -127,7 +127,7 @@ namespace Busniess.Services
 			return BindingUnbindingTeamToSubevnt(subevent, ids, "DELETE");
 		}
 
-        public bool BindingUnbindingTeamToSubevnt(long subeventId, List<long> ids, string method)
+		public bool BindingUnbindingTeamToSubevnt(long subeventId, List<long> ids, string method)
 		{
 			var msg = method == "POST" ? "绑定队伍到子事件" : "解绑子事件绑定的队伍";
 			if (ids == null || ids.Count == 0)
@@ -339,8 +339,10 @@ namespace Busniess.Services
 
 		public bool UpdateTeamMember(long id, string teamId, string name, string phoneNumber, string place)
 		{
-			string serviceName = ConfigurationManager.AppSettings["updataTeamMemberApi"] ?? "team/teamMember";
-			Dictionary<string, string> pairs = new Dictionary<string, string>()
+			try
+			{
+				string serviceName = ConfigurationManager.AppSettings["updataTeamMemberApi"] ?? "team/teamMember";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
 			{
 				{ "id", id.ToString() },
 				{ "teamId", teamId },
@@ -349,68 +351,82 @@ namespace Busniess.Services
 				{ "place", place }
 			};
 
-			Logger.DebugFormat("更新队伍成员 -- {0}", name);
-			var result = RequestControl.Request(serviceName, "PUT", pairs);
-			if (result.StatusCode != 200)
-			{
-				Logger.WarnFormat("更新队伍成员失败 -- {0}", name);
-				Logger.WarnFormat(result.Html);
-				return false;
-			}
-			else
-			{
-				var success = RequestControl.DefaultValide(result.Html);
-				if (success)
+				Logger.DebugFormat("更新队伍成员 -- {0}", name);
+				var result = RequestControl.Request(serviceName, "PUT", pairs);
+				if (result.StatusCode != 200)
 				{
-					Logger.InfoFormat("更新队伍成员成功 -- {0}", name);
+					Logger.WarnFormat("更新队伍成员失败 -- {0}", name);
+					Logger.WarnFormat(result.Html);
+					return false;
 				}
 				else
 				{
-					Logger.WarnFormat("更新队伍成员失败 -- {0}", name);
-					Logger.Warn(result.Html);
-				}
+					var success = RequestControl.DefaultValide(result.Html);
+					if (success)
+					{
+						Logger.InfoFormat("更新队伍成员成功 -- {0}", name);
+					}
+					else
+					{
+						Logger.WarnFormat("更新队伍成员失败 -- {0}", name);
+						Logger.Warn(result.Html);
+					}
 
-				return success;
+					return success;
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Error(string.Format("更新队伍成员失败 -- {0}", name), ex);
+				return false;
 			}
 		}
 
 		public bool DeleteTeamMembers(List<string> ids)
 		{
-			if (ids == null || ids.Count == 0)
+			try
 			{
-				Logger.Warn("队伍成员ID列表为空，不能删除队伍成员");
-				return true;
-			}
-
-			var idstring = string.Join(",", ids.ToArray());
-			string serviceName = ConfigurationManager.AppSettings["updataTeamMemberApi"] ?? "team/teamMember";
-			Dictionary<string, string> pairs = new Dictionary<string, string>()
-			{
-				{ "ids", idstring }
-			};
-
-			Logger.DebugFormat("删除队伍成员 -- ID(s):{0}", ids);
-			var result = RequestControl.Request(serviceName, "DELETE", pairs);
-			if (result.StatusCode != 200)
-			{
-				Logger.WarnFormat("删除队伍成员失败 -- ID(s):{0}", ids);
-				Logger.WarnFormat(result.Html);
-				return false;
-			}
-			else
-			{
-				var success = RequestControl.DefaultValide(result.Html);
-				if (success)
+				if (ids == null || ids.Count == 0)
 				{
-					Logger.InfoFormat("删除队伍成员成功 -- ID(s):{0}", ids);
+					Logger.Warn("队伍成员ID列表为空，不能删除队伍成员");
+					return true;
+				}
+
+				var idstring = string.Join(",", ids.ToArray());
+				string serviceName = ConfigurationManager.AppSettings["updataTeamMemberApi"] ?? "team/teamMember";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+													{
+														{ "ids", idstring }
+													};
+
+				Logger.DebugFormat("删除队伍成员 -- ID(s):{0}", ids);
+				var result = RequestControl.Request(serviceName, "DELETE", pairs);
+				if (result.StatusCode != 200)
+				{
+					Logger.WarnFormat("删除队伍成员失败 -- ID(s):{0}", ids);
+					Logger.WarnFormat(result.Html);
+					return false;
 				}
 				else
 				{
-					Logger.WarnFormat("删除队伍成员失败 -- ID(s):{0}", ids);
-					Logger.Warn(result.Html);
-				}
+					var success = RequestControl.DefaultValide(result.Html);
+					if (success)
+					{
+						Logger.InfoFormat("删除队伍成员成功 -- ID(s):{0}", ids);
+					}
+					else
+					{
+						Logger.WarnFormat("删除队伍成员失败 -- ID(s):{0}", ids);
+						Logger.Warn(result.Html);
+					}
 
-				return success;
+					return success;
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Error(string.Format("删除队伍成员失败 -- ID(s):{0}", ids), ex);
+				return false;
 			}
 		}
 
@@ -441,6 +457,48 @@ namespace Busniess.Services
 			{
 				Logger.Error("获取队伍成员数据异常", ex);
 				throw;
+			}
+		}
+
+		public bool ImportTeamMembers(long teamId, string teamMemberJson)
+		{
+			try
+			{
+				string serviceName = ConfigurationManager.AppSettings["teamMemberImport"] ?? "teamMember/import";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+												{
+													{ "teamId", teamId.ToString() },
+													{ "teamMemberJson", teamMemberJson}
+												};
+
+				Logger.DebugFormat("导入队伍成员:{0}", teamId);
+				var result = RequestControl.Request(serviceName, "DELETE", pairs);
+				if (result.StatusCode != 200)
+				{
+					Logger.WarnFormat("导入队伍成员:{0}失败", teamId);
+					Logger.WarnFormat(result.Html);
+					return false;
+				}
+				else
+				{
+					var success = RequestControl.DefaultValide(result.Html);
+					if (success)
+					{
+						Logger.InfoFormat("导入队伍成员成功:{0}", teamId);
+					}
+					else
+					{
+						Logger.WarnFormat("导入队伍成员失败:{0}", teamId);
+						Logger.Warn(result.Html);
+					}
+
+					return success;
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Error(string.Format("导入队伍成员失败:{0}", teamId), ex);
+				return false;
 			}
 		}
 	}

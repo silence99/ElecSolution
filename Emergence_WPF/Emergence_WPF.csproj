@@ -229,6 +229,9 @@
     <Compile Include="Views\AddressPicker.xaml.cs">
       <DependentUpon>AddressPicker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddressPickerV2.xaml.cs">
+      <DependentUpon>AddressPickerV2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Charts\MaterialsChart.xaml.cs">
       <DependentUpon>MaterialsChart.xaml</DependentUpon>
     </Compile>
@@ -437,6 +440,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddressPicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddressPickerV2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
