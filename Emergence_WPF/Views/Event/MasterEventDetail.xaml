@@ -196,8 +196,10 @@
                     <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="1" Grid.Row="1" Content="{Binding Path=SubEventDetail.ChildTitle,Mode=TwoWay}"></Label>
                     <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="2" Grid.Row="1" Content="详细地址"></Label>
                     <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="3" Grid.Row="1" Content="{Binding Path=SubEventDetail.ChildLocale,Mode=TwoWay}"></Label>
-                    <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="0" Grid.Row="2" Content="简介"></Label>
-                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Content="{Binding Path=SubEventDetail.ChildRemarks,Mode=TwoWay}"></Label>
+                    <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="0" Grid.Row="2" VerticalAlignment="Top" Margin="0 17 0 0" Content="简介"></Label>
+                    <Label Style="{StaticResource SubEventDetailValueLabel}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" VerticalAlignment="Top" Margin="30 17 0 0">
+                        <TextBlock Text="{Binding Path=SubEventDetail.ChildRemarks,Mode=TwoWay}" TextWrapping="Wrap"/>
+                    </Label>
                 </Grid>
                 <Viewbox Grid.Row="3" Margin="15 0 15 0" Stretch="Fill">
                     <Canvas Background="#F9F9F9" Width="1170" Height="150">

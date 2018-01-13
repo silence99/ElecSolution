@@ -34,8 +34,8 @@
         <Setter Property="HorizontalAlignment" Value="Right"/>
     </Style>
     <Style TargetType="Label" x:Key="SubEventDetailValueLabel" BasedOn="{StaticResource StatusRightLabel}">
-        <Setter Property="HorizontalAlignment" Value="Left"/>
-        <Setter Property="Margin" Value="30 0 150 0"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Margin" Value="30 0 30 0"/>
     </Style>
     <!--Base TextBox style-->
     <Style TargetType="TextBox" x:Key="BaseTextBox">

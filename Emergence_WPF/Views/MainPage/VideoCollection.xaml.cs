@@ -23,7 +23,7 @@ namespace Emergence_WPF.Views.MainPage
 				Content.Children.Add(video);
 				video.SetValue(DockPanel.DockProperty, Dock.Top);
 				video.Margin = new System.Windows.Thickness(0, 0, 0, 0);
-				video.Height = ActualWidth;
+				video.Width = ActualWidth;
 				video.BindingViewModel(item);
 			}
 		}

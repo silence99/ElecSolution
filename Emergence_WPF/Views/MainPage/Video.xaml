@@ -6,7 +6,7 @@
              xmlns:forms="clr-namespace:Vlc.DotNet.Forms;assembly=Vlc.DotNet.Forms"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="200" Unloaded="UserControl_Unloaded" Height="{Binding Path=Height}"
-             Width="{Binding Path=Wdith}" MinHeight="100">
+             Width="{Binding Path=Width}">
     <Grid Name="GridVideo" Margin="0, 0, 0, 0" >
         <WindowsFormsHost Margin="0,0,0,0" >
             <forms:VlcControl Margin="0,0,0,0" x:Name="VideoPlay" VlcLibDirectoryNeeded="OnVlcControlNeedsLibDirectory"
