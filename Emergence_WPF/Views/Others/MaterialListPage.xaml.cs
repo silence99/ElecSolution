@@ -55,17 +55,20 @@ namespace Emergence_WPF
 			NavigationService.Navigate(new TeamListPage());
 		}
 
-		private void SyncMaterials()
-		{
-			var data = Service.GetMaterials(ViewModel.PageIndex, ViewModel.PageSize, ViewModel.SearchInfo ?? string.Empty );
-			ViewModel.TotalCount = data.Count;
-			ViewModel.PageIndex = data.PageIndex;
-			ViewModel.PageSize = data.PageSize;
-			ViewModel.TotalPage = (int)Math.Ceiling((double)data.Count / data.PageSize);
-			ViewModel.Materials = new System.Collections.ObjectModel.ObservableCollection<MaterialModel>(data.Data);
-		}
+        private void SyncMaterials()
+        {
+            var data = Service.GetMaterials(ViewModel.PageIndex, ViewModel.PageSize, ViewModel.SearchInfo ?? string.Empty);
+            if (data != null)
+            {
+                ViewModel.TotalCount = data.Count;
+                ViewModel.PageIndex = data.PageIndex;
+                ViewModel.PageSize = data.PageSize;
+                ViewModel.TotalPage = (int)Math.Ceiling((double)data.Count / data.PageSize);
+                ViewModel.Materials = new System.Collections.ObjectModel.ObservableCollection<MaterialModel>(data.Data);
+            }
+        }
 
-		private void BtnSearchMaterial_Click(object sender, RoutedEventArgs e)
+        private void BtnSearchMaterial_Click(object sender, RoutedEventArgs e)
 		{
 			SyncMaterials();
 		}

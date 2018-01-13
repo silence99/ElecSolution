@@ -13,6 +13,7 @@
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary Source="../../style/Generic.xaml"/>
+                    <ResourceDictionary Source="../../style/MasterEventDetailStyle.xaml"/>
                 </ResourceDictionary.MergedDictionaries>
                 <Style TargetType="Label" x:Key="PopupLable">
                     <Setter Property="Foreground" Value="Black"/>
@@ -21,20 +22,64 @@
             </ResourceDictionary>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="8*"/>
-            <RowDefinition Height="18.6*"/>
-            <RowDefinition Height="73.4*"/>
+            <RowDefinition Height="80px"/>
+            <RowDefinition Height="240px"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Column="0" Grid.Row="0" Background="#006f69" Height="80" 
                    Width="auto"  HorizontalAlignment="Stretch" 
                    IsEnabled="{Binding Path=IsPageEnabled}">
             <Label Name="GoBackTitle" MouseLeftButtonUp="GoBack">&lt;返回</Label>
             <Label Name="TeamDetailTitle" Margin="20,0,0,0" Style="{StaticResource SelectedLabel}" HorizontalAlignment="Left">队伍详情</Label>
-            <TextBox Style="{StaticResource TextBoxSearchStyle}" Margin="20,0,0,0" HorizontalAlignment="Left" Text="队员姓名" Width="278" Height="41" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+            <!--<TextBox Style="{StaticResource TextBoxSearchStyle}" Margin="20,0,0,0" HorizontalAlignment="Left" Text="队员姓名" Width="278" Height="41" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>-->
         </DockPanel>
         <DockPanel Grid.Column="0" Grid.Row="1" Background="White" 
                    IsEnabled="{Binding Path=IsPageEnabled}">
-            <Border DockPanel.Dock="Top" Margin="20, 21, 20, 20" CornerRadius="10">
+            <Grid ShowGridLines="False" Name="gridTest" DockPanel.Dock="Top" Background="White" IsEnabled="{Binding Path=IsTeamEditModel, Mode=TwoWay}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="3.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="3.5*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="0" Grid.Row="0" Content="队伍名称"/>
+                <Label Style="{StaticResource SubEventDetailValueLabel}"  Grid.Column="1" Grid.Row="0" Content="{Binding Path=TeamName, Mode=TwoWay}" />
+                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="2" Grid.Row="0" Content="所属单位"/>
+                <Label Style="{StaticResource SubEventDetailValueLabel}"  Grid.Column="3" Grid.Row="0" Content="{Binding Path=TeamDept, Mode=TwoWay}" />
+                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="0" Grid.Row="1" Content="队长姓名"/>
+                <Label Style="{StaticResource SubEventDetailValueLabel}"  Grid.Column="1" Grid.Row="1" Content="{Binding Path=PersonCharge, Mode=TwoWay}" />
+                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="2" Grid.Row="1" Content="队长电话"/>
+                <Label Style="{StaticResource SubEventDetailValueLabel}"  Grid.Column="3" Grid.Row="1" Content="{Binding Path=PersonChargePhone, Mode=TwoWay}" />
+                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Column="0" Grid.Row="2" Content="所属地址"/>
+                <Label Style="{StaticResource SubEventDetailValueLabel}"  Grid.Column="1" Grid.Row="2" Grid.RowSpan="3" Content="{Binding Path=TeamLocale, Mode=TwoWay}" />
+                <!--<StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="0" >
+                    <TextBlock Text="队伍名称" HorizontalAlignment="Left" Padding="0,5,5,5" Margin="20,37,10,0"/>
+                    <TextBox Name="TxtTeamName" Text="{Binding Path=TeamName, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5" VerticalContentAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="1" Grid.Row="0" >
+                    <TextBlock Text="所属单位" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
+                    <TextBox Name="TextDept" Text="{Binding Path=TeamDept, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="2" Grid.Row="0" >
+                    <TextBlock Text="所属地址" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
+                    <TextBox Name="TextAddress" Text="{Binding Path=TeamLocale, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="3" Grid.Row="0" >
+                    <TextBlock Text="队长姓名" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
+                    <TextBox Name="TextPersonCharge" Text="{Binding Path=PersonCharge, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="4" Grid.Row="0" >
+                    <TextBlock Text="队长电话" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
+                    <TextBox Name="TextChargePhone" Text="{Binding Path=PersonChargePhone, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
+                </StackPanel>-->
+            </Grid>
+
+            <!--<Border DockPanel.Dock="Top" Margin="20, 21, 20, 20" CornerRadius="10">
                 <Border.Effect>
                     <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.75"/>
                 </Border.Effect>
@@ -76,16 +121,15 @@
                         </StackPanel>
                     </Grid>
                 </DockPanel>
-            </Border>
+            </Border>-->
         </DockPanel>
         <DockPanel DockPanel.Dock="Top" Grid.Row="2" Background="White" 
                    IsEnabled="{Binding Path=IsPageEnabled}">
             <DockPanel Margin="20,0,20,0"  DockPanel.Dock="Top" >
                 <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
-                    <Button Name="BtnAdd" FontSize="16" Width="82" Height="36" Background="#006f69" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="51,0,0,0" Foreground="White" Content="添加" Style="{StaticResource RoundConnerButtonStyle}" Click="Add_Handler">
-                    </Button>
-                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,40,0" Foreground="White" Content="删除" Style="{StaticResource RoundConnerButtonStyle}" Click="Delete_Handler"></Button>
-                    <Button FontSize="16" Width="88" Height="36" Background="#006f69" HorizontalAlignment="Right" Margin="0,0,20,0" Foreground="White" Content="导入" Style="{StaticResource RoundConnerButtonStyle}" Click="Import_Handler"></Button>
+                    <Button DockPanel.Dock="Right" Margin="0,0,20,0" Content="删除" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Delete_Handler"></Button>
+                    <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Import_Handler"></Button>
+                    <Button Name="BtnAdd" DockPanel.Dock="Right" Margin="0,0,20,0" Content="添加" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Add_Handler"/>
                 </DockPanel>
             </DockPanel>
             <DockPanel DockPanel.Dock="Bottom" LastChildFill="True" Margin="20,5,20,0" Name="PanelData">
@@ -131,17 +175,58 @@
             </DataGrid>
         </DockPanel>
         <Popup 
-            x:Name="PopupEditTeam" 
+            x:Name="PopupEditTeamMember" 
             Width="{Binding Path= PopupWidth}" 
             Height="{Binding Path= PopupHeight}"  
             StaysOpen="True"   
             IsOpen="{Binding Path=IsPopoupOpen}"   
             AllowsTransparency="True"  
             PopupAnimation="Slide"  
-            PlacementTarget="{Binding ElementName=PanelData}"  
-            Placement="Top"
-            HorizontalOffset="360">
-            <DockPanel Background="White">
+            Placement="Center">
+
+            <Grid Background="{StaticResource OpacityBrush}" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid Background="#FFFFFF" Width="600px" Height="400px">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50px"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0">
+                        <Button Style="{StaticResource CancelImageButton}"   Click="ClosePopup_Handler" DockPanel.Dock="Left" Margin="19 0 19 0" />
+                        <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
+                        <Label Style="{StaticResource RightLabel}" FontSize="20px"  DockPanel.Dock="Left" Content="添加队员" Margin="19 0 0 0"/>
+                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Width="88px" Click="EditTeamMember_Handler"/>
+                    </DockPanel>
+                    <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
+                        <Grid Background="#F3F3F3">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="117px"></RowDefinition>
+                                <RowDefinition Height="88px"></RowDefinition>
+                                <RowDefinition Height="88px"></RowDefinition>
+                                <RowDefinition Height="57px"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.35*"/>
+                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.35*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="姓名" Margin="0 22 0 0"/>
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Name="Txt_EditSubEventTitle" Width="260px" Margin="20 18 0 0"  
+                                     Text="{Binding Path=CurrentPerson.Name, Mode=TwoWay}"/>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="电话" Margin="0 0 0 0"/>
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Name="Txt_EditTeamAddress" Width="260px" Margin="20 0 0 0"  
+                                      Text="{Binding Path=CurrentPerson.PhoneNumber, Mode=TwoWay}"/>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="职位"/>
+                            <ComboBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Height="30" VerticalAlignment="Center" Width="260px" HorizontalAlignment="Left" Margin="20 0 0 0"
+                                      ItemsSource="{Binding Path=Places}"
+                                      DisplayMemberPath="Name"
+                                      SelectedValue="{Binding CurrentPerson.Place}"
+                                      SelectedValuePath="Value"/>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+            <!--<DockPanel Background="White">
                 <DockPanel DockPanel.Dock="Top" Height="40">
                     <Label Style="{StaticResource PopupLable}" Width="40" Content="X" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" MouseLeftButtonUp="ClosePopup_Handler"/>
                     <Border Width="1" BorderThickness="1" BorderBrush="#D9D9D9" Margin="0,0,0,0" HorizontalAlignment="Left"/>
@@ -166,7 +251,7 @@
                         </DockPanel>
                     </StackPanel>
                 </Border>
-            </DockPanel>
+            </DockPanel>-->
         </Popup>
     </Grid>
 </Page>

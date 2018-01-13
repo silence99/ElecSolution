@@ -1,4 +1,5 @@
-﻿using Busniess.Services;
+﻿using Business.Services;
+using Busniess.Services;
 using Emergence.Business.ViewModel;
 using Emergence.Common.Model;
 using Emergence_WPF.Comm;
@@ -7,6 +8,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Emergence_WPF
 {
@@ -58,14 +60,42 @@ namespace Emergence_WPF
 			ViewModel.CurrentPerson = new PersonModel().CreateAopProxy();
 			ViewModel.CurrentPerson.Place = ViewModel == null || ViewModel.Places.Count == 0 ? "" : ViewModel.Places[0].Value;
 			ViewModel.CurrentPerson.PlaceName = ViewModel == null || ViewModel.Places.Count == 0 ? "" : ViewModel.Places[0].Name;
-			ViewModel.IsAddMember = true;
+            DependencyObject parent = this.PopupEditTeamMember.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
+            ViewModel.IsAddMember = true;
 			ViewModel.PopupTeamEdit();
 		}
 
 		private void Edit_Handler(object sender, RoutedEventArgs e)
 		{
 			ViewModel.CurrentPerson = (sender as Image).DataContext as PersonModel;
-			ViewModel.IsAddMember = false;
+            DependencyObject parent = this.PopupEditTeamMember.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
+            ViewModel.IsAddMember = false;
 			ViewModel.PopupTeamEdit();
 		}
 

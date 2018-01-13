@@ -29,7 +29,9 @@ namespace Emergence.Business.ViewModel
 		{
 			IsPopoupOpen = true;
 			IsPageEnabled = false;
-		}
+            PopupHeight = ResolutionService.Height;
+            PopupWidth = ResolutionService.Width;
+        }
 
 		public void ClosePopup()
 		{
@@ -48,9 +50,6 @@ namespace Emergence.Business.ViewModel
 			EditTeamButtonLabel = "编辑"; //1.编辑 2.更新
 			CancelEditButtonVisibility = Visibility.Hidden;
 			IsTeamEditModel = false;
-
-			PopupHeight = 360;
-			PopupWidth = 640;
 
 			Places = new ObservableCollection<DictItem>(MetaDataService.TeamMemberPlaces);
 		}
