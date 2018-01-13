@@ -33,6 +33,8 @@ namespace Emergence_WPF.Views
 		public void BindingViewModel(VideoViewModel viewModel)
 		{
 			ViewModel = viewModel;
+			VideoPlay.Play(ViewModel.Uri);
+			VideoPlay.Audio.Volume = 0;
 			//DataContext = ViewModel;
 			//StrategyController = ObjectFactory.GetInstance<VideoStrategyController>(Constant.Services.VideoStrategyController);
 			//StrategyController.RegisterListener(viewModel, "Width", (sender, args) => { ViewModel.Height = ViewModel.Height; });

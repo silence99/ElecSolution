@@ -54,10 +54,10 @@ namespace Emergence_WPF
 			lg.Show();
 		}
 
-		private void Button_Click(object sender, RoutedEventArgs e)
+		private void AddressPopupOpen_Click(object sender, RoutedEventArgs e)
 		{
-			Login lg = new Login();
-			lg.Show();
+			AddressPickerPopup.IsOpen = false;
+			AddressPickerPopup.IsOpen = true;
 		}
 	}
 }

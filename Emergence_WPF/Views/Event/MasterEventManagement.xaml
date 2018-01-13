@@ -245,7 +245,7 @@
                         <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
                         <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" Content="{Binding Path=SubEventEditPopup.PopupName}" Margin="19 0 0 0"/>
                         <Button Content="完成" FontSize="16" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,36,0" Width="88" Height="36" Background="#006f69" Foreground="White">
-                            
+
                         </Button>
                     </DockPanel>
                     <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
@@ -288,8 +288,8 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="40px"/>
                                     </Grid.ColumnDefinitions>
-                                    <Button Style="{StaticResource AddressImageButton}" Grid.Column="1" Click="Button_Click">
-                                        
+                                    <Button Style="{StaticResource AddressImageButton}" Grid.Column="1" Click="AddressPopupOpen_Click">
+
                                     </Button>
                                     <TextBox Name="SubEventEditAddressTextBox" Grid.Column="0" Style="{StaticResource ImageTextBox}" Text="{Binding Path=Current.Locale, Mode=TwoWay}"></TextBox>
                                 </Grid>
@@ -301,15 +301,15 @@
                 </Grid>
             </Border>
         </Popup>
-        <Popup x:Name="pop1" Width="120" Height="120"  
+        <Popup Name="AddressPickerPopup" Width="600" Height="600"  
                            StaysOpen="True"   
-                           IsOpen="{Binding IsAddressPickPopup, Mode=TwoWay}"   
+                           IsOpen="false"   
                            AllowsTransparency="True"  
                            PopupAnimation="Slide"  
                            PlacementTarget="{Binding ElementName= SubEventEditAddressTextBox}"  
-                           Placement="Bottom"  
-                           >
-            <!--<views:AddressPicker/>-->
+                           Placement="Bottom" >
+                <views:AddressPicker Width="500" Height="500"/>
+
         </Popup>
     </Grid>
 </Page>

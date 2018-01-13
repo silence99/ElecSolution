@@ -680,6 +680,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Themes\zuo1.png" />
+    <Content Include="AddressPicker.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="bin\Debug\xml\Emergence.xml" />
     <None Include="BMap.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -1213,7 +1216,9 @@
     <Resource Include="Image\Common\Icon_ThreePopupMap.png" />
     <Resource Include="Image\Common\Icon_ThreePopupSubEvent.png" />
     <Resource Include="Image\Common\Icon_ThreePopupVideo.png" />
-    <Content Include="Views\AddressPicker.html" />
+    <Content Include="Views\AddressPicker.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Image\Common\Icon_Cancel.png" />
     <Resource Include="Image\Common\Icon_Emergence_Large.png" />
     <Resource Include="Image\Common\Icon_Emergence_Middle.png" />
