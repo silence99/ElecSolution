@@ -24,5 +24,10 @@ namespace Emergence_WPF
 		{
 			InitializeComponent();
 		}
-	}
+
+        private void NavigateToMessageNotification_Handler(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new MessageNotificationPage(), UriKind.Relative);
+        }
+    }
 }

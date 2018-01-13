@@ -27,7 +27,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <DockPanel Grid.Column="0" Grid.Row="0" Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" IsEnabled="{Binding Path=IsPageEnabled}">
-            <Label Margin="20,0,0,0">通知事件</Label>
+            <Label Margin="20,0,0,0"  MouseLeftButtonUp="NavigateToMessageNotification_Handler">通知事件</Label>
             <Label Style="{StaticResource SelectedLabel}">历史记录</Label>
         </DockPanel>
         <DockPanel Background="White" Grid.Row="1" Grid.Column="0">

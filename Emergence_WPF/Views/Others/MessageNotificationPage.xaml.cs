@@ -29,5 +29,10 @@ namespace Emergence_WPF
         {
 
         }
+
+        private void NavigateToMessageHistory_Handler(object sender, MouseButtonEventArgs e)
+        {
+            NavigationService.Navigate(new MessageHistoryPage(), UriKind.Relative);
+        }
     }
 }
