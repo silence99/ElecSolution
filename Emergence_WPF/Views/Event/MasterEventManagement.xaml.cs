@@ -57,6 +57,7 @@ namespace Emergence_WPF
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
 			Login lg = new Login();
+            lg.Topmost = true;
 			lg.Show();
 		}
 	}

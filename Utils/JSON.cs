@@ -21,5 +21,23 @@ namespace Utils
             }
 
         }
+        public static string ToJsonString(object obj)
+        {
+            try
+            {
+                if (obj != null)
+                {
+                    return JsonConvert.SerializeObject(obj);
+                }
+                else
+                {
+                    return string.Empty;
+                }
+            }
+            catch (System.Exception e)
+            {
+                return string.Empty;
+            }
+        }
     }
 }

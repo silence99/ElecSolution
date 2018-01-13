@@ -4,11 +4,16 @@ using Emergence.Business.ViewModel;
 using Emergence.Common.Model;
 using Emergence_WPF.Comm;
 using Framework;
+using OfficeOpenXml;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Media;
+using Utils;
 
 namespace Emergence_WPF
 {
@@ -49,13 +54,134 @@ namespace Emergence_WPF
 		{
 			ViewModel.ClosePopup();
 		}
+        
+        private void Import_Handler(object sender, RoutedEventArgs e)
+        {
+            #region choose import file
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Microsoft Excel 2013|*.xlsx";
+            var dlgResult = dialog.ShowDialog();
+            if (dlgResult != DialogResult.OK && dlgResult != DialogResult.Yes)
+            {
+                return;
+            }
+            #endregion
+            #region check file if exists
+            FileStream stream = null;
+            try
+            {
+                //stream = new FileStream(dialog.FileName, FileMode.Open);
+                stream = File.OpenRead(dialog.FileName);
+            }
+            catch (IOException ex)
+            {
+                System.Windows.MessageBox.Show("上传失败，请联系管理员！");
+                return;
+            }
+            #endregion
 
-		private void Import_Handler(object sender, RoutedEventArgs e)
-		{
 
-		}
+            ICollection<PersonModel> teamMembers = new List<PersonModel>();
+            #region read excel
+            using (stream)
+            {
+                ExcelPackage package = new ExcelPackage(stream);
 
-		private void Add_Handler(object sender, RoutedEventArgs e)
+                ExcelWorksheet sheet = package.Workbook.Worksheets[1];
+                #region check excel format
+                if (sheet == null)
+                {
+                    System.Windows.MessageBox.Show("Excel文件格式不正确!");
+                    return;
+                }
+                if (!sheet.Cells[1, 1].Value.Equals("姓名") ||
+                     !sheet.Cells[1, 2].Value.Equals("手机号") ||
+                     !sheet.Cells[1, 3].Value.Equals("职位"))
+                {
+                    System.Windows.MessageBox.Show("Excel文件格式不正确!");
+                    return;
+                }
+                #endregion
+
+                #region get last row index
+                int lastRow = sheet.Dimension.End.Row;
+                while (sheet.Cells[lastRow, 1].Value == null)
+                {
+                    lastRow--;
+                }
+                #endregion
+
+                var teamMemberPlace = MetaDataService.TeamMemberPlaces;
+                bool uploadFailed = false;
+                string uploadFailedStr = "上传失败，以下行数据有误：";
+
+                #region read datas
+                for (int i = 2; i <= lastRow; i++)
+                {
+                    object value;
+                    PersonModel pm = new PersonModel();
+                    value = sheet.Cells[i, 1].Value;
+                    if (value != null && CheckString(value.ToString(),0,28))
+                    {
+                        pm.Name = value.ToString();
+                    }
+                    else
+                    {
+                        uploadFailedStr += i.ToString() + ",";
+                        uploadFailed = true;
+                        continue;
+                    }
+
+                    value = sheet.Cells[i, 2].Value;
+                    if (value != null && CheckPhoneNumber(value.ToString()))
+                    {
+                        pm.PhoneNumber = value.ToString();
+                    }
+                    else
+                    {
+                        uploadFailedStr += i.ToString() + ",";
+                        uploadFailed = true;
+                        continue;
+                    }
+
+                    value = sheet.Cells[i, 3].Value;
+                    if (value != null && teamMemberPlace.Where(a => a.Name == value.ToString()).Count() > 0)
+                    {
+                        pm.PlaceName = value.ToString();
+                    }
+                    else
+                    {
+                        uploadFailedStr += i.ToString() + ",";
+                        uploadFailed = true;
+                        continue;
+                    }
+
+                    teamMembers.Add(pm);
+                }
+
+                if (teamMembers.Count() < 1)
+                {
+                    System.Windows.MessageBox.Show("文档内没有有效的数据，请检查后上传!");
+                }
+                
+                if (uploadFailed )
+                {
+                    System.Windows.MessageBox.Show(uploadFailedStr + "请检查后上传!");
+                    return;
+                }
+
+                var uploadString = JSONHelper.ToJsonString(teamMembers.Select(a => new
+                {
+                    name = a.Name,
+                    phoneNumber = a.PhoneNumber,
+                    place = a.PlaceName
+                }).ToArray());
+                #endregion
+            }
+            #endregion
+        }
+
+        private void Add_Handler(object sender, RoutedEventArgs e)
 		{
 			ViewModel.CurrentPerson = new PersonModel().CreateAopProxy();
 			ViewModel.CurrentPerson.Place = ViewModel == null || ViewModel.Places.Count == 0 ? "" : ViewModel.Places[0].Value;
@@ -178,5 +304,15 @@ namespace Emergence_WPF
 			NavigationService.Navigate(new Uri(@".\Views\Others\TeamListPage.xaml", UriKind.Relative));
 			NavigationService.RemoveBackEntry();
 		}
-	}
+
+        private bool CheckPhoneNumber(string Number)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(Number, @"^[1]+[3,5,7,8,9]+\d{9}");
+        }
+
+        private bool CheckString(string str, int minStrLength, int maxStrLength)
+        {
+            return !string.IsNullOrEmpty(str) && str.Length >= minStrLength && str.Length <= maxStrLength;
+        }
+    }
 }

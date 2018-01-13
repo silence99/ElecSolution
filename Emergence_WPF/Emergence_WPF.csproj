@@ -143,6 +143,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Comm\AttachmentPage.cs" />
     <Compile Include="Comm\ClusteredColumnChart.cs" />
     <Compile Include="Comm\Converters\Int2StringConverter.cs" />
     <Compile Include="Comm\FormControlHost.cs" />

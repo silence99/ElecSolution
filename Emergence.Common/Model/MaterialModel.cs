@@ -9,10 +9,12 @@ namespace Emergence.Common.Model
 		[JsonProperty("id")]
 		public virtual int ID { get; set; }
 		[JsonProperty("bigMaterials")]
-		public virtual int IsBigMaterials { get; set; }
-		[JsonProperty("consumables")]
-		public virtual int IsConsumable { get; set; }
-		[JsonProperty("materialsDept")]
+        public virtual int IsBigMaterials { get; set; }
+        public virtual string IsBigMaterialsName { get; set; }
+        [JsonProperty("consumables")]
+        public virtual int IsConsumable { get; set; }
+        public virtual string IsConsumableName { get; set; }
+        [JsonProperty("materialsDept")]
 		public virtual string MaterialsDept { get; set; }
 		[JsonProperty("materialsDeptName")]
 		public virtual string MaterialsDeptName { get; set; }
