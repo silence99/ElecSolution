@@ -1,16 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using WebBrowserOnTransparentWindow;
 
@@ -19,11 +10,11 @@ namespace Emergence_WPF
 	/// <summary>
 	/// Map.xaml 的交互逻辑
 	/// </summary>
-	public partial class Map : Window
+	public partial class SubEventsMapV2 : Window
 	{
 		WebBrowser Browser { get; set; }
 		public List<Tuple<Point, string, string>> Data { get; set; }
-		public Map()
+		public SubEventsMapV2()
 		{
 			InitializeComponent();
 			WebBrowserOverlay wbo = new WebBrowserOverlay(MapContainer);
