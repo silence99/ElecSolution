@@ -32,7 +32,7 @@
         </DockPanel>
         <DockPanel Background="White" Grid.Row="1" Grid.Column="0">
             <Label Margin="39,0,0,0" DockPanel.Dock="Left" Content="历史列表" FontSize="20" Foreground="Black" Padding="0"/>
-            <Image Margin="0,0,50,0" HorizontalAlignment="Right" Width="28" Height="37" Source="../../Image/Common/Icon_Delete.png"/>
+            <!--<Image Margin="0,0,50,0" HorizontalAlignment="Right" Width="28" Height="37" Source="../../Image/Common/Icon_Delete.png"/>-->
         </DockPanel>
         <DockPanel Grid.Row="2" Grid.Column="0" Background="White">
             <DockPanel DockPanel.Dock="Bottom" LastChildFill="True" Margin="20,5,20,15">
@@ -59,7 +59,7 @@
                     BorderBrush="#dcdcdc"
                     CanUserAddRows="False">
                 <DataGrid.Columns >
-                    <DataGridTemplateColumn Width="40">
+                    <!--<DataGridTemplateColumn Width="40">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <CheckBox Width="16" IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"
@@ -68,12 +68,13 @@
                                 </CheckBox>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="标题" Width="290" />
-                    <DataGridTextColumn  Header="创建时间" Width="209" />
-                    <DataGridTextColumn  Header="分类" Width="200" />
-                    <DataGridTextColumn  Header="关键字" Width="200" />
-                    <DataGridTextColumn  Header="内容" Width="*" />
+                    </DataGridTemplateColumn>-->
+                    <DataGridTextColumn Header="所属子事件" Width="*" />
+                    <DataGridTextColumn  Header="发送类型" Width="*" />
+                    <DataGridTextColumn  Header="预设选择" Width="*" />
+                    <DataGridTextColumn  Header="执行时间" Width="*" />
+                    <DataGridTextColumn  Header="内容" Width="3*" />
+                    <!--<DataGridTextColumn  Header="内容" Width="*" />
                     <DataGridTextColumn  Header="执行时间" Width="200" />
                     <DataGridTextColumn  Header="所属子事件" Width="210" />
                     <DataGridTemplateColumn Width="50">
@@ -82,7 +83,7 @@
                                 <Image Source="../../Image/Common/Icon_edit.png" Width="25" Height="25" Tag="{Binding}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    </DataGridTemplateColumn>-->
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

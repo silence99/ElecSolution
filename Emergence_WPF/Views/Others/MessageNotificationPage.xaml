@@ -39,6 +39,7 @@
             </DockPanel>
             <DockPanel Height="70px" DockPanel.Dock="Top">
                 <Label FontSize="20px" DockPanel.Dock="Left" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="Black" Content="预设内容" Margin="40 0 0 0"/>
+                <Button Name="BtnSendMessage" DockPanel.Dock="Right" Margin="0,0,40,0" Content="发送" Style="{StaticResource RoundConnerGridOperationButtonStyle}"/>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top">
                 <TextBox Margin="20 0 0 20" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsEnabled="False"></TextBox>
