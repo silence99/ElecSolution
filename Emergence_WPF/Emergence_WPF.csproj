@@ -238,6 +238,9 @@
     <Compile Include="Views\Event\AddMasterEvent.xaml.cs">
       <DependentUpon>AddMasterEvent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Event\SubEventPopup_VideoV2.xaml.cs">
+      <DependentUpon>SubEventPopup_VideoV2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Event\SubEventsMapV2.xaml.cs">
       <DependentUpon>SubEventsMapV2.xaml</DependentUpon>
     </Compile>
@@ -440,6 +443,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Event\AddMasterEvent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Event\SubEventPopup_VideoV2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

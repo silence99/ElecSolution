@@ -100,6 +100,7 @@
     <Compile Include="Mappers\TeamStatisticsModelMapper.cs" />
     <Compile Include="Mappers\WeatherMapper.cs" />
     <Compile Include="Services\AnnouncementSvr\AnnouncementService.cs" />
+    <Compile Include="Services\CameraService.cs" />
     <Compile Include="Services\CommonSvr\MetaDataService.cs" />
     <Compile Include="Services\EventSvr\MasterEventService.cs" />
     <Compile Include="Services\EventSvr\SubeventService.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="ViewModel\MaterialListPageViewModel.cs" />
     <Compile Include="ViewModel\MaterialsStatisticsViewModel.cs" />
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
+    <Compile Include="ViewModel\SubEventPopupVideoViewModel.cs" />
     <Compile Include="ViewModel\TeamDetailPageViewModel.cs" />
     <Compile Include="ViewModel\TeamListPageViewModel.cs" />
     <Compile Include="ViewModel\TeamStatisticsViewModel.cs" />
