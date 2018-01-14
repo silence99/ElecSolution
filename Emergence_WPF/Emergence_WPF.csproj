@@ -950,6 +950,49 @@
     <Resource Include="readme.txt" />
     <Resource Include="Image\Common\Icon_Setting.png" />
     <Resource Include="Image\Common\Icon_Team.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\0.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\1.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\10.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\11.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\12.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\13.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\14.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\15.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\16.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\17.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\18.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\19.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\2.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\20.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\21.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\22.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\23.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\24.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\25.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\26.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\27.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\28.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\29.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\3.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\30.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\301.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\302.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\31.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\32.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\4.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\49.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\5.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\53.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\54.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\55.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\56.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\57.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\58.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\6.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\7.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\8.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\9.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\99.png" />
     <Content Include="Views\AddressPicker.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -986,9 +1029,7 @@
       <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Image\MainPage\WeatherIcons\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>if not exist $(TargetDir)lib (mkdir $(TargetDir)lib&amp;&amp;xcopy $(SolutionDir)ThirdParty\lib $(TargetDir)lib /E)

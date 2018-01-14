@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework", "Framework\Framework.csproj", "{CC84392E-728A-40C7-BF45-C6F83F615C0E}"
 EndProject
@@ -12,8 +12,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Busniess\Business.csproj", "{579FC0BF-C4AA-4B0B-80DA-5B7580D6618C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Emergence.Common", "Emergence.Common\Emergence.Common.csproj", "{FA639882-2D69-4822-81D3-4764F08AE196}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{C4814170-46F1-40E6-8949-BC5C2259BB30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +39,6 @@ Global
 		{FA639882-2D69-4822-81D3-4764F08AE196}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA639882-2D69-4822-81D3-4764F08AE196}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA639882-2D69-4822-81D3-4764F08AE196}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C4814170-46F1-40E6-8949-BC5C2259BB30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4814170-46F1-40E6-8949-BC5C2259BB30}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4814170-46F1-40E6-8949-BC5C2259BB30}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4814170-46F1-40E6-8949-BC5C2259BB30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
