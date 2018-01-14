@@ -4,48 +4,83 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" 
-             d:DesignHeight="160" d:DesignWidth="280">
-    <Grid Background="White">
+             d:DesignHeight="120" d:DesignWidth="240">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="WhiteLabel" TargetType="Label">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="FontFamily" Value="Microsoft Sans Serif"/>
+                <Setter Property="Padding" Value="0 0 0 0"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="Black">
         <Grid.RowDefinitions>
-            <RowDefinition Height="90"></RowDefinition>
-            <RowDefinition Height="90"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="70"></ColumnDefinition>
-            <ColumnDefinition Width="70"></ColumnDefinition>
-            <ColumnDefinition Width="70"></ColumnDefinition>
+            <ColumnDefinition Width="5"></ColumnDefinition>
+            <ColumnDefinition Width="80"></ColumnDefinition>
+            <ColumnDefinition Width="80"></ColumnDefinition>
+            <ColumnDefinition Width="5"></ColumnDefinition>
             <ColumnDefinition Width="70"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Image Name="TodayIcon" Source="{Binding Path=ImageFullPath}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" />
-        <DockPanel Grid.Row="0" Grid.Column="2" VerticalAlignment="Bottom" >
-            <Label Content="{Binding Path=TempDisplay}" DockPanel.Dock="Top" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="{Binding Path=WeatherName}" DockPanel.Dock="Top" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="{Binding Path=TempDisplay}" DockPanel.Dock="Top" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="{Binding Path=TempLowHighDisplay}" DockPanel.Dock="Top" Foreground="White" FontFamily="Microsoft Sans Serif"/>
+        <DockPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
+            <Label Style="{StaticResource WhiteLabel}" DockPanel.Dock="Top" FontSize="10px" Margin="0 7 10 4" Content="星期三"></Label>
+            <DockPanel DockPanel.Dock="Top" Width="50px">
+                <Label Style="{StaticResource WhiteLabel}" DockPanel.Dock="Left" FontSize="30px" Content="26" Padding="0 0 0 0"></Label>
+                <Image DockPanel.Dock="Left" Source="/Image/MainPage/WeatherIcons/Common/symbol_temp.png" Width="12px" Height="25px"/>
+            </DockPanel>
+            <Label Style="{StaticResource WhiteLabel}" DockPanel.Dock="Top" FontSize="8px" Content="多云" Margin="0 0 10 0"></Label>
         </DockPanel>
-        <DockPanel Name="Af1Panel" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" >
-            <Image Name="Af1Icon" DockPanel.Dock="Top" Source="{Binding Path=Daily[0].ImageFullPath}" Width="70"/>
-            <Label Content="明天" DockPanel.Dock="Top" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="{Binding Path=Daily[0].WeatherName}" DockPanel.Dock="Top" Name="Af1" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="{Binding Path=Daily[0].TempLowHighDisplay}" DockPanel.Dock="Top" Name="Af1Degree" HorizontalAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
+        <Image Grid.Row="0" Grid.Column="2" Source="/Image/MainPage/WeatherIcons/11.png" Width="70px" Height="55px"/>
+        <Border Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" BorderBrush="#FFFFFF" BorderThickness="0 0 0 1" Margin="11 0 11 0" />
+        <DockPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" LastChildFill="False" Margin="-10 0 0 0">
+            <DockPanel DockPanel.Dock="Top" Height="20px">
+                <Image DockPanel.Dock="Left" Source="/Image/MainPage/WeatherIcons/Common/low_temp.png" Width="12px" Height="25px"/>
+                <Label Style="{StaticResource WhiteLabel}" DockPanel.Dock="Left" FontSize="12px" Content="22" Margin="0 3 0 0"></Label>
+                <Label Style="{StaticResource WhiteLabel}" DockPanel.Dock="Left" FontSize="8px" Content="度" Margin="0 6 0 0"></Label>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top" Height="20px">
+                <Image DockPanel.Dock="Left" Source="/Image/MainPage/WeatherIcons/Common/high_temp.png" Width="12px" Height="12px"/>
+                <Label Style="{StaticResource WhiteLabel}" DockPanel.Dock="Left" FontSize="12px" Content="22" Margin="0 3 0 0"></Label>
+                <Label Style="{StaticResource WhiteLabel}" DockPanel.Dock="Left" FontSize="8px" Content="度" Margin="1 6 0 0"></Label>
+            </DockPanel>
         </DockPanel>
-        <DockPanel Grid.Row="1" Grid.Column="1">
-            <Image Name="Af2Icon" DockPanel.Dock="Top" Source="{Binding Path=Daily[1].ImageFullPath}" Width="70"/>
-            <Label Content="后天" DockPanel.Dock="Top" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="{Binding Path=Daily[1].WeatherName}" DockPanel.Dock="Top" Name="Af2"  HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="{Binding Path=Daily[1].TempLowHighDisplay}" DockPanel.Dock="Top" Name="Af2Degree" HorizontalAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
+        <DockPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" LastChildFill="False" Margin="-10 0 0 0">
+            <DockPanel DockPanel.Dock="Top" Height="20px">
+                <Image DockPanel.Dock="Left" Source="/Image/MainPage/WeatherIcons/Common/sun_rise.png" Width="15px" Height="25px"/>
+                <Label Style="{StaticResource WhiteLabel}" DockPanel.Dock="Left" FontSize="12px" Content="7:22" Margin="0 3 0 0"></Label>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top" Height="20px">
+                <Image DockPanel.Dock="Left" Source="/Image/MainPage/WeatherIcons/Common/humidity.png" Width="12px" Height="12px"/>
+                <Label Style="{StaticResource WhiteLabel}" DockPanel.Dock="Left" FontSize="12px" Content="76%" Margin="3 3 0 0"></Label>
+            </DockPanel>
         </DockPanel>
-        <DockPanel Grid.Row="1" Grid.Column="2">
-            <Image Name="Af3Icon" DockPanel.Dock="Top" Source="{Binding Path=Daily[2].ImageFullPath}" Width="70" Height="auto"/>
-            <Label Content="后天" DockPanel.Dock="Top" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="{Binding Path=Daily[2].WeatherName}" DockPanel.Dock="Top" Name="Af3"  HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="{Binding Path=Daily[2].TempLowHighDisplay}" DockPanel.Dock="Top" Name="Af3Degree" HorizontalAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-        </DockPanel>
-        <DockPanel Name="Af4Panel" Grid.Row="1" Grid.Column="3" HorizontalAlignment="Center" >
-            <Image Name="Af4Icon" DockPanel.Dock="Top" Source="{Binding Path=Daily[3].ImageFullPath}" Width="70"/>
-            <Label Content="明天" DockPanel.Dock="Top" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="{Binding Path=Daily[3].WeatherName}" DockPanel.Dock="Top" Name="Af4" HorizontalContentAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-            <Label Content="{Binding Path=Daily[3].TempLowHighDisplay}" DockPanel.Dock="Top" Name="Af4Degree" HorizontalAlignment="Center" Foreground="White" FontFamily="Microsoft Sans Serif"/>
-        </DockPanel>
+        <Border BorderBrush="#FFFFFF" BorderThickness="1" CornerRadius="5" Grid.Row="0" Grid.Column="4" Grid.RowSpan="2" Margin="0 10 20 10">
+            <DockPanel HorizontalAlignment="Center" LastChildFill="False">
+                <Label Style="{StaticResource WhiteLabel}" DockPanel.Dock="Top" FontSize="8px" Content="星期四" Margin="0 3 0 0"></Label>
+                <Image  DockPanel.Dock="Top" Source="/Image/MainPage/WeatherIcons/13.png" Width="15px" Height="15px" Margin="0 3 0 0"/>
+                <DockPanel DockPanel.Dock="Top" Margin="0 3 0 0">
+                    <Label Style="{StaticResource WhiteLabel}" DockPanel.Dock="Left" FontSize="12px" Content="27" Margin="0 3 0 0"></Label>
+                    <Label Style="{StaticResource WhiteLabel}" DockPanel.Dock="Left" FontSize="8px" Content="度" Margin="1 6 0 0"></Label>
+                </DockPanel>
+                <Grid DockPanel.Dock="Top" Height="16px" Margin="0 3 0 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Grid.Column="0" BorderBrush="#FFFFFF" BorderThickness="0 0 1 0"/>
+                </Grid>
+                <DockPanel DockPanel.Dock="Top" Margin="0 3 0 0">
+                    <Label Style="{StaticResource WhiteLabel}" DockPanel.Dock="Left" FontSize="12px" Content="28" Margin="0 3 0 0"></Label>
+                    <Label Style="{StaticResource WhiteLabel}" DockPanel.Dock="Left" FontSize="8px" Content="度" Margin="1 6 0 0"></Label>
+                </DockPanel>
+            </DockPanel>
+        </Border>
+
     </Grid>
 </UserControl>

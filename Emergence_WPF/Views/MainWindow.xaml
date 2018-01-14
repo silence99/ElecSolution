@@ -7,7 +7,7 @@
         mc:Ignorable="d" 
         d:DesignHeight="1080" d:DesignWidth="1920"
         WindowStartupLocation="CenterScreen" MinHeight="630" MinWidth="1000"
-        Icon="/Image/bbbb.ico"
+        Icon="/Image/Common/bbbb.ico"
         Title="应急指挥中心管理平台" Loaded="Window_Loaded"
         ResizeMode="{Binding Path=ResizeMode, Mode=TwoWay}"
         WindowState="{Binding Path=WindowState, Mode=TwoWay}"

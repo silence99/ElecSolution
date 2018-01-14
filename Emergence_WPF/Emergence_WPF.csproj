@@ -547,6 +547,7 @@
     <None Include="BMap.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Resource Include="Image\Common\bbbb.ico" />
     <Content Include="DebugImage\1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -993,6 +994,11 @@
     <Resource Include="Image\MainPage\WeatherIcons\8.png" />
     <Resource Include="Image\MainPage\WeatherIcons\9.png" />
     <Resource Include="Image\MainPage\WeatherIcons\99.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\Common\high_temp.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\Common\humidity.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\Common\low_temp.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\Common\sun_rise.png" />
+    <Resource Include="Image\MainPage\WeatherIcons\Common\symbol_temp.png" />
     <Content Include="Views\AddressPicker.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

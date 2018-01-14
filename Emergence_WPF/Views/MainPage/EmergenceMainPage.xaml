@@ -170,7 +170,7 @@
                     </LinearGradientBrush>
                 </StackPanel.Background>
 
-                <TextBlock Margin="10,13,0,0" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif">公告</TextBlock>
+                <TextBlock Margin="10,13,0,0" Foreground="White" FontSize="20" Padding="0 0 0 0" FontFamily="Microsoft Sans Serif">公告</TextBlock>
             </StackPanel>
             <Border>
                 <DataGrid  DockPanel.Dock="Top" Name="Grid_Notice" Style="{StaticResource Grid_WithOutHeader_Black}" ItemsSource="{Binding Path=NotificationList,Mode=TwoWay}" >
@@ -190,11 +190,22 @@
                 </DataGrid>
             </Border>
         </DockPanel>
-        <Viewbox x:Name="ViewBox_MainPageWeather" Grid.Row="1" Grid.Column="1" Margin="5,5,5,5"  Stretch="Fill">
-            <Canvas Width="280px" Height="180px">
-                <local:Weather Canvas.Left="0" Canvas.Top="0" />
-            </Canvas>
-        </Viewbox>
+        <DockPanel Grid.Row="1" Grid.Column="1" Margin=" 5 5 5 5 ">
+            <StackPanel DockPanel.Dock="Top" Margin="0 0 0 0" Height="48" Width="160" Orientation="Horizontal" HorizontalAlignment="Left">
+                <StackPanel.Background>
+                    <LinearGradientBrush StartPoint="1,0.5" EndPoint="0,0.5" MappingMode="RelativeToBoundingBox">
+                        <GradientStop Color="#99FFFFFF" Offset="1"/>
+                        <GradientStop/>
+                    </LinearGradientBrush>
+                </StackPanel.Background>
+                <TextBlock Margin="10,13,0,0" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif">天气预报</TextBlock>
+            </StackPanel>
+            <Viewbox DockPanel.Dock="Top" x:Name="ViewBox_MainPageWeather" Grid.Row="1" Grid.Column="1" Margin="0"  Stretch="Fill">
+                <Canvas Width="240px" Height="120px">
+                    <local:Weather Canvas.Left="0" Canvas.Top="0" />
+                </Canvas>
+            </Viewbox>
+        </DockPanel>
         <Viewbox  Margin="5 5 5 5" Grid.Column="1" Grid.Row="2">
             <charts:MaterialsChart Width="280px" Height="180" Foreground="White" Background="Black"/>
         </Viewbox>
