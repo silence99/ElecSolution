@@ -25,9 +25,9 @@ namespace Emergence_WPF
 
 		private void LoginButton_Click(object sender, RoutedEventArgs e)
 		{
-			string userName = this.txtUserName.Text.Trim();
+			string userName = this.txtUserName.Text;
 			//#if Release
-			string passwordStr = this.txtPassword.Password.Trim();
+			string passwordStr = this.txtPassword.Password;
 			if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(passwordStr))
 			{
 				MessageBox.Show("用户名或密码不能为空");

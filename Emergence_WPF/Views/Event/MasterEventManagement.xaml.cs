@@ -38,13 +38,16 @@ namespace Emergence_WPF
 		{
 			var dg = e.Source as DataGrid;
             MasterEvent me = dg.SelectedItem as MasterEvent;
-            if (ResolutionService.Width < 1366)
+            if (me != null && me.ID >= 0)
             {
-                this.NavigationService.Navigate(new MasterEventDetail_1024(me));
-            }
-            else
-            {
-                this.NavigationService.Navigate(new MasterEventDetail(me));
+                if (ResolutionService.Width < 1366)
+                {
+                    this.NavigationService.Navigate(new MasterEventDetail_1024(me));
+                }
+                else
+                {
+                    this.NavigationService.Navigate(new MasterEventDetail(me));
+                }
             }
         }
 

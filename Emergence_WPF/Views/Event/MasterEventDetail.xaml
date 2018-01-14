@@ -41,7 +41,7 @@
                 <Border Name="LeftGridRow1Border" BorderBrush="#4D9A96" BorderThickness="0 0 0 2" Grid.Column="0" Grid.Row="0">
                     <DockPanel>
                         <Button Style="{StaticResource BackImageButton}" Command="NavigationCommands.BrowseBack" DockPanel.Dock="Left" Margin="10 0 10 0" />
-                        <Button Style="{StaticResource ArchiveImageButton}" DockPanel.Dock="Right" Margin="10 0 10 0"/>
+                        <Button Style="{StaticResource ArchiveImageButton}" DockPanel.Dock="Right" Margin="10 0 10 0" Command="{Binding Path=MasterEventArchiveCommand}"/>
                         <Label DockPanel.Dock="Left" FontSize="20px" Style="{StaticResource LeftLabel}">主事件详情</Label>
                     </DockPanel>
                 </Border>
@@ -81,7 +81,9 @@
                         <Label DockPanel.Dock="Top" Style="{StaticResource LeftLabel}" VerticalAlignment="Top" FontSize="16px" Content="队伍展示"/>
                         <Border DockPanel.Dock="Top" BorderBrush="#4D9A96" BorderThickness="0 2 0 0" Grid.Column="0" Grid.Row="2"/>
                         <Grid Name="Grid_ArmyChart" DockPanel.Dock="Bottom">
-                            <chart:WheelChart Width="100" Radius="50" Height="100" Value="90" Total="100" InnerDiameter="80"/>
+                            <Viewbox>
+                                <chart:WheelChart Width="100" Radius="50" Height="100" Value="90" Total="100" InnerDiameter="80"/>
+                            </Viewbox>
                         </Grid>
                     </DockPanel>
                 </Border>
