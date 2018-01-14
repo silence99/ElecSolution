@@ -37,7 +37,7 @@ namespace Busniess.Services
 			}
 		}
 
-		public TeamStatisticsViewModel GetTeamStatistics()
+		public TeamStatisticsModel GetTeamStatistics()
 		{
 			var response = GetTeamStatisticsData();
 			if (response.Code != 1)
@@ -47,9 +47,7 @@ namespace Busniess.Services
 			}
 			else
 			{
-				TeamStatisticsViewModel viewModel = new TeamStatisticsViewModel();
-				new TeamStatisticsModelMapper().MapToViewModel(response.Result, viewModel);
-				return viewModel;
+				return response.Result;
 			}
 		}
 	}

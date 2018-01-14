@@ -21,13 +21,26 @@
         <DockPanel Grid.Column="0">
             <Label DockPanel.Dock="Bottom" Content="已用人数/总人数" FontSize="12px"  Foreground="White" Margin="0 -20 0 0"/>
             <chart:WheelChart  DockPanel.Dock="Bottom" Width="140" Height="140"
-                          Value="{Binding TeamUseTotal}" Total="{Binding TeamTotal}" Radius="70" InnerDiameter="100">
+                          Value="{Binding TeamUseTotal}" 
+                               Total="{Binding TeamTotal}" 
+                               Radius="50" InnerDiameter="60"
+                               InnerCircleColor="Black" 
+                               Foreground="White" 
+                               Background="Black"
+                               SectorColor="#F4BB17"
+                               RestSectorColor="#2EA65E ">
         </chart:WheelChart>
         </DockPanel>
         <DockPanel Grid.Column="1">
             <Label DockPanel.Dock="Bottom" Content="已用队伍/总队伍" FontSize="12px"  Foreground="White" Margin="0 -20 0 0"/>
             <chart:WheelChart Width="140" Height="140" 
-                          Value="{Binding TeamMemberUseTotal}" Total="{Binding TeamMemberTotal}" Radius="70" InnerDiameter="100">
+                          Value="{Binding TeamMemberUseTotal}" Total="{Binding TeamMemberTotal}"
+                               Radius="50" InnerDiameter="60"
+                               InnerCircleColor="Black" 
+                               Foreground="White" 
+                               Background="Black"
+                               SectorColor="#F4BB17"
+                               RestSectorColor="#2EA65E ">
             </chart:WheelChart>
         </DockPanel>
     </Grid>

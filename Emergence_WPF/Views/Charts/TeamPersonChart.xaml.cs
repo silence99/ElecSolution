@@ -1,5 +1,5 @@
 ﻿using Busniess.Services;
-using Emergence.Business.ViewModel;
+using Emergence.Common.Model;
 using Emergence_WPF.Util;
 using Framework;
 using System.Windows.Controls;
@@ -11,7 +11,7 @@ namespace Emergence_WPF.Views.Charts
 	/// </summary>
 	public partial class TeamPersonChart : UserControl
 	{
-		private TeamStatisticsViewModel ViewModel { get; set; }
+		private TeamStatisticsModel ViewModel { get; set; }
 		public TeamPersonChart()
 		{
 			InitializeComponent();
@@ -24,8 +24,6 @@ namespace Emergence_WPF.Views.Charts
 				var service = ServiceManager.Instance.GetService<TeamStatisticsService>(Constant.Services.TeamStatisticsService);
 				ViewModel = service.GetTeamStatistics().CreateAopProxy();
 				DataContext = ViewModel;
-				ViewModel.TeamMemberUseTotal = 5;
-				ViewModel.TeamUseTotal = 5;
 			}
 			catch
 			{
