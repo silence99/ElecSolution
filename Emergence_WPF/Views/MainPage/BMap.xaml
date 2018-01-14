@@ -15,14 +15,5 @@
         <WindowsFormsHost Grid.RowSpan="2">
             <form:WebBrowser x:Name="browser" Url="BMap.html"/>
         </WindowsFormsHost>
-        <StackPanel Grid.Row="1" Visibility="Collapsed" Orientation="Horizontal" >
-            <TextBlock Text="经度" VerticalAlignment="Center"/>
-            <TextBox x:Name="jin" VerticalAlignment="Center" Text="119.931298"/>
-            <TextBlock Text="纬度" VerticalAlignment="Center"/>
-            <TextBox x:Name="wei" VerticalAlignment="Center" Text="28.469722"/>
-            <Button Content="移动" Click="Move_Click" VerticalAlignment="Center"/>
-            <Button Content="标注" Click="Mark_Click" VerticalAlignment="Center"/>
-            <Button Content="清空" Click="Clear_Click" VerticalAlignment="Center"/>
-        </StackPanel>
     </Grid>
 </UserControl>

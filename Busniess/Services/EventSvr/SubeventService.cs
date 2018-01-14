@@ -10,14 +10,29 @@ namespace Busniess.Services
 {
 	public class SubeventService
 	{
+		public static int MAX = 1000;
 		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+
+		public SubEvent[] GetAllSubevents(int mainEventId)
+		{
+			var response = GetSubevents(1, MAX, mainEventId);
+
+			if (response == null || response.Code != 1)
+			{
+				return null;
+			}
+			else
+			{
+				return response.Result.Data ?? new SubEvent[0];
+			}
+		}
 
 		public EmergencyHttpResponse<EmergencyHttpListResult<SubEvent>> GetSubevents(int pageIndex, int pageSize, int mainEventId)
 		{
 			return GetSubevents(pageIndex, pageSize, mainEventId, string.Empty);
 		}
 
-		public EmergencyHttpResponse<EmergencyHttpListResult<SubEvent>> GetSubevents(int pageIndex, int pageSize, int mainEventId, string title)
+		public EmergencyHttpResponse<EmergencyHttpListResult<SubEvent>> GetSubevents(int pageIndex, int pageSize, int mainEventId, string searchInfo)
 		{
 			try
 			{
@@ -27,7 +42,7 @@ namespace Busniess.Services
 														{ "pageIndex", pageIndex.ToString() },
 														{ "pageSize", pageSize.ToString() },
 														{ "mainEventId", mainEventId.ToString() },
-														{ "searchInfo", title }
+														{ "searchInfo", searchInfo }
 													};
 				var result = RequestControl.Request(serviceName, "GET", pairs);
 				if (result.StatusCode == 200)

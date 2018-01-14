@@ -43,19 +43,11 @@ namespace Emergence_WPF
 
 			//}
 
-			browser.Navigate(new Uri(Path.GetFullPath(@"BMap.html")));
+			browser.Navigate(new Uri(Path.GetFullPath(@"Views/MainPage/BMap.html")));
 			browser.ScriptErrorsSuppressed = false;
-			
-		}
-
-		private void Move_Click(object sender, RoutedEventArgs e)
-		{
-			object[] objs = new object[2] {
-				double.Parse(this.jin.Text),
-				double.Parse(this.wei.Text)};
-			browser.Document.InvokeScript("MoveToPoint", objs);
 
 		}
+
 		public void Bind(string jing, string wei)
 		{
 			object[] objs = new object[2] {
@@ -70,22 +62,20 @@ namespace Emergence_WPF
 			};
 			browser.Document.InvokeScript("MoveToPoint", objs);
 		}
-		private void Mark_Click(object sender, RoutedEventArgs e)
+
+		public void RemoveMarkers()
 		{
-			// 119.931298,28.469722
-			object[] objs = new object[2] {
-				double.Parse("119.931298"),
-				double.Parse("28.469722")};
-			browser.Document.InvokeScript("addMarker", objs);
-			object[] objs1 = new object[2] {
-				double.Parse("119.931298"),
-				double.Parse("28.469722")};
-			browser.Document.InvokeScript("addMarker", objs1);
+			browser.Document.InvokeScript("removeOverlay");
 		}
 
-		private void Clear_Click(object sender, RoutedEventArgs e)
+		public void MoveToCenter(double longitude, double latitude)
 		{
-			browser.Document.InvokeScript("removeOverlay", null);
+			browser.Document.InvokeScript("MoveToPoint", new object[] { longitude, latitude });
+		}
+
+		public void MarkPoint(double jing, double wei, string title, string details)
+		{
+			browser.Document.InvokeScript("addMarker", new object[] { jing, wei, 0, title, details });
 		}
 
 		private void UserControl_Unloaded(object sender, RoutedEventArgs e)

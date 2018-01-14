@@ -4,6 +4,7 @@ using Busniess.Strategies;
 using Emergence.Business.ViewModel;
 using Emergence.Common.Model;
 using Emergence_WPF.Comm;
+using Emergence_WPF.Views;
 using Framework;
 using System;
 using System.Linq;
@@ -37,19 +38,19 @@ namespace Emergence_WPF
 		private void Grid_MasterEvent_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			var dg = e.Source as DataGrid;
-            MasterEvent me = dg.SelectedItem as MasterEvent;
-            if (me != null && me.ID >= 0)
-            {
-                if (ResolutionService.Width < 1366)
-                {
-                    this.NavigationService.Navigate(new MasterEventDetail_1024(me));
-                }
-                else
-                {
-                    this.NavigationService.Navigate(new MasterEventDetail(me));
-                }
-            }
-        }
+			MasterEvent me = dg.SelectedItem as MasterEvent;
+			if (me != null && me.ID >= 0)
+			{
+				if (ResolutionService.Width < 1366)
+				{
+					this.NavigationService.Navigate(new MasterEventDetail_1024(me));
+				}
+				else
+				{
+					this.NavigationService.Navigate(new MasterEventDetail(me));
+				}
+			}
+		}
 
 		private void masterEventSearchButton2_Click(object sender, RoutedEventArgs e)
 		{
@@ -59,8 +60,11 @@ namespace Emergence_WPF
 
 		private void AddressPopupOpen_Click(object sender, RoutedEventArgs e)
 		{
-			AddressPickerPopup.IsOpen = false;
-			AddressPickerPopup.IsOpen = true;
+			AddressPickerV2 addressPicker = new AddressPickerV2();
+			addressPicker.Width = 600;
+			addressPicker.Height = 500;
+			addressPicker.AddressPickedEvent += (args) => { ViewModel.Current.Locale = args.Address; };
+			addressPicker.ShowDialog();
 		}
 	}
 }

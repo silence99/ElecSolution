@@ -1,9 +1,12 @@
 ﻿using Business.Services;
+using Busniess.Services;
 using Emergence.Business.ViewModel;
 using Emergence.Common.Model;
 using Emergence_WPF.Views.Event;
 using Framework;
 using Microsoft.Practices.Prism.Commands;
+using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -87,11 +90,11 @@ namespace Emergence_WPF
 		}
 
 		private void ThreePopupSubEventButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Grid_SBPopupTeam.Width = ResolutionService.Width - 4;
-            this.DataGrid_SBPopupMetairls.Width = ResolutionService.Width - 4;
+		{
+			this.Grid_SBPopupTeam.Width = ResolutionService.Width - 4;
+			this.DataGrid_SBPopupMetairls.Width = ResolutionService.Width - 4;
 
-            this.PopupSubEventAmplify.IsOpen = !this.PopupSubEventAmplify.IsOpen;
+			this.PopupSubEventAmplify.IsOpen = !this.PopupSubEventAmplify.IsOpen;
 			DependencyObject parent = this.PopupSubEventAmplify.Child;
 			do
 			{
@@ -111,13 +114,58 @@ namespace Emergence_WPF
 
 		private void ThreePopupMapButton_Click(object sender, RoutedEventArgs e)
 		{
+			this.ViewModel.ThreePopupSelectCloseAction();
+			List<Tuple<Point, string, string>> data = new List<Tuple<Point, string, string>>();
+			var subeventService = new SubeventService();
+			var cameraService = new CameraService();
+			// for show to customers, remove if release
+			ViewModel.MasterEventInfo.Longitude = 119.931298.ToString();
+			ViewModel.MasterEventInfo.Latitude = 28.469722.ToString();
+
+			double longitude = 0;
+			if (!double.TryParse(ViewModel.MasterEventInfo.Longitude, out longitude))
+			{
+				longitude = 119.931298;
+			}
+			double latitude = 0;
+			if (!double.TryParse(ViewModel.MasterEventInfo.Latitude, out latitude))
+			{
+				latitude = 28.469722;
+			}
+
+			data.Add(new Tuple<Point, string, string>(new Point(longitude, latitude), string.Format("主事件:{0}", ViewModel.MasterEventInfo.Title), ViewModel.MasterEventInfo.Remarks));
+			var subevents = subeventService.GetAllSubevents(ViewModel.MasterEventInfo.ID);
+
+			var camerasData = cameraService.GetCameraByMasterEvent(1, 10000, latitude, longitude);
+			CameraModel[] cameras = new CameraModel[0];
+			if (camerasData != null && camerasData.Data != null)
+			{
+				cameras = camerasData.Data;
+			}
+
+			foreach (var item in subevents)
+			{
+				double childLongitude = 0;
+				double childLatitude = 0;
+				if (double.TryParse(item.ChildLongitude, out childLongitude)) { childLongitude = 119.931298; }
+				if (double.TryParse(item.ChildLongitude, out childLongitude)) { childLatitude = 28.469722; }
+				data.Add(new Tuple<Point, string, string>(new Point(childLongitude, childLatitude), string.Format("子事件:{0}", item.ChildTitle), item.ChildRemarks));
+			}
+
+			foreach (var item in cameras)
+			{
+				data.Add(new Tuple<Point, string, string>(new Point(item.Longitude, item.Latitude), string.Format("摄像头:{0}", item.VideoNumber), item.Remarks));
+			}
+
+
 			var win = new SubEventsMapV2()
 			{
 				WindowStyle = WindowStyle.None,
 				WindowState = WindowState.Maximized
 			};
+			win.MoveToCenter(double.Parse(ViewModel.MasterEventInfo.Longitude), double.Parse(ViewModel.MasterEventInfo.Latitude));
+			win.BindingData(data);
 			win.Show();
-			this.ViewModel.ThreePopupSelectCloseAction();
 		}
 
 		private void ThreePopupVideoButton_Click(object sender, RoutedEventArgs e)
