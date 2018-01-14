@@ -13,13 +13,13 @@ namespace Busniess.Services
 	{
 		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-		public EmergencyHttpListResult<MessageTemplateModel> GetTemplates(string templateType)
+		public MessageTemplateModel[] GetTemplates(string templateType)
 		{
 			var response = GetTemplatesData(templateType);
 
 			if (response == null || response.Code != 1)
 			{
-				return new EmergencyHttpListResult<MessageTemplateModel>();
+				return new MessageTemplateModel[0];
 			}
 			else
 			{
@@ -41,7 +41,7 @@ namespace Busniess.Services
 			}
 		}
 
-		private EmergencyHttpResponse<EmergencyHttpListResult<MessageTemplateModel>> GetTemplatesData(string templateType)
+		private EmergencyHttpResponse<MessageTemplateModel[]> GetTemplatesData(string templateType)
 		{
 			try
 			{
@@ -54,7 +54,7 @@ namespace Busniess.Services
 				if (result.StatusCode == 200)
 				{
 					Logger.DebugFormat("获取短信模板:{0}", result.Html);
-					return Utils.JSONHelper.ConvertToObject<EmergencyHttpResponse<EmergencyHttpListResult<MessageTemplateModel>>>(result.Html);
+					return JSONHelper.ConvertToObject<EmergencyHttpResponse<MessageTemplateModel[]>>(result.Html);
 				}
 				else
 				{
