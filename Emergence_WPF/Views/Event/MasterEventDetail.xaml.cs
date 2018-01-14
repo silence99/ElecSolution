@@ -87,8 +87,11 @@ namespace Emergence_WPF
 		}
 
 		private void ThreePopupSubEventButton_Click(object sender, RoutedEventArgs e)
-		{
-			this.PopupSubEventAmplify.IsOpen = !this.PopupSubEventAmplify.IsOpen;
+        {
+            this.Grid_SBPopupTeam.Width = ResolutionService.Width - 4;
+            this.DataGrid_SBPopupMetairls.Width = ResolutionService.Width - 4;
+
+            this.PopupSubEventAmplify.IsOpen = !this.PopupSubEventAmplify.IsOpen;
 			DependencyObject parent = this.PopupSubEventAmplify.Child;
 			do
 			{
