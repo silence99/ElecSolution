@@ -921,15 +921,15 @@
     <Resource Include="Image\weather3.png" />
     <Resource Include="Image\bar.png" />
     <Resource Include="Image\pie.png" />
-    <Resource Include="Image\Icon_FullScreen.png" />
-    <Resource Include="Image\Icon_Graph.png" />
-    <Resource Include="Image\Icon_Home.png" />
-    <Resource Include="Image\Icon_LeftArrow.png" />
-    <Resource Include="Image\Icon_Lighting.png" />
-    <Resource Include="Image\Icon_LogOut.png" />
-    <Resource Include="Image\Icon_MainBrand.png" />
-    <Resource Include="Image\Icon_Message.png" />
-    <Resource Include="Image\Icon_User.png" />
+    <Resource Include="Image\Common\Icon_FullScreen.png" />
+    <Resource Include="Image\Common\Icon_Graph.png" />
+    <Resource Include="Image\Common\Icon_Home.png" />
+    <Resource Include="Image\Common\Icon_LeftArrow.png" />
+    <Resource Include="Image\Common\Icon_Lighting.png" />
+    <Resource Include="Image\Common\Icon_LogOut.png" />
+    <Resource Include="Image\Common\Icon_MainBrand.png" />
+    <Resource Include="Image\Common\Icon_Message.png" />
+    <Resource Include="Image\Common\Icon_User.png" />
     <Resource Include="Image\EmergencyPersonSummary.png" />
     <Resource Include="Image\MaterialsSummary.png" />
     <Resource Include="DebugImage\MainPage\EmergencyPersonSummary.png" />
@@ -1220,12 +1220,14 @@
     <Resource Include="Image\Common\Icon_Back.png" />
     <Resource Include="Image\Common\Icon_Hidden.png" />
     <Resource Include="Image\Common\Icon_Brand.ico" />
-    <Resource Include="Image\Icon_Gear.png" />
+    <Resource Include="Image\Common\Icon_Gear.png" />
     <Resource Include="Image\Common\Icon_ThreePopupClose.png" />
     <Resource Include="Image\Common\Icon_ThreePopupMap.png" />
     <Resource Include="Image\Common\Icon_ThreePopupSubEvent.png" />
     <Resource Include="Image\Common\Icon_ThreePopupVideo.png" />
     <Resource Include="readme.txt" />
+    <Resource Include="Image\Common\Icon_Setting.png" />
+    <Resource Include="Image\Common\Icon_Team.png" />
     <Content Include="Views\AddressPicker.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

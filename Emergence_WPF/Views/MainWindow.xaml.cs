@@ -73,6 +73,18 @@ namespace Emergence_WPF
 			ShowMainPage();
 		}
 
+        public void SetUserName(string useName)
+        {
+            if (!string.IsNullOrEmpty(useName))
+            {
+                ViewModel.UserName = useName;
+            }
+            else
+            {
+                ViewModel.UserName = string.Empty;
+            }
+        }
+
 		/// <summary>
 		/// click event hanlder of home button
 		/// </summary>

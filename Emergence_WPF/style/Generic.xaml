@@ -193,13 +193,15 @@
         <Setter Property="AutoGenerateColumns" Value="false"/>
         <Setter Property="CanUserResizeColumns" Value="false"/>
         <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="CanUserAddRows" Value="False"/>
+        <Setter Property="CanUserDeleteRows" Value="False"/>
         <Setter Property="IsReadOnly" Value="False"/>
         <Setter Property="HeadersVisibility" Value="None"/>
         <Setter Property="Background" Value="#242424" />
         <Setter Property="Margin" Value="1"/>
         <Setter Property="BorderBrush" Value="#AAAAAA"/>
         <Setter Property="BorderThickness" Value="0 1 0 1"/>
-        <Setter Property="VerticalGridLinesBrush" Value="#F5F5F5" />
+        <Setter Property="VerticalGridLinesBrush" Value="#242424" />
         <Setter Property="HorizontalGridLinesBrush">
             <Setter.Value>
                 <SolidColorBrush Color="#AAAAAA"/>
@@ -211,7 +213,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="DataGridCell">
-                            <TextBlock TextAlignment="Center" VerticalAlignment="Center"  >
+                            <TextBlock TextAlignment="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5 0 0 0">
                                     <ContentPresenter />
                             </TextBlock>
                         </ControlTemplate>

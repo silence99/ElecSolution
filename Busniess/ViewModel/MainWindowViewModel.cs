@@ -50,13 +50,19 @@ namespace Emergence.Business.ViewModel
         {
             var data = NoticeService.GetAnnouncements(1, 10);
             var model = IsAopWapper ? this : this.CreateAopProxy();
-            model.NotificationList = new ObservableCollection<Notification>(data.Data.Select(item => new Notification { NotificationTitle = item.Time.ToString("yyyy-MM-dd") + ":" + item.Title }).ToList().Select(a => a.CreateAopProxy()));
+            if (data != null)
+            {
+                model.NotificationList = new ObservableCollection<Notification>(data.Data.Select(item => new Notification { NotificationTitle = item.Time.ToString("yyyy-MM-dd") + ":" + item.Title }).ToList().Select(a => a.CreateAopProxy()));
+            }
         }
 
         public void GetMasterEventList()
         {
-            var masterEvents = MasterEService.GetMasterEventsData(1, 5, "");
-            MasterEventList = new ObservableCollection<MasterEvent>( masterEvents.Result.Data.Select(a => a.CreateAopProxy()));
+            var masterEvents = MasterEService.GetMasterEventsData(1, 10, "");
+            if (masterEvents != null && masterEvents.Result != null && masterEvents.Result.Data != null)
+            {
+                MasterEventList = new ObservableCollection<MasterEvent>(masterEvents.Result.Data.Select(a => a.CreateAopProxy()));
+            }
         }
 
         public void ShowMainWindowPopup()
