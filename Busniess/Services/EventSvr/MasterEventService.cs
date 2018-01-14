@@ -24,8 +24,8 @@ namespace Busniess.Services
 		public MasterEventViewModel GetMasterEvents(int pageIndex, int pageSize, string searchInfo)
 		{
 			var response = GetMasterEventsData(pageIndex, pageSize, searchInfo);
-			
-			if (response == null ||  response.Code != 1)
+
+			if (response == null || response.Code != 1)
 			{
 				return null;
 			}
@@ -38,6 +38,20 @@ namespace Busniess.Services
 				result.MasterEvents = new System.Collections.ObjectModel.ObservableCollection<MasterEvent>(response.Result.Data);
 
 				return result;
+			}
+		}
+
+		public EmergencyHttpListResult<MasterEvent> GetAchievedMasterEvents(int pageIndex, int pageSize, string searchInfo)
+		{
+			var response = GetAchievedMasterEventsData(pageIndex, pageSize, searchInfo);
+
+			if (response == null || response.Code != 1)
+			{
+				return null;
+			}
+			else
+			{
+				return response.Result;
 			}
 		}
 
@@ -63,6 +77,38 @@ namespace Busniess.Services
 				else
 				{
 					Logger.ErrorFormat("Get Master events error{0}: {1}", result.StatusCode, result.Html);
+					return null;
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Error(ex);
+				return null;
+			}
+		}
+
+		public EmergencyHttpResponse<EmergencyHttpListResult<MasterEvent>> GetAchievedMasterEventsData(int pageIndex, int pageSize, string searchInfo)
+		{
+			try
+			{
+				string serviceName = ConfigurationManager.AppSettings["getAchiveMasterEventApi"] ?? "mainEvent/pigeonhole";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+													{
+														{ "pageIndex", pageIndex.ToString() },
+														{ "pageSize", pageSize.ToString() },
+														{ "searchInfo", searchInfo }
+													};
+
+				Logger.InfoFormat("Do Service - {0}", serviceName);
+				HttpResult result = RequestControl.Request(serviceName, "GET", pairs);
+				if (result.StatusCode == 200)
+				{
+					Logger.DebugFormat("获取主事件归档列表:{0}", result.Html);
+					return Utils.JSONHelper.ConvertToObject<EmergencyHttpResponse<EmergencyHttpListResult<MasterEvent>>>(result.Html);
+				}
+				else
+				{
+					Logger.ErrorFormat("获取主事件归档列表异常{0}: {1}", result.StatusCode, result.Html);
 					return null;
 				}
 			}
@@ -200,9 +246,9 @@ namespace Busniess.Services
 					return success;
 				}
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
-                Logger.Fatal(string.Format("更新主事件状态失败 -- {0}", state));
+				Logger.Fatal(string.Format("更新主事件状态失败 -- {0}", state));
 				return false;
 			}
 		}

@@ -291,5 +291,45 @@ namespace Busniess.Services
 			}
 		}
 
+		public PersonModel[] GetPersonBindingToSubevent(long childEventId)
+		{
+			var response = GetPersonBindingToSubeventData(childEventId);
+			if (response.Code != 1)
+			{
+				return null;
+			}
+			else
+			{
+				return response.Result;
+			}
+		}
+
+		private EmergencyHttpResponse<PersonModel[]> GetPersonBindingToSubeventData(long childEventId)
+		{
+			try
+			{
+				string serviceName = ConfigurationManager.AppSettings["getPersonBindingToSubeventsApi"] ?? "getChileEventTeamMemberList";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+													{
+														{ "childEventId", childEventId.ToString() }
+													};
+				var result = RequestControl.Request(serviceName, "GET", pairs);
+				if (result.StatusCode == 200)
+				{
+					Logger.DebugFormat("获取子事件下成员数据:{0}", result.Html);
+					return Utils.JSONHelper.ConvertToObject<EmergencyHttpResponse<PersonModel[]>>(result.Html);
+				}
+				else
+				{
+					throw new Exception(result.Html);
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Error("获取子事件下成员数据", ex);
+				throw;
+			}
+		}
+
 	}
 }
