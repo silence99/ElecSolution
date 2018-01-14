@@ -107,6 +107,18 @@
         <Setter Property="Background" Value="#006F69"/>
         <Setter Property="Foreground" Value="White"/>
     </Style>
+
+    <Style TargetType="Button" x:Key="ButtonFullRoundConner">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="21,21,21,21" Background="{TemplateBinding Background}">
+                        <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" ></ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <!--Ellipse style-->
     <Style x:Key="EllipseStatus" TargetType="{x:Type Ellipse}">
         <Setter Property="Height" Value="42"/>

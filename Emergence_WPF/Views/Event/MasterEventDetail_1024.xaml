@@ -206,23 +206,23 @@
                     <Canvas Background="#F9F9F9" Width="632" Height="103.5">
                         <Label Style="{StaticResource RightLabel}" FontSize="16" Canvas.Left="8" Canvas.Top="7" Content="任务进度"/>
                         <Line X1="32" Y1="52" X2="600" Y2="52" Stroke="#AAAAAA" StrokeThickness="2"/>
-                        <Button DockPanel.Dock="Left" Canvas.Left="18" Canvas.Top="37" Command="{Binding Path=UpdateSubEventStatusCommand}" CommandParameter="Registed"  Width="30" Height="30" Background="{Binding Path=SBStatus.Registed,Mode=TwoWay}">
+                        <Button Style="{StaticResource ButtonFullRoundConner}"  DockPanel.Dock="Left" Canvas.Left="18" Canvas.Top="37" Command="{Binding Path=UpdateSubEventStatusCommand}" CommandParameter="Registed"  Width="30" Height="30" Background="{Binding Path=SBStatus.Registed,Mode=TwoWay}">
                             <!--<Ellipse Style="{StaticResource EllipseStatus}" Fill="Red"/>-->
                         </Button>
                         <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="16" Canvas.Top="67" Content="登记"/>
-                        <Button DockPanel.Dock="Left" Canvas.Left="155" Canvas.Top="37" Command="{Binding Path=UpdateSubEventStatusCommand}" CommandParameter="Published"  Width="30" Height="30" Background="{Binding Path=SBStatus.Published,Mode=TwoWay}">
+                        <Button Style="{StaticResource ButtonFullRoundConner}"  DockPanel.Dock="Left" Canvas.Left="155" Canvas.Top="37" Command="{Binding Path=UpdateSubEventStatusCommand}" CommandParameter="Published"  Width="30" Height="30" Background="{Binding Path=SBStatus.Published,Mode=TwoWay}">
                             <!--<Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="39" Canvas.Top="54" Fill="{Binding Path=SBStatus.Published}"/>-->
                         </Button>
                         <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="153" Canvas.Top="67" Content="发布" RenderTransformOrigin="0.912,0.49"/>
-                        <Button DockPanel.Dock="Left" Canvas.Left="301" Canvas.Top="37" Command="{Binding Path=UpdateSubEventStatusCommand}" CommandParameter="Accepted"  Width="30" Height="30" Background="{Binding Path=SBStatus.Accepted,Mode=TwoWay}">
+                        <Button Style="{StaticResource ButtonFullRoundConner}"  DockPanel.Dock="Left" Canvas.Left="301" Canvas.Top="37" Command="{Binding Path=UpdateSubEventStatusCommand}" CommandParameter="Accepted"  Width="30" Height="30" Background="{Binding Path=SBStatus.Accepted,Mode=TwoWay}">
                             <!--<Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="39" Canvas.Top="54" Fill="{Binding Path=SBStatus.Accepted}"/>-->
                         </Button>
                         <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="299" Canvas.Top="67" Content="接受"/>
-                        <Button DockPanel.Dock="Left" Canvas.Left="438" Canvas.Top="37" Command="{Binding Path=UpdateSubEventStatusCommand}" CommandParameter="Executed"  Width="30" Height="30" Background="{Binding Path=SBStatus.Executed,Mode=TwoWay}">
+                        <Button Style="{StaticResource ButtonFullRoundConner}"  DockPanel.Dock="Left" Canvas.Left="438" Canvas.Top="37" Command="{Binding Path=UpdateSubEventStatusCommand}" CommandParameter="Executed"  Width="30" Height="30" Background="{Binding Path=SBStatus.Executed,Mode=TwoWay}">
                             <!--<Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="39" Canvas.Top="54" Fill="{Binding Path=SBStatus.Executed}"/>-->
                         </Button>
                         <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="436" Canvas.Top="67" Content="执行"/>
-                        <Button DockPanel.Dock="Left" Canvas.Left="587" Canvas.Top="37"  Command="{Binding Path=UpdateSubEventStatusCommand}" CommandParameter="Completed"  Width="30" Height="30" Background="{Binding Path=SBStatus.Completed,Mode=TwoWay}">
+                        <Button Style="{StaticResource ButtonFullRoundConner}"  DockPanel.Dock="Left" Canvas.Left="587" Canvas.Top="37"  Command="{Binding Path=UpdateSubEventStatusCommand}" CommandParameter="Completed"  Width="30" Height="30" Background="{Binding Path=SBStatus.Completed,Mode=TwoWay}">
                             <!--<Ellipse Style="{StaticResource EllipseStatus}" Canvas.Left="39" Canvas.Top="54" Fill="{Binding Path=SBStatus.Completed}"/>-->
                         </Button>
                         <Label Style="{StaticResource StatusRightLabel}" Canvas.Left="586" Canvas.Top="67" Content="完成"/>

@@ -153,73 +153,8 @@
     <Compile Include="Comm\PasswordBoxHelper.cs" />
     <Compile Include="Comm\StringFormatConverter.cs" />
     <Compile Include="Comm\WheelChart.cs" />
-    <Compile Include="EmergencyCommandCenter.xaml.cs">
-      <DependentUpon>EmergencyCommandCenter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EmergencyResources.xaml.cs">
-      <DependentUpon>EmergencyResources.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EmergencyOrganization.xaml.cs">
-      <DependentUpon>EmergencyOrganization.xaml</DependentUpon>
-    </Compile>
     <Compile Include="EmergencyControl.cs" />
-    <Compile Include="MainUserControl2.xaml.cs">
-      <DependentUpon>MainUserControl2.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Model\MasterEvent.cs" />
-    <Compile Include="TaskTracking.xaml.cs">
-      <DependentUpon>TaskTracking.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EventGeneration.xaml.cs">
-      <DependentUpon>EventGeneration.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EventReporting.xaml.cs">
-      <DependentUpon>EventReporting.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="TeamStatistics.xaml.cs">
-      <DependentUpon>TeamStatistics.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MaterialStatistics.xaml.cs">
-      <DependentUpon>MaterialStatistics.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ReportCenter.xaml.cs">
-      <DependentUpon>ReportCenter.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Restatement.xaml.cs">
-      <DependentUpon>Restatement.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="LiveVideo.xaml.cs">
-      <DependentUpon>LiveVideo.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="GeographicInformation.xaml.cs">
-      <DependentUpon>GeographicInformation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="FullScreen1.xaml.cs">
-      <DependentUpon>FullScreen1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NotificationTask.xaml.cs">
-      <DependentUpon>NotificationTask.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NotificationNavigation.xaml.cs">
-      <DependentUpon>NotificationNavigation.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NotificationSystem.xaml.cs">
-      <DependentUpon>NotificationSystem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EventDetails.xaml.cs">
-      <DependentUpon>EventDetails.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="EventAdd.xaml.cs">
-      <DependentUpon>EventAdd.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Leadership.xaml.cs">
-      <DependentUpon>Leadership.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MainUserControl.xaml.cs">
-      <DependentUpon>MainUserControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\ListSortDirector.cs" />
     <Compile Include="Model\ListViewBehavior.cs" />
@@ -341,22 +276,6 @@
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
-    <Page Include="EmergencyCommandCenter.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EmergencyResources.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="EmergencyOrganization.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MainUserControl2.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="style\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -369,75 +288,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="TaskTracking.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="EventGeneration.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="EventReporting.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="TeamStatistics.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="MaterialStatistics.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="ReportCenter.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Restatement.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="LiveVideo.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="GeographicInformation.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="FullScreen1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="NotificationTask.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="NotificationNavigation.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="NotificationSystem.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="EventDetails.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="EventAdd.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Leadership.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Login.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="MainUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1237,21 +1088,6 @@
     <None Include="Views\Event\SubEventsMap.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="xml\TaskTracking.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="xml\EmergencyResources.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="xml\Task.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="xml\EmergencyOrganization.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="xml\Emergence.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Views\MainPage\BMap.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

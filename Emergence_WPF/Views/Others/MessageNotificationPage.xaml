@@ -79,12 +79,7 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </Button>
-                    <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="Click">
-                                <i:InvokeCommandAction Command="{Binding ImportMemberCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
+                    <Button Margin="0,0,20,0" Name="ImportButton" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="ImportButton_Click">
                     </Button>
                     <Button Name="BtnAdd" DockPanel.Dock="Right" Margin="0,0,20,0" Content="添加" Style="{StaticResource RoundConnerGridOperationButtonStyle}">
                         <i:Interaction.Triggers>

@@ -184,7 +184,9 @@ namespace Emergence.Business.ViewModel
 				var result = this.UpdateSubEvent(ids, st);
 				if (result)
 				{
-					SBStatus.SetSubEventStatus(status);
+                    var str = Enum.Parse(typeof(Enumerator.SubEventStatus), status).ToString();
+                    SBStatus.SetSubEventStatus(status);
+                    ShowMessageBox(str + "成功！");
 				}
 			}
 		}
@@ -487,10 +489,22 @@ namespace Emergence.Business.ViewModel
 		}
 
 		private bool UpdateSubEvent(List<string> subEventIDs, int status)
-		{
-			if (subEventIDs != null && subEventIDs.Count() > 0 && status >= 0)
+        {
+            var thisAop = this.AopWapper as VM_MasterEventDetail;
+            if (subEventIDs != null && subEventIDs.Count() > 0 && status >= 0)
 			{
 				var result = subEventService.UpdateChildeEventState(subEventIDs, status);
+                if (result)
+                {
+                    var tempSubEventList = thisAop.SubEventList.Where(a => subEventIDs.Contains(a.Id.ToString())).ToList();
+                    if (tempSubEventList.Count > 0)
+                    {
+                        foreach (var tempSE in tempSubEventList)
+                        {
+                            tempSE.State = status.ToString();
+                        }
+                    }
+                }
 				return result;
 			}
 			return false;
