@@ -162,6 +162,7 @@ namespace Emergence_WPF
                 if (teamMembers.Count() < 1)
                 {
                     System.Windows.MessageBox.Show("文档内没有有效的数据，请检查后上传!");
+                    return;
                 }
                 
                 if (uploadFailed )

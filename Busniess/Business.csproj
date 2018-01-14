@@ -124,6 +124,7 @@
     <Compile Include="Util.cs" />
     <Compile Include="ViewModel\AddMasterEventViewModel.cs" />
     <Compile Include="ViewModel\AnnouncementManagementPageViewModel.cs" />
+    <Compile Include="ViewModel\CameraManagementViewModel.cs" />
     <Compile Include="ViewModel\MainPageUiModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ManagementPageViewModel.cs" />

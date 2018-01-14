@@ -17,7 +17,7 @@ namespace Busniess.ViewModel
 		public void SetCoordinate(double latitude, double longitude)
 		{
 			var cameraService = new CameraService();
-			var data = cameraService.GetCamera(1, Max, latitude, longitude);
+			var data = cameraService.GetCameraByMasterEvent(1, Max, latitude, longitude);
 			if (data != null && data.Data != null)
 			{
 				Cameras = new ObservableCollection<CameraModel>(data.Data);

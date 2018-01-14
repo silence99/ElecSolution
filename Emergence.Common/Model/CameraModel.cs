@@ -4,8 +4,9 @@ using Newtonsoft.Json;
 namespace Emergence.Common.Model
 {
 	public class CameraModel : NotificationObject
-	{
-		[JsonProperty("dept")]
+    {
+        public virtual bool IsSelected { get; set; }
+        [JsonProperty("dept")]
 		public virtual string Dept { get; set; }
 		[JsonProperty("distance")]
 		public virtual double Distance { get; set; }

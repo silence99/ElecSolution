@@ -12,13 +12,13 @@
             <ResourceDictionary>
                 <Style TargetType="Label" x:Key="MenuLabelStyle">
                     <Setter Property="HorizontalAlignment" Value="Left"/>
-                    <Setter Property="Margin" Value="30 0 0 0"/>
+                    <Setter Property="Margin" Value="15 0 0 0"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="Label">
                                 <DockPanel Height="70" Width="{TemplateBinding Width}" Background="White">
                                     <Border Margin="0,0,0,0" Width="10" Background="{TemplateBinding Background}"/>
-                                    <Label Background="White" Margin="10,0,0,0" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26"/>
+                                    <Label Background="White" Margin="10,0,0,0" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
                                 </DockPanel>
                             </ControlTemplate>
                         </Setter.Value>
@@ -27,7 +27,7 @@
             </ResourceDictionary>
         </Grid.Resources>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="220"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Orientation="Vertical">

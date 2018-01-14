@@ -23,8 +23,8 @@
         <DockPanel>
             <DockPanel Height="60" DockPanel.Dock="Top">
                 <Label Margin="39,0,0,0" DockPanel.Dock="Left" Content="摄像头录入" FontSize="20" Foreground="Black" Padding="0" VerticalContentAlignment="Center"/>
-                <Button DockPanel.Dock="Right" Margin="0,0,20,0" Content="删除" Style="{StaticResource RoundConnerGridOperationButtonStyle}"></Button>
-                <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}"></Button>
+                <Button DockPanel.Dock="Right" Margin="0,0,20,0" Content="删除" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="DeleteButton_Click"></Button>
+                <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="ImportButton_Click"></Button>
             </DockPanel>
             <DockPanel Grid.Row="2" Grid.Column="0">
                 <DockPanel DockPanel.Dock="Bottom" Margin="20,5,20,15">
@@ -42,8 +42,9 @@
                     ScrollViewer.VerticalScrollBarVisibility="Auto" 
                     Background="Transparent"
                     AutoGenerateColumns="False" 
+                          CanUserDeleteRows="False"
                     ColumnHeaderHeight="70"
-                    ItemsSource="{Binding Teams, Mode=TwoWay}"
+                    ItemsSource="{Binding Path=camerasList, Mode=TwoWay}"
                     RowHeight="50"
                     AlternatingRowBackground="#f3f3f3"
                     HorizontalGridLinesBrush="#dcdcdc"
@@ -54,22 +55,23 @@
                         <DataGridTemplateColumn Width="30">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <CheckBox Width="16" IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"
+                                    <CheckBox Width="16" IsChecked="{Binding IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                           HorizontalAlignment="Center" 
                                                           VerticalAlignment="Center">
                                     </CheckBox>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="编号" Width="*" />
-                        <DataGridTextColumn  Header="所属单位" Width="*" />
-                        <DataGridTextColumn  Header="经纬度坐标" Width="*" />
-                        <DataGridTextColumn  Header="详细地址" Width="*" />
-                        <DataGridTextColumn  Header="播放地址" Width="*" />
-                        <DataGridTextColumn  Header="生产商" Width="*" />
-                        <DataGridTextColumn  Header="播放方式" Width="*" />
-                        <DataGridTextColumn  Header="播放属性" Width="*" />
-                        <DataGridTextColumn  Header="所属系统" Width="*" />
+                        <DataGridTextColumn Header="编号" Width="*" Binding="{Binding Path=VideoNumber}"/>
+                        <DataGridTextColumn  Header="所属单位" Width="*"  Binding="{Binding Path=Dept}"/>
+                        <DataGridTextColumn  Header="经度" Width="*"  Binding="{Binding Path=Latitude}"/>
+                        <DataGridTextColumn  Header="纬度" Width="*"  Binding="{Binding Path=Longitude}"/>
+                        <DataGridTextColumn  Header="详细地址" Width="2*"  Binding="{Binding Path=Locale}"/>
+                        <DataGridTextColumn  Header="播放地址" Width="2*"  Binding="{Binding Path=Url}"/>
+                        <DataGridTextColumn  Header="生产商" Width="*"  Binding="{Binding Path=Manufacturer}"/>
+                        <DataGridTextColumn  Header="播放方式" Width="*"  Binding="{Binding Path=PlayMode}"/>
+                        <DataGridTextColumn  Header="播放属性" Width="*"  Binding="{Binding Path=PlayAttribute}"/>
+                        <DataGridTextColumn  Header="所属系统" Width="*"  Binding="{Binding Path=System}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>
