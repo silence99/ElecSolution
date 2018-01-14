@@ -214,8 +214,11 @@
         <Setter Property="AutoGenerateColumns" Value="false"/>
         <Setter Property="CanUserResizeColumns" Value="false"/>
         <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="CanUserAddRows" Value="False"/>
+        <Setter Property="CanUserDeleteRows" Value="False"/>
         <Setter Property="IsReadOnly" Value="False"/>
         <Setter Property="HeadersVisibility" Value="None"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="Background" Value="#F5F5F5" />
         <Setter Property="Margin" Value="1"/>
         <Setter Property="BorderBrush" Value="#AAAAAA"/>
@@ -229,10 +232,12 @@
         <Style.Resources>
             <!--单元格样式触发-->
             <Style TargetType="DataGridCell">
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                <Setter Property="Margin" Value="5 0 0 0"/>
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="DataGridCell">
-                            <TextBlock TextAlignment="Center" VerticalAlignment="Center"  >
+                            <TextBlock TextAlignment="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10 0 0 0" >
                                     <ContentPresenter />
                             </TextBlock>
                         </ControlTemplate>
@@ -248,6 +253,8 @@
             <!--行样式触发-->
             <!--背景色改变必须先设置cellStyle 因为cellStyle会覆盖rowStyle样式-->
             <Style TargetType="DataGridRow">
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                <Setter Property="HorizontalAlignment" Value="Left"/>
                 <Setter Property="Background" Value="#F3F3F3" />
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="Height" Value="90px"/>

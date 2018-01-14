@@ -232,7 +232,7 @@
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="DataGridCell">
-                            <TextBlock TextAlignment="Center" VerticalAlignment="Center"  >
+                            <TextBlock TextAlignment="Left" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5 0 0 0" >
                                     <ContentPresenter />
                             </TextBlock>
                         </ControlTemplate>

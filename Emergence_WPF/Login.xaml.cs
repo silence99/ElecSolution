@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Windows;
 using System;
+using System.Windows.Input;
 
 namespace Emergence_WPF
 {
@@ -21,7 +22,8 @@ namespace Emergence_WPF
 		public Login()
 		{
 			InitializeComponent();
-		}
+            this.KeyDown += Login_KeyDown;
+        }
 
 		private void LoginButton_Click(object sender, RoutedEventArgs e)
 		{
@@ -119,5 +121,12 @@ namespace Emergence_WPF
 		{
 			this.Close();
 		}
-	}
+        private void Login_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)//Enter键  
+            {
+                LoginButton_Click(sender, e);
+            }
+        }
+    }
 }

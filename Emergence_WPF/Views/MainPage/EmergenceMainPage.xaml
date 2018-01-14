@@ -66,6 +66,7 @@
                 <Setter Property="Background" Value="#000000" />
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="Height" Value="auto"/>
+                <Setter Property="MinHeight" Value="30px"/>
                 <Setter Property="Foreground" Value="#FFFFFF" />
                 <Style.Triggers>
                     <!--隔行换色-->
@@ -172,7 +173,7 @@
                 <TextBlock Margin="10,13,0,0" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif">公告</TextBlock>
             </StackPanel>
             <Border>
-                <DataGrid  DockPanel.Dock="Top" Name="Grid_Notice" Style="{StaticResource Grid_WithOutHeader_Black}" ItemsSource="{Binding Path=NotificationList,Mode=TwoWay}">
+                <DataGrid  DockPanel.Dock="Top" Name="Grid_Notice" Style="{StaticResource Grid_WithOutHeader_Black}" ItemsSource="{Binding Path=NotificationList,Mode=TwoWay}" >
                     <DataGrid.Columns >
                         <DataGridTextColumn Width="*" Binding="{Binding Path=NotificationTitle,Mode=TwoWay}"  Header="公告" IsReadOnly="True">
                             <DataGridTextColumn.ElementStyle>
@@ -180,6 +181,8 @@
                                     <Setter Property="FontSize" Value="16"/>
                                     <Setter Property="TextWrapping" Value="Wrap"/>
                                     <Setter Property="Height" Value="auto"/>
+                                    <Setter Property="HorizontalAlignment" Value="Left"/>
+                                    <Setter Property="TextAlignment" Value="Left"/>
                                 </Style>
                             </DataGridTextColumn.ElementStyle>
                         </DataGridTextColumn>
@@ -203,7 +206,7 @@
 
         <DockPanel  Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Margin="10 10 5 5" >
             <DockPanel Height="48px" HorizontalAlignment="Stretch" Name="head" DockPanel.Dock="Top" Background="#006F69" Visibility="{Binding Path=MainWindowSubTitleVisible,Mode=TwoWay}">
-                <Image Canvas.Left="20" Margin="10,0,0,3" DockPanel.Dock="Left" Source="/Image/Icon_MainBrand.png" HorizontalAlignment="Left" ></Image>
+                <Image Canvas.Left="20" Margin="10,0,0,3" DockPanel.Dock="Left" Source="/Image/Common/Icon_MainBrand.png" HorizontalAlignment="Left" ></Image>
                 <TextBlock FontSize="20" DockPanel.Dock="Left" TextAlignment="Center" Foreground="White" HorizontalAlignment="Left" Margin="10,10,0,0">国网龙泉市供电公司应急指挥平台</TextBlock>
             </DockPanel>
             <emergence_wpf:BMap DockPanel.Dock="Top" x:Name="map" MinHeight="1" />
