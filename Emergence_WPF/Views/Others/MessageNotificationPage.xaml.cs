@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Busniess.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +21,13 @@ namespace Emergence_WPF
 	/// </summary>
 	public partial class MessageNotificationPage : Page
 	{
-		public MessageNotificationPage()
+        public MessageNotificationViewModel ViewModel { get; set; }
+        public MessageNotificationPage()
 		{
 			InitializeComponent();
-		}
+            ViewModel = new MessageNotificationViewModel();
+
+        }
 
         private void Pager_OnPageChanged(object sender, object e)
         {

@@ -171,6 +171,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTextColumn  Binding="{Binding Path=Name}" x:Name="f2" Header="队员姓名" Width="*" ></DataGridTextColumn>
                     <DataGridTextColumn  Binding="{Binding Path=PhoneNumber}" x:Name="f3" Header="队员电话"  Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=PlaceName}" x:Name="f4" Header="队员职位"  Width="*" ></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>

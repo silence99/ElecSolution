@@ -167,8 +167,8 @@ namespace Emergence_WPF
                      !sheet.Cells[1, 3].Value.Equals("物资类型") ||
                      !sheet.Cells[1, 4].Value.Equals("所属单位") ||
                      !sheet.Cells[1, 5].Value.Equals("是否消耗品") ||
-                     !sheet.Cells[1, 5].Value.Equals("是否大物资") ||
-                     !sheet.Cells[1, 5].Value.Equals("物资数量"))
+                     !sheet.Cells[1, 6].Value.Equals("是否大物资") ||
+                     !sheet.Cells[1, 7].Value.Equals("物资数量"))
                 {
                     System.Windows.MessageBox.Show("Excel文件格式不正确!");
                     return;
@@ -221,7 +221,7 @@ namespace Emergence_WPF
                     value = sheet.Cells[i, 3].Value;
                     if (value != null && materialType.Where(a => a.Name == value.ToString()).Count() > 0)
                     {
-                        mm.MaterialsType = value.ToString();
+                        mm.MaterialsTypeName = value.ToString();
                     }
                     else
                     {
@@ -233,7 +233,7 @@ namespace Emergence_WPF
                     value = sheet.Cells[i, 4].Value;
                     if (value != null && materialDept.Where(a => a.Name == value.ToString()).Count() > 0)
                     {
-                        mm.MaterialsDept = value.ToString();
+                        mm.MaterialsDeptName = value.ToString();
                     }
                     else
                     {
@@ -305,6 +305,16 @@ namespace Emergence_WPF
                     totalQuantity = a.TotalQuantity.ToString()
                 }).ToArray());
                 #endregion
+                var uploadResult = Service.ImportMaterials(uploadString);
+                if (!uploadResult)
+                {
+                    System.Windows.MessageBox.Show("上传失败，请联系管理员!");
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("上传成功!");
+                }
+                SyncMaterials();
             }
             #endregion
         }

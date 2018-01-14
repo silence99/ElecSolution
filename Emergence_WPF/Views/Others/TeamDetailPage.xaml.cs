@@ -177,6 +177,12 @@ namespace Emergence_WPF
                     place = a.PlaceName
                 }).ToArray());
                 #endregion
+                var uploadResult = TeamService.ImportTeamMembers(ViewModel.ID, uploadString);
+                if (!uploadResult)
+                {
+                    System.Windows.MessageBox.Show("上传失败，请联系管理员!");
+                }
+                SyncTeamMembers();
             }
             #endregion
         }

@@ -7,7 +7,7 @@ using System.Configuration;
 using System.Reflection;
 using Utils;
 
-namespace Busniess.Services.MessageSvr
+namespace Busniess.Services
 {
 	public class MessageService
 	{

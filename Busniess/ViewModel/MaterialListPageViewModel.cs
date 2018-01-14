@@ -75,8 +75,8 @@ namespace Emergence.Business.ViewModel
 			PopupHeight = ResolutionService.Height;
 			IsCreateMaterial = false;
 			PopupTitle = "添加物资"; //添加物资、修改物资
-
-			MaterialTypes = new ObservableCollection<DictItem>(MetaDataService.MaterialTypes);
+            CurrentMaterial = new MaterialModel().CreateAopProxy();
+            MaterialTypes = new ObservableCollection<DictItem>(MetaDataService.MaterialTypes);
 			MaterialDepts = new ObservableCollection<DictItem>(MetaDataService.MaterialDepts);
 		}
 	}
