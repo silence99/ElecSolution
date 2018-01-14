@@ -79,11 +79,13 @@ namespace Emergence.Business.ViewModel
 		public virtual DelegateCommand ThreePopupSelectCloseComman { get; set; }
 		public virtual DelegateCommand OpenFullScreenSubEventCommand { get; set; }
 		public virtual DelegateCommand OpenFullScreenMapCommand { get; set; }
-		public virtual DelegateCommand OpenFullScreenVideoCommand { get; set; }
+        public virtual DelegateCommand OpenFullScreenVideoCommand { get; set; }
+        public virtual DelegateCommand MasterEventArchiveCommand { get; set; }
+        
 
-		#endregion
+        #endregion
 
-		public VM_MasterEventDetail(MasterEvent mEvent)
+        public VM_MasterEventDetail(MasterEvent mEvent)
 		{
 			PageEnabled = true;
 			masterEventService = new MasterEventService();
@@ -123,10 +125,11 @@ namespace Emergence.Business.ViewModel
 			ThreePopupSelectCloseComman = new DelegateCommand(new Action(ThreePopupSelectCloseAction));
 			OpenFullScreenSubEventCommand = new DelegateCommand(new Action(OpenFullScreenSubEventAction));
 			OpenFullScreenMapCommand = new DelegateCommand(new Action(OpenFullScreenMapAction));
-			OpenFullScreenVideoCommand = new DelegateCommand(new Action(OpenFullScreenVideoAction));
+            OpenFullScreenVideoCommand = new DelegateCommand(new Action(OpenFullScreenVideoAction));
+            MasterEventArchiveCommand = new DelegateCommand(new Action(MasterEventArchiveAction));
 
 
-			if (mEvent != null)
+            if (mEvent != null)
 			{
 				InitializVM(mEvent);
 			}
@@ -431,10 +434,35 @@ namespace Emergence.Business.ViewModel
 
 		}
 
-		#endregion
+        private void MasterEventArchiveAction()
+        {
+            var unComplatedSubEvents = SubEventList.Where(a => a.State != "5").ToList();
+            if (unComplatedSubEvents.Count > 0)
+            {
+                var titleList = string.Join("\n", unComplatedSubEvents.Select(a => a.ChildTitle).ToArray());
+                string message = "以下子事件未完成，不能归档：" + titleList;
+                System.Windows.MessageBox.Show(message);
+            }
+            else
+            {
+                List<long> masterEventIDs = new List<long>();
+                masterEventIDs.Add(MasterEventInfo.ID);
+                var result = masterEventService.UpdateMasterEventState(masterEventIDs, 1);
+                if (result)
+                {
+                    System.Windows.MessageBox.Show("归档成功");
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("归档失败，请联系管理员！");
+                }
+            }
+        }
 
-		#region [Request service Methods]
-		private void GetSubEventListOb(string searchCondition)
+        #endregion
+
+        #region [Request service Methods]
+        private void GetSubEventListOb(string searchCondition)
 		{
 			var subEvents = subEventService.GetSubevents(0, 1000, this.MasterEventInfo.ID, searchCondition ?? "").Result;
 			var thisAop = this.AopWapper as VM_MasterEventDetail;

@@ -3,7 +3,6 @@ using Emergence.Common.Model;
 using Framework;
 using System.Collections.ObjectModel;
 using System.Windows;
-using
 using Busniess.Services;
 
 namespace Busniess.ViewModel
