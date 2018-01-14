@@ -3,7 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"      
+      xmlns:charts="clr-namespace:Emergence_WPF.Views.Charts"
       xmlns:local="clr-namespace:Emergence_WPF"
       xmlns:chart="clr-namespace:Emergence_WPF.Comm"
       mc:Ignorable="d" 
@@ -82,7 +83,9 @@
                         <Border DockPanel.Dock="Top" BorderBrush="#4D9A96" BorderThickness="0 2 0 0" Grid.Column="0" Grid.Row="2"/>
                         <Grid Name="Grid_ArmyChart" DockPanel.Dock="Bottom">
                             <Viewbox>
-                                <chart:WheelChart Width="100" Radius="50" Height="100" Value="90" Total="100" InnerDiameter="80"/>
+                                <Canvas Width="280px" Height="180px">
+                                    <charts:TeamPersonChart Canvas.Left="0" Canvas.Top="0" />
+                                </Canvas>
                             </Viewbox>
                         </Grid>
                     </DockPanel>
@@ -91,7 +94,13 @@
                     <DockPanel>
                         <Label DockPanel.Dock="Top" Style="{StaticResource LeftLabel}" VerticalAlignment="Top" FontSize="16px" Content="物资展示"/>
                         <Border DockPanel.Dock="Top" BorderBrush="#4D9A96" BorderThickness="0 2 0 0" Grid.Column="0" Grid.Row="2"/>
-                        <Grid Name="Grid_MaterialsChart" DockPanel.Dock="Bottom"></Grid>
+                        <Grid Name="Grid_MaterialsChart" DockPanel.Dock="Bottom">
+                            <Viewbox>
+                                <Canvas Width="280px" Height="180px">
+                                    <charts:MaterialsChart Width="280px" Height="180" Foreground="White" Background="#006f69"/>
+                                </Canvas>
+                            </Viewbox>
+                        </Grid>
                     </DockPanel>
                 </Border>
                 <DockPanel Grid.Column="0" Grid.Row="4">
