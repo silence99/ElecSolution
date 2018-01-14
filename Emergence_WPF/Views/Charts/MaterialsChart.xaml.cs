@@ -1,4 +1,5 @@
 ﻿using Busniess.Services;
+using System;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -50,19 +51,28 @@ namespace Emergence_WPF.Views.Charts
 			var data = Service.GetMaterialsStatistics();
 			var names = new string[5];
 			var values = new double[5];
+
+			double max = 1;
 			if (data != null)
 			{
-				double max = 1;
 				for (int i = 0; i < data.Length; i++)
 				{
-					names[i] = string.Format("{0}({1})", data[i].MaterialsName, data[i].TotalQuantity);
+					// names[i] = string.Format("{0}({1})", data[i].MaterialsName, data[i].TotalQuantity);
+					names[i] = data[i].MaterialsName;
 					values[i] = data[i].TotalQuantity;
 					max = max >= data[i].TotalQuantity ? max : data[i].TotalQuantity;
 				}
-				values = values.Select(val => (100 * val / max)).ToArray();
 			}
+			max = Math.Ceiling(max / 100) * 100;
+			values = values.Select(val => (100 * val / max)).ToArray();
 			Chart.ItemsSource = values;
 			Chart.ItemsSourceName = names;
+			var levels = new double[5];
+			for (int i = 0; i < 5; i++)
+			{
+				levels[i] = (max / 5) * (i + 1);
+			}
+			Chart.Levels = levels;
 		}
 	}
 }

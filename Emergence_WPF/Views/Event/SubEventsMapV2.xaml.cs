@@ -21,10 +21,6 @@ namespace Emergence_WPF
 			Browser = wbo.WebBrowser;
 			Browser.Navigate(new Uri(System.IO.Path.GetFullPath("Views/Event/SubEventsMap.html")));
 			Browser.LoadCompleted += Browser_LoadCompleted;
-			Data = new List<Tuple<Point, string, string>>()
-			{
-				new Tuple<Point, string, string>(new Point(119.931298, 28.469722), "子事件1详细信息信息", "子事件描述")
-			};
 		}
 
 		private void Browser_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
@@ -58,6 +54,18 @@ namespace Emergence_WPF
 				if ((DateTime.Now - start).Seconds > 15)
 				{
 					System.Windows.MessageBox.Show("标注子事件信息超时，请重新进入。");
+				}
+			}
+		}
+
+		public void BindingData(List<Tuple<Point, string, string>> data)
+		{
+			Data = data;
+			if (Data != null && Data.Count > 0)
+			{
+				foreach (var item in Data)
+				{
+					Browser.InvokeScript("addMarker", item.Item1.X, item.Item1.Y, 0, item.Item2, item.Item3);
 				}
 			}
 		}

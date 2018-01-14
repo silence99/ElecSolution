@@ -12,6 +12,12 @@ namespace Emergence_WPF.Comm
 			get { return (double[])GetValue(ItemsSourceProperty); }
 			set { SetValue(ItemsSourceProperty, value); }
 		}
+		public static readonly DependencyProperty LevelsProperty = DependencyProperty.Register("Levels", typeof(double[]), typeof(ClusteredColumnChart), new PropertyMetadata(new double[] { 20.0, 40.0, 60.0, 80.0, 100.0 }, Refresh));
+		public double[] Levels
+		{
+			get { return (double[])GetValue(LevelsProperty); }
+			set { SetValue(LevelsProperty, value); }
+		}
 		public static readonly DependencyProperty ItemsSourceNameProperty = DependencyProperty.Register("ItemsSourceName", typeof(string[]), typeof(ClusteredColumnChart), new PropertyMetadata(new string[5]));
 		public string[] ItemsSourceName
 		{
