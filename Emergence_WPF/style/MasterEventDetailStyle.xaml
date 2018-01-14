@@ -135,6 +135,9 @@
         <Setter Property="AlternationCount" Value="2"/>
         <Setter Property="AutoGenerateColumns" Value="false"/>
         <Setter Property="CanUserResizeColumns" Value="false"/>
+        <Setter Property="CanUserSortColumns" Value="False"/>
+        <Setter Property="CanUserAddRows" Value="False"/>
+        <Setter Property="CanUserDeleteRows" Value="False"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="#FFFFFF" />
         <Setter Property="HorizontalGridLinesBrush">

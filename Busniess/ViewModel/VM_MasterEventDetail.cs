@@ -314,12 +314,13 @@ namespace Emergence.Business.ViewModel
 			var thisAop = this.AopWapper as VM_MasterEventDetail;
 			var ids = UnSelectedTeamList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
 			var result = teamService.BindingUnbindingTeamToSubevnt(SubEventDetail.Id, ids, "POST");
-			if (result)
-			{
-				ShowMessageBox("添加成功！");
-				SetPageEnableStatus(true);
-				thisAop.SubEventEditPopup.IsOpen = false;
-				thisAop.SubEventEdit = new SubEvent();
+            GetTeamListOb();
+            if (result)
+            {
+                SetPageEnableStatus(true);
+                thisAop.TeamSelectPopup.IsOpen = false;
+                //thisAop.SubEventEdit = new SubEvent();
+                ShowMessageBox("添加成功！");
 			}
 			else
 			{
@@ -332,18 +333,18 @@ namespace Emergence.Business.ViewModel
 			var thisAop = this.AopWapper as VM_MasterEventDetail;
 			var ids = TeamList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
 			var result = teamService.BindingUnbindingTeamToSubevnt(SubEventDetail.Id, ids, "DELETE");
-			if (result)
-			{
-				ShowMessageBox("删除成功！");
-				SetPageEnableStatus(true);
-				thisAop.SubEventEditPopup.IsOpen = false;
-				thisAop.SubEventEdit = new SubEvent();
+            GetTeamListOb();
+            if (result)
+            {
+                SetPageEnableStatus(true);
+                thisAop.SubEventEditPopup.IsOpen = false;
+                thisAop.SubEventEdit = new SubEvent();
+                ShowMessageBox("删除成功！");
 			}
 			else
 			{
 				ShowMessageBox("删除失败！");
 			}
-			GetTeamListOb();
 		}
 		private void StartSelectMaterialAction()
 		{
@@ -368,17 +369,17 @@ namespace Emergence.Business.ViewModel
 			var thisAop = this.AopWapper as VM_MasterEventDetail;
 			var ids = UnSelectedMaterialList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
 			var result = materialService.BindingMaterialToSubevnt(SubEventDetail.Id, ids);
-			if (result)
-			{
-				ShowMessageBox("添加成功！");
-				SetPageEnableStatus(true);
-				thisAop.MaterialSelectPopup.IsOpen = false;
+            GetMaterialListOb();
+            if (result)
+            {
+                SetPageEnableStatus(true);
+                thisAop.MaterialSelectPopup.IsOpen = false;
+                ShowMessageBox("添加成功！");
 			}
 			else
 			{
 				ShowMessageBox("添加失败！");
 			}
-			GetMaterialListOb();
 		}
 		private void DeleteMaterialAction()
 		{

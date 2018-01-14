@@ -307,7 +307,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <!--<DataGridCheckBoxColumn Binding="{Binding IsCheck}" x:Name="f1" Header=""  Width="0.5*" />-->
-                            <DataGridTextColumn  Binding="{Binding Path=ChildTitle,Mode=TwoWay}" x:Name="wz2" Header="编号" Width="*" >
+                            <DataGridTextColumn  Binding="{Binding Path=MaterialsNumber,Mode=TwoWay}" x:Name="wz2" Header="编号" Width="*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -315,7 +315,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=ChildTime,Mode=TwoWay}" x:Name="wz3" Header="名称"  Width="*" >
+                            <DataGridTextColumn  Binding="{Binding Path=MaterialsName,Mode=TwoWay}" x:Name="wz3" Header="名称"  Width="*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -323,7 +323,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=ChildLocale,Mode=TwoWay}" x:Name="wz4" Header="所属单位"  Width="2*" >
+                            <DataGridTextColumn  Binding="{Binding Path=MaterialsDeptName,Mode=TwoWay}" x:Name="wz4" Header="所属单位"  Width="2*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -331,7 +331,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=ChildSubmitParty,Mode=TwoWay}" x:Name="wz5" Header="数量"  Width="*" >
+                            <DataGridTextColumn  Binding="{Binding Path=TotalQuantity,Mode=TwoWay}" x:Name="wz5" Header="数量"  Width="*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -441,7 +441,7 @@
                         <Button Style="{StaticResource CancelImageButton}" Command="{Binding Path=CloseSelectTeamCommand}" DockPanel.Dock="Left" Margin="19 0 19 0" />
                         <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
                         <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" Content="{Binding Path=TeamSelectPopup.PopupName,Mode=TwoWay}" Margin="19 0 0 0"/>
-                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Command="{Binding Path=CloseAmplifySubEventCommand}" Width="88px"/>
+                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Command="{Binding Path=SelectTeamCommand}" Width="88px"/>
                     </DockPanel>
                     <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
                         <DataGrid Style="{StaticResource DataGridRight}"  DockPanel.Dock="Top" Name="Grid_SelectTeam"  ItemsSource="{Binding Path=UnSelectedTeamList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2">
@@ -533,7 +533,7 @@
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                                 <!--<DataGridCheckBoxColumn Binding="{Binding IsCheck}" x:Name="f1" Header=""  Width="0.5*" />-->
-                                <DataGridTextColumn  Binding="{Binding Path=ChildTitle,Mode=TwoWay}" x:Name="wzs2" Header="编号" Width="*" >
+                                <DataGridTextColumn  Binding="{Binding Path=MaterialsNumber,Mode=TwoWay}" x:Name="wzs2" Header="编号" Width="*" >
                                     <DataGridTextColumn.ElementStyle>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="TextWrapping" Value="Wrap"/>
@@ -541,7 +541,7 @@
                                         </Style>
                                     </DataGridTextColumn.ElementStyle>
                                 </DataGridTextColumn>
-                                <DataGridTextColumn  Binding="{Binding Path=ChildTime,Mode=TwoWay}" x:Name="wzs3" Header="名称"  Width="*" >
+                                <DataGridTextColumn  Binding="{Binding Path=MaterialsName,Mode=TwoWay}" x:Name="wzs3" Header="名称"  Width="*" >
                                     <DataGridTextColumn.ElementStyle>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="TextWrapping" Value="Wrap"/>
@@ -549,7 +549,7 @@
                                         </Style>
                                     </DataGridTextColumn.ElementStyle>
                                 </DataGridTextColumn>
-                                <DataGridTextColumn  Binding="{Binding Path=ChildLocale,Mode=TwoWay}" x:Name="wzs4" Header="所属单位"  Width="2*" >
+                                <DataGridTextColumn  Binding="{Binding Path=MaterialsDeptName,Mode=TwoWay}" x:Name="wzs4" Header="所属单位"  Width="2*" >
                                     <DataGridTextColumn.ElementStyle>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="TextWrapping" Value="Wrap"/>
@@ -557,7 +557,7 @@
                                         </Style>
                                     </DataGridTextColumn.ElementStyle>
                                 </DataGridTextColumn>
-                                <DataGridTextColumn  Binding="{Binding Path=ChildSubmitParty,Mode=TwoWay}" x:Name="wzs5" Header="数量"  Width="*" >
+                                <DataGridTextColumn  Binding="{Binding Path=TotalQuantity,Mode=TwoWay}" x:Name="wzs5" Header="数量"  Width="*" >
                                     <DataGridTextColumn.ElementStyle>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="TextWrapping" Value="Wrap"/>

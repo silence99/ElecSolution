@@ -3,6 +3,7 @@ using Busniess.Services;
 using Emergence.Common.Model;
 using Framework;
 using Microsoft.Practices.Prism.Commands;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
@@ -79,7 +80,15 @@ namespace Busniess.ViewModel
 					name = item.Name,
 					phone = item.PhoneNumber
 				}).ToArray());
-				obj.MEService.SendMessge(obj.SendType, obj.ChildEventId, obj.TemplateId, sendInfo);
+				var result = obj.MEService.SendMessge(obj.SendType, obj.ChildEventId, obj.TemplateId, sendInfo);
+                if (result)
+                {
+                    System.Windows.MessageBox.Show("发送成功！");
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("发送失败，请联系管理员");
+                }
 			}
 			else
 			{
@@ -121,12 +130,20 @@ namespace Busniess.ViewModel
 			PopupCloseDialogAction();
 		}
 
-		private void ImportAction()
-		{
-			var obj = this.IsAopWapper ? this : this.CreateAopProxy();
-			var file = obj.ImportFile;
+        private void ImportAction()
+        {
+            var obj = this.IsAopWapper ? this : this.CreateAopProxy();
+            var file = obj.ImportFile;
 
-			//import logic here
-		}
-	}
+            //import logic here
+        }
+        public void AddPerson(List<PersonModel> pList)
+        {
+            var obj = this.IsAopWapper ? this : this.CreateAopProxy();
+            foreach (var pm in pList)
+            {
+                obj.Members.Add(pm.CreateAopProxy());
+            }
+        }
+    }
 }
