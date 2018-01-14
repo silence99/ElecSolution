@@ -193,7 +193,7 @@
             </Canvas>
         </Viewbox>
         <Viewbox  Margin="5 5 5 5" Grid.Column="1" Grid.Row="2">
-            <charts:MaterialsChart Width="280px" Height="180"/>
+            <charts:MaterialsChart Width="280px" Height="180" Foreground="White" Background="Black"/>
         </Viewbox>
         <Viewbox Margin="5 5 5 10" Grid.Column="1" Grid.Row="3">
             <Canvas Width="280px" Height="180px">

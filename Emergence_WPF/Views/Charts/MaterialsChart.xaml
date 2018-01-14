@@ -6,13 +6,15 @@
              xmlns:local="clr-namespace:Emergence_WPF.Views.Charts"
              xmlns:comm="clr-namespace:Emergence_WPF.Comm"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             mc:Ignorable="d" >
+             mc:Ignorable="d">
     <Grid Margin="0,0,0,0">
         <Grid.Resources>
             <x:Array x:Key="testData" Type="sys:Double">
                 <sys:Double>20</sys:Double>
                 <sys:Double>30</sys:Double>
                 <sys:Double>80</sys:Double>
+                <sys:Double>90</sys:Double>
+                <sys:Double>100</sys:Double>
             </x:Array>
             <x:Array x:Key="names" Type="sys:String">
                 <sys:String>12345</sys:String>
@@ -22,11 +24,11 @@
                 <sys:String>物资5</sys:String>
             </x:Array>
             <x:Array x:Key="ColumnBrush" Type="Brush">
-                <SolidColorBrush>Red</SolidColorBrush>
-                <SolidColorBrush>Green</SolidColorBrush>
-                <SolidColorBrush>Black</SolidColorBrush>
-                <SolidColorBrush>Gray</SolidColorBrush>
-                <SolidColorBrush>Wheat</SolidColorBrush>
+                <SolidColorBrush>#2EA65E</SolidColorBrush>
+                <SolidColorBrush>#F4BB17</SolidColorBrush>
+                <SolidColorBrush>#E76162</SolidColorBrush>
+                <SolidColorBrush>#49B0F6</SolidColorBrush>
+                <SolidColorBrush>#6959CD</SolidColorBrush>
             </x:Array>
         </Grid.Resources>
         <Grid.RowDefinitions>
@@ -37,59 +39,75 @@
         </Grid.ColumnDefinitions>
 
         <comm:ClusteredColumnChart x:Name="Chart" ChartMarginLeft="25" Grid.Row="0" Grid.Column="0"
-                                   Background="White"
-                                   LineColor="Green" 
+                                   LineColor="#2c2e30" 
                                    ItemsSource="{StaticResource testData}"
                                    ItemsSourceName="{StaticResource names}"
-                                   ColumnColors="{StaticResource ColumnBrush}"
+                                   ColumnColors="{StaticResource ColumnBrush}" Loaded="Chart_Loaded"
                                    >
             <comm:ClusteredColumnChart.Style>
                 <Style TargetType="comm:ClusteredColumnChart">
+                    <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}"/>
+                    <Setter Property="Foreground" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Foreground}"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="comm:ClusteredColumnChart">
                                 <Canvas Background="{TemplateBinding Background}" 
                                         Width="{TemplateBinding Width}" ClipToBounds="True">
-                                    <Border BorderThickness="1,0,0,1" BorderBrush="Black" 
+                                    <Border BorderThickness="1,0,0,1" BorderBrush="{TemplateBinding Foreground}" 
                                             Canvas.Left="{TemplateBinding ChartMarginLeft}" 
                                             Canvas.Bottom="{TemplateBinding ChartMarginBottom}"
                                             Width="{TemplateBinding ChartWidth}"
                                             Height="{TemplateBinding ChartHeight}"/>
-                                    <Label Content="20" FontSize="9" 
+                                    <Label Content="20" FontSize="9"
+                                           Padding="0,0,0,0"
+                                           HorizontalAlignment="Center"
                                            Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[0]}"
-                                           Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ChartMarginLeft}"/>
+                                           Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ChartMarginLeft}"
+                                           Foreground="{TemplateBinding Foreground}"/>
                                     <Border Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ChartWidth}"
                                             BorderThickness="1" Height="1"
                                             Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[0]}"
                                             BorderBrush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LineColor}"
                                             Canvas.Left="{TemplateBinding ChartMarginLeft}"/>
                                     <Label Content="40" FontSize="9" 
+                                           Padding="0,0,0,0"
+                                           HorizontalAlignment="Center"
                                            Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[1]}"
-                                           Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ChartMarginLeft}"/>
+                                           Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ChartMarginLeft}"
+                                           Foreground="{TemplateBinding Foreground}"/>
                                     <Border Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ChartWidth}"
                                             BorderThickness="1" Height="1"
                                             Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[1]}"
                                             BorderBrush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LineColor}"
                                             Canvas.Left="{TemplateBinding ChartMarginLeft}"/>
                                     <Label Content="60" FontSize="9" 
+                                           Padding="0,0,0,0"
+                                           HorizontalAlignment="Center"
                                            Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[2]}"
-                                           Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ChartMarginLeft}"/>
+                                           Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ChartMarginLeft}"
+                                           Foreground="{TemplateBinding Foreground}"/>
                                     <Border Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ChartWidth}"
                                             BorderThickness="1" Height="1"
                                             Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[2]}"
                                             BorderBrush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LineColor}"
                                             Canvas.Left="{TemplateBinding ChartMarginLeft}"/>
                                     <Label Content="80" FontSize="9" 
+                                           Padding="0,0,0,0"
+                                           HorizontalAlignment="Center"
                                            Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[3]}"
-                                           Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ChartMarginLeft}"/>
+                                           Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ChartMarginLeft}"
+                                           Foreground="{TemplateBinding Foreground}"/>
                                     <Border Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ChartWidth}"
                                             BorderThickness="1" Height="1"
                                             Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[3]}"
                                             BorderBrush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LineColor}"
                                             Canvas.Left="{TemplateBinding ChartMarginLeft}"/>
                                     <Label Content="100" FontSize="9" 
+                                           Padding="0,0,0,0"
+                                           HorizontalAlignment="Center"
                                            Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[4]}"
-                                           Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ChartMarginLeft}"/>
+                                           Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ChartMarginLeft}"
+                                           Foreground="{TemplateBinding Foreground}"/>
                                     <Border Width="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ChartWidth}"
                                             BorderThickness="1" Height="1"
                                             Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[4]}"
@@ -136,35 +154,40 @@
                                                     Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ColumnColors[0]}" 
                                                     Margin="0,0,0,0" HorizontalAlignment="Left"/>
                                             <Label Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSourceName[0]}"
-                                                   FontSize="9" Padding="0" VerticalContentAlignment="Center" Margin="5,0,0,0"/>
+                                                   FontSize="9" Padding="0" VerticalContentAlignment="Center" Margin="5,0,0,0" 
+                                                   Foreground="{TemplateBinding Foreground}"/>
                                         </DockPanel>
                                         <DockPanel Grid.Column="2">
                                             <Border Height="10" Width="10" 
                                                     Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ColumnColors[1]}" 
                                                     Margin="0,0,0,0" HorizontalAlignment="Left"/>
                                             <Label Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSourceName[1]}"
-                                                   FontSize="9" Padding="0" VerticalContentAlignment="Center" Margin="5,0,0,0"/>
+                                                   FontSize="9" Padding="0" VerticalContentAlignment="Center" Margin="5,0,0,0"
+                                                   Foreground="{TemplateBinding Foreground}"/>
                                         </DockPanel>
                                         <DockPanel Grid.Column="3">
                                             <Border Height="10" Width="10" 
                                                     Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ColumnColors[2]}" 
                                                     Margin="0,0,0,0" HorizontalAlignment="Left"/>
                                             <Label Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSourceName[2]}"
-                                                   FontSize="9" Padding="0" VerticalContentAlignment="Center" Margin="5,0,0,0"/>
+                                                   FontSize="9" Padding="0" VerticalContentAlignment="Center" Margin="5,0,0,0"
+                                                   Foreground="{TemplateBinding Foreground}"/>
                                         </DockPanel>
                                         <DockPanel Grid.Column="1" Grid.Row="2">
                                             <Border Height="10" Width="10" 
                                                     Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ColumnColors[3]}" 
                                                     Margin="0,0,0,0" HorizontalAlignment="Left"/>
                                             <Label Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSourceName[3]}"
-                                                   FontSize="9" Padding="0" VerticalContentAlignment="Center" Margin="5,0,0,0"/>
+                                                   FontSize="9" Padding="0" VerticalContentAlignment="Center" Margin="5,0,0,0"
+                                                   Foreground="{TemplateBinding Foreground}"/>
                                         </DockPanel>
                                         <DockPanel Grid.Column="2" Grid.Row="2">
                                             <Border Height="10" Width="10" 
                                                     Background="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ColumnColors[4]}" 
                                                     Margin="0,0,0,0" HorizontalAlignment="Left"/>
                                             <Label Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=ItemsSourceName[4]}"
-                                                   FontSize="9" Padding="0" VerticalContentAlignment="Center" Margin="5,0,0,0"/>
+                                                   FontSize="9" Padding="0" VerticalContentAlignment="Center" Margin="5,0,0,0"
+                                                   Foreground="{TemplateBinding Foreground}"/>
                                         </DockPanel>
                                     </Grid>
                                 </Canvas>
