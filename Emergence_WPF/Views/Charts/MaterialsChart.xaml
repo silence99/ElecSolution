@@ -42,8 +42,8 @@
                                    LineColor="#2c2e30" 
                                    ItemsSource="{StaticResource testData}"
                                    ItemsSourceName="{StaticResource names}"
-                                   ColumnColors="{StaticResource ColumnBrush}" Loaded="Chart_Loaded"
-                                   >
+                                   ColumnColors="{StaticResource ColumnBrush}" 
+                                   Loaded="Chart_Loaded">
             <comm:ClusteredColumnChart.Style>
                 <Style TargetType="comm:ClusteredColumnChart">
                     <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background}"/>
@@ -58,7 +58,7 @@
                                             Canvas.Bottom="{TemplateBinding ChartMarginBottom}"
                                             Width="{TemplateBinding ChartWidth}"
                                             Height="{TemplateBinding ChartHeight}"/>
-                                    <Label Content="20" FontSize="9"
+                                    <Label Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Levels[0]}" FontSize="9"
                                            Padding="0,0,0,0"
                                            HorizontalAlignment="Center"
                                            Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[0]}"
@@ -69,7 +69,7 @@
                                             Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[0]}"
                                             BorderBrush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LineColor}"
                                             Canvas.Left="{TemplateBinding ChartMarginLeft}"/>
-                                    <Label Content="40" FontSize="9" 
+                                    <Label Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Levels[1]}" FontSize="9" 
                                            Padding="0,0,0,0"
                                            HorizontalAlignment="Center"
                                            Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[1]}"
@@ -80,7 +80,7 @@
                                             Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[1]}"
                                             BorderBrush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LineColor}"
                                             Canvas.Left="{TemplateBinding ChartMarginLeft}"/>
-                                    <Label Content="60" FontSize="9" 
+                                    <Label Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Levels[2]}" FontSize="9" 
                                            Padding="0,0,0,0"
                                            HorizontalAlignment="Center"
                                            Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[2]}"
@@ -91,7 +91,7 @@
                                             Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[2]}"
                                             BorderBrush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LineColor}"
                                             Canvas.Left="{TemplateBinding ChartMarginLeft}"/>
-                                    <Label Content="80" FontSize="9" 
+                                    <Label Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Levels[3]}" FontSize="9" 
                                            Padding="0,0,0,0"
                                            HorizontalAlignment="Center"
                                            Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[3]}"
@@ -102,7 +102,7 @@
                                             Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[3]}"
                                             BorderBrush="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=LineColor}"
                                             Canvas.Left="{TemplateBinding ChartMarginLeft}"/>
-                                    <Label Content="100" FontSize="9" 
+                                    <Label Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Levels[4]}" FontSize="9" 
                                            Padding="0,0,0,0"
                                            HorizontalAlignment="Center"
                                            Canvas.Bottom="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=VerticalLines[4]}"
