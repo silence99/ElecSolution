@@ -415,7 +415,7 @@
                                         <ColumnDefinition Width="40px"/>
                                     </Grid.ColumnDefinitions>
                                     <Button Style="{StaticResource AddressImageButton}" Grid.Column="1" Command="{Binding Path=SearchSubEventListCommand}" CommandParameter="{Binding Path=SubEventSearchValue}"></Button>
-                                    <TextBox Name="SubEventEditAddressTextBox" Grid.Column="0" Style="{StaticResource ImageTextBox}" Text="{Binding Path=SubEventEdit.ChildLocale, Mode=TwoWay}"></TextBox>
+                                    <TextBox Name="SubEventEditAddressTextBox" Grid.Column="0" Style="{StaticResource ImageTextBox}" Text="{Binding Path=SubEventEdit.ChildLocale, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="0"></TextBox>
                                 </Grid>
                             </Border>
                             <!--<TextBox Style="{StaticResource TextBoxMap}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventLocale" Width="458px" Margin="-8 0 0 0"  Text="{Binding Path=SubEventEdit.ChildLocale,Mode=TwoWay}"/>-->

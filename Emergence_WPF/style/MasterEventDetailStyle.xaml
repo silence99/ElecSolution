@@ -142,12 +142,12 @@
         <Setter Property="BorderBrush" Value="#FFFFFF" />
         <Setter Property="HorizontalGridLinesBrush">
             <Setter.Value>
-                <SolidColorBrush Color="#000000"/>
+                <SolidColorBrush Color="#F5F5F5"/>
             </Setter.Value>
         </Setter>
         <Setter Property="VerticalGridLinesBrush">
             <Setter.Value>
-                <SolidColorBrush Color="#000000"/>
+                <SolidColorBrush Color="#F5F5F5"/>
             </Setter.Value>
         </Setter>
         <Style.Resources>

@@ -47,7 +47,7 @@ namespace Emergence_WPF
 		{
 			var svc = ServiceManager.Instance.GetService<MasterEventService>(Constant.Services.MasterEventService);
 			//this.DataCodeing.ItemsSource = svc.GetMasterEventForMainPage();
-			VideoList.BindingViewModel(svc.GetVideos());
+			//VideoList.BindingViewModel(svc.GetVideos());
 		}
 
 		private void MasterEvent_SelectionChanged(object sender, SelectionChangedEventArgs e)

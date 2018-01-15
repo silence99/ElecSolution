@@ -66,8 +66,9 @@ namespace Emergence_WPF
 
 		private void Btn_PublishSubEvent_Click(object sender, RoutedEventArgs e)
 		{
-
-		}
+            MessageNotificationPage mnp = new MessageNotificationPage(this.ViewModel.SubEventDetail.Id.ToString());
+            NavigationService.Navigate(mnp);
+        }
 
 		private void Btn_AmplifySubEvent_Click(object sender, RoutedEventArgs e)
 		{

@@ -402,8 +402,8 @@
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="等级"/>
                             <ComboBox Grid.Row="1" Grid.Column="1" Name="Txt_EditSubEventGrade" Width="160px" Height="34" Margin="0 0 0 0" 
                                       Text="{Binding Path=SubEventEdit.ChildGradeName,Mode=TwoWay}"
-                                      ItemsSource="{Binding EventGrades, Mode=TwoWay}"
-                                      SelectedValue="{Binding SubEventEdit.ChildGrade, Mode=TwoWay}"
+                                      ItemsSource="{Binding Path=EventGrades, Mode=TwoWay}"
+                                      SelectedValue="{Binding Path=SubEventEdit.ChildGrade, Mode=TwoWay}"
                                       SelectedValuePath="Value"
                                       DisplayMemberPath="Name"/>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="2" Content="负责人"/>
@@ -417,7 +417,7 @@
                                         <ColumnDefinition Width="40px"/>
                                     </Grid.ColumnDefinitions>
                                     <Button Style="{StaticResource AddressImageButton}" Grid.Column="1" Command="{Binding Path=SearchSubEventListCommand}" CommandParameter="{Binding Path=SubEventSearchValue}"></Button>
-                                    <TextBox Name="SubEventEditAddressTextBox" Grid.Column="0" Style="{StaticResource ImageTextBox}" Text="{Binding Path=SubEventEdit.ChildLocale, Mode=TwoWay}"></TextBox>
+                                    <TextBox Name="SubEventEditAddressTextBox" Grid.Column="0" Style="{StaticResource ImageTextBox}" Text="{Binding Path=SubEventEdit.ChildLocale, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="0"></TextBox>
                                 </Grid>
                             </Border>
                             <!--<TextBox Style="{StaticResource TextBoxMap}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventLocale" Width="458px" Margin="-8 0 0 0"  Text="{Binding Path=SubEventEdit.ChildLocale,Mode=TwoWay}"/>-->

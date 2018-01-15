@@ -199,6 +199,7 @@
                                       VerticalGridLinesBrush="#dcdcdc"
                                       BorderBrush="#dcdcdc"
                                       CanUserAddRows="False"
+                              CanUserDeleteRows="False"
                                       MouseDoubleClick="Grid_MasterEvent_MouseDoubleClick">
                         <DataGrid.Columns >
                             <DataGridTemplateColumn Width="40">
@@ -211,13 +212,13 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=SerialNumber}" x:Name="f2" Header="序号" Width="*" ></DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=Title}" x:Name="f3" Header="标题"  Width="*" ></DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=EventTypeName}" x:Name="f4" Header="类型"  Width="*" ></DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=GradeName}" x:Name="f5" Header="等级"  Width="*" ></DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=Time}" x:Name="f6" Header="时间"  Width="*" ></DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=Locale}" x:Name="f7" Header="地址"  Width="2*" ></DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=Remarks}" x:Name="f8" Header="描述"  Width="*" ></DataGridTextColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=SerialNumber}" x:Name="f2" Header="序号" Width="*" IsReadOnly="True"></DataGridTextColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=Title}" x:Name="f3" Header="标题"  Width="*"  IsReadOnly="True"></DataGridTextColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=EventTypeName}" x:Name="f4" Header="类型"  Width="*"  IsReadOnly="True"></DataGridTextColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=GradeName}" x:Name="f5" Header="等级"  Width="*"  IsReadOnly="True"></DataGridTextColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=Time}" x:Name="f6" Header="时间"  Width="*"  IsReadOnly="True"></DataGridTextColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=Locale}" x:Name="f7" Header="地址"  Width="2*"  IsReadOnly="True"></DataGridTextColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=Remarks}" x:Name="f8" Header="描述"  Width="*"  IsReadOnly="True"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </DockPanel>

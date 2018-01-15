@@ -39,6 +39,8 @@
             </DockPanel.Style>
             <Label Name="TeamListTitle" Margin="20,0,0,0" MouseLeftButtonUp="NavigateToMaterialPage">队伍列表</Label>
             <Label Name="MaterialListTile" Style="{StaticResource SelectedLabel}" >物资列表</Label>
+            <Label Name="MaterialListTiles" MouseLeftButtonUp="NavigateToMaterialPage_Handler">PMS数据</Label>
+
         </DockPanel>
         <DockPanel Grid.Column="0" Grid.Row="1" Background="#FFFFFF" Height="80" Width="auto"  HorizontalAlignment="Stretch" >
             <Border Grid.Row="0" Height="41" Width="500px" DockPanel.Dock="Left" HorizontalAlignment="Left" BorderBrush="#D3D3D3" BorderThickness="1 1 1 1" Margin="20 0 0 0" Background="White">

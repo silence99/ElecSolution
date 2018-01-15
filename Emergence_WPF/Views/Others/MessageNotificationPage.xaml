@@ -6,7 +6,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="MessageNotificationPage">
+      Title="MessageNotificationPage"  Loaded="Page_Loaded"> 
     <Grid>
         <Grid.Resources>
             <ResourceDictionary>

@@ -92,6 +92,7 @@ namespace Emergence.Business.ViewModel
 			subEventService = new SubeventService();
 			teamService = new TeamService();
 			materialService = new MaterialService();
+            SubEventEdit = new SubEvent().CreateAopProxy();
 			SBStatus = new SubEventStatus("").CreateAopProxy();
 			SubEventEditPopup = new PopupModel().CreateAopProxy();
 			TeamSelectPopup = new PopupModel().CreateAopProxy();
@@ -222,11 +223,14 @@ namespace Emergence.Business.ViewModel
 
 		private void StartCreateSubEventAction()
 		{
-			SubEventEdit = SubEventEdit ?? new SubEvent()
-			{
-				ChildGrade = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Value,
-				ChildGradeName = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Name
-			};
+            SubEventEdit = SubEventEdit ?? new SubEvent().CreateAopProxy();
+            SubEventEdit.ChildGrade = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Value;
+            SubEventEdit.ChildGradeName = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Name;
+
+   //         {
+			//	ChildGrade = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Value,
+			//	ChildGradeName = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Name
+			//};
 			SubEventEditPopup.PopupName = "创建子事件";
 			SubEventEditPopup.IsOpen = true;
 			SetPageEnableStatus(false);
@@ -253,17 +257,21 @@ namespace Emergence.Business.ViewModel
 		}
 
 		private void CreateSubEventAction()
-		{
-			if (MasterEventInfo != null && SubEventEdit != null)
+        {
+            var thisAop = this.AopWapper as VM_MasterEventDetail;
+
+            if (MasterEventInfo != null && SubEventEdit != null)
 			{
 				var result = subEventService.CreateChildEvent(MasterEventInfo.ID.ToString(), SubEventEdit);
 				if (result)
-				{
-					SetPageEnableStatus(true);
+                {
+                    this.SubEventEditPopup.IsOpen = false;
+                    this.SubEventEdit = new SubEvent();
+                    SetPageEnableStatus(true);
 					ShowMessageBox("创建子事件成功！");
-					this.SubEventEditPopup.IsOpen = false;
-					this.SubEventEdit = new SubEvent();
-				}
+                    thisAop.SubEventEdit = new SubEvent().CreateAopProxy();
+
+                }
 				else
 				{
 					ShowMessageBox("创建子事件失败！");
@@ -273,18 +281,22 @@ namespace Emergence.Business.ViewModel
 		}
 
 		private void UpdateSubEventAction()
-		{
-			if (SubEventEdit != null)
+        {
+            var thisAop = this.AopWapper as VM_MasterEventDetail;
+
+            if (SubEventEdit != null)
 			{
 				var result = subEventService.UpdateChildEvent(MasterEventInfo.ID.ToString(), SubEventEdit);
 				if (result)
-				{
-					ShowMessageBox("编辑子事件成功！");
+                {
+                    this.SubEventEditPopup.IsOpen = false;
+                    this.SubEventEdit = new SubEvent();
+                    ShowMessageBox("编辑子事件成功！");
 					SetPageEnableStatus(true);
-					this.SubEventEditPopup.IsOpen = false;
-					this.SubEventEdit = new SubEvent();
-				}
-				else
+                    thisAop.SubEventEdit = new SubEvent().CreateAopProxy();
+
+                }
+                else
 				{
 					ShowMessageBox("编辑子事件失败！");
 				}
@@ -515,8 +527,8 @@ namespace Emergence.Business.ViewModel
 		#region [other method]
 		private void SetPageEnableStatus(bool status)
 		{
-			var thisAop = this.AopWapper as VM_MasterEventDetail;
-			thisAop.PageEnabled = status;
+			//var thisAop = this.AopWapper as VM_MasterEventDetail;
+			//thisAop.PageEnabled = status;
 		}
 		private void GetSelectedSubEventInfo(string subEventID)
 		{

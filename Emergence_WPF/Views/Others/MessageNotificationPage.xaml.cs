@@ -22,14 +22,24 @@ namespace Emergence_WPF
 	public partial class MessageNotificationPage : Page
 	{
 		public MessageNotificationViewModel ViewModel { get; set; }
-		public MessageNotificationPage()
-		{
-			InitializeComponent();
-			ViewModel = new MessageNotificationViewModel().CreateAopProxy();
-			DataContext = ViewModel;
-		}
 
-		private void Pager_OnPageChanged(object sender, object e)
+        public string SubEventID { get; set; }
+        public SubeventService SBService { get; set; }
+        public MessageNotificationPage()
+        {
+            InitializeComponent();
+            ViewModel = new MessageNotificationViewModel().CreateAopProxy();
+            DataContext = ViewModel;
+        }
+        public MessageNotificationPage(string subEventID)
+        {
+            InitializeComponent();
+            ViewModel = new MessageNotificationViewModel().CreateAopProxy();
+            DataContext = ViewModel;
+            SubEventID = subEventID;
+        }
+
+        private void Pager_OnPageChanged(object sender, object e)
 		{
 
 		}
@@ -182,6 +192,27 @@ namespace Emergence_WPF
         private bool CheckString(string str, int minStrLength, int maxStrLength)
         {
             return !string.IsNullOrEmpty(str) && str.Length >= minStrLength && str.Length <= maxStrLength;
+        }
+
+        public void AddPersonBySubEventID(string subEventID)
+        {
+            long sbID = 0;
+            if(long.TryParse(subEventID,out sbID))
+            {
+                PersonModel[] persons = SBService.GetPersonBindingToSubevent(sbID);
+                if (persons.Count() > 0)
+                {
+                    ViewModel.AddPerson(persons.ToList());
+                }
+            }
+        }
+
+        private void Page_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(this.SubEventID))
+            {
+                AddPersonBySubEventID(this.SubEventID);
+            }
         }
     }
 }
