@@ -69,7 +69,7 @@ namespace Emergence_WPF
                 ViewModel.PageIndex = data.PageIndex;
                 ViewModel.PageSize = data.PageSize;
                 ViewModel.TotalPage = (int)Math.Ceiling((double)data.Count / data.PageSize);
-                ViewModel.Materials = new System.Collections.ObjectModel.ObservableCollection<MaterialModel>(data.Data);
+                ViewModel.Materials = new System.Collections.ObjectModel.ObservableCollection<MaterialModel>(data.Data ?? new MaterialModel[0]);
             }
         }
 

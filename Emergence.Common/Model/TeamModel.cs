@@ -14,6 +14,8 @@ namespace Emergence.Common.Model
 		public virtual string PersonChargePhone { get; set; }
 		[JsonProperty("teamDept")]
 		public virtual string TeamDept { get; set; }
+		[JsonProperty("teamDeptName")]
+		public virtual string TeamDeptName { get; set; }
 		[JsonProperty("teamDeptLocale")]
 		public virtual string TeamLocale { get; set; }
 		[JsonProperty("teamName")]

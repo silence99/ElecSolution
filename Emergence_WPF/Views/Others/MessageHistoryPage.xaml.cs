@@ -29,5 +29,10 @@ namespace Emergence_WPF
         {
             NavigationService.Navigate(new MessageNotificationPage(), UriKind.Relative);
         }
-    }
+
+		private void Pager_OnPageChanged(object sender, object e)
+		{
+
+		}
+	}
 }
