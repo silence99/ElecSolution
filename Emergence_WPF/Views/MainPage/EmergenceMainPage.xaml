@@ -126,10 +126,17 @@
                         <GradientStop/>
                     </LinearGradientBrush>
                 </StackPanel.Background>
-
                 <TextBlock Margin="10,13,0,0" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top">视频资料</TextBlock>
             </StackPanel>
-            <local:VideoCollection x:Name="VideoList" Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            <Grid DockPanel.Dock="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+            </Grid>
+            <!--<local:VideoCollection x:Name="VideoList" Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>-->
         </DockPanel>
         <!--<Image Grid.Row="0" Grid.Column="1" Margin="5,5,5,0"  Source="/Image/MainPage/MaterialsSummary.png" Stretch="Fill" Width="420" Height="234" HorizontalAlignment="Right" ></Image>-->
         <!--<Image Grid.Row="1" Grid.Column="1" Margin="5,5,5,0"  Source="/Image/MainPage/EmergencyPersonSummary.png" Stretch="Fill" Width="420" Height="234" HorizontalAlignment="Right" ></Image>-->

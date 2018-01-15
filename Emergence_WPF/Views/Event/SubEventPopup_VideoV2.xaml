@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:forms="clr-namespace:Vlc.DotNet.Forms;assembly=Vlc.DotNet.Forms"
         mc:Ignorable="d"
+      d:DesignHeight="1080" d:DesignWidth="1920"
         Title="SubEventPopup_VideoV2"
         WindowState="Maximized"
         WindowStyle="None" Closed="Window_Closed">
@@ -43,7 +44,10 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <DockPanel Grid.Row="0" Background="#006F69">
-                    <ComboBox Margin="29,0,0,0" Height="30" Background="#006F69" SelectionChanged="Video1SelectChanged"
+                    <Label Content="摄像头 - 1" VerticalAlignment="Center" FontSize="18" Foreground="#FFFFFF" HorizontalAlignment="Left" Margin="30 0 0 0"/>
+                </DockPanel>
+                <DockPanel Grid.Row="1" Background="#F9F9F9">
+                    <ComboBox Margin="30,0,30,0" Height="30" Background="#006F69" SelectionChanged="Video1SelectChanged"
                               ItemsSource="{Binding Cameras}"
                               SelectedIndex="0"
                               SelectedValuePath="Url">
@@ -51,17 +55,18 @@
                             <DataTemplate>
                                 <DockPanel Margin="0,0,0,0" Background="#006F69">
                                     <Label Content="{Binding VideoNumber}" VerticalAlignment="Center" Foreground="#FFFFFF" HorizontalAlignment="Center"/>
-                                    <Label Content="（左上）" VerticalAlignment="Center" Foreground="#FFFFFF" HorizontalAlignment="Center"/>
+                                    <!--<Label Content="（左上）" VerticalAlignment="Center" Foreground="#FFFFFF" HorizontalAlignment="Center"/>-->
                                 </DockPanel>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                </DockPanel>
-                <DockPanel Grid.Row="1" Background="#F9F9F9">
-                    <ListBoxItem></ListBoxItem>
+                    <!--<ListBoxItem></ListBoxItem>-->
                 </DockPanel>
                 <DockPanel Grid.Row="2" Background="#006F69">
-                    <ComboBox Margin="29,0,0,0" Height="30" Background="#006F69" SelectionChanged="Video2SelectChanged"
+                    <Label Content="摄像头 - 2" VerticalAlignment="Center" FontSize="18" Foreground="#FFFFFF" HorizontalAlignment="Left" Margin="30 0 0 0"/>
+                </DockPanel>
+                <DockPanel Grid.Row="3" Background="#F9F9F9">
+                    <ComboBox Margin="30,0,30,0" Height="30" Background="#006F69" SelectionChanged="Video2SelectChanged"
                               ItemsSource="{Binding Cameras}"
                               SelectedIndex="1"
                               SelectedValuePath="Url">
@@ -69,17 +74,20 @@
                             <DataTemplate>
                                 <DockPanel Margin="0,0,0,0" Background="#006F69">
                                     <Label Content="{Binding VideoNumber}" VerticalAlignment="Center" Foreground="#FFFFFF" HorizontalAlignment="Center"/>
-                                    <Label Content="（右上）" VerticalAlignment="Center" Foreground="#FFFFFF" HorizontalAlignment="Center"/>
+                                    <!--<Label Content="（右上）" VerticalAlignment="Center" Foreground="#FFFFFF" HorizontalAlignment="Center"/>-->
                                 </DockPanel>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                </DockPanel>
-                <DockPanel Grid.Row="3" Background="#F9F9F9">
-                    <ListBoxItem></ListBoxItem>
+
+                    <!--<ListBoxItem></ListBoxItem>-->
                 </DockPanel>
                 <DockPanel Grid.Row="4" Background="#006F69">
-                    <ComboBox Margin="29,0,0,0" Height="30" Background="#006F69" SelectionChanged="Video3SelectChanged"
+                    <Label Content="摄像头 - 3" VerticalAlignment="Center" FontSize="18" Foreground="#FFFFFF" HorizontalAlignment="Left" Margin="30 0 0 0"/>
+                </DockPanel>
+                <DockPanel Grid.Row="5" Background="#F9F9F9">
+
+                    <ComboBox Margin="30,0,30,0" Height="30" Background="#006F69" SelectionChanged="Video3SelectChanged"
                               ItemsSource="{Binding Cameras}"
                               SelectedIndex="2"
                               SelectedValuePath="Url">
@@ -87,17 +95,18 @@
                             <DataTemplate>
                                 <DockPanel Margin="0,0,0,0" Background="#006F69">
                                     <Label Content="{Binding VideoNumber}" VerticalAlignment="Center" Foreground="#FFFFFF" HorizontalAlignment="Center"/>
-                                    <Label Content="（左下）" VerticalAlignment="Center" Foreground="#FFFFFF" HorizontalAlignment="Center"/>
+                                    <!--<Label Content="（左下）" VerticalAlignment="Center" Foreground="#FFFFFF" HorizontalAlignment="Center"/>-->
                                 </DockPanel>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                </DockPanel>
-                <DockPanel Grid.Row="5" Background="#F9F9F9">
-                    <ListBoxItem></ListBoxItem>
+                    <!--<ListBoxItem></ListBoxItem>-->
                 </DockPanel>
                 <DockPanel Grid.Row="6" Background="#006F69">
-                    <ComboBox Margin="29,0,0,0" Height="30" Background="#006F69" SelectionChanged="Video1SelectChanged"
+                    <Label Content="摄像头 - 4" VerticalAlignment="Center" FontSize="18" Foreground="#FFFFFF" HorizontalAlignment="Left" Margin="30 0 0 0"/>
+                </DockPanel>
+                <DockPanel Grid.Row="7" Background="#F9F9F9">
+                    <ComboBox Margin="30,0,30,0" Height="30" Background="#006F69" SelectionChanged="Video1SelectChanged"
                               ItemsSource="{Binding Cameras}"
                               SelectedIndex="3"
                               SelectedValuePath="Url">
@@ -105,14 +114,12 @@
                             <DataTemplate>
                                 <DockPanel Margin="0,0,0,0" Background="#006F69">
                                     <Label Content="{Binding VideoNumber}" VerticalAlignment="Center" Foreground="#FFFFFF" HorizontalAlignment="Center"/>
-                                    <Label Content="（右下）" VerticalAlignment="Center" Foreground="#FFFFFF" HorizontalAlignment="Center"/>
+                                    <!--<Label Content="（右下）" VerticalAlignment="Center" Foreground="#FFFFFF" HorizontalAlignment="Center"/>-->
                                 </DockPanel>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
                     </ComboBox>
-                </DockPanel>
-                <DockPanel Grid.Row="7" Background="#F9F9F9">
-                    <ListBoxItem></ListBoxItem>
+                    <!--<ListBoxItem></ListBoxItem>-->
                 </DockPanel>
             </Grid>
             <Grid Grid.Column="1">
