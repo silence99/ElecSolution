@@ -73,8 +73,8 @@ namespace Emergence_WPF
 
             var tempWidth = this.map.ActualWidth;
             var tempHeight = this.map.ActualHeight;
-            this.MainPageSelectMapPopup.HorizontalOffset = tempWidth  - 100;
-            this.MainPageSelectMapPopup.VerticalOffset = 65;
+            this.MainPageSelectMapPopup.HorizontalOffset = tempWidth  - 250;
+            //this.MainPageSelectMapPopup.VerticalOffset = 65;
         }
 		#region for temp
 		private void Page_Unloaded(object sender, RoutedEventArgs e)

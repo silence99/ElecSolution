@@ -26,13 +26,16 @@
             <RowDefinition Height="240px"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <DockPanel Grid.Column="0" Grid.Row="0" Background="#006f69" Height="80" 
+        <Border BorderBrush="#62A6A3" Grid.Column="0" Grid.Row="0"  BorderThickness="0 1 0 0">
+
+            <DockPanel Grid.Column="0" Grid.Row="0" Background="#006f69" Height="80" 
                    Width="auto"  HorizontalAlignment="Stretch" 
                    IsEnabled="{Binding Path=IsPageEnabled}">
-            <Label Name="GoBackTitle" MouseLeftButtonUp="GoBack">&lt;返回</Label>
-            <Label Name="TeamDetailTitle" Margin="20,0,0,0" Style="{StaticResource SelectedLabel}" HorizontalAlignment="Left">队伍详情</Label>
-            <!--<TextBox Style="{StaticResource TextBoxSearchStyle}" Margin="20,0,0,0" HorizontalAlignment="Left" Text="队员姓名" Width="278" Height="41" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>-->
-        </DockPanel>
+                <Label Name="GoBackTitle" MouseLeftButtonUp="GoBack">&lt;返回</Label>
+                <Label Name="TeamDetailTitle" Margin="20,0,0,0" Style="{StaticResource SelectedLabel}" HorizontalAlignment="Left">队伍详情</Label>
+                <!--<TextBox Style="{StaticResource TextBoxSearchStyle}" Margin="20,0,0,0" HorizontalAlignment="Left" Text="队员姓名" Width="278" Height="41" FontSize="18" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>-->
+            </DockPanel>
+        </Border>
         <DockPanel Grid.Column="0" Grid.Row="1" Background="White" 
                    IsEnabled="{Binding Path=IsPageEnabled}">
             <Grid ShowGridLines="False" Name="gridTest" DockPanel.Dock="Top" Background="White" IsEnabled="{Binding Path=IsTeamEditModel, Mode=TwoWay}">

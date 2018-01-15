@@ -116,6 +116,7 @@ namespace Emergence_WPF
 		private void Image_MouseLeftButtonDown_PopupMasterEventPage(object sender, MouseButtonEventArgs e)
         {
             MainPagePopupWindow mainPopup = new MainPagePopupWindow();
+            mainPopup.Topmost = true;
             mainPopup.Show();
         }
         

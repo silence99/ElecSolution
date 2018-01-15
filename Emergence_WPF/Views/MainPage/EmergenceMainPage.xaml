@@ -295,7 +295,7 @@
             PopupAnimation="Slide"  
             PlacementTarget="{Binding ElementName=Grid_MasterEventDetail}"  
             HorizontalOffset="300"
-            VerticalOffset="50"
+            VerticalOffset="65"
             >
             <Grid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <ComboBox Height="34" VerticalAlignment="Center" Width="150" HorizontalAlignment="Center"

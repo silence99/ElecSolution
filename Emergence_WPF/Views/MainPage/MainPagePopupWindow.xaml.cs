@@ -38,6 +38,7 @@ namespace Emergence_WPF
             this.Height = ResolutionService.Height;
 
             EmergenceMainPage emp = new EmergenceMainPage(true);
+            emp.MainPageSelectMapPopup.VerticalOffset = 115;
             this.Frame_MainWindowPopup.NavigationService.Navigate(emp);
         }
 
