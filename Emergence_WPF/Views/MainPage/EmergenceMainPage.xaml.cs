@@ -46,34 +46,34 @@ namespace Emergence_WPF
 		private void Page_Loaded(object sender, RoutedEventArgs e)
 		{
 			var svc = ServiceManager.Instance.GetService<MasterEventService>(Constant.Services.MasterEventService);
-			//this.DataCodeing.ItemsSource = svc.GetMasterEventForMainPage();
-			//VideoList.BindingViewModel(svc.GetVideos());
-			//V0.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
-			//V1.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
-			//V2.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
-			//V3.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
-			//V0.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
-			//V1.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
-			//V3.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
-			//V2.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
-			//V0.MediaPlayer.EndInit();
-			//V1.MediaPlayer.EndInit();
-			//V2.MediaPlayer.EndInit();
-			//V3.MediaPlayer.EndInit();
-			
-			//V0.MediaPlayer.Play(new Uri("http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171012/346652/1_rD6ose3DCyObL_YD2m0kuA_media.mp4"));
-			//V1.MediaPlayer.Play(new Uri("http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171013/346830/1_gQFJSGJnYGbRtDUelsgYPw_media.mp4"));
-			//V2.MediaPlayer.Play(new Uri("http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171017/325941/1_7IUPQVtjwGQ5xkGq-1cTQw_media.mp4"));
-			//V3.MediaPlayer.Play(new Uri("http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171017/346652/1_JXw4NVgv-LyIwCztsMCvuw_media.mp4"));
+            //this.DataCodeing.ItemsSource = svc.GetMasterEventForMainPage();
+            //VideoList.BindingViewModel(svc.GetVideos());
+            V0.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
+            V1.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
+            V2.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
+            V3.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
+            V0.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
+            V1.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
+            V3.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
+            V2.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
+            V0.MediaPlayer.EndInit();
+            V1.MediaPlayer.EndInit();
+            V2.MediaPlayer.EndInit();
+            V3.MediaPlayer.EndInit();
 
-			//V0.MediaPlayer.Audio.Volume = 0;
-			//V1.MediaPlayer.Audio.Volume = 0;
-			//V2.MediaPlayer.Audio.Volume = 0;
-			//V3.MediaPlayer.Audio.Volume = 0;
+            V0.MediaPlayer.Play(new Uri("http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171012/346652/1_rD6ose3DCyObL_YD2m0kuA_media.mp4"));
+            V1.MediaPlayer.Play(new Uri("http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171013/346830/1_gQFJSGJnYGbRtDUelsgYPw_media.mp4"));
+            V2.MediaPlayer.Play(new Uri("http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171017/325941/1_7IUPQVtjwGQ5xkGq-1cTQw_media.mp4"));
+            V3.MediaPlayer.Play(new Uri("http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171017/346652/1_JXw4NVgv-LyIwCztsMCvuw_media.mp4"));
+
+            V0.MediaPlayer.Audio.Volume = 0;
+            V1.MediaPlayer.Audio.Volume = 0;
+            V2.MediaPlayer.Audio.Volume = 0;
+            V3.MediaPlayer.Audio.Volume = 0;
 
             var tempWidth = this.map.ActualWidth;
             var tempHeight = this.map.ActualHeight;
-            this.MainPageSelectMapPopup.HorizontalOffset = (tempWidth / 4) * 3;
+            this.MainPageSelectMapPopup.HorizontalOffset = tempWidth  - 100;
             this.MainPageSelectMapPopup.VerticalOffset = 65;
         }
 		#region for temp

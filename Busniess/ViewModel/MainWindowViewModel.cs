@@ -9,6 +9,8 @@ using Busniess.Services;
 using System.Collections.ObjectModel;
 using Emergence.Common.Model;
 using Business.Services;
+using Utils;
+using Framework;
 
 namespace Emergence.Business.ViewModel
 {
@@ -29,8 +31,10 @@ namespace Emergence.Business.ViewModel
         public virtual PopupModel MainWindowPopup { get; set; }
         public virtual ObservableCollection<Notification> NotificationList { get; set; }
         public virtual ObservableCollection<MasterEvent> MasterEventList { get; set; }
-        public StatisticsViewModel Statistics { get; set; }
+        public virtual StatisticsViewModel Statistics { get; set; }
 
+        public virtual ObservableCollection<DictItem> MapDropDownList { get; set; }
+        public virtual string mapSelectValue { get; set; }
         public virtual AnnouncementService NoticeService { get; set; }
         public virtual MasterEventService MasterEService { get; set; }
 
@@ -44,6 +48,15 @@ namespace Emergence.Business.ViewModel
             MainWindowSubTitleVisible = "Collapsed";
             GetNoticeList();
             GetMasterEventList();
+            var mapList = new List<DictItem>();
+            mapList.Add(new DictItem { Name = "交警摄像头", Value = "交警摄像头" });
+            mapList.Add(new DictItem { Name = "公安天眼摄像头", Value = "公安天眼摄像头" });
+            mapList.Add(new DictItem { Name = "水利摄像头", Value = "水利摄像头" });
+            mapList.Add(new DictItem { Name = "3D全景", Value = "3D全景" });
+            mapList.Add(new DictItem { Name = "PMS 2.0对接数据", Value = "PMS 2.0对接数据" });
+            mapList.Add(new DictItem { Name = "水文", Value = "水文" });
+            mapList.Add(new DictItem { Name = "天气云图", Value = "天气云图" });
+            MapDropDownList = new ObservableCollection<DictItem>(mapList.Select(a => a.CreateAopProxy()));
         }
 
         public void GetNoticeList()
