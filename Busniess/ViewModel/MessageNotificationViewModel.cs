@@ -26,7 +26,7 @@ namespace Busniess.ViewModel
 		public virtual string SendType { get; set; }
 		public virtual string TemplateId { get; set; }
 		public virtual string TemplateContent { get; set; }
-		public virtual long ChildEventId { get; set; }
+		public virtual string ChildEventId { get; set; }
 		public virtual string ImportFile { get; set; }
 		public virtual bool IsPopupOpen { get; set; }
 		public virtual PersonModel CurrentMember { get; set; }

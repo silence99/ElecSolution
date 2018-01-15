@@ -37,6 +37,7 @@ namespace Emergence_WPF
             ViewModel = new MessageNotificationViewModel().CreateAopProxy();
             DataContext = ViewModel;
             SubEventID = subEventID;
+            ViewModel.ChildEventId = subEventID;
         }
 
         private void Pager_OnPageChanged(object sender, object e)
