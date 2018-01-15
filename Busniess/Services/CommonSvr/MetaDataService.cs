@@ -16,7 +16,7 @@ namespace Business.Services
 		public static string EventState = "event_state";
 		public static string MaterialType = "materials_type";
 		public static string TeamDepartment = "team_dept";
-		public static string TeamMemberPlace = "team_member_placeteam_member_place";
+		public static string TeamMemberPlace = "team_member_place";
 
 		public static string MaterialDept = "materials_dept";
 		public static string TemplateType = "template_type";
