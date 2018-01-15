@@ -41,23 +41,23 @@ namespace Emergence_WPF.Views.Event
 			{
 				new Emergence.Common.Model.CameraModel()
 				{
-					 Url = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi",
-					 VideoNumber = "001"
+					 Url = "http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171012/346652/1_rD6ose3DCyObL_YD2m0kuA_media.mp4",
+					 VideoNumber = "无人机一号编组01号"
 				},
 				new Emergence.Common.Model.CameraModel()
 				{
-					 Url = "http://data.vod.itc.cn/5mp4?file=/121/250/PHW9XS4pJUlDPaceaJm86F.mp4&key=eqgy14PXKCPsRFpcELo93WCSX2TEeyTa&ca=1&prod=56&pt=pc&pg=1&start=-1 ",
-					 VideoNumber = "002"
+					 Url = "http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171013/346830/1_gQFJSGJnYGbRtDUelsgYPw_media.mp4",
+					 VideoNumber = "无人机一号编组02号"
 				},
 				new Emergence.Common.Model.CameraModel()
 				{
-					 Url = "http://data.vod.itc.cn/5mp4?file=/54/50/hUw8ljaFpZRfeKQ4TIyO2H.mp4&key=87IQ9Gx1g2699pd4eR5SCZ-wCuSgsdq_&ca=1&prod=56&pt=pc&pg=1&start=-1  ",
-					 VideoNumber = "003"
+					 Url = "http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171017/325941/1_7IUPQVtjwGQ5xkGq-1cTQw_media.mp4",
+					 VideoNumber = "无人机一号编组03号"
 				},
 				new Emergence.Common.Model.CameraModel()
 				{
-					Url = "http://data.vod.itc.cn/5mp4?file=/191/164/kuxZ1S8VpkvMP9XcrlaPXD.mp4&key=pZCOZRK1VoFaGKCSD6jNDJeTf10VU4IU&ca=1&prod=56&pt=pc&pg=1&start=-1",
-					VideoNumber = "004"
+					Url = "http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171017/346652/1_JXw4NVgv-LyIwCztsMCvuw_media.mp4",
+					VideoNumber = "无人机一号编组04号"
 				}
 			};
 		}
@@ -89,6 +89,7 @@ namespace Emergence_WPF.Views.Event
 				return;
 			}
 			Vlc0.Play(new Uri(combox.SelectedValue.ToString()));
+			Vlc0.Audio.Volume = 0;
 		}
 		private void Video2SelectChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
@@ -98,6 +99,7 @@ namespace Emergence_WPF.Views.Event
 				return;
 			}
 			Vlc1.Play(new Uri(combox.SelectedValue.ToString()));
+			Vlc1.Audio.Volume = 0;
 		}
 		private void Video3SelectChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
@@ -107,6 +109,7 @@ namespace Emergence_WPF.Views.Event
 				return;
 			}
 			Vlc2.Play(new Uri(combox.SelectedValue.ToString()));
+			Vlc2.Audio.Volume = 0;
 		}
 		private void Video4SelectChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
@@ -116,6 +119,7 @@ namespace Emergence_WPF.Views.Event
 				return;
 			}
 			Vlc3.Play(new Uri(combox.SelectedValue.ToString()));
+			Vlc3.Audio.Volume = 0;
 		}
 
 		private void Window_Closed(object sender, EventArgs e)

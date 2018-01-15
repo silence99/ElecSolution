@@ -47,8 +47,59 @@ namespace Emergence_WPF
 		{
 			var svc = ServiceManager.Instance.GetService<MasterEventService>(Constant.Services.MasterEventService);
 			//this.DataCodeing.ItemsSource = svc.GetMasterEventForMainPage();
-			VideoList.BindingViewModel(svc.GetVideos());
+			//VideoList.BindingViewModel(svc.GetVideos());
+			V0.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
+			V1.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
+			V2.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
+			V3.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
+			V0.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
+			V1.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
+			V3.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
+			V2.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
+			V0.MediaPlayer.EndInit();
+			V1.MediaPlayer.EndInit();
+			V2.MediaPlayer.EndInit();
+			V3.MediaPlayer.EndInit();
+			
+			V0.MediaPlayer.Play(new Uri("http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171012/346652/1_rD6ose3DCyObL_YD2m0kuA_media.mp4"));
+			V1.MediaPlayer.Play(new Uri("http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171013/346830/1_gQFJSGJnYGbRtDUelsgYPw_media.mp4"));
+			V2.MediaPlayer.Play(new Uri("http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171017/325941/1_7IUPQVtjwGQ5xkGq-1cTQw_media.mp4"));
+			V3.MediaPlayer.Play(new Uri("http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171017/346652/1_JXw4NVgv-LyIwCztsMCvuw_media.mp4"));
+
+			V0.MediaPlayer.Audio.Volume = 0;
+			V1.MediaPlayer.Audio.Volume = 0;
+			V2.MediaPlayer.Audio.Volume = 0;
+			V3.MediaPlayer.Audio.Volume = 0;
 		}
+		#region for temp
+		private void Page_Unloaded(object sender, RoutedEventArgs e)
+		{
+			V0.MediaPlayer.Dispose();
+			V1.MediaPlayer.Dispose();
+			V2.MediaPlayer.Dispose();
+			V3.MediaPlayer.Dispose();
+
+		}
+		private void OnVlcControlNeedsLibDirectory(object sender, Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs e)
+		{
+			var currentAssembly = System.Reflection.Assembly.GetEntryAssembly();
+			var currentDirectory = new System.IO.FileInfo(currentAssembly.Location).DirectoryName;
+			if (currentDirectory == null)
+				return;
+
+			if (IntPtr.Size == 4)
+				e.VlcLibDirectory = new System.IO.DirectoryInfo(System.IO.Path.Combine(currentDirectory, @"lib\x86\"));
+			else
+				e.VlcLibDirectory = new System.IO.DirectoryInfo(System.IO.Path.Combine(currentDirectory, @"lib\x64\"));
+		}
+
+		private void MediaPlayer_TimeChanged(object sender, Vlc.DotNet.Core.VlcMediaPlayerTimeChangedEventArgs e)
+		{
+			var obj = sender as Vlc.DotNet.Forms.VlcControl;
+			obj.Audio.Volume = 0;
+		}
+
+		#endregion
 
 		private void MasterEvent_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
