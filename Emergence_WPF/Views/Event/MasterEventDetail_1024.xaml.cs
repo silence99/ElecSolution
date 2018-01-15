@@ -65,10 +65,17 @@ namespace Emergence_WPF
 		}
 
 		private void Btn_PublishSubEvent_Click(object sender, RoutedEventArgs e)
-		{
-            MessageNotificationPage mnp = new MessageNotificationPage(this.ViewModel.SubEventDetail.Id.ToString());
-            NavigationService.Navigate(mnp);
-		}
+        {
+            if (this.ViewModel != null && this.ViewModel.SubEventDetail != null && this.ViewModel.SubEventDetail.Id != null)
+            {
+                MessageNotificationPage mnp = new MessageNotificationPage(this.ViewModel.SubEventDetail.Id.ToString());
+                NavigationService.Navigate(mnp);
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("请选择有效的子事件！");
+            }
+        }
 
 		private void Btn_AmplifySubEvent_Click(object sender, RoutedEventArgs e)
 		{

@@ -56,7 +56,14 @@ namespace Business.MainPageSvr
 			}
 
 			var response = Utils.JSONHelper.ConvertToObject<WeatherApiModel>(data);
-			return response.Weather;
+            if(response != null)
+            {
+                return response.Weather;
+            }
+            else
+            {
+                return new Weather();
+            }
 		}
 
 		private bool LocalDataValid()
