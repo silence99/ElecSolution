@@ -57,15 +57,15 @@ namespace Emergence_WPF
 						this.Close();
 						//#if Release
 					}
-					//else
-					//{
-					//	MessageBox.Show("用户名或密码不正确!");
-					//}
-				}
-				catch(Exception ex)
+                    else
+                    {
+                        MessageBox.Show("用户名或密码不正确!");
+                    }
+                }
+                catch (Exception ex)
 				{
-					//MessageBox.Show("登录异常，请重试或联系管理员");
-				}
+                    MessageBox.Show("登录异常，请重试或联系管理员");
+                }
 			}
 			//#endif
 		}
@@ -91,7 +91,7 @@ namespace Emergence_WPF
 			   });
 			if (jsonObj.code != 1)
 			{
-				MessageBox.Show(jsonObj.message);
+				//MessageBox.Show(jsonObj.message);
 				return false;
 			}
 			lim.Code = jsonObj.code;
