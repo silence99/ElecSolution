@@ -37,24 +37,29 @@ namespace Emergence_WPF.Views.Event
 			ViewModel.SetCoordinate(latitude, longitude);
 
 			//for test
-			//ViewModel.Cameras = new System.Collections.ObjectModel.ObservableCollection<Emergence.Common.Model.CameraModel>()
-			//{
-			//	new Emergence.Common.Model.CameraModel()
-			//	{
-			//		 Url = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi",
-			//		 VideoNumber = "001"
-			//	},
-			//	new Emergence.Common.Model.CameraModel()
-			//	{
-			//		 Url = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi",
-			//		 VideoNumber = "002"
-			//	},
-			//	new Emergence.Common.Model.CameraModel()
-			//	{
-			//		 Url = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi",
-			//		 VideoNumber = "003"
-			//	}
-			//};
+			ViewModel.Cameras = new System.Collections.ObjectModel.ObservableCollection<Emergence.Common.Model.CameraModel>()
+			{
+				new Emergence.Common.Model.CameraModel()
+				{
+					 Url = "http://download.blender.org/peach/bigbuckbunny_movies/big_buck_bunny_480p_surround-fix.avi",
+					 VideoNumber = "001"
+				},
+				new Emergence.Common.Model.CameraModel()
+				{
+					 Url = "http://data.vod.itc.cn/5mp4?file=/121/250/PHW9XS4pJUlDPaceaJm86F.mp4&key=eqgy14PXKCPsRFpcELo93WCSX2TEeyTa&ca=1&prod=56&pt=pc&pg=1&start=-1 ",
+					 VideoNumber = "002"
+				},
+				new Emergence.Common.Model.CameraModel()
+				{
+					 Url = "http://data.vod.itc.cn/5mp4?file=/54/50/hUw8ljaFpZRfeKQ4TIyO2H.mp4&key=87IQ9Gx1g2699pd4eR5SCZ-wCuSgsdq_&ca=1&prod=56&pt=pc&pg=1&start=-1  ",
+					 VideoNumber = "003"
+				},
+				new Emergence.Common.Model.CameraModel()
+				{
+					Url = "http://data.vod.itc.cn/5mp4?file=/191/164/kuxZ1S8VpkvMP9XcrlaPXD.mp4&key=pZCOZRK1VoFaGKCSD6jNDJeTf10VU4IU&ca=1&prod=56&pt=pc&pg=1&start=-1",
+					VideoNumber = "004"
+				}
+			};
 		}
 
 		private void MediaPlayer_TimeChanged(object sender, Vlc.DotNet.Core.VlcMediaPlayerTimeChangedEventArgs e)

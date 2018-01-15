@@ -29,7 +29,7 @@ namespace Emergence.Business.ViewModel
         {
             get
             {
-                return Path.GetFullPath(string.Format(@"DebugImage\MainPage\WeatherIcons\{0}.png", Img));
+                return Path.GetFullPath(string.Format(@"Image\MainPage\WeatherIcons\{0}.png", Img));
             }
         }
 
