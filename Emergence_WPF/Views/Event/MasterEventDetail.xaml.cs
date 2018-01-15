@@ -120,18 +120,18 @@ namespace Emergence_WPF
 			var subeventService = new SubeventService();
 			var cameraService = new CameraService();
 			// for show to customers, remove if release
-			ViewModel.MasterEventInfo.Longitude = 119.931298.ToString();
-			ViewModel.MasterEventInfo.Latitude = 28.469722.ToString();
+			ViewModel.MasterEventInfo.Longitude = 119.133194.ToString();
+			ViewModel.MasterEventInfo.Latitude = 28.071823.ToString();
 
 			double longitude = 0;
 			if (!double.TryParse(ViewModel.MasterEventInfo.Longitude, out longitude))
 			{
-				longitude = 119.931298;
+				longitude = 119.133194;
 			}
 			double latitude = 0;
 			if (!double.TryParse(ViewModel.MasterEventInfo.Latitude, out latitude))
 			{
-				latitude = 28.469722;
+				latitude = 28.071823;
 			}
 
 			data.Add(new Tuple<Point, string, string>(new Point(longitude, latitude), string.Format("主事件:{0}", ViewModel.MasterEventInfo.Title), ViewModel.MasterEventInfo.Remarks));
