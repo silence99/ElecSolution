@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Busniess.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace Emergence_WPF
 	/// </summary>
 	public partial class MessageHistoryPage : Page
 	{
+		public MessageHistoryPageViewModel ViewModel { get; set; }
 		public MessageHistoryPage()
 		{
 			InitializeComponent();
+			ViewModel = new MessageHistoryPageViewModel();
+			DataContext = ViewModel;
 		}
 
         private void NavigateToMessageNotification_Handler(object sender, MouseButtonEventArgs e)
@@ -30,9 +34,9 @@ namespace Emergence_WPF
             NavigationService.Navigate(new MessageNotificationPage(), UriKind.Relative);
         }
 
-		private void Pager_OnPageChanged(object sender, object e)
+		private void Pager_OnPageChanged(object sender, Comm.PageChangedEventArg e)
 		{
-
+			ViewModel.SyncData();
 		}
 	}
 }
