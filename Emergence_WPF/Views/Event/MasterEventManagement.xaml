@@ -301,15 +301,5 @@
                 </Grid>
             </Border>
         </Popup>
-        <Popup Name="AddressPickerPopup" Width="600" Height="600"  
-                           StaysOpen="True"   
-                           IsOpen="false"   
-                           AllowsTransparency="True"  
-                           PopupAnimation="Slide"  
-                           PlacementTarget="{Binding ElementName= SubEventEditAddressTextBox}"  
-                           Placement="Bottom" >
-                <views:AddressPicker Width="500" Height="500"/>
-
-        </Popup>
     </Grid>
 </Page>

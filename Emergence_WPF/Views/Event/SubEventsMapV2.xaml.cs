@@ -23,6 +23,36 @@ namespace Emergence_WPF
 			Browser.LoadCompleted += Browser_LoadCompleted;
 		}
 
+		public void MoveToCenter(double longitude, double latitude)
+		{
+			AsyncAction(() =>
+			{
+				Browser.InvokeScript("MoveToPoint", new object[] { longitude, latitude });
+			});
+		}
+
+		private void AsyncAction(Action action)
+		{
+			var timer = new DispatcherTimer();
+			timer.Interval = new TimeSpan(1000);
+			timer.Tick += (sender, e) =>
+			{
+				var iscompleted = (bool)Browser.InvokeScript("IsCompleted");
+				if (iscompleted)
+				{
+					var obj = sender as DispatcherTimer;
+					obj.Stop();
+					if (action != null)
+					{
+						action();
+					}
+				}
+			};
+			timer.Tag = DateTime.Now;
+			timer.Start();
+		}
+
+
 		private void Browser_LoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e)
 		{
 			var timer = new DispatcherTimer();
@@ -60,14 +90,19 @@ namespace Emergence_WPF
 
 		public void BindingData(List<Tuple<Point, string, string>> data)
 		{
-			Data = data;
-			if (Data != null && Data.Count > 0)
+
+			AsyncAction(() =>
 			{
-				foreach (var item in Data)
+				Data = data;
+				if (Data != null && Data.Count > 0)
 				{
-					Browser.InvokeScript("addMarker", item.Item1.X, item.Item1.Y, 0, item.Item2, item.Item3);
+					foreach (var item in Data)
+					{
+						Browser.InvokeScript("addMarker", item.Item1.X, item.Item1.Y, 0, item.Item2, item.Item3);
+					}
 				}
-			}
+			});
+
 		}
 
 		private void CloseButton_Click(object sender, RoutedEventArgs e)
