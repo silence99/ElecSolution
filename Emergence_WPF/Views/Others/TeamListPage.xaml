@@ -40,7 +40,7 @@
                 </DockPanel.Style>
                 <Label Name="TeamListTitle" Margin="20,0,0,0" Style="{StaticResource SelectedLabel}">队伍列表</Label>
                 <Label Name="MaterialListTile" MouseLeftButtonUp="NavigateToMaterialPage_Handler">物资列表</Label>
-                <Label Name="MaterialListTiles" MouseLeftButtonUp="NavigateToMaterialPage_Handler">PMS数据</Label>
+                <Label Name="MaterialListTiles" >PMS数据</Label>
             </DockPanel>
         </Border>
         <DockPanel Grid.Column="0" Grid.Row="1" Background="#FFFFFF" Height="80" Width="auto"  HorizontalAlignment="Stretch" >
@@ -148,7 +148,7 @@
                     </DataGridTemplateColumn>
                     <DataGridTextColumn  Binding="{Binding Path=ID}" x:Name="f2" Header="编号" Width="*" ></DataGridTextColumn>
                     <DataGridTextColumn  Binding="{Binding Path=TeamName}" x:Name="f3" Header="队伍名称"  Width="*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=TeamDept}" x:Name="f4" Header="所属单位"  Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=TeamDeptName}" x:Name="f4" Header="所属单位"  Width="*" ></DataGridTextColumn>
                     <DataGridTextColumn  Binding="{Binding Path=TotalNumber}" x:Name="f5" Header="人数"  Width="*" ></DataGridTextColumn>
                     <DataGridTextColumn  Binding="{Binding Path=PersonCharge}" x:Name="f6" Header="队长"  Width="*" ></DataGridTextColumn>
                     <DataGridTextColumn  Binding="{Binding Path=PersonChargePhone}" x:Name="f7" Header="队长电话" Width="2*" ></DataGridTextColumn>

@@ -79,7 +79,7 @@
                 </Border>
                 <Border Name="LeftGridRow3Border" BorderBrush="#4D9A96" BorderThickness="0 0 0 2" Grid.Column="0" Grid.Row="2">
                     <DockPanel>
-                        <Label DockPanel.Dock="Top" Style="{StaticResource LeftLabel}" VerticalAlignment="Top" FontSize="16px" Content="队伍展示"/>
+                        <Label DockPanel.Dock="Top" Style="{StaticResource LeftLabel}" VerticalAlignment="Top" FontSize="16px" Content="队伍统计"/>
                         <Border DockPanel.Dock="Top" BorderBrush="#4D9A96" BorderThickness="0 2 0 0" Grid.Column="0" Grid.Row="2"/>
                         <Grid Name="Grid_ArmyChart" DockPanel.Dock="Bottom">
                             <Viewbox>
@@ -92,7 +92,7 @@
                 </Border>
                 <Border Name="LeftGridRow4Border" BorderBrush="#4D9A96" BorderThickness="0 0 0 2" Grid.Column="0" Grid.Row="3">
                     <DockPanel>
-                        <Label DockPanel.Dock="Top" Style="{StaticResource LeftLabel}" VerticalAlignment="Top" FontSize="16px" Content="物资展示"/>
+                        <Label DockPanel.Dock="Top" Style="{StaticResource LeftLabel}" VerticalAlignment="Top" FontSize="16px" Content="物资统计"/>
                         <Border DockPanel.Dock="Top" BorderBrush="#4D9A96" BorderThickness="0 2 0 0" Grid.Column="0" Grid.Row="2"/>
                         <Grid Name="Grid_MaterialsChart" DockPanel.Dock="Bottom">
                             <Viewbox>
@@ -112,7 +112,7 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Grid.Row="0" DockPanel.Dock="Left" Style="{StaticResource LeftLabel}" FontSize="16px" HorizontalAlignment="Center" Content="物资展示"/>
+                        <Label Grid.Column="0" Grid.Row="0" DockPanel.Dock="Left" Style="{StaticResource LeftLabel}" FontSize="16px" HorizontalAlignment="Center" Content="总结评估"/>
                         <Border BorderBrush="#4D9A96" BorderThickness="0 0 2 0" Grid.Column="0" Grid.Row="0" Margin="0 25 0 25"/>
                         <Label Grid.Column="1" Grid.Row="0" DockPanel.Dock="Left" Style="{StaticResource LeftLabel}" FontSize="16px" HorizontalAlignment="Center" Content="信息汇总"/>
                         <Border BorderBrush="#4D9A96" BorderThickness="2 0 0 0" Grid.Column="2" Grid.Row="0" Margin="0 25 0 25"/>

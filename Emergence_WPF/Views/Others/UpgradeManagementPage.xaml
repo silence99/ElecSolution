@@ -8,7 +8,7 @@
       d:DesignHeight="1000" d:DesignWidth="1600"
       Title="UpgradeManagementPage">
 
-    <Grid Background="White">
-        <Label FontSize="40" Content="升级管理"/>
+    <Grid Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Label FontSize="20" Content="升级管理" Margin="150 50 0 0" Padding="0"/>
     </Grid>
 </Page>

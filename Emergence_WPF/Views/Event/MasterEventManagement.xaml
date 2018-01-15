@@ -212,7 +212,7 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=SerialNumber}" x:Name="f2" Header="序号" Width="*" IsReadOnly="True"></DataGridTextColumn>
+                            <DataGridTextColumn  Binding="{Binding Path=ID}" x:Name="f2" Header="序号" Width="*" IsReadOnly="True"></DataGridTextColumn>
                             <DataGridTextColumn  Binding="{Binding Path=Title}" x:Name="f3" Header="标题"  Width="*"  IsReadOnly="True"></DataGridTextColumn>
                             <DataGridTextColumn  Binding="{Binding Path=EventTypeName}" x:Name="f4" Header="类型"  Width="*"  IsReadOnly="True"></DataGridTextColumn>
                             <DataGridTextColumn  Binding="{Binding Path=GradeName}" x:Name="f5" Header="等级"  Width="*"  IsReadOnly="True"></DataGridTextColumn>
