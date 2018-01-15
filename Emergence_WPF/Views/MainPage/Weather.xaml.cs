@@ -10,14 +10,14 @@ namespace Emergence_WPF.Views.MainPage
 	/// </summary>
 	public partial class Weather : UserControl
 	{
-		protected WeatherViewModel UIModel = new WeatherViewModel();
+		protected WeatherViewModel ViewModel = new WeatherViewModel();
 		protected StrategyController strategyController = null;
 		public Weather()
 		{
 			InitializeComponent();
-			DataContext = UIModel;
+			DataContext = ViewModel;
 			strategyController = new WeatherStrategyController();
-			strategyController.InitializationUiModel(UIModel);
+			strategyController.InitializationUiModel(ViewModel);
 		}
 	}
 }

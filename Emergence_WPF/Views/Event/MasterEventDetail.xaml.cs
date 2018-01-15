@@ -171,6 +171,7 @@ namespace Emergence_WPF
 
 		private void ThreePopupVideoButton_Click(object sender, RoutedEventArgs e)
 		{
+			ViewModel.ThreePopupSelectCloseAction();
 			double latitude = 0;
 			double longitude = 0;
 			if (ViewModel != null && ViewModel.MasterEventInfo != null)
@@ -182,7 +183,6 @@ namespace Emergence_WPF
 			SubEventPopup_VideoV2 video = new SubEventPopup_VideoV2();
 			video.SetCoordinate(latitude, longitude);
 			video.Show();
-			this.ViewModel.ThreePopupSelectCloseAction();
 		}
 	}
 }

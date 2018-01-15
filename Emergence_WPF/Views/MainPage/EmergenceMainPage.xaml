@@ -7,10 +7,12 @@
       xmlns:emergence_wpf="clr-namespace:Emergence_WPF"
       xmlns:metrochart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
       xmlns:charts="clr-namespace:Emergence_WPF.Views.Charts"
+      xmlns:forms="clr-namespace:Vlc.DotNet.Forms;assembly=Vlc.DotNet.Forms"
+      xmlns:wpf="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="EmergenceMainPage"
-      Loaded="Page_Loaded">
+      Loaded="Page_Loaded" Unloaded="Page_Unloaded">
     <Page.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -135,6 +137,18 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+                <Border Grid.Row="0" Margin="3" CornerRadius="10">
+                    <wpf:VlcControl Grid.Row="0" Margin="0" Name="V0"/>
+                </Border>
+                <Border Grid.Row="1" Margin="3" CornerRadius="10">
+                    <wpf:VlcControl Grid.Row="0" Margin="0" Name="V1"/>
+                </Border>
+                <Border Grid.Row="2" Margin="3" CornerRadius="10">
+                    <wpf:VlcControl Grid.Row="0" Margin="0" Name="V2"/>
+                </Border>
+                <Border Grid.Row="3" Margin="3" CornerRadius="10">
+                    <wpf:VlcControl Grid.Row="0" Margin="0" Name="V3"/>
+                </Border>
             </Grid>
             <!--<local:VideoCollection x:Name="VideoList" Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>-->
         </DockPanel>
