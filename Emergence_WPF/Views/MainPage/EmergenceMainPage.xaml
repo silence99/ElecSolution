@@ -152,36 +152,7 @@
             </Grid>
             <!--<local:VideoCollection x:Name="VideoList" Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>-->
         </DockPanel>
-        <!--<Image Grid.Row="0" Grid.Column="1" Margin="5,5,5,0"  Source="/Image/MainPage/MaterialsSummary.png" Stretch="Fill" Width="420" Height="234" HorizontalAlignment="Right" ></Image>-->
-        <!--<Image Grid.Row="1" Grid.Column="1" Margin="5,5,5,0"  Source="/Image/MainPage/EmergencyPersonSummary.png" Stretch="Fill" Width="420" Height="234" HorizontalAlignment="Right" ></Image>-->
-        <!--<UserControl Name="MaterialsStatitics" Grid.Row="0" Grid.Column="1">
-            <UserControl.Style>
-                <Style TargetType="UserControl">
-                    <Setter Property="Width" Value="420"/>
-                    <Setter Property="Height" Value="234"/>
-                    <Setter Property="HorizontalAlignment" Value="Right"/>
-                    <Setter Property="Margin" Value="5,5,5,0"/>
-                    <Setter Property="ContentTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <Border Margin="0,0,0,0">
-                                    <metrochart:RadialGaugeChart ChartTitle="应急人员汇总"
-                                                                 Background="Black">
-                                        <metrochart:RadialGaugeChart.Series>
-                                            <metrochart:ChartSeries DisplayMember="Name" 
-                                                                    ValueMember="Value"     
-                                                                    ItemsSource="{Binding Path=TeamStatistics}"
-                                                                    SeriesTitle="队伍概况">
-                                            </metrochart:ChartSeries>
-                                        </metrochart:RadialGaugeChart.Series>
-                                    </metrochart:RadialGaugeChart>
-                                </Border>
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </UserControl.Style>
-        </UserControl>-->
+
         <DockPanel Grid.Row="0" Grid.Column="1" Margin="5,10,5,5" Background="#242424">
             <StackPanel DockPanel.Dock="Top" Margin="0 0 0 5" Height="48" Width="160" Orientation="Horizontal" HorizontalAlignment="Left">
                 <StackPanel.Background>
@@ -314,5 +285,19 @@
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>
+        <Popup 
+            x:Name="MainPageSelectMapPopup" 
+            Width="100px" 
+            Height="34px"  
+            StaysOpen="True"   
+            IsOpen="True"   
+            AllowsTransparency="True"  
+            PopupAnimation="Slide"  
+            PlacementTarget="{Binding ElementName=Grid_MasterEventDetail}"  
+            HorizontalOffset="300"
+            VerticalOffset="50"
+            >
+            <Grid Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"></Grid>
+        </Popup>
     </Grid>
 </Page>

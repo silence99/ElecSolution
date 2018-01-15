@@ -69,7 +69,7 @@ namespace Busniess.Services
 			}
 		}
 
-		public bool SendMessge(string templateType, long childEventId, string templateId, string sendInfo)
+		public bool SendMessge(string templateType, string childEventId, string templateId, string sendInfo)
 		{
 			try
 			{
@@ -77,7 +77,7 @@ namespace Busniess.Services
 				Dictionary<string, string> pairs = new Dictionary<string, string>()
 													{
 														{ "templateType", templateType },
-														{ "childEventId", childEventId.ToString() },
+														{ "childEventId", childEventId },
 														{ "templateId", templateId },
 														{ "sendInfo", sendInfo }
 													};
