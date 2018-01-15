@@ -30,15 +30,18 @@ namespace Emergence_WPF
             InitializeComponent();
             ViewModel = new MessageNotificationViewModel().CreateAopProxy();
             DataContext = ViewModel;
+			SBService = new SubeventService();
         }
         public MessageNotificationPage(string subEventID)
         {
             InitializeComponent();
+			SBService = new SubeventService();
             ViewModel = new MessageNotificationViewModel().CreateAopProxy();
             DataContext = ViewModel;
             SubEventID = subEventID;
             ViewModel.ChildEventId = subEventID;
         }
+			
 
         private void Pager_OnPageChanged(object sender, object e)
 		{

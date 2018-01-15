@@ -79,20 +79,20 @@ namespace Emergence.Business.ViewModel
 		public virtual DelegateCommand ThreePopupSelectCloseComman { get; set; }
 		public virtual DelegateCommand OpenFullScreenSubEventCommand { get; set; }
 		public virtual DelegateCommand OpenFullScreenMapCommand { get; set; }
-        public virtual DelegateCommand OpenFullScreenVideoCommand { get; set; }
-        public virtual DelegateCommand MasterEventArchiveCommand { get; set; }
-        
+		public virtual DelegateCommand OpenFullScreenVideoCommand { get; set; }
+		public virtual DelegateCommand MasterEventArchiveCommand { get; set; }
 
-        #endregion
 
-        public VM_MasterEventDetail(MasterEvent mEvent)
+		#endregion
+
+		public VM_MasterEventDetail(MasterEvent mEvent)
 		{
 			PageEnabled = true;
 			masterEventService = new MasterEventService();
 			subEventService = new SubeventService();
 			teamService = new TeamService();
 			materialService = new MaterialService();
-            SubEventEdit = new SubEvent().CreateAopProxy();
+			SubEventEdit = new SubEvent().CreateAopProxy();
 			SBStatus = new SubEventStatus("").CreateAopProxy();
 			SubEventEditPopup = new PopupModel().CreateAopProxy();
 			TeamSelectPopup = new PopupModel().CreateAopProxy();
@@ -126,11 +126,11 @@ namespace Emergence.Business.ViewModel
 			ThreePopupSelectCloseComman = new DelegateCommand(new Action(ThreePopupSelectCloseAction));
 			OpenFullScreenSubEventCommand = new DelegateCommand(new Action(OpenFullScreenSubEventAction));
 			OpenFullScreenMapCommand = new DelegateCommand(new Action(OpenFullScreenMapAction));
-            OpenFullScreenVideoCommand = new DelegateCommand(new Action(OpenFullScreenVideoAction));
-            MasterEventArchiveCommand = new DelegateCommand(new Action(MasterEventArchiveAction));
+			OpenFullScreenVideoCommand = new DelegateCommand(new Action(OpenFullScreenVideoAction));
+			MasterEventArchiveCommand = new DelegateCommand(new Action(MasterEventArchiveAction));
 
 
-            if (mEvent != null)
+			if (mEvent != null)
 			{
 				InitializVM(mEvent);
 			}
@@ -185,9 +185,9 @@ namespace Emergence.Business.ViewModel
 				var result = this.UpdateSubEvent(ids, st);
 				if (result)
 				{
-                    var str = Enum.Parse(typeof(Enumerator.SubEventStatus), status).ToString();
-                    SBStatus.SetSubEventStatus(status);
-                    ShowMessageBox(str + "成功！");
+					var str = Enum.Parse(typeof(Enumerator.SubEventStatus), status).ToString();
+					SBStatus.SetSubEventStatus(status);
+					ShowMessageBox(str + "成功！");
 				}
 			}
 		}
@@ -223,11 +223,11 @@ namespace Emergence.Business.ViewModel
 
 		private void StartCreateSubEventAction()
 		{
-            SubEventEdit = SubEventEdit ?? new SubEvent().CreateAopProxy();
-            SubEventEdit.ChildGrade = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Value;
-            SubEventEdit.ChildGradeName = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Name;
+			SubEventEdit = SubEventEdit ?? new SubEvent().CreateAopProxy();
+			SubEventEdit.ChildGrade = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Value;
+			SubEventEdit.ChildGradeName = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Name;
 
-   //         {
+			//         {
 			//	ChildGrade = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Value,
 			//	ChildGradeName = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Name
 			//};
@@ -257,21 +257,21 @@ namespace Emergence.Business.ViewModel
 		}
 
 		private void CreateSubEventAction()
-        {
-            var thisAop = this.AopWapper as VM_MasterEventDetail;
+		{
+			var thisAop = this.AopWapper as VM_MasterEventDetail;
 
-            if (MasterEventInfo != null && SubEventEdit != null)
+			if (MasterEventInfo != null && SubEventEdit != null)
 			{
 				var result = subEventService.CreateChildEvent(MasterEventInfo.ID.ToString(), SubEventEdit);
 				if (result)
-                {
-                    this.SubEventEditPopup.IsOpen = false;
-                    this.SubEventEdit = new SubEvent();
-                    SetPageEnableStatus(true);
+				{
+					this.SubEventEditPopup.IsOpen = false;
+					this.SubEventEdit = new SubEvent();
+					SetPageEnableStatus(true);
 					ShowMessageBox("创建子事件成功！");
-                    thisAop.SubEventEdit = new SubEvent().CreateAopProxy();
+					thisAop.SubEventEdit = new SubEvent().CreateAopProxy();
 
-                }
+				}
 				else
 				{
 					ShowMessageBox("创建子事件失败！");
@@ -281,22 +281,22 @@ namespace Emergence.Business.ViewModel
 		}
 
 		private void UpdateSubEventAction()
-        {
-            var thisAop = this.AopWapper as VM_MasterEventDetail;
+		{
+			var thisAop = this.AopWapper as VM_MasterEventDetail;
 
-            if (SubEventEdit != null)
+			if (SubEventEdit != null)
 			{
 				var result = subEventService.UpdateChildEvent(MasterEventInfo.ID.ToString(), SubEventEdit);
 				if (result)
-                {
-                    this.SubEventEditPopup.IsOpen = false;
-                    this.SubEventEdit = new SubEvent();
-                    ShowMessageBox("编辑子事件成功！");
+				{
+					this.SubEventEditPopup.IsOpen = false;
+					this.SubEventEdit = new SubEvent();
+					ShowMessageBox("编辑子事件成功！");
 					SetPageEnableStatus(true);
-                    thisAop.SubEventEdit = new SubEvent().CreateAopProxy();
+					thisAop.SubEventEdit = new SubEvent().CreateAopProxy();
 
-                }
-                else
+				}
+				else
 				{
 					ShowMessageBox("编辑子事件失败！");
 				}
@@ -326,13 +326,13 @@ namespace Emergence.Business.ViewModel
 			var thisAop = this.AopWapper as VM_MasterEventDetail;
 			var ids = UnSelectedTeamList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
 			var result = teamService.BindingUnbindingTeamToSubevnt(SubEventDetail.Id, ids, "POST");
-            GetTeamListOb();
-            if (result)
-            {
-                SetPageEnableStatus(true);
-                thisAop.TeamSelectPopup.IsOpen = false;
-                //thisAop.SubEventEdit = new SubEvent();
-                ShowMessageBox("添加成功！");
+			GetTeamListOb();
+			if (result)
+			{
+				SetPageEnableStatus(true);
+				thisAop.TeamSelectPopup.IsOpen = false;
+				//thisAop.SubEventEdit = new SubEvent();
+				ShowMessageBox("添加成功！");
 			}
 			else
 			{
@@ -345,13 +345,13 @@ namespace Emergence.Business.ViewModel
 			var thisAop = this.AopWapper as VM_MasterEventDetail;
 			var ids = TeamList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
 			var result = teamService.BindingUnbindingTeamToSubevnt(SubEventDetail.Id, ids, "DELETE");
-            GetTeamListOb();
-            if (result)
-            {
-                SetPageEnableStatus(true);
-                thisAop.SubEventEditPopup.IsOpen = false;
-                thisAop.SubEventEdit = new SubEvent();
-                ShowMessageBox("删除成功！");
+			GetTeamListOb();
+			if (result)
+			{
+				SetPageEnableStatus(true);
+				thisAop.SubEventEditPopup.IsOpen = false;
+				thisAop.SubEventEdit = new SubEvent();
+				ShowMessageBox("删除成功！");
 			}
 			else
 			{
@@ -360,15 +360,30 @@ namespace Emergence.Business.ViewModel
 		}
 		private void StartSelectMaterialAction()
 		{
-			var thisAop = this.AopWapper as VM_MasterEventDetail;
-			var unbindedMaterialList = materialService.GetUnbindedMaterials(0, 10000).Result.Data;
-			if (unbindedMaterialList != null)
+			try
 			{
-				thisAop.UnSelectedMaterialList = new ObservableCollection<MaterialModel>(unbindedMaterialList.Select(a => a.CreateAopProxy()));
+				var thisAop = this.AopWapper as VM_MasterEventDetail;
+				var data = materialService.GetUnbindedMaterials(0, 10000);
+				if (data != null && data.Result != null)
+				{
+					var unbindedMaterialList = data.Result.Data;
+					if (unbindedMaterialList != null)
+					{
+						thisAop.UnSelectedMaterialList = new ObservableCollection<MaterialModel>(unbindedMaterialList.Select(a => a.CreateAopProxy()));
+					}
+				}
+				else
+				{
+					thisAop.UnSelectedMaterialList = new ObservableCollection<MaterialModel>();
+				}
+				this.MaterialSelectPopup.PopupName = "选择物资";
+				this.MaterialSelectPopup.IsOpen = true;
+				SetPageEnableStatus(false);
 			}
-			this.MaterialSelectPopup.PopupName = "选择物资";
-			this.MaterialSelectPopup.IsOpen = true;
-			SetPageEnableStatus(false);
+			catch (Exception ex)
+			{
+				Logger.Error("Add materials errors", ex);
+			}
 		}
 		private void CloseSelectMaterialAction()
 		{
@@ -381,12 +396,12 @@ namespace Emergence.Business.ViewModel
 			var thisAop = this.AopWapper as VM_MasterEventDetail;
 			var ids = UnSelectedMaterialList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
 			var result = materialService.BindingMaterialToSubevnt(SubEventDetail.Id, ids);
-            GetMaterialListOb();
-            if (result)
-            {
-                SetPageEnableStatus(true);
-                thisAop.MaterialSelectPopup.IsOpen = false;
-                ShowMessageBox("添加成功！");
+			GetMaterialListOb();
+			if (result)
+			{
+				SetPageEnableStatus(true);
+				thisAop.MaterialSelectPopup.IsOpen = false;
+				ShowMessageBox("添加成功！");
 			}
 			else
 			{
@@ -449,35 +464,35 @@ namespace Emergence.Business.ViewModel
 
 		}
 
-        private void MasterEventArchiveAction()
-        {
-            var unComplatedSubEvents = SubEventList.Where(a => a.State != "5").ToList();
-            if (unComplatedSubEvents.Count > 0)
-            {
-                var titleList = string.Join("\n", unComplatedSubEvents.Select(a => a.ChildTitle).ToArray());
-                string message = "以下子事件未完成，不能归档：" + titleList;
-                System.Windows.MessageBox.Show(message);
-            }
-            else
-            {
-                List<long> masterEventIDs = new List<long>();
-                masterEventIDs.Add(MasterEventInfo.ID);
-                var result = masterEventService.UpdateMasterEventState(masterEventIDs, 1);
-                if (result)
-                {
-                    System.Windows.MessageBox.Show("归档成功");
-                }
-                else
-                {
-                    System.Windows.MessageBox.Show("归档失败，请联系管理员！");
-                }
-            }
-        }
+		private void MasterEventArchiveAction()
+		{
+			var unComplatedSubEvents = SubEventList.Where(a => a.State != "5").ToList();
+			if (unComplatedSubEvents.Count > 0)
+			{
+				var titleList = string.Join("\n", unComplatedSubEvents.Select(a => a.ChildTitle).ToArray());
+				string message = "以下子事件未完成，不能归档：" + titleList;
+				System.Windows.MessageBox.Show(message);
+			}
+			else
+			{
+				List<long> masterEventIDs = new List<long>();
+				masterEventIDs.Add(MasterEventInfo.ID);
+				var result = masterEventService.UpdateMasterEventState(masterEventIDs, 1);
+				if (result)
+				{
+					System.Windows.MessageBox.Show("归档成功");
+				}
+				else
+				{
+					System.Windows.MessageBox.Show("归档失败，请联系管理员！");
+				}
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region [Request service Methods]
-        private void GetSubEventListOb(string searchCondition)
+		#region [Request service Methods]
+		private void GetSubEventListOb(string searchCondition)
 		{
 			var subEvents = subEventService.GetSubevents(0, 1000, this.MasterEventInfo.ID, searchCondition ?? "").Result;
 			var thisAop = this.AopWapper as VM_MasterEventDetail;
@@ -487,37 +502,67 @@ namespace Emergence.Business.ViewModel
 		}
 		private void GetTeamListOb()
 		{
-			var thisAop = this.AopWapper as VM_MasterEventDetail;
-			var teams = teamService.GetbindingTeamData(0, 1000, SubEventDetail.Id).Result;
-			thisAop.TeamList = new ObservableCollection<TeamModel>(teams.Data.Select(o => o.CreateAopProxy()));
+			try
+			{
+				var thisAop = this.AopWapper as VM_MasterEventDetail;
+				var data = teamService.GetbindingTeamData(0, 1000, SubEventDetail.Id);
+				if (data != null)
+				{
+					var teams = data.Result ?? new Busniess.EmergencyHttpListResult<TeamModel>();
+					thisAop.TeamList = new ObservableCollection<TeamModel>(teams.Data.Select(o => o.CreateAopProxy()));
+				}
+				else
+				{
+					thisAop.TeamList = new ObservableCollection<TeamModel>();
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Error("Load teams error", ex);
+			}
 		}
 		private void GetMaterialListOb()
 		{
-			var thisAop = this.AopWapper as VM_MasterEventDetail;
-			var materials = materialService.GetMaterialsBindingToSubevent(0, 1000, this.SubEventDetail.Id).Result;
-			if (materials != null)
+			try
 			{
-				thisAop.MaterialList = new ObservableCollection<MaterialModel>(materials.Data.Select(o => o.CreateAopProxy()));
+				var thisAop = this.AopWapper as VM_MasterEventDetail;
+				var data = materialService.GetMaterialsBindingToSubevent(0, 1000, this.SubEventDetail.Id);
+				if (data != null)
+				{
+					var materials = data.Result ?? new Busniess.EmergencyHttpListResult<MaterialModel>();
+					if (materials != null)
+					{
+						thisAop.MaterialList = new ObservableCollection<MaterialModel>(materials.Data.Select(o => o.CreateAopProxy()));
+					}
+				}
+				else
+				{
+					thisAop.MaterialList = new ObservableCollection<MaterialModel>();
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Error("Load materials error", ex);
 			}
 		}
 
 		private bool UpdateSubEvent(List<string> subEventIDs, int status)
-        {
-            var thisAop = this.AopWapper as VM_MasterEventDetail;
-            if (subEventIDs != null && subEventIDs.Count() > 0 && status >= 0)
+		{
+			var thisAop = this.AopWapper as VM_MasterEventDetail;
+			if (subEventIDs != null && subEventIDs.Count() > 0 && status >= 0)
 			{
 				var result = subEventService.UpdateChildeEventState(subEventIDs, status);
-                if (result)
-                {
-                    var tempSubEventList = thisAop.SubEventList.Where(a => subEventIDs.Contains(a.Id.ToString())).ToList();
-                    if (tempSubEventList.Count > 0)
-                    {
-                        foreach (var tempSE in tempSubEventList)
-                        {
-                            tempSE.State = status.ToString();
-                        }
-                    }
-                }
+				if (result)
+				{
+					var tempSubEventList = thisAop.SubEventList.Where(a => subEventIDs.Contains(a.Id.ToString())).ToList();
+					if (tempSubEventList.Count > 0)
+					{
+						foreach (var tempSE in tempSubEventList)
+						{
+							tempSE.State = status.ToString();
+						}
+					}
+				}
 				return result;
 			}
 			return false;
