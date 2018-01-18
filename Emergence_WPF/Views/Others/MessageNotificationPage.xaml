@@ -144,15 +144,15 @@
         </DockPanel>
         <Popup 
             x:Name="PopupEditTeamMember" 
-            Width="600px" 
-            Height="310px"  
+            Width="{Binding Path=SubEventEditPopup.PopupWidth}"
+            Height="{Binding Path=SubEventEditPopup.PopupHeight}"
             StaysOpen="True"   
             IsOpen="{Binding Path=IsPopupOpen}"   
             AllowsTransparency="True"  
             PopupAnimation="Slide"  
             Placement="Center">
 
-            <Grid Background="{StaticResource OpacityBrush}" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid Background="{StaticResource OpacityBrush}">
                 <Grid Background="#FFFFFF" Width="600px" Height="310px">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50px"></RowDefinition>

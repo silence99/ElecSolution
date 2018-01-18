@@ -35,17 +35,47 @@ namespace Emergence_WPF
 			this.DataContext = ViewModel;
 			SE_VE = new SubEventPopup_Video();
 			this.KeyDown += MasterEventDetail_KeyDown;
-		}
+            ViewModel.SetPopupSubEventEditToFullScreen += this.FullPageSubEventEditPopup;
+            ViewModel.SetPopupTeamToFullScreen += this.FullPageTeamPopup;
+            ViewModel.SetPopupMaterialToFullScreen += this.FullPageMaterialPopup;
+            ViewModel.ResetSubEventSelectedValue += this.ResetSubEventDetailSelected;
+        }
 		private void Page_Loaded(object sender, RoutedEventArgs e)
 		{
-			if (ViewModel.SubEventList != null && ViewModel.SubEventList.Count > 0)
-			{
-				DataGridRow row = (DataGridRow)this.Grid_SubEventList.ItemContainerGenerator.ContainerFromIndex(0);
-				row.IsSelected = true;
-				var item = row.Item as SubEvent;
-				ViewModel.SelectSubEventAction(item.Id.ToString());
-			}
-		}
+            ResetSubEventDetailSelected();
+        }
+
+        private void ResetSubEventDetailSelected()
+        {
+            int count = this.Grid_SubEventList.SelectedItems.Count;
+            if (count <= 0)
+            {
+                if (ViewModel.SubEventList != null && ViewModel.SubEventList.Count > 0)
+                {
+                    if (this.Grid_SubEventList.ItemContainerGenerator.Items.Count > 0)
+                    {
+                        DataGridRow row = (DataGridRow)this.Grid_SubEventList.ItemContainerGenerator.ContainerFromIndex(0);
+                        if (row != null)
+                        {
+                            row.IsSelected = true;
+                            var item = row.Item as SubEvent;
+                            ViewModel.SelectSubEventAction(item.Id.ToString());
+                        }
+                    }
+                    else
+                    {
+                        ViewModel.CleanSubEventDetailBlock();
+                        ViewModel.SetSubEventDetailBlockStatus(false);
+                    }
+                }
+                else
+                {
+                    ViewModel.CleanSubEventDetailBlock();
+                    ViewModel.SetSubEventDetailBlockStatus(false);
+                }
+            }
+        }
+
 		private void MasterEventDetail_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.Key == Key.Escape)//Esc键  
@@ -57,11 +87,12 @@ namespace Emergence_WPF
 		{
 			DataGrid dg = sender as DataGrid;
 			var item = dg.CurrentItem as SubEvent;
-			//DataRowView item = cell.Item as DataRowView;
-			if (item != null)
-			{
-				ViewModel.SelectSubEventAction(item.Id.ToString());
-			}
+            //DataRowView item = cell.Item as DataRowView;
+            if (item != null)
+            {
+                ViewModel.SelectSubEventAction(item.Id.ToString());
+                ViewModel.SetSubEventDetailBlockStatus(true);
+            }
 		}
 
 		private void Btn_PublishSubEvent_Click(object sender, RoutedEventArgs e)
@@ -191,5 +222,63 @@ namespace Emergence_WPF
 			video.SetCoordinate(latitude, longitude);
 			video.Show();
 		}
-	}
+
+        private void FullPageSubEventEditPopup()
+        {
+            DependencyObject parent = this.PopupEditSubEvent.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
+        }
+        private void FullPageTeamPopup()
+        {
+            DependencyObject parent = this.PopupSelectTeam.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
+        }
+        private void FullPageMaterialPopup()
+        {
+            DependencyObject parent = this.PopupSelectMaterial.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
+        }
+        
+
+        private void Grid_SubEventList_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
+        {
+
+        }
+    }
 }

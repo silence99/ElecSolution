@@ -13,6 +13,8 @@ using Utils;
 using System.Linq;
 using System.Collections.Generic;
 using OfficeOpenXml;
+using System.Windows;
+using System.Windows.Media;
 
 namespace Emergence_WPF
 {
@@ -31,6 +33,8 @@ namespace Emergence_WPF
             ViewModel = new MessageNotificationViewModel().CreateAopProxy();
             DataContext = ViewModel;
 			SBService = new SubeventService();
+            ViewModel.SetPopupEditToFullScreen += this.FullPageEditPopup;
+
         }
         public MessageNotificationPage(string subEventID)
         {
@@ -217,6 +221,23 @@ namespace Emergence_WPF
             {
                 AddPersonBySubEventID(this.SubEventID);
             }
+        }
+        private void FullPageEditPopup()
+        {
+            DependencyObject parent = this.PopupEditTeamMember.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
         }
     }
 }

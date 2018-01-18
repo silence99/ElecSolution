@@ -1,8 +1,11 @@
-﻿using Busniess.ViewModel;
+﻿using Business.Services;
+using Busniess.ViewModel;
 using Emergence.Common.Model;
 using Emergence_WPF.Comm;
 using Framework;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Emergence_WPF
 {
@@ -17,7 +20,9 @@ namespace Emergence_WPF
 			InitializeComponent();
 			ViewModel = new AnnouncementManagementPageViewModel().CreateAopProxy();
 			DataContext = ViewModel;
-		}
+
+            ViewModel.SetPopupEditToFullScreen += this.FullPageEditPopup;
+        }
 
 		private void Pager_OnPageChanged(object sender, Comm.PageChangedEventArg e)
 		{
@@ -35,5 +40,22 @@ namespace Emergence_WPF
 				}
 			}
 		}
-	}
+        private void FullPageEditPopup()
+        {
+            DependencyObject parent = this.PopupItem.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
+        }
+    }
 }

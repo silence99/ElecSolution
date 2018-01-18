@@ -187,8 +187,7 @@
             AllowsTransparency="True"  
             PopupAnimation="Slide"  
             Placement="Center">
-
-            <Grid Background="{StaticResource OpacityBrush}" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid Background="{StaticResource OpacityBrush}">
                 <Grid Background="#FFFFFF" Width="600px" Height="400px">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50px"></RowDefinition>

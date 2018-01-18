@@ -1,5 +1,6 @@
 ﻿using Business.Services;
 using Emergence.Common.Model;
+using Framework;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -24,13 +25,19 @@ namespace Emergence.Business.ViewModel
 		public virtual bool IsAddMember { get; set; }
 
 		public virtual ObservableCollection<DictItem> Places { get; set; }
+        public virtual event SetPopupHandler SetPopupEditToFullScreen;
 
-		public void PopupTeamEdit()
+        public void PopupTeamEdit()
 		{
 			IsPopoupOpen = true;
 			IsPageEnabled = false;
             PopupHeight = ResolutionService.Height;
             PopupWidth = ResolutionService.Width;
+
+            if (SetPopupEditToFullScreen != null)
+            {
+                SetPopupEditToFullScreen();
+            }
         }
 
 		public void ClosePopup()

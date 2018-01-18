@@ -21,15 +21,18 @@ namespace Emergence.Business.ViewModel
 		public virtual double PopupHeight { get; set; }
 		public virtual bool IsPopoupOpen { get; set; }
 		public virtual bool IsPageEnabled { get; set; }
+        public virtual event SetPopupHandler SetPopupEditToFullScreen;
 
-		public virtual ObservableCollection<DictItem> TeamDepts { get; set; }
+        public virtual ObservableCollection<DictItem> TeamDepts { get; set; }
 
 		public void PopupTeamEdit()
 		{
 			IsPopoupOpen = true;
 			IsPageEnabled = false;
-            PopupHeight = ResolutionService.Height;
-            PopupWidth = ResolutionService.Width;
+            if (SetPopupEditToFullScreen != null)
+            {
+                SetPopupEditToFullScreen();
+            }
         }
 
 		public void ClosePopup()
@@ -46,7 +49,9 @@ namespace Emergence.Business.ViewModel
 			TotalPage = 0;
 			IsPopoupOpen = false;
 			IsPageEnabled = true;
-			TeamDepts = new ObservableCollection<DictItem>(MetaDataService.TeamDepartments);
+            PopupHeight = ResolutionService.Height;
+            PopupWidth = ResolutionService.Width;
+            TeamDepts = new ObservableCollection<DictItem>(MetaDataService.TeamDepartments);
 		}
 	}
 }

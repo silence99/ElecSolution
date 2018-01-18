@@ -31,19 +31,21 @@ namespace Busniess.ViewModel
 
 		public virtual bool IsAdding { get; set; }
 		public virtual bool IsPopupOpen { get; set; }
-		public virtual double PopupOffsetX { get; set; }
-		public virtual double PopupOffsetY { get; set; }
+		public virtual double PopupWidth { get; set; }
+		public virtual double PopupHeight { get; set; }
+        
+        public virtual event SetPopupHandler SetPopupEditToFullScreen;
 
-		public AnnouncementManagementPageViewModel()
+        public AnnouncementManagementPageViewModel()
 		{
 			PageSize = GetPageSize();
 			Service = new AnnouncementService();
 			IsPopupOpen = false;
 			PageIndex = 1;
 			var popupStartPoint = ResolutionService.GetCenterControlOffset(880, 332);
-			PopupOffsetX = popupStartPoint.X;
-			PopupOffsetY = popupStartPoint.Y;
-			UpdateCommand = new DelegateCommand(UpdateAction);
+            PopupHeight = ResolutionService.Height;
+            PopupWidth = ResolutionService.Width;
+            UpdateCommand = new DelegateCommand(UpdateAction);
 			DeleteCommand = new DelegateCommand(DeleteAction);
 			PopupAddCommand = new DelegateCommand(PopupAddAction);
 			PopupEditCommand = new DelegateCommand<AnnouncementModel>(PopupEditAction);
@@ -107,15 +109,20 @@ namespace Busniess.ViewModel
 			}
 		}
 
-		private void PopupAddAction()
-		{
-			CleanMessage();
-			var model = this.CreateAopProxy();
-			model.Current = new AnnouncementModel().CreateAopProxy();
-			model.Current.Time = DateTime.Now;
-			model.IsAdding = true;
-			model.IsPopupOpen = true;
-		}
+        private void PopupAddAction()
+        {
+            CleanMessage();
+            var model = this.CreateAopProxy();
+            model.Current = new AnnouncementModel().CreateAopProxy();
+            model.Current.Time = DateTime.Now;
+            model.IsAdding = true;
+            model.IsPopupOpen = true;
+            if (SetPopupEditToFullScreen != null)
+            {
+                SetPopupEditToFullScreen();
+            }
+
+        }
 
 		public void PopupEditAction(AnnouncementModel model)
 		{
@@ -123,7 +130,11 @@ namespace Busniess.ViewModel
 			Current = model;
 			IsAdding = false;
 			IsPopupOpen = true;
-		}
+            if (SetPopupEditToFullScreen != null)
+            {
+                SetPopupEditToFullScreen();
+            }
+        }
 
 		private void PopupCloseAction()
 		{

@@ -15,7 +15,7 @@ using Business.Services;
 
 namespace Emergence.Business.ViewModel
 {
-	public class VM_MasterEventDetail : NotificationObject
+    public class VM_MasterEventDetail : NotificationObject
 	{
 		#region [Services]
 		public virtual MasterEventService masterEventService { get; set; }
@@ -27,11 +27,12 @@ namespace Emergence.Business.ViewModel
 		#region [Property]
 		public virtual MasterEvent MasterEventInfo { get; set; }
 
-		public virtual string SubEventSearchValue { get; set; }
+        public virtual string SubEventSearchValue { get; set; }
+        public virtual bool SubEventDetailBlockStatus { get; set; }
 
-		public virtual ObservableCollection<SubEvent> SubEventList { get; set; }
+        public virtual ObservableCollection<SubEvent> SubEventList { get; set; }
 
-		public virtual SubEvent SubEventDetail { get; set; }
+        public virtual SubEvent SubEventDetail { get; set; }
 
 		public virtual SubEvent SubEventEdit { get; set; }
 
@@ -83,9 +84,17 @@ namespace Emergence.Business.ViewModel
 		public virtual DelegateCommand MasterEventArchiveCommand { get; set; }
 
 
-		#endregion
+        #endregion
 
-		public VM_MasterEventDetail(MasterEvent mEvent)
+        #region [Event]
+
+        public virtual event SetPopupHandler SetPopupSubEventEditToFullScreen;
+        public virtual event SetPopupHandler SetPopupTeamToFullScreen;
+        public virtual event SetPopupHandler SetPopupMaterialToFullScreen;
+        public virtual event SetPopupHandler ResetSubEventSelectedValue;
+        #endregion
+
+        public VM_MasterEventDetail(MasterEvent mEvent)
 		{
 			PageEnabled = true;
 			masterEventService = new MasterEventService();
@@ -157,6 +166,11 @@ namespace Emergence.Business.ViewModel
 			thisAop.TeamSelectPopup.IsOpen = false;
 		}
 
+        public void SetSubEventDetailBlockStatus(bool status)
+        {
+            var thisAop = this.AopWapper as VM_MasterEventDetail;
+            thisAop.SubEventDetailBlockStatus = status;
+        }
 		#endregion
 
 
@@ -185,7 +199,26 @@ namespace Emergence.Business.ViewModel
 				var result = this.UpdateSubEvent(ids, st);
 				if (result)
 				{
-					var str = Enum.Parse(typeof(Enumerator.SubEventStatus), status).ToString();
+                    string str = string.Empty;
+                    switch (st)
+                    {
+                        case 0:
+                            str = "登记";
+                            break;
+                        case 1:
+                            str = "发布";
+                            break;
+                        case 2:
+                            str = "接受";
+                            break;
+                        case 3:
+                            str = "执行";
+                            break;
+                        case 5:
+                            str = "完成";
+                            break;
+                        default:break;
+                    }
 					SBStatus.SetSubEventStatus(status);
 					ShowMessageBox(str + "成功！");
 				}
@@ -203,8 +236,10 @@ namespace Emergence.Business.ViewModel
 			}
 		}
 		private void DeleteSubEventAction(int? subEventID)
-		{
-			if (subEventID != null)
+        {
+            var thisAop = this.AopWapper as VM_MasterEventDetail;
+
+            if (subEventID != null)
 			{
 				List<string> ids = new List<string>();
 				ids.Add(subEventID.ToString());
@@ -212,13 +247,36 @@ namespace Emergence.Business.ViewModel
 				if (result)
 				{
 					ShowMessageBox("删除子事件成功！");
-				}
+                    //thisAop.SubEventList.Remove(thisAop.SubEventList.Where(a => a.Id == subEventID).FirstOrDefault());
+                    if (ResetSubEventSelectedValue != null)
+                    {
+                        //if (SubEventList.Count <= 0)
+                        //{
+                        CleanSubEventDetailBlock();
+                        //}
+                        //else
+                        //{
+                        //    ResetSubEventSelectedValue();
+                        //}
+                    }
+                }
 				else
 				{
 					ShowMessageBox("删除子事件失败！");
 				}
 				GetSubEventListOb("");
-			}
+                //if (ResetSubEventSelectedValue != null)
+                //{
+                //    if (SubEventList.Count <= 0)
+                //    {
+                //        CleanSubEventDetailBlock();
+                //    }
+                //    else
+                //    {
+                //        ResetSubEventSelectedValue();
+                //    }
+                //}
+            }
 		}
 
 		private void StartCreateSubEventAction()
@@ -233,6 +291,10 @@ namespace Emergence.Business.ViewModel
 			//};
 			SubEventEditPopup.PopupName = "创建子事件";
 			SubEventEditPopup.IsOpen = true;
+            if(SetPopupSubEventEditToFullScreen !=null)
+            {
+                SetPopupSubEventEditToFullScreen();
+            }
 			SetPageEnableStatus(false);
 		}
 
@@ -242,7 +304,11 @@ namespace Emergence.Business.ViewModel
 			thisAop.SubEventEditPopup.PopupName = "编辑子事件";
 			thisAop.SubEventEdit = this.SubEventDetail;
 			thisAop.SubEventEditPopup.IsOpen = true;
-			SetPageEnableStatus(false);
+            if (SetPopupSubEventEditToFullScreen != null)
+            {
+                SetPopupSubEventEditToFullScreen();
+            }
+            SetPageEnableStatus(false);
 		}
 
 		private void CloseSubEventEditAction()
@@ -266,17 +332,17 @@ namespace Emergence.Business.ViewModel
 				if (result)
 				{
 					this.SubEventEditPopup.IsOpen = false;
-					this.SubEventEdit = new SubEvent();
 					SetPageEnableStatus(true);
 					ShowMessageBox("创建子事件成功！");
-					thisAop.SubEventEdit = new SubEvent().CreateAopProxy();
-
-				}
+                    //RefershSubEventDetailBlock(thisAop.SubEventEdit.Id.ToString());
+                    thisAop.SubEventEdit = new SubEvent().CreateAopProxy();
+                }
 				else
 				{
 					ShowMessageBox("创建子事件失败！");
 				}
 				GetSubEventListOb("");
+                ResetSubEventSelectedValue();
 			}
 		}
 
@@ -289,18 +355,25 @@ namespace Emergence.Business.ViewModel
 				var result = subEventService.UpdateChildEvent(MasterEventInfo.ID.ToString(), SubEventEdit);
 				if (result)
 				{
-					this.SubEventEditPopup.IsOpen = false;
-					this.SubEventEdit = new SubEvent();
+                    thisAop.SubEventEditPopup.IsOpen = false;
+                    thisAop.SubEventDetail = thisAop.SubEventEdit;
 					ShowMessageBox("编辑子事件成功！");
 					SetPageEnableStatus(true);
 					thisAop.SubEventEdit = new SubEvent().CreateAopProxy();
-
 				}
 				else
 				{
 					ShowMessageBox("编辑子事件失败！");
 				}
 				GetSubEventListOb("");
+                if (thisAop.SubEventList.Count <= 0)
+                {
+                    CleanSubEventDetailBlock();
+                }
+                else
+                {
+
+                }
 			}
 		}
 		private void StartSelectTeamAction()
@@ -313,7 +386,11 @@ namespace Emergence.Business.ViewModel
 			}
 			this.TeamSelectPopup.PopupName = "选择队伍";
 			this.TeamSelectPopup.IsOpen = true;
-			SetPageEnableStatus(false);
+            if (SetPopupTeamToFullScreen != null)
+            {
+                SetPopupTeamToFullScreen();
+            }
+            SetPageEnableStatus(false);
 		}
 		private void CloseSelectTeamAction()
 		{
@@ -378,7 +455,11 @@ namespace Emergence.Business.ViewModel
 				}
 				this.MaterialSelectPopup.PopupName = "选择物资";
 				this.MaterialSelectPopup.IsOpen = true;
-				SetPageEnableStatus(false);
+                if (SetPopupMaterialToFullScreen != null)
+                {
+                    SetPopupMaterialToFullScreen();
+                }
+                SetPageEnableStatus(false);
 			}
 			catch (Exception ex)
 			{
@@ -428,7 +509,7 @@ namespace Emergence.Business.ViewModel
 		private void StartSubEventAmplifyAction()
 		{
 			var thisAop = this.AopWapper as VM_MasterEventDetail;
-			this.SubEventAmplifyPopup.PopupName = "选择物资";
+			this.SubEventAmplifyPopup.PopupName = "";
 			this.SubEventAmplifyPopup.IsOpen = true;
 			SetPageEnableStatus(false);
 		}
@@ -588,21 +669,38 @@ namespace Emergence.Business.ViewModel
 			}
 		}
 
-		private void RefershSubEventDetailBlock(string subEventID)
-		{
-			var subEvent = this.SubEventList.FirstOrDefault(a => a.Id.ToString() == subEventID);
-			SubEventDetail = subEvent;
-			GetTeamListOb();
-			GetMaterialListOb();
-			SBStatus.ResetSubEventStatus();
-			int sbStatus = -1;
-			if (int.TryParse(SubEventDetail.State, out sbStatus))
-			{
-				Enum.GetName(typeof(Enumerator.SubEventStatus), sbStatus);
-				SBStatus.SetSubEventStatus(SubEventDetail.State);
-			}
-		}
-		private void ShowMessageBox(string value)
+        private void RefershSubEventDetailBlock(string subEventID)
+        {
+            var thisAop = this.AopWapper as VM_MasterEventDetail;
+
+            if (!string.IsNullOrEmpty(subEventID) && thisAop.SubEventList.Count > 0)
+            {
+                var subEvent = thisAop.SubEventList.FirstOrDefault(a => a.Id.ToString() == subEventID);
+                if (subEvent != null)
+                {
+                    SubEventDetail = subEvent;
+                    GetTeamListOb();
+                    GetMaterialListOb();
+                    SBStatus.ResetSubEventStatus();
+                    int sbStatus = -1;
+                    if (int.TryParse(SubEventDetail.State, out sbStatus))
+                    {
+                        Enum.GetName(typeof(Enumerator.SubEventStatus), sbStatus);
+                        SBStatus.SetSubEventStatus(SubEventDetail.State);
+                    }
+                    SetSubEventDetailBlockStatus(true);
+                }
+            }
+        }
+        public void CleanSubEventDetailBlock()
+        {
+            var aopVapper = this.IsAopWapper ? this : this.AopWapper as VM_MasterEventDetail;
+            aopVapper.SubEventDetail = new SubEvent().CreateAopProxy();
+            aopVapper.TeamList = new ObservableCollection<TeamModel>();
+            aopVapper.MaterialList = new ObservableCollection<MaterialModel>();
+            SBStatus.ResetSubEventStatus();
+        }
+        private void ShowMessageBox(string value)
 		{
 			System.Windows.MessageBox.Show(value);
 		}

@@ -145,7 +145,7 @@
                     <!--<Image DockPanel.Dock="Right" Width="18" Height="18" Margin="0 0 -150 0" Source="/Image/Common/Icon_Create.png"/>-->
                 </DockPanel>
                 <DockPanel Grid.Row="3">
-                    <DataGrid  DockPanel.Dock="Top" Name="Grid_SubEventList" Style="{StaticResource SubEventListDataGrid}" ItemsSource="{Binding Path=SubEventList,Mode=TwoWay}" SelectionChanged="Grid_SubEventList_SelectionChanged">
+                    <DataGrid  DockPanel.Dock="Top" Name="Grid_SubEventList" Style="{StaticResource SubEventListDataGrid}" ItemsSource="{Binding Path=SubEventList,Mode=TwoWay}" SelectionChanged="Grid_SubEventList_SelectionChanged" SourceUpdated="Grid_SubEventList_SourceUpdated">
                         <DataGrid.Columns >
                             <DataGridTextColumn Width="0.6*" Binding="{Binding Path=ChildTitle,Mode=TwoWay}" x:Name="f1" Header="子事件标题" IsReadOnly="True">
                                 <DataGridTextColumn.ElementStyle>
@@ -169,7 +169,7 @@
                     </DataGrid>
                 </DockPanel>
             </Grid>
-            <Grid Name="Grid_Right" Grid.Row="0" Grid.Column="2">
+            <Grid Name="Grid_Right" Grid.Row="0" Grid.Column="2" IsEnabled="{Binding Path=SubEventDetailBlockStatus}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.08*"></RowDefinition>
                     <RowDefinition Height="0.23*"></RowDefinition>
@@ -355,230 +355,233 @@
 
         <Popup 
             x:Name="PopupEditSubEvent" 
-            Width="600px" 
-            Height="450px"  
+            Width="{Binding Path=SubEventEditPopup.PopupWidth}"
+            Height="{Binding Path=SubEventEditPopup.PopupHeight}"
             StaysOpen="True"   
             IsOpen="{Binding Path=SubEventEditPopup.IsOpen}"   
             AllowsTransparency="True"  
             PopupAnimation="Slide"  
             PlacementTarget="{Binding ElementName=Grid_MasterEventDetail}"  
             Placement="Center">
-
-            <Border BorderBrush="#BFBFBF" BorderThickness="1">
-                <Grid Background="#FFFFFF">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50px"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <DockPanel Grid.Row="0">
-                        <Button Style="{StaticResource CancelImageButton}" Command="{Binding Path=CloseSubEventEditCommand}" DockPanel.Dock="Left" Margin="19 0 19 0" />
-                        <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
-                        <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" Content="{Binding Path=SubEventEditPopup.PopupName}" Margin="19 0 0 0"/>
-                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Width="88px">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Click">
-                                    <i:InvokeCommandAction Command="{Binding CreateSubEventCommand}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </Button>
-                    </DockPanel>
-                    <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
-                        <Grid Background="#F3F3F3">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="87px"></RowDefinition>
-                                <RowDefinition Height="68px"></RowDefinition>
-                                <RowDefinition Height="68px"></RowDefinition>
-                                <RowDefinition Height="177px"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.15*"/>
-                                <ColumnDefinition Width="0.35*"/>
-                                <ColumnDefinition Width="0.15*"/>
-                                <ColumnDefinition Width="0.35*"/>
-                            </Grid.ColumnDefinitions>
-                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="标题" Margin="0 22 0 0"/>
-                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventTitle" Width="458px" Margin="20 18 0 0"  
+            <Grid Background="{StaticResource OpacityBrush}">
+                <Border BorderBrush="#BFBFBF" BorderThickness="1" Width="600px" Height="450px">
+                    <Grid Background="#FFFFFF">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50px"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <Button Style="{StaticResource CancelImageButton}" Command="{Binding Path=CloseSubEventEditCommand}" DockPanel.Dock="Left" Margin="19 0 19 0" />
+                            <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
+                            <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" Content="{Binding Path=SubEventEditPopup.PopupName}" Margin="19 0 0 0"/>
+                            <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Width="88px">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <i:InvokeCommandAction Command="{Binding CreateSubEventCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Button>
+                        </DockPanel>
+                        <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
+                            <Grid Background="#F3F3F3">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="87px"></RowDefinition>
+                                    <RowDefinition Height="68px"></RowDefinition>
+                                    <RowDefinition Height="68px"></RowDefinition>
+                                    <RowDefinition Height="177px"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*"/>
+                                    <ColumnDefinition Width="0.35*"/>
+                                    <ColumnDefinition Width="0.15*"/>
+                                    <ColumnDefinition Width="0.35*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="标题" Margin="0 22 0 0"/>
+                                <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventTitle" Width="458px" Margin="20 18 0 0"  
                                      Text="{Binding Path=SubEventEdit.ChildTitle, Mode=TwoWay}"/>
-                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="等级"/>
-                            <ComboBox Grid.Row="1" Grid.Column="1" Name="Txt_EditSubEventGrade" Width="160px" Height="34" Margin="0 0 0 0" 
+                                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="等级"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" Name="Txt_EditSubEventGrade" Width="160px" Height="34" Margin="0 0 0 0" 
                                       Text="{Binding Path=SubEventEdit.ChildGradeName,Mode=TwoWay}"
                                       ItemsSource="{Binding Path=EventGrades, Mode=TwoWay}"
                                       SelectedValue="{Binding Path=SubEventEdit.ChildGrade, Mode=TwoWay}"
                                       SelectedValuePath="Value"
                                       DisplayMemberPath="Name"/>
-                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="2" Content="负责人"/>
-                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="1" Grid.Column="3" Name="Txt_EditSubEventPersonLiable" Width="160px" Margin="20 0 0 0"  
+                                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="2" Content="负责人"/>
+                                <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="1" Grid.Column="3" Name="Txt_EditSubEventPersonLiable" Width="160px" Margin="20 0 0 0"  
                                      Text="{Binding Path=SubEventEdit.PersonLiable, Mode=TwoWay}"/>
-                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="地址"/>
-                            <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Width="458px" Height="34px" Margin="-8 0 0 0" BorderBrush="#BFBFBF" BorderThickness="1">
-                                <Grid VerticalAlignment="Center"  Background="#FFFFFF">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="40px"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Button Style="{StaticResource AddressImageButton}" Grid.Column="1" Command="{Binding Path=SearchSubEventListCommand}" CommandParameter="{Binding Path=SubEventSearchValue}"></Button>
-                                    <TextBox Name="SubEventEditAddressTextBox" Grid.Column="0" Style="{StaticResource ImageTextBox}" Text="{Binding Path=SubEventEdit.ChildLocale, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="0"></TextBox>
-                                </Grid>
-                            </Border>
-                            <!--<TextBox Style="{StaticResource TextBoxMap}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventLocale" Width="458px" Margin="-8 0 0 0"  Text="{Binding Path=SubEventEdit.ChildLocale,Mode=TwoWay}"/>-->
-                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="3" Grid.Column="0" Content="任务描述" VerticalAlignment="Top" Margin="0 19 0 0"/>
-                            <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventRemark" Width="458px" VerticalAlignment="Top"  Margin="20 17 0 0"  Text="{Binding Path=SubEventEdit.ChildRemarks,Mode=TwoWay}"/>
-                        </Grid>
-                    </Border>
-                </Grid>
-            </Border>
+                                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="地址"/>
+                                <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Width="458px" Height="34px" Margin="-8 0 0 0" BorderBrush="#BFBFBF" BorderThickness="1">
+                                    <Grid VerticalAlignment="Center"  Background="#FFFFFF">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="40px"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Button Style="{StaticResource AddressImageButton}" Grid.Column="1" Command="{Binding Path=SearchSubEventListCommand}" CommandParameter="{Binding Path=SubEventSearchValue}"></Button>
+                                        <TextBox Name="SubEventEditAddressTextBox" Grid.Column="0" Style="{StaticResource ImageTextBox}" Text="{Binding Path=SubEventEdit.ChildLocale, Mode=TwoWay}" HorizontalAlignment="Stretch" Margin="0"></TextBox>
+                                    </Grid>
+                                </Border>
+                                <!--<TextBox Style="{StaticResource TextBoxMap}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventLocale" Width="458px" Margin="-8 0 0 0"  Text="{Binding Path=SubEventEdit.ChildLocale,Mode=TwoWay}"/>-->
+                                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="3" Grid.Column="0" Content="任务描述" VerticalAlignment="Top" Margin="0 19 0 0"/>
+                                <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventRemark" Width="458px" VerticalAlignment="Top"  Margin="20 17 0 0"  Text="{Binding Path=SubEventEdit.ChildRemarks,Mode=TwoWay}"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
         </Popup>
         <Popup 
             x:Name="PopupSelectTeam" 
-            Width="600px" 
-            Height="450px"  
+            Width="{Binding Path=TeamSelectPopup.PopupWidth}"
+            Height="{Binding Path=TeamSelectPopup.PopupHeight}"
             StaysOpen="True"   
             IsOpen="{Binding Path=TeamSelectPopup.IsOpen}"   
-            AllowsTransparency="False"  
-            PopupAnimation="Slide"  
-            PlacementTarget="{Binding ElementName=Grid_MasterEventDetail}"  
-            Placement="Center">
-
-            <Border BorderBrush="#BFBFBF" BorderThickness="1">
-                <Grid Background="#FFFFFF">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50px"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <DockPanel Grid.Row="0">
-                        <Button Style="{StaticResource CancelImageButton}" Command="{Binding Path=CloseSelectTeamCommand}" DockPanel.Dock="Left" Margin="19 0 19 0" />
-                        <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
-                        <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" Content="{Binding Path=TeamSelectPopup.PopupName,Mode=TwoWay}" Margin="19 0 0 0"/>
-                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Command="{Binding Path=SelectTeamCommand}" Width="88px"/>
-                    </DockPanel>
-                    <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
-                        <DataGrid Style="{StaticResource DataGridRight}"  DockPanel.Dock="Top" Name="Grid_SelectTeam"  ItemsSource="{Binding Path=UnSelectedTeamList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2">
-                            <DataGrid.Columns >
-                                <DataGridTemplateColumn Width="0.3*" x:Name="dws1">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <CheckBox IsChecked="{Binding Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <!--<DataGridCheckBoxColumn Binding="{Binding IsCheck}" x:Name="f1" Header=""  Width="0.5*" />-->
-                                <DataGridTextColumn  Binding="{Binding Path=TeamName, Mode=TwoWay}" x:Name="dws2" Header="队伍名称" Width="*" >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextWrapping" Value="Wrap"/>
-                                            <Setter Property="Height" Value="auto"/>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                                <DataGridTextColumn  Binding="{Binding Path=TotalNumber, Mode=TwoWay}" x:Name="dws3" Header="人数"  Width="0.5*" >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextWrapping" Value="Wrap"/>
-                                            <Setter Property="Height" Value="auto"/>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                                <DataGridTextColumn  Binding="{Binding Path=TeamDeptName, Mode=TwoWay}" x:Name="dws4" Header="所属单位"  Width="1.5*" >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextWrapping" Value="Wrap"/>
-                                            <Setter Property="Height" Value="auto"/>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                                <DataGridTextColumn  Binding="{Binding Path=PersonCharge, Mode=TwoWay}" x:Name="dws5" Header="队长"  Width="0.8*" >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextWrapping" Value="Wrap"/>
-                                            <Setter Property="Height" Value="auto"/>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                                <DataGridTextColumn  Binding="{Binding Path=ChildSubmitDept, Mode=TwoWay}" x:Name="dws6" Header="队长电话"  Width="*" >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextWrapping" Value="Wrap"/>
-                                            <Setter Property="Height" Value="auto"/>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </Border>
-                </Grid>
-            </Border>
-        </Popup>
-        <Popup 
-            x:Name="PopupSelectMaterial" 
-            Width="600px" 
-            Height="450px"  
-            StaysOpen="True"   
-            IsOpen="{Binding Path=MaterialSelectPopup.IsOpen}"   
             AllowsTransparency="True"  
             PopupAnimation="Slide"  
             PlacementTarget="{Binding ElementName=Grid_MasterEventDetail}"  
             Placement="Center">
-            <Border BorderBrush="#BFBFBF" BorderThickness="1">
-                <Grid Background="#FFFFFF">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50px"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <DockPanel Grid.Row="0">
-                        <Button Style="{StaticResource CancelImageButton}" Command="{Binding Path=CloseSelectMaterialCommand}" DockPanel.Dock="Left" Margin="19 0 19 0" />
-                        <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
-                        <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" Content="{Binding Path=MaterialSelectPopup.PopupName}" Margin="19 0 0 0"/>
-                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Command="{Binding Path=SelectMaterialCommand,Mode=TwoWay}" Width="88px"/>
-                    </DockPanel>
-                    <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
-                        <DataGrid Style="{StaticResource DataGridRight}"  DockPanel.Dock="Top" Name="DataGrid_SelectMetairls"  ItemsSource="{Binding Path=UnSelectedMaterialList,  Mode=TwoWay}" Margin="2">
-                            <DataGrid.Columns >
-                                <DataGridTemplateColumn Width="0.3*" x:Name="wzs1">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <CheckBox IsChecked="{Binding Path = IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                                <!--<DataGridCheckBoxColumn Binding="{Binding IsCheck}" x:Name="f1" Header=""  Width="0.5*" />-->
-                                <DataGridTextColumn  Binding="{Binding Path=MaterialsNumber,Mode=TwoWay}" x:Name="wzs2" Header="编号" Width="*" >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextWrapping" Value="Wrap"/>
-                                            <Setter Property="Height" Value="auto"/>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                                <DataGridTextColumn  Binding="{Binding Path=MaterialsName,Mode=TwoWay}" x:Name="wzs3" Header="名称"  Width="*" >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextWrapping" Value="Wrap"/>
-                                            <Setter Property="Height" Value="auto"/>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                                <DataGridTextColumn  Binding="{Binding Path=MaterialsDeptName,Mode=TwoWay}" x:Name="wzs4" Header="所属单位"  Width="2*" >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextWrapping" Value="Wrap"/>
-                                            <Setter Property="Height" Value="auto"/>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                                <DataGridTextColumn  Binding="{Binding Path=TotalQuantity,Mode=TwoWay}" x:Name="wzs5" Header="数量"  Width="*" >
-                                    <DataGridTextColumn.ElementStyle>
-                                        <Style TargetType="TextBlock">
-                                            <Setter Property="TextWrapping" Value="Wrap"/>
-                                            <Setter Property="Height" Value="auto"/>
-                                        </Style>
-                                    </DataGridTextColumn.ElementStyle>
-                                </DataGridTextColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-
-                    </Border>
-                </Grid>
-            </Border>
+            <Grid Background="{StaticResource OpacityBrush}">
+                <Border BorderBrush="#BFBFBF" BorderThickness="1" Width="600px" Height="450px">
+                    <Grid Background="#FFFFFF">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50px"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <Button Style="{StaticResource CancelImageButton}" Command="{Binding Path=CloseSelectTeamCommand}" DockPanel.Dock="Left" Margin="19 0 19 0" />
+                            <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
+                            <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" Content="{Binding Path=TeamSelectPopup.PopupName,Mode=TwoWay}" Margin="19 0 0 0"/>
+                            <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Command="{Binding Path=SelectTeamCommand}" Width="88px"/>
+                        </DockPanel>
+                        <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
+                            <DataGrid Style="{StaticResource DataGridRight}"  DockPanel.Dock="Top" Name="Grid_SelectTeam"  ItemsSource="{Binding Path=UnSelectedTeamList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="2">
+                                <DataGrid.Columns >
+                                    <DataGridTemplateColumn Width="0.3*" x:Name="dws1">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding Path=IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--<DataGridCheckBoxColumn Binding="{Binding IsCheck}" x:Name="f1" Header=""  Width="0.5*" />-->
+                                    <DataGridTextColumn  Binding="{Binding Path=TeamName, Mode=TwoWay}" x:Name="dws2" Header="队伍名称" Width="*" >
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                                <Setter Property="Height" Value="auto"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn  Binding="{Binding Path=TotalNumber, Mode=TwoWay}" x:Name="dws3" Header="人数"  Width="0.5*" >
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                                <Setter Property="Height" Value="auto"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn  Binding="{Binding Path=TeamDeptName, Mode=TwoWay}" x:Name="dws4" Header="所属单位"  Width="1.5*" >
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                                <Setter Property="Height" Value="auto"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn  Binding="{Binding Path=PersonCharge, Mode=TwoWay}" x:Name="dws5" Header="队长"  Width="0.8*" >
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                                <Setter Property="Height" Value="auto"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn  Binding="{Binding Path=ChildSubmitDept, Mode=TwoWay}" x:Name="dws6" Header="队长电话"  Width="*" >
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                                <Setter Property="Height" Value="auto"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Popup>
+        <Popup 
+            x:Name="PopupSelectMaterial" 
+            Width="{Binding Path=MaterialSelectPopup.PopupWidth}"
+            Height="{Binding Path=MaterialSelectPopup.PopupHeight}"
+            StaysOpen="True"   
+            IsOpen="{Binding Path=MaterialSelectPopup.IsOpen}"
+            AllowsTransparency="True"  
+            PopupAnimation="Slide"  
+            PlacementTarget="{Binding ElementName=Grid_MasterEventDetail}"  
+            Placement="Center">
+            <Grid Background="{StaticResource OpacityBrush}">
+                <Border BorderBrush="#BFBFBF" BorderThickness="1" Width="600px" Height="450px">
+                    <Grid Background="#FFFFFF">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50px"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0">
+                            <Button Style="{StaticResource CancelImageButton}" Command="{Binding Path=CloseSelectMaterialCommand}" DockPanel.Dock="Left" Margin="19 0 19 0" />
+                            <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
+                            <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" Content="{Binding Path=MaterialSelectPopup.PopupName}" Margin="19 0 0 0"/>
+                            <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Command="{Binding Path=SelectMaterialCommand,Mode=TwoWay}" Width="88px"/>
+                        </DockPanel>
+                        <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
+                            <DataGrid Style="{StaticResource DataGridRight}"  DockPanel.Dock="Top" Name="DataGrid_SelectMetairls"  ItemsSource="{Binding Path=UnSelectedMaterialList,  Mode=TwoWay}" Margin="2">
+                                <DataGrid.Columns >
+                                    <DataGridTemplateColumn Width="0.3*" x:Name="wzs1">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding Path = IsChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center"></CheckBox>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <!--<DataGridCheckBoxColumn Binding="{Binding IsCheck}" x:Name="f1" Header=""  Width="0.5*" />-->
+                                    <DataGridTextColumn  Binding="{Binding Path=MaterialsNumber,Mode=TwoWay}" x:Name="wzs2" Header="编号" Width="*" >
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                                <Setter Property="Height" Value="auto"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn  Binding="{Binding Path=MaterialsName,Mode=TwoWay}" x:Name="wzs3" Header="名称"  Width="*" >
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                                <Setter Property="Height" Value="auto"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn  Binding="{Binding Path=MaterialsDeptName,Mode=TwoWay}" x:Name="wzs4" Header="所属单位"  Width="2*" >
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                                <Setter Property="Height" Value="auto"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn  Binding="{Binding Path=TotalQuantity,Mode=TwoWay}" x:Name="wzs5" Header="数量"  Width="*" >
+                                        <DataGridTextColumn.ElementStyle>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                                <Setter Property="Height" Value="auto"/>
+                                            </Style>
+                                        </DataGridTextColumn.ElementStyle>
+                                    </DataGridTextColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
         </Popup>
 
         <Popup 

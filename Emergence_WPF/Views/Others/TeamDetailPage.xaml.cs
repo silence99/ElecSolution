@@ -42,9 +42,11 @@ namespace Emergence_WPF
 			ViewModel.TotalNumber = team.TotalNumber;
 
 			SyncTeamMembers();
-		}
+            ViewModel.SetPopupEditToFullScreen += this.FullPageEditPopup;
 
-		private void Delete_Handler(object sender, RoutedEventArgs e)
+        }
+
+        private void Delete_Handler(object sender, RoutedEventArgs e)
 		{
 			TeamService.DeleteTeamMembers(ViewModel.Members.Where(mbr => mbr.IsChecked).Select(mbr => mbr.ID.ToString()).ToList());
 			SyncTeamMembers();
@@ -286,8 +288,25 @@ namespace Emergence_WPF
 
 			SyncTeamMembers();
 		}
+        private void FullPageEditPopup()
+        {
+            DependencyObject parent = this.PopupEditTeamMember.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
 
-		private void CancelEdit_Handler(object sender, RoutedEventArgs e)
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
+        }
+
+        private void CancelEdit_Handler(object sender, RoutedEventArgs e)
 		{
 			CancelEditMode();
 		}

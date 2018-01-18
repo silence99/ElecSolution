@@ -23,9 +23,10 @@ namespace Emergence_WPF
 		public TeamListPage()
 		{
 			InitializeComponent();
-		}
 
-		private void Delete_Handler(object sender, RoutedEventArgs e)
+        }
+
+        private void Delete_Handler(object sender, RoutedEventArgs e)
 		{
 			var teams = ViewModel.Teams.Where(team => team.IsChecked).ToList();
 			if (teams != null && teams.Count != 0)
@@ -63,6 +64,7 @@ namespace Emergence_WPF
             }
             while (parent != null);
             ViewModel.PopupTeamEdit();
+            FullPageEditPopup();
         }
 
         private void Search_Handler(object sender, RoutedEventArgs e)
@@ -97,7 +99,8 @@ namespace Emergence_WPF
 				ViewModel.PageIndex = 1;
 				ViewModel.PageSize = 10;
 				DataContext = ViewModel;
-			}
+                ViewModel.SetPopupEditToFullScreen += this.FullPageEditPopup;
+            }
 			GetTeams();
 		}
 
@@ -105,7 +108,8 @@ namespace Emergence_WPF
 		{
 			ViewModel.CurrentTeam = (sender as Image).DataContext as TeamModel;
 			ViewModel.PopupTeamEdit();
-		}
+            FullPageEditPopup();
+        }
 
 		private void NavigateToMaterialPage_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
@@ -138,6 +142,23 @@ namespace Emergence_WPF
         private void ClosePopup_Handler(object sender, RoutedEventArgs e)
         {
             ViewModel.ClosePopup();
+        }
+        private void FullPageEditPopup()
+        {
+            DependencyObject parent = this.PopupEditTeam.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
         }
     }
 }

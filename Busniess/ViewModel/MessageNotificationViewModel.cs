@@ -22,14 +22,17 @@ namespace Busniess.ViewModel
 		public virtual ObservableCollection<PersonModel> Members { get; set; }
 		public virtual ObservableCollection<DictItem> SendTypes { get; set; }
 		public virtual ObservableCollection<MessageTemplateModel> MessageTemplates { get; set; }
+        public virtual event SetPopupHandler SetPopupEditToFullScreen;
 
-		public virtual string SendType { get; set; }
+        public virtual string SendType { get; set; }
 		public virtual string TemplateId { get; set; }
 		public virtual string TemplateContent { get; set; }
 		public virtual string ChildEventId { get; set; }
 		public virtual string ImportFile { get; set; }
-		public virtual bool IsPopupOpen { get; set; }
-		public virtual PersonModel CurrentMember { get; set; }
+        public virtual bool IsPopupOpen { get; set; }
+        public virtual double PopupWidth { get; set; }
+        public virtual double PopupHeight { get; set; }
+        public virtual PersonModel CurrentMember { get; set; }
 		public virtual bool IsEditMode { get; set; }
 
 		public virtual MessageService MEService { get; set; }
@@ -53,7 +56,9 @@ namespace Busniess.ViewModel
 				SendType = SendTypes == null || SendTypes.Count == 0 ? "" : SendTypes[0].Value;
 			}
 			Members = new ObservableCollection<PersonModel>();
-		}
+            PopupHeight = ResolutionService.Height;
+            PopupWidth = ResolutionService.Width;
+        }
 
 		private void GetMessageTemplatesAction()
 		{
@@ -111,6 +116,10 @@ namespace Busniess.ViewModel
 			obj.CurrentMember = new PersonModel();
 			obj.IsEditMode = false;
 			obj.IsPopupOpen = true;
+            if (SetPopupEditToFullScreen != null)
+            {
+                SetPopupEditToFullScreen();
+            }
 		}
 
 		private void PopupCloseDialogAction()

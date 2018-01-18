@@ -32,10 +32,7 @@ namespace Emergence.Business.CommonControl
 
         public static void SetLogin(LoginInModel lm)
         {
-            if (LoginInfo == null)
-            {
-                LoginInfo = lm;
-            }
+            LoginInfo = lm;
         }
 
         public static string HmacSha1Sign(string text, string key)

@@ -27,7 +27,8 @@ namespace Emergence.Business.ViewModel
 		public virtual string PopupTitle { get; set; }
 		public virtual ObservableCollection<DictItem> MaterialTypes { get; set; }
 		public virtual ObservableCollection<DictItem> MaterialDepts { get; set; }
-		public ObservableCollection<KeyValuePair<int, string>> IsBigEnums
+        public virtual event SetPopupHandler SetPopupEditToFullScreen;
+        public ObservableCollection<KeyValuePair<int, string>> IsBigEnums
 		{
 			get
 			{
@@ -55,6 +56,10 @@ namespace Emergence.Business.ViewModel
 		{
 			IsPopoupOpen = true;
 			IsPageEnabled = false;
+            if (SetPopupEditToFullScreen != null)
+            {
+                SetPopupEditToFullScreen();
+            }
         }
 
 		public void ClosePopup()

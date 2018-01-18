@@ -53,9 +53,11 @@ namespace Emergence_WPF
                 "" : ViewModel.MaterialTypes[0].Value;
             ViewModel.CurrentMaterial.MaterialsTypeName = ViewModel.MaterialTypes == null || ViewModel.MaterialTypes.Count == 0 ?
                 "" : ViewModel.MaterialTypes[0].Name;
+            ViewModel.SetPopupEditToFullScreen += this.FullPageEditPopup;
+
         }
 
-		private void NavigateToMaterialPage(object sender, MouseButtonEventArgs e)
+        private void NavigateToMaterialPage(object sender, MouseButtonEventArgs e)
 		{
 			NavigationService.Navigate(new TeamListPage());
 		}
@@ -100,7 +102,8 @@ namespace Emergence_WPF
             while (parent != null);
 
             ViewModel.PopupTeamEdit();
-		}
+            FullPageEditPopup();
+        }
 
 		private void BtnDelete_Click(object sender, RoutedEventArgs e)
 		{
@@ -323,9 +326,11 @@ namespace Emergence_WPF
 		{
 			ViewModel.IsCreateMaterial = false;
 			ViewModel.PopupTitle = "更新物资";
-			ViewModel.CurrentMaterial = (sender as Image).DataContext as MaterialModel;
-			ViewModel.PopupTeamEdit();
-		}
+            var item = (sender as Image).DataContext as MaterialModel;
+            ViewModel.CurrentMaterial = item;
+            ViewModel.PopupTeamEdit();
+            FullPageEditPopup();
+        }
 
 		private void UpdateMaterial_Click(object sender, RoutedEventArgs e)
 		{
@@ -346,5 +351,24 @@ namespace Emergence_WPF
         {
             ViewModel.ClosePopup();
         }
+        private void FullPageEditPopup()
+        {
+            DependencyObject parent = this.PopupEditMaterial.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
+        }
+
+        
     }
 }
