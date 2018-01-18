@@ -8,7 +8,7 @@
         Width="490px"
         WindowStartupLocation="CenterScreen"
         Title="应急指挥管理平台" 
-        WindowStyle="None">
+        WindowStyle="None" MouseLeftButtonDown="Window_MouseLeftButtonDown">
     <Grid>
         <!--<DockPanel Height="40" VerticalAlignment="Top">
                 <Label Margin="0,0,20,0" Content="X" Width="20" Height="20" Padding="0" HorizontalAlignment="Right"/>

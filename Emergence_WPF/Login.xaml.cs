@@ -22,8 +22,8 @@ namespace Emergence_WPF
 		public Login()
 		{
 			InitializeComponent();
-            this.KeyDown += Login_KeyDown;
-        }
+			this.KeyDown += Login_KeyDown;
+		}
 
 		private void LoginButton_Click(object sender, RoutedEventArgs e)
 		{
@@ -57,15 +57,15 @@ namespace Emergence_WPF
 						this.Close();
 						//#if Release
 					}
-                    else
-                    {
-                        MessageBox.Show("用户名或密码不正确!");
-                    }
-                }
-                catch (Exception ex)
+					else
+					{
+						MessageBox.Show("用户名或密码不正确!");
+					}
+				}
+				catch (Exception ex)
 				{
-                    MessageBox.Show("登录异常，请重试或联系管理员");
-                }
+					MessageBox.Show("登录异常，请重试或联系管理员");
+				}
 			}
 			//#endif
 		}
@@ -121,12 +121,17 @@ namespace Emergence_WPF
 		{
 			this.Close();
 		}
-        private void Login_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)//Enter键  
-            {
-                LoginButton_Click(sender, e);
-            }
-        }
-    }
+		private void Login_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)//Enter键  
+			{
+				LoginButton_Click(sender, e);
+			}
+		}
+
+		private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+		{
+			DragMove();
+		}
+	}
 }
