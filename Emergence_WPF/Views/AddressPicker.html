@@ -35,7 +35,9 @@
 
         var map; //Map实例
         var myGeo;//地址解析
-        var address;
+        var pickedAddress;
+        var pickedPoint_X;
+        var pickedPoint_Y;
         function map_init() {
             map = new BMap.Map("map");
 
@@ -75,18 +77,32 @@
 
             map.addEventListener("click", function (e) {
                 removeOverlay();
-                var currentPoint = e.point;
-                var marker = addPointMaker(currentPoint);
+                var p = e.point;
+                pickedPoint_X = p.lng;
+                pickedPoint_Y = p.lat;
+                //根据坐标点，获取详细地址信息
+                if (myGeo == null)
+                    myGeo = new BMap.Geocoder();
+                myGeo.getLocation(p, function (res) {
+                    if (res != null) {
+                        pickedAddress = res.address;
+                    }
+                });
+                var marker = addPointMaker(p, 0, pickedAddress, "");
             });
 
         }
 
         function getAddress() {
-            return address;
+            return pickedAddress;
         }
 
-        function setAddress() {
+        function getCoordinate_X() {
+            return pickedPoint_X;
+        }
 
+        function getCoordinate_Y() {
+            return pickedPoint_Y;
         }
 
         //清除覆盖物

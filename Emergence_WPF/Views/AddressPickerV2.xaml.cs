@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using WebBrowserOnTransparentWindow;
 
 namespace Emergence_WPF.Views
 {
@@ -10,13 +8,10 @@ namespace Emergence_WPF.Views
 	/// </summary>
 	public partial class AddressPickerV2 : Window
 	{
-		WebBrowser Browser { get; set; }
 		public event AddressPickedHandler AddressPickedEvent;
 		public AddressPickerV2()
 		{
 			InitializeComponent();
-			WebBrowserOverlay wbo = new WebBrowserOverlay(MapContainer);
-			Browser = wbo.WebBrowser;
 			Browser.Navigate(new Uri(System.IO.Path.GetFullPath("Views/AddressPicker.html")));
 		}
 
@@ -24,7 +19,22 @@ namespace Emergence_WPF.Views
 		{
 			get
 			{
-				return Browser.InvokeScript("getAddress").ToString();
+				var obj = Browser.InvokeScript("getAddress");
+				return obj == null ? "" : obj.ToString();
+			}
+		}
+
+		public Point PickedCoordinate
+		{
+			get
+			{
+				double x = 0;
+				double y = 0;
+				var xVar = Browser.InvokeScript("getCoordinate_X");
+				var yVar = Browser.InvokeScript("getCoordinate_Y");
+				x = double.TryParse(xVar == null ? "0.0" : xVar.ToString(), out x) ? x : 0;
+				y = double.TryParse(yVar == null ? "0.0" : yVar.ToString(), out y) ? y : 0;
+				return new Point(x, y);
 			}
 		}
 
@@ -32,7 +42,7 @@ namespace Emergence_WPF.Views
 		{
 			if (!string.IsNullOrEmpty(PickedAddress))
 			{
-				AddressPickedEvent?.Invoke(new AddressPickedEventArgs() { Address = PickedAddress });
+				AddressPickedEvent?.Invoke(new AddressPickedEventArgs() { Address = PickedAddress, Coordinate = PickedCoordinate });
 			}
 			this.Close();
 		}
