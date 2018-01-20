@@ -89,11 +89,17 @@ namespace Emergence_WPF
 			AddressPickerV2 addressPicker = new AddressPickerV2();
 			addressPicker.Width = 600;
 			addressPicker.Height = 500;
-			addressPicker.AddressPickedEvent += (args) => { ViewModel.Current.Locale = args.Address; };
+			addressPicker.AddressPickedEvent += PickedAddress;
 			addressPicker.ShowDialog();
 		}
 
-        public void SetPopupToFullScreen()
+		private void PickedAddress(AddressPickedEventArgs args)
+		{
+			ViewModel.Current.Locale = args.Address;
+			ViewModel.Current.Longitude = args.Coordinate.X.ToString();
+			ViewModel.Current.Latitude = args.Coordinate.Y.ToString();
+		}
+		public void SetPopupToFullScreen()
         {
             DependencyObject parent = this.PopupItem.Child;
             do

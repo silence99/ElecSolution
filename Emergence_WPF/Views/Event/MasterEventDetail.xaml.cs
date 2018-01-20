@@ -2,6 +2,7 @@
 using Busniess.Services;
 using Emergence.Business.ViewModel;
 using Emergence.Common.Model;
+using Emergence_WPF.Views;
 using Emergence_WPF.Views.Event;
 using Framework;
 using Microsoft.Practices.Prism.Commands;
@@ -280,5 +281,21 @@ namespace Emergence_WPF
         {
 
         }
-    }
+
+		private void PopupOpen_Click(object sender, RoutedEventArgs e)
+		{
+			AddressPickerV2 addressPicker = new AddressPickerV2();
+			addressPicker.Width = 600;
+			addressPicker.Height = 500;
+			addressPicker.AddressPickedEvent += PickedAddress;
+			addressPicker.ShowDialog();
+		}
+
+		private void PickedAddress(AddressPickedEventArgs args)
+		{
+			ViewModel.SubEventEdit.ChildLocale = args.Address;
+			ViewModel.SubEventEdit.ChildLongitude = args.Coordinate.X.ToString();
+			ViewModel.SubEventEdit.ChildLatitude = args.Coordinate.Y.ToString();
+		}
+	}
 }
