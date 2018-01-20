@@ -84,15 +84,34 @@ namespace Busniess.ViewModel
 		{
 			if (IsAdding)
 			{
-				Service.CreateAnnouncement(Current);
+				var result = Service.CreateAnnouncement(Current);
+                if(result)
+                {
+                    System.Windows.MessageBox.Show("添加成功！");
+                    CleanMessage();
+                    PopupCloseAction();
+                    GetAnnouncementsAction();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("添加失败！");
+                }
 			}
 			else
 			{
-				Service.UpdateAnnouncement(Current);
-			}
-			CleanMessage();
-			PopupCloseAction();
-			GetAnnouncementsAction();
+				var result = Service.UpdateAnnouncement(Current);
+                if (result)
+                {
+                    System.Windows.MessageBox.Show("编辑成功！");
+                    CleanMessage();
+                    PopupCloseAction();
+                    GetAnnouncementsAction();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("编辑失败！");
+                }
+            }
 		}
 
 		private void DeleteAction()
@@ -104,8 +123,17 @@ namespace Busniess.ViewModel
 			}
 			else
 			{
-				Service.DeleteAnncoucement(ids);
-				GetAnnouncementsAction();
+				var result = Service.DeleteAnncoucement(ids);
+
+                if (result)
+                {
+                    System.Windows.MessageBox.Show("删除成功！");
+                    GetAnnouncementsAction();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("删除失败！");
+                }
 			}
 		}
 

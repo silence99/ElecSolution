@@ -97,7 +97,7 @@
             Width="{Binding Path=PopupWidth}" 
             Height="{Binding Path= PopupHeight}"  
             StaysOpen="True"   
-            IsOpen="{Binding Path=IsPopoupOpen}"   
+            IsOpen="{Binding Path=IsPopupOpen}"   
             AllowsTransparency="True"  
             PopupAnimation="Slide"  
             Placement="Center">
@@ -132,8 +132,21 @@
                             <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditNotiTitle" Width="458px" Margin="20 18 0 0"  
                                      Text="{Binding Path=Current.Title, Mode=TwoWay}"/>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="时间"/>
-                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditNotiTime" Width="458px" Margin="20 18 0 0"  
-                                     Text="{Binding Path=Current.Time, Mode=TwoWay}"/>
+                            <!--<TextBox Style="{StaticResource PopupTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditNotiTime" Width="458px" Margin="20 18 0 0"  
+                                     Text="{Binding Path=Current.Time, Mode=TwoWay}"/>-->
+                            <DatePicker x:Name="datePickerAnn" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Width="200px" Height="34" FontSize="20"  Margin="20 0 0 0"  HorizontalAlignment="Left"
+                                FirstDayOfWeek="Monday" SelectedDate="{Binding Path=Current.Time, Mode=TwoWay}" SelectedDateFormat="Short"
+                                IsTodayHighlighted="True" >
+                                <DatePicker.Resources>
+                                    <Style TargetType="DatePickerTextBox">
+                                        <Setter Property="IsReadOnly" Value="True"/>
+                                    </Style>
+                                </DatePicker.Resources>
+                                <!--<DatePicker.BlackoutDates>
+                                    <CalendarDateRange Start="2010/4/3" End="2010/4/5"/>
+                                    <CalendarDateRange Start="2010/4/10" End="2010/4/12"/>
+                                </DatePicker.BlackoutDates>-->
+                            </DatePicker>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="内容" Margin="0 0 0 0"/>
                             <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" Name="Txt_EditNotiContent" Width="458px" VerticalAlignment="Top" Margin="20 30 0 0"  
                                       Text="{Binding Path=Current.Content, Mode=TwoWay}"/>

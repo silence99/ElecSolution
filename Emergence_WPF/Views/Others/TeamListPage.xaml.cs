@@ -31,13 +31,22 @@ namespace Emergence_WPF
 			var teams = ViewModel.Teams.Where(team => team.IsChecked).ToList();
 			if (teams != null && teams.Count != 0)
 			{
-				TeamService.DeleteTeam(teams.Select(t => t.ID.ToString()).ToList());
-			}
+				var result = TeamService.DeleteTeam(teams.Select(t => t.ID.ToString()).ToList());
+
+                if (result)
+                {
+                    System.Windows.MessageBox.Show("删除成功！");
+                    GetTeams();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("删除失败！");
+                }
+            }
 			else
 			{
 				System.Windows.MessageBox.Show("没有选择要删除的队伍");
 			}
-			GetTeams();
 		}
 
 		private void Import_Handler(object sender, RoutedEventArgs e)
@@ -118,16 +127,34 @@ namespace Emergence_WPF
 
 		private void Update_Handler(object sender, RoutedEventArgs e)
 		{
-			ViewModel.ClosePopup();
 			if (ViewModel.CurrentTeam.ID == 0)
 			{
-				TeamService.CreateTeam(ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept);
-			}
+				var result = TeamService.CreateTeam(ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept);
+                if (result)
+                {
+                    ViewModel.ClosePopup();
+                    System.Windows.MessageBox.Show("添加成功！");
+                    GetTeams();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("添加失败！");
+                }
+            }
 			else
 			{
-				TeamService.UpdateTeam(ViewModel.CurrentTeam.ID, ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept);
-			}
-			GetTeams();
+				var result = TeamService.UpdateTeam(ViewModel.CurrentTeam.ID, ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept);
+                if (result)
+                {
+                    ViewModel.ClosePopup();
+                    System.Windows.MessageBox.Show("编辑成功！");
+                    GetTeams();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("编辑失败！");
+                }
+            }
 		}
 
 		private void NavigateToTeamDetailPage_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
