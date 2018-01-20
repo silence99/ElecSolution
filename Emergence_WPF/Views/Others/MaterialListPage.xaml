@@ -174,13 +174,13 @@
                             <ComboBox Grid.Column="1" Grid.Row="2" Height="30" VerticalAlignment="Center" Width="160" HorizontalAlignment="Left" Margin="20 0 0 0"
                                       SelectedValue="{Binding Path=CurrentMaterial.IsConsumable, Mode=TwoWay}"
                                       DisplayMemberPath="Value"
-                                      SelectedValuePath="Key"
+                                      SelectedValuePath="Value"
                                       ItemsSource="{Binding IsConsumableEnums}"/>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="2" Content="是否大物件"/>
                             <ComboBox Grid.Column="3" Grid.Row="2" Height="30" VerticalAlignment="Center" Width="160" HorizontalAlignment="Left" Margin="20 0 0 0"
                                       SelectedValue="{Binding Path=CurrentMaterial.IsBigMaterials, Mode=TwoWay}"
                                       DisplayMemberPath="Value"
-                                      SelectedValuePath="Key"
+                                      SelectedValuePath="Value"
                                       ItemsSource="{Binding IsBigEnums}"/>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="3" Grid.Column="0" Content="数量" Margin="0 0 0 0"/>
                             <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="3" Grid.Column="1" Width="160px" Margin="20 0 0 0"  
