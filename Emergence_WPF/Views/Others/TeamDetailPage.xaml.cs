@@ -48,8 +48,17 @@ namespace Emergence_WPF
 
         private void Delete_Handler(object sender, RoutedEventArgs e)
 		{
-			TeamService.DeleteTeamMembers(ViewModel.Members.Where(mbr => mbr.IsChecked).Select(mbr => mbr.ID.ToString()).ToList());
-			SyncTeamMembers();
+			var result = TeamService.DeleteTeamMembers(ViewModel.Members.Where(mbr => mbr.IsChecked).Select(mbr => mbr.ID.ToString()).ToList());
+
+            if (result)
+            {
+                System.Windows.MessageBox.Show("删除成功！");
+                SyncTeamMembers();
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("删除失败！");
+            }
 		}
 
 		private void ClosePopup_Handler(object sender, RoutedEventArgs e)
@@ -276,17 +285,34 @@ namespace Emergence_WPF
 
 		private void EditTeamMember_Handler(object sender, RoutedEventArgs e)
 		{
-			ViewModel.ClosePopup();
 			if (ViewModel.IsAddMember)
 			{
-				TeamService.CreateTeamMember(ViewModel.ID.ToString(), ViewModel.CurrentPerson.Name, ViewModel.CurrentPerson.PhoneNumber, ViewModel.CurrentPerson.Place);
+				var result = TeamService.CreateTeamMember(ViewModel.ID.ToString(), ViewModel.CurrentPerson.Name, ViewModel.CurrentPerson.PhoneNumber, ViewModel.CurrentPerson.Place);
+                if (result)
+                {
+                    ViewModel.ClosePopup();
+                    System.Windows.MessageBox.Show("添加成功！");
+                    SyncTeamMembers();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("添加失败！");
+                }
 			}
 			else
 			{
-				TeamService.UpdateTeamMember(ViewModel.CurrentPerson.ID, ViewModel.ID.ToString(), ViewModel.CurrentPerson.Name, ViewModel.CurrentPerson.PhoneNumber, ViewModel.CurrentPerson.Place);
-			}
-
-			SyncTeamMembers();
+                var result = TeamService.UpdateTeamMember(ViewModel.CurrentPerson.ID, ViewModel.ID.ToString(), ViewModel.CurrentPerson.Name, ViewModel.CurrentPerson.PhoneNumber, ViewModel.CurrentPerson.Place);
+                if (result)
+                {
+                    ViewModel.ClosePopup();
+                    System.Windows.MessageBox.Show("编辑成功！");
+                    SyncTeamMembers();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("编辑失败！");
+                }
+            }
 		}
         private void FullPageEditPopup()
         {
