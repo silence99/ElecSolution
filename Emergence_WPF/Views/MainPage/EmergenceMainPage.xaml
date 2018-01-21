@@ -131,26 +131,10 @@
                 </StackPanel.Background>
                 <TextBlock Margin="10,13,0,0" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top">视频资料</TextBlock>
             </StackPanel>
-            <DataGrid HeadersVisibility="None" 
-                      ItemsSource="{Binding CurrentMasterEventVideos, Mode=TwoWay}"
-                      Margin="5,5,5,10"
-                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                      RowHeaderWidth="0"
-                      IsReadOnly="True"
-                      AlternationCount="2" 
-                      AutoGenerateColumns="False"
-                      RowHeight="200">
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <views:Video Margin="0" Url="{Binding Path=Url, Mode=TwoWay}" Height="200"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0,0,0,0">
+                <DockPanel Name="VideosContainer" Margin="0,0,0,0" LastChildFill="False">
+                </DockPanel>
+            </ScrollViewer>
         </DockPanel>
 
         <DockPanel Grid.Row="0" Grid.Column="1" Margin="5,10,5,5" Background="#242424">

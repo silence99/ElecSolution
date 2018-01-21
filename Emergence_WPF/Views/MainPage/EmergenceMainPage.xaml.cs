@@ -1,7 +1,9 @@
-﻿using Busniess.Services;
+﻿using Business.Services;
+using Busniess.Services;
 using Emergence.Business.ViewModel;
 using Emergence.Common.Model;
 using Emergence_WPF.Util;
+using Emergence_WPF.Views;
 using Framework;
 using System;
 using System.Collections.ObjectModel;
@@ -113,7 +115,7 @@ namespace Emergence_WPF
 					cameras = camerasData.Data;
 				}
 
-				ViewModel.CurrentMasterEventVideos = new ObservableCollection<CameraModel>(cameras.Select(it=>it.CreateAopProxy()));
+				DisplayVideos(cameras);
 
 				foreach (var item in subevents)
 				{
@@ -123,6 +125,24 @@ namespace Emergence_WPF
 				foreach (var item in cameras)
 				{
 					map.MarkPoint(item.Longitude, item.Latitude, string.Format("摄像头:{0}", item.VideoNumber), item.Remarks);
+				}
+			}
+		}
+
+		private void DisplayVideos(CameraModel[] videos)
+		{
+			VideosContainer.Children.Clear();
+			if (videos != null)
+			{
+				foreach (var item in videos)
+				{
+					Video video = new Video();
+					VideosContainer.Children.Add(video);
+					video.SetValue(DockPanel.DockProperty, Dock.Top);
+					video.Margin = new System.Windows.Thickness(5, 5, 5, 5);
+					video.Width = (ResolutionService.Width * 1.5 / 7) - 10;
+					video.Height = video.Width * 3 / 4 - 10;
+					video.Url = item.Url;
 				}
 			}
 		}
