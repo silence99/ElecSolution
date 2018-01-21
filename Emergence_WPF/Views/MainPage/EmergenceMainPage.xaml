@@ -131,21 +131,14 @@
                 </StackPanel.Background>
                 <TextBlock Margin="10,13,0,0" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top">视频资料</TextBlock>
             </StackPanel>
-            <DataGrid HeadersVisibility="None" 
+            <DataGrid Style="{StaticResource Grid_ForVedio_Black}"
                       ItemsSource="{Binding CurrentMasterEventVideos, Mode=TwoWay}"
-                      Margin="5,5,5,10"
-                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                      RowHeaderWidth="0"
-                      IsReadOnly="True"
-                      AlternationCount="2" 
-                      AutoGenerateColumns="False"
-                      RowHeight="200">
+                      IsReadOnly="True">
                 <DataGrid.Columns>
                     <DataGridTemplateColumn Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <views:Video Margin="0" Url="{Binding Path=Url, Mode=TwoWay}" Height="200"/>
+                                <views:Video Margin="0" Url="{Binding Path=Url, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
