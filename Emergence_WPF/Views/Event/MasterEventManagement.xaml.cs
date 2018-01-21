@@ -96,8 +96,8 @@ namespace Emergence_WPF
 		private void PickedAddress(AddressPickedEventArgs args)
 		{
 			ViewModel.Current.Locale = args.Address;
-			ViewModel.Current.Longitude = args.Coordinate.X.ToString();
-			ViewModel.Current.Latitude = args.Coordinate.Y.ToString();
+			ViewModel.Current.Longitude = args.Coordinate.X;
+			ViewModel.Current.Latitude = args.Coordinate.Y;
 		}
 		public void SetPopupToFullScreen()
         {

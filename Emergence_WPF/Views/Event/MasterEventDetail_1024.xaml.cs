@@ -65,17 +65,17 @@ namespace Emergence_WPF
 		}
 
 		private void Btn_PublishSubEvent_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.ViewModel != null && this.ViewModel.SubEventDetail != null && this.ViewModel.SubEventDetail.Id != null)
-            {
-                MessageNotificationPage mnp = new MessageNotificationPage(this.ViewModel.SubEventDetail.Id.ToString());
-                NavigationService.Navigate(mnp);
-            }
-            else
-            {
-                System.Windows.MessageBox.Show("请选择有效的子事件！");
-            }
-        }
+		{
+			if (this.ViewModel != null && this.ViewModel.SubEventDetail != null && this.ViewModel.SubEventDetail.Id != null)
+			{
+				MessageNotificationPage mnp = new MessageNotificationPage(this.ViewModel.SubEventDetail.Id.ToString());
+				NavigationService.Navigate(mnp);
+			}
+			else
+			{
+				System.Windows.MessageBox.Show("请选择有效的子事件！");
+			}
+		}
 
 		private void Btn_AmplifySubEvent_Click(object sender, RoutedEventArgs e)
 		{
@@ -125,25 +125,11 @@ namespace Emergence_WPF
 			List<Tuple<Point, string, string>> data = new List<Tuple<Point, string, string>>();
 			var subeventService = new SubeventService();
 			var cameraService = new CameraService();
-			// for show to customers, remove if release
-			ViewModel.MasterEventInfo.Longitude = 119.133194.ToString();
-			ViewModel.MasterEventInfo.Latitude = 28.071823.ToString();
 
-			double longitude = 0;
-			if (!double.TryParse(ViewModel.MasterEventInfo.Longitude, out longitude))
-			{
-				longitude = 119.133194;
-			}
-			double latitude = 0;
-			if (!double.TryParse(ViewModel.MasterEventInfo.Latitude, out latitude))
-			{
-				latitude = 28.071823;
-			}
-
-			data.Add(new Tuple<Point, string, string>(new Point(longitude, latitude), string.Format("主事件:{0}", ViewModel.MasterEventInfo.Title), ViewModel.MasterEventInfo.Remarks));
+			data.Add(new Tuple<Point, string, string>(new Point(ViewModel.MasterEventInfo.Longitude, ViewModel.MasterEventInfo.Latitude), string.Format("主事件:{0}", ViewModel.MasterEventInfo.Title), ViewModel.MasterEventInfo.Remarks));
 			var subevents = subeventService.GetAllSubevents(ViewModel.MasterEventInfo.ID);
 
-			var camerasData = cameraService.GetCameraByMasterEvent(1, 10000, latitude, longitude);
+			var camerasData = cameraService.GetCameraByMasterEvent(1, 10000, ViewModel.MasterEventInfo.Latitude, ViewModel.MasterEventInfo.Longitude);
 			CameraModel[] cameras = new CameraModel[0];
 			if (camerasData != null && camerasData.Data != null)
 			{
@@ -152,11 +138,7 @@ namespace Emergence_WPF
 
 			foreach (var item in subevents)
 			{
-				double childLongitude = 0;
-				double childLatitude = 0;
-				if (double.TryParse(item.ChildLongitude, out childLongitude)) { childLongitude = 119.931298; }
-				if (double.TryParse(item.ChildLongitude, out childLongitude)) { childLatitude = 28.469722; }
-				data.Add(new Tuple<Point, string, string>(new Point(childLongitude, childLatitude), string.Format("子事件:{0}", item.ChildTitle), item.ChildRemarks));
+				data.Add(new Tuple<Point, string, string>(new Point(item.ChildLongitude, item.ChildLatitude), string.Format("子事件:{0}", item.ChildTitle), item.ChildRemarks));
 			}
 
 			foreach (var item in cameras)
@@ -170,23 +152,15 @@ namespace Emergence_WPF
 				WindowStyle = WindowStyle.None,
 				WindowState = WindowState.Maximized
 			};
-			win.MoveToCenter(double.Parse(ViewModel.MasterEventInfo.Longitude), double.Parse(ViewModel.MasterEventInfo.Latitude));
+			win.MoveToCenter(ViewModel.MasterEventInfo.Longitude, ViewModel.MasterEventInfo.Latitude);
 			win.BindingData(data);
 			win.Show();
 		}
 
 		private void ThreePopupVideoButton_Click(object sender, RoutedEventArgs e)
 		{
-			double latitude = 0;
-			double longitude = 0;
-			if (ViewModel != null && ViewModel.MasterEventInfo != null)
-			{
-				latitude = string.IsNullOrEmpty(ViewModel.MasterEventInfo.Latitude) ? 0 : double.Parse(ViewModel.MasterEventInfo.Latitude);
-				longitude = string.IsNullOrEmpty(ViewModel.MasterEventInfo.Longitude) ? 0 : double.Parse(ViewModel.MasterEventInfo.Longitude);
-			}
-
 			SubEventPopup_VideoV2 video = new SubEventPopup_VideoV2();
-			video.SetCoordinate(latitude, longitude);
+			video.SetCoordinate(ViewModel.MasterEventInfo.Latitude, ViewModel.MasterEventInfo.Longitude);
 			video.Show();
 			this.ViewModel.ThreePopupSelectCloseAction();
 		}

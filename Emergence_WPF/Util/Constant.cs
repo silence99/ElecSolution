@@ -3,6 +3,7 @@
 	public class Constant
 	{
 		public static ServicesNames Services = new ServicesNames();
+		public static DefaultLocation DefaultLocation = new DefaultLocation() { Longutide = 119.133194, Latitude = 28.071823 };
 	}
 
 	public class ServicesNames
@@ -15,4 +16,9 @@
 		public string TeamStatisticsService = "teamStatisticsService";
 	}
 
+	public class DefaultLocation
+	{
+		public double Longutide { get; set; }
+		public double Latitude { get; set; }
+	}
 }

@@ -34,13 +34,13 @@ namespace Emergence.Common.Model
         public virtual int ID { get; set; }
 
         [JsonProperty("latitude")]
-        public virtual string Latitude { get; set; }
+        public virtual double Latitude { get; set; }
 
         [JsonProperty("locale")]
         public virtual string Locale { get; set; }
 
         [JsonProperty("longitude")]
-        public virtual string Longitude { get; set; }
+        public virtual double Longitude { get; set; }
 
         [JsonProperty("remarks")]
         public virtual string Remarks { get; set; }

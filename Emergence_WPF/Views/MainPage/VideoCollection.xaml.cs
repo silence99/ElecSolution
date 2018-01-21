@@ -16,16 +16,16 @@ namespace Emergence_WPF.Views.MainPage
 
 		public void BindingViewModel(List<VideoViewModel> videos)
 		{
-			Content.Children.Clear();
-			foreach (var item in videos)
-			{
-				Video video = new Video();
-				Content.Children.Add(video);
-				video.SetValue(DockPanel.DockProperty, Dock.Top);
-				video.Margin = new System.Windows.Thickness(0, 0, 0, 0);
-				video.Width = ActualWidth;
-				video.BindingViewModel(item);
-			}
+			//Content.Children.Clear();
+			//foreach (var item in videos)
+			//{
+			//	Video video = new Video();
+			//	Content.Children.Add(video);
+			//	video.SetValue(DockPanel.DockProperty, Dock.Top);
+			//	video.Margin = new System.Windows.Thickness(0, 0, 0, 0);
+			//	video.Width = ActualWidth;
+			//	video.BindingViewModel(item);
+			//}
 		}
 	}
 }

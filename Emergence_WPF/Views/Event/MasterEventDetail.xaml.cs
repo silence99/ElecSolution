@@ -36,46 +36,46 @@ namespace Emergence_WPF
 			this.DataContext = ViewModel;
 			SE_VE = new SubEventPopup_Video();
 			this.KeyDown += MasterEventDetail_KeyDown;
-            ViewModel.SetPopupSubEventEditToFullScreen += this.FullPageSubEventEditPopup;
-            ViewModel.SetPopupTeamToFullScreen += this.FullPageTeamPopup;
-            ViewModel.SetPopupMaterialToFullScreen += this.FullPageMaterialPopup;
-            ViewModel.ResetSubEventSelectedValue += this.ResetSubEventDetailSelected;
-        }
+			ViewModel.SetPopupSubEventEditToFullScreen += this.FullPageSubEventEditPopup;
+			ViewModel.SetPopupTeamToFullScreen += this.FullPageTeamPopup;
+			ViewModel.SetPopupMaterialToFullScreen += this.FullPageMaterialPopup;
+			ViewModel.ResetSubEventSelectedValue += this.ResetSubEventDetailSelected;
+		}
 		private void Page_Loaded(object sender, RoutedEventArgs e)
 		{
-            ResetSubEventDetailSelected();
-        }
+			ResetSubEventDetailSelected();
+		}
 
-        private void ResetSubEventDetailSelected()
-        {
-            int count = this.Grid_SubEventList.SelectedItems.Count;
-            if (count <= 0)
-            {
-                if (ViewModel.SubEventList != null && ViewModel.SubEventList.Count > 0)
-                {
-                    if (this.Grid_SubEventList.ItemContainerGenerator.Items.Count > 0)
-                    {
-                        DataGridRow row = (DataGridRow)this.Grid_SubEventList.ItemContainerGenerator.ContainerFromIndex(0);
-                        if (row != null)
-                        {
-                            row.IsSelected = true;
-                            var item = row.Item as SubEvent;
-                            ViewModel.SelectSubEventAction(item.Id.ToString());
-                        }
-                    }
-                    else
-                    {
-                        ViewModel.CleanSubEventDetailBlock();
-                        ViewModel.SetSubEventDetailBlockStatus(false);
-                    }
-                }
-                else
-                {
-                    ViewModel.CleanSubEventDetailBlock();
-                    ViewModel.SetSubEventDetailBlockStatus(false);
-                }
-            }
-        }
+		private void ResetSubEventDetailSelected()
+		{
+			int count = this.Grid_SubEventList.SelectedItems.Count;
+			if (count <= 0)
+			{
+				if (ViewModel.SubEventList != null && ViewModel.SubEventList.Count > 0)
+				{
+					if (this.Grid_SubEventList.ItemContainerGenerator.Items.Count > 0)
+					{
+						DataGridRow row = (DataGridRow)this.Grid_SubEventList.ItemContainerGenerator.ContainerFromIndex(0);
+						if (row != null)
+						{
+							row.IsSelected = true;
+							var item = row.Item as SubEvent;
+							ViewModel.SelectSubEventAction(item.Id.ToString());
+						}
+					}
+					else
+					{
+						ViewModel.CleanSubEventDetailBlock();
+						ViewModel.SetSubEventDetailBlockStatus(false);
+					}
+				}
+				else
+				{
+					ViewModel.CleanSubEventDetailBlock();
+					ViewModel.SetSubEventDetailBlockStatus(false);
+				}
+			}
+		}
 
 		private void MasterEventDetail_KeyDown(object sender, KeyEventArgs e)
 		{
@@ -88,26 +88,26 @@ namespace Emergence_WPF
 		{
 			DataGrid dg = sender as DataGrid;
 			var item = dg.CurrentItem as SubEvent;
-            //DataRowView item = cell.Item as DataRowView;
-            if (item != null)
-            {
-                ViewModel.SelectSubEventAction(item.Id.ToString());
-                ViewModel.SetSubEventDetailBlockStatus(true);
-            }
+			//DataRowView item = cell.Item as DataRowView;
+			if (item != null)
+			{
+				ViewModel.SelectSubEventAction(item.Id.ToString());
+				ViewModel.SetSubEventDetailBlockStatus(true);
+			}
 		}
 
 		private void Btn_PublishSubEvent_Click(object sender, RoutedEventArgs e)
 		{
-            if (this.ViewModel != null && this.ViewModel.SubEventDetail != null && this.ViewModel.SubEventDetail.Id != null)
-            {
-                MessageNotificationPage mnp = new MessageNotificationPage(this.ViewModel.SubEventDetail.Id.ToString());
-                NavigationService.Navigate(mnp);
-            }
-            else
-            {
-                System.Windows.MessageBox.Show("请选择有效的子事件！");
-            }
-        }
+			if (this.ViewModel != null && this.ViewModel.SubEventDetail != null && this.ViewModel.SubEventDetail.Id != null)
+			{
+				MessageNotificationPage mnp = new MessageNotificationPage(this.ViewModel.SubEventDetail.Id.ToString());
+				NavigationService.Navigate(mnp);
+			}
+			else
+			{
+				System.Windows.MessageBox.Show("请选择有效的子事件！");
+			}
+		}
 
 		private void Btn_AmplifySubEvent_Click(object sender, RoutedEventArgs e)
 		{
@@ -158,25 +158,11 @@ namespace Emergence_WPF
 			List<Tuple<Point, string, string>> data = new List<Tuple<Point, string, string>>();
 			var subeventService = new SubeventService();
 			var cameraService = new CameraService();
-			// for show to customers, remove if release
-			ViewModel.MasterEventInfo.Longitude = 119.133194.ToString();
-			ViewModel.MasterEventInfo.Latitude = 28.071823.ToString();
 
-			double longitude = 0;
-			if (!double.TryParse(ViewModel.MasterEventInfo.Longitude, out longitude))
-			{
-				longitude = 119.133194;
-			}
-			double latitude = 0;
-			if (!double.TryParse(ViewModel.MasterEventInfo.Latitude, out latitude))
-			{
-				latitude = 28.071823;
-			}
-
-			data.Add(new Tuple<Point, string, string>(new Point(longitude, latitude), string.Format("主事件:{0}", ViewModel.MasterEventInfo.Title), ViewModel.MasterEventInfo.Remarks));
+			data.Add(new Tuple<Point, string, string>(new Point(ViewModel.MasterEventInfo.Longitude, ViewModel.MasterEventInfo.Latitude), string.Format("主事件:{0}", ViewModel.MasterEventInfo.Title), ViewModel.MasterEventInfo.Remarks));
 			var subevents = subeventService.GetAllSubevents(ViewModel.MasterEventInfo.ID);
 
-			var camerasData = cameraService.GetCameraByMasterEvent(1, 10000, latitude, longitude);
+			var camerasData = cameraService.GetCameraByMasterEvent(1, 10000, ViewModel.MasterEventInfo.Latitude, ViewModel.MasterEventInfo.Longitude);
 			CameraModel[] cameras = new CameraModel[0];
 			if (camerasData != null && camerasData.Data != null)
 			{
@@ -185,11 +171,7 @@ namespace Emergence_WPF
 
 			foreach (var item in subevents)
 			{
-				double childLongitude = 0;
-				double childLatitude = 0;
-				if (double.TryParse(item.ChildLongitude, out childLongitude)) { childLongitude = 119.931298; }
-				if (double.TryParse(item.ChildLongitude, out childLongitude)) { childLatitude = 28.469722; }
-				data.Add(new Tuple<Point, string, string>(new Point(childLongitude, childLatitude), string.Format("子事件:{0}", item.ChildTitle), item.ChildRemarks));
+				data.Add(new Tuple<Point, string, string>(new Point(item.ChildLongitude, item.ChildLatitude), string.Format("子事件:{0}", item.ChildTitle), item.ChildRemarks));
 			}
 
 			foreach (var item in cameras)
@@ -203,7 +185,7 @@ namespace Emergence_WPF
 				WindowStyle = WindowStyle.None,
 				WindowState = WindowState.Maximized
 			};
-			win.MoveToCenter(double.Parse(ViewModel.MasterEventInfo.Longitude), double.Parse(ViewModel.MasterEventInfo.Latitude));
+			win.MoveToCenter(ViewModel.MasterEventInfo.Longitude, ViewModel.MasterEventInfo.Latitude);
 			win.BindingData(data);
 			win.Show();
 		}
@@ -211,76 +193,68 @@ namespace Emergence_WPF
 		private void ThreePopupVideoButton_Click(object sender, RoutedEventArgs e)
 		{
 			ViewModel.ThreePopupSelectCloseAction();
-			double latitude = 0;
-			double longitude = 0;
-			if (ViewModel != null && ViewModel.MasterEventInfo != null)
-			{
-				latitude = string.IsNullOrEmpty(ViewModel.MasterEventInfo.Latitude) ? 0 : double.Parse(ViewModel.MasterEventInfo.Latitude);
-				longitude = string.IsNullOrEmpty(ViewModel.MasterEventInfo.Longitude) ? 0 : double.Parse(ViewModel.MasterEventInfo.Longitude);
-			}
-
 			SubEventPopup_VideoV2 video = new SubEventPopup_VideoV2();
-			video.SetCoordinate(latitude, longitude);
+			video.SetCoordinate(ViewModel.MasterEventInfo.Latitude, ViewModel.MasterEventInfo.Longitude);
 			video.Show();
 		}
 
-        private void FullPageSubEventEditPopup()
-        {
-            DependencyObject parent = this.PopupEditSubEvent.Child;
-            do
-            {
-                parent = VisualTreeHelper.GetParent(parent);
+		private void FullPageSubEventEditPopup()
+		{
+			DependencyObject parent = this.PopupEditSubEvent.Child;
+			do
+			{
+				parent = VisualTreeHelper.GetParent(parent);
 
-                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
-                {
-                    var element = parent as FrameworkElement;
-                    element.Height = ResolutionService.Height;
-                    element.Width = ResolutionService.Width;
-                    break;
-                }
-            }
-            while (parent != null);
-        }
-        private void FullPageTeamPopup()
-        {
-            DependencyObject parent = this.PopupSelectTeam.Child;
-            do
-            {
-                parent = VisualTreeHelper.GetParent(parent);
+				if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+				{
+					var element = parent as FrameworkElement;
+					element.Height = ResolutionService.Height;
+					element.Width = ResolutionService.Width;
+					break;
+				}
+			}
+			while (parent != null);
+		}
+		private void FullPageTeamPopup()
+		{
+			DependencyObject parent = this.PopupSelectTeam.Child;
+			do
+			{
+				parent = VisualTreeHelper.GetParent(parent);
 
-                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
-                {
-                    var element = parent as FrameworkElement;
-                    element.Height = ResolutionService.Height;
-                    element.Width = ResolutionService.Width;
-                    break;
-                }
-            }
-            while (parent != null);
-        }
-        private void FullPageMaterialPopup()
-        {
-            DependencyObject parent = this.PopupSelectMaterial.Child;
-            do
-            {
-                parent = VisualTreeHelper.GetParent(parent);
+				if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+				{
+					var element = parent as FrameworkElement;
+					element.Height = ResolutionService.Height;
+					element.Width = ResolutionService.Width;
+					break;
+				}
+			}
+			while (parent != null);
+		}
+		private void FullPageMaterialPopup()
+		{
+			DependencyObject parent = this.PopupSelectMaterial.Child;
+			do
+			{
+				parent = VisualTreeHelper.GetParent(parent);
 
-                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
-                {
-                    var element = parent as FrameworkElement;
-                    element.Height = ResolutionService.Height;
-                    element.Width = ResolutionService.Width;
-                    break;
-                }
-            }
-            while (parent != null);
-        }
-        
+				if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+				{
+					var element = parent as FrameworkElement;
+					element.Height = ResolutionService.Height;
+					element.Width = ResolutionService.Width;
+					break;
+				}
+			}
+			while (parent != null);
+		}
 
-        private void Grid_SubEventList_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
-        {
 
-        }
+		private void Grid_SubEventList_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
+		{
+
+		}
 
 		private void PopupOpen_Click(object sender, RoutedEventArgs e)
 		{
@@ -294,8 +268,8 @@ namespace Emergence_WPF
 		private void PickedAddress(AddressPickedEventArgs args)
 		{
 			ViewModel.SubEventEdit.ChildLocale = args.Address;
-			ViewModel.SubEventEdit.ChildLongitude = args.Coordinate.X.ToString();
-			ViewModel.SubEventEdit.ChildLatitude = args.Coordinate.Y.ToString();
+			ViewModel.SubEventEdit.ChildLongitude = args.Coordinate.X;
+			ViewModel.SubEventEdit.ChildLatitude = args.Coordinate.Y;
 		}
 	}
 }

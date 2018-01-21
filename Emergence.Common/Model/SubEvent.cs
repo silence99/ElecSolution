@@ -1,14 +1,9 @@
 ﻿using Framework;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Emergence.Common.Model
 {
-    public class SubEvent : NotificationObject
+	public class SubEvent : NotificationObject
     {
         public virtual bool IsChecked { get; set; }
         [JsonProperty("id")]
@@ -18,11 +13,11 @@ namespace Emergence.Common.Model
         [JsonProperty("childGradeName")]
         public virtual string ChildGradeName { get; set; }
         [JsonProperty("childLatitude")]
-        public virtual string ChildLatitude { get; set; }
+        public virtual double ChildLatitude { get; set; }
         [JsonProperty("childLocale")]
         public virtual string ChildLocale { get; set; }
         [JsonProperty("childLongitude")]
-        public virtual string ChildLongitude { get; set; }
+        public virtual double ChildLongitude { get; set; }
         [JsonProperty("childRemarks")]
         public virtual string ChildRemarks { get; set; }
         [JsonProperty("childTitle")]
@@ -37,8 +32,8 @@ namespace Emergence.Common.Model
         public SubEvent()
         {
             IsChecked = false;
-            ChildLongitude = "321.110";
-            ChildLatitude = "321.110";
+            ChildLongitude = 119.133194;
+            ChildLatitude = 28.071823;
         }
     }
 }

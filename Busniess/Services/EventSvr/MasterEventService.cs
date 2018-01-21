@@ -122,8 +122,8 @@ namespace Busniess.Services
 		public bool CreateMasterEvent(MasterEvent model)
 		{
 			return CreateMasterEvent(model.Title, model.EventType, model.Grade, DateTime.Parse(model.Time), model.Remarks, model.Locale,
-				double.Parse(model.Longitude ?? "0"),
-				double.Parse(model.Latitude ?? "0"));
+				model.Longitude,
+				model.Latitude);
 		}
 
 		public bool CreateMasterEvent(string title, string eventType, string grade, DateTime time, string description, string location, double longitude, double latitude, Func<string, bool> callback = null)
