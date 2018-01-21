@@ -286,7 +286,7 @@ namespace Emergence_WPF
 		{
 			AddressPickerV2 addressPicker = new AddressPickerV2();
 			addressPicker.Width = 600;
-			addressPicker.Height = 500;
+			addressPicker.Height = 550;
 			addressPicker.AddressPickedEvent += PickedAddress;
 			addressPicker.ShowDialog();
 		}
@@ -297,5 +297,23 @@ namespace Emergence_WPF
 			ViewModel.SubEventEdit.ChildLongitude = args.Coordinate.X.ToString();
 			ViewModel.SubEventEdit.ChildLatitude = args.Coordinate.Y.ToString();
 		}
-	}
+
+        private void Button_SubEventEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var result = false;
+            foreach (var item in MEDPopupBindingGroup.BindingExpressions)
+            {
+                item.UpdateSource();
+                if (item.HasValidationError)
+                {
+                    result = true;
+                }
+            }
+            if (!result)
+            {
+                this.ViewModel.CreateSubEventCommand.Execute();
+            }
+            
+        }
+    }
 }

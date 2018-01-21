@@ -126,35 +126,48 @@ namespace Emergence_WPF
 		}
 
 		private void Update_Handler(object sender, RoutedEventArgs e)
-		{
-			if (ViewModel.CurrentTeam.ID == 0)
-			{
-				var result = TeamService.CreateTeam(ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept);
-                if (result)
+        {
+            var resultValidation = false;
+            foreach (var item in TLPPopupBindingGroup.BindingExpressions)
+            {
+                item.UpdateSource();
+                if (item.HasValidationError)
                 {
-                    ViewModel.ClosePopup();
-                    System.Windows.MessageBox.Show("添加成功！");
-                    GetTeams();
+                    resultValidation = true;
+                }
+            }
+            if (!resultValidation)
+            {
+                if (ViewModel.CurrentTeam.ID == 0)
+                {
+                    var result = TeamService.CreateTeam(ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept);
+                    if (result)
+                    {
+                        ViewModel.ClosePopup();
+                        System.Windows.MessageBox.Show("添加成功！");
+                        GetTeams();
+                    }
+                    else
+                    {
+                        System.Windows.MessageBox.Show("添加失败！");
+                    }
                 }
                 else
                 {
-                    System.Windows.MessageBox.Show("添加失败！");
+                    var result = TeamService.UpdateTeam(ViewModel.CurrentTeam.ID, ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept);
+                    if (result)
+                    {
+                        ViewModel.ClosePopup();
+                        System.Windows.MessageBox.Show("编辑成功！");
+                        GetTeams();
+                    }
+                    else
+                    {
+                        System.Windows.MessageBox.Show("编辑失败！");
+                    }
                 }
             }
-			else
-			{
-				var result = TeamService.UpdateTeam(ViewModel.CurrentTeam.ID, ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept);
-                if (result)
-                {
-                    ViewModel.ClosePopup();
-                    System.Windows.MessageBox.Show("编辑成功！");
-                    GetTeams();
-                }
-                else
-                {
-                    System.Windows.MessageBox.Show("编辑失败！");
-                }
-            }
+            
 		}
 
 		private void NavigateToTeamDetailPage_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)

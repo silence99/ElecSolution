@@ -200,7 +200,7 @@
                         <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Width="88px" Click="EditTeamMember_Handler"/>
                     </DockPanel>
                     <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
-                        <Grid Background="#F3F3F3">
+                        <Grid Background="#F3F3F3" local1:FEExtension.ValidateOnLostFocus="true">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="117px"></RowDefinition>
                                 <RowDefinition Height="88px"></RowDefinition>
@@ -213,18 +213,45 @@
                                 <ColumnDefinition Width="0.15*"/>
                                 <ColumnDefinition Width="0.35*"/>
                             </Grid.ColumnDefinitions>
+                            <Grid.BindingGroup>
+                                <BindingGroup x:Name="TDPPopupBindingGroup" />
+                            </Grid.BindingGroup>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="姓名" Margin="0 22 0 0"/>
                             <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Name="Txt_EditSubEventTitle" Width="260px" Margin="20 18 0 0"  
-                                     Text="{Binding Path=CurrentPerson.Name, Mode=TwoWay}"/>
+                                    Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
+                                <TextBox.Text>
+                                    <Binding Path="CurrentPerson.Name" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <local1:NotNullValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="电话" Margin="0 0 0 0"/>
                             <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Name="Txt_EditTeamAddress" Width="260px" Margin="20 0 0 0"  
-                                      Text="{Binding Path=CurrentPerson.PhoneNumber, Mode=TwoWay}"/>
+                                                               Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
+                                <TextBox.Text>
+                                    <Binding Path="CurrentPerson.PhoneNumber" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <local1:NotNullValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="职位"/>
                             <ComboBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Height="30" VerticalAlignment="Center" Width="260px" HorizontalAlignment="Left" Margin="20 0 0 0"
                                       ItemsSource="{Binding Path=Places}"
                                       DisplayMemberPath="Name"
-                                      SelectedValue="{Binding CurrentPerson.Place}"
-                                      SelectedValuePath="Value"/>
+                                      SelectedValuePath="Value"
+                                      Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
+                                <ComboBox.SelectedValue>
+                                    <Binding Path="CurrentPerson.Place" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <local1:NotNullValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </ComboBox.SelectedValue>
+                            </ComboBox>
                         </Grid>
                     </Border>
                 </Grid>

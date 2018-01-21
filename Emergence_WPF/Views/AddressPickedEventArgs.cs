@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Emergence_WPF.Views
+namespace Emergence_WPF
 {
 	public class AddressPickedEventArgs
 	{

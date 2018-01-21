@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 
-namespace Emergence_WPF.Views
+namespace Emergence_WPF
 {
 	/// <summary>
 	/// AddressPickerV2.xaml 的交互逻辑
@@ -40,12 +40,17 @@ namespace Emergence_WPF.Views
 
 		private void OKButton_Click(object sender, RoutedEventArgs e)
 		{
-			if (!string.IsNullOrEmpty(PickedAddress))
-			{
-				AddressPickedEvent?.Invoke(new AddressPickedEventArgs() { Address = PickedAddress, Coordinate = PickedCoordinate });
-			}
-			this.Close();
-		}
+            if (!string.IsNullOrEmpty(PickedAddress))
+            {
+                AddressPickedEvent?.Invoke(new AddressPickedEventArgs() { Address = PickedAddress, Coordinate = PickedCoordinate });
+                this.Close();
+
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("请选择地址！");
+            }
+        }
 
 		private void CancelButton_Click(object sender, RoutedEventArgs e)
 		{

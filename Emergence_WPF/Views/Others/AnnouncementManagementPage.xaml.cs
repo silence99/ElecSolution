@@ -57,5 +57,23 @@ namespace Emergence_WPF
             }
             while (parent != null);
         }
+
+        private void Button_AMEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var result = false;
+            foreach (var item in AMPPopupBindingGroup.BindingExpressions)
+            {
+                item.UpdateSource();
+                if (item.HasValidationError)
+                {
+                    result = true;
+                }
+            }
+            if (!result)
+            {
+                this.ViewModel.UpdateCommand.Execute();
+            }
+            
+        }
     }
 }

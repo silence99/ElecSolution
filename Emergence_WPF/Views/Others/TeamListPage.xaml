@@ -55,56 +55,6 @@
                 </Grid>
             </Border>
         </DockPanel>
-        <!--<DockPanel Grid.Column="0" Grid.Row="1" Background="White" IsEnabled="{Binding Path=IsPageEnabled}">
-            <DockPanel.Style>
-                <Style TargetType="DockPanel">
-                    <Style.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Background" Value="Black"/>
-                            <Setter Property="Opacity" Value="0.7"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </DockPanel.Style>
-            <Border DockPanel.Dock="Top" Margin="20, 21, 20, 20" CornerRadius="10">
-                <Border.Effect>
-                    <DropShadowEffect ShadowDepth="0" BlurRadius="10" Opacity="0.75"/>
-                </Border.Effect>
-                <DockPanel Margin="0,0,0,0">
-                    <DockPanel Height="60" HorizontalAlignment="Stretch" Name="head" DockPanel.Dock="Top" Background="#CCE2E1">
-                        <TextBlock FontSize="20" DockPanel.Dock="Left" TextAlignment="Center" HorizontalAlignment="Left" Margin="51,15,0,0" Foreground="Black">搜索</TextBlock>
-                        <Button Name="BtnSearch" FontSize="16" Width="132" Height="36" Background="#006f69" DockPanel.Dock="Left" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,51,0" Foreground="White" Content="搜索" Click="Search_Handler"></Button>
-                    </DockPanel>
-                    <Grid ShowGridLines="False" Name="GridSearchBlock" DockPanel.Dock="Top" Background="White">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="100"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="211*"></ColumnDefinition>
-                            <ColumnDefinition Width="165*"/>
-                            <ColumnDefinition Width="309*"></ColumnDefinition>
-                            <ColumnDefinition Width="30*"/>
-                            <ColumnDefinition Width="37*"/>
-                            <ColumnDefinition Width="376*"></ColumnDefinition>
-                            <ColumnDefinition Width="376*"></ColumnDefinition>
-                            <ColumnDefinition Width="376*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" >
-                            <TextBlock Text="队伍名称" HorizontalAlignment="Left" Padding="0,5,5,5" Margin="20,37,10,0"/>
-                            <TextBox Name="QueryTeamName" Text="{Binding Path=QueryTeamName, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5" VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="3" >
-                            <TextBlock Text="所属单位" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
-                            <TextBox Name="QueryDepartment" Text="{Binding Path=QueryDepartment, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Stretch"  Grid.Column="5" Grid.Row="0" >
-                            <TextBlock Text="队长" HorizontalAlignment="Left" Padding="0,5,5,5"  Margin="20,37,10,0"/>
-                            <TextBox Name="QueryChargeName" Text="{Binding Path=QueryChargeName, Mode=TwoWay}" Height="34" Width="Auto" MinWidth="100" Margin="0,5,0,5"  VerticalContentAlignment="Center"/>
-                        </StackPanel>
-                    </Grid>
-                </DockPanel>
-            </Border>
-        </DockPanel>-->
         <DockPanel DockPanel.Dock="Top" Grid.Row="2" Background="White" Name="PanelData" IsEnabled="{Binding Path=IsPageEnabled}">
             <DockPanel Margin="20,0,20,0"  DockPanel.Dock="Top" >
                 <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
@@ -186,7 +136,7 @@
                         </Button>
                     </DockPanel>
                     <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
-                        <Grid Background="#F3F3F3">
+                        <Grid Background="#F3F3F3" local1:FEExtension.ValidateOnLostFocus="true">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="117px"></RowDefinition>
                                 <RowDefinition Height="88px"></RowDefinition>
@@ -199,9 +149,20 @@
                                 <ColumnDefinition Width="0.15*"/>
                                 <ColumnDefinition Width="0.35*"/>
                             </Grid.ColumnDefinitions>
+                            <Grid.BindingGroup>
+                                <BindingGroup x:Name="TLPPopupBindingGroup" />
+                            </Grid.BindingGroup>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="队伍名称" Margin="0 22 0 0"/>
                             <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventTitle" Width="458px" Margin="20 18 0 0"  
-                                     Text="{Binding Path=CurrentTeam.TeamName, Mode=TwoWay}"/>
+                                        Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
+                                <TextBox.Text>
+                                    <Binding Path="CurrentTeam.TeamName" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <local1:NotNullValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="所属单位"/>
                             <ComboBox Grid.Column="1" Grid.Row="1" Height="30" VerticalAlignment="Center" Width="180" HorizontalAlignment="Left" Margin="20 0 0 0"
                                      SelectedValue="{Binding Path=CurrentTeam.TeamDept,Mode=TwoWay}"
@@ -209,49 +170,30 @@
                                      SelectedValuePath="Value"
                                      ItemsSource="{Binding TeamDepts}"/>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="单位地址" Margin="0 0 0 0"/>
-                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditTeamAddress" Width="458px" Margin="20 0 0 0"  
-                                      Text="{Binding Path=CurrentTeam.teamDeptLocale, Mode=TwoWay}"/>
+                            <!--<TextBox Style="{StaticResource PopupTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditTeamAddress" Width="458px" Margin="20 0 0 0"  
+                                         Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
+                                <TextBox.Text>
+                                    <Binding Path="CurrentTeam.teamDeptLocale" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <local1:NotNullValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>-->
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditTeamAddress" Width="458px" Margin="20 18 0 0"  
+                                        Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
+                                <TextBox.Text>
+                                    <Binding Path="CurrentTeam.teamDeptLocale" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <local1:NotNullValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </Grid>
                     </Border>
                 </Grid>
             </Grid>
         </Popup>
-        <!--<Popup 
-            x:Name="PopupEditTeam1" 
-            Width="{Binding Path=PopupWidth}" 
-            Height="{Binding Path= PopupHeight}"  
-            StaysOpen="True"   
-            IsOpen="{Binding Path=IsPopoupOpen}"   
-            AllowsTransparency="True"  
-            PopupAnimation="Slide"  
-            PlacementTarget="{Binding ElementName=PanelData}"  
-            Placement="Center">
-            <DockPanel Background="White">
-                <DockPanel DockPanel.Dock="Top" Height="40">
-                    <Label Style="{StaticResource PopupLable}" Width="40" Content="X" HorizontalAlignment="Left" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" MouseLeftButtonUp="ClosePopup_Handler"/>
-                    <Border Width="1" BorderThickness="1" BorderBrush="#D9D9D9" Margin="0,0,0,0" HorizontalAlignment="Left"/>
-                    <Label Style="{StaticResource PopupLable}" Content="添加队伍" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
-                    <Button Content="完成" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,40,0" Width="40" Click="Update_Handler"/>
-                </DockPanel>
-                <Border Margin="2,0,0,0" Background="#F3F3F3" BorderThickness="1">
-                    <StackPanel Orientation="Vertical">
-                        <DockPanel Height="60" VerticalAlignment="Top">
-                            <Label Style="{StaticResource PopupLable}" Content="队伍名称" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5,20,0,0" Text="{Binding Path=CurrentTeam.TeamName, Mode=TwoWay}"/>
-                            <Label Style="{StaticResource PopupLable}" Content="所属单位" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,0"/>
-                            <ComboBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5, 20, 0, 0"
-                                     SelectedValue="{Binding Path=CurrentTeam.TeamDept,Mode=TwoWay}"
-                                     DisplayMemberPath="Name"
-                                     SelectedValuePath="Value"
-                                     ItemsSource="{Binding TeamDepts,Mode=TwoWay}"/>
-                        </DockPanel>
-                        <DockPanel Height="60" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,20,0,0">
-                            <Label Style="{StaticResource PopupLable}" Content="单位地址" Height="30" Width="60" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,0,0,0"/>
-                            <TextBox Height="30" VerticalAlignment="Top" Width="120" HorizontalAlignment="Left" Margin="5, 0, 0, 0" Text="{Binding Path=CurrentTeam.teamDeptLocale, Mode=TwoWay}"/>
-                        </DockPanel>
-                    </StackPanel> 
-                </Border>
-            </DockPanel>
-        </Popup>-->
     </Grid>
 </Page>

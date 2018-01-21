@@ -239,5 +239,23 @@ namespace Emergence_WPF
             }
             while (parent != null);
         }
+
+        private void Button_MNPPopupEdit_Click(object sender, RoutedEventArgs e)
+        {
+            var result = false;
+            foreach (var item in MNPPopupBindingGroup.BindingExpressions)
+            {
+                item.UpdateSource();
+                if (item.HasValidationError)
+                {
+                    result = true;
+                }
+            }
+            if (!result)
+            {
+                this.ViewModel.AddMemberCommand.Execute();
+            }
+            
+        }
     }
 }

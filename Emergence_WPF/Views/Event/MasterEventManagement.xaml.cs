@@ -20,17 +20,17 @@ namespace Emergence_WPF
     /// Interaction logic for MasterEventManagement.xaml
     /// </summary>
     public partial class MasterEventManagement : Page
-	{
-		VM_MasterEventManagement ViewModel { get; set; }
-		MasterEventService MasterEventService { get; set; }
+    {
+        VM_MasterEventManagement ViewModel { get; set; }
+        MasterEventService MasterEventService { get; set; }
 
 
         public MasterEventManagement()
-		{
-			InitializeComponent();
-			ViewModel = new VM_MasterEventManagement().CreateAopProxy();
-			DataContext = ViewModel;
-		}
+        {
+            InitializeComponent();
+            ViewModel = new VM_MasterEventManagement().CreateAopProxy();
+            DataContext = ViewModel;
+        }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -57,14 +57,14 @@ namespace Emergence_WPF
         }
 
         private void Pager_OnPageChanged(object sender, PageChangedEventArg e)
-		{
-			ViewModel.SyncData();
+        {
+            ViewModel.SyncData();
         }
 
-		private void Grid_MasterEvent_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			var dg = e.Source as DataGrid;
-			MasterEvent me = dg.SelectedItem as MasterEvent;
+        private void Grid_MasterEvent_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var dg = e.Source as DataGrid;
+            MasterEvent me = dg.SelectedItem as MasterEvent;
             if (me != null && me.ID >= 0)
             {
                 //if (ResolutionService.Width < 1366)
@@ -76,30 +76,30 @@ namespace Emergence_WPF
                 this.NavigationService.Navigate(new MasterEventDetail(me));
                 //}
             }
-		}
+        }
 
-		private void masterEventSearchButton2_Click(object sender, RoutedEventArgs e)
-		{
-			Login lg = new Login();
-			lg.Show();
-		}
+        private void masterEventSearchButton2_Click(object sender, RoutedEventArgs e)
+        {
+            Login lg = new Login();
+            lg.Show();
+        }
 
-		private void AddressPopupOpen_Click(object sender, RoutedEventArgs e)
-		{
-			AddressPickerV2 addressPicker = new AddressPickerV2();
-			addressPicker.Width = 600;
-			addressPicker.Height = 500;
-			addressPicker.AddressPickedEvent += PickedAddress;
-			addressPicker.ShowDialog();
-		}
+        private void AddressPopupOpen_Click(object sender, RoutedEventArgs e)
+        {
+            AddressPickerV2 addressPicker = new AddressPickerV2();
+            addressPicker.Width = 600;
+            addressPicker.Height = 550;
+            addressPicker.AddressPickedEvent += PickedAddress;
+            addressPicker.ShowDialog();
+        }
 
-		private void PickedAddress(AddressPickedEventArgs args)
-		{
-			ViewModel.Current.Locale = args.Address;
-			ViewModel.Current.Longitude = args.Coordinate.X.ToString();
-			ViewModel.Current.Latitude = args.Coordinate.Y.ToString();
-		}
-		public void SetPopupToFullScreen()
+        private void PickedAddress(AddressPickedEventArgs args)
+        {
+            ViewModel.Current.Locale = args.Address;
+            ViewModel.Current.Longitude = args.Coordinate.X.ToString();
+            ViewModel.Current.Latitude = args.Coordinate.Y.ToString();
+        }
+        public void SetPopupToFullScreen()
         {
             DependencyObject parent = this.PopupItem.Child;
             do
@@ -117,5 +117,21 @@ namespace Emergence_WPF
             while (parent != null);
         }
 
+        private void Button_CreateMasterEvent_Click(object sender, RoutedEventArgs e)
+        {
+            var result = false;
+            foreach (var item in MEMPopupBindingGroup.BindingExpressions)
+            {
+                item.UpdateSource();
+                if (item.HasValidationError)
+                {
+                    result = true;
+                }
+            }
+            if (!result)
+            {
+                this.ViewModel.CreateCommand.Execute();
+            }
+        }
     }
 }
