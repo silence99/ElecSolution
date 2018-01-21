@@ -236,6 +236,25 @@
             </Style>
         </Style.Resources>
     </Style>
-
+    <ControlTemplate x:Key="ErrorTempalte">
+        <StackPanel Orientation="Horizontal">
+            <StackPanel.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded" SourceName="bd">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="bd" Storyboard.TargetProperty="RenderTransform.ScaleX" From="0" To="1" Duration="0:0:0.2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </StackPanel.Triggers>
+            <AdornedElementPlaceholder/>
+            <Border CornerRadius="3" BorderBrush="DarkMagenta" Background="#AAFF0000" BorderThickness="1" Padding="5 2" x:Name="bd">
+                <Border.RenderTransform>
+                    <ScaleTransform/>
+                </Border.RenderTransform>
+                <TextBlock Foreground="White" VerticalAlignment="Center" Text="{Binding Path=/ErrorContent}"/>
+            </Border>
+        </StackPanel>
+    </ControlTemplate>
     <SolidColorBrush Color="#000000" Opacity="0.5" x:Key="OpacityBrush"/>
 </ResourceDictionary>

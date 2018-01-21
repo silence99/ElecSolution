@@ -220,7 +220,8 @@ namespace Emergence_WPF
             while (parent != null);
             ViewModel.IsAddMember = true;
 			ViewModel.PopupTeamEdit();
-		}
+            SetPopupToFullScreen();
+        }
 
 		private void Edit_Handler(object sender, RoutedEventArgs e)
 		{
@@ -241,7 +242,8 @@ namespace Emergence_WPF
             while (parent != null);
             ViewModel.IsAddMember = false;
 			ViewModel.PopupTeamEdit();
-		}
+            SetPopupToFullScreen();
+        }
 
 		private void Click_SearchTextBox(object sender, RoutedEventArgs e)
 		{
@@ -280,37 +282,49 @@ namespace Emergence_WPF
 			{
 				GotoEditModel();
 			}
-
-		}
+        }
 
 		private void EditTeamMember_Handler(object sender, RoutedEventArgs e)
-		{
-			if (ViewModel.IsAddMember)
-			{
-				var result = TeamService.CreateTeamMember(ViewModel.ID.ToString(), ViewModel.CurrentPerson.Name, ViewModel.CurrentPerson.PhoneNumber, ViewModel.CurrentPerson.Place);
-                if (result)
+        {
+            var result1 = false;
+            foreach (var item in TDPPopupBindingGroup.BindingExpressions)
+            {
+                item.UpdateSource();
+                if (item.HasValidationError)
                 {
-                    ViewModel.ClosePopup();
-                    System.Windows.MessageBox.Show("添加成功！");
-                    SyncTeamMembers();
+                    result1 = true;
+                }
+            }
+            if (!result1)
+            {
+
+                if (ViewModel.IsAddMember)
+                {
+                    var result = TeamService.CreateTeamMember(ViewModel.ID.ToString(), ViewModel.CurrentPerson.Name, ViewModel.CurrentPerson.PhoneNumber, ViewModel.CurrentPerson.Place);
+                    if (result)
+                    {
+                        ViewModel.ClosePopup();
+                        System.Windows.MessageBox.Show("添加成功！");
+                        SyncTeamMembers();
+                    }
+                    else
+                    {
+                        System.Windows.MessageBox.Show("添加失败！");
+                    }
                 }
                 else
                 {
-                    System.Windows.MessageBox.Show("添加失败！");
-                }
-			}
-			else
-			{
-                var result = TeamService.UpdateTeamMember(ViewModel.CurrentPerson.ID, ViewModel.ID.ToString(), ViewModel.CurrentPerson.Name, ViewModel.CurrentPerson.PhoneNumber, ViewModel.CurrentPerson.Place);
-                if (result)
-                {
-                    ViewModel.ClosePopup();
-                    System.Windows.MessageBox.Show("编辑成功！");
-                    SyncTeamMembers();
-                }
-                else
-                {
-                    System.Windows.MessageBox.Show("编辑失败！");
+                    var result = TeamService.UpdateTeamMember(ViewModel.CurrentPerson.ID, ViewModel.ID.ToString(), ViewModel.CurrentPerson.Name, ViewModel.CurrentPerson.PhoneNumber, ViewModel.CurrentPerson.Place);
+                    if (result)
+                    {
+                        ViewModel.ClosePopup();
+                        System.Windows.MessageBox.Show("编辑成功！");
+                        SyncTeamMembers();
+                    }
+                    else
+                    {
+                        System.Windows.MessageBox.Show("编辑失败！");
+                    }
                 }
             }
 		}
@@ -365,6 +379,24 @@ namespace Emergence_WPF
         private bool CheckString(string str, int minStrLength, int maxStrLength)
         {
             return !string.IsNullOrEmpty(str) && str.Length >= minStrLength && str.Length <= maxStrLength;
+        }
+
+        public void SetPopupToFullScreen()
+        {
+            DependencyObject parent = this.PopupEditTeamMember.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
         }
     }
 }

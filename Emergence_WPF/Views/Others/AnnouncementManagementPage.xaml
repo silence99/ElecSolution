@@ -111,11 +111,11 @@
                         <Button Style="{StaticResource CancelImageButton}" Command="{Binding Path=PopupCloseCommand}" DockPanel.Dock="Left" Margin="19 0 19 0" />
                         <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
                         <Label Style="{StaticResource RightLabel}" FontSize="20px"  DockPanel.Dock="Left" Content="添加公告" Margin="19 0 0 0"/>
-                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Width="88px" Command="{Binding Path=UpdateCommand}">
+                        <Button Style="{StaticResource RoundConnerButton}" Name="Button_AMEdit" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Width="88px" Click="Button_AMEdit_Click">
                         </Button>
                     </DockPanel>
                     <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
-                        <Grid Background="#F3F3F3">
+                        <Grid Background="#F3F3F3" local1:FEExtension.ValidateOnLostFocus="true">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="117px"></RowDefinition>
                                 <RowDefinition Height="88px"></RowDefinition>
@@ -128,15 +128,26 @@
                                 <ColumnDefinition Width="0.15*"/>
                                 <ColumnDefinition Width="0.35*"/>
                             </Grid.ColumnDefinitions>
+                            <Grid.BindingGroup>
+                                <BindingGroup x:Name="AMPPopupBindingGroup" />
+                            </Grid.BindingGroup>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="标题" Margin="0 22 0 0"/>
                             <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditNotiTitle" Width="458px" Margin="20 18 0 0"  
-                                     Text="{Binding Path=Current.Title, Mode=TwoWay}"/>
+                                            Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
+                                <TextBox.Text>
+                                    <Binding Path="Current.Title" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <local1:NotNullValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="时间"/>
                             <!--<TextBox Style="{StaticResource PopupTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditNotiTime" Width="458px" Margin="20 18 0 0"  
                                      Text="{Binding Path=Current.Time, Mode=TwoWay}"/>-->
                             <DatePicker x:Name="datePickerAnn" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Width="200px" Height="34" FontSize="20"  Margin="20 0 0 0"  HorizontalAlignment="Left"
-                                FirstDayOfWeek="Monday" SelectedDate="{Binding Path=Current.Time, Mode=TwoWay}" SelectedDateFormat="Short"
-                                IsTodayHighlighted="True" >
+                                FirstDayOfWeek="Monday" SelectedDateFormat="Short" DatePicker.SelectedDate="{Binding Path=Current.Time}"
+                                IsTodayHighlighted="True">
                                 <DatePicker.Resources>
                                     <Style TargetType="DatePickerTextBox">
                                         <Setter Property="IsReadOnly" Value="True"/>
@@ -149,7 +160,15 @@
                             </DatePicker>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="内容" Margin="0 0 0 0"/>
                             <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" Name="Txt_EditNotiContent" Width="458px" VerticalAlignment="Top" Margin="20 30 0 0"  
-                                      Text="{Binding Path=Current.Content, Mode=TwoWay}"/>
+                                Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
+                                <TextBox.Text>
+                                    <Binding Path="Current.Content" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <local1:NotNullValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
                         </Grid>
                     </Border>
                 </Grid>

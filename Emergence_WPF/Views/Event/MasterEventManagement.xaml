@@ -2,7 +2,7 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"              
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Emergence_WPF.Comm"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:views="clr-namespace:Emergence_WPF.Views"
@@ -246,12 +246,11 @@
                             <Button Style="{StaticResource CancelImageButton}" Command="{Binding Path=PopupCloseCommand}" DockPanel.Dock="Left" Margin="19 0 19 0" />
                             <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
                             <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" Content="{Binding Path=SubEventEditPopup.PopupName}" Margin="19 0 0 0"/>
-                            <Button Content="完成" FontSize="16" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,36,0" Width="88" Height="36" Background="#006f69" Foreground="White" Command="{Binding Path=CreateCommand}">
-
-                            </Button>
+                            <Button Content="完成" Name="Button_CreateMasterEvent" FontSize="16" Style="{StaticResource RoundConnerButtonStyle}" HorizontalAlignment="Right" Margin="0,0,36,0" Width="88" Height="36" Background="#006f69" Foreground="White" Click="Button_CreateMasterEvent_Click" />
+                            <!--Command="{Binding Path=CreateCommand}">-->
                         </DockPanel>
                         <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
-                            <Grid Background="#F3F3F3">
+                            <Grid Background="#F3F3F3" local:FEExtension.ValidateOnLostFocus="true">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="87px"></RowDefinition>
                                     <RowDefinition Height="68px"></RowDefinition>
@@ -264,9 +263,20 @@
                                     <ColumnDefinition Width="0.15*"/>
                                     <ColumnDefinition Width="0.35*"/>
                                 </Grid.ColumnDefinitions>
+                                <Grid.BindingGroup>
+                                    <BindingGroup x:Name="MEMPopupBindingGroup" />
+                                </Grid.BindingGroup>
                                 <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="标题" Margin="0 22 0 0"/>
                                 <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventTitle" Width="436px" Margin="20 18 0 0"  
-                                     Text="{Binding Path=Current.Title, Mode=TwoWay}"/>
+                                     Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
+                                    <TextBox.Text>
+                                        <Binding Path="Current.Title" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <local:NotNullValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
                                 <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="类型"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" Height="30" VerticalAlignment="Top" Width="160" HorizontalAlignment="Left" Margin="20 20, 0, 0" 
                                       Text="{Binding Path=Current.EventTypeName, Mode=TwoWay}" 
@@ -293,11 +303,29 @@
                                         <Button Style="{StaticResource AddressImageButton}" Grid.Column="1" Click="AddressPopupOpen_Click">
 
                                         </Button>
-                                        <TextBox Name="SubEventEditAddressTextBox" Grid.Column="0" Style="{StaticResource ImageTextBox}" Text="{Binding Path=Current.Locale, Mode=TwoWay}" Margin="0 0 0 0" HorizontalAlignment="Stretch"></TextBox>
+                                        <TextBox Name="SubEventEditAddressTextBox" Grid.Column="0" Style="{StaticResource ImageTextBox}"  Margin="0 0 0 0" HorizontalAlignment="Stretch"
+                                                 Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
+                                            <TextBox.Text>
+                                                <Binding Path="Current.Locale" Mode="TwoWay">
+                                                    <Binding.ValidationRules>
+                                                        <local:NotNullValidationRule/>
+                                                    </Binding.ValidationRules>
+                                                </Binding>
+                                            </TextBox.Text>
+                                        </TextBox>
                                     </Grid>
                                 </Border>
                                 <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="3" Grid.Column="0" Content="描述" VerticalAlignment="Top" Margin="0 19 0 0"/>
-                                <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventRemark" Width="438px" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20 17 0 0"  Text="{Binding Path=Current.Remarks,Mode=TwoWay}"/>
+                                <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventRemark" Width="438px" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20 17 0 0" 
+                                         Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
+                                    <TextBox.Text>
+                                        <Binding Path="Current.Remarks" Mode="TwoWay">
+                                            <Binding.ValidationRules>
+                                                <local:NotNullValidationRule/>
+                                            </Binding.ValidationRules>
+                                        </Binding>
+                                    </TextBox.Text>
+                                </TextBox>
                             </Grid>
                         </Border>
                     </Grid>

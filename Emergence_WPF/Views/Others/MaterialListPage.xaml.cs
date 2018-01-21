@@ -86,6 +86,11 @@ namespace Emergence_WPF
 			ViewModel.IsCreateMaterial = true;
 			ViewModel.PopupTitle = "添加物资";
 			ViewModel.CurrentMaterial = new MaterialModel().CreateAopProxy();
+            ViewModel.CurrentMaterial.MaterialsType = ViewModel.MaterialTypes == null || ViewModel.MaterialTypes.Count == 0 ? "" : ViewModel.MaterialTypes[0].Value;
+            ViewModel.CurrentMaterial.MaterialsDept = ViewModel.MaterialDepts == null || ViewModel.MaterialDepts.Count == 0 ? "" : ViewModel.MaterialDepts[0].Value;
+            ViewModel.CurrentMaterial.IsConsumable = ViewModel.IsConsumableEnums == null || ViewModel.IsConsumableEnums.Count == 0 ? "" : ViewModel.IsConsumableEnums[0].Value;
+            ViewModel.CurrentMaterial.IsBigMaterials = ViewModel.IsBigEnums == null || ViewModel.IsBigEnums.Count == 0 ? "" : ViewModel.IsBigEnums[0].Value;
+            ViewModel.PopupTeamEdit();
             DependencyObject parent = this.PopupEditMaterial.Child;
             do
             {
@@ -101,11 +106,9 @@ namespace Emergence_WPF
             }
             while (parent != null);
 
-            ViewModel.PopupTeamEdit();
-            FullPageEditPopup();
         }
 
-		private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
 		{
 			var ids = ViewModel.Materials.Where(m => m.IsChecked).Select(m => m.ID.ToString()).ToList();
 			if (ids != null && ids.Count > 0)
@@ -113,7 +116,8 @@ namespace Emergence_WPF
 				if (Service.DeleteMaterial(ids))
 				{
 					System.Windows.MessageBox.Show("删除成功");
-				}
+                    SyncMaterials();
+                }
 				else
 				{
 					System.Windows.MessageBox.Show("删除失败");
@@ -123,7 +127,6 @@ namespace Emergence_WPF
 			{
 				System.Windows.MessageBox.Show("没有选择要删除的物资");
 			}
-			SyncMaterials();
 		}
 
 		private void BtnImport_Click(object sender, RoutedEventArgs e)
@@ -333,18 +336,46 @@ namespace Emergence_WPF
         }
 
 		private void UpdateMaterial_Click(object sender, RoutedEventArgs e)
-		{
-			ViewModel.ClosePopup();
-			if (ViewModel.IsCreateMaterial)
-			{
-				Service.CreateMaterial(ViewModel.CurrentMaterial);
-			}
-			else
-			{
-				Service.UpdateMaterial(ViewModel.CurrentMaterial);
-			}
-
-			SyncMaterials();
+        {
+            var result = false;
+            foreach (var item in MLPPopupBindingGroup.BindingExpressions)
+            {
+                item.UpdateSource();
+                if (item.HasValidationError)
+                {
+                    result = true;
+                }
+            }
+            if (!result)
+            {
+                ViewModel.ClosePopup();
+                if (ViewModel.IsCreateMaterial)
+                {
+                    var results = Service.CreateMaterial(ViewModel.CurrentMaterial);
+                    if (results)
+                    {
+                        System.Windows.MessageBox.Show("添加成功！");
+                        SyncMaterials();
+                    }
+                    else
+                    {
+                        System.Windows.MessageBox.Show("添加失败！");
+                    }
+                }
+                else
+                {
+                    var results = Service.UpdateMaterial(ViewModel.CurrentMaterial);
+                    if (results)
+                    {
+                        System.Windows.MessageBox.Show("修改成功！");
+                        SyncMaterials();
+                    }
+                    else
+                    {
+                        System.Windows.MessageBox.Show("修改失败！");
+                    }
+                }
+            }
 		}
 
         private void ClosePopup_Click(object sender, RoutedEventArgs e)
