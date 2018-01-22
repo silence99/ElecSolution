@@ -131,19 +131,34 @@ namespace Emergence_WPF
 
 		private void DisplayVideos(CameraModel[] videos)
 		{
-			VideosContainer.Children.Clear();
 			if (videos != null)
 			{
-				foreach (var item in videos)
+				for (int i = 0; i < 4; i++)
 				{
-					Video video = new Video();
-					VideosContainer.Children.Add(video);
-					video.SetValue(DockPanel.DockProperty, Dock.Top);
-					video.Margin = new System.Windows.Thickness(5, 5, 5, 5);
-					video.Width = (ResolutionService.Width * 1.5 / 7) - 10;
-					video.Height = video.Width * 3 / 4 - 10;
-					video.Url = item.Url;
+					if (i < videos.Length)
+					{
+						Video video = new Video();
+						var container = GetContainer(i);
+						container.Child = null;
+						container.Child = video;
+						video.SetValue(DockPanel.DockProperty, Dock.Top);
+						video.Url = videos[i].Url;
+						video.Height = container.ActualHeight;
+						video.Width = container.ActualWidth;
+					}
 				}
+			}
+		}
+
+		private Border GetContainer(int i)
+		{
+			switch (i)
+			{
+				case 0: return V0Container;
+				case 1: return V1Container;
+				case 2: return V2Container;
+				case 3: return V3Container;
+				default: return V0Container;
 			}
 		}
 	}

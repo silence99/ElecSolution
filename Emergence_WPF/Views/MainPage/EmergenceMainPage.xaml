@@ -131,10 +131,22 @@
                 </StackPanel.Background>
                 <TextBlock Margin="10,13,0,0" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top">视频资料</TextBlock>
             </StackPanel>
-            <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="0,0,0,0">
-                <DockPanel Name="VideosContainer" Margin="0,0,0,0" LastChildFill="False">
-                </DockPanel>
-            </ScrollViewer>
+            <Grid DockPanel.Dock="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Margin="3" CornerRadius="10" Name="V0Container">
+                </Border>
+                <Border Grid.Row="1" Margin="3" CornerRadius="10" Name="V1Container">
+                </Border>
+                <Border Grid.Row="2" Margin="3" CornerRadius="10" Name="V2Container">
+                </Border>
+                <Border Grid.Row="3" Margin="3" CornerRadius="10" Name="V3Container">
+                </Border>
+            </Grid>
         </DockPanel>
 
         <DockPanel Grid.Row="0" Grid.Column="1" Margin="5,10,5,5" Background="#242424">
