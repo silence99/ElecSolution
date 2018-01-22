@@ -68,6 +68,7 @@
     <Compile Include="Model\TeamModel.cs" />
     <Compile Include="Model\MaterialsStatisticsModel.cs" />
     <Compile Include="Model\TeamStatisticsModel.cs" />
+    <Compile Include="Model\Vedio.cs" />
     <Compile Include="Model\Weather.cs" />
     <Compile Include="Model\RequestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

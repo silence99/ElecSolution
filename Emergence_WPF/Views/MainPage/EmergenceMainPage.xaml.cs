@@ -1,9 +1,7 @@
-﻿using Business.Services;
-using Busniess.Services;
+﻿using Busniess.Services;
 using Emergence.Business.ViewModel;
 using Emergence.Common.Model;
 using Emergence_WPF.Util;
-using Emergence_WPF.Views;
 using Framework;
 using System;
 using System.Collections.ObjectModel;
@@ -115,7 +113,7 @@ namespace Emergence_WPF
 					cameras = camerasData.Data;
 				}
 
-				DisplayVideos(cameras);
+				ViewModel.CurrentMasterEventVideos = new ObservableCollection<CameraModel>(cameras.Select(it=>it.CreateAopProxy()));
 
 				foreach (var item in subevents)
 				{
