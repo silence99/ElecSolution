@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using Emergence_WPF.Views;
 
 namespace Emergence_WPF
 {
@@ -24,6 +25,11 @@ namespace Emergence_WPF
 
 			ViewModel = new MainWindowViewModel().CreateAopProxy();
 			DataContext = ViewModel;
+			if (DataGrid_MasterEvent.Items.Count > 0)
+			{
+				DataGridRow row = (DataGridRow)DataGrid_MasterEvent.ItemContainerGenerator.ContainerFromIndex(0);
+				row.IsSelected = true;
+			}
 		}
 
 		public EmergenceMainPage(bool isShowMaxPop) : this()
@@ -67,6 +73,11 @@ namespace Emergence_WPF
 			var tempWidth = this.map.ActualWidth;
 			var tempHeight = this.map.ActualHeight;
 			this.MainPageSelectMapPopup.HorizontalOffset = tempWidth - 250;
+			if (DataGrid_MasterEvent.Items.Count > 0)
+			{
+				DataGridRow row = (DataGridRow)DataGrid_MasterEvent.ItemContainerGenerator.ContainerFromIndex(0);
+				row.IsSelected = true;
+			}
 		}
 
 		#region for temp
@@ -113,7 +124,8 @@ namespace Emergence_WPF
 					cameras = camerasData.Data;
 				}
 
-				ViewModel.CurrentMasterEventVideos = new ObservableCollection<CameraModel>(cameras.Select(it=>it.CreateAopProxy()));
+				ViewModel.CurrentMasterEventVideos = new ObservableCollection<CameraModel>(cameras.Select(it => it.CreateAopProxy()));
+				DisplayVideos(cameras);
 
 				foreach (var item in subevents)
 				{
@@ -158,6 +170,18 @@ namespace Emergence_WPF
 				case 3: return V3Container;
 				default: return V0Container;
 			}
+		}
+
+		public void Play(int index, string url)
+		{
+			Video video = new Video();
+			var container = GetContainer(index);
+			container.Child = null;
+			container.Child = video;
+			video.SetValue(DockPanel.DockProperty, Dock.Top);
+			video.Url = url;
+			video.Height = container.ActualHeight;
+			video.Width = container.ActualWidth;
 		}
 	}
 }
