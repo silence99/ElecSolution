@@ -85,7 +85,9 @@
 
         //清除覆盖物
         function removeOverlay() {
-            map.clearOverlays();
+            if (map && map.clearOverlays) {
+                map.clearOverlays();
+            }
         }
 
         //移动到某一点

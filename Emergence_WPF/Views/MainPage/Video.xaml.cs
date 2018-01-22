@@ -66,7 +66,6 @@ namespace Emergence_WPF
 		{
 			InitializeComponent();
 			VideoPlay.EndInit();
-			VideoPlay.BackgroundImage = System.Drawing.Image.FromFile(VideoViewModel.DefaultImageUri);
 		}
 
 		private void MediaPlayer_TimeChanged(object sender, Vlc.DotNet.Core.VlcMediaPlayerTimeChangedEventArgs e)
