@@ -190,8 +190,8 @@ namespace Busniess.Services
 														{ "materialsNumber", model.MaterialsNumber },
 														{ "materialsType", model.MaterialsType },
 														{ "materialsDept", model.MaterialsDept },
-														{ "consumables", model.IsConsumable.ToString() },
-														{ "bigMaterials", model.IsBigMaterials.ToString() },
+														{ "consumables", model.IsConsumable.ToString() == "是" ? "1" : "0" },
+														{ "bigMaterials", model.IsBigMaterials.ToString() == "是" ? "1" : "0" },
 														{ "totalQuantity", model.TotalQuantity.ToString() }
 													};
 
@@ -237,17 +237,17 @@ namespace Busniess.Services
 				}
 
 				string serviceName = ConfigurationManager.AppSettings["materialUpdateApi"] ?? "materials";
-				Dictionary<string, string> pairs = new Dictionary<string, string>()
-												{
-													{ "id", model.ID.ToString() },
-													{ "materialsName", model.MaterialsName },
-													{ "materialsNumber", model.MaterialsNumber },
-													{ "materialsType", model.MaterialsType },
-													{ "materialsDept", model.MaterialsDept },
-													{ "consumables", model.IsConsumable.ToString() },
-													{ "bigMaterials", model.IsBigMaterials.ToString() },
-													{ "totalQuantity", model.TotalQuantity.ToString() }
-												};
+                Dictionary<string, string> pairs = new Dictionary<string, string>()
+                                                {
+                                                    { "id", model.ID.ToString() },
+                                                    { "materialsName", model.MaterialsName },
+                                                    { "materialsNumber", model.MaterialsNumber },
+                                                    { "materialsType", model.MaterialsType },
+                                                    { "materialsDept", model.MaterialsDept },
+                                                        { "consumables", model.IsConsumable.ToString() == "是" ? "1" : "0" },
+                                                        { "bigMaterials", model.IsBigMaterials.ToString() == "是" ? "1" : "0" },
+                                                    { "totalQuantity", model.TotalQuantity.ToString() }
+                };
 
 				Logger.DebugFormat("更新物资 -- {0}", model.MaterialsName);
 				var result = RequestControl.Request(serviceName, "PUT", pairs);

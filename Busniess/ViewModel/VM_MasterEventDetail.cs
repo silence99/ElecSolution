@@ -250,16 +250,17 @@ namespace Emergence.Business.ViewModel
 					//thisAop.SubEventList.Remove(thisAop.SubEventList.Where(a => a.Id == subEventID).FirstOrDefault());
 					if (ResetSubEventSelectedValue != null)
 					{
-						//if (SubEventList.Count <= 0)
-						//{
-						CleanSubEventDetailBlock();
-						//}
-						//else
-						//{
-						//    ResetSubEventSelectedValue();
-						//}
-					}
-				}
+                        if (SubEventList.Count <= 1)
+                        {
+                            CleanSubEventDetailBlock();
+                            SetSubEventDetailBlockStatus(false);
+                        }
+                        //else
+                        //{
+                        //    ResetSubEventSelectedValue();
+                        //}
+                    }
+                }
 				else
 				{
 					ShowMessageBox("删除子事件失败！");
@@ -707,7 +708,9 @@ namespace Emergence.Business.ViewModel
 			aopVapper.TeamList = new ObservableCollection<TeamModel>();
 			aopVapper.MaterialList = new ObservableCollection<MaterialModel>();
 			SBStatus.ResetSubEventStatus();
-		}
+            aopVapper.SetSubEventDetailBlockStatus(false);
+
+        }
 		private void ShowMessageBox(string value)
 		{
 			System.Windows.MessageBox.Show(value);

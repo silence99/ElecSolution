@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Emergence_WPF.Views
+namespace Emergence_WPF
 {
 	/// <summary>
 	/// Video.xaml 的交互逻辑

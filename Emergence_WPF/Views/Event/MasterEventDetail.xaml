@@ -169,7 +169,7 @@
                     </DataGrid>
                 </DockPanel>
             </Grid>
-            <Grid Name="Grid_Right" Grid.Row="0" Grid.Column="2" IsEnabled="{Binding Path=SubEventDetailBlockStatus}">
+            <Grid Name="Grid_Right" Grid.Row="0" Grid.Column="2" IsEnabled="{Binding Path=SubEventDetailBlockStatus,Mode=TwoWay}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.08*"></RowDefinition>
                     <RowDefinition Height="0.23*"></RowDefinition>

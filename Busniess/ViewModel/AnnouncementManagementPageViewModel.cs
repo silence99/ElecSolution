@@ -87,10 +87,10 @@ namespace Busniess.ViewModel
 				var result = Service.CreateAnnouncement(Current);
                 if(result)
                 {
-                    System.Windows.MessageBox.Show("添加成功！");
                     CleanMessage();
                     PopupCloseAction();
                     GetAnnouncementsAction();
+                    System.Windows.MessageBox.Show("添加成功！");
                 }
                 else
                 {
@@ -102,10 +102,10 @@ namespace Busniess.ViewModel
 				var result = Service.UpdateAnnouncement(Current);
                 if (result)
                 {
-                    System.Windows.MessageBox.Show("编辑成功！");
                     CleanMessage();
                     PopupCloseAction();
                     GetAnnouncementsAction();
+                    System.Windows.MessageBox.Show("编辑成功！");
                 }
                 else
                 {
@@ -127,8 +127,9 @@ namespace Busniess.ViewModel
 
                 if (result)
                 {
-                    System.Windows.MessageBox.Show("删除成功！");
                     GetAnnouncementsAction();
+
+                    System.Windows.MessageBox.Show("删除成功！");
                 }
                 else
                 {

@@ -233,7 +233,7 @@
                                 <TextBox.Text>
                                     <Binding Path="CurrentPerson.PhoneNumber" Mode="TwoWay">
                                         <Binding.ValidationRules>
-                                            <local1:NotNullValidationRule/>
+                                            <local1:IsPhoneNumberValidationRule/>
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </TextBox.Text>

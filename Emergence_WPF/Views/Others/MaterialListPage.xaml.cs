@@ -252,7 +252,7 @@ namespace Emergence_WPF
                     value = sheet.Cells[i, 5].Value;
                     if (value != null && status.Contains(value.ToString()))
                     {
-                        mm.IsConsumableName = value.ToString();
+                        mm.IsConsumableName = value.ToString() == "是" ? "1" : "0";
                     }
                     else
                     {
@@ -264,7 +264,7 @@ namespace Emergence_WPF
                     value = sheet.Cells[i, 6].Value;
                     if (value != null && status.Contains(value.ToString()))
                     {
-                        mm.IsBigMaterialsName = value.ToString();
+                        mm.IsBigMaterialsName = value.ToString() == "是" ? "1" : "0";
                     }
                     else
                     {

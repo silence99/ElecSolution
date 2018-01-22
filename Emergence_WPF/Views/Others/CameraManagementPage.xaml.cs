@@ -82,7 +82,8 @@ namespace Emergence_WPF
                     System.Windows.MessageBox.Show("Excel文件格式不正确!");
                     return;
                 }
-                if (!sheet.Cells[1, 1].Value.Equals("编号") ||
+                if ((sheet.Cells[1, 1].Value != null && sheet.Cells[1, 2].Value != null && sheet.Cells[1, 3].Value != null && sheet.Cells[1, 4].Value != null && sheet.Cells[1, 5].Value != null && sheet.Cells[1, 6].Value != null && sheet.Cells[1, 7].Value != null && sheet.Cells[1, 8].Value != null && sheet.Cells[1, 9].Value != null && sheet.Cells[1, 10].Value != null) 
+                    && (!sheet.Cells[1, 1].Value.Equals("编号") ||
                      !sheet.Cells[1, 2].Value.Equals("所属单位") ||
                      !sheet.Cells[1, 3].Value.Equals("经度") ||
                      !sheet.Cells[1, 4].Value.Equals("纬度") ||
@@ -91,7 +92,7 @@ namespace Emergence_WPF
                      !sheet.Cells[1, 7].Value.Equals("生产商") ||
                      !sheet.Cells[1, 8].Value.Equals("播放方式") ||
                      !sheet.Cells[1, 9].Value.Equals("播放属性") ||
-                     !sheet.Cells[1, 10].Value.Equals("所属系统"))
+                     !sheet.Cells[1, 10].Value.Equals("所属系统")))
                 {
                     System.Windows.MessageBox.Show("Excel文件格式不正确!");
                     return;

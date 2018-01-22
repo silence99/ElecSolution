@@ -105,9 +105,10 @@ namespace Emergence_WPF
                     System.Windows.MessageBox.Show("Excel文件格式不正确!");
                     return;
                 }
-                if (!sheet.Cells[1, 1].Value.Equals("姓名") ||
+                if ((sheet.Cells[1, 1].Value != null && sheet.Cells[1, 2].Value != null && sheet.Cells[1, 3].Value != null) && 
+                    (!sheet.Cells[1, 1].Value.Equals("姓名") ||
                      !sheet.Cells[1, 2].Value.Equals("手机号") ||
-                     !sheet.Cells[1, 3].Value.Equals("职位"))
+                     !sheet.Cells[1, 3].Value.Equals("职位")))
                 {
                     System.Windows.MessageBox.Show("Excel文件格式不正确!");
                     return;
