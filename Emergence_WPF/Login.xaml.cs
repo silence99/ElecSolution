@@ -64,7 +64,7 @@ namespace Emergence_WPF
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show("登录异常，请重试或联系管理员");
+					MessageBox.Show("登录异常，请重试或联系管理员:"+ex.ToString());
 				}
 			}
 			//#endif

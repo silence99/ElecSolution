@@ -25,21 +25,21 @@ namespace Emergence_WPF
 
 			ViewModel = new MainWindowViewModel().CreateAopProxy();
 			DataContext = ViewModel;
-			if (DataGrid_MasterEvent.Items.Count > 0)
-			{
-				DataGridRow row = (DataGridRow)DataGrid_MasterEvent.ItemContainerGenerator.ContainerFromIndex(0);
-				row.IsSelected = true;
-			}
+			//if (DataGrid_MasterEvent.Items.Count > 0)
+			//{
+			//	DataGridRow row = (DataGridRow)DataGrid_MasterEvent.ItemContainerGenerator.ContainerFromIndex(0);
+			//	row.IsSelected = true;
+			//}
 		}
 
 		public EmergenceMainPage(bool isShowMaxPop) : this()
 		{
 			ViewModel.MainWindowSubTitleVisible = isShowMaxPop ? "Visible" : "Collapsed";
-			if (DataGrid_MasterEvent.Items.Count > 0)
-			{
-				DataGridRow row = (DataGridRow)DataGrid_MasterEvent.ItemContainerGenerator.ContainerFromIndex(0);
-				row.IsSelected = true;
-			}
+			//if (DataGrid_MasterEvent.Items.Count > 0)
+			//{
+			//	DataGridRow row = (DataGridRow)DataGrid_MasterEvent.ItemContainerGenerator.ContainerFromIndex(0);
+			//	row.IsSelected = true;
+			//}
 		}
 
 		private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -73,11 +73,11 @@ namespace Emergence_WPF
 			var tempWidth = this.map.ActualWidth;
 			var tempHeight = this.map.ActualHeight;
 			this.MainPageSelectMapPopup.HorizontalOffset = tempWidth - 250;
-			if (DataGrid_MasterEvent.Items.Count > 0)
-			{
-				DataGridRow row = (DataGridRow)DataGrid_MasterEvent.ItemContainerGenerator.ContainerFromIndex(0);
-				row.IsSelected = true;
-			}
+			//if (DataGrid_MasterEvent.Items.Count > 0)
+			//{
+			//	DataGridRow row = (DataGridRow)DataGrid_MasterEvent.ItemContainerGenerator.ContainerFromIndex(0);
+			//	row.IsSelected = true;
+			//}
 		}
 
 		#region for temp
