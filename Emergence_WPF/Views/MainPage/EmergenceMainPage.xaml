@@ -10,6 +10,7 @@
       xmlns:forms="clr-namespace:Vlc.DotNet.Forms;assembly=Vlc.DotNet.Forms"
       xmlns:wpf="clr-namespace:Vlc.DotNet.Wpf;assembly=Vlc.DotNet.Wpf"
       xmlns:views="clr-namespace:Emergence_WPF.Views"
+      xmlns:ctl="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
       Title="EmergenceMainPage"
@@ -131,7 +132,12 @@
                 </StackPanel.Background>
                 <TextBlock Margin="10,13,0,0" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top">视频资料</TextBlock>
             </StackPanel>
-            <Grid DockPanel.Dock="Top">
+            <Border Margin="0,0,0,10" Name="BorderVideoContainer">
+                <WindowsFormsHost Margin="0">
+                    <ctl:Panel x:Name="VideoContainer" AutoScroll="False"/>
+                </WindowsFormsHost>
+            </Border>
+            <!--<Grid DockPanel.Dock="Top">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -146,7 +152,7 @@
                 </Border>
                 <Border Grid.Row="3" Margin="3" CornerRadius="10" Name="V3Container">
                 </Border>
-            </Grid>
+            </Grid>-->
         </DockPanel>
 
         <DockPanel Grid.Row="0" Grid.Column="1" Margin="5,10,5,5" Background="#242424">

@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using Emergence_WPF.Views;
 using System.Reflection;
 using log4net;
+using System.Drawing;
 
 namespace Emergence_WPF
 {
@@ -28,50 +29,25 @@ namespace Emergence_WPF
 
 			ViewModel = new MainWindowViewModel().CreateAopProxy();
 			DataContext = ViewModel;
-			//if (DataGrid_MasterEvent.Items.Count > 0)
-			//{
-			//	DataGridRow row = (DataGridRow)DataGrid_MasterEvent.ItemContainerGenerator.ContainerFromIndex(0);
-			//	row.IsSelected = true;
-			//}
 		}
 
 		public EmergenceMainPage(bool isShowMaxPop) : this()
 		{
 			ViewModel.MainWindowSubTitleVisible = isShowMaxPop ? "Visible" : "Collapsed";
-			//if (DataGrid_MasterEvent.Items.Count > 0)
-			//{
-			//	DataGridRow row = (DataGridRow)DataGrid_MasterEvent.ItemContainerGenerator.ContainerFromIndex(0);
-			//	row.IsSelected = true;
-			//}
 		}
 
 		private void Page_Loaded(object sender, RoutedEventArgs e)
 		{
 			var svc = ServiceManager.Instance.GetService<MasterEventService>(Constant.Services.MasterEventService);
-			//this.DataCodeing.ItemsSource = svc.GetMasterEventForMainPage();
-			//VideoList.BindingViewModel(svc.GetVideos());
-			//V0.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
-			//V1.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
-			//V2.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
-			//V3.MediaPlayer.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
-			//V0.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
-			//V1.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
-			//V3.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
-			//V2.MediaPlayer.TimeChanged += MediaPlayer_TimeChanged;
-			//V0.MediaPlayer.EndInit();
-			//V1.MediaPlayer.EndInit();
-			//V2.MediaPlayer.EndInit();
-			//V3.MediaPlayer.EndInit();
-
-			//V0.MediaPlayer.Play(new Uri("http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171012/346652/1_rD6ose3DCyObL_YD2m0kuA_media.mp4"));
-			//V1.MediaPlayer.Play(new Uri("http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171013/346830/1_gQFJSGJnYGbRtDUelsgYPw_media.mp4"));
-			//V2.MediaPlayer.Play(new Uri("http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171017/325941/1_7IUPQVtjwGQ5xkGq-1cTQw_media.mp4"));
-			//V3.MediaPlayer.Play(new Uri("http://cdn.cnbj2.fds.api.mi-img.com/sportscamera/sportssns/20171017/346652/1_JXw4NVgv-LyIwCztsMCvuw_media.mp4"));
-
-			//V0.MediaPlayer.Audio.Volume = 0;
-			//V1.MediaPlayer.Audio.Volume = 0;
-			//V2.MediaPlayer.Audio.Volume = 0;
-			//V3.MediaPlayer.Audio.Volume = 0;
+			VideoContainer.Width = (int)BorderVideoContainer.ActualWidth;
+			VideoContainer.Height = (int)BorderVideoContainer.ActualHeight;
+			VideoContainer.AutoScroll = true;
+			VideoContainer.BackColor = Color.Black;
+			//var panel = new System.Windows.Forms.Panel();
+			//panel.Width = VideoContainer.Width + 20;
+			//panel.Height = VideoContainer.Height + 20;
+			//panel.AutoScroll = true;
+			//VideoContainer.Controls.Add(panel);			
 
 			var tempWidth = this.map.ActualWidth;
 			var tempHeight = this.map.ActualHeight;
@@ -86,6 +62,7 @@ namespace Emergence_WPF
 		#region for temp
 		private void Page_Unloaded(object sender, RoutedEventArgs e)
 		{
+			DisposeVideos();
 		}
 
 		private void OnVlcControlNeedsLibDirectory(object sender, Vlc.DotNet.Forms.VlcLibDirectoryNeededEventArgs e)
@@ -143,7 +120,7 @@ namespace Emergence_WPF
 					}
 				}
 			}
-			catch(Exception ex)
+			catch (Exception ex)
 			{
 				Logger.Error("选择主事件发生异常", ex);
 			}
@@ -151,47 +128,49 @@ namespace Emergence_WPF
 
 		private void DisplayVideos(CameraModel[] videos)
 		{
+			DisposeVideos();
 			if (videos != null)
 			{
-				for (int i = 0; i < 4; i++)
+				// var panel = VideoContainer.Controls[0] as System.Windows.Forms.Panel;
+				var panel = VideoContainer as System.Windows.Forms.Panel;
+				if (panel != null)
 				{
-					if (i < videos.Length)
+					int i = 0;
+					foreach (var video in videos)
 					{
-						Video video = new Video();
-						var container = GetContainer(i);
-						container.Child = null;
-						container.Child = video;
-						video.SetValue(DockPanel.DockProperty, Dock.Top);
-						video.Url = videos[i].Url;
-						video.Height = container.ActualHeight;
-						video.Width = container.ActualWidth;
+						Vlc.DotNet.Forms.VlcControl vtl = new Vlc.DotNet.Forms.VlcControl();
+						vtl.Width = VideoContainer.Width - 20;
+						vtl.Height = (int)(vtl.Width * 9 / 16);
+						panel.Controls.Add(vtl);
+						vtl.Location = new System.Drawing.Point(0, i * (vtl.Height + 10));
+						vtl.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
+						vtl.TimeChanged += MediaPlayer_TimeChanged;
+						
+						vtl.EndInit();
+						vtl.Play(video.Url);
+						vtl.Audio.Volume = 0;
+						i++;
 					}
 				}
 			}
 		}
 
-		private Border GetContainer(int i)
+		private void DisposeVideos()
 		{
-			switch (i)
+			if (VideoContainer.HasChildren)
 			{
-				case 0: return V0Container;
-				case 1: return V1Container;
-				case 2: return V2Container;
-				case 3: return V3Container;
-				default: return V0Container;
+				// var panel = VideoContainer.Controls[0] as System.Windows.Forms.Panel;
+				var panel = VideoContainer as System.Windows.Forms.Panel;
+				if (panel != null)
+				{
+					foreach (System.Windows.Forms.Control ctl in panel.Controls)
+					{
+						var vd = ctl as Vlc.DotNet.Forms.VlcControl;
+						vd.Dispose();
+						panel.Controls.Remove(ctl);
+					}
+				}
 			}
-		}
-
-		public void Play(int index, string url)
-		{
-			Video video = new Video();
-			var container = GetContainer(index);
-			container.Child = null;
-			container.Child = video;
-			video.SetValue(DockPanel.DockProperty, Dock.Top);
-			video.Url = url;
-			video.Height = container.ActualHeight;
-			video.Width = container.ActualWidth;
 		}
 	}
 }

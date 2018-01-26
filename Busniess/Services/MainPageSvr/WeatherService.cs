@@ -29,7 +29,7 @@ namespace Business.MainPageSvr
 					HttpItem httpItem = new HttpItem()
 					{
 						Method = "GET",
-						URL = "http://jisutianqi.market.alicloudapi.com/weather/query?city=安顺",
+						URL = "http://jisutianqi.market.alicloudapi.com/weather/query?location=28.071823,119.133194",
 						Header = new System.Net.WebHeaderCollection()
 					};
 					httpItem.Header["Authorization"] = "APPCODE 845c52bbefba41829dacc4642147fd58";
