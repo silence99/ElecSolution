@@ -81,9 +81,9 @@ namespace Emergence_WPF
 				return;
 
 			if (IntPtr.Size == 4)
-				e.VlcLibDirectory = new DirectoryInfo(Path.Combine(currentDirectory, @"lib\x86\"));
+				e.VlcLibDirectory = new DirectoryInfo(Path.Combine(currentDirectory, @"ThirdParty\lib\x86\"));
 			else
-				e.VlcLibDirectory = new DirectoryInfo(Path.Combine(currentDirectory, @"lib\x64\"));
+				e.VlcLibDirectory = new DirectoryInfo(Path.Combine(currentDirectory, @"ThirdParty\lib\x64\"));
 		}
 
 		private void UserControl_Unloaded(object sender, RoutedEventArgs e)

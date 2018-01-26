@@ -9,6 +9,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Emergence_WPF.Views;
+using System.Reflection;
+using log4net;
 
 namespace Emergence_WPF
 {
@@ -17,6 +19,7 @@ namespace Emergence_WPF
 	/// </summary>
 	public partial class EmergenceMainPage : Page
 	{
+		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 		private MainWindowViewModel ViewModel { get; set; }
 
 		public EmergenceMainPage()
@@ -108,34 +111,41 @@ namespace Emergence_WPF
 
 		private void MasterEvent_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			map.RemoveMarkers();
-			var masterEvent = (sender as DataGrid).SelectedItem as MasterEvent;
-			if (masterEvent != null)
+			try
 			{
-				var subeventService = new SubeventService();
-				var cameraService = new CameraService();
-				map.MarkPoint(masterEvent.Longitude, masterEvent.Latitude, string.Format("主事件:{0}", masterEvent.Title), masterEvent.Remarks);
-
-				var subevents = subeventService.GetAllSubevents(masterEvent.ID);
-				var camerasData = cameraService.GetCameraByMasterEvent(1, 10000, masterEvent.Latitude, masterEvent.Longitude);
-				CameraModel[] cameras = new CameraModel[0];
-				if (camerasData != null && camerasData.Data != null)
+				map.RemoveMarkers();
+				var masterEvent = (sender as DataGrid).SelectedItem as MasterEvent;
+				if (masterEvent != null)
 				{
-					cameras = camerasData.Data;
-				}
+					var subeventService = new SubeventService();
+					var cameraService = new CameraService();
+					map.MarkPoint(masterEvent.Longitude, masterEvent.Latitude, string.Format("主事件:{0}", masterEvent.Title), masterEvent.Remarks);
 
-				ViewModel.CurrentMasterEventVideos = new ObservableCollection<CameraModel>(cameras.Select(it => it.CreateAopProxy()));
-				DisplayVideos(cameras);
+					var subevents = subeventService.GetAllSubevents(masterEvent.ID);
+					var camerasData = cameraService.GetCameraByMasterEvent(1, 10000, masterEvent.Latitude, masterEvent.Longitude);
+					CameraModel[] cameras = new CameraModel[0];
+					if (camerasData != null && camerasData.Data != null)
+					{
+						cameras = camerasData.Data;
+					}
 
-				foreach (var item in subevents)
-				{
-					map.MarkPoint(item.ChildLongitude, item.ChildLatitude, string.Format("子事件:{0}", item.ChildTitle), item.ChildRemarks);
-				}
+					ViewModel.CurrentMasterEventVideos = new ObservableCollection<CameraModel>(cameras.Select(it => it.CreateAopProxy()));
+					DisplayVideos(cameras);
 
-				foreach (var item in cameras)
-				{
-					map.MarkPoint(item.Longitude, item.Latitude, string.Format("摄像头:{0}", item.VideoNumber), item.Remarks);
+					foreach (var item in subevents)
+					{
+						map.MarkPoint(item.ChildLongitude, item.ChildLatitude, string.Format("子事件:{0}", item.ChildTitle), item.ChildRemarks);
+					}
+
+					foreach (var item in cameras)
+					{
+						map.MarkPoint(item.Longitude, item.Latitude, string.Format("摄像头:{0}", item.VideoNumber), item.Remarks);
+					}
 				}
+			}
+			catch(Exception ex)
+			{
+				Logger.Error("选择主事件发生异常", ex);
 			}
 		}
 
