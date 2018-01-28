@@ -38,9 +38,11 @@ namespace Emergence_WPF
 			this.KeyDown += MasterEventDetail_KeyDown;
 			ViewModel.SetPopupSubEventEditToFullScreen += this.FullPageSubEventEditPopup;
 			ViewModel.SetPopupTeamToFullScreen += this.FullPageTeamPopup;
-			ViewModel.SetPopupMaterialToFullScreen += this.FullPageMaterialPopup;
-			ViewModel.ResetSubEventSelectedValue += this.ResetSubEventDetailSelected;
-		}
+            ViewModel.SetPopupMaterialToFullScreen += this.FullPageMaterialPopup;
+            ViewModel.SetPopupSummaryEvaluationToFullScreen += this.FullPageSummaryEvaluationlPopup;
+            ViewModel.ResetSubEventSelectedValue += this.ResetSubEventDetailSelected; 
+
+        }
 		private void Page_Loaded(object sender, RoutedEventArgs e)
 		{
 			ResetSubEventDetailSelected();
@@ -231,27 +233,44 @@ namespace Emergence_WPF
 				}
 			}
 			while (parent != null);
-		}
-		private void FullPageMaterialPopup()
-		{
-			DependencyObject parent = this.PopupSelectMaterial.Child;
-			do
-			{
-				parent = VisualTreeHelper.GetParent(parent);
+        }
+        private void FullPageMaterialPopup()
+        {
+            DependencyObject parent = this.PopupSelectMaterial.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
 
-				if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
-				{
-					var element = parent as FrameworkElement;
-					element.Height = ResolutionService.Height;
-					element.Width = ResolutionService.Width;
-					break;
-				}
-			}
-			while (parent != null);
-		}
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
+        }
+        private void FullPageSummaryEvaluationlPopup()
+        {
+            DependencyObject parent = this.PopupSummaryEvaluation.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
 
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
+        }
+        
 
-		private void Grid_SubEventList_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
+        private void Grid_SubEventList_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
 		{
 
 		}

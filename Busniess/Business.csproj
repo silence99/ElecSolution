@@ -105,6 +105,7 @@
     <Compile Include="Services\EventSvr\MasterEventService.cs" />
     <Compile Include="Services\EventSvr\SubeventService.cs" />
     <Compile Include="Services\EventSvr\GetTaskSvr.cs" />
+    <Compile Include="Services\EventSvr\SummaryEvaluationService.cs" />
     <Compile Include="Services\MainPageSvr\LoginServices.cs" />
     <Compile Include="Services\MainPageSvr\WeatherService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

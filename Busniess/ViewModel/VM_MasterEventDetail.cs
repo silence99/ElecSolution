@@ -12,6 +12,7 @@ using System.Windows;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Business.Services;
+using Busniess;
 
 namespace Emergence.Business.ViewModel
 {
@@ -21,11 +22,12 @@ namespace Emergence.Business.ViewModel
 		public virtual MasterEventService masterEventService { get; set; }
 		public virtual SubeventService subEventService { get; set; }
 		public virtual TeamService teamService { get; set; }
-		public virtual MaterialService materialService { get; set; }
-		#endregion
+        public virtual MaterialService materialService { get; set; }
+        public virtual SummaryEvaluationService summaryEvaluationService { get; set; }
+        #endregion
 
-		#region [Property]
-		public virtual MasterEvent MasterEventInfo { get; set; }
+        #region [Property]
+        public virtual MasterEvent MasterEventInfo { get; set; }
 
 		public virtual string SubEventSearchValue { get; set; }
 		public virtual bool SubEventDetailBlockStatus { get; set; }
@@ -36,7 +38,10 @@ namespace Emergence.Business.ViewModel
 
 		public virtual SubEvent SubEventEdit { get; set; }
 
-		public virtual ObservableCollection<TeamModel> TeamList { get; set; }
+        public virtual SummaryEvaluationModel SummaryEvaluationEdit { get; set; }
+
+
+        public virtual ObservableCollection<TeamModel> TeamList { get; set; }
 		public virtual ObservableCollection<TeamModel> UnSelectedTeamList { get; set; }
 		public virtual ObservableCollection<MaterialModel> MaterialList { get; set; }
 		public virtual ObservableCollection<MaterialModel> UnSelectedMaterialList { get; set; }
@@ -51,12 +56,13 @@ namespace Emergence.Business.ViewModel
 		public virtual PopupModel TeamSelectPopup { get; set; }
 		public virtual PopupModel MaterialSelectPopup { get; set; }
 		public virtual PopupModel ThreeWindowPopup { get; set; }
-		public virtual PopupModel MaxMapAndVideoPopup { get; set; }
-		#endregion
+        public virtual PopupModel MaxMapAndVideoPopup { get; set; }
+        public virtual PopupModel SummaryEvaluationPopup { get; set; }
+        #endregion
 
 
-		#region [Command]
-		public virtual DelegateCommand<string> SearchSubEventListCommand { get; set; }
+        #region [Command]
+        public virtual DelegateCommand<string> SearchSubEventListCommand { get; set; }
 		public virtual DelegateCommand<string> SelectSubEventCommand { get; set; }
 		public virtual DelegateCommand<int?> DeleteSubEventCommand { get; set; }
 		public virtual DelegateCommand<string> UpdateSubEventStatusCommand { get; set; }
@@ -81,17 +87,24 @@ namespace Emergence.Business.ViewModel
 		public virtual DelegateCommand OpenFullScreenSubEventCommand { get; set; }
 		public virtual DelegateCommand OpenFullScreenMapCommand { get; set; }
 		public virtual DelegateCommand OpenFullScreenVideoCommand { get; set; }
-		public virtual DelegateCommand MasterEventArchiveCommand { get; set; }
+        public virtual DelegateCommand MasterEventArchiveCommand { get; set; }
+        public virtual DelegateCommand OpenSummaryEvaluation1Command { get; set; }
+        public virtual DelegateCommand OpenSummaryEvaluation2Command { get; set; }
+        public virtual DelegateCommand CloseSummaryEvaluationCommand { get; set; }
+        public virtual DelegateCommand DownloadSummaryEvaluationCommand { get; set; }
+        public virtual DelegateCommand SubmitSummaryEvaluationCommand { get; set; }
+        public virtual DelegateCommand GetSummaryEvaluationCommand { get; set; }
 
 
-		#endregion
+        #endregion
 
-		#region [Event]
+        #region [Event]
 
-		public virtual event SetPopupHandler SetPopupSubEventEditToFullScreen;
+        public virtual event SetPopupHandler SetPopupSubEventEditToFullScreen;
 		public virtual event SetPopupHandler SetPopupTeamToFullScreen;
-		public virtual event SetPopupHandler SetPopupMaterialToFullScreen;
-		public virtual event SetPopupHandler ResetSubEventSelectedValue;
+        public virtual event SetPopupHandler SetPopupMaterialToFullScreen;
+        public virtual event SetPopupHandler SetPopupSummaryEvaluationToFullScreen;
+        public virtual event SetPopupHandler ResetSubEventSelectedValue;
 		#endregion
 
 		public VM_MasterEventDetail(MasterEvent mEvent)
@@ -101,15 +114,18 @@ namespace Emergence.Business.ViewModel
 			subEventService = new SubeventService();
 			teamService = new TeamService();
 			materialService = new MaterialService();
-			SubEventEdit = new SubEvent().CreateAopProxy();
+            summaryEvaluationService = new SummaryEvaluationService();
+            SubEventEdit = new SubEvent().CreateAopProxy();
 			SBStatus = new SubEventStatus("").CreateAopProxy();
-			SubEventEditPopup = new PopupModel().CreateAopProxy();
+            SummaryEvaluationEdit = new SummaryEvaluationModel().CreateAopProxy();
+            SubEventEditPopup = new PopupModel().CreateAopProxy();
 			TeamSelectPopup = new PopupModel().CreateAopProxy();
 			MaterialSelectPopup = new PopupModel().CreateAopProxy();
 			ThreeWindowPopup = new PopupModel().CreateAopProxy();
 			MaxMapAndVideoPopup = new PopupModel().CreateAopProxy();
-			SubEventAmplifyPopup = new PopupModel().CreateAopProxy();
-			EventGrades = new ObservableCollection<DictItem>(MetaDataService.EventGrades);
+            SubEventAmplifyPopup = new PopupModel().CreateAopProxy();
+            SummaryEvaluationPopup = new PopupModel().CreateAopProxy();
+            EventGrades = new ObservableCollection<DictItem>(MetaDataService.EventGrades);
 			//this.eventAggregator = eventAggregator;
 
 			SearchSubEventListCommand = new DelegateCommand<string>(new Action<string>(SearchSubEventAction));
@@ -136,10 +152,16 @@ namespace Emergence.Business.ViewModel
 			OpenFullScreenSubEventCommand = new DelegateCommand(new Action(OpenFullScreenSubEventAction));
 			OpenFullScreenMapCommand = new DelegateCommand(new Action(OpenFullScreenMapAction));
 			OpenFullScreenVideoCommand = new DelegateCommand(new Action(OpenFullScreenVideoAction));
-			MasterEventArchiveCommand = new DelegateCommand(new Action(MasterEventArchiveAction));
+            MasterEventArchiveCommand = new DelegateCommand(new Action(MasterEventArchiveAction));
+            OpenSummaryEvaluation1Command = new DelegateCommand(new Action(OpenSummaryEvaluation1Action));
+            OpenSummaryEvaluation2Command = new DelegateCommand(new Action(OpenSummaryEvaluation2Action));
+            CloseSummaryEvaluationCommand = new DelegateCommand(new Action(CloseSummaryEvaluationAction));
+            DownloadSummaryEvaluationCommand = new DelegateCommand(new Action(DownloadSummaryEvaluationAction));
+            SubmitSummaryEvaluationCommand = new DelegateCommand(new Action(SubmitSummaryEvaluationAction));
+            GetSummaryEvaluationCommand = new DelegateCommand(new Action(GetSummaryEvaluationAction));
 
 
-			if (mEvent != null)
+            if (mEvent != null)
 			{
 				InitializVM(mEvent);
 			}
@@ -571,10 +593,84 @@ namespace Emergence.Business.ViewModel
 			}
 		}
 
-		#endregion
+        private void OpenSummaryEvaluation1Action()
+        {
+            var thisAop = this.AopWapper as VM_MasterEventDetail;
+            thisAop.SummaryEvaluationPopup.PopupName = "总结评估";
+            thisAop.SummaryEvaluationEdit = new SummaryEvaluationModel().CreateAopProxy();
+            thisAop.SummaryEvaluationEdit.Type = 1;
+            thisAop.SummaryEvaluationEdit.MainEventId = MasterEventInfo.ID;
+            thisAop.SummaryEvaluationPopup.IsOpen = true;
+            if (thisAop.SetPopupSummaryEvaluationToFullScreen != null)
+            {
+                thisAop.SetPopupSummaryEvaluationToFullScreen();
+            }
+        }
+        private void OpenSummaryEvaluation2Action()
+        {
+            var thisAop = this.AopWapper as VM_MasterEventDetail;
+            thisAop.SummaryEvaluationPopup.PopupName = "信息汇总";
+            thisAop.SummaryEvaluationEdit = new SummaryEvaluationModel().CreateAopProxy();
+            thisAop.SummaryEvaluationEdit.Type = 2;
+            thisAop.SummaryEvaluationEdit.MainEventId = thisAop.MasterEventInfo.ID;
+            thisAop.SummaryEvaluationPopup.IsOpen = true;
+            if (thisAop.SetPopupSummaryEvaluationToFullScreen != null)
+            {
+                thisAop.SetPopupSummaryEvaluationToFullScreen();
+            }
+        }
+        private void CloseSummaryEvaluationAction()
+        {
+            var thisAop = this.AopWapper as VM_MasterEventDetail;
+            thisAop.SummaryEvaluationPopup.IsOpen = false;
+            thisAop.SummaryEvaluationEdit = new SummaryEvaluationModel().CreateAopProxy();
+        }
+        private void DownloadSummaryEvaluationAction()
+        {
+            var thisAop = this.AopWapper as VM_MasterEventDetail;
 
-		#region [Request service Methods]
-		private void GetSubEventListOb(string searchCondition)
+            thisAop.SummaryEvaluationPopup.IsOpen = false;
+            ShowMessageBox("下载成功！");
+        }
+        private void SubmitSummaryEvaluationAction()
+        {
+            var thisAop = this.AopWapper as VM_MasterEventDetail;
+            var result = summaryEvaluationService.UpdateSummaryEvaluation(thisAop.SummaryEvaluationEdit);
+
+            if (result)
+            {
+                thisAop.SummaryEvaluationPopup.IsOpen = false;
+                ShowMessageBox("提交成功！");
+            }
+            else
+            {
+                thisAop.SummaryEvaluationPopup.IsOpen = false;
+                ShowMessageBox("提交失败！");
+            }
+
+        }
+        private void GetSummaryEvaluationAction()
+        {
+            var thisAop = this.AopWapper as VM_MasterEventDetail;
+            EmergencyHttpResponse<SummaryEvaluationModel> result = summaryEvaluationService.GetSummaryEvaluationDataByMasterEvent(thisAop.MasterEventInfo.ID, thisAop.SummaryEvaluationEdit.Type);
+            if (result != null)
+            {
+                //ShowMessageBox("获取成功！");
+                thisAop.SummaryEvaluationEdit.Id = result.Result.Id;
+                thisAop.SummaryEvaluationEdit.ImpleAssessment = result.Result.ImpleAssessment;
+                thisAop.SummaryEvaluationEdit.Summary = result.Result.Summary;
+                thisAop.SummaryEvaluationEdit.OrganAssessment = result.Result.OrganAssessment;
+                // = result.Result.CreateAopProxy();
+            }
+            else
+            {
+                //ShowMessageBox("获取失败，没有历史数据！");
+            }
+        }
+        #endregion
+
+        #region [Request service Methods]
+        private void GetSubEventListOb(string searchCondition)
 		{
 			try
 			{
