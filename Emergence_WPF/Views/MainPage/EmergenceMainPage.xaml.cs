@@ -12,6 +12,9 @@ using Emergence_WPF.Views;
 using System.Reflection;
 using log4net;
 using System.Drawing;
+using Emergence_WPF.Comm;
+using System.Windows.Input;
+using System.Windows.Interop;
 
 namespace Emergence_WPF
 {
@@ -22,6 +25,7 @@ namespace Emergence_WPF
 	{
 		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 		private MainWindowViewModel ViewModel { get; set; }
+		private System.Windows.Forms.Panel VideosContainer { get; set; }
 
 		public EmergenceMainPage()
 		{
@@ -29,6 +33,12 @@ namespace Emergence_WPF
 
 			ViewModel = new MainWindowViewModel().CreateAopProxy();
 			DataContext = ViewModel;
+			MouseWheel += PageMouseWheel;
+		}
+
+		private void PageMouseWheel(object sender, MouseWheelEventArgs e)
+		{
+
 		}
 
 		public EmergenceMainPage(bool isShowMaxPop) : this()
@@ -39,24 +49,55 @@ namespace Emergence_WPF
 		private void Page_Loaded(object sender, RoutedEventArgs e)
 		{
 			var svc = ServiceManager.Instance.GetService<MasterEventService>(Constant.Services.MasterEventService);
-			VideoContainer.Width = (int)BorderVideoContainer.ActualWidth;
-			VideoContainer.Height = (int)BorderVideoContainer.ActualHeight;
-			VideoContainer.AutoScroll = true;
-			VideoContainer.BackColor = Color.Black;
-			//var panel = new System.Windows.Forms.Panel();
-			//panel.Width = VideoContainer.Width + 20;
-			//panel.Height = VideoContainer.Height + 20;
-			//panel.AutoScroll = true;
-			//VideoContainer.Controls.Add(panel);			
-
 			var tempWidth = this.map.ActualWidth;
 			var tempHeight = this.map.ActualHeight;
 			this.MainPageSelectMapPopup.HorizontalOffset = tempWidth - 250;
-			//if (DataGrid_MasterEvent.Items.Count > 0)
-			//{
-			//	DataGridRow row = (DataGridRow)DataGrid_MasterEvent.ItemContainerGenerator.ContainerFromIndex(0);
-			//	row.IsSelected = true;
-			//}
+			InitVideoContainer();
+		}
+
+		private void InitVideoContainer()
+		{
+			int width = (int)BorderVideoContainer.ActualWidth - 20;
+			int height = (int)BorderVideoContainer.ActualHeight;
+
+			var panel = new System.Windows.Forms.Panel();			
+			var outContainer = new System.Windows.Forms.Panel();
+			var innerPanel = new System.Windows.Forms.Panel();
+			innerPanel.AutoScroll = true;
+			outContainer.Controls.Add(innerPanel);
+			panel.Controls.Add(outContainer);
+			VideosContainer = innerPanel;
+			MyControlLibrary.ScrollBar scrollBar1 = new MyControlLibrary.ScrollBar();
+			panel.Controls.Add(scrollBar1);
+
+			panel.BackColor = System.Drawing.Color.Black;
+			innerPanel.BackColor = System.Drawing.Color.Black;
+
+			var host = new FormControlHost(panel);
+			host.Width = BorderVideoContainer.ActualWidth - 20;
+			host.Height = (int)BorderVideoContainer.ActualHeight;
+
+
+			outContainer.Width = width - 20;
+			innerPanel.Width = width;
+
+			outContainer.Height = height;
+			innerPanel.Height = height;
+
+			scrollBar1.Active = true;
+			scrollBar1.ActiveColor = System.Drawing.SystemColors.ControlLightLight;
+			scrollBar1.BackColor = System.Drawing.Color.Black;
+			scrollBar1.HoverColor = System.Drawing.SystemColors.ControlLight;
+			scrollBar1.Location = new System.Drawing.Point(width - 15, 12);
+			scrollBar1.MinSlideBarLenght = 50;
+			scrollBar1.NeedSleep = false;
+			scrollBar1.NormalColor = System.Drawing.SystemColors.ControlLight;
+			scrollBar1.RelaPanel = innerPanel;
+			scrollBar1.Size = new System.Drawing.Size(14, height);
+
+
+			
+			BorderVideoContainer.Child = host;
 		}
 
 		#region for temp
@@ -131,21 +172,21 @@ namespace Emergence_WPF
 			DisposeVideos();
 			if (videos != null)
 			{
-				// var panel = VideoContainer.Controls[0] as System.Windows.Forms.Panel;
-				var panel = VideoContainer as System.Windows.Forms.Panel;
+				var panel = VideosContainer as System.Windows.Forms.Panel;
+				//var panel = VideoContainer as System.Windows.Forms.Panel;
 				if (panel != null)
 				{
 					int i = 0;
 					foreach (var video in videos)
 					{
 						Vlc.DotNet.Forms.VlcControl vtl = new Vlc.DotNet.Forms.VlcControl();
-						vtl.Width = VideoContainer.Width - 20;
+						vtl.Width = VideosContainer.Width - 20;
 						vtl.Height = (int)(vtl.Width * 9 / 16);
 						panel.Controls.Add(vtl);
 						vtl.Location = new System.Drawing.Point(0, i * (vtl.Height + 10));
 						vtl.VlcLibDirectoryNeeded += OnVlcControlNeedsLibDirectory;
 						vtl.TimeChanged += MediaPlayer_TimeChanged;
-						
+
 						vtl.EndInit();
 						vtl.Play(video.Url);
 						vtl.Audio.Volume = 0;
@@ -157,10 +198,10 @@ namespace Emergence_WPF
 
 		private void DisposeVideos()
 		{
-			if (VideoContainer.HasChildren)
+			if (VideosContainer.HasChildren)
 			{
-				// var panel = VideoContainer.Controls[0] as System.Windows.Forms.Panel;
-				var panel = VideoContainer as System.Windows.Forms.Panel;
+				var panel = VideosContainer as System.Windows.Forms.Panel;
+				//var panel = VideoContainer as System.Windows.Forms.Panel;
 				if (panel != null)
 				{
 					foreach (System.Windows.Forms.Control ctl in panel.Controls)

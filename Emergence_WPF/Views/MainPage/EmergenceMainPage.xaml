@@ -133,9 +133,9 @@
                 <TextBlock Margin="10,13,0,0" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif" VerticalAlignment="Top">视频资料</TextBlock>
             </StackPanel>
             <Border Margin="0,0,0,10" Name="BorderVideoContainer">
-                <WindowsFormsHost Margin="0">
+                <!--<WindowsFormsHost Margin="0">
                     <ctl:Panel x:Name="VideoContainer" AutoScroll="False"/>
-                </WindowsFormsHost>
+                </WindowsFormsHost>-->
             </Border>
             <!--<Grid DockPanel.Dock="Top">
                 <Grid.RowDefinitions>
