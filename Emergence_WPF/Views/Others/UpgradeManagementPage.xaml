@@ -3,12 +3,45 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       xmlns:local="clr-namespace:Emergence_WPF"
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="1600"
       Title="UpgradeManagementPage">
 
-    <Grid Background="White" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <Label FontSize="20" Content="升级管理" Margin="150 50 0 0" Padding="0"/>
+    <Grid Background="White">
+        <Grid.Resources>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Foreground" Value="Black"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80px"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="#62A6A3" Grid.Column="0" Grid.Row="0"  BorderThickness="0 1 0 0">
+            <DockPanel Grid.Column="0" Grid.Row="0" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch">
+                <Label Margin="20,0,0,0" Content="版本管理" FontSize="20" Padding="25"/>
+            </DockPanel>
+        </Border>
+        <StackPanel Orientation="Vertical" Grid.Row="1">
+            <DockPanel Margin="100,50,0,0" Height="50">
+                <Label Width="200">最新版本</Label>
+                <Label Content="{Binding Version, Mode=TwoWay}"/>
+            </DockPanel>
+            <DockPanel Margin="100,0,0,0" Height="50">
+                <Label Width="200">创建时间</Label>
+                <Label Content="{Binding CreatedTime, Mode=TwoWay}"/>
+            </DockPanel>
+            <DockPanel Margin="100,0,0,0" Height="50">
+                <Label Width="200">下载地址</Label>
+                <Label Content="{Binding Url, Mode=TwoWay}"/>
+            </DockPanel>
+            <DockPanel Margin="100,0,0,0" Height="50">
+                <Button Width="100" HorizontalAlignment="Left" Click="OnDownload_Click" Content="下载" IsEnabled="{Binding DownloadEnabled, Mode=TwoWay}"/>
+                <ProgressBar Name="DownloadProcessBar" Margin="100,0,0,0" Visibility="{Binding ProcessBarVisiable, Mode=TwoWay}" Maximum="{Binding ContentLength, Mode=TwoWay}" Value="{Binding DownloadLength, Mode=TwoWay}" Width="1000" HorizontalAlignment="Left"/>
+            </DockPanel>
+        </StackPanel>
     </Grid>
 </Page>

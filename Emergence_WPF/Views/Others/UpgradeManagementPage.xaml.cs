@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Busniess.ViewModel;
+using Emergence_WPF.Util;
+using Framework;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace Emergence_WPF
 {
@@ -20,9 +12,27 @@ namespace Emergence_WPF
 	/// </summary>
 	public partial class UpgradeManagementPage : Page
 	{
+		public UpgradeManagementPageViewModel ViewModel { get; set; }
+
 		public UpgradeManagementPage()
 		{
 			InitializeComponent();
+			ViewModel = ObjectFactory.GetInstance<UpgradeManagementPageViewModel>("upgradeManagementPageViewModel").CreateAopProxy();
+			DataContext = ViewModel;
+		}
+
+		private void OnDownload_Click(object sender, RoutedEventArgs e)
+		{
+			FolderBrowserDialog m_Dialog = new FolderBrowserDialog();
+			DialogResult result = m_Dialog.ShowDialog();
+
+			if (result == System.Windows.Forms.DialogResult.Cancel)
+			{
+				return;
+			}
+
+			ViewModel.DownloadFolder = m_Dialog.SelectedPath.Trim();
+			ViewModel.Download();
 		}
 	}
 }

@@ -69,6 +69,16 @@ namespace Busniess.CommonControl
 
 			return string.Empty;
 		}
+		public static HttpResult Request(string url)
+		{
+			HttpHelper helper = new HttpHelper();
+			HttpItem requestDat = new HttpItem()
+			{
+				URL = url,
+				Method = "GET"
+			};
+			return helper.GetHtml(requestDat);
+		}
 
 		public static HttpResult Request(string serviceName, string method, Dictionary<string, string> param, bool useCommonHead = true)
 		{
