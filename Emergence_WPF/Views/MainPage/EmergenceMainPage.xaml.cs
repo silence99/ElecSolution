@@ -26,6 +26,7 @@ namespace Emergence_WPF
 		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 		private MainWindowViewModel ViewModel { get; set; }
 		private System.Windows.Forms.Panel VideosContainer { get; set; }
+		MyControlLibrary.ScrollBar Scrollbar { get; set; }
 
 		public EmergenceMainPage()
 		{
@@ -60,15 +61,15 @@ namespace Emergence_WPF
 			int width = (int)BorderVideoContainer.ActualWidth - 20;
 			int height = (int)BorderVideoContainer.ActualHeight;
 
-			var panel = new System.Windows.Forms.Panel();			
+			var panel = new System.Windows.Forms.Panel();
 			var outContainer = new System.Windows.Forms.Panel();
 			var innerPanel = new System.Windows.Forms.Panel();
 			innerPanel.AutoScroll = true;
 			outContainer.Controls.Add(innerPanel);
 			panel.Controls.Add(outContainer);
 			VideosContainer = innerPanel;
-			MyControlLibrary.ScrollBar scrollBar1 = new MyControlLibrary.ScrollBar();
-			panel.Controls.Add(scrollBar1);
+			Scrollbar = new MyControlLibrary.ScrollBar();
+			panel.Controls.Add(Scrollbar);
 
 			panel.BackColor = System.Drawing.Color.Black;
 			innerPanel.BackColor = System.Drawing.Color.Black;
@@ -84,19 +85,17 @@ namespace Emergence_WPF
 			outContainer.Height = height;
 			innerPanel.Height = height;
 
-			scrollBar1.Active = true;
-			scrollBar1.ActiveColor = System.Drawing.SystemColors.ControlLightLight;
-			scrollBar1.BackColor = System.Drawing.Color.Black;
-			scrollBar1.HoverColor = System.Drawing.SystemColors.ControlLight;
-			scrollBar1.Location = new System.Drawing.Point(width - 15, 12);
-			scrollBar1.MinSlideBarLenght = 50;
-			scrollBar1.NeedSleep = false;
-			scrollBar1.NormalColor = System.Drawing.SystemColors.ControlLight;
-			scrollBar1.RelaPanel = innerPanel;
-			scrollBar1.Size = new System.Drawing.Size(14, height);
-
-
-			
+			Scrollbar.Active = true;
+			Scrollbar.ActiveColor = System.Drawing.SystemColors.ControlLightLight;
+			Scrollbar.BackColor = System.Drawing.Color.Black;
+			Scrollbar.HoverColor = System.Drawing.SystemColors.ControlLight;
+			Scrollbar.Location = new System.Drawing.Point(width - 15, 12);
+			Scrollbar.MinSlideBarLenght = 50;
+			Scrollbar.NeedSleep = false;
+			Scrollbar.NormalColor = System.Drawing.SystemColors.ControlLight;
+			Scrollbar.RelaPanel = innerPanel;
+			Scrollbar.Size = new System.Drawing.Size(14, height);
+			Scrollbar.Visible = false;
 			BorderVideoContainer.Child = host;
 		}
 
@@ -114,9 +113,9 @@ namespace Emergence_WPF
 				return;
 
 			if (IntPtr.Size == 4)
-				e.VlcLibDirectory = new System.IO.DirectoryInfo(System.IO.Path.Combine(currentDirectory, @"lib\x86\"));
+				e.VlcLibDirectory = new System.IO.DirectoryInfo(System.IO.Path.Combine(currentDirectory, @"ThirdParty\lib\x86\"));
 			else
-				e.VlcLibDirectory = new System.IO.DirectoryInfo(System.IO.Path.Combine(currentDirectory, @"lib\x64\"));
+				e.VlcLibDirectory = new System.IO.DirectoryInfo(System.IO.Path.Combine(currentDirectory, @"ThirdParty\lib\x64\"));
 		}
 
 		private void MediaPlayer_TimeChanged(object sender, Vlc.DotNet.Core.VlcMediaPlayerTimeChangedEventArgs e)
@@ -172,6 +171,11 @@ namespace Emergence_WPF
 			DisposeVideos();
 			if (videos != null)
 			{
+				if (videos.Length > 4)
+				{
+					Scrollbar.Visible = true;
+				}
+
 				var panel = VideosContainer as System.Windows.Forms.Panel;
 				//var panel = VideoContainer as System.Windows.Forms.Panel;
 				if (panel != null)
