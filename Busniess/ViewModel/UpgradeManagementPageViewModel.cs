@@ -2,6 +2,7 @@
 using Framework;
 using log4net;
 using System;
+using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Reflection;
@@ -12,6 +13,7 @@ namespace Busniess.ViewModel
 {
 	public class UpgradeManagementPageViewModel : NotificationObject
 	{
+		public virtual string CurrentVersion { get; set; }
 		public virtual string Version { get; set; }
 		public virtual string Url { get; set; }
 		public virtual DateTime CreatedTime { get; set; }
@@ -26,9 +28,22 @@ namespace Busniess.ViewModel
 		public UpgradeManagementPageViewModel()
 		{
 			Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-			DownloadEnabled = true;
+
 			ProcessBarVisiable = Visibility.Hidden;
 			Init();
+			CurrentVersion = ConfigurationManager.AppSettings["Client"] ?? "1.0";
+			double verNumber = 1.0;
+			double.TryParse(CurrentVersion, out verNumber);
+			var latest = 1.0;
+			double.TryParse(Version, out latest);
+			if (latest > verNumber)
+			{
+				DownloadEnabled = true;
+			}
+			else
+			{
+				DownloadEnabled = false;
+			}
 		}
 
 		private void Init()
@@ -73,7 +88,7 @@ namespace Busniess.ViewModel
 					WebResponse respone = request.GetResponse();
 					aopWraper.ProcessBarVisiable = Visibility.Visible;
 					aopWraper.ContentLength = respone.ContentLength;
-					
+
 					using (Stream netStream = respone.GetResponseStream())
 					{
 						using (Stream fileStream = new FileStream(aopWraper.DownloadFullPath, FileMode.Create))
