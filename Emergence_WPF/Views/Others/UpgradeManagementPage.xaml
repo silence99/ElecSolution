@@ -27,6 +27,10 @@
         </Border>
         <StackPanel Orientation="Vertical" Grid.Row="1">
             <DockPanel Margin="100,50,0,0" Height="50">
+                <Label Width="200">当前版本</Label>
+                <Label Content="{Binding CurrentVersion, Mode=TwoWay}"/>
+            </DockPanel>
+            <DockPanel Margin="100,0,0,0" Height="50">
                 <Label Width="200">最新版本</Label>
                 <Label Content="{Binding Version, Mode=TwoWay}"/>
             </DockPanel>
@@ -37,6 +41,10 @@
             <DockPanel Margin="100,0,0,0" Height="50">
                 <Label Width="200">下载地址</Label>
                 <Label Content="{Binding Url, Mode=TwoWay}"/>
+            </DockPanel>
+            <DockPanel Margin="100,0,0,0" Height="50" Visibility="{Binding ProcessBarVisiable,Mode=TwoWay}">
+                <Label Width="200">保存地址</Label>
+                <Label Content="{Binding DownloadFullPath, Mode=TwoWay}"/>
             </DockPanel>
             <DockPanel Margin="100,0,0,0" Height="50">
                 <Button Width="100" DockPanel.Dock="Left" HorizontalAlignment="Left" Click="OnDownload_Click" Content="下载" IsEnabled="{Binding DownloadEnabled, Mode=TwoWay}"/>
