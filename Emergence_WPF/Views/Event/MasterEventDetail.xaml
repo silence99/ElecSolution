@@ -112,7 +112,7 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Grid.Row="0" DockPanel.Dock="Left" Style="{StaticResource LeftLabel}" FontSize="16px" HorizontalAlignment="Center" Content="总结评估">
+                        <Label Grid.Column="0" Grid.Row="0" Name="Label_SummaryEvaluation" DockPanel.Dock="Left" Style="{StaticResource LeftLabel}" FontSize="16px" HorizontalAlignment="Center" MouseLeftButtonDown="Label_SummaryEvaluation_MouseLeftButtonDown"  Content="总结评估">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDown">
                                     <i:InvokeCommandAction Command="{Binding OpenSummaryEvaluation1Command}"/>
@@ -120,12 +120,12 @@
                             </i:Interaction.Triggers>
                         </Label>
                         <Border BorderBrush="#4D9A96" BorderThickness="0 0 2 0" Grid.Column="0" Grid.Row="0" Margin="0 25 0 25"/>
-                        <Label Grid.Column="1" Grid.Row="0" DockPanel.Dock="Left" Style="{StaticResource LeftLabel}" FontSize="16px" HorizontalAlignment="Center" Content="信息汇总">
-                            <i:Interaction.Triggers>
+                        <Label Grid.Column="1" Grid.Row="0" Name="Label_InformationSummary" DockPanel.Dock="Left" Style="{StaticResource LeftLabel}" FontSize="16px" HorizontalAlignment="Center" MouseLeftButtonDown="Label_InformationSummary_MouseLeftButtonDown" Content="信息汇总">
+                            <!--<i:Interaction.Triggers>
                                 <i:EventTrigger EventName="MouseDown">
                                     <i:InvokeCommandAction Command="{Binding OpenSummaryEvaluation2Command}"/>
                                 </i:EventTrigger>
-                            </i:Interaction.Triggers>
+                            </i:Interaction.Triggers>-->
                         </Label>
                         <Border BorderBrush="#4D9A96" BorderThickness="2 0 0 0" Grid.Column="2" Grid.Row="0" Margin="0 25 0 25"/>
                         <Label Grid.Column="2" Grid.Row="0" DockPanel.Dock="Left" Style="{StaticResource LeftLabel}" FontSize="16px" HorizontalAlignment="Center" Content="地图标绘" MouseDown="ThreePopupMapButton_Click"/>
@@ -842,7 +842,7 @@
             <Frame x:Name="Frame_MEDPopupMapAndVideo"></Frame>
         </Popup>
 
-        <Popup 
+        <!--<Popup 
             x:Name="PopupSummaryEvaluation" 
             Width="{Binding Path=SummaryEvaluationPopup.PopupWidth}"
             Height="{Binding Path=SummaryEvaluationPopup.PopupHeight}"
@@ -852,7 +852,7 @@
             PopupAnimation="Slide"  
             Placement="Center">
             <Grid Background="{StaticResource OpacityBrush}">
-                <Border BorderBrush="#BFBFBF" BorderThickness="1" Width="600px" Height="500px">
+                <Border BorderBrush="#BFBFBF" BorderThickness="1" Width="700px" Height="500px">
                     <Grid Background="#FFFFFF">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50px"></RowDefinition>
@@ -862,9 +862,10 @@
                             <Button Style="{StaticResource CancelImageButton}" Command="{Binding Path=CloseSummaryEvaluationCommand}" DockPanel.Dock="Left" Margin="19 0 19 0" />
                             <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
                             <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" FontSize="18" Content="{Binding Path=SummaryEvaluationPopup.PopupName}" Margin="19 0 0 0"/>
-                            <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="下载" Command="{Binding Path=DownloadSummaryEvaluationCommand,Mode=TwoWay}" Width="88px"/>
-                            <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="提交" Command="{Binding Path=SubmitSummaryEvaluationCommand,Mode=TwoWay}" Width="88px"/>
-                            <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="获取" Command="{Binding Path=GetSummaryEvaluationCommand,Mode=TwoWay}" Width="88px"/>
+                            <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" FontSize="18" Foreground="Green" FontWeight="Bold" Content="{Binding Path=SummaryEvaluationPopupMessage}" Margin="19 0 0 0"/>
+                            <Button Style="{StaticResource RoundConnerButton}" Name="Button_SummaryEvaluation" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 10 0" Content="下载" Click="Button_SummaryEvaluation_Click" Width="88px"/>
+                            <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 10 0" Content="提交" Command="{Binding Path=SubmitSummaryEvaluationCommand,Mode=TwoWay}" Width="88px"/>
+                            <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 10 0" Content="获取" Command="{Binding Path=GetSummaryEvaluationCommand,Mode=TwoWay}" Width="88px"/>
                         </DockPanel>
                         <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
                             <Grid>
@@ -878,7 +879,7 @@
                                     <ColumnDefinition Width="8*"/>
                                 </Grid.ColumnDefinitions>
                                 <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="工作组织评估" VerticalAlignment="Top" Margin="0 19 0 0"/>
-                                <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_OrganAssessment" Width="420px" VerticalAlignment="Top"  Margin="20 17 0 0"
+                                <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_OrganAssessment" Width="480px" VerticalAlignment="Top"  Margin="20 17 0 0"
                                          Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
                                     <TextBox.Text>
                                         <Binding Path="SummaryEvaluationEdit.OrganAssessment" Mode="TwoWay">
@@ -889,7 +890,7 @@
                                     </TextBox.Text>
                                 </TextBox>
                                 <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="任务执行评估" VerticalAlignment="Top" Margin="0 19 0 0"/>
-                                <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_ImpleAssessment" Width="420px" VerticalAlignment="Top"  Margin="20 17 0 0"
+                                <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_ImpleAssessment" Width="480px" VerticalAlignment="Top"  Margin="20 17 0 0"
                                          Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
                                     <TextBox.Text>
                                         <Binding Path="SummaryEvaluationEdit.ImpleAssessment" Mode="TwoWay">
@@ -900,7 +901,7 @@
                                     </TextBox.Text>
                                 </TextBox>
                                 <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="工作总结" VerticalAlignment="Top" Margin="0 19 0 0"/>
-                                <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_Summary" Width="420px" VerticalAlignment="Top"  Margin="20 17 0 0"
+                                <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_Summary" Width="480px" VerticalAlignment="Top"  Margin="20 17 0 0"
                                          Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
                                     <TextBox.Text>
                                         <Binding Path="SummaryEvaluationEdit.Summary" Mode="TwoWay">
@@ -915,6 +916,6 @@
                     </Grid>
                 </Border>
             </Grid>
-        </Popup>
+        </Popup>-->
     </Grid>
 </Page>

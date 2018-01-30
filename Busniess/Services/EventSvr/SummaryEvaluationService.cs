@@ -1,9 +1,11 @@
 ﻿using Busniess.CommonControl;
 using Emergence.Common.Model;
+using Framework.Http;
 using log4net;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Reflection;
 
 
@@ -82,5 +84,33 @@ namespace Busniess.Services
         }
 
 
+        public MemoryStream GetSummaryEvaluationFileByMasterEvent(long masterEventID, int type)
+        {
+            try
+            {
+                string serviceName = ConfigurationManager.AppSettings["summaryDownloadApi"] ?? "mainEvent/summary/download";
+                Dictionary<string, string> pairs = new Dictionary<string, string>()
+                                                    {
+                                                        { "mainEventId", masterEventID.ToString() },
+                                                        { "type", type.ToString() },
+                                                    };
+                var result = RequestControl.RequestStream(serviceName, "GET", pairs);
+                if (result != null)
+                {
+                    Logger.DebugFormat("获取总结评估:{0}", result.Length);
+                    return result;
+                }
+                else
+                {
+                    Logger.DebugFormat("获取总结评估文件失败:{0}", result.Length);
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("获取总结评估异常", ex);
+                return null;
+            }
+        }
     }
 }

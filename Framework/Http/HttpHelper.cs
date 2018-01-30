@@ -132,6 +132,56 @@ namespace Framework.Http
 
             return result;
         }
+        private MemoryStream GetHttpRequestStreamData(HttpItem objhttpitem)
+        {
+            //返回参数
+            HttpResult result = new HttpResult();
+            try
+            {
+                #region 得到请求的response
+                using (response = (HttpWebResponse)request.GetResponse())
+                {
+                    result.StatusCode = (int)response.StatusCode;
+                    result.Header = response.Headers;
+                    if (response.Cookies != null)
+                    {
+                        result.CookieCollection = response.Cookies;
+                    }
+                    if (response.Headers["set-cookie"] != null)
+                    {
+                        result.Cookie = response.Headers["set-cookie"];
+                    }
+
+                    MemoryStream _stream = new MemoryStream();
+                    //GZIIP处理
+                    if (response.ContentEncoding != null && response.ContentEncoding.Equals("gzip", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        //开始读取流并设置编码方式
+                        //new GZipStream(response.GetResponseStream(), CompressionMode.Decompress).CopyTo(_stream, 10240);
+                        //.net4.0以下写法
+                        _stream = GetMemoryStream(new GZipStream(response.GetResponseStream(), CompressionMode.Decompress));
+                    }
+                    else
+                    {
+                        //开始读取流并设置编码方式
+                        //response.GetResponseStream().CopyTo(_stream, 10240);
+                        //.net4.0以下写法
+                        _stream = GetMemoryStream(response.GetResponseStream());
+                    }
+                    return _stream;
+
+                    #endregion
+                }
+            }
+            catch (WebException ex)
+            {
+                //这里是在发生异常时返回的错误信息
+                result.Html = "Request Error:" + ex.Message;
+                response = (HttpWebResponse)ex.Response;
+                return null;
+            }
+        }
+        
 
         /// <summary>
         /// 4.0以下.net版本取数据使用
@@ -353,6 +403,13 @@ namespace Framework.Http
             SetRequest(objhttpItem);
             //调用专门读取数据的类
             return GetHttpRequestData(objhttpItem);
+        }
+        public MemoryStream GetStream(HttpItem objhttpItem)
+        {
+            //准备参数
+            SetRequest(objhttpItem);
+            //调用专门读取数据的类
+            return GetHttpRequestStreamData(objhttpItem);
         }
         #endregion
     }

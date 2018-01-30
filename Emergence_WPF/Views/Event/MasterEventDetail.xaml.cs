@@ -39,7 +39,7 @@ namespace Emergence_WPF
 			ViewModel.SetPopupSubEventEditToFullScreen += this.FullPageSubEventEditPopup;
 			ViewModel.SetPopupTeamToFullScreen += this.FullPageTeamPopup;
             ViewModel.SetPopupMaterialToFullScreen += this.FullPageMaterialPopup;
-            ViewModel.SetPopupSummaryEvaluationToFullScreen += this.FullPageSummaryEvaluationlPopup;
+            //ViewModel.SetPopupSummaryEvaluationToFullScreen += this.FullPageSummaryEvaluationlPopup;
             ViewModel.ResetSubEventSelectedValue += this.ResetSubEventDetailSelected; 
 
         }
@@ -251,23 +251,23 @@ namespace Emergence_WPF
             }
             while (parent != null);
         }
-        private void FullPageSummaryEvaluationlPopup()
-        {
-            DependencyObject parent = this.PopupSummaryEvaluation.Child;
-            do
-            {
-                parent = VisualTreeHelper.GetParent(parent);
+        //private void FullPageSummaryEvaluationlPopup()
+        //{
+        //    DependencyObject parent = this.PopupSummaryEvaluation.Child;
+        //    do
+        //    {
+        //        parent = VisualTreeHelper.GetParent(parent);
 
-                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
-                {
-                    var element = parent as FrameworkElement;
-                    element.Height = ResolutionService.Height;
-                    element.Width = ResolutionService.Width;
-                    break;
-                }
-            }
-            while (parent != null);
-        }
+        //        if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+        //        {
+        //            var element = parent as FrameworkElement;
+        //            element.Height = ResolutionService.Height;
+        //            element.Width = ResolutionService.Width;
+        //            break;
+        //        }
+        //    }
+        //    while (parent != null);
+        //}
         
 
         private void Grid_SubEventList_SourceUpdated(object sender, System.Windows.Data.DataTransferEventArgs e)
@@ -307,6 +307,30 @@ namespace Emergence_WPF
                 this.ViewModel.CreateSubEventCommand.Execute();
             }
             
+        }
+
+        private void Label_SummaryEvaluation_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            SummaryEvaluationWindows sew = new SummaryEvaluationWindows();
+            sew.Topmost = true;
+            sew.ViewModel = this.ViewModel;
+            sew.DataContext = sew.ViewModel;
+            ViewModel.OpenSummaryEvaluation1Command.Execute();
+            //sew.Height = ResolutionService.Height;
+            //sew.Width = ResolutionService.Width;
+            sew.Show();
+        }
+
+        private void Label_InformationSummary_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            SummaryEvaluationWindows sew = new SummaryEvaluationWindows();
+            sew.Topmost = true;
+            sew.ViewModel = this.ViewModel;
+            sew.DataContext = sew.ViewModel;
+            ViewModel.OpenSummaryEvaluation2Command.Execute();
+            //sew.Height = ResolutionService.Height;
+            //sew.Width = ResolutionService.Width;
+            sew.Show();
         }
     }
 }

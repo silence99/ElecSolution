@@ -13,6 +13,8 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Business.Services;
 using Busniess;
+using System.Threading;
+using System.IO;
 
 namespace Emergence.Business.ViewModel
 {
@@ -30,7 +32,11 @@ namespace Emergence.Business.ViewModel
         public virtual MasterEvent MasterEventInfo { get; set; }
 
 		public virtual string SubEventSearchValue { get; set; }
-		public virtual bool SubEventDetailBlockStatus { get; set; }
+        public virtual string SummaryEvaluationPopupMessage { get; set; }
+        public virtual string SummaryEvaluationPopupDownloadUrl { get; set; }
+        public virtual bool SummaryEvaluationPopupDownloading { get; set; }
+
+        public virtual bool SubEventDetailBlockStatus { get; set; }
 
 		public virtual ObservableCollection<SubEvent> SubEventList { get; set; }
 
@@ -156,10 +162,13 @@ namespace Emergence.Business.ViewModel
             OpenSummaryEvaluation1Command = new DelegateCommand(new Action(OpenSummaryEvaluation1Action));
             OpenSummaryEvaluation2Command = new DelegateCommand(new Action(OpenSummaryEvaluation2Action));
             CloseSummaryEvaluationCommand = new DelegateCommand(new Action(CloseSummaryEvaluationAction));
-            DownloadSummaryEvaluationCommand = new DelegateCommand(new Action(DownloadSummaryEvaluationAction));
+            //DownloadSummaryEvaluationCommand = new DelegateCommand(new Action(DownloadSummaryEvaluationAction));
             SubmitSummaryEvaluationCommand = new DelegateCommand(new Action(SubmitSummaryEvaluationAction));
             GetSummaryEvaluationCommand = new DelegateCommand(new Action(GetSummaryEvaluationAction));
 
+            SummaryEvaluationPopupMessage = "";
+            SummaryEvaluationPopupDownloadUrl = "";
+            SummaryEvaluationPopupDownloading = false;
 
             if (mEvent != null)
 			{
@@ -597,40 +606,97 @@ namespace Emergence.Business.ViewModel
         {
             var thisAop = this.AopWapper as VM_MasterEventDetail;
             thisAop.SummaryEvaluationPopup.PopupName = "总结评估";
+            thisAop.SummaryEvaluationPopupMessage = "";
             thisAop.SummaryEvaluationEdit = new SummaryEvaluationModel().CreateAopProxy();
             thisAop.SummaryEvaluationEdit.Type = 1;
             thisAop.SummaryEvaluationEdit.MainEventId = MasterEventInfo.ID;
             thisAop.SummaryEvaluationPopup.IsOpen = true;
-            if (thisAop.SetPopupSummaryEvaluationToFullScreen != null)
+            thisAop.SummaryEvaluationPopup.PopupWidth = ResolutionService.Width.ToString();
+            thisAop.SummaryEvaluationPopup.PopupHeight = ResolutionService.Height.ToString();
+            if (SetPopupSummaryEvaluationToFullScreen != null)
             {
-                thisAop.SetPopupSummaryEvaluationToFullScreen();
+                SetPopupSummaryEvaluationToFullScreen();
             }
         }
         private void OpenSummaryEvaluation2Action()
         {
             var thisAop = this.AopWapper as VM_MasterEventDetail;
             thisAop.SummaryEvaluationPopup.PopupName = "信息汇总";
+            thisAop.SummaryEvaluationPopupMessage = "";
             thisAop.SummaryEvaluationEdit = new SummaryEvaluationModel().CreateAopProxy();
             thisAop.SummaryEvaluationEdit.Type = 2;
             thisAop.SummaryEvaluationEdit.MainEventId = thisAop.MasterEventInfo.ID;
             thisAop.SummaryEvaluationPopup.IsOpen = true;
-            if (thisAop.SetPopupSummaryEvaluationToFullScreen != null)
+            thisAop.SummaryEvaluationPopup.PopupWidth = ResolutionService.Width.ToString();
+            thisAop.SummaryEvaluationPopup.PopupHeight = ResolutionService.Height.ToString();
+            if (SetPopupSummaryEvaluationToFullScreen != null)
             {
-                thisAop.SetPopupSummaryEvaluationToFullScreen();
+                SetPopupSummaryEvaluationToFullScreen();
             }
         }
         private void CloseSummaryEvaluationAction()
         {
             var thisAop = this.AopWapper as VM_MasterEventDetail;
             thisAop.SummaryEvaluationPopup.IsOpen = false;
+            thisAop.SummaryEvaluationPopupMessage = "";
             thisAop.SummaryEvaluationEdit = new SummaryEvaluationModel().CreateAopProxy();
         }
-        private void DownloadSummaryEvaluationAction()
+        public void DownloadSummaryEvaluationAction(string downloadFolder)
         {
             var thisAop = this.AopWapper as VM_MasterEventDetail;
+            if (thisAop.SummaryEvaluationPopupDownloading)
+            {
+                thisAop.SummaryEvaluationPopupMessage = "下载中......";
+                return;
+            }
+            else
+            {
+                thisAop.SummaryEvaluationPopupDownloading = true;
+            }
+            thisAop.SummaryEvaluationPopupMessage = "下载中......";
+            Thread.Sleep(1000);
+            ThreadPool.QueueUserWorkItem((obj) =>
+            {
+                try
+                {
+                    MemoryStream result = summaryEvaluationService.GetSummaryEvaluationFileByMasterEvent(thisAop.MasterEventInfo.ID, thisAop.SummaryEvaluationEdit.Type);
+                    if (result != null)
+                    {
+                        //var splits = aopWraper.SummaryEvaluationPopupDownloadUrl.Split('/', '\\');
+                        string fileName = (thisAop.SummaryEvaluationEdit.Type == 1 ? "总结评估" : "信息汇总") + DateTime.Now.ToString("yyyyMMdd") + ".xls";
+                        string DownloadFullPath = System.IO.Path.Combine(downloadFolder, fileName);
 
-            thisAop.SummaryEvaluationPopup.IsOpen = false;
-            ShowMessageBox("下载成功！");
+                        using (Stream fileStream = new FileStream(DownloadFullPath, FileMode.Create))
+                        {
+                            fileStream.Write(result.ToArray(), 0, Convert.ToInt32(result.Length));
+                        }
+                        thisAop.SummaryEvaluationPopupMessage = "下载成功.";
+                        thisAop.SummaryEvaluationPopup.IsOpen = false;
+                    }
+                    else
+                    {
+                        thisAop.SummaryEvaluationPopupMessage = "下载失败！";
+                    }
+                }
+                catch (System.UnauthorizedAccessException uex)
+                {
+                    Logger.Error(string.Format("下载失败:"), uex);
+                    thisAop.SummaryEvaluationPopupMessage = "下载失败！";
+
+                    //System.Windows.MessageBox.Show(string.Format("下载客户端{0}失败, 没有访问\"{1}\"的权限", aopWraper.Version, aopWraper.DownloadFolder));
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(string.Format("下载失败:"), ex);
+                    //System.Windows.MessageBox.Show(string.Format("下载客户端{0}失败", aopWraper.Version));
+                    thisAop.SummaryEvaluationPopupMessage = "下载失败！";
+
+                }
+                finally
+                {
+                    thisAop.SummaryEvaluationPopupDownloading = false;
+                }
+            }, null);
         }
         private void SubmitSummaryEvaluationAction()
         {
@@ -640,12 +706,12 @@ namespace Emergence.Business.ViewModel
             if (result)
             {
                 thisAop.SummaryEvaluationPopup.IsOpen = false;
-                ShowMessageBox("提交成功！");
+                thisAop.SummaryEvaluationPopupMessage = "提交成功.";
             }
             else
             {
                 thisAop.SummaryEvaluationPopup.IsOpen = false;
-                ShowMessageBox("提交失败！");
+                thisAop.SummaryEvaluationPopupMessage = "提交失败.";
             }
 
         }
@@ -655,7 +721,7 @@ namespace Emergence.Business.ViewModel
             EmergencyHttpResponse<SummaryEvaluationModel> result = summaryEvaluationService.GetSummaryEvaluationDataByMasterEvent(thisAop.MasterEventInfo.ID, thisAop.SummaryEvaluationEdit.Type);
             if (result != null)
             {
-                //ShowMessageBox("获取成功！");
+                thisAop.SummaryEvaluationPopupMessage = "获取成功.";
                 thisAop.SummaryEvaluationEdit.Id = result.Result.Id;
                 thisAop.SummaryEvaluationEdit.ImpleAssessment = result.Result.ImpleAssessment;
                 thisAop.SummaryEvaluationEdit.Summary = result.Result.Summary;
@@ -664,7 +730,7 @@ namespace Emergence.Business.ViewModel
             }
             else
             {
-                //ShowMessageBox("获取失败，没有历史数据！");
+                thisAop.SummaryEvaluationPopupMessage = "获取失败，没有历史数据！";
             }
         }
         #endregion

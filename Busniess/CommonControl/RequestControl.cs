@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Net;
 using System.Reflection;
 
@@ -114,9 +115,44 @@ namespace Busniess.CommonControl
 				requestDat.Postdata = GetKeyValuePairs(param);
 			}
 			return helper.GetHtml(requestDat);
-		}
+        }
 
-		public static bool DefaultValide(string html)
+        public static MemoryStream RequestStream(string serviceName, string method, Dictionary<string, string> param, bool useCommonHead = true)
+        {
+            return RequestStream(serviceName, method, param, null, useCommonHead, (item) =>
+            {
+                item.ContentType = "application/x-www-form-urlencoded";
+                item.ResultType = ResultType.String;
+            });
+        }
+        public static MemoryStream RequestStream(string serviceName, string method, Dictionary<string, string> param, Dictionary<string, string> extendHead, bool useCommonHead, Action<HttpItem> initHttpItem)
+        {
+            HttpHelper helper = new HttpHelper();
+            var head = useCommonHead ? GetCommonHead(serviceName, method) : new WebHeaderCollection();
+            var isGet = method.Trim().ToUpper() != "POST";
+            var url = isGet ? GetUrl(serviceName, param) : GetUrl(serviceName, null);
+            if (extendHead != null)
+            {
+                foreach (var item in extendHead)
+                {
+                    head.Add(item.Key, item.Value);
+                }
+            }
+            HttpItem requestDat = new HttpItem()
+            {
+                Header = head,
+                URL = url,
+                Method = method.Trim().ToUpper()
+            };
+            initHttpItem?.Invoke(requestDat);
+            if (!isGet)
+            {
+                requestDat.Postdata = GetKeyValuePairs(param);
+            }
+            return helper.GetStream(requestDat);
+        }
+
+        public static bool DefaultValide(string html)
 		{
 			var response = Utils.JSONHelper.ConvertToObject<EmergencyCommonResponse>(html);
 			if (response.Code == 1)

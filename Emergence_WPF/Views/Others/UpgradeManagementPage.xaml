@@ -39,8 +39,8 @@
                 <Label Content="{Binding Url, Mode=TwoWay}"/>
             </DockPanel>
             <DockPanel Margin="100,0,0,0" Height="50">
-                <Button Width="100" HorizontalAlignment="Left" Click="OnDownload_Click" Content="下载" IsEnabled="{Binding DownloadEnabled, Mode=TwoWay}"/>
-                <ProgressBar Name="DownloadProcessBar" Margin="100,0,0,0" Visibility="{Binding ProcessBarVisiable, Mode=TwoWay}" Maximum="{Binding ContentLength, Mode=TwoWay}" Value="{Binding DownloadLength, Mode=TwoWay}" Width="1000" HorizontalAlignment="Left"/>
+                <Button Width="100" DockPanel.Dock="Left" HorizontalAlignment="Left" Click="OnDownload_Click" Content="下载" IsEnabled="{Binding DownloadEnabled, Mode=TwoWay}"/>
+                <ProgressBar Name="DownloadProcessBar"  DockPanel.Dock="Left" Margin="100,0,50,0" Width="700" Visibility="{Binding ProcessBarVisiable, Mode=TwoWay}" Maximum="{Binding ContentLength, Mode=TwoWay}" Value="{Binding DownloadLength, Mode=TwoWay}" VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
             </DockPanel>
         </StackPanel>
     </Grid>
