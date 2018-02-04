@@ -111,7 +111,15 @@ namespace Emergence.Business.ViewModel
 		private void CreateAction()
 		{
 			PopupCloseAction();
-			MasterEventService.CreateMasterEvent(Current);
+            if (MasterEventService.CreateMasterEvent(Current))
+            {
+                System.Windows.MessageBox.Show("创建成功！");
+            }
+            else
+            {
+
+                System.Windows.MessageBox.Show("创建失败！");
+            }
 			CleanMessage();
 			GetMasterEventsAction("");
 		}
@@ -122,18 +130,18 @@ namespace Emergence.Business.ViewModel
 			if (ids == null || ids.Count == 0)
 			{
 				Warn("没有选择删除的公告");
-				System.Windows.MessageBox.Show("没有选择删除的公告");
+				System.Windows.MessageBox.Show("没有选择删除的公告！");
 			}
 			else
 			{
 				if (MasterEventService.DeleteMasterEvents(ids))
 				{
 					GetMasterEventsAction("");
-					System.Windows.MessageBox.Show("删除成功");
+					System.Windows.MessageBox.Show("删除成功！");
 				}
 				else
 				{
-					System.Windows.MessageBox.Show("删除失败");
+					System.Windows.MessageBox.Show("删除失败！");
 				}
 			}
 		}

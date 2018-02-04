@@ -14,6 +14,7 @@
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <ResourceDictionary Source="../../style/Generic.xaml"/>
+                    <ResourceDictionary Source="../../style/MasterEventDetailStyle.xaml" />
                 </ResourceDictionary.MergedDictionaries>
                 <Style TargetType="Label">
 
@@ -37,20 +38,10 @@
                     </local1:Pager>
                 </DockPanel>
                 <DataGrid DockPanel.Dock="Top" Margin="20,0,20,5"
-                    Name="GridData" 
-                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                    ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                    Background="Transparent"
-                    AutoGenerateColumns="False" 
-                          CanUserDeleteRows="False"
+                    Name="GridData"
                     ColumnHeaderHeight="70"
                     ItemsSource="{Binding Path=camerasList, Mode=TwoWay}"
-                    RowHeight="50"
-                    AlternatingRowBackground="#f3f3f3"
-                    HorizontalGridLinesBrush="#dcdcdc"
-                    VerticalGridLinesBrush="#dcdcdc"
-                    BorderBrush="#dcdcdc"
-                    CanUserAddRows="False">
+                    RowHeight="50" Style="{StaticResource DataGridRight}">
                     <DataGrid.Columns >
                         <DataGridTemplateColumn Width="30">
                             <DataGridTemplateColumn.CellTemplate>
