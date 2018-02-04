@@ -69,7 +69,7 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>-->
-                    <DataGridTextColumn Binding="{Binding ChildTitle, Mode=TwoWay}" Header="所属子事件" Width="*" />
+                    <DataGridTextColumn Binding="{Binding childTitle, Mode=TwoWay}" Header="所属子事件" Width="*" />
                     <DataGridTextColumn Binding="{Binding TemplateTypeName, Mode=TwoWay}"  Header="发送类型" Width="*" />
                     <DataGridTextColumn Binding="{Binding TemplateTypeName}" Header="预设选择" Width="*" />
                     <DataGridTextColumn Binding="{Binding CreatedTime, Mode=TwoWay}"  Header="执行时间" Width="*" />
