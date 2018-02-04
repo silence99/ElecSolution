@@ -133,9 +133,10 @@ namespace Busniess.ViewModel
 			try
 			{
 				var ids = Data.Where(item => item.IsChecked).Select(item => item.ID.ToString()).ToList();
-				if (ids == null && ids.Count == 0)
+				if (ids == null || ids.Count == 0)
 				{
 					Warn("没有选择删除的公告");
+					System.Windows.MessageBox.Show("没有选择删除的公告");
 				}
 				else
 				{

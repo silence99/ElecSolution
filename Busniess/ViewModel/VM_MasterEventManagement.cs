@@ -110,9 +110,9 @@ namespace Emergence.Business.ViewModel
 
 		private void CreateAction()
 		{
-			MasterEventService.CreateMasterEvent(Current);
-			CleanMessage();
 			PopupCloseAction();
+			MasterEventService.CreateMasterEvent(Current);
+			CleanMessage();			
 			GetMasterEventsAction("");
 		}
 

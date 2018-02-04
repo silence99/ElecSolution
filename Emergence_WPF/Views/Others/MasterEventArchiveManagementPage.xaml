@@ -49,10 +49,10 @@
                     BorderBrush="#dcdcdc"
                     CanUserAddRows="False">
                     <DataGrid.Columns >
-                        <DataGridTextColumn Binding="{Binding Title, Mode=TwoWay}" Header="主事件标题" Width="*" />
-                        <DataGridTextColumn Binding="{Binding GradeName, Mode=TwoWay}"  Header="等级" Width="*" />
-                        <DataGridTextColumn Binding="{Binding Locale, Mode=TwoWay}" Header="地址" Width="3*" />
-                        <DataGridTextColumn Binding="{Binding Time, Mode=TwoWay}" Header="发生时间" Width="*" />
+                        <DataGridTextColumn IsReadOnly="True" Binding="{Binding Title, Mode=TwoWay}" Header="主事件标题" Width="*" />
+                        <DataGridTextColumn IsReadOnly="True" Binding="{Binding GradeName, Mode=TwoWay}"  Header="等级" Width="*" />
+                        <DataGridTextColumn IsReadOnly="True" Binding="{Binding Locale, Mode=TwoWay}" Header="地址" Width="3*" />
+                        <DataGridTextColumn IsReadOnly="True" Binding="{Binding Time, Mode=TwoWay}" Header="发生时间" Width="*" />
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>

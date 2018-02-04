@@ -40,7 +40,7 @@
                     </i:Interaction.Triggers>
                 </Image>-->
                 <Button DockPanel.Dock="Right" Margin="0,0,20,0" Content="删除" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Command="{Binding Path=DeleteCommand}"></Button>
-                <Button Name="BtnAdd" DockPanel.Dock="Right" Margin="0,0,20,0" Content="添加" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Command="{Binding Path=PopupAddCommand}"/>
+                <Button Name="BtnAdd" DockPanel.Dock="Right" Margin="0,0,20,0" Content="添加公告" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Command="{Binding Path=PopupAddCommand}"/>
             </DockPanel>
             <DockPanel>
                 <DockPanel DockPanel.Dock="Bottom" Margin="20,5,20,15">
@@ -77,9 +77,9 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Binding="{Binding ID, Mode=TwoWay}" Header="编号" Width="*" />
-                        <DataGridTextColumn Binding="{Binding Title, Mode=TwoWay}" Header="标题" Width="*" />
-                        <DataGridTextColumn Binding="{Binding Content, Mode=TwoWay}" Header="内容" Width="3*" />
+                        <DataGridTextColumn IsReadOnly="True" Binding="{Binding ID, Mode=TwoWay}" Header="编号" Width="*" />
+                        <DataGridTextColumn IsReadOnly="True" Binding="{Binding Title, Mode=TwoWay}" Header="标题" Width="*" />
+                        <DataGridTextColumn IsReadOnly="True" Binding="{Binding Content, Mode=TwoWay}" Header="内容" Width="3*" />
                         <DataGridTemplateColumn Width="100" Header="操作">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -159,7 +159,7 @@
                                 </DatePicker.BlackoutDates>-->
                             </DatePicker>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="内容" Margin="0 0 0 0"/>
-                            <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" Name="Txt_EditNotiContent" Width="458px" VerticalAlignment="Top" Margin="20 30 0 0"  
+                            <TextBox MaxLength="255" Style="{StaticResource PopupMultTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Grid.RowSpan="2" Name="Txt_EditNotiContent" Width="458px" VerticalAlignment="Top" Margin="20 30 0 0"  
                                 Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
                                 <TextBox.Text>
                                     <Binding Path="Current.Content" Mode="TwoWay">
