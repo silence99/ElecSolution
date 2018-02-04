@@ -108,18 +108,10 @@
             </DockPanel>-->
             <DataGrid DockPanel.Dock="Top" Margin="20,0,20,0"
                     Name="GridTeamList" 
-                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                    ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                    Background="Transparent"
-                    AutoGenerateColumns="False" 
                     ColumnHeaderHeight="70"
                     ItemsSource="{Binding Members, Mode=TwoWay}"
                     RowHeight="50"
-                    AlternatingRowBackground="#f3f3f3"
-                    HorizontalGridLinesBrush="#dcdcdc"
-                    VerticalGridLinesBrush="#dcdcdc"
-                    BorderBrush="#dcdcdc"
-                    CanUserAddRows="False">
+                    Style="{StaticResource DataGridRight}" >
                 <DataGrid.Columns >
                     <DataGridTemplateColumn Width="40">
                         <DataGridTemplateColumn.CellTemplate>

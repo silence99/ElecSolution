@@ -8,7 +8,14 @@
       mc:Ignorable="d" 
       d:DesignHeight="1000" d:DesignWidth="1920"
       Title="MessageHistoryPage">
-
+    <Page.Resources>
+        <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="../../style/MasterEventDetailStyle.xaml" />
+            <ResourceDictionary Source="../../style/Generic.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid>
         <Grid.Resources>
             <ResourceDictionary>
@@ -46,18 +53,10 @@
             </DockPanel>
             <DataGrid DockPanel.Dock="Top" Margin="20,0,20,5"
                     Name="GridData" 
-                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                    ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                    Background="Transparent"
-                    AutoGenerateColumns="False" 
                     ColumnHeaderHeight="70"
                     ItemsSource="{Binding Data, Mode=TwoWay}"
-                    RowHeight="50"
-                    AlternatingRowBackground="#f3f3f3"
-                    HorizontalGridLinesBrush="#dcdcdc"
-                    VerticalGridLinesBrush="#dcdcdc"
-                    BorderBrush="#dcdcdc"
-                    CanUserAddRows="False">
+                    MinRowHeight="50"
+                    Style="{StaticResource DataGridRight}">
                 <DataGrid.Columns >
                     <!--<DataGridTemplateColumn Width="40">
                         <DataGridTemplateColumn.CellTemplate>
@@ -69,11 +68,17 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>-->
-                    <DataGridTextColumn Binding="{Binding ChildTitle, Mode=TwoWay}" Header="所属子事件" Width="*" />
-                    <DataGridTextColumn Binding="{Binding TemplateTypeName, Mode=TwoWay}"  Header="发送类型" Width="*" />
-                    <DataGridTextColumn Binding="{Binding TemplateTypeName}" Header="预设选择" Width="*" />
-                    <DataGridTextColumn Binding="{Binding CreatedTime, Mode=TwoWay}"  Header="执行时间" Width="*" />
-                    <DataGridTextColumn Binding="{Binding TemplateContent, Mode=TwoWay}" Header="内容" Width="3*" />
+                    <DataGridTextColumn Binding="{Binding ChildTitle, Mode=TwoWay}" IsReadOnly="True" Header="所属子事件" Width="*" />
+                    <DataGridTextColumn Binding="{Binding TemplateTypeName, Mode=TwoWay}"  IsReadOnly="True" Header="发送类型" Width="*" />
+                    <DataGridTextColumn Binding="{Binding TemplateTypeName}" Header="预设选择" IsReadOnly="True" Width="*" />
+                    <DataGridTextColumn Binding="{Binding CreatedTime, Mode=TwoWay}" IsReadOnly="True"  Header="执行时间" Width="*" />
+                    <DataGridTextColumn Binding="{Binding TemplateContent, Mode=TwoWay}" IsReadOnly="True" Header="内容" Width="3*" >
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
                     <!--<DataGridTextColumn  Header="内容" Width="*" />
                     <DataGridTextColumn  Header="执行时间" Width="200" />
                     <DataGridTextColumn  Header="所属子事件" Width="210" />

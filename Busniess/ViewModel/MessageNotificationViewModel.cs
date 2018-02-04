@@ -107,8 +107,9 @@ namespace Busniess.ViewModel
 			if (obj.Members != null && obj.Members.Count != 0)
 			{
 				obj.Members = new ObservableCollection<PersonModel>(obj.Members.Where(item => !item.IsChecked).ToArray());
-			}
-		}
+            }
+            System.Windows.MessageBox.Show("删除成功！");
+        }
 
 		private void PopupAddDialogAction()
 		{

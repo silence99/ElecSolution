@@ -272,18 +272,18 @@ namespace Emergence_WPF
 			ViewModel.Members = new System.Collections.ObjectModel.ObservableCollection<PersonModel>(result.Data);
 		}
 
-		private void EditTeam_Handler(object sender, RoutedEventArgs e)
-		{
-			if (ViewModel.IsTeamEditModel)
-			{
-				CancelEditMode();
-				TeamService.UpdateTeam(ViewModel.ID, ViewModel.TeamName, ViewModel.PersonCharge, ViewModel.PersonChargePhone, ViewModel.TeamDept);
-			}
-			else
-			{
-				GotoEditModel();
-			}
-        }
+		//private void EditTeam_Handler(object sender, RoutedEventArgs e)
+		//{
+		//	if (ViewModel.IsTeamEditModel)
+		//	{
+		//		CancelEditMode();
+		//		TeamService.UpdateTeam(ViewModel.ID, ViewModel.TeamName, ViewModel.PersonCharge, ViewModel.PersonChargePhone, ViewModel.TeamDept);
+		//	}
+		//	else
+		//	{
+		//		GotoEditModel();
+		//	}
+  //      }
 
 		private void EditTeamMember_Handler(object sender, RoutedEventArgs e)
         {

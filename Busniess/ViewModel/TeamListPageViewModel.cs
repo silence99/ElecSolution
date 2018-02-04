@@ -1,6 +1,8 @@
 ﻿using Business.Services;
+using Busniess.Services;
 using Emergence.Common.Model;
 using Framework;
+using System;
 using System.Collections.ObjectModel;
 
 namespace Emergence.Business.ViewModel
@@ -8,7 +10,8 @@ namespace Emergence.Business.ViewModel
 	public class TeamListPageViewModel : NotificationObject
 	{
 		public virtual ObservableCollection<TeamModel> Teams { get; set; }
-		public virtual int PageSize { get; set; }
+        public virtual TeamService teamService { get; set; }
+        public virtual int PageSize { get; set; }
 		public virtual int PageIndex { get; set; }
 		public virtual int TotalCount { get; set; }
 		public virtual int TotalPage { get; set; }
@@ -21,13 +24,20 @@ namespace Emergence.Business.ViewModel
 		public virtual double PopupHeight { get; set; }
 		public virtual bool IsPopoupOpen { get; set; }
 		public virtual bool IsPageEnabled { get; set; }
+        public virtual string CanSelectCaptain { get; set; }
+        public virtual string PopupHeader { get; set; }
+        public virtual ObservableCollection<PersonModel> Members { get; set; }
+
         public virtual event SetPopupHandler SetPopupEditToFullScreen;
 
         public virtual ObservableCollection<DictItem> TeamDepts { get; set; }
 
+        
 		public void PopupTeamEdit()
 		{
-			IsPopoupOpen = true;
+            SyncTeamMembers(CurrentTeam.ID);
+
+            IsPopoupOpen = true;
 			IsPageEnabled = false;
             if (SetPopupEditToFullScreen != null)
             {
@@ -44,7 +54,7 @@ namespace Emergence.Business.ViewModel
 		public TeamListPageViewModel()
 		{
 			PageIndex = 1;
-			PageSize = 10;
+			PageSize = 1000;
 			TotalCount = 0;
 			TotalPage = 0;
 			IsPopoupOpen = false;
@@ -52,6 +62,19 @@ namespace Emergence.Business.ViewModel
             PopupHeight = ResolutionService.Height;
             PopupWidth = ResolutionService.Width;
             TeamDepts = new ObservableCollection<DictItem>(MetaDataService.TeamDepartments);
-		}
-	}
+            Members = new ObservableCollection<PersonModel>();
+            teamService = new TeamService();
+        }
+        private void SyncTeamMembers(long teamID)
+        {
+            var aopWapper = this.IsAopWapper ? this : this.AopWapper as TeamListPageViewModel;
+
+            var result = teamService.GetTeamPersons(aopWapper.PageIndex, aopWapper.PageSize, teamID);
+            //ViewModel.PageIndex = result.PageIndex;
+            //ViewModel.PageSize = result.PageSize;
+            //ViewModel.TotalCount = result.Count;
+            //ViewModel.TotalPage = (int)Math.Ceiling((double)ViewModel.TotalCount / ViewModel.PageSize);
+            aopWapper.Members = new System.Collections.ObjectModel.ObservableCollection<PersonModel>(result.Data);
+        }
+    }
 }

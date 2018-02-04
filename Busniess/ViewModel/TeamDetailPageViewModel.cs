@@ -49,7 +49,7 @@ namespace Emergence.Business.ViewModel
 		public TeamDetailPageViewModel()
 		{
 			PageIndex = 1;
-			PageSize = 10;
+			PageSize = 1000;
 			TotalCount = 0;
 			TotalPage = 0;
 			IsPopoupOpen = false;

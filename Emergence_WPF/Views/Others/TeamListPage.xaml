@@ -131,7 +131,7 @@
                     <DockPanel Grid.Row="0">
                         <Button Style="{StaticResource CancelImageButton}"   Click="ClosePopup_Handler" DockPanel.Dock="Left" Margin="19 0 19 0" />
                         <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
-                        <Label Style="{StaticResource RightLabel}" FontSize="20px"  DockPanel.Dock="Left" Content="添加队伍" Margin="19 0 0 0"/>
+                        <Label Style="{StaticResource RightLabel}" FontSize="20px"  DockPanel.Dock="Left" Content="{Binding Path=PopupHeader}" Margin="19 0 0 0"/>
                         <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Width="88px" Click="Update_Handler">
                         </Button>
                     </DockPanel>
@@ -149,10 +149,17 @@
                                 <ColumnDefinition Width="0.15*"/>
                                 <ColumnDefinition Width="0.35*"/>
                             </Grid.ColumnDefinitions>
-                            <Grid.BindingGroup>
-                                <BindingGroup x:Name="TLPPopupBindingGroup" />
-                            </Grid.BindingGroup>
-                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="队伍名称" Margin="0 22 0 0"/>
+                            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.15*"/>
+                                    <ColumnDefinition Width="0.35*"/>
+                                    <ColumnDefinition Width="0.15*"/>
+                                    <ColumnDefinition Width="0.35*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.BindingGroup>
+                                    <BindingGroup x:Name="TLPPopupBindingGroup" />
+                                </Grid.BindingGroup>
+                                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="队伍名称" Margin="0 22 0 0"/>
                             <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventTitle" Width="458px" Margin="20 18 0 0"  
                                         Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
                                 <TextBox.Text>
@@ -162,13 +169,21 @@
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </TextBox.Text>
-                            </TextBox>
+                                </TextBox>
+                            </Grid>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="所属单位"/>
-                            <ComboBox Grid.Column="1" Grid.Row="1" Height="30" VerticalAlignment="Center" Width="180" HorizontalAlignment="Left" Margin="20 0 0 0"
+                            <ComboBox Grid.Column="1" Grid.Row="1" Height="30" VerticalAlignment="Center" Width="150" HorizontalAlignment="Left" Margin="20 0 0 0"
                                      SelectedValue="{Binding Path=CurrentTeam.TeamDept,Mode=TwoWay}"
                                      DisplayMemberPath="Name"
                                      SelectedValuePath="Value"
                                      ItemsSource="{Binding TeamDepts}"/>
+
+                            <Label Visibility="{Binding Path=CanSelectCaptain}" Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="2" Content="队长"/>
+                            <ComboBox Grid.Column="3" Visibility="{Binding Path=CanSelectCaptain}" Grid.Row="1" Height="30" VerticalAlignment="Center" Width="150" HorizontalAlignment="Left" Margin="20 0 0 0"
+                                     SelectedValue="{Binding Path=CurrentTeam.TeamMemberId,Mode=TwoWay}"
+                                     DisplayMemberPath="Name"
+                                     SelectedValuePath="Value"
+                                     ItemsSource="{Binding Members}"/>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="单位地址" Margin="0 0 0 0"/>
                             <!--<TextBox Style="{StaticResource PopupTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditTeamAddress" Width="458px" Margin="20 0 0 0"  
                                          Validation.ErrorTemplate="{StaticResource ErrorTempalte}">

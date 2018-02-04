@@ -267,7 +267,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <!--<DataGridCheckBoxColumn Binding="{Binding IsCheck}" x:Name="f1" Header=""  Width="0.5*" />-->
-                            <DataGridTextColumn  Binding="{Binding Path=TeamName, Mode=TwoWay}" x:Name="dw2" Header="队伍名称" Width="*" >
+                            <DataGridTextColumn  Binding="{Binding Path=TeamName, Mode=TwoWay}" IsReadOnly="True" x:Name="dw2" Header="队伍名称" Width="*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -275,7 +275,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=TotalNumber, Mode=TwoWay}" x:Name="dw3" Header="人数"  Width="0.5*" >
+                            <DataGridTextColumn  Binding="{Binding Path=TotalNumber, Mode=TwoWay}" IsReadOnly="True"  x:Name="dw3" Header="人数"  Width="0.5*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -283,7 +283,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=TeamDeptName, Mode=TwoWay}" x:Name="dw4" Header="所属单位"  Width="1.5*" >
+                            <DataGridTextColumn  Binding="{Binding Path=TeamDeptName, Mode=TwoWay}" IsReadOnly="True"  x:Name="dw4" Header="所属单位"  Width="1.5*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -291,7 +291,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=PersonCharge, Mode=TwoWay}" x:Name="dw5" Header="队长"  Width="0.8*" >
+                            <DataGridTextColumn  Binding="{Binding Path=PersonCharge, Mode=TwoWay}" IsReadOnly="True"  x:Name="dw5" Header="队长"  Width="0.8*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -299,7 +299,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=ChildSubmitDept, Mode=TwoWay}" x:Name="dw6" Header="队长电话"  Width="*" >
+                            <DataGridTextColumn  Binding="{Binding Path=ChildSubmitDept, Mode=TwoWay}" IsReadOnly="True"  x:Name="dw6" Header="队长电话"  Width="*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -327,7 +327,7 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <!--<DataGridCheckBoxColumn Binding="{Binding IsCheck}" x:Name="f1" Header=""  Width="0.5*" />-->
-                            <DataGridTextColumn  Binding="{Binding Path=MaterialsNumber,Mode=TwoWay}" x:Name="wz2" Header="编号" Width="*" >
+                            <DataGridTextColumn  Binding="{Binding Path=MaterialsNumber,Mode=TwoWay}" IsReadOnly="True"  x:Name="wz2" Header="编号" Width="*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -335,7 +335,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=MaterialsName,Mode=TwoWay}" x:Name="wz3" Header="名称"  Width="*" >
+                            <DataGridTextColumn  Binding="{Binding Path=MaterialsName,Mode=TwoWay}" IsReadOnly="True"  x:Name="wz3" Header="名称"  Width="*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -343,7 +343,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=MaterialsDeptName,Mode=TwoWay}" x:Name="wz4" Header="所属单位"  Width="2*" >
+                            <DataGridTextColumn  Binding="{Binding Path=MaterialsDeptName,Mode=TwoWay}" IsReadOnly="True"  x:Name="wz4" Header="所属单位"  Width="2*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -351,7 +351,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=TotalQuantity,Mode=TwoWay}" x:Name="wz5" Header="数量"  Width="*" >
+                            <DataGridTextColumn  Binding="{Binding Path=TotalQuantity,Mode=TwoWay}" IsReadOnly="True"  x:Name="wz5" Header="数量"  Width="*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>

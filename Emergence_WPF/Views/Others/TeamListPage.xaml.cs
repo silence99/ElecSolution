@@ -72,10 +72,12 @@ namespace Emergence_WPF
                 }
             }
             while (parent != null);
+            ViewModel.CanSelectCaptain = "Hidden";
+            ViewModel.PopupHeader = "新增队伍";
             ViewModel.PopupTeamEdit();
             FullPageEditPopup();
         }
-
+        
         private void Search_Handler(object sender, RoutedEventArgs e)
 		{
 			ViewModel.PageIndex = 1;
@@ -116,7 +118,9 @@ namespace Emergence_WPF
 		private void Edit_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
 			ViewModel.CurrentTeam = (sender as Image).DataContext as TeamModel;
-			ViewModel.PopupTeamEdit();
+            ViewModel.CanSelectCaptain = "Visible";
+            ViewModel.PopupHeader = "编辑队伍";
+            ViewModel.PopupTeamEdit();
             FullPageEditPopup();
         }
 
@@ -154,7 +158,13 @@ namespace Emergence_WPF
                 }
                 else
                 {
-                    var result = TeamService.UpdateTeam(ViewModel.CurrentTeam.ID, ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept);
+                    var captain = ViewModel.Members.First(a => a.ID == ViewModel.CurrentTeam.TeamMemberId);
+                    if(captain != null)
+                    {
+                        ViewModel.CurrentTeam.PersonCharge = captain.Name;
+                        ViewModel.CurrentTeam.PersonChargePhone = captain.PhoneNumber;
+                    }
+                    var result = TeamService.UpdateTeam(ViewModel.CurrentTeam.ID, ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept, ViewModel.CurrentTeam.TeamMemberId);
                     if (result)
                     {
                         ViewModel.ClosePopup();
@@ -200,5 +210,6 @@ namespace Emergence_WPF
             }
             while (parent != null);
         }
+
     }
 }

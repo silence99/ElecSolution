@@ -56,6 +56,7 @@
         <Setter Property="AcceptsTab" Value="True"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="MaxLength" Value="200"/>
     </Style>
     <!--Image TextBox style-->
     <Style TargetType="TextBox" x:Key="ImageTextBox" BasedOn="{StaticResource PopupTextBox}">
@@ -66,6 +67,7 @@
     <!--Search textbox with icon style-->
     <Style  x:Key="TextBoxSearch" TargetType="{x:Type TextBox}">
         <Setter Property="Margin" Value="30 15 30 15"/>
+        <Setter Property="MaxLength" Value="20"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">

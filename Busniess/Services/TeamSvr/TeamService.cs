@@ -205,17 +205,18 @@ namespace Busniess.Services
 			}
 		}
 
-		public bool UpdateTeam(long id, string teamName, string charge, string chargePhone, string teamDept)
+		public bool UpdateTeam(long id, string teamName, string charge, string chargePhone, string teamDept, long teamMemberID)
 		{
 			string serviceName = ConfigurationManager.AppSettings["teamApi"] ?? "team";
-			Dictionary<string, string> pairs = new Dictionary<string, string>()
-			{
-				{ "id", id.ToString() },
-				{ "teamName", teamName },
-				{ "personCharge", charge },
-				{ "personChargePhone", chargePhone },
-				{ "teamDept", teamDept }
-			};
+            Dictionary<string, string> pairs = new Dictionary<string, string>()
+            {
+                { "id", id.ToString() },
+                { "teamName", teamName },
+                { "personCharge", charge },
+                { "personChargePhone", chargePhone },
+                { "teamDept", teamDept },
+                { "teamMemberId", teamMemberID.ToString() }
+            };
 
 			Logger.DebugFormat("更新队伍 -- {0}", teamName);
 			var result = RequestControl.Request(serviceName, "PUT", pairs);
