@@ -303,7 +303,7 @@
                                         <Button Style="{StaticResource AddressImageButton}" Grid.Column="1" Click="AddressPopupOpen_Click">
 
                                         </Button>
-                                        <TextBox Name="SubEventEditAddressTextBox" Grid.Column="0" Style="{StaticResource ImageTextBox}"  Margin="0 0 0 0" HorizontalAlignment="Stretch"
+                                        <TextBox IsReadOnly="True" Name="SubEventEditAddressTextBox" Grid.Column="0" Style="{StaticResource ImageTextBox}"  Margin="0 0 0 0" HorizontalAlignment="Stretch"
                                                  Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
                                             <TextBox.Text>
                                                 <Binding Path="Current.Locale" Mode="TwoWay">

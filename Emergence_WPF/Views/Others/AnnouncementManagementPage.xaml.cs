@@ -26,6 +26,7 @@ namespace Emergence_WPF
 
 		private void Pager_OnPageChanged(object sender, Comm.PageChangedEventArg e)
 		{
+			ViewModel.GetAnnouncementsAction();
 		}
 
 		private void PopupEdit_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)

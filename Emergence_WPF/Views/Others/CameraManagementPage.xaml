@@ -62,16 +62,16 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                        <DataGridTextColumn Header="编号" Width="*" Binding="{Binding Path=VideoNumber}"/>
-                        <DataGridTextColumn  Header="所属单位" Width="*"  Binding="{Binding Path=Dept}"/>
-                        <DataGridTextColumn  Header="经度" Width="*"  Binding="{Binding Path=Latitude}"/>
-                        <DataGridTextColumn  Header="纬度" Width="*"  Binding="{Binding Path=Longitude}"/>
-                        <DataGridTextColumn  Header="详细地址" Width="2*"  Binding="{Binding Path=Locale}"/>
-                        <DataGridTextColumn  Header="播放地址" Width="2*"  Binding="{Binding Path=Url}"/>
-                        <DataGridTextColumn  Header="生产商" Width="*"  Binding="{Binding Path=Manufacturer}"/>
-                        <DataGridTextColumn  Header="播放方式" Width="*"  Binding="{Binding Path=PlayMode}"/>
-                        <DataGridTextColumn  Header="播放属性" Width="*"  Binding="{Binding Path=PlayAttribute}"/>
-                        <DataGridTextColumn  Header="所属系统" Width="*"  Binding="{Binding Path=System}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="编号" Width="*" Binding="{Binding Path=VideoNumber}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="所属单位" Width="*"  Binding="{Binding Path=Dept}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="经度" Width="*"  Binding="{Binding Path=Latitude}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="纬度" Width="*"  Binding="{Binding Path=Longitude}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="详细地址" Width="2*"  Binding="{Binding Path=Locale}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="播放地址" Width="2*"  Binding="{Binding Path=Url}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="生产商" Width="*"  Binding="{Binding Path=Manufacturer}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="播放方式" Width="*"  Binding="{Binding Path=PlayMode}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="播放属性" Width="*"  Binding="{Binding Path=PlayAttribute}"/>
+                        <DataGridTextColumn IsReadOnly="True" Header="所属系统" Width="*"  Binding="{Binding Path=System}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>

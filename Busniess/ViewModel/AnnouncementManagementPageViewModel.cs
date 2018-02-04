@@ -33,19 +33,19 @@ namespace Busniess.ViewModel
 		public virtual bool IsPopupOpen { get; set; }
 		public virtual double PopupWidth { get; set; }
 		public virtual double PopupHeight { get; set; }
-        
-        public virtual event SetPopupHandler SetPopupEditToFullScreen;
 
-        public AnnouncementManagementPageViewModel()
+		public virtual event SetPopupHandler SetPopupEditToFullScreen;
+
+		public AnnouncementManagementPageViewModel()
 		{
 			PageSize = GetPageSize();
 			Service = new AnnouncementService();
 			IsPopupOpen = false;
 			PageIndex = 1;
 			var popupStartPoint = ResolutionService.GetCenterControlOffset(880, 332);
-            PopupHeight = ResolutionService.Height;
-            PopupWidth = ResolutionService.Width;
-            UpdateCommand = new DelegateCommand(UpdateAction);
+			PopupHeight = ResolutionService.Height;
+			PopupWidth = ResolutionService.Width;
+			UpdateCommand = new DelegateCommand(UpdateAction);
 			DeleteCommand = new DelegateCommand(DeleteAction);
 			PopupAddCommand = new DelegateCommand(PopupAddAction);
 			PopupEditCommand = new DelegateCommand<AnnouncementModel>(PopupEditAction);
@@ -65,93 +65,115 @@ namespace Busniess.ViewModel
 			return t;
 		}
 
-		private void GetAnnouncementsAction()
+		public void GetAnnouncementsAction()
 		{
-			if (PageSize <= 0 || PageIndex < 0)
+			try
 			{
-				return;
+				if (PageSize <= 0 || PageIndex < 0)
+				{
+					return;
+				}
+				var data = Service.GetAnnouncements(PageIndex, PageSize);
+				var model = IsAopWapper ? this : this.CreateAopProxy();
+				model.Data = new ObservableCollection<AnnouncementModel>(data.Data.Select(item => item.CreateAopProxy()));
+				model.PageIndex = data.PageIndex;
+				model.PageSize = data.PageSize;
+				model.TotalCount = data.Count;
+				model.TotalPage = (int)Math.Ceiling((double)data.Count / data.PageSize);
 			}
-			var data = Service.GetAnnouncements(PageIndex, PageSize);
-			var model = IsAopWapper ? this : this.CreateAopProxy();
-			model.Data = new ObservableCollection<AnnouncementModel>(data.Data.Select(item => item.CreateAopProxy()));
-			model.PageIndex = data.PageIndex;
-			model.PageSize = data.PageSize;
-			model.TotalCount = data.Count;
-			model.TotalPage = (int)Math.Ceiling((double)data.Count / data.PageSize);
+			catch (Exception ex)
+			{
+				Logger.Error("获取通告失败", ex);
+			}
 		}
 
 		private void UpdateAction()
 		{
-			if (IsAdding)
+			try
 			{
-				var result = Service.CreateAnnouncement(Current);
-                if(result)
-                {
-                    CleanMessage();
-                    PopupCloseAction();
-                    GetAnnouncementsAction();
-                    System.Windows.MessageBox.Show("添加成功！");
-                }
-                else
-                {
-                    System.Windows.MessageBox.Show("添加失败！");
-                }
+				if (IsAdding)
+				{
+					var result = Service.CreateAnnouncement(Current);
+					if (result)
+					{
+						CleanMessage();
+						PopupCloseAction();
+						GetAnnouncementsAction();
+						System.Windows.MessageBox.Show("添加成功！");
+					}
+					else
+					{
+						System.Windows.MessageBox.Show("添加失败！");
+					}
+				}
+				else
+				{
+					var result = Service.UpdateAnnouncement(Current);
+					if (result)
+					{
+						CleanMessage();
+						PopupCloseAction();
+						GetAnnouncementsAction();
+						System.Windows.MessageBox.Show("编辑成功！");
+					}
+					else
+					{
+						System.Windows.MessageBox.Show("编辑失败！");
+					}
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				var result = Service.UpdateAnnouncement(Current);
-                if (result)
-                {
-                    CleanMessage();
-                    PopupCloseAction();
-                    GetAnnouncementsAction();
-                    System.Windows.MessageBox.Show("编辑成功！");
-                }
-                else
-                {
-                    System.Windows.MessageBox.Show("编辑失败！");
-                }
-            }
+				Logger.Error("更新公告失败", ex);
+			}
 		}
 
 		private void DeleteAction()
 		{
-			var ids = Data.Where(item => item.IsChecked).Select(item => item.ID.ToString()).ToList();
-			if (ids == null && ids.Count == 0)
+			try
 			{
-				Warn("没有选择删除的公告");
+				var ids = Data.Where(item => item.IsChecked).Select(item => item.ID.ToString()).ToList();
+				if (ids == null || ids.Count == 0)
+				{
+					Warn("没有选择删除的公告");
+					System.Windows.MessageBox.Show("没有选择删除的公告");
+				}
+				else
+				{
+					var result = Service.DeleteAnncoucement(ids);
+
+					if (result)
+					{
+						GetAnnouncementsAction();
+
+						System.Windows.MessageBox.Show("删除成功！");
+					}
+					else
+					{
+						System.Windows.MessageBox.Show("删除失败！");
+					}
+				}
 			}
-			else
+			catch (Exception ex)
 			{
-				var result = Service.DeleteAnncoucement(ids);
-
-                if (result)
-                {
-                    GetAnnouncementsAction();
-
-                    System.Windows.MessageBox.Show("删除成功！");
-                }
-                else
-                {
-                    System.Windows.MessageBox.Show("删除失败！");
-                }
+				Logger.Error("删除公告失败", ex);
 			}
 		}
 
-        private void PopupAddAction()
-        {
-            CleanMessage();
-            var model = this.CreateAopProxy();
-            model.Current = new AnnouncementModel().CreateAopProxy();
-            model.Current.Time = DateTime.Now;
-            model.IsAdding = true;
-            model.IsPopupOpen = true;
-            if (SetPopupEditToFullScreen != null)
-            {
-                SetPopupEditToFullScreen();
-            }
+		private void PopupAddAction()
+		{
+			CleanMessage();
+			var model = this.CreateAopProxy();
+			model.Current = new AnnouncementModel().CreateAopProxy();
+			model.Current.Time = DateTime.Now;
+			model.IsAdding = true;
+			model.IsPopupOpen = true;
+			if (SetPopupEditToFullScreen != null)
+			{
+				SetPopupEditToFullScreen();
+			}
 
-        }
+		}
 
 		public void PopupEditAction(AnnouncementModel model)
 		{
@@ -159,11 +181,11 @@ namespace Busniess.ViewModel
 			Current = model;
 			IsAdding = false;
 			IsPopupOpen = true;
-            if (SetPopupEditToFullScreen != null)
-            {
-                SetPopupEditToFullScreen();
-            }
-        }
+			if (SetPopupEditToFullScreen != null)
+			{
+				SetPopupEditToFullScreen();
+			}
+		}
 
 		private void PopupCloseAction()
 		{
