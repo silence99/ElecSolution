@@ -10,14 +10,14 @@ using System.Linq;
 
 namespace Emergence.Business.ViewModel
 {
-    public class VM_MasterEventManagement : NotificationObject
+	public class VM_MasterEventManagement : NotificationObject
 	{
 		public virtual string ErrorMessage { get; set; }
 		public virtual string WarningMessage { get; set; }
 		public virtual string Message { get; set; }
 		public virtual MasterEventService MasterEventService { get; set; }
-        public virtual event SetPopupHandler SetPopupToFullScreen;
-        public virtual int PageSize { get; set; }
+		public virtual event SetPopupHandler SetPopupToFullScreen;
+		public virtual int PageSize { get; set; }
 		public virtual int PageIndex { get; set; }
 		public virtual int TotalCount { get; set; }
 		public virtual int TotalPage { get; set; }
@@ -28,9 +28,9 @@ namespace Emergence.Business.ViewModel
 		public virtual bool IsPopupOpen { get; set; }
 		public virtual double PopupOffsetX { get; set; }
 		public virtual double PopupOffsetY { get; set; }
-        public virtual string PopupWidth { get; set; }
-        public virtual string PopupHeight { get; set; }
-        public virtual MasterEvent Current { get; set; }
+		public virtual string PopupWidth { get; set; }
+		public virtual string PopupHeight { get; set; }
+		public virtual MasterEvent Current { get; set; }
 		public virtual ObservableCollection<DictItem> EventTypes { get; set; }
 		public virtual ObservableCollection<DictItem> EventGrades { get; set; }
 
@@ -52,12 +52,12 @@ namespace Emergence.Business.ViewModel
 			TotalCount = 0;
 			MasterEventService = new MasterEventService();
 
-            PopupWidth = ResolutionService.Width.ToString();
-            PopupHeight = ResolutionService.Height.ToString();
-            //var popupStartPoint = ResolutionService.GetCenterControlOffset(880, 332);
-            //PopupOffsetX = popupStartPoint.X;
-            //PopupOffsetY = popupStartPoint.Y;
-            MasterEventSearchValue = "";
+			PopupWidth = ResolutionService.Width.ToString();
+			PopupHeight = ResolutionService.Height.ToString();
+			//var popupStartPoint = ResolutionService.GetCenterControlOffset(880, 332);
+			//PopupOffsetX = popupStartPoint.X;
+			//PopupOffsetY = popupStartPoint.Y;
+			MasterEventSearchValue = "";
 			GetMasterEventsAction("");
 
 			CreateCommand = new DelegateCommand(CreateAction);
@@ -112,21 +112,29 @@ namespace Emergence.Business.ViewModel
 		{
 			PopupCloseAction();
 			MasterEventService.CreateMasterEvent(Current);
-			CleanMessage();			
+			CleanMessage();
 			GetMasterEventsAction("");
 		}
 
 		private void DeleteAction()
 		{
 			var ids = MasterEvents.Where(item => item.IsChecked).Select(item => (long)item.ID).ToList();
-			if (ids == null && ids.Count == 0)
+			if (ids == null || ids.Count == 0)
 			{
-				Warn("没有选择要删除的主事件！");
+				Warn("没有选择删除的公告");
+				System.Windows.MessageBox.Show("没有选择删除的公告");
 			}
 			else
 			{
-				MasterEventService.DeleteMasterEvents(ids);
-				GetMasterEventsAction("");
+				if (MasterEventService.DeleteMasterEvents(ids))
+				{
+					GetMasterEventsAction("");
+					System.Windows.MessageBox.Show("删除成功");
+				}
+				else
+				{
+					System.Windows.MessageBox.Show("删除失败");
+				}
 			}
 		}
 
@@ -141,9 +149,9 @@ namespace Emergence.Business.ViewModel
 			model.Current.Grade = EventGrades[0].Value;
 			model.Current.GradeName = EventGrades[0].Name;
 			model.IsPopupOpen = true;
-            SetPopupToFullScreen();
+			SetPopupToFullScreen();
 
-        }
+		}
 
 		private void PopupCloseAction()
 		{
