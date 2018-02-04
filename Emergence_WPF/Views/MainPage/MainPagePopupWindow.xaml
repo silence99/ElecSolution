@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Emergence_WPF.Views.MainPage"
         mc:Ignorable="d"
         Title="MainPagePopupWindow" 
-        WindowStyle="SingleBorderWindow"
+        WindowStyle="None"
         WindowState="Maximized"
         ResizeMode="NoResize"
         BorderThickness="0"

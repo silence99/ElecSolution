@@ -149,17 +149,10 @@
                                 <ColumnDefinition Width="0.15*"/>
                                 <ColumnDefinition Width="0.35*"/>
                             </Grid.ColumnDefinitions>
-                            <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.15*"/>
-                                    <ColumnDefinition Width="0.35*"/>
-                                    <ColumnDefinition Width="0.15*"/>
-                                    <ColumnDefinition Width="0.35*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.BindingGroup>
-                                    <BindingGroup x:Name="TLPPopupBindingGroup" />
-                                </Grid.BindingGroup>
-                                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="队伍名称" Margin="0 22 0 0"/>
+                            <Grid.BindingGroup>
+                                <BindingGroup x:Name="TLPPopupBindingGroup" />
+                            </Grid.BindingGroup>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="队伍名称" Margin="0 22 0 0"/>
                             <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventTitle" Width="458px" Margin="20 18 0 0"  
                                         Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
                                 <TextBox.Text>
@@ -169,8 +162,7 @@
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </TextBox.Text>
-                                </TextBox>
-                            </Grid>
+                            </TextBox>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="所属单位"/>
                             <ComboBox Grid.Column="1" Grid.Row="1" Height="30" VerticalAlignment="Center" Width="150" HorizontalAlignment="Left" Margin="20 0 0 0"
                                      SelectedValue="{Binding Path=CurrentTeam.TeamDept,Mode=TwoWay}"
@@ -183,7 +175,7 @@
                                      SelectedValue="{Binding Path=CurrentTeam.TeamMemberId,Mode=TwoWay}"
                                      DisplayMemberPath="Name"
                                      SelectedValuePath="Value"
-                                     ItemsSource="{Binding Members}"/>
+                                     ItemsSource="{Binding Path=TeamMembers}"/>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="单位地址" Margin="0 0 0 0"/>
                             <!--<TextBox Style="{StaticResource PopupTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditTeamAddress" Width="458px" Margin="20 0 0 0"  
                                          Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
@@ -198,7 +190,7 @@
                             <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditTeamAddress" Width="458px" Margin="20 18 0 0"  
                                         Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
                                 <TextBox.Text>
-                                    <Binding Path="CurrentTeam.teamDeptLocale" Mode="TwoWay">
+                                    <Binding Path="CurrentTeam.TeamLocale" Mode="TwoWay">
                                         <Binding.ValidationRules>
                                             <local1:NotNullValidationRule/>
                                         </Binding.ValidationRules>

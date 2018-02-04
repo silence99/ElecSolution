@@ -118,9 +118,24 @@ namespace Emergence_WPF
 		private void Edit_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
 			ViewModel.CurrentTeam = (sender as Image).DataContext as TeamModel;
+            DependencyObject parent = this.PopupEditTeam.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
             ViewModel.CanSelectCaptain = "Visible";
             ViewModel.PopupHeader = "编辑队伍";
             ViewModel.PopupTeamEdit();
+            ViewModel.CurrentTeam.TeamMemberId = (ViewModel.CurrentTeam.TeamMemberId < 0 && ViewModel.Members != null && ViewModel.Members.Count != 0) ? ViewModel.Members[0].ID : ViewModel.CurrentTeam.TeamMemberId;
             FullPageEditPopup();
         }
 

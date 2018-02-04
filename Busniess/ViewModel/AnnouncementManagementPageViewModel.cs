@@ -29,12 +29,14 @@ namespace Busniess.ViewModel
 		public virtual DelegateCommand<AnnouncementModel> PopupEditCommand { get; set; }
 		public virtual DelegateCommand PopupCloseCommand { get; set; }
 
-		public virtual bool IsAdding { get; set; }
+
+        public virtual bool IsAdding { get; set; }
 		public virtual bool IsPopupOpen { get; set; }
 		public virtual double PopupWidth { get; set; }
 		public virtual double PopupHeight { get; set; }
+        public virtual string PopupHeader { get; set; }
 
-		public virtual event SetPopupHandler SetPopupEditToFullScreen;
+        public virtual event SetPopupHandler SetPopupEditToFullScreen;
 
 		public AnnouncementManagementPageViewModel()
 		{
@@ -167,25 +169,22 @@ namespace Busniess.ViewModel
 			model.Current = new AnnouncementModel().CreateAopProxy();
 			model.Current.Time = DateTime.Now;
 			model.IsAdding = true;
+            model.PopupHeader = "添加公告";
 			model.IsPopupOpen = true;
-			if (SetPopupEditToFullScreen != null)
-			{
-				SetPopupEditToFullScreen();
-			}
+            SetPopupEditToFullScreen?.Invoke();
 
-		}
+        }
 
-		public void PopupEditAction(AnnouncementModel model)
-		{
-			CleanMessage();
-			Current = model;
-			IsAdding = false;
-			IsPopupOpen = true;
-			if (SetPopupEditToFullScreen != null)
-			{
-				SetPopupEditToFullScreen();
-			}
-		}
+        public void PopupEditAction(AnnouncementModel model)
+        {
+            CleanMessage();
+            Current = model;
+            IsAdding = false;
+            PopupHeader = "编辑公告";
+            IsPopupOpen = true;
+
+            SetPopupEditToFullScreen?.Invoke();
+        }
 
 		private void PopupCloseAction()
 		{

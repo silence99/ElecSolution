@@ -31,10 +31,15 @@ namespace Emergence.Business.ViewModel
         public virtual event SetPopupHandler SetPopupEditToFullScreen;
 
         public virtual ObservableCollection<DictItem> TeamDepts { get; set; }
+        public virtual ObservableCollection<DictItem> TeamMembers { get; set; }
 
-        
-		public void PopupTeamEdit()
-		{
+
+        public void PopupTeamEdit()
+        {
+            var aopWapper = this.IsAopWapper ? this : this.AopWapper as TeamListPageViewModel;
+
+            aopWapper.TeamMembers = new ObservableCollection<DictItem>();
+
             SyncTeamMembers(CurrentTeam.ID);
 
             IsPopoupOpen = true;
@@ -62,6 +67,7 @@ namespace Emergence.Business.ViewModel
             PopupHeight = ResolutionService.Height;
             PopupWidth = ResolutionService.Width;
             TeamDepts = new ObservableCollection<DictItem>(MetaDataService.TeamDepartments);
+            TeamMembers = new ObservableCollection<DictItem>();
             Members = new ObservableCollection<PersonModel>();
             teamService = new TeamService();
         }
@@ -74,7 +80,14 @@ namespace Emergence.Business.ViewModel
             //ViewModel.PageSize = result.PageSize;
             //ViewModel.TotalCount = result.Count;
             //ViewModel.TotalPage = (int)Math.Ceiling((double)ViewModel.TotalCount / ViewModel.PageSize);
-            aopWapper.Members = new System.Collections.ObjectModel.ObservableCollection<PersonModel>(result.Data);
+            if (result.Data != null && result.Data.Length > 0)
+            {
+                aopWapper.Members = new System.Collections.ObjectModel.ObservableCollection<PersonModel>(result.Data);
+                foreach (PersonModel pm in aopWapper.Members)
+                {
+                    aopWapper.TeamMembers.Add(new DictItem { Name = pm.Name, Value = pm.ID.ToString() });
+                }
+            }
         }
     }
 }

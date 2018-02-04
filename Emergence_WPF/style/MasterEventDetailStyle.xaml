@@ -47,6 +47,7 @@
     <!--Popup TextBox style-->
     <Style TargetType="TextBox" x:Key="PopupTextBox" BasedOn="{StaticResource BaseTextBox}">
         <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="MaxLength" Value="50"/>
     </Style>
     <!--Popup Multple Line TextBox style-->
     <Style TargetType="TextBox" x:Key="PopupMultTextBox" BasedOn="{StaticResource PopupTextBox}">
