@@ -47,6 +47,8 @@ namespace Busniess.ViewModel
 			}
 
 			obj.Events = new ObservableCollection<MasterEvent>(data.Data);
+			obj.TotalCount = obj.Events.Count;
+			obj.TotalPage = (int)System.Math.Ceiling(((double)obj.TotalCount) / (obj.PageSize == 0 ? 1000 : obj.PageSize));
 		}
 	}
 }

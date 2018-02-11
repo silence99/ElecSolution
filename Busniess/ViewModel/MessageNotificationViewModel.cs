@@ -78,6 +78,11 @@ namespace Busniess.ViewModel
 			{
 				obj = this.CreateAopProxy();
 			}
+			if(string.IsNullOrEmpty(obj.SendType) || string.IsNullOrEmpty(obj.TemplateId))
+			{
+				System.Windows.MessageBox.Show("请选择发送方式和预设选择");
+				return;
+			}
 			if (obj.Members != null && obj.Members.Count > 0)
 			{
 				var sendInfo = Utils.JSONHelper.ToJsonString(obj.Members.Select(item => new
