@@ -347,8 +347,8 @@ namespace Emergence_WPF
         private void Button_MasterEventArchive_Click(object sender, RoutedEventArgs e)
         {
             this.ViewModel.MasterEventArchiveCommand.Execute();
-            NavigationService.GoBack();
-            NavigationService.Refresh();
+            MasterEventManagement mem = new MasterEventManagement();
+            NavigationService.Navigate(new MasterEventManagement());
         }
     }
 }

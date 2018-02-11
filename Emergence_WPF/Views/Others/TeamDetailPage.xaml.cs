@@ -24,7 +24,9 @@ namespace Emergence_WPF
 	{
 		TeamDetailPageViewModel ViewModel { get; set; }
 		TeamService TeamService = new TeamService();
-		public TeamDetailPage(TeamModel team)
+        TeamModel TeamInfo { get; set; }
+
+        public TeamDetailPage(TeamModel team)
 		{
 			InitializeComponent();
 			InitViewModel(team);
@@ -33,7 +35,8 @@ namespace Emergence_WPF
 		private void InitViewModel(TeamModel team)
 		{
 			ViewModel = new TeamDetailPageViewModel().CreateAopProxy();
-			DataContext = ViewModel;
+            TeamInfo = team;
+            DataContext = ViewModel;
 			ViewModel.ID = team.ID;
 			ViewModel.PersonCharge = team.PersonCharge;
 			ViewModel.PersonChargePhone = team.PersonChargePhone;
@@ -50,11 +53,17 @@ namespace Emergence_WPF
 
         private void Delete_Handler(object sender, RoutedEventArgs e)
 		{
+            try
+            {
+
             var removeList = ViewModel.Members.Where(mbr => mbr.IsChecked).Select(mbr => mbr.ID.ToString()).ToList();
             if (removeList != null && removeList.Count() > 0)
             {
-                var result = TeamService.DeleteTeamMembers(ViewModel.Members.Where(mbr => mbr.IsChecked).Select(mbr => mbr.ID.ToString()).ToList());
-
+                var result = TeamService.DeleteTeamMembers(removeList);
+                if (ViewModel.Members.Where(mbr => mbr.IsChecked).Select(mbr => mbr.ID).ToList().Contains(TeamInfo.TeamMemberId))
+                {
+                    TeamService.UpdateTeam(TeamInfo.ID, TeamInfo.TeamName, "", "", TeamInfo.TeamDept, TeamInfo.TeamLocale, 0);
+                }
                 if (result)
                 {
                     System.Windows.MessageBox.Show("删除成功！");
@@ -68,9 +77,15 @@ namespace Emergence_WPF
             else
             {
                 System.Windows.MessageBox.Show("请选择要删除的人员！");
+                }
+            }
+            catch (Exception)
+            {
+
+                System.Windows.MessageBox.Show("删除人员出错！");
             }
 
-		}
+        }
 
 		private void ClosePopup_Handler(object sender, RoutedEventArgs e)
 		{
@@ -79,136 +94,136 @@ namespace Emergence_WPF
         
         private void Import_Handler(object sender, RoutedEventArgs e)
         {
-            #region choose import file
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Microsoft Excel 2013|*.xlsx";
-            var dlgResult = dialog.ShowDialog();
-            if (dlgResult != DialogResult.OK && dlgResult != DialogResult.Yes)
-            {
-                return;
-            }
-            #endregion
-            #region check file if exists
-            FileStream stream = null;
             try
             {
+                #region choose import file
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Filter = "Microsoft Excel 2013|*.xlsx";
+                var dlgResult = dialog.ShowDialog();
+                if (dlgResult != DialogResult.OK && dlgResult != DialogResult.Yes)
+                {
+                    return;
+                }
+                #endregion
+                #region check file if exists
+                FileStream stream = null;
                 //stream = new FileStream(dialog.FileName, FileMode.Open);
                 stream = File.OpenRead(dialog.FileName);
+                #endregion
+
+
+                ICollection<PersonModel> teamMembers = new List<PersonModel>();
+                #region read excel
+                using (stream)
+                {
+                    ExcelPackage package = new ExcelPackage(stream);
+
+                    ExcelWorksheet sheet = package.Workbook.Worksheets[1];
+                    #region check excel format
+                    if (sheet == null)
+                    {
+                        System.Windows.MessageBox.Show("Excel文件格式不正确!");
+                        return;
+                    }
+                    if ((sheet.Cells[1, 1].Value != null && sheet.Cells[1, 2].Value != null && sheet.Cells[1, 3].Value != null) &&
+                        (!sheet.Cells[1, 1].Value.Equals("姓名") ||
+                         !sheet.Cells[1, 2].Value.Equals("手机号") ||
+                         !sheet.Cells[1, 3].Value.Equals("职位")))
+                    {
+                        System.Windows.MessageBox.Show("Excel文件格式不正确!");
+                        return;
+                    }
+                    #endregion
+
+                    #region get last row index
+                    int lastRow = sheet.Dimension.End.Row;
+                    while (sheet.Cells[lastRow, 1].Value == null)
+                    {
+                        lastRow--;
+                    }
+                    #endregion
+
+                    var teamMemberPlace = MetaDataService.TeamMemberPlaces;
+                    bool uploadFailed = false;
+                    string uploadFailedStr = "上传失败，以下行数据有误：";
+
+                    #region read datas
+                    for (int i = 2; i <= lastRow; i++)
+                    {
+                        object value;
+                        PersonModel pm = new PersonModel();
+                        value = sheet.Cells[i, 1].Value;
+                        if (value != null && CheckString(value.ToString(), 0, 28))
+                        {
+                            pm.Name = value.ToString();
+                        }
+                        else
+                        {
+                            uploadFailedStr += i.ToString() + ",";
+                            uploadFailed = true;
+                            continue;
+                        }
+
+                        value = sheet.Cells[i, 2].Value;
+                        if (value != null && CheckPhoneNumber(value.ToString()))
+                        {
+                            pm.PhoneNumber = value.ToString();
+                        }
+                        else
+                        {
+                            uploadFailedStr += i.ToString() + ",";
+                            uploadFailed = true;
+                            continue;
+                        }
+
+                        value = sheet.Cells[i, 3].Value;
+                        if (value != null && teamMemberPlace.Where(a => a.Name == value.ToString()).Count() > 0)
+                        {
+                            pm.PlaceName = value.ToString();
+                        }
+                        else
+                        {
+                            uploadFailedStr += i.ToString() + ",";
+                            uploadFailed = true;
+                            continue;
+                        }
+
+                        teamMembers.Add(pm);
+                    }
+
+                    if (teamMembers.Count() < 1)
+                    {
+                        System.Windows.MessageBox.Show("文档内没有有效的数据，请检查后上传!");
+                        return;
+                    }
+
+                    if (uploadFailed)
+                    {
+                        System.Windows.MessageBox.Show(uploadFailedStr + "请检查后上传!");
+                        return;
+                    }
+
+                    var uploadString = JSONHelper.ToJsonString(teamMembers.Select(a => new
+                    {
+                        name = a.Name,
+                        phoneNumber = a.PhoneNumber,
+                        place = a.PlaceName
+                    }).ToArray());
+                    #endregion
+                    var uploadResult = TeamService.ImportTeamMembers(ViewModel.ID, uploadString);
+                    if (!uploadResult)
+                    {
+                        System.Windows.MessageBox.Show("上传失败，请联系管理员!");
+                    }
+                    SyncTeamMembers();
+                }
+                #endregion
             }
             catch (IOException ex)
             {
                 System.Windows.MessageBox.Show("上传失败，请联系管理员！");
                 return;
             }
-            #endregion
-
-
-            ICollection<PersonModel> teamMembers = new List<PersonModel>();
-            #region read excel
-            using (stream)
-            {
-                ExcelPackage package = new ExcelPackage(stream);
-
-                ExcelWorksheet sheet = package.Workbook.Worksheets[1];
-                #region check excel format
-                if (sheet == null)
-                {
-                    System.Windows.MessageBox.Show("Excel文件格式不正确!");
-                    return;
-                }
-                if ((sheet.Cells[1, 1].Value != null && sheet.Cells[1, 2].Value != null && sheet.Cells[1, 3].Value != null) && 
-                    (!sheet.Cells[1, 1].Value.Equals("姓名") ||
-                     !sheet.Cells[1, 2].Value.Equals("手机号") ||
-                     !sheet.Cells[1, 3].Value.Equals("职位")))
-                {
-                    System.Windows.MessageBox.Show("Excel文件格式不正确!");
-                    return;
-                }
-                #endregion
-
-                #region get last row index
-                int lastRow = sheet.Dimension.End.Row;
-                while (sheet.Cells[lastRow, 1].Value == null)
-                {
-                    lastRow--;
-                }
-                #endregion
-
-                var teamMemberPlace = MetaDataService.TeamMemberPlaces;
-                bool uploadFailed = false;
-                string uploadFailedStr = "上传失败，以下行数据有误：";
-
-                #region read datas
-                for (int i = 2; i <= lastRow; i++)
-                {
-                    object value;
-                    PersonModel pm = new PersonModel();
-                    value = sheet.Cells[i, 1].Value;
-                    if (value != null && CheckString(value.ToString(),0,28))
-                    {
-                        pm.Name = value.ToString();
-                    }
-                    else
-                    {
-                        uploadFailedStr += i.ToString() + ",";
-                        uploadFailed = true;
-                        continue;
-                    }
-
-                    value = sheet.Cells[i, 2].Value;
-                    if (value != null && CheckPhoneNumber(value.ToString()))
-                    {
-                        pm.PhoneNumber = value.ToString();
-                    }
-                    else
-                    {
-                        uploadFailedStr += i.ToString() + ",";
-                        uploadFailed = true;
-                        continue;
-                    }
-
-                    value = sheet.Cells[i, 3].Value;
-                    if (value != null && teamMemberPlace.Where(a => a.Name == value.ToString()).Count() > 0)
-                    {
-                        pm.PlaceName = value.ToString();
-                    }
-                    else
-                    {
-                        uploadFailedStr += i.ToString() + ",";
-                        uploadFailed = true;
-                        continue;
-                    }
-
-                    teamMembers.Add(pm);
-                }
-
-                if (teamMembers.Count() < 1)
-                {
-                    System.Windows.MessageBox.Show("文档内没有有效的数据，请检查后上传!");
-                    return;
-                }
-                
-                if (uploadFailed )
-                {
-                    System.Windows.MessageBox.Show(uploadFailedStr + "请检查后上传!");
-                    return;
-                }
-
-                var uploadString = JSONHelper.ToJsonString(teamMembers.Select(a => new
-                {
-                    name = a.Name,
-                    phoneNumber = a.PhoneNumber,
-                    place = a.PlaceName
-                }).ToArray());
-                #endregion
-                var uploadResult = TeamService.ImportTeamMembers(ViewModel.ID, uploadString);
-                if (!uploadResult)
-                {
-                    System.Windows.MessageBox.Show("上传失败，请联系管理员!");
-                }
-                SyncTeamMembers();
-            }
-            #endregion
         }
 
         private void Add_Handler(object sender, RoutedEventArgs e)
