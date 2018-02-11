@@ -75,10 +75,7 @@
             </DockPanel>
             <DataGrid DockPanel.Dock="Top" Margin="20,0,20,0"
                     Name="GridTeamList" 
-                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-                    ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                    Background="Transparent"
-                    AutoGenerateColumns="False" 
+                      Style="{StaticResource DataGridRight}"
                     ColumnHeaderHeight="70"
                     ItemsSource="{Binding Materials, Mode=TwoWay}"
                     RowHeight="50"
@@ -86,7 +83,12 @@
                     HorizontalGridLinesBrush="#dcdcdc"
                     VerticalGridLinesBrush="#dcdcdc"
                     BorderBrush="#dcdcdc"
-                    CanUserAddRows="False">
+                    CanUserAddRows="False"
+                    ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                    RowHeaderWidth="0" HeadersVisibility="Column"
+                    HorizontalAlignment="Stretch" Background="Transparent"
+                    AutoGenerateColumns="False" >
                 <DataGrid.Columns >
                     <DataGridTemplateColumn Width="40">
                         <DataGridTemplateColumn.CellTemplate>
@@ -98,13 +100,13 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=MaterialsNumber}" x:Name="f2" Header="编号" Width="*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=MaterialsName}" x:Name="f3" Header="名称"  Width="*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=MaterialsTypeName}" x:Name="f4" Header="类别"  Width="*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=MaterialsDeptName}" x:Name="f5" Header="所属单位"  Width="*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=IsConsumable}" x:Name="f6" Header="是否消耗品"  Width="*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=IsBigMaterials}" x:Name="f7" Header="是否大物件" Width="2*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=TotalQuantity}" x:Name="f8" Header="数量" Width="2*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=MaterialsNumber}" IsReadOnly="True" x:Name="f2" Header="编号" Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=MaterialsName}" IsReadOnly="True" x:Name="f3" Header="名称"  Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=MaterialsTypeName}" IsReadOnly="True" x:Name="f4" Header="类别"  Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=MaterialsDeptName}" IsReadOnly="True" x:Name="f5" Header="所属单位"  Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=IsConsumable}" IsReadOnly="True" x:Name="f6" Header="是否消耗品"  Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=IsBigMaterials}" IsReadOnly="True" x:Name="f7" Header="是否大物件" Width="2*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=TotalQuantity}" IsReadOnly="True" x:Name="f8" Header="数量" Width="2*" ></DataGridTextColumn>
                     <DataGridTemplateColumn Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>

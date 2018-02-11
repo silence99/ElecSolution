@@ -60,8 +60,9 @@ namespace Emergence_WPF
 		private void Add_Handler(object sender, RoutedEventArgs e)
 		{
 			ViewModel.CurrentTeam = new TeamModel().CreateAopProxy();
-			ViewModel.CurrentTeam.TeamDept = ViewModel.TeamDepts == null || ViewModel.TeamDepts.Count == 0 ? "" : ViewModel.TeamDepts[0].Value;
-			DependencyObject parent = this.PopupEditTeam.Child;
+            ViewModel.CurrentTeam.TeamDept = ViewModel.TeamDepts == null || ViewModel.TeamDepts.Count == 0 ? "" : ViewModel.TeamDepts[0].Value;
+            ViewModel.CurrentTeam.TeamMemberId = ViewModel.TeamMembers == null || ViewModel.TeamMembers.Count == 0 ? 0 : Convert.ToInt64(ViewModel.TeamMembers[0].Value);
+            DependencyObject parent = this.PopupEditTeam.Child;
 			do
 			{
 				parent = VisualTreeHelper.GetParent(parent);
@@ -138,7 +139,8 @@ namespace Emergence_WPF
 			ViewModel.CanSelectCaptain = "Visible";
 			ViewModel.PopupHeader = "编辑队伍";
 			ViewModel.PopupTeamEdit();
-			ViewModel.CurrentTeam.TeamMemberId = (ViewModel.CurrentTeam.TeamMemberId < 0 && ViewModel.Members != null && ViewModel.Members.Count != 0) ? ViewModel.Members[0].ID : ViewModel.CurrentTeam.TeamMemberId;
+            //ViewModel.CurrentTeam.TeamMemberId = ViewModel.TeamMembers == null || ViewModel.TeamMembers.Count == 0 ? 0 : Convert.ToInt64(ViewModel.TeamMembers[0].Value);
+            ViewModel.CurrentTeam.TeamMemberId = ((ViewModel.CurrentTeam.TeamMemberId <= 0 || !ViewModel.TeamMembers.Select(a => Convert.ToInt64( a.Value)).Contains(ViewModel.CurrentTeam.TeamMemberId)) && ViewModel.Members != null && ViewModel.Members.Count != 0) ? ViewModel.Members[0].ID : ViewModel.CurrentTeam.TeamMemberId;
 			FullPageEditPopup();
 		}
 

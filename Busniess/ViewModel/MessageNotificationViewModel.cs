@@ -109,11 +109,15 @@ namespace Busniess.ViewModel
 		private void DeleteMemberAction()
 		{
 			var obj = this.IsAopWapper ? this : this.CreateAopProxy();
-			if (obj.Members != null && obj.Members.Count != 0)
-			{
-				obj.Members = new ObservableCollection<PersonModel>(obj.Members.Where(item => !item.IsChecked).ToArray());
+            if (obj.Members != null && obj.Members.Count > 0 && obj.Members.Where(item => !item.IsChecked).Count() > 0)
+            {
+                obj.Members = new ObservableCollection<PersonModel>(obj.Members.Where(item => !item.IsChecked).ToArray());
+                System.Windows.MessageBox.Show("删除成功！");
             }
-            System.Windows.MessageBox.Show("删除成功！");
+            else
+            {
+                System.Windows.MessageBox.Show("请选择要删除的人员！");
+            }
         }
 
 		private void PopupAddDialogAction()
