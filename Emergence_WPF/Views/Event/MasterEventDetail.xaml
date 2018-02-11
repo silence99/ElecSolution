@@ -42,7 +42,7 @@
                 <Border Name="LeftGridRow1Border" BorderBrush="#4D9A96" BorderThickness="0 0 0 2" Grid.Column="0" Grid.Row="0">
                     <DockPanel>
                         <Button Style="{StaticResource BackImageButton}" Command="NavigationCommands.BrowseBack" DockPanel.Dock="Left" Margin="10 0 10 0" />
-                        <Button Style="{StaticResource ArchiveImageButton}" DockPanel.Dock="Right" Margin="10 0 10 0" Command="{Binding Path=MasterEventArchiveCommand}"/>
+                        <Button Style="{StaticResource ArchiveImageButton}" Name="Button_MasterEventArchive" DockPanel.Dock="Right" Margin="10 0 10 0" Click="Button_MasterEventArchive_Click" />
                         <Label DockPanel.Dock="Left" FontSize="20px" Style="{StaticResource LeftLabel}">主事件详情</Label>
                     </DockPanel>
                 </Border>
@@ -128,7 +128,7 @@
                             </i:Interaction.Triggers>-->
                         </Label>
                         <Border BorderBrush="#4D9A96" BorderThickness="2 0 0 0" Grid.Column="2" Grid.Row="0" Margin="0 25 0 25"/>
-                        <Label Grid.Column="2" Grid.Row="0" DockPanel.Dock="Left" Style="{StaticResource LeftLabel}" FontSize="16px" HorizontalAlignment="Center" Content="地图标绘" MouseDown="ThreePopupMapButton_Click"/>
+                        <Label Grid.Column="2" Grid.Row="0" DockPanel.Dock="Left" Style="{StaticResource LeftLabel}" FontSize="16px" HorizontalAlignment="Center" Content="地图标绘" MouseLeftButtonDown="ThreePopupMapButton_Click"/>
                     </Grid>
                 </DockPanel>
             </Grid>

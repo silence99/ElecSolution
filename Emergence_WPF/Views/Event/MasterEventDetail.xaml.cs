@@ -187,6 +187,7 @@ namespace Emergence_WPF
 				WindowStyle = WindowStyle.None,
 				WindowState = WindowState.Maximized
 			};
+            win.Topmost = true;
 			win.MoveToCenter(ViewModel.MasterEventInfo.Longitude, ViewModel.MasterEventInfo.Latitude);
 			win.BindingData(data);
 			win.Show();
@@ -304,7 +305,14 @@ namespace Emergence_WPF
             }
             if (!result)
             {
-                this.ViewModel.CreateSubEventCommand.Execute();
+                if (this.ViewModel.SubEventEdit.Id == -1)
+                {
+                    this.ViewModel.CreateSubEventCommand.Execute();
+                }
+                else
+                {
+                    this.ViewModel.UpdateSubEventCommand.Execute();
+                }
             }
             
         }
@@ -318,7 +326,10 @@ namespace Emergence_WPF
             ViewModel.OpenSummaryEvaluation1Command.Execute();
             //sew.Height = ResolutionService.Height;
             //sew.Width = ResolutionService.Width;
+            sew.Owner = Window.GetWindow(this);
             sew.Show();
+            //sew.Height = ResolutionService.Height;
+            //sew.Width = ResolutionService.Width;
         }
 
         private void Label_InformationSummary_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -331,6 +342,13 @@ namespace Emergence_WPF
             //sew.Height = ResolutionService.Height;
             //sew.Width = ResolutionService.Width;
             sew.Show();
+        }
+
+        private void Button_MasterEventArchive_Click(object sender, RoutedEventArgs e)
+        {
+            this.ViewModel.MasterEventArchiveCommand.Execute();
+            NavigationService.GoBack();
+            NavigationService.Refresh();
         }
     }
 }

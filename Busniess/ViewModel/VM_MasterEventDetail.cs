@@ -322,7 +322,8 @@ namespace Emergence.Business.ViewModel
 			//	ChildGradeName = EventGrades == null || EventGrades.Count == 0 ? "" : EventGrades[0].Name
 			//};
 			SubEventEditPopup.PopupName = "创建子事件";
-			SubEventEditPopup.IsOpen = true;
+            SubEventEdit.Id = -1;
+            SubEventEditPopup.IsOpen = true;
 			if (SetPopupSubEventEditToFullScreen != null)
 			{
 				SetPopupSubEventEditToFullScreen();
@@ -434,7 +435,12 @@ namespace Emergence.Business.ViewModel
 		{
 			var thisAop = this.AopWapper as VM_MasterEventDetail;
 			var ids = UnSelectedTeamList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
-			var result = teamService.BindingUnbindingTeamToSubevnt(SubEventDetail.Id, ids, "POST");
+            if (ids == null || ids.Count() <= 0)
+            {
+                ShowMessageBox("请选择要添加的队伍！");
+                return;
+            }
+            var result = teamService.BindingUnbindingTeamToSubevnt(SubEventDetail.Id, ids, "POST");
 			GetTeamListOb();
 			if (result)
 			{
@@ -452,7 +458,12 @@ namespace Emergence.Business.ViewModel
 		private void DeleteTeamAction()
 		{
 			var thisAop = this.AopWapper as VM_MasterEventDetail;
-			var ids = TeamList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
+			var ids = thisAop.TeamList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
+            if (ids == null || ids.Count() <= 0)
+            {
+                ShowMessageBox("请选择要删除的队伍！");
+                return;
+            }
 			var result = teamService.BindingUnbindingTeamToSubevnt(SubEventDetail.Id, ids, "DELETE");
 			GetTeamListOb();
 			if (result)
@@ -508,7 +519,12 @@ namespace Emergence.Business.ViewModel
 		{
 			var thisAop = this.AopWapper as VM_MasterEventDetail;
 			var ids = UnSelectedMaterialList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
-			var result = materialService.BindingMaterialToSubevnt(SubEventDetail.Id, ids);
+            if (ids == null || ids.Count() <= 0)
+            {
+                ShowMessageBox("请选择要添加的物资！");
+                return;
+            }
+            var result = materialService.BindingMaterialToSubevnt(SubEventDetail.Id, ids);
 			GetMaterialListOb();
 			if (result)
 			{
@@ -524,8 +540,13 @@ namespace Emergence.Business.ViewModel
 		private void DeleteMaterialAction()
 		{
 			var thisAop = this.AopWapper as VM_MasterEventDetail;
-			var ids = UnSelectedMaterialList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
-			var result = materialService.UnbindingMaterialFromSubevnt(SubEventDetail.Id, ids);
+			var ids = thisAop.MaterialList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
+            if (ids == null || ids.Count() <= 0)
+            {
+                ShowMessageBox("请选择要删除的物资！");
+                return;
+            }
+            var result = materialService.UnbindingMaterialFromSubevnt(SubEventDetail.Id, ids);
 			if (result)
 			{
 				ShowMessageBox("删除成功！");

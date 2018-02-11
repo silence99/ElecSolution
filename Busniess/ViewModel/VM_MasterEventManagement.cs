@@ -131,8 +131,8 @@ namespace Emergence.Business.ViewModel
 			var ids = MasterEvents.Where(item => item.IsChecked).Select(item => (long)item.ID).ToList();
 			if (ids == null || ids.Count == 0)
 			{
-				Warn("没有选择删除的公告");
-				System.Windows.MessageBox.Show("没有选择删除的公告！");
+				Warn("请选择要删除的主事件！");
+				System.Windows.MessageBox.Show("请选择要删除的主事件!");
 			}
 			else
 			{

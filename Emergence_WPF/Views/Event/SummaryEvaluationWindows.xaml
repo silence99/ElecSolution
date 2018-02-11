@@ -10,8 +10,8 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen"
-        Width="700px" Height="500px"
-        Title="SummaryEvaluationWindows">
+        WindowState="Maximized"
+        Title="SummaryEvaluationWindows" AllowsTransparency="True" ShowInTaskbar="False">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -21,9 +21,12 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid Background="{StaticResource OpacityBrush}">
-        <Border BorderBrush="#BFBFBF" BorderThickness="1" Width="700px" Height="500px">
-            <Grid Background="#FFFFFF">
+    <Window.Background>
+        <SolidColorBrush  Color="#000000" Opacity="0.5"/>
+    </Window.Background>
+    <Grid>
+        <Border BorderBrush="#BFBFBF" BorderThickness="1">
+            <Grid Background="#FFFFFF"  Width="700px" Height="500px">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50px"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
