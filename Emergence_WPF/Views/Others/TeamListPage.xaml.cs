@@ -159,7 +159,7 @@ namespace Emergence_WPF
             {
                 if (ViewModel.CurrentTeam.ID == 0)
                 {
-                    var result = TeamService.CreateTeam(ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept);
+                    var result = TeamService.CreateTeam(ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept, ViewModel.CurrentTeam.TeamLocale);
                     if (result)
                     {
                         ViewModel.ClosePopup();
@@ -179,7 +179,7 @@ namespace Emergence_WPF
                         ViewModel.CurrentTeam.PersonCharge = captain.Name;
                         ViewModel.CurrentTeam.PersonChargePhone = captain.PhoneNumber;
                     }
-                    var result = TeamService.UpdateTeam(ViewModel.CurrentTeam.ID, ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept, ViewModel.CurrentTeam.TeamMemberId);
+                    var result = TeamService.UpdateTeam(ViewModel.CurrentTeam.ID, ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept, ViewModel.CurrentTeam.TeamLocale, ViewModel.CurrentTeam.TeamMemberId);
                     if (result)
                     {
                         ViewModel.ClosePopup();

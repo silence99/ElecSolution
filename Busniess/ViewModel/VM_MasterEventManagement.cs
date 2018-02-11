@@ -7,6 +7,8 @@ using System;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Linq;
+using System.Windows;
+using System.Windows.Forms;
 
 namespace Emergence.Business.ViewModel
 {
@@ -113,12 +115,12 @@ namespace Emergence.Business.ViewModel
 			PopupCloseAction();
             if (MasterEventService.CreateMasterEvent(Current))
             {
-                System.Windows.MessageBox.Show("创建成功！");
+                System.Windows.MessageBox.Show(new Window { Topmost = true }, "创建成功！");
             }
             else
             {
 
-                System.Windows.MessageBox.Show("创建失败！");
+                System.Windows.MessageBox.Show(new Window { Topmost = true }, "创建失败！");
             }
 			CleanMessage();
 			GetMasterEventsAction("");

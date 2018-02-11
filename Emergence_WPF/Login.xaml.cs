@@ -51,7 +51,7 @@ namespace Emergence_WPF
 						{
 							MessageBox.Show("应用程序错误，请联系管理员。");
 						}
-
+                        main.Topmost = true;
 						main.Show();
 
 						this.Close();
@@ -64,7 +64,7 @@ namespace Emergence_WPF
 				}
 				catch (Exception ex)
 				{
-					MessageBox.Show("登录异常，请重试或联系管理员:"+ex.ToString());
+					MessageBox.Show("登录异常，请重试或联系管理员!");
 				}
 			}
 			//#endif

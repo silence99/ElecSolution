@@ -39,6 +39,8 @@ namespace Emergence_WPF
 			ViewModel.PersonChargePhone = team.PersonChargePhone;
 			ViewModel.TeamDept = team.TeamDept;
 			ViewModel.TeamName = team.TeamName;
+            ViewModel.TeamLocale = team.TeamLocale;
+            ViewModel.TeamMemberId = team.TeamMemberId;
 			ViewModel.TotalNumber = team.TotalNumber;
 
 			SyncTeamMembers();
@@ -48,17 +50,26 @@ namespace Emergence_WPF
 
         private void Delete_Handler(object sender, RoutedEventArgs e)
 		{
-			var result = TeamService.DeleteTeamMembers(ViewModel.Members.Where(mbr => mbr.IsChecked).Select(mbr => mbr.ID.ToString()).ToList());
-
-            if (result)
+            var removeList = ViewModel.Members.Where(mbr => mbr.IsChecked).Select(mbr => mbr.ID.ToString()).ToList();
+            if (removeList != null && removeList.Count() > 0)
             {
-                System.Windows.MessageBox.Show("删除成功！");
-                SyncTeamMembers();
+                var result = TeamService.DeleteTeamMembers(ViewModel.Members.Where(mbr => mbr.IsChecked).Select(mbr => mbr.ID.ToString()).ToList());
+
+                if (result)
+                {
+                    System.Windows.MessageBox.Show("删除成功！");
+                    SyncTeamMembers();
+                }
+                else
+                {
+                    System.Windows.MessageBox.Show("删除失败！");
+                }
             }
             else
             {
-                System.Windows.MessageBox.Show("删除失败！");
+                System.Windows.MessageBox.Show("请选择要删除的人员！");
             }
+
 		}
 
 		private void ClosePopup_Handler(object sender, RoutedEventArgs e)

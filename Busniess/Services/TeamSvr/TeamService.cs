@@ -169,7 +169,7 @@ namespace Busniess.Services
 			}
 		}
 
-		public bool CreateTeam(string teamName, string charge, string chargePhone, string teamDept)
+		public bool CreateTeam(string teamName, string charge, string chargePhone, string teamDept, string teamDeptLocale)
 		{
 			string serviceName = ConfigurationManager.AppSettings["teamApi"] ?? "team";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()
@@ -177,7 +177,8 @@ namespace Busniess.Services
 				{ "teamName", teamName },
 				{ "personCharge", charge },
 				{ "personChargePhone", chargePhone },
-				{ "teamDept", teamDept }
+				{ "teamDept", teamDept },
+                { "teamDeptLocale", teamDeptLocale}
 			};
 
 			Logger.DebugFormat("创建队伍 -- {0}", teamName);
@@ -205,7 +206,7 @@ namespace Busniess.Services
 			}
 		}
 
-		public bool UpdateTeam(long id, string teamName, string charge, string chargePhone, string teamDept, long teamMemberID)
+		public bool UpdateTeam(long id, string teamName, string charge, string chargePhone, string teamDept,string teamDeptLocale, long teamMemberID)
 		{
 			string serviceName = ConfigurationManager.AppSettings["teamApi"] ?? "team";
             Dictionary<string, string> pairs = new Dictionary<string, string>()
@@ -215,7 +216,8 @@ namespace Busniess.Services
                 { "personCharge", charge },
                 { "personChargePhone", chargePhone },
                 { "teamDept", teamDept },
-                { "teamMemberId", teamMemberID.ToString() }
+                { "teamMemberId", teamMemberID.ToString() },
+                { "teamDeptLocale",teamDeptLocale}
             };
 
 			Logger.DebugFormat("更新队伍 -- {0}", teamName);
