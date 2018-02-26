@@ -16,7 +16,8 @@ namespace Emergence.Business.ViewModel
 
 		public virtual double PopupWidth { get; set; }
 		public virtual double PopupHeight { get; set; }
-		public virtual bool IsPopoupOpen { get; set; }
+        public virtual string PopupName { get; set; }
+        public virtual bool IsPopoupOpen { get; set; }
 		public virtual bool IsPageEnabled { get; set; }
 		public virtual PersonModel CurrentPerson { get; set; }
 		public virtual bool IsTeamEditModel { get; set; }

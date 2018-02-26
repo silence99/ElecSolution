@@ -188,6 +188,7 @@ namespace Emergence_WPF
 				WindowState = WindowState.Maximized
 			};
             win.Topmost = true;
+            win.Owner = Window.GetWindow(this);
 			win.MoveToCenter(ViewModel.MasterEventInfo.Longitude, ViewModel.MasterEventInfo.Latitude);
 			win.BindingData(data);
 			win.Show();
@@ -197,7 +198,9 @@ namespace Emergence_WPF
 		{
 			ViewModel.ThreePopupSelectCloseAction();
 			SubEventPopup_VideoV2 video = new SubEventPopup_VideoV2();
-			video.SetCoordinate(ViewModel.MasterEventInfo.Latitude, ViewModel.MasterEventInfo.Longitude);
+            video.Topmost = true;
+            video.Owner = Window.GetWindow(this);
+            video.SetCoordinate(ViewModel.MasterEventInfo.Latitude, ViewModel.MasterEventInfo.Longitude);
 			video.Show();
 		}
 

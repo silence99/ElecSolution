@@ -196,7 +196,7 @@
                     <DockPanel Grid.Row="0">
                         <Button Style="{StaticResource CancelImageButton}"   Click="ClosePopup_Handler" DockPanel.Dock="Left" Margin="19 0 19 0" />
                         <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
-                        <Label Style="{StaticResource RightLabel}" FontSize="20px"  DockPanel.Dock="Left" Content="添加队员" Margin="19 0 0 0"/>
+                        <Label Style="{StaticResource RightLabel}" FontSize="20px"  DockPanel.Dock="Left" Content="{Binding Path=PopupName}" Margin="19 0 0 0"/>
                         <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Width="88px" Click="EditTeamMember_Handler"/>
                     </DockPanel>
                     <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">

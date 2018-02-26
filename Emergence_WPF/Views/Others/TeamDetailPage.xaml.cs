@@ -246,7 +246,8 @@ namespace Emergence_WPF
             }
             while (parent != null);
             ViewModel.IsAddMember = true;
-			ViewModel.PopupTeamEdit();
+            ViewModel.PopupName = "新增队员";
+            ViewModel.PopupTeamEdit();
             SetPopupToFullScreen();
         }
 
@@ -278,10 +279,28 @@ namespace Emergence_WPF
 		}
 
 		private void GridTeamList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
-		{
-			ViewModel.CurrentPerson = GridTeamMembersList.SelectedItem as PersonModel;
-			ViewModel.PopupTeamEdit();
-		}
+        {
+            DependencyObject parent = this.PopupEditTeamMember.Child;
+            do
+            {
+                parent = VisualTreeHelper.GetParent(parent);
+
+                if (parent != null && parent.ToString() == "System.Windows.Controls.Primitives.PopupRoot")
+                {
+                    var element = parent as FrameworkElement;
+                    element.Height = ResolutionService.Height;
+                    element.Width = ResolutionService.Width;
+                    break;
+                }
+            }
+            while (parent != null);
+            ViewModel.IsAddMember = false;
+            ViewModel.CurrentPerson = GridTeamMembersList.SelectedItem as PersonModel;
+            ViewModel.PopupName = "编辑队员";
+            ViewModel.PopupTeamEdit();
+            SetPopupToFullScreen();
+
+        }
 
 		private void Pager_OnPageChanged(object sender, PageChangedEventArg e)
 		{

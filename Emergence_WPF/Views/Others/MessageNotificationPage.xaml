@@ -123,8 +123,8 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=Name, Mode=TwoWay}" x:Name="f2" Header="姓名" Width="210" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=PhoneNumber, Mode=TwoWay}" x:Name="f3" Header="联系电话" Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=Name, Mode=TwoWay}" x:Name="f2" IsReadOnly="True" Header="姓名" Width="210" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=PhoneNumber, Mode=TwoWay}" x:Name="f3" IsReadOnly="True" Header="联系电话" Width="*" ></DataGridTextColumn>
                     <DataGridTemplateColumn Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
