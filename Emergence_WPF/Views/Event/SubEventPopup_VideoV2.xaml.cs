@@ -76,9 +76,9 @@ namespace Emergence_WPF.Views.Event
 				return;
 
 			if (IntPtr.Size == 4)
-				e.VlcLibDirectory = new DirectoryInfo(Path.Combine(currentDirectory, @"lib\x86\"));
+				e.VlcLibDirectory = new System.IO.DirectoryInfo(System.IO.Path.Combine(currentDirectory, @"ThirdParty\lib\x86\"));
 			else
-				e.VlcLibDirectory = new DirectoryInfo(Path.Combine(currentDirectory, @"lib\x64\"));
+				e.VlcLibDirectory = new System.IO.DirectoryInfo(System.IO.Path.Combine(currentDirectory, @"ThirdParty\lib\x64\"));
 		}
 
 		private void Video1SelectChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
