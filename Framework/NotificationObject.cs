@@ -226,49 +226,5 @@ namespace Framework
         {
             UIChanged = true;
         }
-
-        public static object Copy(object source, object target)
-        {
-            throw new NotImplementedException();
-            if (source == null)
-            {
-                return null;
-            }
-
-            if (source.GetType().IsValueType || source is string)
-            {
-                return source;
-            }
-
-            MemberInfo[] memberCollection = source.GetType().GetMembers();
-            if (target == null)
-            {
-                target = Activator.CreateInstance(source.GetType());
-            }
-
-            foreach (MemberInfo member in memberCollection)
-            {
-                if (member.MemberType == MemberTypes.Field)
-                {
-                    FieldInfo field = (FieldInfo)member;
-                    object fieldValue = field.GetValue(source);
-                    object targetFieldValue = field.GetValue(target);
-                    field.SetValue(target, Copy(fieldValue, target));
-                }
-                else if (member.MemberType == MemberTypes.Property)
-                {
-                    PropertyInfo myProperty = (PropertyInfo)member;
-                    MethodInfo info = myProperty.GetSetMethod();
-                    if (info != null)
-                    {
-                        object propertyValue = myProperty.GetValue(source);
-                        object targetpropertyValue = myProperty.GetValue(target);
-                        myProperty.SetValue(target, Copy(propertyValue, targetpropertyValue));
-                    }
-                }
-            }
-
-            return target;
-        }
     }
 }

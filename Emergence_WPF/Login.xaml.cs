@@ -51,7 +51,7 @@ namespace Emergence_WPF
 						{
 							MessageBox.Show("应用程序错误，请联系管理员。");
 						}
-                        main.Topmost = true;
+                        //main.Topmost = true;
 						main.Show();
 
 						this.Close();
