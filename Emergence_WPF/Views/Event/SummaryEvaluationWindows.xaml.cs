@@ -42,5 +42,15 @@ namespace Emergence_WPF.Views.Event
 
             ViewModel.DownloadSummaryEvaluationAction(m_Dialog.SelectedPath.Trim());
         }
+
+        private void Button_Preview_Click(object sender, RoutedEventArgs e)
+        {
+            SummaryEvaluationPreview sep = new SummaryEvaluationPreview();
+            sep.Topmost = true;
+
+            sep.Owner = Window.GetWindow(this);
+            sep.Show();
+            
+        }
     }
 }

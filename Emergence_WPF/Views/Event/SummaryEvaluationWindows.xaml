@@ -37,6 +37,7 @@
                     <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" FontSize="18" Content="{Binding Path=SummaryEvaluationPopup.PopupName}" Margin="19 0 0 0"/>
                     <Label Style="{StaticResource RightLabel}" DockPanel.Dock="Left" FontSize="18" Foreground="Green" FontWeight="Bold" Content="{Binding Path=SummaryEvaluationPopupMessage}" Margin="19 0 0 0"/>
                     <Button Style="{StaticResource RoundConnerButton}" Name="Button_SummaryEvaluation" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 10 0" Content="下载" Click="Button_SummaryEvaluation_Click" Width="88px"/>
+                    <Button Style="{StaticResource RoundConnerButton}" Name="Button_Preview" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 10 0" Content="预览" Click="Button_Preview_Click"  Width="88px"/>
                     <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 10 0" Content="提交" Command="{Binding Path=SubmitSummaryEvaluationCommand,Mode=TwoWay}" Width="88px"/>
                     <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 10 0" Content="获取" Command="{Binding Path=GetSummaryEvaluationCommand,Mode=TwoWay}" Width="88px"/>
                 </DockPanel>

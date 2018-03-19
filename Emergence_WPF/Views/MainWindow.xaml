@@ -38,8 +38,9 @@
                     <Image Margin="0,0,18,0" Width="30" Height="30" Source="/Image/Common/Icon_User.png"  HorizontalAlignment="Right" Cursor="Hand"></Image>
                     <TextBlock Margin="0,30,20,30" Foreground="White" FontSize="20" FontFamily="Microsoft Sans Serif" Name="loginname" Text="{Binding Path=UserNameLabel}"/>
                     <TextBlock Margin="0,20,20,0" Foreground="White" FontSize="30" FontFamily="Microsoft Sans Serif">|</TextBlock>
-                    <StackPanel Orientation="Horizontal" MouseLeftButtonDown="LogoutBtn_Click">
-                        <Image Margin="0,0,40,0" Width="30" Height="30" Source="/Image/Common/Icon_LogOut.png" HorizontalAlignment="Right" Cursor="Hand"></Image>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Margin="0,0,20,0" Width="30" Height="30" Source="/Image/Common/Icon_Minimize.png" HorizontalAlignment="Right" Cursor="Hand" MouseLeftButtonDown="MinimizeBtn_Click"></Image>
+                        <Image Margin="0,0,30,0" Width="30" Height="30" Source="/Image/Common/Icon_LogOut.png" HorizontalAlignment="Right" Cursor="Hand" MouseLeftButtonDown="LogoutBtn_Click"></Image>
                         <!--<TextBlock Foreground="White" FontSize="14" Padding="10,17,0,0">登出</TextBlock>-->
                     </StackPanel>
                 </StackPanel>

@@ -132,5 +132,10 @@ namespace Emergence_WPF
 		{
 			this.frmMain.Navigate(new System.Uri(@".\Views\Others\TeamListPage.xaml", UriKind.Relative));
 		}
-	}
+
+        private void MinimizeBtn_Click(object sender, MouseButtonEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+    }
 }
