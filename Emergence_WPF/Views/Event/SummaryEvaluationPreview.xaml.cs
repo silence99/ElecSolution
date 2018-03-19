@@ -32,13 +32,14 @@ namespace Emergence_WPF.Views
         {
             try
             {
+                var browser = new CefSharp.Wpf.ChromiumWebBrowser();
+                this.Content = browser;
                 string loadUrlName = ConfigurationManager.AppSettings["SummaryEvaluationPreviewURL"] ?? "http://www.baidu.com";
-                this.MyChrome.Address = loadUrlName;
+                browser.Address = loadUrlName;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
-                throw;
             }
             //var setting = new CefSharp.CefSettings();
             //CefSharp.Cef.Initialize();//setting, true, null);
