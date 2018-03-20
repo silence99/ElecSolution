@@ -36,7 +36,7 @@
     <PublisherName>James</PublisherName>
     <SuiteName>应急指挥中心管理应用平台</SuiteName>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -2944,25 +2944,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(SolutionDir)packages\cef.redist.x86.3.3239.1723\CEF\**\*">
+    <Content Include="$(SolutionDir)packages\CefSharp.Common.63.0.0\CefSharp\x64\*">
       <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
       <Visible>false</Visible>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(SolutionDir)packages\CefSharp.Common.63.0.0\CefSharp\**\*">
-      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
-      <Visible>false</Visible>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="$(SolutionDir)packages\CefSharp.Wpf.63.0.0\CefSharp\**\*">
-      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
-      <Visible>false</Visible>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="$(SolutionDir)packages\CefSharp.Wpf.63.0.0\cef\**\*">
+    <Content Include="$(SolutionDir)packages\CefSharp.Wpf.63.0.0\CefSharp\x64\*">
       <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
       <Visible>false</Visible>
     </Content>
@@ -2977,9 +2965,8 @@
   <PropertyGroup>
     <PreBuildEvent>if not exist $(TargetDir)lib (mkdir $(TargetDir)lib&amp;&amp;xcopy $(SolutionDir)ThirdParty\lib $(TargetDir)lib /E)
 if not exist $(TargetDir)DebugImage\MainPage\WeatherIcons (mkdir $(TargetDir)DebugImage\MainPage\WeatherIcons &amp;&amp; xcopy $(ProjectDir)DebugImage\MainPage\WeatherIcons $(TargetDir)DebugImage\MainPage\WeatherIcons /E)
-xcopy "$(SolutionDir)packages\CefSharp.Wpf.63.0.0\cef*" "$(TargetDir)" /s /y /i
-xcopy "$(SolutionDir)packages\CefSharp.Common.63.0.0\cef*" "$(TargetDir)" /s /y /i
-xcopy "$(SolutionDir)packages\cef.redist.x86.3.3239.1723\cef*" "$(TargetDir)" /s /y /i
+xcopy "$(SolutionDir)packages\CefSharp.Wpf.63.0.0\CefSharp\x64\*" "$(TargetDir)" /s /y /i
+xcopy "$(SolutionDir)packages\CefSharp.Common.63.0.0\CefSharp\x64\*" "$(TargetDir)" /s /y /i
 xcopy "$(SolutionDir)packages\cef.redist.x64.3.3239.1723\cef*" "$(TargetDir)" /s /y /i</PreBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

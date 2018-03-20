@@ -21,18 +21,20 @@ namespace Emergence_WPF.Views
     /// </summary>
     public partial class SummaryEvaluationPreview : Window
     {
+        CefSharp.Wpf.ChromiumWebBrowser browser;
+
         public SummaryEvaluationPreview()
         {
             InitializeComponent();
             this.KeyDown += SummaryEvaluationPreview_KeyDown;
-
+            browser = new CefSharp.Wpf.ChromiumWebBrowser();
         }
 
         void SummaryEvaluationPreview_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-                var browser = new CefSharp.Wpf.ChromiumWebBrowser();
+                browser.Name = "CefSharpBrowser";
                 this.Content = browser;
                 string loadUrlName = ConfigurationManager.AppSettings["SummaryEvaluationPreviewURL"] ?? "http://www.baidu.com";
                 browser.Address = loadUrlName;
@@ -52,9 +54,37 @@ namespace Emergence_WPF.Views
 
         private void SummaryEvaluationPreview_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Escape)//Esc键  
+            try
             {
-                this.Close();
+                if (e.Key == Key.Escape)//Esc键  
+                {
+                    this.Close();
+                }
+                if (e.Key == Key.C)
+                {
+                    browser.Load("http://www.csdn.net");
+                }
+                if (e.Key == Key.V)
+                {
+                    browser.Load("http://www.taobao.com");
+                }
+                if (e.Key == Key.B)
+                {
+                    browser.Load("http://www.163.com");
+                }
+                if (e.Key == Key.N)
+                {
+                    browser.Load("http://www.sohu.com");
+                }
+                if (e.Key == Key.M)
+                {
+                    browser.Load("http://www.qq.com");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
     }
