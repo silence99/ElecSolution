@@ -167,8 +167,20 @@ namespace Busniess.Services
 				return false;
 			}
 		}
+        public bool UpdateMasterEvent(MasterEvent model)
+        {
+            return UpdateMasterEvent(model.ID, 
+                model.Title, 
+                model.EventType, 
+                model.Grade, 
+                DateTime.Parse(model.Time), 
+                model.Remarks, 
+                model.Locale,
+                model.Longitude,
+                model.Latitude);
+        }
 
-		public bool UpdateMasterEvent(long id, string title, string eventType, string grade, DateTime time, string description, string location, double longitude, double latitude, Func<string, bool> callback)
+        public bool UpdateMasterEvent(long id, string title, string eventType, string grade, DateTime time, string description, string location, double longitude, double latitude, Func<string, bool> callback = null)
 		{
 			string serviceName = ConfigurationManager.AppSettings["mainEventApi"] ?? "mainEvent";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()

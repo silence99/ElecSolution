@@ -220,6 +220,13 @@
                             <DataGridTextColumn  Binding="{Binding Path=Time}" x:Name="f6" Header="时间"  Width="*"  IsReadOnly="True"></DataGridTextColumn>
                             <DataGridTextColumn  Binding="{Binding Path=Locale}" x:Name="f7" Header="地址"  Width="2*"  IsReadOnly="True"></DataGridTextColumn>
                             <DataGridTextColumn  Binding="{Binding Path=Remarks}" x:Name="f8" Header="描述"  Width="*"  IsReadOnly="True"></DataGridTextColumn>
+                            <DataGridTemplateColumn Width="50">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="../../Image/Common/Icon_edit.png" MouseLeftButtonUp="EditMasterEvent_Click" Width="25" Height="25" Tag="{Binding}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
                 </DockPanel>
@@ -258,16 +265,17 @@
                                     <RowDefinition Height="177px"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.15*"/>
-                                    <ColumnDefinition Width="0.35*"/>
-                                    <ColumnDefinition Width="0.15*"/>
-                                    <ColumnDefinition Width="0.35*"/>
+                                    <ColumnDefinition Width="89*"/>
+                                    <ColumnDefinition Width="208*"/>
+                                    <ColumnDefinition Width="89*"/>
+                                    <ColumnDefinition Width="161*"/>
+                                    <ColumnDefinition Width="47*"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.BindingGroup>
                                     <BindingGroup x:Name="MEMPopupBindingGroup" />
                                 </Grid.BindingGroup>
-                                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="标题" Margin="0 22 0 0"/>
-                                <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventTitle" Width="436px" Margin="20 18 0 0"  
+                                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="标题" Margin="0,40,0,18"/>
+                                <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventTitle" Width="436px" Margin="20,36,0,17"  
                                      Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
                                     <TextBox.Text>
                                         <Binding Path="Current.Title" Mode="TwoWay">
@@ -277,7 +285,7 @@
                                         </Binding>
                                     </TextBox.Text>
                                 </TextBox>
-                                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="类型"/>
+                                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="类型" Margin="0,19"/>
                                 <ComboBox Grid.Row="1" Grid.Column="1" Height="30" VerticalAlignment="Top" Width="160" HorizontalAlignment="Left" Margin="20 20, 0, 0" 
                                       Text="{Binding Path=Current.EventTypeName, Mode=TwoWay}" 
                                       ItemsSource="{Binding EventTypes}" 
@@ -286,15 +294,15 @@
                                       DisplayMemberPath="Name" 
                                       SelectedValuePath="Value">
                                 </ComboBox>
-                                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="2" Content="等级"/>
+                                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="2" Content="等级" Margin="0,19"/>
                                 <ComboBox Height="30" VerticalAlignment="Top" Width="160" Grid.Row="1" Grid.Column="3"  HorizontalAlignment="Left" Margin="0,20,0,0" 
                                       Text="{Binding Path=Current.GradeName, Mode=TwoWay}" 
                                       ItemsSource="{Binding EventGrades}" 
                                       SelectedValue="{Binding Path=Current.Grade}" 
                                       SelectedValuePath="Value"
                                       DisplayMemberPath="Name"/>
-                                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="地址"/>
-                                <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Width="438px" Height="34px" HorizontalAlignment="Left" Margin="20 0 0 0" BorderBrush="#BFBFBF" BorderThickness="1">
+                                <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="地址" Margin="0,19"/>
+                                <Border Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Width="438px" Height="34px" HorizontalAlignment="Left" Margin="20,17,0,17" BorderBrush="#BFBFBF" BorderThickness="1">
                                     <Grid VerticalAlignment="Center"  Background="#FFFFFF">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>

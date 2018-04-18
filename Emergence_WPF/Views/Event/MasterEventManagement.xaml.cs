@@ -130,8 +130,26 @@ namespace Emergence_WPF
             }
             if (!result)
             {
-                this.ViewModel.CreateCommand.Execute();
+                if(this.ViewModel.IsCreateMasterEvent)
+                {
+                    this.ViewModel.CreateCommand.Execute();
+                }
+                else
+                {
+                    this.ViewModel.EditCommand.Execute();
+                }
             }
+        }
+
+        private void EditMasterEvent_Click(object sender, MouseButtonEventArgs e)
+        {
+
+            ViewModel.IsCreateMasterEvent = false;
+            ViewModel.PopupTitle = "编辑主事件";
+            var item = (sender as Image).DataContext as MasterEvent;
+            ViewModel.Current = item.CreateAopProxy();
+            ViewModel.PopupEditAction();
+            ViewModel_SetPopupToFullScreen();
         }
     }
 }

@@ -60,27 +60,6 @@ namespace Emergence_WPF.Views
                 {
                     this.Close();
                 }
-                if (e.Key == Key.C)
-                {
-                    browser.Load("http://www.csdn.net");
-                }
-                if (e.Key == Key.V)
-                {
-                    browser.Load("http://www.taobao.com");
-                }
-                if (e.Key == Key.B)
-                {
-                    browser.Load("http://www.163.com");
-                }
-                if (e.Key == Key.N)
-                {
-                    browser.Load("http://www.sohu.com");
-                }
-                if (e.Key == Key.M)
-                {
-                    browser.Load("http://www.qq.com");
-                }
-
             }
             catch (Exception ex)
             {

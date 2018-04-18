@@ -36,7 +36,7 @@
     <PublisherName>James</PublisherName>
     <SuiteName>应急指挥中心管理应用平台</SuiteName>
     <AutorunEnabled>true</AutorunEnabled>
-    <ApplicationRevision>12</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -623,9 +623,9 @@
     <Resource Include="zuo1.png" />
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5 %28x86 和 x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.6 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -2944,13 +2944,25 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(SolutionDir)packages\CefSharp.Common.63.0.0\CefSharp\x64\*">
+    <Content Include="$(SolutionDir)packages\CefSharp.Common.63.0.0\CefSharp\x64\CefSharp.BrowserSubprocess.exe">
       <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
       <Visible>false</Visible>
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(SolutionDir)packages\CefSharp.Wpf.63.0.0\CefSharp\x64\*">
+    <Content Include="$(SolutionDir)packages\CefSharp.Common.63.0.0\CefSharp\x64\CefSharp.BrowserSubprocess.Core.dll">
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <Visible>false</Visible>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(SolutionDir)packages\CefSharp.Common.63.0.0\CefSharp\**\*">
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <Visible>false</Visible>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(SolutionDir)packages\CefSharp.Wpf.63.0.0\CefSharp\**\*">
       <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
       <Visible>false</Visible>
     </Content>
@@ -2965,9 +2977,11 @@
   <PropertyGroup>
     <PreBuildEvent>if not exist $(TargetDir)lib (mkdir $(TargetDir)lib&amp;&amp;xcopy $(SolutionDir)ThirdParty\lib $(TargetDir)lib /E)
 if not exist $(TargetDir)DebugImage\MainPage\WeatherIcons (mkdir $(TargetDir)DebugImage\MainPage\WeatherIcons &amp;&amp; xcopy $(ProjectDir)DebugImage\MainPage\WeatherIcons $(TargetDir)DebugImage\MainPage\WeatherIcons /E)
-xcopy "$(SolutionDir)packages\CefSharp.Wpf.63.0.0\CefSharp\x64\*" "$(TargetDir)" /s /y /i
-xcopy "$(SolutionDir)packages\CefSharp.Common.63.0.0\CefSharp\x64\*" "$(TargetDir)" /s /y /i
-xcopy "$(SolutionDir)packages\cef.redist.x64.3.3239.1723\cef*" "$(TargetDir)" /s /y /i</PreBuildEvent>
+xcopy "$(SolutionDir)packages\CefSharp.Wpf.63.0.0\cef*" "$(TargetDir)" /s /y /i
+xcopy "$(SolutionDir)packages\CefSharp.Common.63.0.0\CefSharp\x64\CefSharp.BrowserSubprocess.exe" "$(TargetDir)" /s /y /i
+xcopy "$(SolutionDir)packages\CefSharp.Common.63.0.0\CefSharp\x64\CefSharp.BrowserSubprocess.Core.dll" "$(TargetDir)" /s /y /i
+xcopy "$(SolutionDir)packages\cef.redist.x64.3.3239.1723\cef*" "$(TargetDir)" /s /y /i
+xcopy "$(SolutionDir)packages\CefSharp.Common.63.0.0\cef*" "$(TargetDir)" /s /y /i</PreBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

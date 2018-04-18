@@ -52,5 +52,12 @@ namespace Emergence_WPF.Views.Event
             sep.Show();
             
         }
+
+        public void DisplaySummaryBlock()
+        {
+            this.SEWSummaryLabel.Visibility = Visibility.Hidden;
+            this.Txt_Summary.Visibility = Visibility.Hidden;
+            this.SEWBaseGrid.Height = 450;
+        }
     }
 }

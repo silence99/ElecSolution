@@ -36,8 +36,9 @@ namespace Emergence.Business.ViewModel
 		public virtual ObservableCollection<DictItem> EventTypes { get; set; }
 		public virtual ObservableCollection<DictItem> EventGrades { get; set; }
 
-		public virtual DelegateCommand CreateCommand { get; set; }
-		public virtual DelegateCommand DeleteCommand { get; set; }
+        public virtual DelegateCommand CreateCommand { get; set; }
+        public virtual DelegateCommand EditCommand { get; set; }
+        public virtual DelegateCommand DeleteCommand { get; set; }
 		public virtual DelegateCommand PopupAddCommand { get; set; }
 		public virtual DelegateCommand<AnnouncementModel> PopupEditCommand { get; set; }
 		public virtual DelegateCommand PopupCloseCommand { get; set; }
@@ -45,14 +46,18 @@ namespace Emergence.Business.ViewModel
 		public virtual DelegateCommand PopupAddressPickerCommand { get; set; }
 		public virtual DelegateCommand CloseAddressPickerCommand { get; set; }
 		public virtual bool IsAddressPickPopup { get; set; }
+        public virtual bool IsCreateMasterEvent { get; set; }
+        public virtual string PopupTitle { get; set; }
 
 
-		public VM_MasterEventManagement()
+        public VM_MasterEventManagement()
 		{
 			PageSize = GetPageSize();
 			PageIndex = 1;
 			TotalCount = 0;
-			MasterEventService = new MasterEventService();
+            IsCreateMasterEvent = true;
+            PopupTitle = "创建主事件";
+            MasterEventService = new MasterEventService();
 
 			PopupWidth = ResolutionService.Width.ToString();
 			PopupHeight = ResolutionService.Height.ToString();
@@ -62,8 +67,9 @@ namespace Emergence.Business.ViewModel
 			MasterEventSearchValue = "";
 			GetMasterEventsAction("");
 
-			CreateCommand = new DelegateCommand(CreateAction);
-			DeleteCommand = new DelegateCommand(DeleteAction);
+            CreateCommand = new DelegateCommand(CreateAction);
+            EditCommand = new DelegateCommand(EditAction); 
+             DeleteCommand = new DelegateCommand(DeleteAction);
 			PopupAddCommand = new DelegateCommand(PopupAddAction);
 			PopupCloseCommand = new DelegateCommand(PopupCloseAction);
 			SearchMasterEventListCommand = new DelegateCommand<string>(GetMasterEventsAction);
@@ -110,9 +116,9 @@ namespace Emergence.Business.ViewModel
 			}
 		}
 
-		private void CreateAction()
-		{
-			PopupCloseAction();
+        private void CreateAction()
+        {
+            PopupCloseAction();
             if (MasterEventService.CreateMasterEvent(Current))
             {
                 System.Windows.MessageBox.Show(new Window { Topmost = true }, "创建成功！");
@@ -122,11 +128,26 @@ namespace Emergence.Business.ViewModel
 
                 System.Windows.MessageBox.Show(new Window { Topmost = true }, "创建失败！");
             }
-			CleanMessage();
-			GetMasterEventsAction("");
-		}
+            CleanMessage();
+            GetMasterEventsAction("");
+        }
+        private void EditAction()
+        {
+            PopupCloseAction();
+            if (MasterEventService.UpdateMasterEvent(Current))
+            {
+                System.Windows.MessageBox.Show(new Window { Topmost = true }, "编辑成功！");
+            }
+            else
+            {
 
-		private void DeleteAction()
+                System.Windows.MessageBox.Show(new Window { Topmost = true }, "编辑失败！");
+            }
+            CleanMessage();
+            GetMasterEventsAction("");
+        }
+
+        private void DeleteAction()
 		{
 			var ids = MasterEvents.Where(item => item.IsChecked).Select(item => (long)item.ID).ToList();
 			if (ids == null || ids.Count == 0)
@@ -148,22 +169,28 @@ namespace Emergence.Business.ViewModel
 			}
 		}
 
-		private void PopupAddAction()
-		{
-			CleanMessage();
-			var model = this.CreateAopProxy();
-			model.Current = new MasterEvent().CreateAopProxy();
-			model.Current.Time = DateTime.Now.ToString();
-			model.Current.EventType = EventTypes[0].Value;
-			model.Current.EventTypeName = EventTypes[0].Name;
-			model.Current.Grade = EventGrades[0].Value;
-			model.Current.GradeName = EventGrades[0].Name;
-			model.IsPopupOpen = true;
-			SetPopupToFullScreen();
+        private void PopupAddAction()
+        {
+            CleanMessage();
+            var model = this.CreateAopProxy();
+            model.Current = new MasterEvent().CreateAopProxy();
+            model.Current.Time = DateTime.Now.ToString();
+            model.Current.EventType = EventTypes[0].Value;
+            model.Current.EventTypeName = EventTypes[0].Name;
+            model.Current.Grade = EventGrades[0].Value;
+            model.Current.GradeName = EventGrades[0].Name;
+            model.IsPopupOpen = true;
+            SetPopupToFullScreen();
+        }
+        public void PopupEditAction()
+        {
+            CleanMessage();
+            var model = this.CreateAopProxy();
+            model.IsPopupOpen = true;
+            //SetPopupToFullScreen();
+        }
 
-		}
-
-		private void PopupCloseAction()
+        private void PopupCloseAction()
 		{
 			CleanMessage();
 			var model = this.CreateAopProxy();

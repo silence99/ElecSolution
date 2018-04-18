@@ -341,6 +341,7 @@ namespace Emergence_WPF
             sew.Topmost = true;
             sew.ViewModel = this.ViewModel;
             sew.DataContext = sew.ViewModel;
+            sew.DisplaySummaryBlock();
             ViewModel.OpenSummaryEvaluation2Command.Execute();
             //sew.Height = ResolutionService.Height;
             //sew.Width = ResolutionService.Width;

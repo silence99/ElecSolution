@@ -26,7 +26,7 @@
     </Window.Background>
     <Grid>
         <Border BorderBrush="#BFBFBF" BorderThickness="1">
-            <Grid Background="#FFFFFF"  Width="700px" Height="500px">
+            <Grid x:Name="SEWBaseGrid" Background="#FFFFFF"  Width="700px" Height="500px">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50px"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
@@ -74,7 +74,7 @@
                                 </Binding>
                             </TextBox.Text>
                         </TextBox>
-                        <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="工作总结" VerticalAlignment="Top" Margin="0 19 0 0"/>
+                        <Label x:Name="SEWSummaryLabel" Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="工作总结" VerticalAlignment="Top" Margin="0 19 0 0"/>
                         <TextBox Style="{StaticResource PopupMultTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_Summary" Width="480px" VerticalAlignment="Top"  Margin="20 17 0 0"
                                          Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
                             <TextBox.Text>
