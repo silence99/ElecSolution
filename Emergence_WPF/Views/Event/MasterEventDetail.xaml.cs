@@ -322,30 +322,34 @@ namespace Emergence_WPF
 
         private void Label_SummaryEvaluation_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            SummaryEvaluationWindows sew = new SummaryEvaluationWindows();
-            sew.Topmost = true;
-            sew.ViewModel = this.ViewModel;
-            sew.DataContext = sew.ViewModel;
-            ViewModel.OpenSummaryEvaluation1Command.Execute();
-            //sew.Height = ResolutionService.Height;
-            //sew.Width = ResolutionService.Width;
-            sew.Owner = Window.GetWindow(this);
-            sew.Show();
-            //sew.Height = ResolutionService.Height;
-            //sew.Width = ResolutionService.Width;
+            //SummaryEvaluationWindows sew = new SummaryEvaluationWindows();
+            //sew.Topmost = true;
+            //sew.ViewModel = this.ViewModel;
+            //sew.DataContext = sew.ViewModel;
+            //ViewModel.OpenSummaryEvaluation1Command.Execute();
+            //sew.Owner = Window.GetWindow(this);
+            //sew.Show();
+            SummaryEvaluationPreview sep = new SummaryEvaluationPreview(1);
+            sep.Topmost = true;
+
+            sep.Owner = Window.GetWindow(this);
+            sep.Show();
         }
 
         private void Label_InformationSummary_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            SummaryEvaluationWindows sew = new SummaryEvaluationWindows();
-            sew.Topmost = true;
-            sew.ViewModel = this.ViewModel;
-            sew.DataContext = sew.ViewModel;
-            sew.DisplaySummaryBlock();
-            ViewModel.OpenSummaryEvaluation2Command.Execute();
-            //sew.Height = ResolutionService.Height;
-            //sew.Width = ResolutionService.Width;
-            sew.Show();
+            //SummaryEvaluationWindows sew = new SummaryEvaluationWindows();
+            //sew.Topmost = true;
+            //sew.ViewModel = this.ViewModel;
+            //sew.DataContext = sew.ViewModel;
+            //sew.DisplaySummaryBlock();
+            //ViewModel.OpenSummaryEvaluation2Command.Execute();
+            //sew.Show();
+            SummaryEvaluationPreview sep = new SummaryEvaluationPreview(0);
+            sep.Topmost = true;
+
+            sep.Owner = Window.GetWindow(this);
+            sep.Show();
         }
 
         private void Button_MasterEventArchive_Click(object sender, RoutedEventArgs e)
@@ -353,6 +357,7 @@ namespace Emergence_WPF
             this.ViewModel.MasterEventArchiveCommand.Execute();
             MasterEventManagement mem = new MasterEventManagement();
             NavigationService.Navigate(new MasterEventManagement());
+
         }
     }
 }
