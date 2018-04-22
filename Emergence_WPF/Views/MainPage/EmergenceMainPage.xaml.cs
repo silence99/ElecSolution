@@ -63,7 +63,13 @@ namespace Emergence_WPF
 
 			var panel = new System.Windows.Forms.Panel();
 			var outContainer = new System.Windows.Forms.Panel();
+			outContainer.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom;
+			outContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+
 			var innerPanel = new System.Windows.Forms.Panel();
+			innerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+			innerPanel.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom;
+
 			innerPanel.AutoScroll = true;
 			outContainer.Controls.Add(innerPanel);
 			panel.Controls.Add(outContainer);
@@ -76,9 +82,8 @@ namespace Emergence_WPF
 			outContainer.BackColor = System.Drawing.Color.Black;
 
 			var host = new FormControlHost(panel);
-			host.Width = BorderVideoContainer.ActualWidth - 20;
-			host.Height = (int)BorderVideoContainer.ActualHeight;
-
+			host.Width = width;
+			host.Height = height;
 
 			outContainer.Width = width - 20;
 			innerPanel.Width = width;
