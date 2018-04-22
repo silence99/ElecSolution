@@ -73,6 +73,7 @@ namespace Emergence_WPF
 
 			panel.BackColor = System.Drawing.Color.Black;
 			innerPanel.BackColor = System.Drawing.Color.Black;
+			outContainer.BackColor = System.Drawing.Color.Black;
 
 			var host = new FormControlHost(panel);
 			host.Width = BorderVideoContainer.ActualWidth - 20;
