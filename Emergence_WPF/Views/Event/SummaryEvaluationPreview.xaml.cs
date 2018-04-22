@@ -22,12 +22,15 @@ namespace Emergence_WPF.Views
     public partial class SummaryEvaluationPreview : Window
     {
         CefSharp.Wpf.ChromiumWebBrowser browser;
+        public string eventID = "";
+        public int type = 0;
 
-        public SummaryEvaluationPreview()
+        public SummaryEvaluationPreview(int seType)
         {
             InitializeComponent();
             this.KeyDown += SummaryEvaluationPreview_KeyDown;
             browser = new CefSharp.Wpf.ChromiumWebBrowser();
+            this.type = seType;
         }
 
         void SummaryEvaluationPreview_Loaded(object sender, RoutedEventArgs e)
@@ -36,7 +39,8 @@ namespace Emergence_WPF.Views
             {
                 browser.Name = "CefSharpBrowser";
                 this.Content = browser;
-                string loadUrlName = ConfigurationManager.AppSettings["SummaryEvaluationPreviewURL"] ?? "http://www.baidu.com";
+                string loadUrlName = ConfigurationManager.AppSettings["SummaryEvaluationPreviewURL"] ?? "http://emgr-long.tsicent.com";
+                loadUrlName += "?id=" + eventID + ";type=" + type;
                 browser.Address = loadUrlName;
             }
             catch (Exception ex)
