@@ -25,6 +25,7 @@ namespace Emergence_WPF
 	{
 		public MessageNotificationViewModel ViewModel { get; set; }
 
+        public SubEvent SubEvent { get; set; }
         public string SubEventID { get; set; }
         public SubeventService SBService { get; set; }
         public MessageNotificationPage()
@@ -34,16 +35,18 @@ namespace Emergence_WPF
             DataContext = ViewModel;
 			SBService = new SubeventService();
             ViewModel.SetPopupEditToFullScreen += this.FullPageEditPopup;
+            SubEvent = null;
 
         }
-        public MessageNotificationPage(string subEventID)
+        public MessageNotificationPage(SubEvent subEvent)
         {
             InitializeComponent();
 			SBService = new SubeventService();
             ViewModel = new MessageNotificationViewModel().CreateAopProxy();
             DataContext = ViewModel;
-            SubEventID = subEventID;
-            ViewModel.ChildEventId = subEventID;
+            SubEvent = subEvent;
+            SubEventID = subEvent.Id.ToString();
+            ViewModel.ChildEventId = SubEventID;
         }
 			
 
@@ -59,12 +62,20 @@ namespace Emergence_WPF
 
 		private void Template_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			if (ViewModel != null && ViewModel.MessageTemplates != null)
-			{
-				var obj = sender as System.Windows.Controls.ComboBox;
-				var item = obj.SelectedItem as MessageTemplateModel;
-				Content.Text = item == null ? "" : item.TemplateContent;
-			}
+            if (ViewModel != null && ViewModel.MessageTemplates != null)
+            {
+                var obj = sender as System.Windows.Controls.ComboBox;
+                var item = obj.SelectedItem as MessageTemplateModel;
+                Content.Text = item == null ? "" : item.TemplateContent;
+                if (SubEvent == null)
+                {
+                    Content.Text = Content.Text.Replace(@"${childLocale}", " ").Replace(@"${childGrade}", " ");
+                }
+                else
+                {
+                    Content.Text = Content.Text.Replace(@"${childLocale}", SubEvent.ChildLocale).Replace(@"${childGrade}", SubEvent.ChildGradeName + SubEvent.ChildTitle);
+                }
+            }
 		}
 
 		private void PopupEditButton_Click(object sender, MouseButtonEventArgs e)

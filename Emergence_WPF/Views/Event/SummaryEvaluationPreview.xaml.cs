@@ -25,12 +25,13 @@ namespace Emergence_WPF.Views
         public string eventID = "";
         public int type = 0;
 
-        public SummaryEvaluationPreview(int seType)
+        public SummaryEvaluationPreview(int eventID, int seType)
         {
             InitializeComponent();
             this.KeyDown += SummaryEvaluationPreview_KeyDown;
             browser = new CefSharp.Wpf.ChromiumWebBrowser();
             this.type = seType;
+            this.eventID = eventID.ToString();
         }
 
         void SummaryEvaluationPreview_Loaded(object sender, RoutedEventArgs e)
@@ -40,7 +41,7 @@ namespace Emergence_WPF.Views
                 browser.Name = "CefSharpBrowser";
                 this.Content = browser;
                 string loadUrlName = ConfigurationManager.AppSettings["SummaryEvaluationPreviewURL"] ?? "http://emgr-long.tsicent.com";
-                loadUrlName += "?id=" + eventID + ";type=" + type;
+                loadUrlName += "/?id=" + eventID + "&type=" + type;
                 browser.Address = loadUrlName;
             }
             catch (Exception ex)

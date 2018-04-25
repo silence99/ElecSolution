@@ -41,6 +41,7 @@ namespace Emergence_WPF
 			ViewModel.PersonCharge = team.PersonCharge;
 			ViewModel.PersonChargePhone = team.PersonChargePhone;
 			ViewModel.TeamDept = team.TeamDept;
+            ViewModel.TeamDeptName = team.TeamDeptName;
 			ViewModel.TeamName = team.TeamName;
             ViewModel.TeamLocale = team.TeamLocale;
             ViewModel.TeamMemberId = team.TeamMemberId;

@@ -45,7 +45,7 @@ namespace Emergence_WPF.Views.Event
 
         private void Button_Preview_Click(object sender, RoutedEventArgs e)
         {
-            SummaryEvaluationPreview sep = new SummaryEvaluationPreview(0);
+            SummaryEvaluationPreview sep = new SummaryEvaluationPreview(0, 0);
             sep.Topmost = true;
 
             sep.Owner = Window.GetWindow(this);

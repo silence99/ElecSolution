@@ -60,6 +60,7 @@
             <DockPanel Margin="20,0,20,0"  DockPanel.Dock="Top" >
                 <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
                     <Button DockPanel.Dock="Right" Margin="0,0,20,0" Content="删除" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="BtnDelete_Click"></Button>
+                    <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导出" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click=""></Button>
                     <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="BtnImport_Click"></Button>
                     <Button Name="BtnAdd" DockPanel.Dock="Right" Margin="0,0,20,0" Content="添加" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="BtnAdd_Click"/>
                 </DockPanel>
@@ -101,12 +102,12 @@
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTextColumn  Binding="{Binding Path=MaterialsNumber}" IsReadOnly="True" x:Name="f2" Header="编号" Width="*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=MaterialsName}" IsReadOnly="True" x:Name="f3" Header="名称"  Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=MaterialsName}" IsReadOnly="True" x:Name="f3" Header="名称"  Width="5*" ></DataGridTextColumn>
                     <DataGridTextColumn  Binding="{Binding Path=MaterialsTypeName}" IsReadOnly="True" x:Name="f4" Header="类别"  Width="*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=MaterialsDeptName}" IsReadOnly="True" x:Name="f5" Header="所属单位"  Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=MaterialsDeptName}" IsReadOnly="True" x:Name="f5" Header="所属单位"  Width="2.5*" ></DataGridTextColumn>
                     <DataGridTextColumn  Binding="{Binding Path=IsConsumable}" IsReadOnly="True" x:Name="f6" Header="是否消耗品"  Width="*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=IsBigMaterials}" IsReadOnly="True" x:Name="f7" Header="是否大物件" Width="2*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=TotalQuantity}" IsReadOnly="True" x:Name="f8" Header="数量" Width="2*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=IsBigMaterials}" IsReadOnly="True" x:Name="f7" Header="是否大物件" Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=TotalQuantity}" IsReadOnly="True" x:Name="f8" Header="数量" Width="*" ></DataGridTextColumn>
                     <DataGridTemplateColumn Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -158,7 +159,7 @@
                                 <BindingGroup x:Name="MLPPopupBindingGroup" />
                             </Grid.BindingGroup>
                             <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="名称" Margin="0 0 0 0"/>
-                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Width="160px" Margin="20 0 0 0"          
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.ColumnSpan="3" Grid.Column="1" Width="455px" Margin="20 0 0 0"          
                                      Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
                                 <TextBox.Text>
                                     <Binding Path="CurrentMaterial.MaterialsName" Mode="TwoWay">
@@ -168,8 +169,8 @@
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
-                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="2" Content="序号" Margin="0 0 0 0"/>
-                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="3" Width="160px" Margin="20 0 0 0" 
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="3" Grid.Column="2" Content="序号" Margin="0 0 0 0"/>
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="3" Grid.Column="3" Width="160px" Margin="20 0 0 0" 
                                      Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
                                 <TextBox.Text>
                                     <Binding Path="CurrentMaterial.MaterialsNumber" Mode="TwoWay">

@@ -102,7 +102,7 @@ namespace Emergence_WPF
 		{
 			if (this.ViewModel != null && this.ViewModel.SubEventDetail != null && this.ViewModel.SubEventDetail.Id != null)
 			{
-				MessageNotificationPage mnp = new MessageNotificationPage(this.ViewModel.SubEventDetail.Id.ToString());
+				MessageNotificationPage mnp = new MessageNotificationPage(this.ViewModel.SubEventDetail);
 				NavigationService.Navigate(mnp);
 			}
 			else
@@ -329,7 +329,7 @@ namespace Emergence_WPF
             //ViewModel.OpenSummaryEvaluation1Command.Execute();
             //sew.Owner = Window.GetWindow(this);
             //sew.Show();
-            SummaryEvaluationPreview sep = new SummaryEvaluationPreview(1);
+            SummaryEvaluationPreview sep = new SummaryEvaluationPreview(this.ViewModel.MasterEventInfo.ID, 1);
             sep.Topmost = true;
 
             sep.Owner = Window.GetWindow(this);
@@ -345,7 +345,7 @@ namespace Emergence_WPF
             //sew.DisplaySummaryBlock();
             //ViewModel.OpenSummaryEvaluation2Command.Execute();
             //sew.Show();
-            SummaryEvaluationPreview sep = new SummaryEvaluationPreview(0);
+            SummaryEvaluationPreview sep = new SummaryEvaluationPreview(this.ViewModel.MasterEventInfo.ID, 0);
             sep.Topmost = true;
 
             sep.Owner = Window.GetWindow(this);
