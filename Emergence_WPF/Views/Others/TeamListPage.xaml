@@ -59,8 +59,8 @@
             <DockPanel Margin="20,0,20,0"  DockPanel.Dock="Top" >
                 <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
                     <Button DockPanel.Dock="Right" Margin="0,0,20,0" Content="删除" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Delete_Handler"></Button>
-                    <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="模版下载" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click=""></Button>
-                    <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click=""></Button>
+                    <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="模版下载" Style="{StaticResource RoundConnerGridOperationButtonStyle}" ></Button>
+                    <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}" ></Button>
                     <Button Name="BtnAdd" DockPanel.Dock="Right" Margin="0,0,20,0" Content="添加" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Add_Handler"/>
                 </DockPanel>
             </DockPanel>
