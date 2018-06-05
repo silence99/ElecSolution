@@ -137,8 +137,9 @@ namespace Emergence.Business.ViewModel
 			SearchSubEventListCommand = new DelegateCommand<string>(new Action<string>(SearchSubEventAction));
 			SelectSubEventCommand = new DelegateCommand<string>(new Action<string>(SelectSubEventAction));
 			DeleteSubEventCommand = new DelegateCommand<int?>(DeleteSubEventAction);
-			UpdateSubEventStatusCommand = new DelegateCommand<string>(new Action<string>(UpdateSubEventStatusAction), new Func<string, bool>(CheckSubEventStatusCanChangeAction));
-			StartCreateSubEventCommand = new DelegateCommand(new Action(StartCreateSubEventAction));
+            //UpdateSubEventStatusCommand = new DelegateCommand<string>(new Action<string>(UpdateSubEventStatusAction), new Func<string, bool>(CheckSubEventStatusCanChangeAction));
+            UpdateSubEventStatusCommand = new DelegateCommand<string>(new Action<string>(UpdateSubEventStatusAction));
+            StartCreateSubEventCommand = new DelegateCommand(new Action(StartCreateSubEventAction));
 			StartUpdateSubEventCommand = new DelegateCommand<int?>(StartUpdateSubEventAction);
 			CloseSubEventEditCommand = new DelegateCommand(new Action(CloseSubEventEditAction));
 			CreateSubEventCommand = new DelegateCommand(new Action(CreateSubEventAction));

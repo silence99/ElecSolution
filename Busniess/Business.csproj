@@ -159,6 +159,7 @@
     <Compile Include="ViewModel\StatisticsViewModel.cs" />
     <Compile Include="ViewModel\SubEventPopupVideoViewModel.cs" />
     <Compile Include="ViewModel\TeamDetailPageViewModel.cs" />
+    <Compile Include="ViewModel\TeamListPageViewModel_V2.cs" />
     <Compile Include="ViewModel\TeamListPageViewModel.cs" />
     <Compile Include="ViewModel\TeamStatisticsViewModel.cs" />
     <Compile Include="ViewModel\UpgradeManagementPageViewModel.cs" />

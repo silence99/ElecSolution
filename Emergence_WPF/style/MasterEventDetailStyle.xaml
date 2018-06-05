@@ -234,6 +234,7 @@
         <Setter Property="CanUserSortColumns" Value="False"/>
         <Setter Property="CanUserAddRows" Value="False"/>
         <Setter Property="CanUserDeleteRows" Value="False"/>
+        <Setter Property="SelectionUnit" Value="FullRow" />
         <Setter Property="IsReadOnly" Value="False"/>
         <Setter Property="HeadersVisibility" Value="None"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>

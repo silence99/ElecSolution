@@ -33,9 +33,10 @@ namespace Busniess.ViewModel
         public virtual double PopupWidth { get; set; }
         public virtual double PopupHeight { get; set; }
         public virtual PersonModel CurrentMember { get; set; }
-		public virtual bool IsEditMode { get; set; }
+        public virtual bool IsEditMode { get; set; }
+        public virtual bool HasSubEvent { get; set; }
 
-		public virtual MessageService MEService { get; set; }
+        public virtual MessageService MEService { get; set; }
 
 		public MessageNotificationViewModel()
 		{

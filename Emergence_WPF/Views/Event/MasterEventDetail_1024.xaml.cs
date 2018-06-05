@@ -68,7 +68,7 @@ namespace Emergence_WPF
 		{
 			if (this.ViewModel != null && this.ViewModel.SubEventDetail != null && this.ViewModel.SubEventDetail.Id != null)
 			{
-				MessageNotificationPage mnp = new MessageNotificationPage(this.ViewModel.SubEventDetail);
+				MessageNotificationPage mnp = new MessageNotificationPage(this.ViewModel.MasterEventInfo, this.ViewModel.SubEventDetail);
 				NavigationService.Navigate(mnp);
 			}
 			else

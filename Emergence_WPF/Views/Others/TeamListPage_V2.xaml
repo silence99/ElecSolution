@@ -1,0 +1,208 @@
+﻿<Page x:Class="Emergence_WPF.TeamListPage_V2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"      
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:local1="clr-namespace:Emergence_WPF.Comm"
+      mc:Ignorable="d" 
+      d:DesignHeight="1000" d:DesignWidth="1920"
+      Title="TeamListPage" Loaded="Page_Loaded">
+
+    <Grid>
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="../../style/Generic.xaml"/>
+                    <ResourceDictionary Source="../../style/MasterEventDetailStyle.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+                <Style TargetType="Label" x:Key="PopupLable">
+                    <Setter Property="Foreground" Value="Black"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                </Style>
+            </ResourceDictionary>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80px"/>
+            <RowDefinition Height="80px"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="#62A6A3" Grid.Column="0" Grid.Row="0"  BorderThickness="0 1 0 0">
+            <DockPanel Grid.Column="0" Grid.Row="0" Background="#006f69" Height="80" Name="titleEventMasterPage" Width="auto"  HorizontalAlignment="Stretch" IsEnabled="{Binding Path=IsPageEnabled}">
+                <DockPanel.Style>
+                    <Style TargetType="DockPanel">
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#005651"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </DockPanel.Style>
+                <Label Name="TeamListTitle" Margin="20,0,0,0" Style="{StaticResource SelectedLabel}">队伍列表</Label>
+                <Label Name="MaterialListTile" MouseLeftButtonUp="NavigateToMaterialPage_Handler">物资列表</Label>
+                <Label Name="MaterialListTiles" >PMS数据</Label>
+            </DockPanel>
+        </Border>
+        <DockPanel Grid.Column="0" Grid.Row="1" Background="#FFFFFF" Height="80" Width="auto"  HorizontalAlignment="Stretch" >
+            <Border Grid.Row="0" Height="41" Width="500px" DockPanel.Dock="Left" HorizontalAlignment="Left" BorderBrush="#D3D3D3" BorderThickness="1 1 1 1" Margin="20 0 0 0" Background="White">
+                <Grid VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40px"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource SearchImageButton}" Grid.Column="1" Click="Search_Handler"></Button>
+                    <TextBox Name="SubEventSearchTextBox" Grid.Column="0" BorderThickness="0" Height="40px" TextAlignment="Left" VerticalAlignment="Center" FontSize="20"  VerticalContentAlignment="Center" Text="{Binding Path=SerachInfo, Mode=TwoWay}"></TextBox>
+                </Grid>
+            </Border>
+        </DockPanel>
+        <DockPanel DockPanel.Dock="Top" Grid.Row="2" Background="White" Name="PanelData" IsEnabled="{Binding Path=IsPageEnabled}">
+            <DockPanel Margin="20,0,20,0"  DockPanel.Dock="Top" >
+                <DockPanel Height="60" HorizontalAlignment="Stretch" DockPanel.Dock="Top" Background="#CCE2E1">
+                    <Button DockPanel.Dock="Right" Margin="0,0,20,0" Content="删除" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Delete_Handler"></Button>
+                    <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="模版下载" Style="{StaticResource RoundConnerGridOperationButtonStyle}" ></Button>
+                    <Button Margin="0,0,20,0" DockPanel.Dock="Right" Content="导入" Style="{StaticResource RoundConnerGridOperationButtonStyle}" ></Button>
+                    <Button Name="BtnAdd" DockPanel.Dock="Right" Margin="0,0,20,0" Content="添加" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="Add_Handler"/>
+                </DockPanel>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Bottom" LastChildFill="True" Margin="20,5,20,0">
+                <local1:Pager Height="30" Width="auto" 
+                             TotalCount="{Binding TotalCount,Mode=TwoWay}"
+                             PageSize="{Binding PageSize,Mode=TwoWay}"
+                             PageIndex="{Binding PageIndex,Mode=TwoWay}"
+                             TotalPage="{Binding TotalPage, Mode=TwoWay}"
+                             PageChanged="Pager_OnPageChanged">
+                </local1:Pager>
+            </DockPanel>
+            <DataGrid DockPanel.Dock="Top" Margin="20,0,20,0"
+                    Name="GridTeamList" 
+                      Style="{StaticResource DataGridRight}"
+                    AutoGenerateColumns="False" 
+                    ItemsSource="{Binding Teams, Mode=TwoWay}"
+                    AlternatingRowBackground="#f3f3f3"
+                    HorizontalGridLinesBrush="#dcdcdc"
+                    VerticalGridLinesBrush="#dcdcdc"
+                    BorderBrush="#dcdcdc"
+                    CanUserAddRows="False"
+                    RowHeight="50"
+                    VerticalAlignment="Stretch"
+                    MouseDoubleClick="NavigateToTeamDetailPage_Handler">
+                <DataGrid.Columns >
+                    <DataGridTemplateColumn Width="40">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox Width="16" IsChecked="{Binding IsChecked, UpdateSourceTrigger=PropertyChanged}"
+                                                          HorizontalAlignment="Center" 
+                                                          VerticalAlignment="Center">
+                                </CheckBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=ID}" x:Name="f2" Header="编号" Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=TeamName}" x:Name="f3" Header="姓名"  Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=TeamDeptName}" x:Name="f4" Header="部门"  Width="2*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=TotalNumber}" x:Name="f5" Header="职务"  Width="2*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=PersonCharge}" x:Name="f6" Header="移动电话"  Width="2*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=PersonChargePhone}" x:Name="f7" Header="应急分工" Width="2*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=PersonChargePhone}" x:Name="f8" Header="应急队伍" Width="2*" ></DataGridTextColumn>
+                    <DataGridTemplateColumn Width="50">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="../../Image/Common/Icon_edit.png" MouseLeftButtonUp="Edit_Handler" Width="25" Height="25" Tag="{Binding}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
+
+        <Popup 
+            x:Name="PopupEditTeam" 
+            Width="{Binding Path=PopupWidth}" 
+            Height="{Binding Path= PopupHeight}"  
+            StaysOpen="True"   
+            IsOpen="{Binding Path=IsPopoupOpen}"   
+            AllowsTransparency="True"  
+            PopupAnimation="Slide"  
+            Placement="Center">
+            <Grid Background="{StaticResource OpacityBrush}">
+                <Grid Background="#FFFFFF" Width="600px" Height="450px">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50px"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0">
+                        <Button Style="{StaticResource CancelImageButton}"   Click="ClosePopup_Handler" DockPanel.Dock="Left" Margin="19 0 19 0" />
+                        <Border DockPanel.Dock="Left" BorderBrush="#999999" BorderThickness="1 0 0 0" Margin="0 10 0 10"></Border>
+                        <Label Style="{StaticResource RightLabel}" FontSize="20px"  DockPanel.Dock="Left" Content="{Binding Path=PopupHeader}" Margin="19 0 0 0"/>
+                        <Button Style="{StaticResource RoundConnerButton}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0 0 20 0" Content="完成" Width="88px" Click="Update_Handler">
+                        </Button>
+                    </DockPanel>
+                    <Border Grid.Row="1" Margin="2 0 2 2" BorderBrush="#BFBFBF">
+                        <Grid Background="#F3F3F3" local1:FEExtension.ValidateOnLostFocus="true">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="117px"></RowDefinition>
+                                <RowDefinition Height="88px"></RowDefinition>
+                                <RowDefinition Height="88px"></RowDefinition>
+                                <RowDefinition Height="107px"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.35*"/>
+                                <ColumnDefinition Width="0.15*"/>
+                                <ColumnDefinition Width="0.35*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.BindingGroup>
+                                <BindingGroup x:Name="TLPPopupBindingGroup" />
+                            </Grid.BindingGroup>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="队伍名称" Margin="0 22 0 0"/>
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventTitle" Width="458px" Margin="20 18 0 0"  
+                                        Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
+                                <TextBox.Text>
+                                    <Binding Path="CurrentTeam.TeamName" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <local1:NotNullValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="所属单位"/>
+                            <ComboBox Grid.Column="1" Grid.Row="1" Height="30" VerticalAlignment="Center" Width="150" HorizontalAlignment="Left" Margin="20 0 0 0"
+                                     SelectedValue="{Binding Path=CurrentTeam.TeamDept,Mode=TwoWay}"
+                                     DisplayMemberPath="Name"
+                                     SelectedValuePath="Value"
+                                     ItemsSource="{Binding TeamDepts}"/>
+
+                            <Label Visibility="{Binding Path=CanSelectCaptain}" Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="2" Content="队长"/>
+                            <ComboBox Grid.Column="3" Visibility="{Binding Path=CanSelectCaptain}" Grid.Row="1" Height="30" VerticalAlignment="Center" Width="150" HorizontalAlignment="Left" Margin="20 0 0 0"
+                                     SelectedValue="{Binding Path=CurrentTeam.TeamMemberId,Mode=TwoWay}"
+                                     DisplayMemberPath="Name"
+                                     SelectedValuePath="Value"
+                                     ItemsSource="{Binding Path=TeamMembers}"/>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="单位地址" Margin="0 0 0 0"/>
+                            <!--<TextBox Style="{StaticResource PopupTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditTeamAddress" Width="458px" Margin="20 0 0 0"  
+                                         Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
+                                <TextBox.Text>
+                                    <Binding Path="CurrentTeam.teamDeptLocale" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <local1:NotNullValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>-->
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditTeamAddress" Width="458px" Margin="20 18 0 0"  
+                                        Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
+                                <TextBox.Text>
+                                    <Binding Path="CurrentTeam.TeamLocale" Mode="TwoWay">
+                                        <Binding.ValidationRules>
+                                            <local1:NotNullValidationRule/>
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </TextBox.Text>
+                            </TextBox>
+                        </Grid>
+                    </Border>
+                </Grid>
+            </Grid>
+        </Popup>
+    </Grid>
+</Page>

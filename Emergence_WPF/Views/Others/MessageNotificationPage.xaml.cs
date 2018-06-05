@@ -26,6 +26,7 @@ namespace Emergence_WPF
 		public MessageNotificationViewModel ViewModel { get; set; }
 
         public SubEvent SubEvent { get; set; }
+        public MasterEvent masEvent { get; set; }
         public string SubEventID { get; set; }
         public SubeventService SBService { get; set; }
         public MessageNotificationPage()
@@ -36,9 +37,9 @@ namespace Emergence_WPF
 			SBService = new SubeventService();
             ViewModel.SetPopupEditToFullScreen += this.FullPageEditPopup;
             SubEvent = null;
-
+            ViewModel.HasSubEvent = false;
         }
-        public MessageNotificationPage(SubEvent subEvent)
+        public MessageNotificationPage(MasterEvent masterEvent, SubEvent subEvent)
         {
             InitializeComponent();
 			SBService = new SubeventService();
@@ -46,7 +47,9 @@ namespace Emergence_WPF
             DataContext = ViewModel;
             SubEvent = subEvent;
             SubEventID = subEvent.Id.ToString();
+            masEvent = masterEvent;
             ViewModel.ChildEventId = SubEventID;
+            ViewModel.HasSubEvent = true;
         }
 			
 
@@ -269,6 +272,22 @@ namespace Emergence_WPF
                 this.ViewModel.AddMemberCommand.Execute();
             }
             
+        }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (masEvent != null)
+            {
+                MasterEventManagement mem = new MasterEventManagement();
+                this.NavigationService.Navigate(mem);
+                mem.NavigatingToMasterEventDetail(masEvent);
+
+                this.NavigationService.Navigate(new MasterEventDetail(masEvent));
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("返回失败，找不到对应的子事件！");
+            }
         }
     }
 }

@@ -57,7 +57,8 @@ namespace Emergence_WPF
 				{
 					if (this.Grid_SubEventList.ItemContainerGenerator.Items.Count > 0)
 					{
-						DataGridRow row = (DataGridRow)this.Grid_SubEventList.ItemContainerGenerator.ContainerFromIndex(0);
+                        this.Grid_SubEventList.UpdateLayout();
+                        DataGridRow row = (DataGridRow)this.Grid_SubEventList.ItemContainerGenerator.ContainerFromIndex(0);
 						if (row != null)
 						{
 							row.IsSelected = true;
@@ -97,12 +98,22 @@ namespace Emergence_WPF
 				ViewModel.SetSubEventDetailBlockStatus(true);
 			}
 		}
-
-		private void Btn_PublishSubEvent_Click(object sender, RoutedEventArgs e)
+        public void Grid_SubEventList_Select(object sender, MouseButtonEventArgs e)
+        {
+            DataGrid dg = sender as DataGrid;
+            var item = dg.CurrentItem as SubEvent;
+            //DataRowView item = cell.Item as DataRowView;
+            if (item != null)
+            {
+                ViewModel.SelectSubEventAction(item.Id.ToString());
+                ViewModel.SetSubEventDetailBlockStatus(true);
+            }
+        }
+        private void Btn_PublishSubEvent_Click(object sender, RoutedEventArgs e)
 		{
 			if (this.ViewModel != null && this.ViewModel.SubEventDetail != null && this.ViewModel.SubEventDetail.Id != null)
 			{
-				MessageNotificationPage mnp = new MessageNotificationPage(this.ViewModel.SubEventDetail);
+				MessageNotificationPage mnp = new MessageNotificationPage(this.ViewModel.MasterEventInfo, this.ViewModel.SubEventDetail);
 				NavigationService.Navigate(mnp);
 			}
 			else
@@ -311,6 +322,7 @@ namespace Emergence_WPF
                 if (this.ViewModel.SubEventEdit.Id == -1)
                 {
                     this.ViewModel.CreateSubEventCommand.Execute();
+                    ResetSubEventDetailSelected();
                 }
                 else
                 {
@@ -359,5 +371,12 @@ namespace Emergence_WPF
             NavigationService.Navigate(new MasterEventManagement());
 
         }
+
+        public void NavigateToMasterManagementPage()
+        {
+            MasterEventManagement mem = new MasterEventManagement();
+            this.NavigationService.Navigate(mem);
+        }
+
     }
 }

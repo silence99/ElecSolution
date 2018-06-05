@@ -151,5 +151,10 @@ namespace Emergence_WPF
             ViewModel.PopupEditAction();
             ViewModel_SetPopupToFullScreen();
         }
+
+        public void NavigatingToMasterEventDetail(MasterEvent me)
+        {
+            this.NavigationService.Navigate(new MasterEventDetail(me));
+        }
     }
 }

@@ -64,6 +64,8 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </Button>
+                <Button Margin="0,0,20,0" Name="BackButton" DockPanel.Dock="Right" Content="返回" Visibility="{Binding Path=HasSubEvent,Mode=TwoWay}" Style="{StaticResource RoundConnerGridOperationButtonStyle}" Click="BackButton_Click">
+                </Button>
             </DockPanel>
             <DockPanel DockPanel.Dock="Top">
                 <TextBox Margin="20 0 0 20" Name="Content" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" IsEnabled="False"></TextBox>

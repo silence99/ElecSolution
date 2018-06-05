@@ -41,7 +41,7 @@
                 </Grid.ColumnDefinitions>
                 <Border Name="LeftGridRow1Border" BorderBrush="#4D9A96" BorderThickness="0 0 0 2" Grid.Column="0" Grid.Row="0">
                     <DockPanel>
-                        <Button Style="{StaticResource BackImageButton}" Command="NavigationCommands.BrowseBack" DockPanel.Dock="Left" Margin="10 0 10 0" />
+                        <Button Style="{StaticResource BackImageButton}" Click="NavigateToMasterManagementPage" DockPanel.Dock="Left" Margin="10 0 10 0" />  <!--Command="NavigationCommands.BrowseBack"/>-->
                         <Button Style="{StaticResource ArchiveImageButton}" Name="Button_MasterEventArchive" DockPanel.Dock="Right" Margin="10 0 10 0" Click="Button_MasterEventArchive_Click" />
                         <Label DockPanel.Dock="Left" FontSize="20px" Style="{StaticResource LeftLabel}">主事件详情</Label>
                     </DockPanel>
@@ -159,14 +159,18 @@
                 <DockPanel Grid.Row="3">
                     <DataGrid  DockPanel.Dock="Top" Name="Grid_SubEventList" Style="{StaticResource SubEventListDataGrid}" ItemsSource="{Binding Path=SubEventList,Mode=TwoWay}" SelectionChanged="Grid_SubEventList_SelectionChanged" SourceUpdated="Grid_SubEventList_SourceUpdated">
                         <DataGrid.Columns >
-                            <DataGridTextColumn Width="0.6*" Binding="{Binding Path=ChildTitle,Mode=TwoWay}" x:Name="f1" Header="子事件标题" IsReadOnly="True">
+                            <DataGridTextColumn Width="0.6*" Binding="{Binding Path=ChildTitle,Mode=TwoWay}" x:Name="f1" Header="子事件标题" IsReadOnly="True" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="FontSize" Value="16"/>
                                         <Setter Property="TextWrapping" Value="Wrap"/>
-                                        <Setter Property="Height" Value="auto"/>
+                                        <Setter Property="Height" Value="90px"/>
+                                        <Setter Property="MinWidth" Value="260px"/>
+                                        <Setter Property="Width" Value="auto"/>
                                         <Setter Property="HorizontalAlignment" Value="Left"/>
+                                        <Setter Property="VerticalAlignment" Value="Center"/>
                                         <Setter Property="Margin" Value="5 0 0 0"/>
+                                        <Setter Property="Padding" Value="0 33 0 0"/>
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>

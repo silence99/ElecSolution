@@ -11,6 +11,7 @@ using System.Linq;
 using Busniess.Services;
 using Busniess.ViewModel;
 using Framework;
+using System;
 
 namespace Emergence_WPF
 {
@@ -301,6 +302,35 @@ namespace Emergence_WPF
             double checkDouble = 0.0;
             return double.TryParse(str, out checkDouble);
             //return System.Text.RegularExpressions.Regex.IsMatch(str, @"/^[\-\+]?([0-8]?\d{1}\.\d{1,5}|90\.0{1,5})$/");
+        }
+
+        private void ExportButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            System.Windows.Forms.FolderBrowserDialog m_Dialog = new System.Windows.Forms.FolderBrowserDialog();
+            System.Windows.Forms.DialogResult result = m_Dialog.ShowDialog();
+
+            if (result == System.Windows.Forms.DialogResult.Cancel)
+            {
+                return;
+            }
+            
+            MemoryStream templeteStream = MetaDataService.DownloadTempleteFile(0);
+            if (templeteStream != null)
+            {
+                //var splits = aopWraper.SummaryEvaluationPopupDownloadUrl.Split('/', '\\');
+                string fileName = "摄像头信息模版" + DateTime.Now.ToString("yyyyMMdd") + ".xls";
+                string DownloadFullPath = System.IO.Path.Combine(m_Dialog.SelectedPath, fileName);
+
+                using (Stream fileStream = new FileStream(DownloadFullPath, FileMode.Create))
+                {
+                    fileStream.Write(templeteStream.ToArray(), 0, Convert.ToInt32(templeteStream.Length));
+                }
+                System.Windows.MessageBox.Show("下载成功！");
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("下载失败！");
+            }
         }
     }
 }
