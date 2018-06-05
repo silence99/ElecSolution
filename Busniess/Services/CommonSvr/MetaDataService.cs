@@ -5,6 +5,7 @@ using log4net;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Reflection;
 
 namespace Business.Services
@@ -20,7 +21,6 @@ namespace Business.Services
 
 		public static string MaterialDept = "materials_dept";
 		public static string TemplateType = "template_type";
-		public static string TeamId = "team_id";
 	}
 
 	public class MetaDataService
@@ -34,7 +34,6 @@ namespace Business.Services
 		public static DictItem[] TeamMemberPlaces { get { return GetMetaData(MetaDataType.TeamMemberPlace); } }
 		public static DictItem[] MaterialDepts { get { return GetMetaData(MetaDataType.MaterialDept); } }
 		public static DictItem[] TemplateTypes { get { return GetMetaData(MetaDataType.TemplateType); } }
-		public static DictItem[] TeamIds { get { return GetMetaData(MetaDataType.TeamId); } }
 
 		public static DictItem[] GetMetaData(string type)
 		{
@@ -90,6 +89,34 @@ namespace Business.Services
 					Result = new DictItem[0]
 				};
 			}
-		}
-	}
+        }
+
+        public static MemoryStream DownloadTempleteFile(int type)
+        {
+            try
+            {
+                string serviceName = ConfigurationManager.AppSettings["downloadTempleteFileApi"] ?? "templeteFile/download";
+                Dictionary<string, string> pairs = new Dictionary<string, string>()
+                                                    {
+                                                        { "type", type.ToString() },
+                                                    };
+                var result = RequestControl.RequestStream(serviceName, "GET", pairs);
+                if (result != null)
+                {
+                    Logger.DebugFormat("获取模版文件({0}):{1}", type, result.Length);
+                    return result;
+                }
+                else
+                {
+                    Logger.DebugFormat("获取模版文件({0})失败:{1}", type, result.Length);
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("获取模版文件(" + type + ")异常", ex);
+                return null;
+            }
+        }
+    }
 }
