@@ -340,6 +340,50 @@ namespace Busniess.Services
 			}
 		}
 
+		private bool TeamMemberApi(PersonModel person, TeamModel team, string httpMethod)
+		{
+			string serviceName = ConfigurationManager.AppSettings["updataTeamMemberApi2"] ?? "/team/teamMemberInfo";
+			Dictionary<string, string> pairs = new Dictionary<string, string>()
+			{
+				{ "teamId", team.ID.ToString() },
+				{ "teamDept", team.TeamDept.ToString() },
+				{ "phoneNumber", person.PhoneNumber },
+				{ "place", person.Place },
+				{ "teamMemberName", person.Name },
+			};
+
+			return DoRequest(serviceName, httpMethod, pairs);
+		}
+		public bool CreateTeamMemberV2(PersonModel person, TeamModel team)
+		{
+			Logger.DebugFormat("创建队伍成员 -- {0}", person.Name);
+			var success = TeamMemberApi(person, team, "POST");
+			if (success)
+			{
+				Logger.InfoFormat("创建更新队伍成员成功 -- {0}", person.Name);
+			}
+			else
+			{
+				Logger.WarnFormat("创建更新队伍成员失败 -- {0}", person.Name);
+			}
+			return success;
+		}
+
+		public bool UpdateTeamMember(PersonModel person, TeamModel team)
+		{
+			Logger.DebugFormat("更新队伍成员 -- {0}", person.Name);
+			var success = TeamMemberApi(person, team, "PUT");
+			if (success)
+			{
+				Logger.InfoFormat("更新队伍成员成功 -- {0}", person.Name);
+			}
+			else
+			{
+				Logger.WarnFormat("更新队伍成员失败 -- {0}", person.Name);
+			}
+			return success;
+		}
+
 		public bool UpdateTeamMember(long id, string teamId, string name, string phoneNumber, string place)
 		{
 			try
@@ -463,6 +507,34 @@ namespace Busniess.Services
 			}
 		}
 
+		private EmergencyHttpResponse<EmergencyHttpListResult<TeamMemberModel>> GetTeamMembersDataV2(int pageIndex, int pageSize)
+		{
+			try
+			{
+				string serviceName = ConfigurationManager.AppSettings["getTeamMemberListApi2"] ?? "/team/memberInfoList";
+				Dictionary<string, string> pairs = new Dictionary<string, string>()
+													{
+														{ "pageIndex", pageIndex.ToString() },
+														{ "pageSize", pageSize.ToString() }
+													};
+				var result = RequestControl.Request(serviceName, "GET", pairs);
+				if (result.StatusCode == 200)
+				{
+					Logger.DebugFormat("获取队伍成员数据:{0}", result.Html);
+					return Utils.JSONHelper.ConvertToObject<EmergencyHttpResponse<EmergencyHttpListResult<TeamMemberModel>>>(result.Html);
+				}
+				else
+				{
+					throw new Exception(result.Html);
+				}
+			}
+			catch (Exception ex)
+			{
+				Logger.Error("获取队伍成员数据异常", ex);
+				throw;
+			}
+		}
+
 		public bool ImportTeamMembers(long teamId, string teamMemberJson)
 		{
 			try
@@ -502,6 +574,47 @@ namespace Busniess.Services
 			{
 				Logger.Error(string.Format("导入队伍成员失败:{0}", teamId), ex);
 				return false;
+			}
+		}
+
+		public bool ImportTeamMembersV2(string json)
+		{
+			string serviceName = ConfigurationManager.AppSettings["importTeamMemberApi"] ?? "/team/import";
+			Dictionary<string, string> pairs = new Dictionary<string, string>()
+			{
+				{"teamInfoJson", json }
+			};
+
+			Logger.DebugFormat("导入队伍成员:\r\n{0}", json);
+			var success = DoRequest(serviceName, "POST", pairs);
+			if (success)
+			{
+				Logger.Info("导入队伍成员成功");
+			}
+			else
+			{
+				Logger.Info("导入队伍成员失败");
+			}
+			return success;
+		}
+
+		private bool DoRequest(string serviceName, string method, Dictionary<string, string> pairs)
+		{
+			var result = RequestControl.Request(serviceName, method, pairs);
+			if (result.StatusCode != 200)
+			{
+				Logger.WarnFormat(result.Html);
+				return false;
+			}
+			else
+			{
+				var success = RequestControl.DefaultValide(result.Html);
+				if (!success)
+				{
+					Logger.Warn(result.Html);
+				}
+
+				return success;
 			}
 		}
 	}
