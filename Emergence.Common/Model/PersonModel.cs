@@ -20,9 +20,10 @@ namespace Emergence.Common.Model
 		public virtual long TeamId { get; set; }
 	}
 
-	public class TeamMemberModel
-	{
-		[JsonProperty("phoneNumber")]
+	public class TeamMemberModel : NotificationObject
+    {
+        public virtual bool IsChecked { get; set; }
+        [JsonProperty("phoneNumber")]
 		public virtual string PhoneNumber { get; set; }
 		[JsonProperty("place")]
 		public virtual string Place { get; set; }

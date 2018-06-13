@@ -21,7 +21,7 @@ namespace Emergence_WPF
 	public partial class TeamListPage_V2 : Page
 	{
 		private ILog Logger = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
-		private TeamListPageViewModel ViewModel { get; set; }
+		private TeamListPageViewModel_V2 ViewModel { get; set; }
 		private TeamService TeamService = new TeamService();
 		public TeamListPage_V2()
 		{
@@ -59,9 +59,9 @@ namespace Emergence_WPF
 
 		private void Add_Handler(object sender, RoutedEventArgs e)
 		{
-			ViewModel.CurrentTeam = new TeamModel().CreateAopProxy();
+			ViewModel.CurrentTeam = new TeamMemberModel().CreateAopProxy();
             ViewModel.CurrentTeam.TeamDept = ViewModel.TeamDepts == null || ViewModel.TeamDepts.Count == 0 ? "" : ViewModel.TeamDepts[0].Value;
-            ViewModel.CurrentTeam.TeamMemberId = ViewModel.TeamMembers == null || ViewModel.TeamMembers.Count == 0 ? 0 : Convert.ToInt64(ViewModel.TeamMembers[0].Value);
+            //ViewModel.CurrentTeam.TeamMemberId = ViewModel.TeamMembers == null || ViewModel.TeamMembers.Count == 0 ? 0 : Convert.ToInt64(ViewModel.TeamMembers[0].Value);
             DependencyObject parent = this.PopupEditTeam.Child;
 			do
 			{
@@ -93,13 +93,21 @@ namespace Emergence_WPF
 			var teams = TeamService.GetTeam(ViewModel.PageIndex, ViewModel.PageSize, ViewModel.SerachInfo);
 			if (teams != null)
 			{
-				ViewModel.Teams = new ObservableCollection<TeamModel>(teams.Data.Select(o => o.CreateAopProxy()));
+				//ViewModel.Teams = new ObservableCollection<TeamMemberModel>(teams.Data.Select(o => o.CreateAopProxy()));
 				ViewModel.PageIndex = teams.PageIndex;
 				ViewModel.PageSize = teams.PageSize;
 				ViewModel.TotalCount = teams.Count;
 				ViewModel.TotalPage = teams.PageSize == 0 ? 0 : (int)Math.Ceiling((double)teams.Count / teams.PageSize);
 			}
-		}
+            if(ViewModel.TotleTeams != null && ViewModel.TotleTeams.Count() > 0)
+            { 
+            var totleTeams = TeamService.GetTeam(0, 999999, "");
+            if (totleTeams != null)
+            {
+                //ViewModel.Teams = new ObservableCollection<TeamMemberModel>(teams.Data.Select(o => o.CreateAopProxy()));
+            }
+            }
+        }
 
 		private void Pager_OnPageChanged(object sender, PageChangedEventArg e)
 		{
@@ -110,7 +118,7 @@ namespace Emergence_WPF
 		{
 			if (ViewModel == null)
 			{
-				ViewModel = new TeamListPageViewModel().CreateAopProxy();
+				ViewModel = new TeamListPageViewModel_V2().CreateAopProxy();
 				ViewModel.PageIndex = 1;
 				ViewModel.PageSize = 10;
 				DataContext = ViewModel;
@@ -121,7 +129,7 @@ namespace Emergence_WPF
 
 		private void Edit_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
-			ViewModel.CurrentTeam = (sender as Image).DataContext as TeamModel;
+			ViewModel.CurrentTeam = (sender as Image).DataContext as TeamMemberModel;
 			DependencyObject parent = this.PopupEditTeam.Child;
 			do
 			{
@@ -140,7 +148,7 @@ namespace Emergence_WPF
 			ViewModel.PopupHeader = "编辑队伍";
 			ViewModel.PopupTeamEdit();
             //ViewModel.CurrentTeam.TeamMemberId = ViewModel.TeamMembers == null || ViewModel.TeamMembers.Count == 0 ? 0 : Convert.ToInt64(ViewModel.TeamMembers[0].Value);
-            ViewModel.CurrentTeam.TeamMemberId = ((ViewModel.CurrentTeam.TeamMemberId <= 0 || !ViewModel.TeamMembers.Select(a => Convert.ToInt64( a.Value)).Contains(ViewModel.CurrentTeam.TeamMemberId)) && ViewModel.Members != null && ViewModel.Members.Count != 0) ? ViewModel.Members[0].ID : ViewModel.CurrentTeam.TeamMemberId;
+            //ViewModel.CurrentTeam.TeamMemberId = ((ViewModel.CurrentTeam.TeamMemberId <= 0 || !ViewModel.TeamMembers.Select(a => Convert.ToInt64( a.Value)).Contains(ViewModel.CurrentTeam.TeamMemberId)) && ViewModel.Members != null && ViewModel.Members.Count != 0) ? ViewModel.Members[0].ID : ViewModel.CurrentTeam.TeamMemberId;
 			FullPageEditPopup();
 		}
 
@@ -149,63 +157,63 @@ namespace Emergence_WPF
 			NavigationService.Navigate(new Uri("./Views/Others/MaterialListPage.xaml", UriKind.Relative));
 		}
 
-		private void Update_Handler(object sender, RoutedEventArgs e)
-		{
-			try
-			{
-				var resultValidation = false;
-				foreach (var item in TLPPopupBindingGroup.BindingExpressions)
-				{
-					item.UpdateSource();
-					if (item.HasValidationError)
-					{
-						resultValidation = true;
-					}
-				}
-				if (!resultValidation)
-				{
-					if (ViewModel.CurrentTeam.ID == 0)
-					{
-						var result = TeamService.CreateTeam(ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept, ViewModel.CurrentTeam.TeamLocale);
-						if (result)
-						{
-							ViewModel.ClosePopup();
-							System.Windows.MessageBox.Show("添加成功！");
-							GetTeams();
-						}
-						else
-						{
-							System.Windows.MessageBox.Show("添加失败！");
-						}
-					}
-					else
-					{
-						var captain = ViewModel.Members.First(a => a.ID == ViewModel.CurrentTeam.TeamMemberId);
-						if (captain != null)
-						{
-							ViewModel.CurrentTeam.PersonCharge = captain.Name;
-							ViewModel.CurrentTeam.PersonChargePhone = captain.PhoneNumber;
-						}
-						var result = TeamService.UpdateTeam(ViewModel.CurrentTeam.ID, ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept, ViewModel.CurrentTeam.TeamLocale, ViewModel.CurrentTeam.TeamMemberId);
-						if (result)
-						{
-							ViewModel.ClosePopup();
-							System.Windows.MessageBox.Show("编辑成功！");
-							GetTeams();
-						}
-						else
-						{
-							System.Windows.MessageBox.Show("编辑失败！");
-						}
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				System.Windows.Forms.MessageBox.Show("编辑队伍异常，请重新编辑。");
-				Logger.Error("编辑队伍异常", ex);
-			}
-		}
+		//private void Update_Handler(object sender, RoutedEventArgs e)
+		//{
+		//	try
+		//	{
+		//		var resultValidation = false;
+		//		foreach (var item in TLPPopupBindingGroup.BindingExpressions)
+		//		{
+		//			item.UpdateSource();
+		//			if (item.HasValidationError)
+		//			{
+		//				resultValidation = true;
+		//			}
+		//		}
+		//		if (!resultValidation)
+		//		{
+		//			if (ViewModel.CurrentTeam.ID == 0)
+		//			{
+		//				var result = TeamService.CreateTeam(ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept, ViewModel.CurrentTeam.TeamLocale);
+		//				if (result)
+		//				{
+		//					ViewModel.ClosePopup();
+		//					System.Windows.MessageBox.Show("添加成功！");
+		//					GetTeams();
+		//				}
+		//				else
+		//				{
+		//					System.Windows.MessageBox.Show("添加失败！");
+		//				}
+		//			}
+		//			else
+		//			{
+		//				var captain = ViewModel.Members.First(a => a.ID == ViewModel.CurrentTeam.TeamMemberId);
+		//				if (captain != null)
+		//				{
+		//					ViewModel.CurrentTeam.PersonCharge = captain.Name;
+		//					ViewModel.CurrentTeam.PersonChargePhone = captain.PhoneNumber;
+		//				}
+		//				var result = TeamService.UpdateTeam(ViewModel.CurrentTeam.TeamId, ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept, ViewModel.CurrentTeam.TeamLocale, ViewModel.CurrentTeam.TeamMemberId);
+		//				if (result)
+		//				{
+		//					ViewModel.ClosePopup();
+		//					System.Windows.MessageBox.Show("编辑成功！");
+		//					GetTeams();
+		//				}
+		//				else
+		//				{
+		//					System.Windows.MessageBox.Show("编辑失败！");
+		//				}
+		//			}
+		//		}
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		System.Windows.Forms.MessageBox.Show("编辑队伍异常，请重新编辑。");
+		//		Logger.Error("编辑队伍异常", ex);
+		//	}
+		//}
 
 		private void NavigateToTeamDetailPage_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{

@@ -97,13 +97,13 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=ID}" x:Name="f2" Header="编号" Width="*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=TeamName}" x:Name="f3" Header="姓名"  Width="*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=TeamDeptName}" x:Name="f4" Header="部门"  Width="2*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=TotalNumber}" x:Name="f5" Header="职务"  Width="2*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=PersonCharge}" x:Name="f6" Header="移动电话"  Width="2*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=PersonChargePhone}" x:Name="f7" Header="应急分工" Width="2*" ></DataGridTextColumn>
-                    <DataGridTextColumn  Binding="{Binding Path=PersonChargePhone}" x:Name="f8" Header="应急队伍" Width="2*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=teamId}" x:Name="f2" Header="编号" Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=teamMemberName}" x:Name="f3" Header="姓名"  Width="*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=teamDeptName}" x:Name="f4" Header="部门"  Width="2*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=placeName}" x:Name="f5" Header="职务"  Width="2*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=phoneNumber}" x:Name="f6" Header="移动电话"  Width="2*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=placeName}" x:Name="f7" Header="应急分工" Width="2*" ></DataGridTextColumn>
+                    <DataGridTextColumn  Binding="{Binding Path=TeamName}" x:Name="f8" Header="应急队伍" Width="2*" ></DataGridTextColumn>
                     <DataGridTemplateColumn Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -141,9 +141,9 @@
                         <Grid Background="#F3F3F3" local1:FEExtension.ValidateOnLostFocus="true">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="117px"></RowDefinition>
-                                <RowDefinition Height="88px"></RowDefinition>
-                                <RowDefinition Height="88px"></RowDefinition>
-                                <RowDefinition Height="107px"></RowDefinition>
+                                <RowDefinition Height="117px"></RowDefinition>
+                                <RowDefinition Height="117px"></RowDefinition>
+                                <RowDefinition Height="69px"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="0.15*"/>
@@ -154,45 +154,48 @@
                             <Grid.BindingGroup>
                                 <BindingGroup x:Name="TLPPopupBindingGroup" />
                             </Grid.BindingGroup>
-                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="队伍名称" Margin="0 22 0 0"/>
-                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditSubEventTitle" Width="458px" Margin="20 18 0 0"  
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="0" Content="部门"/>
+                            <ComboBox Grid.Column="1" Grid.Row="0" Height="30" VerticalAlignment="Center" Width="150" HorizontalAlignment="Left" Margin="20 0 0 0"
+                                     SelectedValue="{Binding Path=CurrentTeam.TeamDept,Mode=TwoWay}"
+                                     DisplayMemberPath="Name"
+                                     SelectedValuePath="Value"
+                                     ItemsSource="{Binding TeamDepts}"/>
+
+                            <Label Visibility="{Binding Path=CanSelectCaptain}" Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="0" Grid.Column="2" Content="职务"/>
+                            <ComboBox Grid.Column="3" Visibility="{Binding Path=CanSelectCaptain}" Grid.Row="0" Height="30" VerticalAlignment="Center" Width="150" HorizontalAlignment="Left" Margin="20 0 0 0"
+                                     SelectedValue="{Binding Path=CurrentTeam.Place,Mode=TwoWay}"
+                                     DisplayMemberPath="Name"
+                                     SelectedValuePath="Value"
+                                     ItemsSource="{Binding Path=TeamMembers}"/>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="应急分工"/>
+                            <ComboBox Grid.Column="1" Grid.Row="1" Height="30" VerticalAlignment="Center" Width="150" HorizontalAlignment="Left" Margin="20 0 0 0"
+                                     SelectedValue="{Binding Path=CurrentTeam.Place,Mode=TwoWay}"
+                                     DisplayMemberPath="Name"
+                                     SelectedValuePath="Value"
+                                     ItemsSource="{Binding TeamDepts}"/>
+
+                            <Label Visibility="{Binding Path=CanSelectCaptain}" Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="2" Content="应急队伍"/>
+                            <ComboBox Grid.Column="3" Visibility="{Binding Path=CanSelectCaptain}" Grid.Row="1" Height="30" VerticalAlignment="Center" Width="150" HorizontalAlignment="Left" Margin="20 0 0 0"
+                                     SelectedValue="{Binding Path=CurrentTeam.TeamId,Mode=TwoWay}"
+                                     DisplayMemberPath="Name"
+                                     SelectedValuePath="Value"
+                                     ItemsSource="{Binding Path=TeamMembers}"/>
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="姓名" Margin="0 0 0 0"/>
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_Name" Width="150px" Margin="20 0 0 0"  
                                         Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
                                 <TextBox.Text>
-                                    <Binding Path="CurrentTeam.TeamName" Mode="TwoWay">
+                                    <Binding Path="CurrentTeam.TeamMemberName" Mode="TwoWay">
                                         <Binding.ValidationRules>
                                             <local1:NotNullValidationRule/>
                                         </Binding.ValidationRules>
                                     </Binding>
                                 </TextBox.Text>
                             </TextBox>
-                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="0" Content="所属单位"/>
-                            <ComboBox Grid.Column="1" Grid.Row="1" Height="30" VerticalAlignment="Center" Width="150" HorizontalAlignment="Left" Margin="20 0 0 0"
-                                     SelectedValue="{Binding Path=CurrentTeam.TeamDept,Mode=TwoWay}"
-                                     DisplayMemberPath="Name"
-                                     SelectedValuePath="Value"
-                                     ItemsSource="{Binding TeamDepts}"/>
-
-                            <Label Visibility="{Binding Path=CanSelectCaptain}" Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="1" Grid.Column="2" Content="队长"/>
-                            <ComboBox Grid.Column="3" Visibility="{Binding Path=CanSelectCaptain}" Grid.Row="1" Height="30" VerticalAlignment="Center" Width="150" HorizontalAlignment="Left" Margin="20 0 0 0"
-                                     SelectedValue="{Binding Path=CurrentTeam.TeamMemberId,Mode=TwoWay}"
-                                     DisplayMemberPath="Name"
-                                     SelectedValuePath="Value"
-                                     ItemsSource="{Binding Path=TeamMembers}"/>
-                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="0" Content="单位地址" Margin="0 0 0 0"/>
-                            <!--<TextBox Style="{StaticResource PopupTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditTeamAddress" Width="458px" Margin="20 0 0 0"  
-                                         Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
-                                <TextBox.Text>
-                                    <Binding Path="CurrentTeam.teamDeptLocale" Mode="TwoWay">
-                                        <Binding.ValidationRules>
-                                            <local1:NotNullValidationRule/>
-                                        </Binding.ValidationRules>
-                                    </Binding>
-                                </TextBox.Text>
-                            </TextBox>-->
-                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Name="Txt_EditTeamAddress" Width="458px" Margin="20 18 0 0"  
+                            <Label Style="{StaticResource SubEventDetailNameLabel}" Grid.Row="2" Grid.Column="2" Content="移动电话" Margin="0 0 0 0"/>
+                            <TextBox Style="{StaticResource PopupTextBox}" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="3" Name="Txt_Phone" Width="150px" Margin="20 0 0 0"  
                                         Validation.ErrorTemplate="{StaticResource ErrorTempalte}">
                                 <TextBox.Text>
-                                    <Binding Path="CurrentTeam.TeamLocale" Mode="TwoWay">
+                                    <Binding Path="CurrentTeam.PhoneNumber" Mode="TwoWay">
                                         <Binding.ValidationRules>
                                             <local1:NotNullValidationRule/>
                                         </Binding.ValidationRules>
