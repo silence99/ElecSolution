@@ -304,6 +304,20 @@ namespace Busniess.Services
 			}
 		}
 
+		public EmergencyHttpListResult<TeamMemberModel> GetTeamPersonsV2(int pageIndex, int pageSize)
+		{
+			var response = GetTeamMembersDataV2(pageIndex, pageSize);
+			if (response.Code != 1)
+			{
+				Util.ShowError(string.Format("获取统计信息失败：{0}", response.Message));
+				return null;
+			}
+			else
+			{
+				return response.Result;
+			}
+		}
+
 		public bool CreateTeamMember(string teamId, string name, string phoneNumber, string place)
 		{
 			string serviceName = ConfigurationManager.AppSettings["updataTeamMemberApi"] ?? "team/teamMember";
@@ -342,11 +356,12 @@ namespace Busniess.Services
 
 		private bool TeamMemberApi(PersonModel person, TeamModel team, string httpMethod)
 		{
-			string serviceName = ConfigurationManager.AppSettings["updataTeamMemberApi2"] ?? "/team/teamMemberInfo";
+			string serviceName = ConfigurationManager.AppSettings["updataTeamMemberApi2"] ?? "team/teamMemberInfo";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()
 			{
 				{ "teamId", team.ID.ToString() },
 				{ "teamDept", team.TeamDept.ToString() },
+				{ "teamMemberId", person.ID.ToString() },
 				{ "phoneNumber", person.PhoneNumber },
 				{ "place", person.Place },
 				{ "teamMemberName", person.Name },
@@ -369,7 +384,7 @@ namespace Busniess.Services
 			return success;
 		}
 
-		public bool UpdateTeamMember(PersonModel person, TeamModel team)
+		public bool UpdateTeamMemberV2(PersonModel person, TeamModel team)
 		{
 			Logger.DebugFormat("更新队伍成员 -- {0}", person.Name);
 			var success = TeamMemberApi(person, team, "PUT");
@@ -511,7 +526,7 @@ namespace Busniess.Services
 		{
 			try
 			{
-				string serviceName = ConfigurationManager.AppSettings["getTeamMemberListApi2"] ?? "/team/memberInfoList";
+				string serviceName = ConfigurationManager.AppSettings["getTeamMemberListApi2"] ?? "team/memberInfoList";
 				Dictionary<string, string> pairs = new Dictionary<string, string>()
 													{
 														{ "pageIndex", pageIndex.ToString() },
@@ -579,7 +594,7 @@ namespace Busniess.Services
 
 		public bool ImportTeamMembersV2(string json)
 		{
-			string serviceName = ConfigurationManager.AppSettings["importTeamMemberApi"] ?? "/team/import";
+			string serviceName = ConfigurationManager.AppSettings["importTeamMemberApi"] ?? "team/import";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()
 			{
 				{"teamInfoJson", json }
