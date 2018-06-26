@@ -34,7 +34,7 @@ namespace Emergence_WPF
 			var teams = ViewModel.Teams.Where(team => team.IsChecked).ToList();
 			if (teams != null && teams.Count != 0)
 			{
-				var result = TeamService.DeleteTeam(teams.Select(t => t.ID.ToString()).ToList());
+				var result = TeamService.DeleteTeam(teams.Select(t => t.TeamId.ToString()).ToList());
 
 				if (result)
 				{
@@ -157,65 +157,65 @@ namespace Emergence_WPF
 			NavigationService.Navigate(new Uri("./Views/Others/MaterialListPage.xaml", UriKind.Relative));
 		}
 
-		//private void Update_Handler(object sender, RoutedEventArgs e)
-		//{
-		//	try
-		//	{
-		//		var resultValidation = false;
-		//		foreach (var item in TLPPopupBindingGroup.BindingExpressions)
-		//		{
-		//			item.UpdateSource();
-		//			if (item.HasValidationError)
-		//			{
-		//				resultValidation = true;
-		//			}
-		//		}
-		//		if (!resultValidation)
-		//		{
-		//			if (ViewModel.CurrentTeam.ID == 0)
-		//			{
-		//				var result = TeamService.CreateTeam(ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept, ViewModel.CurrentTeam.TeamLocale);
-		//				if (result)
-		//				{
-		//					ViewModel.ClosePopup();
-		//					System.Windows.MessageBox.Show("添加成功！");
-		//					GetTeams();
-		//				}
-		//				else
-		//				{
-		//					System.Windows.MessageBox.Show("添加失败！");
-		//				}
-		//			}
-		//			else
-		//			{
-		//				var captain = ViewModel.Members.First(a => a.ID == ViewModel.CurrentTeam.TeamMemberId);
-		//				if (captain != null)
-		//				{
-		//					ViewModel.CurrentTeam.PersonCharge = captain.Name;
-		//					ViewModel.CurrentTeam.PersonChargePhone = captain.PhoneNumber;
-		//				}
-		//				var result = TeamService.UpdateTeam(ViewModel.CurrentTeam.TeamId, ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept, ViewModel.CurrentTeam.TeamLocale, ViewModel.CurrentTeam.TeamMemberId);
-		//				if (result)
-		//				{
-		//					ViewModel.ClosePopup();
-		//					System.Windows.MessageBox.Show("编辑成功！");
-		//					GetTeams();
-		//				}
-		//				else
-		//				{
-		//					System.Windows.MessageBox.Show("编辑失败！");
-		//				}
-		//			}
-		//		}
-		//	}
-		//	catch (Exception ex)
-		//	{
-		//		System.Windows.Forms.MessageBox.Show("编辑队伍异常，请重新编辑。");
-		//		Logger.Error("编辑队伍异常", ex);
-		//	}
-		//}
+        private void Update_Handler(object sender, RoutedEventArgs e)
+        {
+            //try
+            //{
+            //    var resultValidation = false;
+            //    foreach (var item in TLPPopupBindingGroup.BindingExpressions)
+            //    {
+            //        item.UpdateSource();
+            //        if (item.HasValidationError)
+            //        {
+            //            resultValidation = true;
+            //        }
+            //    }
+            //    if (!resultValidation)
+            //    {
+            //        if (ViewModel.CurrentTeam.ID == 0)
+            //        {
+            //            var result = TeamService.CreateTeam(ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept, ViewModel.CurrentTeam.TeamLocale);
+            //            if (result)
+            //            {
+            //                ViewModel.ClosePopup();
+            //                System.Windows.MessageBox.Show("添加成功！");
+            //                GetTeams();
+            //            }
+            //            else
+            //            {
+            //                System.Windows.MessageBox.Show("添加失败！");
+            //            }
+            //        }
+            //        else
+            //        {
+            //            var captain = ViewModel.Members.First(a => a.ID == ViewModel.CurrentTeam.TeamMemberId);
+            //            if (captain != null)
+            //            {
+            //                ViewModel.CurrentTeam.PersonCharge = captain.Name;
+            //                ViewModel.CurrentTeam.PersonChargePhone = captain.PhoneNumber;
+            //            }
+            //            var result = TeamService.UpdateTeam(ViewModel.CurrentTeam.TeamId, ViewModel.CurrentTeam.TeamName, ViewModel.CurrentTeam.PersonCharge, ViewModel.CurrentTeam.PersonChargePhone, ViewModel.CurrentTeam.TeamDept, ViewModel.CurrentTeam.TeamLocale, ViewModel.CurrentTeam.TeamMemberId);
+            //            if (result)
+            //            {
+            //                ViewModel.ClosePopup();
+            //                System.Windows.MessageBox.Show("编辑成功！");
+            //                GetTeams();
+            //            }
+            //            else
+            //            {
+            //                System.Windows.MessageBox.Show("编辑失败！");
+            //            }
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    System.Windows.Forms.MessageBox.Show("编辑队伍异常，请重新编辑。");
+            //    Logger.Error("编辑队伍异常", ex);
+            //}
+        }
 
-		private void NavigateToTeamDetailPage_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void NavigateToTeamDetailPage_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
 			var team = GridTeamList.SelectedItem as TeamModel;
 			if (team != null)

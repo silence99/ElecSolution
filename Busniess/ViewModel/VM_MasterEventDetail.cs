@@ -435,7 +435,7 @@ namespace Emergence.Business.ViewModel
 		private void SelectTeamAction()
 		{
 			var thisAop = this.AopWapper as VM_MasterEventDetail;
-			var ids = UnSelectedTeamList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
+			var ids = UnSelectedTeamList.Where(a => a.IsChecked).Select(a => a.ID).ToList();
             if (ids == null || ids.Count() <= 0)
             {
                 ShowMessageBox("请选择要添加的队伍！");
@@ -459,7 +459,7 @@ namespace Emergence.Business.ViewModel
 		private void DeleteTeamAction()
 		{
 			var thisAop = this.AopWapper as VM_MasterEventDetail;
-			var ids = thisAop.TeamList.Where(a => a.IsChecked).Select(a => (long)a.ID).ToList();
+			var ids = thisAop.TeamList.Where(a => a.IsChecked).Select(a => a.ID).ToList();
             if (ids == null || ids.Count() <= 0)
             {
                 ShowMessageBox("请选择要删除的队伍！");

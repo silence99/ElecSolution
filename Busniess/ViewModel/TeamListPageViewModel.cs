@@ -9,7 +9,7 @@ namespace Emergence.Business.ViewModel
 {
 	public class TeamListPageViewModel : NotificationObject
 	{
-		public virtual ObservableCollection<TeamModel> Teams { get; set; }
+		public virtual ObservableCollection<TeamMemberModel> Teams { get; set; }
         public virtual TeamService teamService { get; set; }
         public virtual int PageSize { get; set; }
 		public virtual int PageIndex { get; set; }
@@ -19,7 +19,7 @@ namespace Emergence.Business.ViewModel
 		public virtual string QueryDepartment { get; set; }
         public virtual string QueryChargeName { get; set; }
         public virtual string SerachInfo { get; set; }
-        public virtual TeamModel CurrentTeam { get; set; }
+        public virtual TeamMemberModel CurrentTeam { get; set; }
 		public virtual double PopupWidth { get; set; }
 		public virtual double PopupHeight { get; set; }
 		public virtual bool IsPopoupOpen { get; set; }
@@ -31,6 +31,8 @@ namespace Emergence.Business.ViewModel
         public virtual event SetPopupHandler SetPopupEditToFullScreen;
 
         public virtual ObservableCollection<DictItem> TeamDepts { get; set; }
+        public virtual ObservableCollection<DictItem> TeamList { get; set; }
+        public virtual ObservableCollection<DictItem> TeamMemberPlace { get; set; }
         public virtual ObservableCollection<DictItem> TeamMembers { get; set; }
 
 
@@ -40,7 +42,7 @@ namespace Emergence.Business.ViewModel
 
             aopWapper.TeamMembers = new ObservableCollection<DictItem>();
 
-            SyncTeamMembers(CurrentTeam.ID);
+            SyncTeamMembers(CurrentTeam.TeamId);
 
             IsPopoupOpen = true;
 			IsPageEnabled = false;
@@ -67,11 +69,17 @@ namespace Emergence.Business.ViewModel
             PopupHeight = ResolutionService.Height;
             PopupWidth = ResolutionService.Width;
             TeamDepts = new ObservableCollection<DictItem>(MetaDataService.TeamDepartments);
+            TeamList = new ObservableCollection<DictItem>(MetaDataService.TeamIds);
+            TeamMemberPlace = new ObservableCollection<DictItem>();
+            TeamMemberPlace.Add(new DictItem { Name = "队长", Value = "place_1" });
+            TeamMemberPlace.Add(new DictItem { Name = "队员", Value = "place_2" });
+
+            TeamMembers = new ObservableCollection<DictItem>(MetaDataService.TeamDepartments);
             TeamMembers = new ObservableCollection<DictItem>();
             Members = new ObservableCollection<PersonModel>();
             teamService = new TeamService();
         }
-        private void SyncTeamMembers(long teamID)
+        private void SyncTeamMembers(string teamID)
         {
             var aopWapper = this.IsAopWapper ? this : this.AopWapper as TeamListPageViewModel;
 

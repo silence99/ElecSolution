@@ -30,7 +30,7 @@ namespace Emergence.Common.Model
 		[JsonProperty("placeName")]
 		public virtual string PlaceName { get; set; }
 		[JsonProperty("teamId")]
-		public virtual long TeamId { get; set; }
+		public virtual string TeamId { get; set; }
 		[JsonProperty("teamDept")]
 		public virtual string TeamDept { get; set; }
 		[JsonProperty("teamDeptName")]

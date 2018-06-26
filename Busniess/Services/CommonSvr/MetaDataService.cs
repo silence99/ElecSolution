@@ -21,8 +21,9 @@ namespace Business.Services
 
 		public static string MaterialDept = "materials_dept";
 		public static string TemplateType = "template_type";
-		public static string TeamId = "team_id";
-	}
+        public static string TeamId = "team_id";
+        public static string PlaceId = "place";
+    }
 
 	public class MetaDataService
 	{
@@ -117,6 +118,31 @@ namespace Business.Services
             catch (Exception ex)
             {
                 Logger.Error("获取模版文件(" + type + ")异常", ex);
+                return null;
+            }
+        }
+
+        public static MemoryStream DownloadTeamMemberTempleteFile()
+        {
+            try
+            {
+                string serviceName = ConfigurationManager.AppSettings["downloadTeamMemberTempleteFileApi"] ?? "getTeamMemberTemplate";
+                Dictionary<string, string> pairs = new Dictionary<string, string>(){};
+                var result = RequestControl.RequestStream(serviceName, "GET", pairs);
+                if (result != null)
+                {
+                    Logger.DebugFormat("获取队员模版文件({0}):{1}", result.Length);
+                    return result;
+                }
+                else
+                {
+                    Logger.DebugFormat("获取队员模版文件({0})失败:{1}", result.Length);
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("获取队员模版文件异常", ex);
                 return null;
             }
         }

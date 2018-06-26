@@ -372,7 +372,7 @@ namespace Emergence_WPF
 
         }
 
-        public void NavigateToMasterManagementPage()
+        public void NavigateToMasterManagementPage(object sender, RoutedEventArgs e)
         {
             MasterEventManagement mem = new MasterEventManagement();
             this.NavigationService.Navigate(mem);

@@ -117,17 +117,17 @@ namespace Busniess.Services
 			}
 		}
 
-		public bool BindgTeamToSubevent(long subeventId, List<long> ids)
+		public bool BindgTeamToSubevent(long subeventId, List<string> ids)
 		{
 			return BindingUnbindingTeamToSubevnt(subeventId, ids, "POST");
 		}
 
-		public bool UnbindingTeamFromSubevent(long subevent, List<long> ids)
+		public bool UnbindingTeamFromSubevent(long subevent, List<string> ids)
 		{
 			return BindingUnbindingTeamToSubevnt(subevent, ids, "DELETE");
 		}
 
-		public bool BindingUnbindingTeamToSubevnt(long subeventId, List<long> ids, string method)
+		public bool BindingUnbindingTeamToSubevnt(long subeventId, List<string> ids, string method)
 		{
 			var msg = method == "POST" ? "绑定队伍到子事件" : "解绑子事件绑定的队伍";
 			if (ids == null || ids.Count == 0)
@@ -206,7 +206,7 @@ namespace Busniess.Services
 			}
 		}
 
-		public bool UpdateTeam(long id, string teamName, string charge, string chargePhone, string teamDept,string teamDeptLocale, long teamMemberID)
+		public bool UpdateTeam(string id, string teamName, string charge, string chargePhone, string teamDept,string teamDeptLocale, long teamMemberID)
 		{
 			string serviceName = ConfigurationManager.AppSettings["teamApi"] ?? "team";
             Dictionary<string, string> pairs = new Dictionary<string, string>()
@@ -290,7 +290,7 @@ namespace Busniess.Services
 			}
 		}
 
-		public EmergencyHttpListResult<PersonModel> GetTeamPersons(int pageIndex, int pageSize, long teamId, string Name = "")
+		public EmergencyHttpListResult<PersonModel> GetTeamPersons(int pageIndex, int pageSize, string teamId, string Name = "")
 		{
 			var response = GetTeamMembersData(pageIndex, pageSize, teamId, Name);
 			if (response.Code != 1)
@@ -304,9 +304,9 @@ namespace Busniess.Services
 			}
 		}
 
-		public EmergencyHttpListResult<TeamMemberModel> GetTeamPersonsV2(int pageIndex, int pageSize)
+		public EmergencyHttpListResult<TeamMemberModel> GetTeamPersonsV2(int pageIndex, int pageSize, string searchInfo)
 		{
-			var response = GetTeamMembersDataV2(pageIndex, pageSize);
+			var response = GetTeamMembersDataV2(pageIndex, pageSize, searchInfo);
 			if (response.Code != 1)
 			{
 				Util.ShowError(string.Format("获取统计信息失败：{0}", response.Message));
@@ -354,48 +354,50 @@ namespace Busniess.Services
 			}
 		}
 
-		private bool TeamMemberApi(PersonModel person, TeamModel team, string httpMethod)
+		private bool TeamMemberApi(TeamMemberModel team, string httpMethod)
 		{
 			string serviceName = ConfigurationManager.AppSettings["updataTeamMemberApi2"] ?? "team/teamMemberInfo";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()
-			{
-				{ "teamId", team.ID.ToString() },
-				{ "teamDept", team.TeamDept.ToString() },
-				{ "teamMemberId", person.ID.ToString() },
-				{ "phoneNumber", person.PhoneNumber },
-				{ "place", person.Place },
-				{ "teamMemberName", person.Name },
+            {
+                { "teamId", team.TeamId.ToString() },
+                { "teamName", team.TeamName.ToString() },
+                { "teamDept", team.TeamDept.ToString() },
+                { "teamDeptName", team.TeamDeptName.ToString() },
+                { "teamMemberId", team.TeamMemberId.ToString() },
+				{ "phoneNumber", team.PhoneNumber },
+				{ "place", team.Place },
+				{ "teamMemberName", team.TeamMemberName },
 			};
 
 			return DoRequest(serviceName, httpMethod, pairs);
 		}
-		public bool CreateTeamMemberV2(PersonModel person, TeamModel team)
+		public bool CreateTeamMemberV2(TeamMemberModel team)
 		{
-			Logger.DebugFormat("创建队伍成员 -- {0}", person.Name);
-			var success = TeamMemberApi(person, team, "POST");
+			Logger.DebugFormat("创建队伍成员 -- {0}", team.TeamName);
+			var success = TeamMemberApi(team, "POST");
 			if (success)
 			{
-				Logger.InfoFormat("创建更新队伍成员成功 -- {0}", person.Name);
+				Logger.InfoFormat("创建更新队伍成员成功 -- {0}", team.TeamName);
 			}
 			else
 			{
-				Logger.WarnFormat("创建更新队伍成员失败 -- {0}", person.Name);
+				Logger.WarnFormat("创建更新队伍成员失败 -- {0}", team.TeamName);
 			}
 			return success;
 		}
 
-		public bool UpdateTeamMemberV2(PersonModel person, TeamModel team)
-		{
-			Logger.DebugFormat("更新队伍成员 -- {0}", person.Name);
-			var success = TeamMemberApi(person, team, "PUT");
+		public bool UpdateTeamMemberV2(TeamMemberModel team)
+        {
+			Logger.DebugFormat("更新队伍成员 -- {0}", team.TeamName);
+            var success = TeamMemberApi(team, "PUT");
 			if (success)
 			{
-				Logger.InfoFormat("更新队伍成员成功 -- {0}", person.Name);
-			}
+				Logger.InfoFormat("更新队伍成员成功 -- {0}", team.TeamName);
+            }
 			else
 			{
-				Logger.WarnFormat("更新队伍成员失败 -- {0}", person.Name);
-			}
+				Logger.WarnFormat("更新队伍成员失败 -- {0}", team.TeamName);
+            }
 			return success;
 		}
 
@@ -492,7 +494,7 @@ namespace Busniess.Services
 			}
 		}
 
-		private EmergencyHttpResponse<EmergencyHttpListResult<PersonModel>> GetTeamMembersData(int pageIndex, int pageSize, long teamId, string memberName)
+		private EmergencyHttpResponse<EmergencyHttpListResult<PersonModel>> GetTeamMembersData(int pageIndex, int pageSize, string teamId, string memberName)
 		{
 			try
 			{
@@ -522,7 +524,7 @@ namespace Busniess.Services
 			}
 		}
 
-		private EmergencyHttpResponse<EmergencyHttpListResult<TeamMemberModel>> GetTeamMembersDataV2(int pageIndex, int pageSize)
+		public EmergencyHttpResponse<EmergencyHttpListResult<TeamMemberModel>> GetTeamMembersDataV2(int pageIndex, int pageSize, string searchInfo)
 		{
 			try
 			{
@@ -530,8 +532,9 @@ namespace Busniess.Services
 				Dictionary<string, string> pairs = new Dictionary<string, string>()
 													{
 														{ "pageIndex", pageIndex.ToString() },
-														{ "pageSize", pageSize.ToString() }
-													};
+														{ "pageSize", pageSize.ToString() },
+                                                        { "searchInfo", searchInfo }
+                                                    };
 				var result = RequestControl.Request(serviceName, "GET", pairs);
 				if (result.StatusCode == 200)
 				{
@@ -550,7 +553,7 @@ namespace Busniess.Services
 			}
 		}
 
-		public bool ImportTeamMembers(long teamId, string teamMemberJson)
+		public bool ImportTeamMembers(string teamId, string teamMemberJson)
 		{
 			try
 			{
