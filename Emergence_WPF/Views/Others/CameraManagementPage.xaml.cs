@@ -314,11 +314,11 @@ namespace Emergence_WPF
                 return;
             }
             
-            MemoryStream templeteStream = MetaDataService.DownloadTempleteFile(0);
+            MemoryStream templeteStream = MetaDataService.DownloadCameraTempleteFile();
             if (templeteStream != null)
             {
                 //var splits = aopWraper.SummaryEvaluationPopupDownloadUrl.Split('/', '\\');
-                string fileName = "摄像头信息模版" + DateTime.Now.ToString("yyyyMMdd") + ".xls";
+                string fileName = "摄像头信息模版" + DateTime.Now.ToString("yyyyMMdd") + ".xlsx";
                 string DownloadFullPath = System.IO.Path.Combine(m_Dialog.SelectedPath, fileName);
 
                 using (Stream fileStream = new FileStream(DownloadFullPath, FileMode.Create))

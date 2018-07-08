@@ -39,7 +39,7 @@ namespace Emergence_WPF
 			var teams = ViewModel.Teams.Where(team => team.IsChecked).ToList();
 			if (teams != null && teams.Count != 0)
 			{
-				var result = TeamService.DeleteTeam(teams.Select(t => t.TeamMemberId.ToString()).ToList());
+				var result = TeamService.DeleteTeamMembers(teams.Select(t => t.TeamMemberId.ToString()).ToList());
 
 				if (result)
 				{
@@ -53,7 +53,7 @@ namespace Emergence_WPF
 			}
 			else
 			{
-				System.Windows.MessageBox.Show("没有选择要删除的队伍");
+				System.Windows.MessageBox.Show("没有选择要删除的队员");
 			}
 		}
 
@@ -93,7 +93,7 @@ namespace Emergence_WPF
                     }
                     if ((sheet.Cells[1, 2].Value != null && sheet.Cells[1, 3].Value != null && sheet.Cells[1, 4].Value != null && sheet.Cells[1, 5].Value != null && sheet.Cells[1, 6].Value != null) &&
                         (!sheet.Cells[1, 2].Value.Equals("姓名") ||
-                         !sheet.Cells[1, 3].Value.Equals("手机号") ||
+                         !sheet.Cells[1, 3].Value.Equals("移动电话") ||
                          !sheet.Cells[1, 4].Value.Equals("所属单位") ||
                          !sheet.Cells[1, 5].Value.Equals("队伍名称") ||
                          !sheet.Cells[1, 6].Value.Equals("队长队员")))
@@ -150,12 +150,21 @@ namespace Emergence_WPF
                         if (value != null && teamDepart.Where(a => a.Name.Trim() == value.ToString().Trim()).Count() > 0)
                         {
                             pm.TeamDept = teamDepart.Where(a => a.Name.Trim() == value.ToString().Trim()).Select(a => a.Value).FirstOrDefault();
+                            pm.TeamDeptName = value.ToString();
                         }
                         else
                         {
-                            uploadFailedStr += i.ToString() + ",";
-                            uploadFailed = true;
-                            continue;
+                            if (!string.IsNullOrEmpty(value.ToString()))
+                            {
+                                pm.TeamDept = "-1";
+                                pm.TeamDeptName = value.ToString();
+                            }
+                            else
+                            { 
+                                uploadFailedStr += i.ToString() + ",";
+                                uploadFailed = true;
+                                continue;
+                            }
                         }
 
 
@@ -163,12 +172,21 @@ namespace Emergence_WPF
                         if (value != null && teamList.Where(a => a.Name.Trim() == value.ToString().Trim()).Count() > 0)
                         {
                             pm.TeamId = (teamList.Where(a => a.Name.Trim() == value.ToString().Trim()).Select(a => a.Value).FirstOrDefault().ToString());
+                            pm.TeamName = value.ToString();
                         }
                         else
                         {
-                            uploadFailedStr += i.ToString() + ",";
-                            uploadFailed = true;
-                            continue;
+                            if (!string.IsNullOrEmpty(value.ToString()))
+                            {
+                                pm.TeamId = "-1";
+                                pm.TeamName = value.ToString();
+                            }
+                            else
+                            {
+                                uploadFailedStr += i.ToString() + ",";
+                                uploadFailed = true;
+                                continue;
+                            }
                         }
 
                         value = sheet.Cells[i, 6].Value;
@@ -186,7 +204,7 @@ namespace Emergence_WPF
                         teamMembers.Add(pm);
                     }
 
-                    if (teamMembers.Count() < 1)
+                    if (lastRow <= 1)
                     {
                         System.Windows.MessageBox.Show("文档内没有有效的数据，请检查后上传!");
                         return;
@@ -200,8 +218,10 @@ namespace Emergence_WPF
 
                     var uploadString = JSONHelper.ToJsonString(teamMembers.Select(a => new
                     {
-                        teamName = a.TeamId,
+                        teamName = a.TeamName,
+                        teamID = a.TeamId,
                         teamDept = a.TeamDept,
+                        TeamDeptName = a.TeamDeptName,
                         place = a.PlaceName,
                         phoneNumber = a.PhoneNumber,
                         name = a.TeamMemberName
@@ -291,7 +311,11 @@ namespace Emergence_WPF
         private void Edit_Handler(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
 			ViewModel.CurrentTeam = (sender as Image).DataContext as TeamMemberModel;
-			DependencyObject parent = this.PopupEditTeam.Child;
+            ViewModel.CurrentTeam.TeamDept = ViewModel.TeamDepts == null || ViewModel.TeamDepts.Count == 0 ? null : ViewModel.TeamDepts[0].Value;
+            ViewModel.CurrentTeam.TeamId = ViewModel.TeamList == null || ViewModel.TeamList.Count == 0 ? null : ViewModel.TeamList[0].Value;
+            ViewModel.CurrentTeam.Place = ViewModel.TeamMemberPlace == null || ViewModel.TeamMemberPlace.Count == 0 ? "" : ViewModel.TeamMemberPlace[0].Value;
+
+            DependencyObject parent = this.PopupEditTeam.Child;
 			do
 			{
 				parent = VisualTreeHelper.GetParent(parent);
@@ -337,9 +361,9 @@ namespace Emergence_WPF
                     {
                         ViewModel.CurrentTeam.TeamDeptName = this.comboDept.Text;
                         ViewModel.CurrentTeam.TeamName = this.comboTeam.Text;
-                        ViewModel.CurrentTeam.TeamMemberId = "-1";
-                        ViewModel.CurrentTeam.TeamDept = ViewModel.CurrentTeam.TeamDept == null ? "-1" : ViewModel.CurrentTeam.TeamDept;
-                        ViewModel.CurrentTeam.TeamId = ViewModel.CurrentTeam.TeamId == null ? "-1" : ViewModel.CurrentTeam.TeamId;
+                        ViewModel.CurrentTeam.TeamMemberId = null;
+                        ViewModel.CurrentTeam.TeamDept = ViewModel.CurrentTeam.TeamDept == null ? null : ViewModel.CurrentTeam.TeamDept;
+                        ViewModel.CurrentTeam.TeamId = ViewModel.CurrentTeam.TeamId == null ? null : ViewModel.CurrentTeam.TeamId;
 
                         var result = TeamService.CreateTeamMemberV2(ViewModel.CurrentTeam);
                         if (result)
@@ -350,6 +374,7 @@ namespace Emergence_WPF
                         }
                         else
                         {
+                            ViewModel.ClosePopup();
                             System.Windows.MessageBox.Show("添加失败！");
                         }
                     }
@@ -364,9 +389,8 @@ namespace Emergence_WPF
 
                         ViewModel.CurrentTeam.TeamDeptName = this.comboDept.Text;
                         ViewModel.CurrentTeam.TeamName = this.comboTeam.Text;
-                        ViewModel.CurrentTeam.TeamMemberId = "-1";
-                        ViewModel.CurrentTeam.TeamDept = ViewModel.CurrentTeam.TeamDept == null ? "-1" : ViewModel.CurrentTeam.TeamDept;
-                        ViewModel.CurrentTeam.TeamId = ViewModel.CurrentTeam.TeamId == null ? "-1" : ViewModel.CurrentTeam.TeamId;
+                        ViewModel.CurrentTeam.TeamDept = ViewModel.CurrentTeam.TeamDept == null ? null : ViewModel.CurrentTeam.TeamDept;
+                        ViewModel.CurrentTeam.TeamId = ViewModel.CurrentTeam.TeamId == null ? null : ViewModel.CurrentTeam.TeamId;
                         var result = TeamService.UpdateTeamMemberV2(ViewModel.CurrentTeam);
                         if (result)
                         {

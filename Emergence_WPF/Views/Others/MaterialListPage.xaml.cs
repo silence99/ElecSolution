@@ -332,7 +332,34 @@ namespace Emergence_WPF
                 return;
             }
         }
+        private void ExportButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            System.Windows.Forms.FolderBrowserDialog m_Dialog = new System.Windows.Forms.FolderBrowserDialog();
+            System.Windows.Forms.DialogResult result = m_Dialog.ShowDialog();
 
+            if (result == System.Windows.Forms.DialogResult.Cancel)
+            {
+                return;
+            }
+
+            MemoryStream templeteStream = MetaDataService.DownloadMaterialTempleteFile();
+            if (templeteStream != null)
+            {
+                //var splits = aopWraper.SummaryEvaluationPopupDownloadUrl.Split('/', '\\');
+                string fileName = "物资导入模板" + DateTime.Now.ToString("yyyyMMdd") + ".xlsx";
+                string DownloadFullPath = System.IO.Path.Combine(m_Dialog.SelectedPath, fileName);
+
+                using (Stream fileStream = new FileStream(DownloadFullPath, FileMode.Create))
+                {
+                    fileStream.Write(templeteStream.ToArray(), 0, Convert.ToInt32(templeteStream.Length));
+                }
+                System.Windows.MessageBox.Show("下载成功！");
+            }
+            else
+            {
+                System.Windows.MessageBox.Show("下载失败！");
+            }
+        }
         private void EditMaterial_Click(object sender, MouseButtonEventArgs e)
 		{
 			ViewModel.IsCreateMaterial = false;

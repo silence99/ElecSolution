@@ -127,7 +127,7 @@ namespace Business.Services
             try
             {
                 string serviceName = ConfigurationManager.AppSettings["downloadTeamMemberTempleteFileApi"] ?? "getTeamMemberTemplate";
-                Dictionary<string, string> pairs = new Dictionary<string, string>(){};
+                Dictionary<string, string> pairs = new Dictionary<string, string>() { };
                 var result = RequestControl.RequestStream(serviceName, "GET", pairs);
                 if (result != null)
                 {
@@ -143,6 +143,54 @@ namespace Business.Services
             catch (Exception ex)
             {
                 Logger.Error("获取队员模版文件异常", ex);
+                return null;
+            }
+        }
+        public static MemoryStream DownloadMaterialTempleteFile()
+        {
+            try
+            {
+                string serviceName = ConfigurationManager.AppSettings["downloadMaterialTempleteFileApi"] ?? "getMaterialsTemplate";
+                Dictionary<string, string> pairs = new Dictionary<string, string>() { };
+                var result = RequestControl.RequestStream(serviceName, "GET", pairs);
+                if (result != null)
+                {
+                    Logger.DebugFormat("获取物资模版文件({0}):{1}", result.Length);
+                    return result;
+                }
+                else
+                {
+                    Logger.DebugFormat("获取物资模版文件({0})失败:{1}", result.Length);
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("获取物资模版文件异常", ex);
+                return null;
+            }
+        }
+        public static MemoryStream DownloadCameraTempleteFile()
+        {
+            try
+            {
+                string serviceName = ConfigurationManager.AppSettings["downloadCameraTempleteFileApi"] ?? "getCameraTemplate";
+                Dictionary<string, string> pairs = new Dictionary<string, string>() { };
+                var result = RequestControl.RequestStream(serviceName, "GET", pairs);
+                if (result != null)
+                {
+                    Logger.DebugFormat("获取摄像头模版文件({0}):{1}", result.Length);
+                    return result;
+                }
+                else
+                {
+                    Logger.DebugFormat("获取摄像头模版文件({0})失败:{1}", result.Length);
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Error("获取摄像头模版文件异常", ex);
                 return null;
             }
         }

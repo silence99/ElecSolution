@@ -33,16 +33,16 @@ namespace Emergence.Business.ViewModel
         public virtual ObservableCollection<DictItem> TeamDepts { get; set; }
         public virtual ObservableCollection<DictItem> TeamList { get; set; }
         public virtual ObservableCollection<DictItem> TeamMemberPlace { get; set; }
-        public virtual ObservableCollection<DictItem> TeamMembers { get; set; }
+        //public virtual ObservableCollection<DictItem> TeamMembers { get; set; }
 
 
         public void PopupTeamEdit()
         {
             var aopWapper = this.IsAopWapper ? this : this.AopWapper as TeamListPageViewModel;
 
-            aopWapper.TeamMembers = new ObservableCollection<DictItem>();
+            //aopWapper.TeamMembers = new ObservableCollection<DictItem>();
 
-            SyncTeamMembers(CurrentTeam.TeamId);
+            //SyncTeamMembers(CurrentTeam.TeamId);
 
             IsPopoupOpen = true;
 			IsPageEnabled = false;
@@ -74,28 +74,28 @@ namespace Emergence.Business.ViewModel
             TeamMemberPlace.Add(new DictItem { Name = "队长", Value = "place_1" });
             TeamMemberPlace.Add(new DictItem { Name = "队员", Value = "place_2" });
 
-            TeamMembers = new ObservableCollection<DictItem>(MetaDataService.TeamDepartments);
-            TeamMembers = new ObservableCollection<DictItem>();
+            //TeamMembers = new ObservableCollection<DictItem>(MetaDataService.TeamDepartments);
+            //TeamMembers = new ObservableCollection<DictItem>();
             Members = new ObservableCollection<PersonModel>();
             teamService = new TeamService();
         }
-        private void SyncTeamMembers(string teamID)
-        {
-            var aopWapper = this.IsAopWapper ? this : this.AopWapper as TeamListPageViewModel;
+        //private void SyncTeamMembers(string teamID)
+        //{
+        //    var aopWapper = this.IsAopWapper ? this : this.AopWapper as TeamListPageViewModel;
 
-            var result = teamService.GetTeamPersons(aopWapper.PageIndex, aopWapper.PageSize, teamID);
-            //ViewModel.PageIndex = result.PageIndex;
-            //ViewModel.PageSize = result.PageSize;
-            //ViewModel.TotalCount = result.Count;
-            //ViewModel.TotalPage = (int)Math.Ceiling((double)ViewModel.TotalCount / ViewModel.PageSize);
-            if (result.Data != null && result.Data.Length > 0)
-            {
-                aopWapper.Members = new System.Collections.ObjectModel.ObservableCollection<PersonModel>(result.Data);
-                foreach (PersonModel pm in aopWapper.Members)
-                {
-                    aopWapper.TeamMembers.Add(new DictItem { Name = pm.Name, Value = pm.ID.ToString() });
-                }
-            }
-        }
+        //    var result = teamService.GetTeamPersons(aopWapper.PageIndex, aopWapper.PageSize, teamID);
+        //    //ViewModel.PageIndex = result.PageIndex;
+        //    //ViewModel.PageSize = result.PageSize;
+        //    //ViewModel.TotalCount = result.Count;
+        //    //ViewModel.TotalPage = (int)Math.Ceiling((double)ViewModel.TotalCount / ViewModel.PageSize);
+        //    if (result.Data != null && result.Data.Length > 0)
+        //    {
+        //        aopWapper.Members = new System.Collections.ObjectModel.ObservableCollection<PersonModel>(result.Data);
+        //        foreach (PersonModel pm in aopWapper.Members)
+        //        {
+        //            aopWapper.TeamMembers.Add(new DictItem { Name = pm.Name, Value = pm.ID.ToString() });
+        //        }
+        //    }
+        //}
     }
 }

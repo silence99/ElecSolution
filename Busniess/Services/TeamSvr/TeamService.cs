@@ -359,11 +359,11 @@ namespace Busniess.Services
 			string serviceName = ConfigurationManager.AppSettings["updataTeamMemberApi2"] ?? "team/teamMemberInfo";
 			Dictionary<string, string> pairs = new Dictionary<string, string>()
             {
-                { "teamId", team.TeamId.ToString() },
+                { "teamId", team.TeamId },
                 { "teamName", team.TeamName.ToString() },
-                { "teamDept", team.TeamDept.ToString() },
+                { "teamDept", team.TeamDept },
                 { "teamDeptName", team.TeamDeptName.ToString() },
-                { "teamMemberId", team.TeamMemberId.ToString() },
+                { "teamMemberId", team.TeamMemberId},
 				{ "phoneNumber", team.PhoneNumber },
 				{ "place", team.Place },
 				{ "teamMemberName", team.TeamMemberName },
@@ -557,7 +557,7 @@ namespace Busniess.Services
 		{
 			try
 			{
-				string serviceName = ConfigurationManager.AppSettings["teamMemberImport"] ?? "teamMember/import";
+				string serviceName = ConfigurationManager.AppSettings["importTeamMemberApi"] ?? "team/import";
 				Dictionary<string, string> pairs = new Dictionary<string, string>()
 												{
 													{ "teamId", teamId.ToString() },
