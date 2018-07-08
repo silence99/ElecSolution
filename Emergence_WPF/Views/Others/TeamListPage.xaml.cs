@@ -232,6 +232,10 @@ namespace Emergence_WPF
                     {
                         System.Windows.MessageBox.Show("上传失败，请联系管理员!");
                     }
+                    else
+                    {
+                        System.Windows.MessageBox.Show("上传成功!");
+                    }
                     GetTeams();
                 }
                 #endregion
@@ -303,7 +307,7 @@ namespace Emergence_WPF
             }
             while (parent != null);
             ViewModel.CanSelectCaptain = "Visible";
-            ViewModel.PopupHeader = "新增队伍";
+            ViewModel.PopupHeader = "新增队员";
             ViewModel.PopupTeamEdit();
             FullPageEditPopup();
         }
@@ -330,7 +334,7 @@ namespace Emergence_WPF
 			}
 			while (parent != null);
 			ViewModel.CanSelectCaptain = "Visible";
-			ViewModel.PopupHeader = "编辑队伍";
+			ViewModel.PopupHeader = "编辑队员";
 			ViewModel.PopupTeamEdit();
             //ViewModel.CurrentTeam.TeamMemberId = ViewModel.TeamMembers == null || ViewModel.TeamMembers.Count == 0 ? 0 : Convert.ToInt64(ViewModel.TeamMembers[0].Value);
             //ViewModel.CurrentTeam.TeamMemberId = ((ViewModel.CurrentTeam.TeamMemberId <= 0 || !ViewModel.TeamMembers.Select(a => Convert.ToInt64( a.Value)).Contains(ViewModel.CurrentTeam.TeamMemberId)) && ViewModel.Members != null && ViewModel.Members.Count != 0) ? ViewModel.Members[0].ID : ViewModel.CurrentTeam.TeamMemberId;
@@ -407,8 +411,8 @@ namespace Emergence_WPF
 			}
 			catch (Exception ex)
 			{
-				System.Windows.Forms.MessageBox.Show("编辑队伍异常，请重新编辑。");
-				Logger.Error("编辑队伍异常", ex);
+				System.Windows.Forms.MessageBox.Show("编辑队员异常，请重新编辑。");
+				Logger.Error("编辑队员异常", ex);
 			}
 		}
 
