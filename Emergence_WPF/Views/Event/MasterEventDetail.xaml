@@ -303,7 +303,7 @@
                                     </Style>
                                 </DataGridTextColumn.ElementStyle>
                             </DataGridTextColumn>
-                            <DataGridTextColumn  Binding="{Binding Path=ChildSubmitDept, Mode=TwoWay}" IsReadOnly="True"  x:Name="dw6" Header="队长电话"  Width="*" >
+                            <DataGridTextColumn  Binding="{Binding Path=PersonChargePhone, Mode=TwoWay}" IsReadOnly="True"  x:Name="dw6" Header="队长电话"  Width="*" >
                                 <DataGridTextColumn.ElementStyle>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="TextWrapping" Value="Wrap"/>
@@ -548,7 +548,7 @@
                                             </Style>
                                         </DataGridTextColumn.ElementStyle>
                                     </DataGridTextColumn>
-                                    <DataGridTextColumn  Binding="{Binding Path=ChildSubmitDept, Mode=TwoWay}" x:Name="dws6" Header="队长电话"  Width="*" >
+                                    <DataGridTextColumn  Binding="{Binding Path=PersonChargePhone, Mode=TwoWay}" x:Name="dws6" Header="队长电话"  Width="*" >
                                         <DataGridTextColumn.ElementStyle>
                                             <Style TargetType="TextBlock">
                                                 <Setter Property="TextWrapping" Value="Wrap"/>
@@ -779,7 +779,7 @@
                                         </Style>
                                     </DataGridTextColumn.ElementStyle>
                                 </DataGridTextColumn>
-                                <DataGridTextColumn  Binding="{Binding Path=ChildSubmitDept, Mode=TwoWay}" x:Name="pdw6" Header="队长电话"  Width="*" >
+                                <DataGridTextColumn  Binding="{Binding Path=PersonChargePhone, Mode=TwoWay}" x:Name="pdw6" Header="队长电话"  Width="*" >
                                     <DataGridTextColumn.ElementStyle>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="TextWrapping" Value="Wrap"/>

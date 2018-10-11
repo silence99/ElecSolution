@@ -135,16 +135,24 @@ namespace Emergence_WPF
                         }
 
                         value = sheet.Cells[i, 3].Value;
-                        if (value != null && CheckPhoneNumber(value.ToString()))
+                        if (value == null)
                         {
-                            pm.PhoneNumber = value.ToString();
+                            pm.PhoneNumber = "";
                         }
                         else
                         {
-                            uploadFailedStr += i.ToString() + ",";
-                            uploadFailed = true;
-                            continue;
+                            pm.PhoneNumber = value.ToString();
                         }
+                        //if (value != null && CheckPhoneNumber(value.ToString()))
+                        //{
+                        //    pm.PhoneNumber = value.ToString();
+                        //}
+                        //else
+                        //{
+                        //    uploadFailedStr += i.ToString() + ",";
+                        //    uploadFailed = true;
+                        //    continue;
+                        //}
 
                         value = sheet.Cells[i, 4].Value;
                         if (value != null && teamDepart.Where(a => a.Name.Trim() == value.ToString().Trim()).Count() > 0)
@@ -219,9 +227,9 @@ namespace Emergence_WPF
                     var uploadString = JSONHelper.ToJsonString(teamMembers.Select(a => new
                     {
                         teamName = a.TeamName,
-                        teamID = a.TeamId,
-                        teamDept = a.TeamDept,
-                        TeamDeptName = a.TeamDeptName,
+                        //teamID = a.TeamId,
+                        //teamDept = a.TeamDept,
+                        teamDeptName = a.TeamDeptName,
                         place = a.PlaceName,
                         phoneNumber = a.PhoneNumber,
                         name = a.TeamMemberName
